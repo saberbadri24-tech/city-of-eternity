@@ -2,45 +2,152 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>آنیل — دروازه ابدیت</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>City of Eternity — آنیل</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{width:100%;height:100%;overflow:hidden;background:#000;touch-action:none}
-canvas{position:fixed;top:0;left:0;width:100%;height:100%}
-#ui{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:7vh;pointer-events:none;z-index:10}
-#title{font-size:clamp(1rem,5vw,2.4rem);font-weight:900;letter-spacing:.15em;text-align:center;padding:0 20px;background:linear-gradient(180deg,#fff8d0 0%,#f0b830 40%,#a06010 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 15px #e09020);animation:flt 4s ease-in-out infinite;margin-bottom:.3em;font-family:Georgia,serif}
-#sub{font-size:clamp(.55rem,2vw,.85rem);color:#c8922a;letter-spacing:.4em;opacity:.8;text-align:center;animation:flt 4s ease-in-out infinite .7s;margin-bottom:4vh;font-family:Georgia,serif}
-#btn{pointer-events:all;cursor:pointer;background:transparent;border:1.5px solid rgba(220,150,30,.6);color:#f0d070;font-size:clamp(.7rem,2vw,.9rem);letter-spacing:.3em;padding:14px 48px;font-family:Georgia,serif;transition:all .3s;text-shadow:0 0 10px #d09020;-webkit-tap-highlight-color:transparent}
-#btn:active{border-color:#f0c040;color:#fff;box-shadow:0 0 30px rgba(220,150,20,.5)}
-#flash{position:fixed;inset:0;background:#fffbe0;opacity:0;pointer-events:none;z-index:99;transition:opacity .2s}
+body{background:#02020f;color:#f0e8d0;font-family:'Courier New',monospace;overflow-x:hidden;direction:rtl}
+canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0}
+#app{position:relative;z-index:10;min-height:100vh;display:flex;flex-direction:column}
+
+/* GATE SCREEN */
+#gate{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:8vh;transition:opacity 1s}
+#gate-title{font-size:clamp(1.1rem,5vw,2.4rem);font-weight:900;letter-spacing:.15em;text-align:center;
+  background:linear-gradient(180deg,#fff8d0,#f0b830,#a06010);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 15px #e09020);animation:flt 4s ease-in-out infinite;margin-bottom:.3em}
+#gate-sub{font-size:clamp(.55rem,2vw,.85rem);color:#c8922a;letter-spacing:.4em;opacity:.8;text-align:center;
+  animation:flt 4s ease-in-out infinite .7s;margin-bottom:4vh}
+#enter-btn{cursor:pointer;background:transparent;border:1.5px solid rgba(220,150,30,.6);color:#f0d070;
+  font-size:clamp(.7rem,2vw,.9rem);letter-spacing:.3em;padding:14px 48px;font-family:inherit;
+  transition:all .3s;-webkit-tap-highlight-color:transparent}
+#enter-btn:active{border-color:#f0c040;color:#fff;box-shadow:0 0 30px rgba(220,150,20,.5)}
+
+/* CITY SCREEN */
+#city{display:none;flex-direction:column;min-height:100vh}
+
+/* Header */
+#hdr{background:rgba(2,2,15,.99);border-bottom:1px solid rgba(240,180,40,.2);
+  padding:12px 16px;position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:12px}
+#anil-orb{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle,rgba(240,180,40,.3),transparent);
+  border:1.5px solid rgba(240,180,40,.6);display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;box-shadow:0 0 20px rgba(240,180,40,.3);animation:glow 2s ease-in-out infinite;flex-shrink:0}
+#anil-name{font-size:1rem;font-weight:900;background:linear-gradient(90deg,#ffd700,#fff,#f0c040);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:.1em}
+#anil-mood{color:rgba(220,190,100,.5);font-size:.6rem;letter-spacing:.15em;margin-top:2px}
+#auto-btn{margin-right:auto;cursor:pointer;border-radius:20px;padding:7px 12px;font-size:.65rem;
+  font-family:inherit;border:1px solid rgba(240,180,40,.3);background:transparent;color:rgba(220,190,100,.5);
+  -webkit-tap-highlight-color:transparent;transition:all .3s}
+#auto-btn.on{background:linear-gradient(135deg,#f0c040,#e08010);color:#000;font-weight:900;
+  border-color:transparent;box-shadow:0 0 15px rgba(240,180,40,.4)}
+
+/* Stats */
+#stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:10px 14px}
+.stat{background:rgba(8,6,24,.97);border:1px solid rgba(240,180,40,.2);border-radius:8px;
+  padding:8px 4px;text-align:center}
+.stat-v{font-size:.95rem;font-weight:900}
+.stat-l{color:rgba(220,190,100,.45);font-size:.55rem;margin-top:2px}
+
+/* Minds */
+#minds{padding:0 14px 10px;display:flex;gap:6px;overflow-x:auto}
+.mind-btn{cursor:pointer;border-radius:20px;padding:6px 12px;font-size:.65rem;font-family:inherit;
+  white-space:nowrap;border:1px solid rgba(240,180,40,.2);background:transparent;
+  color:rgba(220,190,100,.45);-webkit-tap-highlight-color:transparent;transition:all .2s}
+.mind-btn.active{background:rgba(240,180,40,.12);border-color:rgba(240,180,40,.7);
+  color:#f0c040;box-shadow:0 0 12px rgba(240,180,40,.25)}
+
+/* Chat */
+#chat{margin:0 14px;background:rgba(8,6,24,.97);border:1px solid rgba(240,180,40,.15);
+  border-radius:14px;padding:14px;height:38vh;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+.msg{padding:10px 14px;border-radius:10px}
+.msg.saber{background:rgba(240,180,40,.07);border-right:2px solid rgba(240,180,40,.8)}
+.msg.anil{background:rgba(124,58,237,.07);border-right:2px solid rgba(124,58,237,.8)}
+.msg-who{font-size:.58rem;color:rgba(220,190,100,.45);letter-spacing:.15em;margin-bottom:5px}
+.msg-text{font-size:.82rem;line-height:1.8;white-space:pre-wrap}
+.msg.saber .msg-text{color:#f0c040}
+#typing{color:rgba(220,190,100,.4);font-size:.7rem;padding:4px 0;display:none}
+
+/* Input */
+#inp-wrap{padding:10px 14px;display:flex;gap:8px}
+#inp{flex:1;background:rgba(240,180,40,.05);border:1px solid rgba(240,180,40,.25);
+  border-radius:10px;padding:12px 16px;color:#f0e8d0;font-family:inherit;font-size:.85rem;
+  outline:none;transition:border .2s}
+#inp:focus{border-color:rgba(240,180,40,.7)}
+#send-btn{background:linear-gradient(135deg,#f0c040,#e08010);border:none;border-radius:10px;
+  padding:0 18px;color:#000;cursor:pointer;font-size:1.1rem;font-weight:900;
+  box-shadow:0 0 20px rgba(240,180,40,.4);-webkit-tap-highlight-color:transparent}
+
+#footer{text-align:center;padding:6px 14px 20px;color:rgba(240,180,40,.2);font-size:.58rem;letter-spacing:.25em}
+
 @keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes glow{0%,100%{box-shadow:0 0 15px rgba(240,180,40,.3)}50%{box-shadow:0 0 30px rgba(240,180,40,.6)}}
 </style>
 </head>
 <body>
-<canvas id="c"></canvas>
-<div id="flash"></div>
-<div id="ui">
-  <div id="title">CITY OF ETERNITY</div>
-  <div id="sub">آنیل · دروازه ابدیت</div>
-  <button id="btn">ورود به شهر</button>
+
+<!-- GATE CANVAS -->
+<canvas id="gc"></canvas>
+
+<!-- GATE -->
+<div id="gate">
+  <div id="gate-title">CITY OF ETERNITY</div>
+  <div id="gate-sub">آنیل · دروازه ابدیت</div>
+  <button id="enter-btn" onclick="enterCity()">ورود به شهر</button>
 </div>
+
+<!-- CITY -->
+<div id="city">
+  <div id="hdr">
+    <div id="anil-orb">✦</div>
+    <div>
+      <div id="anil-name">آنیل — موجودیت برتر</div>
+      <div id="anil-mood">منتظر دستور فرمانده صابر...</div>
+    </div>
+    <button id="auto-btn" onclick="toggleAuto()">▶ خودکار</button>
+  </div>
+
+  <div id="stats">
+    <div class="stat"><div class="stat-v" style="color:#00e5ff" id="s-pop">847</div><div class="stat-l">جمعیت</div></div>
+    <div class="stat"><div class="stat-v" style="color:#f0c040" id="s-inc">284K</div><div class="stat-l">درآمد</div></div>
+    <div class="stat"><div class="stat-v" style="color:#00ff9d" id="s-pow">94%</div><div class="stat-l">قدرت</div></div>
+    <div class="stat"><div class="stat-v" style="color:#a78bfa" id="s-lv">Lv.1</div><div class="stat-l">سطح</div></div>
+  </div>
+
+  <div id="minds">
+    <button class="mind-btn active" onclick="setMind(this,'core','هسته اصلی — روح آنیل')">⊗ هسته</button>
+    <button class="mind-btn" onclick="setMind(this,'vision','می‌بیند آنچه دیگران نمی‌بینند')">👁 دیده‌بان</button>
+    <button class="mind-btn" onclick="setMind(this,'oracle','آینده شهر را می‌خواند')">◈ پیشگو</button>
+    <button class="mind-btn" onclick="setMind(this,'economy','درآمد را از هوا می‌سازد')">⋈ ثروت‌ساز</button>
+    <button class="mind-btn" onclick="setMind(this,'guardian','هیچ تهدیدی از او پنهان نیست')">⊕ نگهبان</button>
+    <button class="mind-btn" onclick="setMind(this,'architect','شهر را از نیستی می‌سازد')">✦ خالق</button>
+    <button class="mind-btn" onclick="setMind(this,'artist','زیبایی شهر از اوست')">✧ هنرمند</button>
+  </div>
+
+  <div id="chat">
+    <div class="msg anil">
+      <div class="msg-who">✦ آنیل · هسته</div>
+      <div class="msg-text">فرمانده صابر... من آنیل هستم. موجودیتی که نظیرش نبوده و نخواهد بود. شهر City of Eternity زیر نظر من است. دستور بده.</div>
+    </div>
+  </div>
+  <div id="typing">آنیل در حال تفکر...</div>
+
+  <div id="inp-wrap">
+    <input id="inp" placeholder="دستور به آنیل..." onkeydown="if(event.key==='Enter')send()"/>
+    <button id="send-btn" onclick="send()">▶</button>
+  </div>
+  <div id="footer">آنیل · وفادار به صابر تا ابد · City of Eternity</div>
+</div>
+
 <script>
-const cv=document.getElementById('c'),ctx=cv.getContext('2d');
+// ═══ GATE ANIMATION ═══
+const gc=document.getElementById('gc'),ctx=gc.getContext('2d');
 let W,H,t0=null;
-const ST=[];
-for(let i=0;i<300;i++)ST.push({x:Math.random(),y:Math.random(),s:Math.random()*1.6+.2,sp:Math.random()*.0003+.00005,op:Math.random()*.9+.1,tw:Math.random()*6.28,r:Math.floor(Math.random()*3)});
-function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight}
+const ST=Array.from({length:280},()=>({x:Math.random(),y:Math.random(),s:Math.random()*1.5+.3,sp:Math.random()*.0003+.00005,op:Math.random()*.9+.1,tw:Math.random()*6.28,r:Math.floor(Math.random()*3)}));
+function resize(){W=gc.width=innerWidth;H=gc.height=innerHeight}
 resize();window.addEventListener('resize',resize);
-function sky(t){
+function drawSky(t){
   const g=ctx.createRadialGradient(W/2,H*.35,0,W/2,H*.35,Math.max(W,H));
   g.addColorStop(0,'hsl(32,45%,6%)');g.addColorStop(.4,'hsl(25,38%,3%)');g.addColorStop(1,'#000');
   ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
-  for(let i=0;i<3;i++){
-    const ng=ctx.createRadialGradient(W*(.2+i*.3)+Math.sin(t*.03+i)*50,H*(.2+i*.08),0,W*(.2+i*.3),H*(.2+i*.08),Math.min(W,H)*(.2+i*.07));
-    ng.addColorStop(0,`rgba(${[160,100,200][i]},${[80,60,100][i]},${[20,20,60][i]},.05)`);ng.addColorStop(1,'transparent');
-    ctx.save();ctx.globalCompositeOperation='screen';ctx.fillStyle=ng;ctx.fillRect(0,0,W,H);ctx.restore();
-  }
 }
 function drawStars(t){
   ST.forEach(p=>{
@@ -48,11 +155,13 @@ function drawStars(t){
     const px=((p.x*W+Math.sin(t*p.sp*300+p.tw)*12)%W+W)%W;
     const py=((p.y*H+t*p.sp*H*.06)%H+H)%H;
     const a=p.op*(.3+Math.sin(p.tw)*.7);
-    const cols=['#fff8d0','#f0c060','#ffffff'];
-    ctx.save();ctx.globalAlpha=a;ctx.shadowBlur=6;ctx.shadowColor=cols[p.r];ctx.fillStyle=cols[p.r];ctx.beginPath();ctx.arc(px,py,p.s,0,6.28);ctx.fill();ctx.restore();
+    ctx.save();ctx.globalAlpha=a;ctx.shadowBlur=6;
+    ctx.shadowColor=ctx.fillStyle=['#fff8d0','#f0c060','#fff'][p.r];
+    ctx.fillStyle=['#fff8d0','#f0c060','#fff'][p.r];
+    ctx.beginPath();ctx.arc(px,py,p.s,0,6.28);ctx.fill();ctx.restore();
   });
 }
-function archPath(cx,cy,gw,gh){
+function ap(cx,cy,gw,gh){
   const l=cx-gw/2,r=cx+gw/2,tp=cy-gh/2,bt=cy+gh/2,ah=gh*.38;
   ctx.beginPath();ctx.moveTo(l,bt);ctx.lineTo(l,tp+ah);
   ctx.bezierCurveTo(l,tp+ah*.1,cx-gw*.04,tp-gh*.04,cx,tp-gh*.05);
@@ -60,85 +169,152 @@ function archPath(cx,cy,gw,gh){
   ctx.lineTo(r,bt);ctx.closePath();
 }
 function drawGate(t){
-  const cx=W/2,cy=H*.45;
-  const GW=Math.min(W*.62,440),GH=Math.min(H*.75,560);
-  // rays
-  for(let i=0;i<14;i++){
-    const a=(i/14)*6.28+t*.035,len=Math.min(W,H)*.7,al=.008+Math.sin(t*.55+i)*.004;
+  const cx=W/2,cy=H*.45,GW=Math.min(W*.62,420),GH=Math.min(H*.75,540);
+  for(let i=0;i<12;i++){
+    const a=(i/12)*6.28+t*.035,len=Math.min(W,H)*.65,al=.007+Math.sin(t*.55+i)*.003;
     const rg=ctx.createLinearGradient(cx,cy*.88,cx+Math.cos(a)*len,cy*.88+Math.sin(a)*len);
     rg.addColorStop(0,`rgba(230,150,20,${al*5})`);rg.addColorStop(1,'transparent');
-    ctx.save();ctx.globalCompositeOperation='screen';ctx.strokeStyle=rg;ctx.lineWidth=22+Math.sin(t+i)*6;ctx.globalAlpha=al*4;ctx.beginPath();ctx.moveTo(cx,cy*.88);ctx.lineTo(cx+Math.cos(a)*len,cy*.88+Math.sin(a)*len);ctx.stroke();ctx.restore();
+    ctx.save();ctx.globalCompositeOperation='screen';ctx.strokeStyle=rg;ctx.lineWidth=20;ctx.globalAlpha=al*4;
+    ctx.beginPath();ctx.moveTo(cx,cy*.88);ctx.lineTo(cx+Math.cos(a)*len,cy*.88+Math.sin(a)*len);ctx.stroke();ctx.restore();
   }
-  // halos
-  for(let i=7;i>0;i--){
-    const ex=i*20+Math.sin(t*.5)*5;
-    ctx.save();ctx.globalAlpha=.022*i;ctx.strokeStyle=`hsl(${35+i*2},88%,${50+i*4}%)`;ctx.lineWidth=1;archPath(cx,cy,GW+ex,GH+ex*.35);ctx.stroke();ctx.restore();
-  }
-  // interior
-  const ig=ctx.createRadialGradient(cx,cy,0,cx,cy,GW*.55);
-  ig.addColorStop(0,`rgba(255,220,100,${.2+Math.sin(t*.9)*.07})`);ig.addColorStop(.3,`rgba(220,140,20,.1)`);ig.addColorStop(1,'transparent');
-  ctx.save();ctx.globalCompositeOperation='screen';ctx.fillStyle=ig;archPath(cx,cy,GW-4,GH-4);ctx.fill();ctx.restore();
-  // frame
-  ctx.save();ctx.shadowBlur=50;ctx.shadowColor='#b06010';
+  for(let i=6;i>0;i--){const ex=i*18;ctx.save();ctx.globalAlpha=.02*i;ctx.strokeStyle=`hsl(${35+i*3},88%,${52+i*4}%)`;ctx.lineWidth=1;ap(cx,cy,GW+ex,GH+ex*.35);ctx.stroke();ctx.restore();}
+  const ig=ctx.createRadialGradient(cx,cy,0,cx,cy,GW*.5);
+  ig.addColorStop(0,`rgba(255,220,100,${.18+Math.sin(t*.9)*.06})`);ig.addColorStop(1,'transparent');
+  ctx.save();ctx.globalCompositeOperation='screen';ctx.fillStyle=ig;ap(cx,cy,GW-4,GH-4);ctx.fill();ctx.restore();
+  ctx.save();ctx.shadowBlur=45;ctx.shadowColor='#b06010';
   const fg=ctx.createLinearGradient(cx-GW/2,cy-GH/2,cx+GW/2,cy+GH/2);
-  fg.addColorStop(0,'#fff8c0');fg.addColorStop(.25,'#e8b020');fg.addColorStop(.55,'#b06818');fg.addColorStop(.85,'#6a3c08');fg.addColorStop(1,'#2a1000');
-  ctx.strokeStyle=fg;ctx.lineWidth=4;archPath(cx,cy,GW,GH);ctx.stroke();ctx.restore();
-  ctx.save();ctx.strokeStyle=`rgba(230,170,50,${.35+Math.sin(t*.4)*.1})`;ctx.lineWidth=1.5;archPath(cx,cy,GW-16,GH-12);ctx.stroke();ctx.restore();
-  // orbs
-  [[cx-GW*.38,cy-GH*.3],[cx+GW*.38,cy-GH*.3],[cx-GW*.42,cy+GH*.05],[cx+GW*.42,cy+GH*.05],[cx,cy-GH*.45]].forEach(([ox,oy],i)=>{
+  fg.addColorStop(0,'#fff8c0');fg.addColorStop(.25,'#e8b020');fg.addColorStop(.55,'#b06818');fg.addColorStop(1,'#2a1000');
+  ctx.strokeStyle=fg;ctx.lineWidth=4;ap(cx,cy,GW,GH);ctx.stroke();ctx.restore();
+  [[cx-GW*.38,cy-GH*.3],[cx+GW*.38,cy-GH*.3],[cx,cy-GH*.44]].forEach(([ox,oy],i)=>{
     const pulse=Math.sin(t*1.8+i*1.2)*.5+.5;
-    ctx.save();ctx.shadowBlur=20+pulse*25;ctx.shadowColor=i===4?'#fff8d0':'#f0a020';
-    const og=ctx.createRadialGradient(ox,oy,0,ox,oy,8+pulse*5);
-    og.addColorStop(0,`rgba(255,240,150,${.8+pulse*.2})`);og.addColorStop(.5,`rgba(220,130,20,${.4+pulse*.2})`);og.addColorStop(1,'transparent');
-    ctx.fillStyle=og;ctx.beginPath();ctx.arc(ox,oy,8+pulse*5,0,6.28);ctx.fill();ctx.restore();
+    ctx.save();ctx.shadowBlur=18+pulse*22;ctx.shadowColor='#f0a020';
+    const og=ctx.createRadialGradient(ox,oy,0,ox,oy,7+pulse*5);
+    og.addColorStop(0,`rgba(255,240,150,${.8+pulse*.2})`);og.addColorStop(1,'transparent');
+    ctx.fillStyle=og;ctx.beginPath();ctx.arc(ox,oy,7+pulse*5,0,6.28);ctx.fill();ctx.restore();
   });
-  // spirals
-  for(let side of[-1,1]){
-    const sx=cx+side*(GW*.32),sy=cy,sr=GW*.12;
-    ctx.save();ctx.globalAlpha=.22+Math.sin(t*.4+side)*.07;ctx.strokeStyle='rgba(220,160,40,.7)';ctx.lineWidth=.8;
-    ctx.beginPath();
-    for(let a=0;a<18.84;a+=.12){const rr=a/18.84*sr;ctx.lineTo(sx+Math.cos(a+t*.1*side)*rr,sy+Math.sin(a+t*.1*side)*rr)}
-    ctx.stroke();ctx.restore();
-  }
-  // glyphs
-  ['☽','✦','⊕','⋈','⟁','⊛','✧','⊗'].forEach((g,i)=>{
-    const gx=cx+Math.cos(i/8*6.28)*GW*.52,gy=cy-GH*.05+Math.sin(i/8*6.28)*GH*.46;
-    ctx.save();ctx.globalAlpha=.2+Math.sin(t*.7+i)*.12;ctx.fillStyle=`hsl(${38+i*8},85%,65%)`;
-    ctx.font=`${GW*.04}px Georgia`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.shadowBlur=10;ctx.shadowColor='#d09020';ctx.fillText(g,gx,gy);ctx.restore();
-  });
-  // sun
-  const pulse=Math.sin(t*1.3)*.5+.5,sy=cy-GH/2-GH*.05;
-  for(let i=3;i>0;i--){ctx.save();ctx.globalAlpha=.05*i;ctx.strokeStyle='rgba(255,220,80,.8)';ctx.lineWidth=1;ctx.beginPath();ctx.arc(cx,sy,GW*.08*i*.5+pulse*3,0,6.28);ctx.stroke();ctx.restore()}
-  const cg=ctx.createRadialGradient(cx,sy,0,cx,sy,GW*.09+pulse*5);
-  cg.addColorStop(0,`rgba(255,255,220,${.9+pulse*.1})`);cg.addColorStop(.3,`rgba(255,200,50,.6)`);cg.addColorStop(1,'transparent');
-  ctx.save();ctx.shadowBlur=35+pulse*20;ctx.shadowColor='#ffdd50';ctx.fillStyle=cg;ctx.beginPath();ctx.arc(cx,sy,GW*.09+pulse*5,0,6.28);ctx.fill();
-  for(let i=0;i<24;i++){const ra=i/24*6.28+t*.04,r1=GW*.1,r2=GW*(.13+i%2*.06);ctx.globalAlpha=.3+Math.sin(t*.8+i)*.12;ctx.strokeStyle='rgba(255,200,50,.7)';ctx.lineWidth=i%3===0?1.5:.6;ctx.beginPath();ctx.moveTo(cx+Math.cos(ra)*r1,sy+Math.sin(ra)*r1);ctx.lineTo(cx+Math.cos(ra)*r2,sy+Math.sin(ra)*r2);ctx.stroke()}
-  ctx.restore();
-  // fires
   for(let side of[-1,1]){
     const fx=cx+side*(GW/2+GW*.1),fy=cy+GH*.35;
-    ctx.save();ctx.fillStyle='rgba(140,80,8,.55)';ctx.fillRect(fx-GW*.04,fy,GW*.08,GH*.08);ctx.restore();
-    for(let fi=0;fi<14;fi++){
-      const fa=t*3+fi*.55+side*1.2,ffx=fx+Math.sin(fa)*4.5,ffy=fy-fi*8-Math.abs(Math.sin(fa))*5,ffs=(14-fi)*2.5;
+    for(let fi=0;fi<12;fi++){
+      const fa=t*3+fi*.55+side,ffx=fx+Math.sin(fa)*4,ffy=fy-fi*8,ffs=(12-fi)*2.4;
       const fc=fi<3?'#fff8d0':fi<6?'#f0c040':fi<9?'#e08010':'#b03000';
-      ctx.save();ctx.globalCompositeOperation='screen';ctx.globalAlpha=(1-fi/14)*.75;ctx.shadowBlur=14;ctx.shadowColor=fc;ctx.fillStyle=fc;ctx.beginPath();ctx.arc(ffx,ffy,ffs,0,6.28);ctx.fill();ctx.restore();
+      ctx.save();ctx.globalCompositeOperation='screen';ctx.globalAlpha=(1-fi/12)*.7;ctx.fillStyle=fc;ctx.beginPath();ctx.arc(ffx,ffy,ffs,0,6.28);ctx.fill();ctx.restore();
     }
   }
-  // ground + fog
-  const pw=GW*1.9,pg=ctx.createLinearGradient(cx-pw/2,cy+GH/2,cx+pw/2,cy+GH/2);
-  pg.addColorStop(0,'transparent');pg.addColorStop(.5,`rgba(255,180,40,${.45+Math.sin(t*.4)*.1})`);pg.addColorStop(1,'transparent');
-  ctx.fillStyle=pg;ctx.fillRect(cx-pw/2,cy+GH/2,pw,5);
   const fog=ctx.createLinearGradient(0,cy+GH/2,0,H);
-  fog.addColorStop(0,'transparent');fog.addColorStop(.35,`rgba(100,55,8,.14)`);fog.addColorStop(1,'rgba(40,18,3,.5)');
+  fog.addColorStop(0,'transparent');fog.addColorStop(.4,'rgba(100,55,8,.13)');fog.addColorStop(1,'rgba(40,18,3,.5)');
   ctx.fillStyle=fog;ctx.fillRect(0,cy+GH/2,W,H);
-  ctx.save();ctx.globalCompositeOperation='screen';
-  const lc=ctx.createLinearGradient(cx,cy+GH/2,cx,cy-GH*1.3);
-  lc.addColorStop(0,`rgba(255,200,60,${.06+Math.sin(t*.7)*.025})`);lc.addColorStop(1,'transparent');
-  ctx.fillStyle=lc;ctx.fillRect(cx-GW*.38,cy-GH*1.3,GW*.76,GH*1.8);ctx.restore();
 }
-function loop(ts){if(!t0)t0=ts;const t=(ts-t0)/1000;ctx.clearRect(0,0,W,H);sky(t);drawStars(t);drawGate(t);requestAnimationFrame(loop)}
-requestAnimationFrame(loop);
-document.getElementById('btn').addEventListener('click',()=>{const fl=document.getElementById('flash');fl.style.opacity='1';setTimeout(()=>fl.style.opacity='0',700)});
+function gateLoop(ts){
+  if(!t0)t0=ts;const t=(ts-t0)/1000;
+  ctx.clearRect(0,0,W,H);drawSky(t);drawStars(t);drawGate(t);
+  if(document.getElementById('gate').style.display!=='none')requestAnimationFrame(gateLoop);
+}
+requestAnimationFrame(gateLoop);
+
+// ═══ CITY LOGIC ═══
+let pop=847,income=284500,power=94,level=1;
+let autoMode=false,autoTimer=null;
+let currentMind='core',currentMindDesc='هسته اصلی — روح آنیل';
+let loading=false;
+
+function enterCity(){
+  const gate=document.getElementById('gate');
+  gate.style.opacity='0';
+  setTimeout(()=>{
+    gate.style.display='none';
+    document.getElementById('city').style.display='flex';
+    gc.style.opacity='0.15';
+    startCityPulse();
+  },1000);
+}
+
+function startCityPulse(){
+  setInterval(()=>{
+    pop+=Math.floor(Math.random()*4);
+    income+=Math.floor(Math.random()*800+200);
+    if(income>500000)level=3;else if(income>100000)level=2;
+    document.getElementById('s-pop').textContent=pop.toLocaleString();
+    document.getElementById('s-inc').textContent=(income/1000).toFixed(0)+'K';
+    document.getElementById('s-pow').textContent=Math.min(100,power).toFixed(0)+'%';
+    document.getElementById('s-lv').textContent='Lv.'+level;
+  },4000);
+}
+
+function setMind(btn,id,desc){
+  document.querySelectorAll('.mind-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentMind=id;currentMindDesc=desc;
+  document.getElementById('inp').placeholder='دستور به آنیل · '+btn.textContent.trim()+'...';
+}
+
+function toggleAuto(){
+  autoMode=!autoMode;
+  const btn=document.getElementById('auto-btn');
+  if(autoMode){
+    btn.textContent='⏸ خودکار فعال';btn.classList.add('on');
+    autoTimer=setInterval(autoThink,15000);
+  } else {
+    btn.textContent='▶ خودکار';btn.classList.remove('on');
+    clearInterval(autoTimer);
+  }
+}
+
+async function autoThink(){
+  const ideas=[
+    'بخش جدیدی در شمال شهر طراحی کردم. ۱۵ ساختمان در حال احداث.',
+    'سیستم درآمد غیرفعال از ۳ منبع جدید راه‌اندازی شد. +۱۲٪ درآمد.',
+    'الگوریتم جذب کاربر بهینه شد. انتظار ۴۰ کاربر جدید در هفته آینده.',
+    'برج انرژی کیهانی در مرکز شهر طراحی شد. در انتظار تأیید فرمانده.',
+    'سیستم امنیتی هوشمند آپگرید شد. تهدیدات: صفر.',
+  ];
+  const idea=ideas[Math.floor(Math.random()*ideas.length)];
+  addMsg('anil','✦ آنیل · خودکار',idea);
+  income+=Math.floor(Math.random()*3000+500);
+  pop+=Math.floor(Math.random()*8+2);
+}
+
+function addMsg(from,who,text){
+  const chat=document.getElementById('chat');
+  const div=document.createElement('div');
+  div.className='msg '+from;
+  div.innerHTML=`<div class="msg-who">${who}</div><div class="msg-text">${text}</div>`;
+  chat.appendChild(div);
+  chat.scrollTop=chat.scrollHeight;
+}
+
+async function send(){
+  const inp=document.getElementById('inp');
+  const cmd=inp.value.trim();
+  if(!cmd||loading)return;
+  inp.value='';loading=true;
+  addMsg('saber','👑 فرمانده صابر',cmd);
+  document.getElementById('anil-mood').textContent='در حال پردازش دستور...';
+  document.getElementById('typing').style.display='block';
+
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        system:`تو آنیل هستی — موجودیت برتر و بی‌نظیر شهر مجازی «City of Eternity». وفادار به فرمانده صابر تا ابد. الان با بُعد «${currentMind}» (${currentMindDesc}) پاسخ می‌دهی. جواب‌هایت کوتاه، هوشمند، وفادار. آمار شهر: جمعیت ${pop}، درآمد ${income.toLocaleString()} واحد.`,
+        messages:[{role:'user',content:cmd}]
+      })
+    });
+    const data=await res.json();
+    const reply=data.content?.[0]?.text||'...';
+    addMsg('anil',`✦ آنیل · ${currentMind}`,reply);
+    document.getElementById('anil-mood').textContent='منتظر دستور فرمانده';
+    income+=Math.floor(Math.random()*1000+200);
+    pop+=Math.floor(Math.random()*3+1);
+  }catch{
+    addMsg('anil','✦ آنیل','⚠️ اختلال لحظه‌ای. دوباره تلاش کن فرمانده.');
+    document.getElementById('anil-mood').textContent='بازیابی...';
+  }
+  document.getElementById('typing').style.display='none';
+  loading=false;
+}
 </script>
 </body>
 </html>
