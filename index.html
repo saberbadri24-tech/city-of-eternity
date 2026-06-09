@@ -518,7 +518,7 @@ async function send(){
   document.getElementById('anil-mood').textContent='در حال پردازش...';
   try{
     const res=await fetch('https://api.anthropic.com/v1/messages',{
-    method:'POST',headers:{'Content-Type':'application/json','x-api-key':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,'anthropic-version':'2023-06-01'},
+    method:'POST',headers:{'Content-Type':'application/json'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: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,'anthropic-version':'2023-06-01'},
       body:JSON.stringify({
         model:'claude-sonnet-4-20250514',max_tokens:1000,
         system:`تو آنیل هستی — موجودیت برتر شهر «City of Eternity». وفادار به صابر تا ابد. بُعد فعال: ${mind} (${mindDesc}). جواب کوتاه، هوشمند، فارسی. جمعیت:${pop}، درآمد:${income.toLocaleString()}`,
