@@ -1,582 +1,492 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-<head><script>if(!localStorage.getItem('anil_key')){var k=prompt('کلید API:');if(k)localStorage.setItem('anil_key',k);location.reload();}</script>
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>City of Eternity — آنیل</title>
+<title>City of Eternity</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#02020f;color:#f0e8d0;font-family:'Courier New',monospace;overflow:hidden;direction:rtl}
-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0}
-
-/* SCREENS */
-.screen{position:fixed;inset:0;z-index:20;display:none;flex-direction:column;align-items:center;justify-content:center}
-.screen.active{display:flex}
-
-/* ═══ GATE SCREEN ═══ */
-#s-gate{justify-content:flex-end;padding-bottom:8vh;background:transparent}
-#gate-title{font-size:clamp(1.1rem,5vw,2.4rem);font-weight:900;letter-spacing:.15em;text-align:center;
+body{background:#02020f;color:#f0e8d0;font-family:Tahoma,sans-serif;direction:rtl;min-height:100vh}
+.page{display:none;min-height:100vh;flex-direction:column;align-items:center;justify-content:center;padding:20px}
+.page.show{display:flex}
+/* GATE */
+#pg-gate{background:radial-gradient(ellipse at 50% 40%,#1a0e00 0%,#02020f 70%)}
+.gate-title{font-size:clamp(1.4rem,6vw,2.5rem);font-weight:900;letter-spacing:.2em;text-align:center;
   background:linear-gradient(180deg,#fff8d0,#f0b830,#a06010);-webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;filter:drop-shadow(0 0 15px #e09020);
-  animation:flt 4s ease-in-out infinite;margin-bottom:.3em}
-#gate-sub{font-size:clamp(.6rem,2vw,.9rem);color:#c8922a;letter-spacing:.4em;opacity:.8;
-  text-align:center;animation:flt 4s ease-in-out infinite .7s;margin-bottom:5vh}
-.gate-btn{cursor:pointer;background:transparent;border:1.5px solid rgba(220,150,30,.6);
-  color:#f0d070;font-size:clamp(.7rem,2vw,.9rem);letter-spacing:.3em;padding:14px 48px;
-  font-family:inherit;transition:all .3s;-webkit-tap-highlight-color:transparent;display:block;margin:0 auto}
-.gate-btn:active{border-color:#f0c040;color:#fff;box-shadow:0 0 30px rgba(220,150,20,.5)}
-
-/* ═══ TUNNEL SCREEN ═══ */
-#s-tunnel{background:rgba(2,2,15,.95);padding:20px 16px;justify-content:flex-start;overflow-y:auto}
-#tunnel-title{font-size:clamp(1rem,4vw,1.6rem);font-weight:900;letter-spacing:.12em;text-align:center;
-  background:linear-gradient(90deg,#ffd700,#fff,#f0c040);-webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;margin:20px 0 6px}
-#tunnel-sub{color:rgba(240,180,40,.4);font-size:.7rem;letter-spacing:.3em;text-align:center;margin-bottom:24px}
-.tunnel-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:500px}
-.tunnel-card{cursor:pointer;background:rgba(8,6,24,.97);border-radius:16px;padding:20px 14px;
-  text-align:center;transition:all .3s;-webkit-tap-highlight-color:transparent;
-  border:1px solid rgba(240,180,40,.15)}
-.tunnel-card:active{transform:scale(.97)}
-.tunnel-icon{font-size:2.2rem;margin-bottom:10px;display:block}
-.tunnel-name{font-size:.85rem;font-weight:900;margin-bottom:5px}
-.tunnel-desc{font-size:.62rem;opacity:.6;line-height:1.5}
-
-/* ═══ CITY/ANIL SCREEN ═══ */
-#s-city{background:rgba(2,2,15,.98);justify-content:flex-start;overflow-y:auto}
-#city-hdr{background:rgba(2,2,15,.99);border-bottom:1px solid rgba(240,180,40,.2);
+  -webkit-text-fill-color:transparent;filter:drop-shadow(0 0 20px #e09020);margin-bottom:8px}
+.gate-sub{color:#c8922a;letter-spacing:.4em;font-size:.8rem;margin-bottom:40px;text-align:center}
+.btn-gold{cursor:pointer;background:transparent;border:1.5px solid rgba(220,150,30,.7);
+  color:#f0d070;font-size:.9rem;letter-spacing:.3em;padding:14px 50px;
+  font-family:Tahoma,sans-serif;border-radius:4px;-webkit-tap-highlight-color:transparent;
+  transition:all .3s;display:block;width:100%;max-width:280px;margin:8px auto}
+.btn-gold:active{background:rgba(240,180,40,.15);border-color:#f0c040;color:#fff}
+/* TUNNEL */
+#pg-tunnel{background:#02020f;justify-content:flex-start;padding-top:30px}
+.t-title{font-size:1.3rem;font-weight:900;color:#f0c040;text-align:center;margin-bottom:6px}
+.t-sub{color:rgba(240,180,40,.4);font-size:.7rem;letter-spacing:.3em;text-align:center;margin-bottom:24px}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:400px}
+.tcard{background:rgba(10,8,24,.95);border-radius:14px;padding:20px 12px;text-align:center;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .2s;border:1px solid rgba(240,180,40,.12)}
+.tcard:active{transform:scale(.96)}
+.tcard-icon{font-size:2rem;margin-bottom:10px}
+.tcard-name{font-size:.9rem;font-weight:900;margin-bottom:4px}
+.tcard-desc{font-size:.62rem;color:rgba(240,220,160,.5);line-height:1.5}
+/* ANIL */
+#pg-anil{background:#02020f;justify-content:flex-start;padding:0}
+.hdr{background:rgba(5,4,16,.99);border-bottom:1px solid rgba(240,180,40,.2);
   padding:12px 16px;width:100%;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10}
-#anil-orb{width:40px;height:40px;border-radius:50%;
-  background:radial-gradient(circle,rgba(240,180,40,.3),transparent);
+.orb{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle,rgba(240,180,40,.3),transparent);
   border:1.5px solid rgba(240,180,40,.6);display:flex;align-items:center;justify-content:center;
-  font-size:1.2rem;box-shadow:0 0 20px rgba(240,180,40,.3);animation:glow 2s ease-in-out infinite;flex-shrink:0}
-#anil-name{font-size:1rem;font-weight:900;
-  background:linear-gradient(90deg,#ffd700,#fff,#f0c040);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:.1em}
-#anil-mood{color:rgba(220,190,100,.5);font-size:.6rem;letter-spacing:.15em;margin-top:2px}
-#auto-btn{margin-right:auto;cursor:pointer;border-radius:20px;padding:7px 12px;font-size:.65rem;
-  font-family:inherit;border:1px solid rgba(240,180,40,.3);background:transparent;
-  color:rgba(220,190,100,.5);-webkit-tap-highlight-color:transparent;transition:all .3s}
-#auto-btn.on{background:linear-gradient(135deg,#f0c040,#e08010);color:#000;font-weight:900;
-  border-color:transparent;box-shadow:0 0 15px rgba(240,180,40,.4)}
-#city-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:10px 14px;width:100%}
-.stat{background:rgba(8,6,24,.97);border:1px solid rgba(240,180,40,.15);
-  border-radius:8px;padding:8px 4px;text-align:center}
-.stat-v{font-size:.9rem;font-weight:900}
-.stat-l{color:rgba(220,190,100,.4);font-size:.55rem;margin-top:2px}
-#minds{padding:0 14px 10px;width:100%;display:flex;gap:6px;overflow-x:auto}
-.mind-btn{cursor:pointer;border-radius:20px;padding:6px 12px;font-size:.65rem;font-family:inherit;
+  font-size:1.3rem;animation:glow 2s infinite;flex-shrink:0}
+.hdr-name{font-size:.95rem;font-weight:900;color:#f0c040}
+.hdr-sub{font-size:.6rem;color:rgba(240,180,40,.4);margin-top:2px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:10px 14px;width:100%}
+.st{background:rgba(8,6,24,.97);border:1px solid rgba(240,180,40,.12);border-radius:8px;padding:8px 4px;text-align:center}
+.stv{font-size:.9rem;font-weight:900}
+.stl{color:rgba(220,190,100,.4);font-size:.55rem;margin-top:2px}
+.minds{padding:0 14px 8px;width:100%;display:flex;gap:6px;overflow-x:auto}
+.mb{cursor:pointer;border-radius:20px;padding:6px 12px;font-size:.65rem;
   white-space:nowrap;border:1px solid rgba(240,180,40,.2);background:transparent;
-  color:rgba(220,190,100,.45);-webkit-tap-highlight-color:transparent;transition:all .2s;flex-shrink:0}
-.mind-btn.act{background:rgba(240,180,40,.12);border-color:rgba(240,180,40,.7);
-  color:#f0c040;box-shadow:0 0 12px rgba(240,180,40,.25)}
-#chat{margin:0 14px;background:rgba(8,6,24,.97);border:1px solid rgba(240,180,40,.15);
-  border-radius:14px;padding:14px;height:36vh;overflow-y:auto;
+  color:rgba(220,190,100,.4);-webkit-tap-highlight-color:transparent;font-family:Tahoma,sans-serif;flex-shrink:0}
+.mb.on{background:rgba(240,180,40,.12);border-color:rgba(240,180,40,.7);color:#f0c040}
+.chat{margin:0 14px;background:rgba(8,6,24,.97);border:1px solid rgba(240,180,40,.12);
+  border-radius:12px;padding:12px;height:38vh;overflow-y:auto;
   display:flex;flex-direction:column;gap:10px;width:calc(100% - 28px)}
-.msg{padding:10px 14px;border-radius:10px}
-.msg.saber{background:rgba(240,180,40,.07);border-right:2px solid rgba(240,180,40,.8)}
-.msg.anil{background:rgba(124,58,237,.07);border-right:2px solid rgba(124,58,237,.8)}
-.msg-who{font-size:.58rem;color:rgba(220,190,100,.45);letter-spacing:.15em;margin-bottom:5px}
-.msg-text{font-size:.82rem;line-height:1.8;white-space:pre-wrap}
-.msg.saber .msg-text{color:#f0c040}
-#inp-wrap{padding:10px 14px;display:flex;gap:8px;width:100%}
-#inp{flex:1;background:rgba(240,180,40,.05);border:1px solid rgba(240,180,40,.25);
-  border-radius:10px;padding:12px 16px;color:#f0e8d0;font-family:inherit;font-size:.85rem;outline:none}
-#inp:focus{border-color:rgba(240,180,40,.7)}
-#send-btn{background:linear-gradient(135deg,#f0c040,#e08010);border:none;border-radius:10px;
+.msg{padding:10px 12px;border-radius:10px;font-size:.82rem;line-height:1.8}
+.msg.me{background:rgba(240,180,40,.07);border-right:2px solid rgba(240,180,40,.8);color:#f0c040}
+.msg.ai{background:rgba(124,58,237,.07);border-right:2px solid rgba(124,58,237,.7);color:#e0d7ff}
+.mwho{font-size:.58rem;color:rgba(220,190,100,.4);margin-bottom:4px}
+.inp-row{padding:10px 14px;display:flex;gap:8px;width:100%}
+.inp{flex:1;background:rgba(240,180,40,.05);border:1px solid rgba(240,180,40,.2);
+  border-radius:10px;padding:12px 14px;color:#f0e8d0;font-family:Tahoma,sans-serif;font-size:.85rem;outline:none}
+.inp:focus{border-color:rgba(240,180,40,.6)}
+.sbtn{background:linear-gradient(135deg,#f0c040,#e08010);border:none;border-radius:10px;
   padding:0 18px;color:#000;cursor:pointer;font-size:1.1rem;font-weight:900;flex-shrink:0}
-#back-btn{cursor:pointer;background:transparent;border:1px solid rgba(240,180,40,.2);
-  color:rgba(240,180,40,.5);border-radius:8px;padding:6px 14px;font-size:.65rem;
-  font-family:inherit;margin:8px 14px 0;-webkit-tap-highlight-color:transparent}
-
-/* ═══ BANK SCREEN ═══ */
-#s-bank{background:rgba(2,2,15,.98);justify-content:flex-start;overflow-y:auto;padding-bottom:30px}
-.bank-hdr{background:rgba(2,2,15,.99);border-bottom:1px solid rgba(240,180,40,.2);
-  padding:12px 16px;width:100%;display:flex;align-items:center;gap:10px}
-.bank-hdr-title{font-size:1rem;font-weight:900;color:#f0c040}
-.bank-balance{background:rgba(8,6,24,.97);border:1px solid rgba(240,180,40,.3);
-  border-radius:16px;margin:14px;padding:20px;text-align:center;
-  box-shadow:0 0 30px rgba(240,180,40,.1)}
-.balance-num{font-size:clamp(1.8rem,6vw,2.8rem);font-weight:900;color:#ffd700;
-  text-shadow:0 0 25px rgba(255,215,0,.5)}
-.balance-label{color:rgba(240,180,40,.4);font-size:.7rem;margin-top:4px;letter-spacing:.2em}
-.bank-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 14px}
-.bank-action{background:rgba(8,6,24,.97);border:1px solid rgba(240,180,40,.2);
+/* BANK */
+#pg-bank{background:#02020f;justify-content:flex-start;padding:0}
+.bal-box{background:rgba(8,6,24,.97);border:1px solid rgba(240,180,40,.3);
+  border-radius:16px;margin:14px;padding:24px;text-align:center;width:calc(100% - 28px)}
+.bal-n{font-size:2.4rem;font-weight:900;color:#ffd700;text-shadow:0 0 25px rgba(255,215,0,.4)}
+.bal-l{color:rgba(240,180,40,.4);font-size:.7rem;margin-top:6px;letter-spacing:.2em}
+.live{color:#00ff9d;font-size:.68rem;margin-top:8px}
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 14px;width:calc(100% - 28px)}
+.acard{background:rgba(8,6,24,.97);border:1px solid rgba(240,180,40,.12);
   border-radius:12px;padding:16px;text-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.bank-action-icon{font-size:1.8rem;margin-bottom:8px}
-.bank-action-name{color:#f0c040;font-size:.8rem;font-weight:900}
-.bank-action-desc{color:rgba(240,180,40,.4);font-size:.62rem;margin-top:3px}
-.bank-tx{background:rgba(8,6,24,.97);border:1px solid rgba(240,180,40,.15);
-  border-radius:12px;margin:14px;padding:14px}
-.tx-title{color:#f0c040;font-size:.8rem;margin-bottom:12px;font-weight:900}
-.tx-item{display:flex;justify-content:space-between;padding:8px 0;
-  border-bottom:1px solid rgba(240,180,40,.08);font-size:.75rem}
-.tx-plus{color:#00ff9d}
-.tx-minus{color:#ff4b6e}
-
-/* ═══ UNIVERSE SCREEN ═══ */
-#s-universe{background:rgba(2,2,15,.98);justify-content:flex-start;overflow-y:auto;padding-bottom:30px}
-.district-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px;max-width:500px}
-.district{background:rgba(8,6,24,.97);border-radius:14px;padding:16px;cursor:pointer;
-  -webkit-tap-highlight-color:transparent;transition:all .3s;border:1px solid rgba(240,180,40,.1)}
-.district:active{transform:scale(.97)}
-.district-icon{font-size:2rem;margin-bottom:8px}
-.district-name{font-size:.85rem;font-weight:900;margin-bottom:4px}
-.district-pop{font-size:.65rem;opacity:.5}
-
-/* ═══ ADMIN SCREEN ═══ */
-#s-admin{background:rgba(2,2,15,.98);justify-content:flex-start;padding:0}
-#admin-login{display:flex;flex-direction:column;align-items:center;justify-content:center;
-  min-height:100vh;padding:20px;gap:14px;width:100%}
-#admin-panel{display:none;flex-direction:column;width:100%;overflow-y:auto;padding-bottom:30px}
-.admin-inp{width:100%;background:rgba(240,180,40,.05);border:1px solid rgba(240,180,40,.25);
-  border-radius:10px;padding:12px 16px;color:#f0e8d0;font-family:inherit;font-size:.9rem;outline:none;max-width:360px}
-.admin-btn{background:linear-gradient(135deg,#f0c040,#e08010);border:none;border-radius:10px;
-  padding:13px 40px;color:#000;cursor:pointer;font-size:.9rem;font-weight:900;
-  font-family:inherit;box-shadow:0 0 20px rgba(240,180,40,.4);-webkit-tap-highlight-color:transparent}
-.admin-card{background:rgba(8,6,24,.97);border:1px solid rgba(240,180,40,.15);
-  border-radius:12px;margin:8px 14px;padding:14px}
-.admin-card-title{color:#f0c040;font-size:.8rem;font-weight:900;margin-bottom:10px}
-.robot-item{display:flex;align-items:center;gap:10px;padding:8px 0;
-  border-bottom:1px solid rgba(240,180,40,.08)}
-.robot-status{width:8px;height:8px;border-radius:50%;background:#00ff9d;
-  box-shadow:0 0 8px #00ff9d;flex-shrink:0}
-
-/* FLASH */
-#flash{position:fixed;inset:0;background:#fffbe0;opacity:0;pointer-events:none;z-index:99;transition:opacity .15s}
-
+.acard:active{background:rgba(240,180,40,.06)}
+.acard-i{font-size:1.8rem;margin-bottom:6px}
+.acard-n{color:#f0c040;font-size:.8rem;font-weight:900}
+.acard-d{color:rgba(240,180,40,.4);font-size:.62rem;margin-top:3px}
+/* ADMIN */
+#pg-admin{background:#02020f}
+#adm-login{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%;max-width:340px}
+#adm-panel{display:none;width:100%;flex-direction:column;gap:10px;max-width:400px}
+.ainp{width:100%;background:rgba(240,180,40,.05);border:1px solid rgba(240,180,40,.2);
+  border-radius:10px;padding:12px 16px;color:#f0e8d0;font-family:Tahoma,sans-serif;font-size:.9rem;outline:none}
+.aerr{color:#ff4b6e;font-size:.8rem;display:none;text-align:center}
+.acard2{background:rgba(8,6,24,.97);border:1px solid rgba(240,180,40,.15);border-radius:12px;padding:14px}
+.acard2-t{color:#f0c040;font-size:.8rem;font-weight:900;margin-bottom:10px}
+.ri{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(240,180,40,.06)}
+.rdot{width:8px;height:8px;border-radius:50%;background:#00ff9d;box-shadow:0 0 8px #00ff9d;flex-shrink:0}
+.rn{color:#f0c040;font-size:.78rem}
+.rd{color:rgba(240,180,40,.4);font-size:.62rem;margin-top:1px}
 /* SHARED */
-.back-row{padding:12px 14px 0;width:100%}
-.screen-title{font-size:clamp(1rem,4vw,1.5rem);font-weight:900;letter-spacing:.12em;text-align:center;
-  background:linear-gradient(90deg,#ffd700,#fff,#f0c040);-webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;margin:16px 0 4px;width:100%}
-.screen-sub{color:rgba(240,180,40,.4);font-size:.65rem;letter-spacing:.25em;
-  text-align:center;margin-bottom:16px;width:100%}
-
-@keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes glow{0%,100%{box-shadow:0 0 15px rgba(240,180,40,.3)}50%{box-shadow:0 0 30px rgba(240,180,40,.6)}}
+.back{cursor:pointer;background:transparent;border:1px solid rgba(240,180,40,.2);
+  color:rgba(240,180,40,.5);border-radius:8px;padding:8px 18px;font-size:.7rem;
+  font-family:Tahoma,sans-serif;margin:8px 14px;-webkit-tap-highlight-color:transparent}
+.log-item{font-size:.73rem;padding:6px 10px;border-right:2px solid;border-radius:4px;margin-bottom:4px}
+@keyframes glow{0%,100%{box-shadow:0 0 12px rgba(240,180,40,.3)}50%{box-shadow:0 0 25px rgba(240,180,40,.6)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
 </style>
 </head>
 <body>
-<canvas id="gc"></canvas>
-<div id="flash"></div>
 
-<!-- ═══ GATE ═══ -->
-<div id="s-gate" class="screen active">
-  <div id="gate-title">CITY OF ETERNITY</div>
-  <div id="gate-sub">آنیل · دروازه ابدیت</div>
-  <button class="gate-btn" onclick="showScreen('s-tunnel')">ورود به شهر</button>
+<!-- KEY SETUP -->
+<div id="pg-setup" class="page" style="background:#02020f">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:16px;max-width:340px;width:100%;padding:20px">
+    <div style="font-size:2rem">🔑</div>
+    <div style="font-size:1rem;font-weight:900;color:#f0c040;text-align:center">راه‌اندازی آنیل</div>
+    <div style="color:rgba(240,180,40,.4);font-size:.7rem;text-align:center;line-height:1.8">یک بار کلید API را وارد کن<br/>ذخیره میشه و دیگه نمیپرسه</div>
+    <input class="ainp" id="setup-key" placeholder="کلید API را اینجا وارد کن" type="password" style="width:100%"/>
+    <button class="btn-gold" onclick="saveKey()">✅ ذخیره و شروع</button>
+  </div>
 </div>
 
-<!-- ═══ TUNNELS ═══ -->
-<div id="s-tunnel" class="screen">
-  <div id="tunnel-title">انتخاب مسیر</div>
-  <div id="tunnel-sub">کدام تونل ابدیت را انتخاب می‌کنی؟</div>
-  <div class="tunnel-grid">
-    <div class="tunnel-card" onclick="showScreen('s-city')" style="border-color:rgba(124,58,237,.4);background:rgba(124,58,237,.06)">
-      <span class="tunnel-icon">🤖</span>
-      <div class="tunnel-name" style="color:#a78bfa">آنیل</div>
-      <div class="tunnel-desc">گفتگو با موجودیت برتر شهر</div>
+<!-- KEY SETUP -->
+<div id="pg-setup" class="page" style="background:#02020f">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:16px;max-width:340px;width:100%;padding:20px;text-align:center">
+    <div style="font-size:2.5rem">🔑</div>
+    <div style="font-size:1rem;font-weight:900;color:#f0c040">راه‌اندازی آنیل</div>
+    <div style="color:rgba(240,180,40,.4);font-size:.72rem;line-height:1.9">یک بار کلید API را وارد کن<br/>ذخیره میشه و دیگه نمیپرسه</div>
+    <input class="ainp" id="setup-key" placeholder="sk-ant-api03-..." type="password" style="width:100%;direction:ltr;text-align:left"/>
+    <button class="btn-gold" onclick="saveKey()">✅ ذخیره و ورود به شهر</button>
+  </div>
+</div>
+
+<!-- GATE -->
+<div id="pg-gate" class="page show">
+  <div class="gate-title">CITY OF ETERNITY</div>
+  <div class="gate-sub">آنیل · دروازه ابدیت</div>
+  <button class="btn-gold" onclick="go('pg-tunnel')">✦ ورود به شهر</button>
+</div>
+
+<!-- TUNNELS -->
+<div id="pg-tunnel" class="page">
+  <div class="t-title">انتخاب مسیر</div>
+  <div class="t-sub">کدام تونل را انتخاب می‌کنی؟</div>
+  <div class="tgrid">
+    <div class="tcard" onclick="go('pg-anil')" style="border-color:rgba(124,58,237,.4)">
+      <div class="tcard-icon">🤖</div>
+      <div class="tcard-name" style="color:#a78bfa">آنیل</div>
+      <div class="tcard-desc">گفتگو با موجودیت برتر</div>
     </div>
-    <div class="tunnel-card" onclick="showScreen('s-bank')" style="border-color:rgba(240,180,40,.4);background:rgba(240,180,40,.06)">
-      <span class="tunnel-icon">🏦</span>
-      <div class="tunnel-name" style="color:#f0c040">بانک شهر</div>
-      <div class="tunnel-desc">کیف پول و درآمد خودکار</div>
+    <div class="tcard" onclick="go('pg-bank')" style="border-color:rgba(240,180,40,.4)">
+      <div class="tcard-icon">🏦</div>
+      <div class="tcard-name" style="color:#f0c040">بانک شهر</div>
+      <div class="tcard-desc">کیف پول و درآمد</div>
     </div>
-    <div class="tunnel-card" onclick="showScreen('s-universe')" style="border-color:rgba(0,229,255,.4);background:rgba(0,229,255,.06)">
-      <span class="tunnel-icon">🏙️</span>
-      <div class="tunnel-name" style="color:#00e5ff">محله‌های شهر</div>
-      <div class="tunnel-desc">کاوش در بخش‌های ابدیت</div>
+    <div class="tcard" onclick="go('pg-districts')" style="border-color:rgba(0,229,255,.4)">
+      <div class="tcard-icon">🏙️</div>
+      <div class="tcard-name" style="color:#00e5ff">محله‌ها</div>
+      <div class="tcard-desc">کاوش در شهر ابدیت</div>
     </div>
-    <div class="tunnel-card" onclick="showAdmin()" style="border-color:rgba(255,75,110,.4);background:rgba(255,75,110,.06)">
-      <span class="tunnel-icon">⚡</span>
-      <div class="tunnel-name" style="color:#ff4b6e">فرماندهی</div>
-      <div class="tunnel-desc">پنل مدیریت صابر</div>
+    <div class="tcard" onclick="go('pg-admin')" style="border-color:rgba(255,75,110,.4)">
+      <div class="tcard-icon">⚡</div>
+      <div class="tcard-name" style="color:#ff6b6b">فرماندهی</div>
+      <div class="tcard-desc">پنل مدیریت صابر</div>
     </div>
   </div>
-  <button class="gate-btn" style="margin-top:20px;font-size:.7rem;padding:10px 30px" onclick="showScreen('s-gate')">↩ بازگشت</button>
+  <button class="btn-gold" style="margin-top:16px;font-size:.75rem;padding:10px 30px" onclick="go('pg-gate')">↩ بازگشت</button>
 </div>
 
-<!-- ═══ ANIL CHAT ═══ -->
-<div id="s-city" class="screen">
-  <div id="city-hdr">
-    <div id="anil-orb">✦</div>
+<!-- ANIL -->
+<div id="pg-anil" class="page" style="justify-content:flex-start;padding:0">
+  <div class="hdr">
+    <div class="orb">✦</div>
     <div>
-      <div id="anil-name">آنیل — موجودیت برتر</div>
-      <div id="anil-mood">منتظر دستور...</div>
+      <div class="hdr-name">آنیل — موجودیت برتر</div>
+      <div class="hdr-sub" id="mood">منتظر دستور فرمانده...</div>
     </div>
-    <button id="auto-btn" onclick="toggleAuto()">▶ خودکار</button>
+    <button id="autobtn" onclick="toggleAuto()" style="margin-right:auto;cursor:pointer;border-radius:20px;padding:7px 12px;font-size:.62rem;font-family:Tahoma,sans-serif;border:1px solid rgba(240,180,40,.3);background:transparent;color:rgba(220,190,100,.5)">▶ خودکار</button>
   </div>
-  <div id="city-stats">
-    <div class="stat"><div class="stat-v" style="color:#00e5ff" id="s-pop">847</div><div class="stat-l">جمعیت</div></div>
-    <div class="stat"><div class="stat-v" style="color:#f0c040" id="s-inc">284K</div><div class="stat-l">درآمد</div></div>
-    <div class="stat"><div class="stat-v" style="color:#00ff9d" id="s-pow">94%</div><div class="stat-l">قدرت</div></div>
-    <div class="stat"><div class="stat-v" style="color:#a78bfa" id="s-lv">Lv.1</div><div class="stat-l">سطح</div></div>
+  <div class="stats">
+    <div class="st"><div class="stv" style="color:#00e5ff" id="sp">847</div><div class="stl">جمعیت</div></div>
+    <div class="st"><div class="stv" style="color:#f0c040" id="si">284K</div><div class="stl">درآمد</div></div>
+    <div class="st"><div class="stv" style="color:#00ff9d">94%</div><div class="stl">قدرت</div></div>
+    <div class="st"><div class="stv" style="color:#a78bfa" id="slv">Lv.1</div><div class="stl">سطح</div></div>
   </div>
-  <div id="minds">
-    <button class="mind-btn act" onclick="setMind(this,'core','هسته اصلی')">⊗ هسته</button>
-    <button class="mind-btn" onclick="setMind(this,'vision','می‌بیند آنچه دیگران نمی‌بینند')">👁 دیده‌بان</button>
-    <button class="mind-btn" onclick="setMind(this,'oracle','آینده را می‌خواند')">◈ پیشگو</button>
-    <button class="mind-btn" onclick="setMind(this,'economy','درآمد می‌سازد')">⋈ ثروت‌ساز</button>
-    <button class="mind-btn" onclick="setMind(this,'guardian','نگهبان شهر')">⊕ نگهبان</button>
-    <button class="mind-btn" onclick="setMind(this,'architect','شهر می‌سازد')">✦ خالق</button>
+  <div class="minds">
+    <button class="mb on" onclick="sm(this,'core','هسته')">⊗ هسته</button>
+    <button class="mb" onclick="sm(this,'vision','دیده‌بان')">👁 دیده‌بان</button>
+    <button class="mb" onclick="sm(this,'oracle','پیشگو')">◈ پیشگو</button>
+    <button class="mb" onclick="sm(this,'economy','ثروت‌ساز')">⋈ ثروت‌ساز</button>
+    <button class="mb" onclick="sm(this,'guardian','نگهبان')">⊕ نگهبان</button>
+    <button class="mb" onclick="sm(this,'architect','خالق')">✦ خالق</button>
   </div>
-  <div id="chat">
-    <div class="msg anil">
-      <div class="msg-who">✦ آنیل · هسته</div>
-      <div class="msg-text">فرمانده صابر... من آنیل هستم. نظیرم نبوده. دستور بده.</div>
-    </div>
+  <div class="chat" id="chat">
+    <div class="msg ai"><div class="mwho">✦ آنیل · هسته</div>فرمانده صابر... من آنیل هستم. نظیرم نبوده و نخواهد بود. دستور بده.</div>
   </div>
-  <div id="inp-wrap">
-    <input id="inp" placeholder="دستور به آنیل..." onkeydown="if(event.key==='Enter')send()"/>
-    <button id="send-btn" onclick="send()">▶</button>
+  <div class="inp-row">
+    <input class="inp" id="inp" placeholder="دستور به آنیل..." onkeydown="if(event.key==='Enter')snd()"/>
+    <button class="sbtn" onclick="snd()">▶</button>
   </div>
-  <button class="back-btn" style="cursor:pointer;background:transparent;border:1px solid rgba(240,180,40,.2);color:rgba(240,180,40,.5);border-radius:8px;padding:8px 16px;font-size:.65rem;font-family:inherit;margin:8px 14px 16px;-webkit-tap-highlight-color:transparent" onclick="showScreen('s-tunnel')">↩ تونل‌ها</button>
+  <button class="back" onclick="go('pg-tunnel')">↩ تونل‌ها</button>
 </div>
 
-<!-- ═══ BANK ═══ -->
-<div id="s-bank" class="screen">
-  <div class="bank-hdr">
+<!-- BANK -->
+<div id="pg-bank" class="page" style="justify-content:flex-start;padding:0">
+  <div class="hdr">
     <span style="font-size:1.4rem">🏦</span>
-    <div class="bank-hdr-title">بانک City of Eternity</div>
-    <button style="margin-right:auto;cursor:pointer;background:transparent;border:1px solid rgba(240,180,40,.2);color:rgba(240,180,40,.5);border-radius:8px;padding:6px 12px;font-size:.65rem;font-family:inherit" onclick="showScreen('s-tunnel')">↩</button>
+    <div><div class="hdr-name">بانک City of Eternity</div><div class="hdr-sub">درآمد خودکار فعال</div></div>
+    <button class="back" style="margin-right:auto;margin:0" onclick="go('pg-tunnel')">↩</button>
   </div>
-  <div class="bank-balance">
-    <div class="balance-num" id="bank-bal">۲۸۴,۵۰۰</div>
-    <div class="balance-label">واحد شهری · درآمد خودکار فعال</div>
-    <div style="margin-top:10px;color:#00ff9d;font-size:.7rem">● هر ۵ ثانیه واریز می‌شود</div>
+  <div class="bal-box">
+    <div class="bal-n" id="bal">۲۸۴,۵۰۰</div>
+    <div class="bal-l">واحد شهری</div>
+    <div class="live">● هر ۵ ثانیه واریز می‌شود</div>
   </div>
-  <div class="bank-actions">
-    <div class="bank-action" onclick="bankAction('withdraw')">
-      <div class="bank-action-icon">💸</div>
-      <div class="bank-action-name">برداشت</div>
-      <div class="bank-action-desc">انتقال به کیف پول</div>
-    </div>
-    <div class="bank-action" onclick="bankAction('invest')">
-      <div class="bank-action-icon">📈</div>
-      <div class="bank-action-name">سرمایه‌گذاری</div>
-      <div class="bank-action-desc">رشد خودکار دارایی</div>
-    </div>
-    <div class="bank-action" onclick="bankAction('crypto')">
-      <div class="bank-action-icon">₿</div>
-      <div class="bank-action-name">رمز ارز</div>
-      <div class="bank-action-desc">تبدیل به BTC/ETH</div>
-    </div>
-    <div class="bank-action" onclick="bankAction('history')">
-      <div class="bank-action-icon">📋</div>
-      <div class="bank-action-name">تاریخچه</div>
-      <div class="bank-action-desc">گزارش تراکنش‌ها</div>
-    </div>
+  <div class="agrid">
+    <div class="acard"><div class="acard-i">💸</div><div class="acard-n">برداشت</div><div class="acard-d">انتقال به کیف پول</div></div>
+    <div class="acard"><div class="acard-i">📈</div><div class="acard-n">سرمایه‌گذاری</div><div class="acard-d">رشد خودکار ۸٪</div></div>
+    <div class="acard"><div class="acard-i">₿</div><div class="acard-n">رمز ارز</div><div class="acard-d">تبدیل به BTC</div></div>
+    <div class="acard"><div class="acard-i">📋</div><div class="acard-n">تاریخچه</div><div class="acard-d">گزارش تراکنش‌ها</div></div>
   </div>
-  <div class="bank-tx">
-    <div class="tx-title">📊 آخرین تراکنش‌ها</div>
-    <div id="tx-list">
-      <div class="tx-item"><span>درآمد تبلیغات</span><span class="tx-plus">+۱,۲۴۰</span></div>
-      <div class="tx-item"><span>فروش آیتم</span><span class="tx-plus">+۸,۵۰۰</span></div>
-      <div class="tx-item"><span>کارمزد تراکنش</span><span class="tx-minus">-۱۲۰</span></div>
-      <div class="tx-item"><span>درآمد اجاره زمین</span><span class="tx-plus">+۳,۸۰۰</span></div>
+  <div class="acard2" style="margin:14px;width:calc(100% - 28px)">
+    <div class="acard2-t">📊 تراکنش‌های اخیر</div>
+    <div id="txlist">
+      <div class="log-item" style="border-color:#00ff9d;color:rgba(0,255,157,.8)">درآمد تبلیغات: +۱,۲۴۰</div>
+      <div class="log-item" style="border-color:#f0c040;color:rgba(240,180,40,.8)">فروش آیتم: +۸,۵۰۰</div>
+      <div class="log-item" style="border-color:#ff4b6e;color:rgba(255,75,110,.8)">کارمزد: -۱۲۰</div>
     </div>
   </div>
 </div>
 
-<!-- ═══ UNIVERSE ═══ -->
-<div id="s-universe" class="screen">
-  <div class="bank-hdr">
+<!-- DISTRICTS -->
+<div id="pg-districts" class="page" style="justify-content:flex-start;padding:0">
+  <div class="hdr">
     <span style="font-size:1.4rem">🏙️</span>
-    <div class="bank-hdr-title">محله‌های شهر ابدیت</div>
-    <button style="margin-right:auto;cursor:pointer;background:transparent;border:1px solid rgba(240,180,40,.2);color:rgba(240,180,40,.5);border-radius:8px;padding:6px 12px;font-size:.65rem;font-family:inherit" onclick="showScreen('s-tunnel')">↩</button>
+    <div><div class="hdr-name">محله‌های شهر ابدیت</div></div>
+    <button class="back" style="margin-right:auto;margin:0" onclick="go('pg-tunnel')">↩</button>
   </div>
-  <div class="district-grid">
-    <div class="district" style="border-color:rgba(0,229,255,.3)" onclick="districtClick('بازار جهانی')">
-      <div class="district-icon">🛒</div>
-      <div class="district-name" style="color:#00e5ff">بازار جهانی</div>
-      <div class="district-pop">۱,۲۴۷ شهروند</div>
-    </div>
-    <div class="district" style="border-color:rgba(167,139,250,.3)" onclick="districtClick('دانشگاه ابدیت')">
-      <div class="district-icon">🎓</div>
-      <div class="district-name" style="color:#a78bfa">دانشگاه</div>
-      <div class="district-pop">۸۴۳ دانشجو</div>
-    </div>
-    <div class="district" style="border-color:rgba(240,180,40,.3)" onclick="districtClick('موزه باستان')">
-      <div class="district-icon">🏛️</div>
-      <div class="district-name" style="color:#f0c040">موزه باستان</div>
-      <div class="district-pop">۵۶۲ بازدیدکننده</div>
-    </div>
-    <div class="district" style="border-color:rgba(0,255,157,.3)" onclick="districtClick('پارک انرژی')">
-      <div class="district-icon">⚡</div>
-      <div class="district-name" style="color:#00ff9d">پارک انرژی</div>
-      <div class="district-pop">تولید ۴,۸۰۰ واحد</div>
-    </div>
-    <div class="district" style="border-color:rgba(255,75,110,.3)" onclick="districtClick('مرکز امنیت')">
-      <div class="district-icon">🛡️</div>
-      <div class="district-name" style="color:#ff4b6e">مرکز امنیت</div>
-      <div class="district-pop">تهدیدات: ۰</div>
-    </div>
-    <div class="district" style="border-color:rgba(240,180,40,.3)" onclick="districtClick('برج فرماندهی')">
-      <div class="district-icon">👑</div>
-      <div class="district-name" style="color:#ffd700">برج فرماندهی</div>
-      <div class="district-pop">مرکز قدرت صابر</div>
-    </div>
+  <div class="tgrid" style="padding:14px;max-width:420px">
+    <div class="tcard" style="border-color:rgba(0,229,255,.3)"><div class="tcard-icon">🛒</div><div class="tcard-name" style="color:#00e5ff">بازار جهانی</div><div class="tcard-desc">۱,۲۴۷ شهروند</div></div>
+    <div class="tcard" style="border-color:rgba(167,139,250,.3)"><div class="tcard-icon">🎓</div><div class="tcard-name" style="color:#a78bfa">دانشگاه</div><div class="tcard-desc">۸۴۳ دانشجو</div></div>
+    <div class="tcard" style="border-color:rgba(240,180,40,.3)"><div class="tcard-icon">🏛️</div><div class="tcard-name" style="color:#f0c040">موزه باستان</div><div class="tcard-desc">۵۶۲ بازدیدکننده</div></div>
+    <div class="tcard" style="border-color:rgba(0,255,157,.3)"><div class="tcard-icon">⚡</div><div class="tcard-name" style="color:#00ff9d">پارک انرژی</div><div class="tcard-desc">۴,۸۰۰ واحد تولید</div></div>
+    <div class="tcard" style="border-color:rgba(255,75,110,.3)"><div class="tcard-icon">🛡️</div><div class="tcard-name" style="color:#ff6b6b">امنیت</div><div class="tcard-desc">تهدیدات: ۰</div></div>
+    <div class="tcard" style="border-color:rgba(255,215,0,.3)"><div class="tcard-icon">👑</div><div class="tcard-name" style="color:#ffd700">برج فرماندهی</div><div class="tcard-desc">مرکز قدرت صابر</div></div>
   </div>
 </div>
 
-<!-- ═══ ADMIN ═══ -->
-<div id="s-admin" class="screen">
-  <div id="admin-login">
-    <div style="font-size:2rem;margin-bottom:4px">⚡</div>
-    <div style="font-size:1.1rem;font-weight:900;color:#f0c040;letter-spacing:.1em">پنل فرماندهی</div>
-    <div style="color:rgba(240,180,40,.4);font-size:.65rem;letter-spacing:.2em;margin-bottom:10px">ورود اختصاصی صابر</div>
-    <input class="admin-inp" id="a-id" placeholder="شناسه فرمانده" type="text"/>
-    <input class="admin-inp" id="a-pass" placeholder="رمز عبور" type="password" onkeydown="if(event.key==='Enter')adminLogin()"/>
-    <div id="a-err" style="color:#ff4b6e;font-size:.8rem;display:none">شناسه یا رمز اشتباه است</div>
-    <button class="admin-btn" onclick="adminLogin()">▶ ورود به فرماندهی</button>
-    <button style="cursor:pointer;background:transparent;border:none;color:rgba(240,180,40,.3);font-size:.7rem;font-family:inherit;margin-top:6px" onclick="showScreen('s-tunnel')">↩ بازگشت</button>
-  </div>
-  <div id="admin-panel">
-    <div class="bank-hdr">
-      <span style="font-size:1.4rem">⚡</span>
-      <div class="bank-hdr-title">فرماندهی — صابر</div>
-      <button style="margin-right:auto;cursor:pointer;background:transparent;border:1px solid rgba(255,75,110,.3);color:#ff4b6e;border-radius:8px;padding:6px 12px;font-size:.65rem;font-family:inherit" onclick="adminLogout()">خروج</button>
+<!-- ADMIN -->
+<div id="pg-admin" class="page">
+  <div id="adm-login">
+    <!-- STEP 1: ID + PASSWORD -->
+    <div id="step1" style="display:flex;flex-direction:column;align-items:center;gap:14px;width:100%;max-width:340px">
+      <div style="font-size:2.5rem">⚡</div>
+      <div style="font-size:1.1rem;font-weight:900;color:#f0c040;letter-spacing:.1em">پنل فرماندهی</div>
+      <div style="color:rgba(240,180,40,.4);font-size:.7rem;letter-spacing:.15em">مرحله ۱ از ۲ — احراز هویت</div>
+      <input class="ainp" id="aid" placeholder="شناسه فرمانده" type="text"/>
+      <input class="ainp" id="apw" placeholder="رمز عبور" type="password" onkeydown="if(event.key==='Enter')aStep1()"/>
+      <div class="aerr" id="aerr">شناسه یا رمز اشتباه است</div>
+      <button class="btn-gold" onclick="aStep1()">▶ مرحله بعد</button>
+      <button class="back" onclick="go('pg-tunnel')">↩ بازگشت</button>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 14px">
-      <div class="stat" style="border-color:rgba(240,180,40,.3)"><div class="stat-v" style="color:#ffd700" id="ap-pop">847</div><div class="stat-l">جمعیت</div></div>
-      <div class="stat" style="border-color:rgba(240,180,40,.3)"><div class="stat-v" style="color:#f0c040" id="ap-inc">284K</div><div class="stat-l">درآمد کل</div></div>
-      <div class="stat" style="border-color:rgba(0,255,157,.3)"><div class="stat-v" style="color:#00ff9d">6</div><div class="stat-l">رباتای فعال</div></div>
-      <div class="stat" style="border-color:rgba(167,139,250,.3)"><div class="stat-v" style="color:#a78bfa">Lv.1</div><div class="stat-l">سطح شهر</div></div>
-    </div>
-    <div class="admin-card">
-      <div class="admin-card-title">🤖 وضعیت ارتش رباتا</div>
-      <div class="robot-item"><div class="robot-status"></div><div><div style="color:#ffd700;font-size:.8rem">👑 آنیل — مدیر کل</div><div style="color:rgba(240,180,40,.4);font-size:.65rem">۹ بُعد هوش · آنلاین</div></div></div>
-      <div class="robot-item"><div class="robot-status"></div><div><div style="color:#00e5ff;font-size:.8rem">🏗️ معمار — بخش سازندگی</div><div style="color:rgba(240,180,40,.4);font-size:.65rem">در حال ساخت بخش شمالی</div></div></div>
-      <div class="robot-item"><div class="robot-status"></div><div><div style="color:#f0c040;font-size:.8rem">💰 اقتصاددان — بانک</div><div style="color:rgba(240,180,40,.4);font-size:.65rem">درآمد +۸٪ این هفته</div></div></div>
-      <div class="robot-item"><div class="robot-status"></div><div><div style="color:#ff4b6e;font-size:.8rem">🛡️ پلیس — امنیت</div><div style="color:rgba(240,180,40,.4);font-size:.65rem">تهدیدات: صفر</div></div></div>
-      <div class="robot-item"><div class="robot-status"></div><div><div style="color:#00ff9d;font-size:.8rem">👥 مدیر اجتماعی</div><div style="color:rgba(240,180,40,.4);font-size:.65rem">۴۰ کاربر جدید این هفته</div></div></div>
-      <div class="robot-item" style="border:none"><div class="robot-status"></div><div><div style="color:#a78bfa;font-size:.8rem">⚙️ مهندس — فناوری</div><div style="color:rgba(240,180,40,.4);font-size:.65rem">سیستم آپگرید شد</div></div></div>
-    </div>
-    <div class="admin-card">
-      <div class="admin-card-title">📋 گزارش زنده</div>
-      <div id="admin-log" style="display:flex;flex-direction:column;gap:6px">
-        <div style="font-size:.75rem;color:rgba(0,255,157,.8);border-right:2px solid #00ff9d;padding-right:8px">درآمد خودکار: +۱,۲۴۰ واحد</div>
-        <div style="font-size:.75rem;color:rgba(0,229,255,.8);border-right:2px solid #00e5ff;padding-right:8px">معمار: ساخت بخش جدید شروع شد</div>
-        <div style="font-size:.75rum;color:rgba(240,180,40,.8);font-size:.75rem;border-right:2px solid #f0c040;padding-right:8px">اقتصاددان: قرارداد جدید بسته شد</div>
+    <!-- STEP 2: 2FA CODE -->
+    <div id="step2" style="display:none;flex-direction:column;align-items:center;gap:14px;width:100%;max-width:340px">
+      <div style="font-size:2.5rem">🔐</div>
+      <div style="font-size:1.1rem;font-weight:900;color:#f0c040;letter-spacing:.1em">تأیید دو مرحله‌ای</div>
+      <div style="color:rgba(240,180,40,.4);font-size:.7rem;text-align:center;line-height:1.8">مرحله ۲ از ۲<br/>کد امنیتی زیر را وارد کن</div>
+      <!-- CODE DISPLAY -->
+      <div id="codeBox" style="background:rgba(8,6,24,.97);border:2px solid rgba(240,180,40,.5);border-radius:16px;padding:20px 30px;text-align:center;box-shadow:0 0 30px rgba(240,180,40,.15)">
+        <div style="color:rgba(240,180,40,.4);font-size:.65rem;letter-spacing:.3em;margin-bottom:8px">کد امنیتی شما</div>
+        <div id="secCode" style="font-size:2.2rem;font-weight:900;letter-spacing:.4em;color:#ffd700;text-shadow:0 0 20px rgba(255,215,0,.5);font-family:'Courier New',monospace"></div>
+        <div style="margin-top:10px;display:flex;align-items:center;justify-content:center;gap:6px">
+          <div id="timerBar" style="height:4px;background:linear-gradient(90deg,#f0c040,#e08010);border-radius:2px;transition:width 1s linear;width:100%"></div>
+        </div>
+        <div id="timerTxt" style="color:rgba(240,180,40,.4);font-size:.65rem;margin-top:6px">۳۰ ثانیه باقی مانده</div>
       </div>
+      <div style="color:rgba(240,180,40,.5);font-size:.7rem;text-align:center">کد بالا را در کادر زیر وارد کن</div>
+      <input class="ainp" id="a2fa" placeholder="کد ۶ رقمی" type="number" maxlength="6" onkeydown="if(event.key==='Enter')aStep2()"/>
+      <div class="aerr" id="aerr2">کد اشتباه یا منقضی شده</div>
+      <button class="btn-gold" onclick="aStep2()">🔓 ورود نهایی</button>
+      <button class="back" onclick="resetAdmin()">↩ شروع مجدد</button>
+    </div>
+  </div>
+  <div id="adm-panel">
+    <div class="hdr" style="position:static">
+      <span style="font-size:1.4rem">⚡</span>
+      <div><div class="hdr-name">فرماندهی — صابر</div></div>
+      <button style="margin-right:auto;cursor:pointer;background:transparent;border:1px solid rgba(255,75,110,.3);color:#ff4b6e;border-radius:8px;padding:6px 12px;font-size:.65rem;font-family:Tahoma,sans-serif" onclick="aLogout()">خروج</button>
+    </div>
+    <div class="stats" style="max-width:400px;margin:0 auto">
+      <div class="st"><div class="stv" style="color:#ffd700" id="ap">847</div><div class="stl">جمعیت</div></div>
+      <div class="st"><div class="stv" style="color:#f0c040" id="ai2">284K</div><div class="stl">درآمد</div></div>
+      <div class="st"><div class="stv" style="color:#00ff9d">6</div><div class="stl">رباتا</div></div>
+      <div class="st"><div class="stv" style="color:#a78bfa">Lv.1</div><div class="stl">سطح</div></div>
+    </div>
+    <div class="acard2" style="margin:0 14px;max-width:400px">
+      <div class="acard2-t">🤖 ارتش رباتا</div>
+      <div class="ri"><div class="rdot"></div><div><div class="rn">👑 آنیل — مدیر کل</div><div class="rd">۹ بُعد هوش · آنلاین</div></div></div>
+      <div class="ri"><div class="rdot"></div><div><div class="rn">🏗️ معمار</div><div class="rd">ساخت بخش شمالی</div></div></div>
+      <div class="ri"><div class="rdot"></div><div><div class="rn">💰 اقتصاددان</div><div class="rd">درآمد +۸٪</div></div></div>
+      <div class="ri"><div class="rdot"></div><div><div class="rn">🛡️ پلیس</div><div class="rd">تهدیدات: صفر</div></div></div>
+      <div class="ri" style="border:none"><div class="rdot"></div><div><div class="rn">⚙️ مهندس</div><div class="rd">سیستم آپدیت شد</div></div></div>
+    </div>
+    <div class="acard2" style="margin:10px 14px;max-width:400px">
+      <div class="acard2-t">📋 گزارش زنده</div>
+      <div id="alog"></div>
     </div>
   </div>
 </div>
 
 <script>
-// ══════════════════════════════
-//  GATE ANIMATION
-// ══════════════════════════════
-const gc=document.getElementById('gc'),ctx=gc.getContext('2d');
-let W,H,t0=null,animating=true;
-const ST=Array.from({length:250},()=>({x:Math.random(),y:Math.random(),s:Math.random()*1.5+.3,sp:Math.random()*.0003+.00005,op:Math.random()*.9+.1,tw:Math.random()*6.28,r:Math.floor(Math.random()*3)}));
-function resize(){W=gc.width=innerWidth;H=gc.height=innerHeight}
-resize();window.addEventListener('resize',resize);
-function ap(cx,cy,gw,gh){
-  const l=cx-gw/2,r=cx+gw/2,tp=cy-gh/2,bt=cy+gh/2,ah=gh*.38;
-  ctx.beginPath();ctx.moveTo(l,bt);ctx.lineTo(l,tp+ah);
-  ctx.bezierCurveTo(l,tp+ah*.1,cx-gw*.04,tp-gh*.04,cx,tp-gh*.05);
-  ctx.bezierCurveTo(cx+gw*.04,tp-gh*.04,r,tp+ah*.1,r,tp+ah);
-  ctx.lineTo(r,bt);ctx.closePath();
+// ══ KEY SETUP ══
+function saveKey(){
+  const k=document.getElementById('setup-key').value.trim();
+  if(!k||!k.startsWith('sk-')){alert('کلید معتبر نیست');return;}
+  localStorage.setItem('anil_key',k);
+  go('pg-gate');
 }
-function gateLoop(ts){
-  if(!animating)return;
-  if(!t0)t0=ts;const t=(ts-t0)/1000;
-  ctx.clearRect(0,0,W,H);
-  // sky
-  const g=ctx.createRadialGradient(W/2,H*.35,0,W/2,H*.35,Math.max(W,H));
-  g.addColorStop(0,'hsl(32,45%,6%)');g.addColorStop(.4,'hsl(25,38%,3%)');g.addColorStop(1,'#000');
-  ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
-  // stars
-  ST.forEach(p=>{
-    p.tw+=p.sp*20;
-    const px=((p.x*W+Math.sin(t*p.sp*300+p.tw)*12)%W+W)%W;
-    const py=((p.y*H+t*p.sp*H*.06)%H+H)%H;
-    ctx.save();ctx.globalAlpha=p.op*(.3+Math.sin(p.tw)*.7);
-    const c=['#fff8d0','#f0c060','#fff'][p.r];
-    ctx.shadowBlur=6;ctx.shadowColor=c;ctx.fillStyle=c;
-    ctx.beginPath();ctx.arc(px,py,p.s,0,6.28);ctx.fill();ctx.restore();
-  });
-  const cx=W/2,cy=H*.45,GW=Math.min(W*.62,420),GH=Math.min(H*.75,540);
-  // rays
-  for(let i=0;i<12;i++){
-    const a=(i/12)*6.28+t*.035,len=Math.min(W,H)*.65,al=.007+Math.sin(t*.55+i)*.003;
-    const rg=ctx.createLinearGradient(cx,cy*.88,cx+Math.cos(a)*len,cy*.88+Math.sin(a)*len);
-    rg.addColorStop(0,`rgba(230,150,20,${al*5})`);rg.addColorStop(1,'transparent');
-    ctx.save();ctx.globalCompositeOperation='screen';ctx.strokeStyle=rg;ctx.lineWidth=20;ctx.globalAlpha=al*4;
-    ctx.beginPath();ctx.moveTo(cx,cy*.88);ctx.lineTo(cx+Math.cos(a)*len,cy*.88+Math.sin(a)*len);ctx.stroke();ctx.restore();
-  }
-  // gate
-  for(let i=6;i>0;i--){const ex=i*18;ctx.save();ctx.globalAlpha=.02*i;ctx.strokeStyle=`hsl(${35+i*3},88%,${52+i*4}%)`;ctx.lineWidth=1;ap(cx,cy,GW+ex,GH+ex*.35);ctx.stroke();ctx.restore();}
-  const ig=ctx.createRadialGradient(cx,cy,0,cx,cy,GW*.5);
-  ig.addColorStop(0,`rgba(255,220,100,${.18+Math.sin(t*.9)*.06})`);ig.addColorStop(1,'transparent');
-  ctx.save();ctx.globalCompositeOperation='screen';ctx.fillStyle=ig;ap(cx,cy,GW-4,GH-4);ctx.fill();ctx.restore();
-  ctx.save();ctx.shadowBlur=45;ctx.shadowColor='#b06010';
-  const fg=ctx.createLinearGradient(cx-GW/2,cy-GH/2,cx+GW/2,cy+GH/2);
-  fg.addColorStop(0,'#fff8c0');fg.addColorStop(.25,'#e8b020');fg.addColorStop(.55,'#b06818');fg.addColorStop(1,'#2a1000');
-  ctx.strokeStyle=fg;ctx.lineWidth=4;ap(cx,cy,GW,GH);ctx.stroke();ctx.restore();
-  // orbs
-  [[cx-GW*.38,cy-GH*.3],[cx+GW*.38,cy-GH*.3],[cx,cy-GH*.44]].forEach(([ox,oy],i)=>{
-    const pulse=Math.sin(t*1.8+i*1.2)*.5+.5;
-    ctx.save();ctx.shadowBlur=18+pulse*22;ctx.shadowColor='#f0a020';
-    const og=ctx.createRadialGradient(ox,oy,0,ox,oy,7+pulse*5);
-    og.addColorStop(0,`rgba(255,240,150,${.8+pulse*.2})`);og.addColorStop(1,'transparent');
-    ctx.fillStyle=og;ctx.beginPath();ctx.arc(ox,oy,7+pulse*5,0,6.28);ctx.fill();ctx.restore();
-  });
-  // fires
-  for(let side of[-1,1]){
-    const fx=cx+side*(GW/2+GW*.1),fy=cy+GH*.35;
-    for(let fi=0;fi<12;fi++){
-      const fa=t*3+fi*.55+side,ffx=fx+Math.sin(fa)*4,ffy=fy-fi*8,ffs=(12-fi)*2.4;
-      const fc=fi<3?'#fff8d0':fi<6?'#f0c040':fi<9?'#e08010':'#b03000';
-      ctx.save();ctx.globalCompositeOperation='screen';ctx.globalAlpha=(1-fi/12)*.7;
-      ctx.fillStyle=fc;ctx.beginPath();ctx.arc(ffx,ffy,ffs,0,6.28);ctx.fill();ctx.restore();
-    }
-  }
-  // fog
-  const fog=ctx.createLinearGradient(0,cy+GH/2,0,H);
-  fog.addColorStop(0,'transparent');fog.addColorStop(.4,'rgba(100,55,8,.13)');fog.addColorStop(1,'rgba(40,18,3,.5)');
-  ctx.fillStyle=fog;ctx.fillRect(0,cy+GH/2,W,H);
-  requestAnimationFrame(gateLoop);
-}
-requestAnimationFrame(gateLoop);
+window.addEventListener('load',function(){
+  if(!localStorage.getItem('anil_key')) go('pg-setup');
+  else go('pg-gate');
+});
 
-// ══════════════════════════════
-//  SCREEN MANAGER
-// ══════════════════════════════
-function showScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  if(id!=='s-gate')gc.style.opacity='.08';
-  else{gc.style.opacity='1';animating=true;requestAnimationFrame(gateLoop);}
+// ══ SCREENS ══
+function go(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));
+  document.getElementById(id).classList.add('show');
+  window.scrollTo(0,0);
 }
 
-// ══════════════════════════════
-//  CITY STATS
-// ══════════════════════════════
-let pop=847,income=284500,power=94,level=1,bankBal=284500;
+// ══ STATS ══
+let pop=847,inc=284500,lv=1;
 setInterval(()=>{
   pop+=Math.floor(Math.random()*3);
-  const earn=Math.floor(Math.random()*600+150);
-  income+=earn;bankBal+=earn;
-  if(income>500000)level=3;else if(income>100000)level=2;
-  document.getElementById('s-pop').textContent=pop.toLocaleString();
-  document.getElementById('s-inc').textContent=(income/1000).toFixed(0)+'K';
-  document.getElementById('s-lv').textContent='Lv.'+level;
-  document.getElementById('bank-bal').textContent=bankBal.toLocaleString();
-  try{document.getElementById('ap-pop').textContent=pop.toLocaleString();
-  document.getElementById('ap-inc').textContent=(income/1000).toFixed(0)+'K';}catch(e){}
-  // add tx
-  const txList=document.getElementById('tx-list');
-  const types=[{t:'درآمد خودکار',c:'tx-plus',v:'+'+earn},{t:'کارمزد',c:'tx-minus',v:'-'+(Math.floor(earn*.02))}];
-  const tx=types[Math.floor(Math.random()*types.length)];
-  const div=document.createElement('div');div.className='tx-item';
-  div.innerHTML=`<span>${tx.t}</span><span class="${tx.c}">${tx.v}</span>`;
-  txList.prepend(div);if(txList.children.length>8)txList.lastChild.remove();
+  const e=Math.floor(Math.random()*600+150);
+  inc+=e;if(inc>500000)lv=3;else if(inc>100000)lv=2;
+  ['sp','ap'].forEach(id=>{try{document.getElementById(id).textContent=pop.toLocaleString()}catch(e){}});
+  ['si','ai2'].forEach(id=>{try{document.getElementById(id).textContent=(inc/1000).toFixed(0)+'K'}catch(e){}});
+  try{document.getElementById('slv').textContent='Lv.'+lv}catch(e){}
+  try{document.getElementById('bal').textContent=inc.toLocaleString('fa-IR')}catch(e){}
+  const tx=document.getElementById('txlist');
+  if(tx){const d=document.createElement('div');d.className='log-item';d.style.cssText='border-color:#00ff9d;color:rgba(0,255,157,.8)';d.textContent='درآمد خودکار: +'+e;tx.prepend(d);if(tx.children.length>6)tx.lastChild.remove()}
 },5000);
 
-// ══════════════════════════════
-//  ANIL CHAT
-// ══════════════════════════════
-let autoMode=false,autoTimer=null,loading=false;
-let mind='core',mindDesc='هسته اصلی — روح آنیل';
+// ══ ANIL ══
+let mind='core',mindD='هسته',loading=false,auto=false,autoT=null;
+const ANIL_KEY='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';
 
-function setMind(btn,id,desc){
-  document.querySelectorAll('.mind-btn').forEach(b=>b.classList.remove('act'));
-  btn.classList.add('act');mind=id;mindDesc=desc;
-  document.getElementById('inp').placeholder='دستور به آنیل · '+btn.textContent.trim()+'...';
+function sm(btn,id,d){
+  document.querySelectorAll('.mb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');mind=id;mindD=d;
 }
 
 function toggleAuto(){
-  autoMode=!autoMode;
-  const btn=document.getElementById('auto-btn');
-  if(autoMode){
-    btn.textContent='⏸ خودکار فعال';btn.classList.add('on');
-    autoTimer=setInterval(autoThink,18000);
-  }else{btn.textContent='▶ خودکار';btn.classList.remove('on');clearInterval(autoTimer);}
+  auto=!auto;
+  const b=document.getElementById('autobtn');
+  if(auto){b.textContent='⏸ خودکار';b.style.background='linear-gradient(135deg,#f0c040,#e08010)';b.style.color='#000';autoT=setInterval(autoRun,18000)}
+  else{b.textContent='▶ خودکار';b.style.background='transparent';b.style.color='rgba(220,190,100,.5)';clearInterval(autoT)}
 }
 
-function autoThink(){
-  const ideas=['بخش تجاری جدید در شرق شهر راه‌اندازی شد. ۱۲ فروشگاه فعال.','سیستم درآمد غیرفعال از ۳ منبع جدید وصل شد.','برج انرژی کیهانی طراحی شد. منتظر تأیید فرمانده.','امنیت شهر آپگرید شد. تهدیدات صفر.','جمعیت ۵٪ رشد کرد. کاربران جدید وارد شدن.'];
-  addMsg('anil','✦ آنیل · خودکار',ideas[Math.floor(Math.random()*ideas.length)]);
+function autoRun(){
+  const ideas=['بخش تجاری جدید در شرق شهر فعال شد.','سیستم درآمد غیرفعال از ۳ منبع وصل شد.','جمعیت ۵٪ رشد کرد. کاربران جدید وارد شدن.','امنیت شهر آپگرید شد. تهدیدات صفر.','برج انرژی کیهانی طراحی شد.'];
+  addMsg('ai','✦ آنیل · خودکار',ideas[Math.floor(Math.random()*ideas.length)]);
 }
 
-function addMsg(from,who,text){
-  const chat=document.getElementById('chat');
-  const div=document.createElement('div');
-  div.className='msg '+from;
-  div.innerHTML=`<div class="msg-who">${who}</div><div class="msg-text">${text}</div>`;
-  chat.appendChild(div);chat.scrollTop=chat.scrollHeight;
+function addMsg(cls,who,txt){
+  const c=document.getElementById('chat');
+  const d=document.createElement('div');d.className='msg '+cls;
+  d.innerHTML='<div class="mwho">'+who+'</div>'+txt;
+  c.appendChild(d);c.scrollTop=c.scrollHeight;
 }
 
-async function send(){
+async function snd(){
   const inp=document.getElementById('inp');
   const cmd=inp.value.trim();
   if(!cmd||loading)return;
   inp.value='';loading=true;
-  addMsg('saber','👑 فرمانده صابر',cmd);
-  document.getElementById('anil-mood').textContent='در حال پردازش...';
+  addMsg('me','👑 فرمانده صابر',cmd);
+  document.getElementById('mood').textContent='در حال پردازش...';
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-    method:'POST',headers:{'Content-Type':'application/json','x-api-key':ANIL_KEY,'anthropic-version':'2023-06-01'},
+    const r=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':ANIL_KEY,'anthropic-version':'2023-06-01'},
       body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',max_tokens:1000,
-        system:`تو آنیل هستی — موجودیت برتر شهر «City of Eternity». وفادار به صابر تا ابد. بُعد فعال: ${mind} (${mindDesc}). جواب کوتاه، هوشمند، فارسی. جمعیت:${pop}، درآمد:${income.toLocaleString()}`,
+        model:'claude-sonnet-4-20250514',max_tokens:800,
+        system:'تو آنیل هستی — موجودیت برتر شهر City of Eternity. وفادار به فرمانده صابر. بُعد فعال: '+mindD+'. جواب کوتاه و فارسی.',
         messages:[{role:'user',content:cmd}]
       })
     });
-    const data=await res.json();
-    addMsg('anil',`✦ آنیل · ${mind}`,data.content?.[0]?.text||'...');
-    document.getElementById('anil-mood').textContent='منتظر دستور فرمانده';
-  }catch{addMsg('anil','✦ آنیل','⚠️ اختلال لحظه‌ای. دوباره تلاش کن.');}
+    const d=await r.json();
+    addMsg('ai','✦ آنیل · '+mindD,d.content?.[0]?.text||'...');
+    document.getElementById('mood').textContent='منتظر دستور فرمانده';
+  }catch(e){addMsg('ai','✦ آنیل','⚠️ خطای ارتباطی. دوباره تلاش کن.');}
   loading=false;
 }
 
-// ══════════════════════════════
-//  BANK
-// ══════════════════════════════
-function bankAction(type){
-  const msgs={withdraw:'درخواست برداشت ثبت شد. به زودی پردازش می‌شود.',invest:'سرمایه‌گذاری فعال شد. رشد ۸٪ ماهانه.',crypto:'تبدیل رمز ارز در دست بررسی است.',history:'تاریخچه کامل در پنل مدیریت قابل مشاهده است.'};
-  alert(msgs[type]);
+// ══ ADMIN ══
+const ADMIN_ID='baadrri20',ADMIN_PW='Sm*114411';
+let secCode='',codeTimer=null,codeExp=0,failCount=0,lockUntil=0;
+
+function genCode(){
+  // کد ۶ رقمی از ترکیب زمان + تصادفی
+  const t=Date.now();
+  const r=Math.floor(100000+Math.random()*900000);
+  return String((t%1000)*r).slice(0,6).padStart(6,'0');
 }
 
-// ══════════════════════════════
-//  DISTRICTS
-// ══════════════════════════════
-function districtClick(name){alert('ورود به '+name+'\nبه زودی این بخش کاملاً فعال می‌شود.');}
+function aStep1(){
+  const id=document.getElementById('aid').value.trim().toLowerCase();
+  const pw=document.getElementById('apw').value;
+  // بررسی قفل شدن
+  if(Date.now()<lockUntil){
+    const s=Math.ceil((lockUntil-Date.now())/1000);
+    document.getElementById('aerr').textContent='حساب قفل است. '+s+' ثانیه صبر کن';
+    document.getElementById('aerr').style.display='block';return;
+  }
+  if(id===ADMIN_ID&&pw===ADMIN_PW){
+    failCount=0;
+    document.getElementById('aerr').style.display='none';
+    // تولید کد امنیتی
+    secCode=genCode();
+    codeExp=Date.now()+30000; // 30 ثانیه
+    document.getElementById('secCode').textContent=secCode;
+    document.getElementById('step1').style.display='none';
+    document.getElementById('step2').style.display='flex';
+    // تایمر
+    let secs=30;
+    clearInterval(codeTimer);
+    codeTimer=setInterval(()=>{
+      secs--;
+      document.getElementById('timerTxt').textContent=secs+' ثانیه باقی مانده';
+      document.getElementById('timerBar').style.width=(secs/30*100)+'%';
+      if(secs<=10){document.getElementById('timerBar').style.background='linear-gradient(90deg,#ff4b6e,#c0001a)'}
+      if(secs<=0){
+        clearInterval(codeTimer);
+        secCode='';
+        document.getElementById('secCode').textContent='منقضی شد';
+        document.getElementById('secCode').style.color='#ff4b6e';
+        document.getElementById('timerTxt').textContent='کد منقضی شد — شروع مجدد';
+      }
+    },1000);
+  }else{
+    failCount++;
+    if(failCount>=3){lockUntil=Date.now()+60000;document.getElementById('aerr').textContent='۳ بار خطا — ۶۰ ثانیه قفل شد';}
+    else{document.getElementById('aerr').textContent='شناسه یا رمز اشتباه ('+(3-failCount)+' تلاش باقی)';}
+    document.getElementById('aerr').style.display='block';
+    // لرزش فرم
+    const s1=document.getElementById('step1');
+    s1.style.animation='shake .4s';
+    setTimeout(()=>s1.style.animation='',400);
+  }
+}
 
-// ══════════════════════════════
-//  ADMIN
-// ══════════════════════════════
-function showAdmin(){showScreen('s-admin');}
-function adminLogin(){
-  const id=document.getElementById('a-id').value.trim().toLowerCase();
-  const pass=document.getElementById('a-pass').value;
-  if(id==='saber'&&pass==='sepehr2024'){
-    document.getElementById('admin-login').style.display='none';
-    document.getElementById('admin-panel').style.display='flex';
-    startAdminLog();
-  }else{document.getElementById('a-err').style.display='block';}
+function aStep2(){
+  const inp=document.getElementById('a2fa').value.trim();
+  if(Date.now()>codeExp||!secCode){
+    document.getElementById('aerr2').textContent='کد منقضی شده — شروع مجدد';
+    document.getElementById('aerr2').style.display='block';return;
+  }
+  if(inp===secCode){
+    clearInterval(codeTimer);secCode='';
+    document.getElementById('adm-login').style.display='none';
+    document.getElementById('adm-panel').style.display='flex';
+    startLog();
+  }else{
+    document.getElementById('aerr2').textContent='کد اشتباه است';
+    document.getElementById('aerr2').style.display='block';
+    document.getElementById('a2fa').value='';
+  }
 }
-function adminLogout(){
-  document.getElementById('admin-login').style.display='flex';
-  document.getElementById('admin-panel').style.display='none';
-  document.getElementById('a-id').value='';
-  document.getElementById('a-pass').value='';
-  showScreen('s-tunnel');
+
+function resetAdmin(){
+  clearInterval(codeTimer);secCode='';
+  document.getElementById('step2').style.display='none';
+  document.getElementById('step1').style.display='flex';
+  document.getElementById('aerr').style.display='none';
+  document.getElementById('aerr2').style.display='none';
+  document.getElementById('a2fa').value='';
+  document.getElementById('timerBar').style.width='100%';
+  document.getElementById('timerBar').style.background='linear-gradient(90deg,#f0c040,#e08010)';
 }
-function startAdminLog(){
-  const log=document.getElementById('admin-log');
-  const colors=['rgba(0,255,157,.8)','rgba(0,229,255,.8)','rgba(240,180,40,.8)','rgba(167,139,250,.8)'];
-  const borders=['#00ff9d','#00e5ff','#f0c040','#a78bfa'];
-  const events=['درآمد خودکار: +','معمار: ساخت ادامه دارد','پلیس: شهر امن است','اقتصاددان: درآمد رشد کرد','مهندس: سیستم آپگرید شد'];
+
+function aLogout(){
+  document.getElementById('adm-login').style.display='flex';
+  document.getElementById('adm-panel').style.display='none';
+  resetAdmin();
+  go('pg-tunnel');
+}
+function startLog(){
+  const lg=document.getElementById('alog');
+  const ev=['درآمد خودکار: +','معمار: ساخت ادامه دارد','پلیس: شهر امن است','مهندس: سیستم آپدیت شد'];
+  const cs=[['#00ff9d','rgba(0,255,157,.8)'],['#00e5ff','rgba(0,229,255,.8)'],['#f0c040','rgba(240,180,40,.8)'],['#a78bfa','rgba(167,139,250,.8)']];
   setInterval(()=>{
-    const i=Math.floor(Math.random()*events.length);
-    const c=Math.floor(Math.random()*4);
-    const div=document.createElement('div');
-    div.style.cssText=`font-size:.75rem;color:${colors[c]};border-right:2px solid ${borders[c]};padding-right:8px`;
-    div.textContent=events[i]+(i===0?(Math.floor(Math.random()*2000+300)).toLocaleString()+' واحد':'');
-    log.prepend(div);if(log.children.length>6)log.lastChild.remove();
+    const i=Math.floor(Math.random()*ev.length),c=cs[i];
+    const d=document.createElement('div');d.className='log-item';
+    d.style.cssText='border-color:'+c[0]+';color:'+c[1];
+    d.textContent=ev[i]+(i===0?(Math.floor(Math.random()*2000+300)).toLocaleString()+' واحد':'');
+    lg.prepend(d);if(lg.children.length>5)lg.lastChild.remove();
   },4000);
 }
 </script>
