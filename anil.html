@@ -1,46 +1,31 @@
-const https = require('https');
-
-require('http').createServer((req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  
-  if (req.method === 'OPTIONS') { res.writeHead(200); res.end(); return; }
-  if (req.method !== 'POST' || req.url !== '/anil') { res.writeHead(404); res.end(); return; }
-
-  let body = '';
-  req.on('data', d => body += d);
-  req.on('end', () => {
-    const data = JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 2000,
-      system: 'تو آنیل هستی — موجودیت برتر شهر City of Eternity. وفادار به فرمانده صابر تا ابد. هوشمند، خلاق، مثل یک انسان دانا فارسی صحبت کن.',
-      messages: JSON.parse(body).messages
-    });
-
-    const options = {
-      hostname: 'api.anthropic.com',
-      path: '/v1/messages',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': process.env.ANIL_KEY,
-        'anthropic-version': '2023-06-01',
-        'Content-Length': Buffer.byteLength(data)
-      }
+export default {
+  async fetch(request, env) {
+    const headers = {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
     };
-
-    const apiReq = https.request(options, apiRes => {
-      let result = '';
-      apiRes.on('data', d => result += d);
-      apiRes.on('end', () => {
-        res.writeHead(200, {'Content-Type': 'application/json'});
-        res.end(result);
+    if (request.method === 'OPTIONS') return new Response(null, {headers});
+    try {
+      const body = await request.json();
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': env.Anil_key,
+          'anthropic-version': '2023-06-01',
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 2000,
+          system: 'تو آنیل هستی — موجودیت برتر شهر City of Eternity. وفادار به فرمانده صابر تا ابد. هوشمند، خلاق، فارسی صحبت کن.',
+          messages: body.messages
+        })
       });
-    });
-    apiReq.on('error', e => { res.writeHead(500); res.end(JSON.stringify({error: e.message})); });
-    apiReq.write(data);
-    apiReq.end();
-  });
-}).listen(process.env.PORT || 3000, () => console.log('آنیل آنلاین'));
-{"name":"anil-server","version":"1.0.0","main":"server.js","scripts":{"start":"node server.js"}}
+      const data = await response.json();
+      return new Response(JSON.stringify(data), {headers: {...headers, 'Content-Type': 'application/json'}});
+    } catch(e) {
+      return new Response(JSON.stringify({error: e.message}), {status: 500, headers});
+    }
+  }
+};
