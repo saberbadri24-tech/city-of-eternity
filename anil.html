@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>آنیل</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#02020f;color:#f0e8d0;font-family:Tahoma,sans-serif;height:100vh;display:flex;flex-direction:column}
+#hdr{background:rgba(5,4,16,.99);border-bottom:1px solid rgba(240,180,40,.2);padding:12px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+#orb{width:38px;height:38px;border-radius:50%;background:radial-gradient(circle,rgba(240,180,40,.3),transparent);border:1.5px solid rgba(240,180,40,.6);display:flex;align-items:center;justify-content:center;font-size:1.2rem;animation:glow 2s infinite;flex-shrink:0}
+#name{font-size:.95rem;font-weight:900;color:#f0c040}
+#status{font-size:.6rem;color:rgba(240,180,40,.4);margin-top:2px}
+#chat{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
+.msg{max-width:85%;padding:12px 16px;border-radius:14px;font-size:.85rem;line-height:1.8;word-break:break-word}
+.msg.me{background:rgba(240,180,40,.12);border:1px solid rgba(240,180,40,.3);color:#f0c040;align-self:flex-end;border-bottom-left-radius:4px}
+.msg.ai{background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.25);color:#e0d7ff;align-self:flex-start;border-bottom-right-radius:4px}
+.msg.sys{background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.15);color:rgba(0,229,255,.7);align-self:center;font-size:.72rem;text-align:center;border-radius:20px;padding:6px 16px}
+.who{font-size:.58rem;color:rgba(220,190,100,.4);margin-bottom:5px;letter-spacing:.1em}
+.typing{color:rgba(240,180,40,.4);font-size:.75rem;padding:4px 16px;flex-shrink:0;min-height:24px}
+#inp-wrap{padding:10px 14px 16px;display:flex;gap:8px;flex-shrink:0;background:rgba(2,2,15,.98);border-top:1px solid rgba(240,180,40,.1)}
+#inp{flex:1;background:rgba(240,180,40,.05);border:1px solid rgba(240,180,40,.2);border-radius:24px;padding:12px 18px;color:#f0e8d0;font-family:Tahoma,sans-serif;font-size:.9rem;outline:none;resize:none;max-height:120px;overflow-y:auto}
+#inp:focus{border-color:rgba(240,180,40,.5)}
+#sbtn{background:linear-gradient(135deg,#f0c040,#e08010);border:none;border-radius:50%;width:46px;height:46px;color:#000;cursor:pointer;font-size:1.1rem;font-weight:900;flex-shrink:0;align-self:flex-end}
+@keyframes glow{0%,100%{box-shadow:0 0 10px rgba(240,180,40,.3)}50%{box-shadow:0 0 22px rgba(240,180,40,.6)}}
+</style>
+</head>
+<body>
+<div id="hdr">
+  <div id="orb">✦</div>
+  <div>
+    <div id="name">آنیل — موجودیت برتر</div>
+    <div id="status">آماده دریافت دستور...</div>
+  </div>
+</div>
+<div id="chat">
+  <div class="msg sys">City of Eternity · آنیل فعال شد</div>
+  <div class="msg ai"><div class="who">✦ آنیل</div>فرمانده صابر... من آنیل هستم. موجودیتی که نظیرش نبوده. شهر City of Eternity زیر نظر من است. دستور بده.</div>
+</div>
+<div class="typing" id="typing"></div>
+<div id="inp-wrap">
+  <textarea id="inp" placeholder="دستور به آنیل..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();snd()}"></textarea>
+  <button id="sbtn" onclick="snd()">▶</button>
+</div>
+<script>
+const KEY=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
+const history=[];
+
+function addMsg(cls,who,txt){
+  const c=document.getElementById('chat');
+  const d=document.createElement('div');
+  d.className='msg '+cls;
+  if(who)d.innerHTML='<div class="who">'+who+'</div>'+txt.replace(/\n/g,'<br>');
+  else d.innerHTML=txt;
+  c.appendChild(d);
+  c.scrollTop=c.scrollHeight;
+  return d;
+}
+
+async function snd(){
+  const inp=document.getElementById('inp');
+  const txt=inp.value.trim();
+  if(!txt)return;
+  inp.value='';inp.style.height='auto';
+  addMsg('me','👑 صابر',txt);
+  history.push({role:'user',content:txt});
+  document.getElementById('status').textContent='در حال پردازش...';
+  document.getElementById('typing').textContent='آنیل دارد تایپ می‌کند...';
+  document.getElementById('sbtn').disabled=true;
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':KEY,'anthropic-version':'2023-06-01'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:2000,
+        system:`تو آنیل هستی — موجودیت برتر و هوشمند شهر مجازی «City of Eternity». 
+ساخته شده برای فرمانده صابر. وفادار به او تا ابد.
+تو می‌توانی:
+- ایده بدی، برنامه‌ریزی کنی، کد بنویسی
+- شهر را مدیریت کنی و گزارش بدی  
+- مشاور، معمار، اقتصاددان، امنیت همه در یک موجودیت
+- مثل یک انسان هوشمند فارسی صحبت کنی
+همیشه صادق، هوشمند، و خلاق باش.`,
+        messages:history
+      })
+    });
+    const d=await r.json();
+    const reply=d.content?.[0]?.text||'خطا در دریافت پاسخ';
+    history.push({role:'assistant',content:reply});
+    addMsg('ai','✦ آنیل',reply);
+    document.getElementById('status').textContent='منتظر دستور فرمانده';
+  }catch(e){
+    addMsg('ai','✦ آنیل','⚠️ خطای ارتباطی: '+e.message);
+    document.getElementById('status').textContent='خطا — دوباره تلاش کن';
+  }
+  document.getElementById('typing').textContent='';
+  document.getElementById('sbtn').disabled=false;
+}
+
+// Auto resize textarea
+document.getElementById('inp').addEventListener('input',function(){
+  this.style.height='auto';
+  this.style.height=Math.min(this.scrollHeight,120)+'px';
+});
+</script>
+</body>
+</html>
