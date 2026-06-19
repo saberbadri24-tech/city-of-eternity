@@ -3,68 +3,177 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>آنیل — ابزار هوشمند روزمره</title>
+<title>آنیل</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#0a0a14;color:#e8e4f0;font-family:Tahoma,sans-serif;direction:rtl;min-height:100vh}
-.header{background:linear-gradient(135deg,#1a1530,#0a0a14);padding:20px 16px;text-align:center;border-bottom:1px solid rgba(167,139,250,.2)}
-.logo{font-size:1.4rem;font-weight:900;background:linear-gradient(90deg,#a78bfa,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.tagline{font-size:.7rem;color:rgba(167,139,250,.5);margin-top:4px}
-.tabs{display:flex;gap:6px;padding:12px 14px;overflow-x:auto;background:rgba(20,16,40,.5)}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:#0a0a14;color:#e8e4f0;font-family:Tahoma,sans-serif;direction:rtl;min-height:100vh;overflow-x:hidden}
+.header{background:linear-gradient(135deg,#1a1530,#0a0a14);padding:18px 16px;text-align:center;border-bottom:1px solid rgba(167,139,250,.2);position:sticky;top:0;z-index:50}
+.logo{font-size:1.3rem;font-weight:900;background:linear-gradient(90deg,#a78bfa,#60a5fa,#f0c040);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.tabs{display:flex;gap:6px;padding:10px 14px;overflow-x:auto;background:rgba(15,12,30,.9);position:sticky;top:64px;z-index:49}
 .tab{padding:8px 16px;border-radius:20px;font-size:.78rem;white-space:nowrap;cursor:pointer;
   background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.15);color:rgba(220,210,250,.6)}
-.tab.active{background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff;border-color:transparent}
+.tab.active{background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff;border-color:transparent;box-shadow:0 0 15px rgba(124,58,237,.4)}
 .content{padding:16px;max-width:600px;margin:0 auto}
-.card{background:rgba(20,16,40,.6);border:1px solid rgba(167,139,250,.15);border-radius:14px;padding:18px;margin-bottom:14px}
-.card-title{font-size:.95rem;font-weight:900;color:#a78bfa;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.hidden{display:none}
+.card{background:rgba(20,16,40,.6);border:1px solid rgba(167,139,250,.15);border-radius:16px;padding:18px;margin-bottom:14px}
+.card-title{font-size:1rem;font-weight:900;color:#a78bfa;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+
+/* GAMES GRID */
+.games-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.game-tile{background:linear-gradient(135deg,rgba(124,58,237,.15),rgba(59,130,246,.1));
+  border:1px solid rgba(167,139,250,.25);border-radius:14px;padding:18px 12px;text-align:center;
+  cursor:pointer;transition:transform .15s}
+.game-tile:active{transform:scale(.95)}
+.game-icon{font-size:2rem;margin-bottom:8px}
+.game-name{font-size:.82rem;font-weight:700}
+.game-best{font-size:.65rem;color:rgba(167,139,250,.5);margin-top:4px}
+
+/* 2048 GAME */
+.board2048{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;background:rgba(0,0,0,.3);
+  border-radius:12px;padding:8px;touch-action:none}
+.cell2048{aspect-ratio:1;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;font-weight:900;transition:all .15s;background:rgba(167,139,250,.05)}
+
+/* SNAKE GAME */
+#snakeCanvas{width:100%;border-radius:12px;background:#0d0d1a;touch-action:none}
+.snake-controls{display:grid;grid-template-columns:60px 60px 60px;gap:6px;justify-content:center;margin-top:12px}
+.snake-btn{background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.3);border-radius:10px;
+  height:50px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#a78bfa;cursor:pointer}
+.snake-btn:active{background:rgba(167,139,250,.3)}
+
+/* MEMORY CARDS */
+.memory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.memory-card{aspect-ratio:1;background:linear-gradient(135deg,#7c3aed,#3b82f6);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;
+  transition:transform .3s;transform-style:preserve-3d}
+.memory-card.flipped{background:rgba(167,139,250,.1);transform:rotateY(180deg)}
+.memory-card.matched{background:rgba(0,255,150,.15);opacity:.6}
+
+/* QUIZ */
+.quiz-q{font-size:1rem;text-align:center;padding:20px 10px;color:#e8e4f0;line-height:1.6}
+.quiz-opts{display:flex;flex-direction:column;gap:10px}
+.quiz-opt{background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);border-radius:10px;
+  padding:14px;text-align:right;cursor:pointer;font-size:.88rem}
+.quiz-opt.correct{background:rgba(0,255,150,.2);border-color:#00ff96}
+.quiz-opt.wrong{background:rgba(255,75,75,.2);border-color:#ff4b4b}
+
+/* CALC */
 input,select{width:100%;background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.2);
-  border-radius:10px;padding:12px 14px;color:#e8e4f0;font-family:Tahoma,sans-serif;font-size:.9rem;outline:none;margin-bottom:10px}
+  border-radius:10px;padding:13px 14px;color:#e8e4f0;font-family:Tahoma,sans-serif;font-size:.92rem;outline:none;margin-bottom:10px}
 input:focus,select:focus{border-color:#a78bfa}
 button.btn{width:100%;background:linear-gradient(135deg,#7c3aed,#3b82f6);border:none;border-radius:10px;
-  padding:13px;color:#fff;font-size:.9rem;font-weight:900;cursor:pointer;font-family:Tahoma,sans-serif}
+  padding:14px;color:#fff;font-size:.92rem;font-weight:900;cursor:pointer;font-family:Tahoma,sans-serif}
 .result{background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.3);border-radius:10px;
-  padding:14px;margin-top:12px;text-align:center;font-size:1.1rem;font-weight:900;color:#a78bfa;display:none}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.game-box{background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.15);border-radius:12px;
-  padding:20px;text-align:center;margin-bottom:12px}
-.score{font-size:2rem;font-weight:900;color:#60a5fa}
-.target{font-size:3rem;text-align:center;margin:20px 0}
-.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.choice-btn{background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.3);border-radius:10px;
-  padding:14px;color:#e8e4f0;font-size:.9rem;cursor:pointer;font-family:Tahoma,sans-serif}
-.choice-btn:active{background:rgba(167,139,250,.25)}
-.list-item{background:rgba(167,139,250,.06);border-radius:10px;padding:12px 14px;margin-bottom:8px;
+  padding:16px;margin-top:12px;text-align:center;font-size:1.1rem;font-weight:900;color:#a78bfa;display:none;line-height:1.8}
+
+.score-bar{display:flex;justify-content:space-between;align-items:center;background:rgba(167,139,250,.08);
+  border-radius:12px;padding:14px 18px;margin-bottom:14px}
+.score-num{font-size:1.6rem;font-weight:900;color:#60a5fa}
+.score-label{font-size:.7rem;color:rgba(167,139,250,.5)}
+
+.back-btn{background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.25);border-radius:10px;
+  padding:10px 18px;color:#a78bfa;font-size:.8rem;cursor:pointer;margin-bottom:12px;display:inline-block}
+
+.list-item{background:rgba(167,139,250,.06);border-radius:10px;padding:13px 15px;margin-bottom:8px;
   display:flex;justify-content:space-between;align-items:center}
-.list-item-name{font-size:.85rem}
-.list-item-cat{font-size:.65rem;color:rgba(167,139,250,.5)}
-.ad-banner{background:linear-gradient(135deg,rgba(167,139,250,.15),rgba(96,165,250,.1));
-  border:1px solid rgba(167,139,250,.25);border-radius:12px;padding:14px;text-align:center;
-  margin-bottom:14px;font-size:.75rem;color:rgba(167,139,250,.6)}
+
 .footer{text-align:center;padding:30px 16px;color:rgba(167,139,250,.25);font-size:.65rem}
-.hidden{display:none}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="logo">⚡ آنیل</div>
-  <div class="tagline">ابزار هوشمند روزمره شما</div>
-</div>
+<div class="header"><div class="logo">⚡ آنیل</div></div>
 
 <div class="tabs">
-  <div class="tab active" onclick="showTab('calc')">💰 محاسبه‌گر</div>
-  <div class="tab" onclick="showTab('game')">🎮 بازی ذهنی</div>
+  <div class="tab active" onclick="showTab('games')">🎮 بازی‌ها</div>
+  <div class="tab" onclick="showTab('calc')">💰 محاسبه‌گر</div>
+  <div class="tab" onclick="showTab('quiz')">🧠 کوییز</div>
   <div class="tab" onclick="showTab('local')">📍 خدمات</div>
-  <div class="tab" onclick="showTab('convert')">🔄 تبدیل واحد</div>
 </div>
 
 <div class="content">
 
-  <!-- AD BANNER -->
-  <div class="ad-banner">📢 فضای تبلیغاتی — برای تبلیغ کسب‌وکارتان تماس بگیرید</div>
+  <!-- ═══ GAMES HUB ═══ -->
+  <div id="tab-games">
+    <div id="gamesList">
+      <div class="games-grid">
+        <div class="game-tile" onclick="openGame('2048')">
+          <div class="game-icon">🔢</div>
+          <div class="game-name">۲۰۴۸</div>
+          <div class="game-best" id="best2048">بهترین: 0</div>
+        </div>
+        <div class="game-tile" onclick="openGame('snake')">
+          <div class="game-icon">🐍</div>
+          <div class="game-name">مار</div>
+          <div class="game-best" id="bestSnake">بهترین: 0</div>
+        </div>
+        <div class="game-tile" onclick="openGame('memory')">
+          <div class="game-icon">🃏</div>
+          <div class="game-name">حافظه</div>
+          <div class="game-best" id="bestMemory">بهترین: --</div>
+        </div>
+        <div class="game-tile" onclick="openGame('reaction')">
+          <div class="game-icon">⚡</div>
+          <div class="game-name">واکنش</div>
+          <div class="game-best" id="bestReaction">بهترین: --</div>
+        </div>
+      </div>
+    </div>
 
-  <!-- CALCULATOR TAB -->
-  <div id="tab-calc">
+    <!-- 2048 -->
+    <div id="game-2048" class="hidden">
+      <div class="back-btn" onclick="closeGame()">← بازگشت</div>
+      <div class="score-bar">
+        <div><div class="score-num" id="score2048">0</div><div class="score-label">امتیاز</div></div>
+        <button class="btn" style="width:auto;padding:10px 20px" onclick="init2048()">شروع دوباره</button>
+      </div>
+      <div class="board2048" id="board2048"></div>
+      <div style="text-align:center;margin-top:10px;font-size:.7rem;color:rgba(167,139,250,.4)">با دکمه‌های پایین یا کشیدن انگشت بازی کنید</div>
+      <div class="snake-controls" style="margin-top:14px">
+        <div></div><div class="snake-btn" onclick="move2048('up')">↑</div><div></div>
+        <div class="snake-btn" onclick="move2048('left')">←</div><div class="snake-btn" onclick="move2048('down')">↓</div><div class="snake-btn" onclick="move2048('right')">→</div>
+      </div>
+    </div>
+
+    <!-- SNAKE -->
+    <div id="game-snake" class="hidden">
+      <div class="back-btn" onclick="closeGame()">← بازگشت</div>
+      <div class="score-bar">
+        <div><div class="score-num" id="scoreSnake">0</div><div class="score-label">امتیاز</div></div>
+        <button class="btn" style="width:auto;padding:10px 20px" onclick="initSnake()">شروع دوباره</button>
+      </div>
+      <canvas id="snakeCanvas" width="300" height="300"></canvas>
+      <div class="snake-controls">
+        <div></div><div class="snake-btn" onclick="snakeDir('up')">↑</div><div></div>
+        <div class="snake-btn" onclick="snakeDir('left')">←</div><div class="snake-btn" onclick="snakeDir('down')">↓</div><div class="snake-btn" onclick="snakeDir('right')">→</div>
+      </div>
+    </div>
+
+    <!-- MEMORY -->
+    <div id="game-memory" class="hidden">
+      <div class="back-btn" onclick="closeGame()">← بازگشت</div>
+      <div class="score-bar">
+        <div><div class="score-num" id="movesMemory">0</div><div class="score-label">حرکت‌ها</div></div>
+        <button class="btn" style="width:auto;padding:10px 20px" onclick="initMemory()">شروع دوباره</button>
+      </div>
+      <div class="memory-grid" id="memoryGrid"></div>
+    </div>
+
+    <!-- REACTION -->
+    <div id="game-reaction" class="hidden">
+      <div class="back-btn" onclick="closeGame()">← بازگشت</div>
+      <div class="card" style="text-align:center">
+        <div class="card-title" style="justify-content:center">⚡ تست سرعت واکنش</div>
+        <div id="reactionBox" style="height:160px;display:flex;align-items:center;justify-content:center;
+          background:rgba(167,139,250,.1);border-radius:14px;cursor:pointer;font-size:1.2rem;font-weight:700;margin:10px 0"
+          onclick="reactionClick()">برای شروع لمس کنید</div>
+        <div style="font-size:1.4rem;font-weight:900;color:#60a5fa" id="reactionResult"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ CALCULATOR ═══ -->
+  <div id="tab-calc" class="hidden">
     <div class="card">
       <div class="card-title">🏠 محاسبه‌گر وام و اقساط</div>
       <input type="number" id="loanAmount" placeholder="مبلغ وام (تومان)">
@@ -73,108 +182,57 @@ button.btn{width:100%;background:linear-gradient(135deg,#7c3aed,#3b82f6);border:
       <button class="btn" onclick="calcLoan()">محاسبه قسط ماهانه</button>
       <div class="result" id="loanResult"></div>
     </div>
-
-    <div class="card">
-      <div class="card-title">💵 محاسبه‌گر سود بانکی</div>
-      <input type="number" id="depositAmount" placeholder="مبلغ سپرده (تومان)">
-      <input type="number" id="depositRate" placeholder="نرخ سود سالانه (٪)" value="20">
-      <input type="number" id="depositMonths" placeholder="مدت (ماه)">
-      <button class="btn" onclick="calcDeposit()">محاسبه سود</button>
-      <div class="result" id="depositResult"></div>
-    </div>
-
     <div class="card">
       <div class="card-title">⚖️ محاسبه‌گر BMI</div>
       <input type="number" id="weight" placeholder="وزن (کیلوگرم)">
       <input type="number" id="height" placeholder="قد (سانتی‌متر)">
-      <button class="btn" onclick="calcBMI()">محاسبه شاخص توده بدنی</button>
+      <button class="btn" onclick="calcBMI()">محاسبه</button>
       <div class="result" id="bmiResult"></div>
     </div>
-  </div>
-
-  <!-- GAME TAB -->
-  <div id="tab-game" class="hidden">
     <div class="card">
-      <div class="card-title">🧠 بازی حافظه عددی</div>
-      <div class="game-box">
-        <div style="font-size:.75rem;color:rgba(167,139,250,.5);margin-bottom:8px">امتیاز شما</div>
-        <div class="score" id="gameScore">0</div>
-      </div>
-      <div class="target" id="gameTarget">شروع کنید</div>
-      <div class="choices" id="gameChoices"></div>
-      <button class="btn" onclick="startGame()" style="margin-top:14px">🔄 شروع دوباره</button>
-    </div>
-
-    <div class="card">
-      <div class="card-title">🎯 بازی واکنش سریع</div>
-      <div class="game-box">
-        <div id="reactionBox" style="height:120px;display:flex;align-items:center;justify-content:center;
-          background:rgba(167,139,250,.1);border-radius:10px;cursor:pointer;font-size:1.1rem"
-          onclick="reactionClick()">برای شروع کلیک کنید</div>
-        <div style="margin-top:10px;font-size:.8rem;color:rgba(167,139,250,.5)" id="reactionResult"></div>
-      </div>
+      <div class="card-title">💱 تبدیل ارز</div>
+      <input type="number" id="currAmount" placeholder="مقدار" value="1">
+      <select id="currFrom">
+        <option value="1">تومان</option><option value="600000">دلار</option><option value="650000">یورو</option>
+      </select>
+      <select id="currTo">
+        <option value="600000">دلار</option><option value="1">تومان</option><option value="650000">یورو</option>
+      </select>
+      <button class="btn" onclick="calcCurrency()">تبدیل</button>
+      <div class="result" id="currResult"></div>
     </div>
   </div>
 
-  <!-- LOCAL SERVICES TAB -->
+  <!-- ═══ QUIZ ═══ -->
+  <div id="tab-quiz" class="hidden">
+    <div class="card">
+      <div class="score-bar" style="margin-bottom:0">
+        <div><div class="score-num" id="quizScore">0</div><div class="score-label">امتیاز کوییز</div></div>
+        <div><div class="score-num" id="quizNum">1/10</div><div class="score-label">سوال</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="quiz-q" id="quizQ">در حال بارگذاری...</div>
+      <div class="quiz-opts" id="quizOpts"></div>
+    </div>
+  </div>
+
+  <!-- ═══ LOCAL SERVICES ═══ -->
   <div id="tab-local" class="hidden">
     <div class="card">
-      <div class="card-title">📍 دسته‌بندی خدمات محلی</div>
+      <div class="card-title">📍 خدمات محلی</div>
       <select id="serviceCategory" onchange="filterServices()">
         <option value="all">همه دسته‌ها</option>
         <option value="food">رستوران و کافه</option>
         <option value="health">پزشکی و سلامت</option>
         <option value="repair">تعمیرات</option>
-        <option value="edu">آموزش</option>
       </select>
       <div id="serviceList"></div>
-      <div style="text-align:center;margin-top:14px;font-size:.75rem;color:rgba(167,139,250,.4)">
-        💡 برای ثبت کسب‌وکار خود در این لیست تماس بگیرید
-      </div>
-    </div>
-  </div>
-
-  <!-- CONVERTER TAB -->
-  <div id="tab-convert" class="hidden">
-    <div class="card">
-      <div class="card-title">💱 تبدیل ارز</div>
-      <input type="number" id="currAmount" placeholder="مقدار" value="1">
-      <div class="grid2">
-        <select id="currFrom">
-          <option value="1">تومان</option>
-          <option value="600000">دلار</option>
-          <option value="650000">یورو</option>
-        </select>
-        <select id="currTo">
-          <option value="600000">دلار</option>
-          <option value="1">تومان</option>
-          <option value="650000">یورو</option>
-        </select>
-      </div>
-      <button class="btn" onclick="calcCurrency()">تبدیل</button>
-      <div class="result" id="currResult"></div>
-      <div style="font-size:.6rem;color:rgba(167,139,250,.3);margin-top:8px;text-align:center">نرخ تقریبی — برای معاملات واقعی نرخ روز را بررسی کنید</div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">📏 تبدیل واحد طول و وزن</div>
-      <input type="number" id="unitAmount" placeholder="مقدار" value="1">
-      <select id="unitType" onchange="updateUnitOptions()">
-        <option value="length">طول</option>
-        <option value="weight">وزن</option>
-      </select>
-      <div class="grid2">
-        <select id="unitFrom"></select>
-        <select id="unitTo"></select>
-      </div>
-      <button class="btn" onclick="calcUnit()">تبدیل</button>
-      <div class="result" id="unitResult"></div>
     </div>
   </div>
 
 </div>
-
-<div class="footer">⚡ آنیل · ابزار هوشمند روزمره شما</div>
+<div class="footer">⚡ آنیل · ابزار و سرگرمی هوشمند</div>
 
 <script>
 function showTab(name){
@@ -182,167 +240,311 @@ function showTab(name){
   document.getElementById('tab-'+name).classList.remove('hidden');
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   event.target.classList.add('active');
+  if(name==='quiz'&&!quizStarted)startQuiz();
 }
 
-// ═══ LOAN CALCULATOR ═══
-function calcLoan(){
-  const p=parseFloat(document.getElementById('loanAmount').value);
-  const n=parseFloat(document.getElementById('loanMonths').value);
-  const r=parseFloat(document.getElementById('loanRate').value)/100/12;
-  if(!p||!n){alert('لطفا مبلغ و مدت را وارد کنید');return}
-  const installment=p*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
-  const total=installment*n;
-  document.getElementById('loanResult').style.display='block';
-  document.getElementById('loanResult').innerHTML=
-    'قسط ماهانه: '+Math.round(installment).toLocaleString()+' تومان<br>'+
-    '<span style="font-size:.75rem;color:rgba(167,139,250,.6)">مجموع پرداخت: '+Math.round(total).toLocaleString()+' تومان</span>';
+function openGame(name){
+  document.getElementById('gamesList').classList.add('hidden');
+  document.getElementById('game-'+name).classList.remove('hidden');
+  if(name==='2048')init2048();
+  if(name==='snake')initSnake();
+  if(name==='memory')initMemory();
+}
+function closeGame(){
+  document.querySelectorAll('[id^="game-"]').forEach(g=>g.classList.add('hidden'));
+  document.getElementById('gamesList').classList.remove('hidden');
+  clearInterval(snakeInterval);
 }
 
-// ═══ DEPOSIT CALCULATOR ═══
-function calcDeposit(){
-  const p=parseFloat(document.getElementById('depositAmount').value);
-  const r=parseFloat(document.getElementById('depositRate').value)/100;
-  const m=parseFloat(document.getElementById('depositMonths').value);
-  if(!p||!m){alert('لطفا مقادیر را وارد کنید');return}
-  const profit=p*(r/12)*m;
-  document.getElementById('depositResult').style.display='block';
-  document.getElementById('depositResult').innerHTML=
-    'سود کل: '+Math.round(profit).toLocaleString()+' تومان<br>'+
-    '<span style="font-size:.75rem;color:rgba(167,139,250,.6)">سود ماهانه: '+Math.round(profit/m).toLocaleString()+' تومان</span>';
-}
+// ═══════════ 2048 ═══════════
+let board=[],score2048=0,best2048=parseInt(localStorage.getItem('best2048')||0);
+document.getElementById('best2048').textContent='بهترین: '+best2048;
 
-// ═══ BMI CALCULATOR ═══
-function calcBMI(){
-  const w=parseFloat(document.getElementById('weight').value);
-  const h=parseFloat(document.getElementById('height').value)/100;
-  if(!w||!h){alert('لطفا وزن و قد را وارد کنید');return}
-  const bmi=(w/(h*h)).toFixed(1);
-  let cat='';
-  if(bmi<18.5)cat='کمبود وزن';
-  else if(bmi<25)cat='وزن سالم ✅';
-  else if(bmi<30)cat='اضافه وزن';
-  else cat='چاقی';
-  document.getElementById('bmiResult').style.display='block';
-  document.getElementById('bmiResult').innerHTML='BMI: '+bmi+'<br><span style="font-size:.8rem;color:rgba(167,139,250,.6)">'+cat+'</span>';
+function init2048(){
+  board=Array(16).fill(0);
+  score2048=0;
+  addRandom2048();addRandom2048();
+  render2048();
 }
-
-// ═══ MEMORY GAME ═══
-let gameScore=0,gameTarget=0;
-function startGame(){
-  gameScore=0;
-  document.getElementById('gameScore').textContent=0;
-  nextRound();
+function addRandom2048(){
+  const empty=board.map((v,i)=>v===0?i:-1).filter(i=>i>=0);
+  if(empty.length===0)return;
+  const idx=empty[Math.floor(Math.random()*empty.length)];
+  board[idx]=Math.random()<.9?2:4;
 }
-function nextRound(){
-  const a=Math.floor(Math.random()*20+1);
-  const b=Math.floor(Math.random()*20+1);
-  gameTarget=a+b;
-  document.getElementById('gameTarget').textContent=a+' + '+b+' = ?';
-  const opts=[gameTarget];
-  while(opts.length<4){
-    const fake=gameTarget+Math.floor(Math.random()*10-5);
-    if(fake!==gameTarget&&!opts.includes(fake)&&fake>0)opts.push(fake);
+function render2048(){
+  const colors={0:'rgba(167,139,250,.05)',2:'#3b82f6',4:'#60a5fa',8:'#7c3aed',16:'#a78bfa',
+    32:'#f0c040',64:'#f59e0b',128:'#ef4444',256:'#ec4899',512:'#8b5cf6',1024:'#06b6d4',2048:'#10b981'};
+  document.getElementById('board2048').innerHTML=board.map(v=>
+    '<div class="cell2048" style="background:'+(colors[v]||'#fff')+';color:'+(v<=4?'#888':'#fff')+'">'+(v||'')+'</div>'
+  ).join('');
+  document.getElementById('score2048').textContent=score2048;
+}
+function move2048(dir){
+  let moved=false;
+  const get=(r,c)=>board[r*4+c];
+  const set=(r,c,v)=>board[r*4+c]=v;
+  function slide(line){
+    let arr=line.filter(v=>v!==0);
+    for(let i=0;i<arr.length-1;i++){
+      if(arr[i]===arr[i+1]){arr[i]*=2;score2048+=arr[i];arr.splice(i+1,1)}
+    }
+    while(arr.length<4)arr.push(0);
+    return arr;
   }
-  opts.sort(()=>Math.random()-.5);
-  document.getElementById('gameChoices').innerHTML=opts.map(o=>
-    '<button class="choice-btn" onclick="checkAnswer('+o+')">'+o+'</button>').join('');
+  for(let i=0;i<4;i++){
+    let line=[];
+    if(dir==='left'||dir==='right'){
+      for(let j=0;j<4;j++)line.push(get(i,j));
+      if(dir==='right')line.reverse();
+      const newLine=slide(line);
+      if(dir==='right')newLine.reverse();
+      for(let j=0;j<4;j++){if(get(i,j)!==newLine[j])moved=true;set(i,j,newLine[j])}
+    }else{
+      for(let j=0;j<4;j++)line.push(get(j,i));
+      if(dir==='down')line.reverse();
+      const newLine=slide(line);
+      if(dir==='down')newLine.reverse();
+      for(let j=0;j<4;j++){if(get(j,i)!==newLine[j])moved=true;set(j,i,newLine[j])}
+    }
+  }
+  if(moved){
+    addRandom2048();render2048();
+    if(score2048>best2048){best2048=score2048;localStorage.setItem('best2048',best2048);document.getElementById('best2048').textContent='بهترین: '+best2048}
+    if(board.every(v=>v!==0)){
+      let canMove=false;
+      for(let i=0;i<16;i++){
+        if(i%4<3&&board[i]===board[i+1])canMove=true;
+        if(i<12&&board[i]===board[i+4])canMove=true;
+      }
+      if(!canMove)setTimeout(()=>alert('بازی تمام شد! امتیاز: '+score2048),100);
+    }
+  }
 }
-function checkAnswer(val){
-  if(val===gameTarget){
-    gameScore+=10;
-    document.getElementById('gameScore').textContent=gameScore;
-    nextRound();
-  }else{
-    alert('اشتباه بود! امتیاز نهایی: '+gameScore);
-    startGame();
+let touchStartX=0,touchStartY=0;
+document.addEventListener('touchstart',e=>{
+  if(document.getElementById('game-2048').classList.contains('hidden'))return;
+  touchStartX=e.touches[0].clientX;touchStartY=e.touches[0].clientY;
+});
+document.addEventListener('touchend',e=>{
+  if(document.getElementById('game-2048').classList.contains('hidden'))return;
+  const dx=e.changedTouches[0].clientX-touchStartX;
+  const dy=e.changedTouches[0].clientY-touchStartY;
+  if(Math.abs(dx)>Math.abs(dy)){if(Math.abs(dx)>30)move2048(dx>0?'right':'left')}
+  else{if(Math.abs(dy)>30)move2048(dy>0?'down':'up')}
+});
+
+// ═══════════ SNAKE ═══════════
+let snake,snakeDirection,snakeFood,snakeInterval,snakeScore,bestSnake=parseInt(localStorage.getItem('bestSnake')||0);
+document.getElementById('bestSnake').textContent='بهترین: '+bestSnake;
+const sc=document.getElementById('snakeCanvas'),sctx=sc.getContext('2d');
+const GRID=15,CELL=300/GRID;
+
+function initSnake(){
+  snake=[{x:7,y:7},{x:6,y:7},{x:5,y:7}];
+  snakeDirection='right';
+  snakeScore=0;
+  placeFood();
+  document.getElementById('scoreSnake').textContent=0;
+  clearInterval(snakeInterval);
+  snakeInterval=setInterval(snakeTick,150);
+}
+function placeFood(){snakeFood={x:Math.floor(Math.random()*GRID),y:Math.floor(Math.random()*GRID)}}
+function snakeDir(d){
+  if(d==='up'&&snakeDirection!=='down')snakeDirection='up';
+  if(d==='down'&&snakeDirection!=='up')snakeDirection='down';
+  if(d==='left'&&snakeDirection!=='right')snakeDirection='left';
+  if(d==='right'&&snakeDirection!=='left')snakeDirection='right';
+}
+function snakeTick(){
+  const head={...snake[0]};
+  if(snakeDirection==='up')head.y--;
+  if(snakeDirection==='down')head.y++;
+  if(snakeDirection==='left')head.x--;
+  if(snakeDirection==='right')head.x++;
+  if(head.x<0||head.x>=GRID||head.y<0||head.y>=GRID||snake.some(s=>s.x===head.x&&s.y===head.y)){
+    clearInterval(snakeInterval);
+    if(snakeScore>bestSnake){bestSnake=snakeScore;localStorage.setItem('bestSnake',bestSnake);document.getElementById('bestSnake').textContent='بهترین: '+bestSnake}
+    setTimeout(()=>alert('باخت! امتیاز: '+snakeScore),50);
+    return;
+  }
+  snake.unshift(head);
+  if(head.x===snakeFood.x&&head.y===snakeFood.y){
+    snakeScore+=10;
+    document.getElementById('scoreSnake').textContent=snakeScore;
+    placeFood();
+  }else snake.pop();
+  drawSnake();
+}
+function drawSnake(){
+  sctx.fillStyle='#0d0d1a';sctx.fillRect(0,0,300,300);
+  sctx.fillStyle='#f0c040';
+  sctx.beginPath();sctx.arc(snakeFood.x*CELL+CELL/2,snakeFood.y*CELL+CELL/2,CELL/2.5,0,6.28);sctx.fill();
+  snake.forEach((s,i)=>{
+    sctx.fillStyle=i===0?'#a78bfa':'#7c3aed';
+    sctx.fillRect(s.x*CELL+1,s.y*CELL+1,CELL-2,CELL-2);
+  });
+}
+let snakeTouchX=0,snakeTouchY=0;
+sc.addEventListener('touchstart',e=>{snakeTouchX=e.touches[0].clientX;snakeTouchY=e.touches[0].clientY});
+sc.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-snakeTouchX;
+  const dy=e.changedTouches[0].clientY-snakeTouchY;
+  if(Math.abs(dx)>Math.abs(dy)){snakeDir(dx>0?'right':'left')}
+  else{snakeDir(dy>0?'down':'up')}
+});
+
+// ═══════════ MEMORY ═══════════
+let memCards=[],memFlipped=[],memMatched=0,memMoves=0;
+function initMemory(){
+  const emojis=['🎮','🎯','🎲','🎪','🎨','🎭','🎸','🎺'];
+  memCards=[...emojis,...emojis].sort(()=>Math.random()-.5);
+  memFlipped=[];memMatched=0;memMoves=0;
+  document.getElementById('movesMemory').textContent=0;
+  renderMemory();
+}
+function renderMemory(){
+  document.getElementById('memoryGrid').innerHTML=memCards.map((e,i)=>
+    '<div class="memory-card'+(memFlipped.includes(i)?' flipped':'')+(memCards[i]==='matched'?' matched':'')+
+    '" onclick="flipCard('+i+')">'+(memFlipped.includes(i)||memCards[i]==='matched'?e:'?')+'</div>'
+  ).join('');
+}
+function flipCard(i){
+  if(memFlipped.length>=2||memFlipped.includes(i)||memCards[i]==='matched')return;
+  memFlipped.push(i);
+  renderMemory();
+  if(memFlipped.length===2){
+    memMoves++;
+    document.getElementById('movesMemory').textContent=memMoves;
+    const [a,b]=memFlipped;
+    if(memCards[a]===memCards[b]){
+      setTimeout(()=>{
+        memCards[a]='matched';memCards[b]='matched';
+        memFlipped=[];memMatched+=2;
+        renderMemory();
+        if(memMatched===16){
+          const best=parseInt(localStorage.getItem('bestMemory')||999);
+          if(memMoves<best){localStorage.setItem('bestMemory',memMoves);document.getElementById('bestMemory').textContent='بهترین: '+memMoves}
+          setTimeout(()=>alert('برد! تعداد حرکت: '+memMoves),100);
+        }
+      },500);
+    }else{
+      setTimeout(()=>{memFlipped=[];renderMemory()},800);
+    }
   }
 }
 
-// ═══ REACTION GAME ═══
+// ═══════════ REACTION ═══════════
 let reactionStart=0,reactionWaiting=false;
 function reactionClick(){
   const box=document.getElementById('reactionBox');
+  if(reactionStart>0&&!reactionWaiting){
+    const time=Date.now()-reactionStart;
+    const best=parseInt(localStorage.getItem('bestReaction')||9999);
+    if(time<best){localStorage.setItem('bestReaction',time);document.getElementById('bestReaction').textContent='بهترین: '+time+'ms'}
+    document.getElementById('reactionResult').textContent=time+' میلی‌ثانیه';
+    box.style.background='rgba(167,139,250,.1)';
+    box.textContent='برای تست دوباره لمس کنید';
+    reactionStart=0;
+    return;
+  }
   if(!reactionWaiting){
     reactionWaiting=true;
     box.style.background='rgba(255,75,75,.2)';
     box.textContent='صبر کنید...';
+    document.getElementById('reactionResult').textContent='';
     const delay=Math.random()*2000+1000;
     setTimeout(()=>{
       box.style.background='rgba(0,255,150,.2)';
-      box.textContent='حالا کلیک کنید!';
+      box.textContent='حالا لمس کنید!';
       reactionStart=Date.now();
       reactionWaiting=false;
     },delay);
-  }else{
-    box.style.background='rgba(167,139,250,.1)';
-    box.textContent='زیادی زود بود! دوباره کلیک کنید';
-  }
-  if(reactionStart>0&&!reactionWaiting){
-    const time=Date.now()-reactionStart;
-    document.getElementById('reactionResult').textContent='زمان واکنش شما: '+time+' میلی‌ثانیه';
-    box.style.background='rgba(167,139,250,.1)';
-    box.textContent='برای تست دوباره کلیک کنید';
-    reactionStart=0;
   }
 }
 
-// ═══ LOCAL SERVICES ═══
-const services=[
-  {name:'رستوران سنتی پارس',cat:'food',catName:'رستوران'},
-  {name:'کافه روشن',cat:'food',catName:'کافه'},
-  {name:'مطب دکتر احمدی',cat:'health',catName:'پزشک عمومی'},
-  {name:'داروخانه شبانه‌روزی مرکزی',cat:'health',catName:'داروخانه'},
-  {name:'تعمیرگاه موبایل سریع',cat:'repair',catName:'تعمیرات موبایل'},
-  {name:'برقکار حرفه‌ای',cat:'repair',catName:'برقکاری'},
-  {name:'آموزشگاه زبان نوین',cat:'edu',catName:'آموزش زبان'},
-  {name:'کلاس‌های آنلاین ریاضی',cat:'edu',catName:'تدریس خصوصی'},
+// ═══════════ QUIZ ═══════════
+const quizData=[
+  {q:'پایتخت ایران کجاست؟',opts:['تهران','اصفهان','شیراز','مشهد'],a:0},
+  {q:'بزرگترین سیاره منظومه شمسی؟',opts:['زمین','مریخ','مشتری','زهره'],a:2},
+  {q:'نتیجه ۱۲×۸ چقدر است؟',opts:['86','96','106','116'],a:1},
+  {q:'سریع‌ترین حیوان زمینی؟',opts:['شیر','یوزپلنگ','اسب','گورخر'],a:1},
+  {q:'آب از چه عناصری تشکیل شده؟',opts:['کربن و اکسیژن','هیدروژن و اکسیژن','نیتروژن و هیدروژن','کربن و هیدروژن'],a:1},
+  {q:'بلندترین قله جهان؟',opts:['دماوند','کلیمانجارو','اورست','الپ'],a:2},
+  {q:'تعداد روزهای سال کبیسه؟',opts:['364','365','366','367'],a:2},
+  {q:'بزرگترین اقیانوس جهان؟',opts:['اطلس','آرام','هند','منجمد'],a:1},
+  {q:'نویسنده شاهنامه؟',opts:['حافظ','سعدی','فردوسی','مولانا'],a:2},
+  {q:'سرعت نور تقریبا چند کیلومتر بر ثانیه؟',opts:['150000','300000','450000','600000'],a:1},
 ];
-function renderServices(filter){
-  const list=filter==='all'?services:services.filter(s=>s.cat===filter);
-  document.getElementById('serviceList').innerHTML=list.map(s=>
-    '<div class="list-item"><div><div class="list-item-name">'+s.name+'</div>'+
-    '<div class="list-item-cat">'+s.catName+'</div></div><div style="color:rgba(167,139,250,.4)">←</div></div>'
-  ).join('');
+let quizCurrent=0,quizScoreVal=0,quizStarted=false;
+function startQuiz(){
+  quizStarted=true;quizCurrent=0;quizScoreVal=0;
+  document.getElementById('quizScore').textContent=0;
+  showQuizQuestion();
 }
-function filterServices(){renderServices(document.getElementById('serviceCategory').value)}
-renderServices('all');
+function showQuizQuestion(){
+  if(quizCurrent>=quizData.length){
+    document.getElementById('quizQ').textContent='پایان کوییز! امتیاز نهایی: '+quizScoreVal+'/'+quizData.length*10;
+    document.getElementById('quizOpts').innerHTML='<button class="btn" onclick="startQuiz()">شروع دوباره</button>';
+    return;
+  }
+  const q=quizData[quizCurrent];
+  document.getElementById('quizQ').textContent=q.q;
+  document.getElementById('quizNum').textContent=(quizCurrent+1)+'/'+quizData.length;
+  document.getElementById('quizOpts').innerHTML=q.opts.map((o,i)=>
+    '<div class="quiz-opt" onclick="answerQuiz('+i+')">'+o+'</div>').join('');
+}
+function answerQuiz(i){
+  const q=quizData[quizCurrent];
+  const opts=document.querySelectorAll('.quiz-opt');
+  opts[q.a].classList.add('correct');
+  if(i!==q.a)opts[i].classList.add('wrong');
+  else{quizScoreVal+=10;document.getElementById('quizScore').textContent=quizScoreVal}
+  opts.forEach(o=>o.onclick=null);
+  setTimeout(()=>{quizCurrent++;showQuizQuestion()},1200);
+}
 
-// ═══ CURRENCY CONVERTER ═══
+// ═══════════ CALCULATORS ═══════════
+function calcLoan(){
+  const p=parseFloat(document.getElementById('loanAmount').value);
+  const n=parseFloat(document.getElementById('loanMonths').value);
+  const r=parseFloat(document.getElementById('loanRate').value)/100/12;
+  if(!p||!n){alert('لطفا مقادیر را وارد کنید');return}
+  const installment=p*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+  document.getElementById('loanResult').style.display='block';
+  document.getElementById('loanResult').innerHTML='قسط ماهانه: '+Math.round(installment).toLocaleString()+' تومان';
+}
+function calcBMI(){
+  const w=parseFloat(document.getElementById('weight').value);
+  const h=parseFloat(document.getElementById('height').value)/100;
+  if(!w||!h){alert('لطفا مقادیر را وارد کنید');return}
+  const bmi=(w/(h*h)).toFixed(1);
+  let cat=bmi<18.5?'کمبود وزن':bmi<25?'وزن سالم ✅':bmi<30?'اضافه وزن':'چاقی';
+  document.getElementById('bmiResult').style.display='block';
+  document.getElementById('bmiResult').innerHTML='BMI: '+bmi+'<br><span style="font-size:.8rem">'+cat+'</span>';
+}
 function calcCurrency(){
   const amount=parseFloat(document.getElementById('currAmount').value);
   const from=parseFloat(document.getElementById('currFrom').value);
   const to=parseFloat(document.getElementById('currTo').value);
   if(!amount){alert('لطفا مقدار را وارد کنید');return}
-  const result=amount*from/to;
   document.getElementById('currResult').style.display='block';
-  document.getElementById('currResult').textContent=result.toLocaleString(undefined,{maximumFractionDigits:2});
+  document.getElementById('currResult').textContent=(amount*from/to).toLocaleString(undefined,{maximumFractionDigits:2});
 }
 
-// ═══ UNIT CONVERTER ═══
-const units={
-  length:{m:1,km:1000,cm:.01,mile:1609.34,foot:.3048},
-  weight:{kg:1,g:.001,ton:1000,lb:.453592}
-};
-const unitNames={m:'متر',km:'کیلومتر',cm:'سانتی‌متر',mile:'مایل',foot:'فوت',kg:'کیلوگرم',g:'گرم',ton:'تن',lb:'پوند'};
-function updateUnitOptions(){
-  const type=document.getElementById('unitType').value;
-  const opts=Object.keys(units[type]).map(u=>'<option value="'+u+'">'+unitNames[u]+'</option>').join('');
-  document.getElementById('unitFrom').innerHTML=opts;
-  document.getElementById('unitTo').innerHTML=opts;
+// ═══════════ SERVICES ═══════════
+const services=[
+  {name:'رستوران سنتی پارس',cat:'food'},{name:'کافه روشن',cat:'food'},
+  {name:'مطب دکتر احمدی',cat:'health'},{name:'داروخانه مرکزی',cat:'health'},
+  {name:'تعمیرگاه موبایل',cat:'repair'},{name:'برقکار حرفه‌ای',cat:'repair'},
+];
+function renderServices(filter){
+  const list=filter==='all'?services:services.filter(s=>s.cat===filter);
+  document.getElementById('serviceList').innerHTML=list.map(s=>
+    '<div class="list-item"><div>'+s.name+'</div><div style="color:rgba(167,139,250,.4)">←</div></div>').join('');
 }
-updateUnitOptions();
-function calcUnit(){
-  const type=document.getElementById('unitType').value;
-  const amount=parseFloat(document.getElementById('unitAmount').value);
-  const from=document.getElementById('unitFrom').value;
-  const to=document.getElementById('unitTo').value;
-  if(!amount){alert('لطفا مقدار را وارد کنید');return}
-  const result=amount*units[type][from]/units[type][to];
-  document.getElementById('unitResult').style.display='block';
-  document.getElementById('unitResult').textContent=result.toLocaleString(undefined,{maximumFractionDigits:4});
-}
-
-startGame();
+function filterServices(){renderServices(document.getElementById('serviceCategory').value)}
+renderServices('all');
 </script>
 </body>
 </html>
