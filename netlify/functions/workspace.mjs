@@ -1,0 +1,3 @@
+const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store'}});
+export default async req=>{if(req.method==='GET')return json({ok:true,service:'workspace',persistence:'request-scoped',message:'Workspace API is ready; durable multi-user storage requires a connected database.'});if(req.method==='POST'){try{const body=await req.json();return json({ok:true,received:body,createdAt:new Date().toISOString()})}catch{return json({ok:false,error:'invalid_json'},400)}}return json({ok:false,error:'method_not_allowed'},405)};
+export const config={path:'/api/workspace'};
