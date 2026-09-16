@@ -10,7 +10,7 @@ permissions:
   contents: write
 jobs:
   polish:
-    if: !contains(github.event.head_commit.message, 'ANIL X: experience polish')
+    if: ${{ !contains(github.event.head_commit.message, 'ANIL X: experience polish') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
