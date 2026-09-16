@@ -1,4 +1,4 @@
-name: Deploy ANIL X to GitHub Pages
+name: ANIL X — Production Check
 
 on:
   push:
@@ -7,30 +7,18 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  production-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-      - name: Upload site
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: .
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Validate ANIL X site
+        run: |
+          test -f index.html
+          test -f style.css
+          test -f script.js
+          grep -q "ANIL X" index.html
+          grep -q "<title>" index.html
+          echo "ANIL X production files validated successfully."
