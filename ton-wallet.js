@@ -1,21 +1,7 @@
 (()=>{'use strict';
-const manifest='https://city-of-eternity.vercel.app/tonconnect-manifest.json';
-function boot(){
- if(!window.TON_CONNECT_UI)return setTimeout(boot,300);
- const root=document.getElementById('ton-connect'); if(!root)return;
- const ui=new TON_CONNECT_UI.TonConnectUI({manifestUrl:manifest});
- ui.uiOptions={language:'en',uiPreferences:{theme:TON_CONNECT_UI.THEME.DARK}};
- const fallback=document.getElementById('ton-connect-fallback');
- if(fallback)fallback.onclick=()=>ui.openModal();
- root.innerHTML='';
- ui.onStatusChange(wallet=>{
-  const out=document.getElementById('ton-wallet-status');
-  const btn=document.getElementById('ton-connect-fallback');
-  if(!out)return;
-  if(wallet){const a=wallet.account?.address||'';out.textContent='TON وصل شد · '+a.slice(0,6)+'…'+a.slice(-6);out.dataset.address=a;if(btn)btn.textContent='کیف پول متصل است';}
-  else {out.textContent='کیف پول TON وصل نیست';out.dataset.address='';if(btn)btn.textContent='اتصال کیف پول TON';}
- });
- window.anilXTonConnect=ui;
-}
-boot();
-})();
+const MANIFEST='https://saberbadri24-tech.github.io/city-of-eternity/tonconnect-manifest.json';
+const CDN='https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js';
+function mount(){let root=document.getElementById('ton-connect');if(!root){const target=document.querySelector('.top-actions')||document.querySelector('.wallet')||document.body;root=document.createElement('div');root.id='ton-connect';root.style.cssText='display:flex;align-items:center;justify-content:center;min-width:155px;margin:10px auto;direction:ltr;z-index:9999';target.prepend(root)}let fallback=document.getElementById('ton-connect-fallback');if(!fallback){fallback=document.createElement('button');fallback.id='ton-connect-fallback';fallback.type='button';fallback.textContent='اتصال کیف پول TON';fallback.style.cssText='display:block;margin:10px auto;padding:14px 24px;border:0;border-radius:14px;background:#d8b45a;color:#17130b;font-weight:800;font-size:16px;cursor:pointer';root.after(fallback)}return{root,fallback}}
+function init(){if(!window.TON_CONNECT_UI)return false;const{root,fallback}=mount();try{if(window.anilXTonConnect)return true;const ui=new TON_CONNECT_UI.TonConnectUI({manifestUrl:MANIFEST,buttonRootId:'ton-connect',language:'en'});window.anilXTonConnect=ui;fallback.onclick=()=>ui.openModal();ui.onStatusChange?.(wallet=>{const out=document.getElementById('ton-wallet-status');const address=wallet?.account?.address||'';if(out){out.textContent=address?'TON وصل شد · '+address.slice(0,6)+'…'+address.slice(-6):'کیف پول TON وصل نیست';out.dataset.address=address}fallback.textContent=address?'کیف پول TON متصل است':'اتصال کیف پول TON'});return true}catch(e){console.error('ANIL X TON Connect',e);return false}}
+function load(){if(init())return;const s=document.createElement('script');s.src=CDN;s.async=true;s.onload=()=>init();s.onerror=()=>console.error('TON Connect UI CDN failed');document.head.appendChild(s)}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',load,{once:true});else load();})();
