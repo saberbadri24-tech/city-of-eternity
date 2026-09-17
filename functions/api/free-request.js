@@ -1,0 +1,4 @@
+import { getStore } from '@netlify/blobs';
+const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers:{'content-type':'application/json','cache-control':'no-store'}});
+const clean=(v,n)=>String(v??'').trim().slice(0,n);
+export default async(req)=>{if(req.method!=='POST')return json({error:'POST required'},405);try{const b=await req.json();const name=clean(b.name,80),email=clean(b.email,160),country=clean(b.country,80),request=clean(b.request,2000);if(!name||!email||!country||!request||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))return json({error:'Please complete all fields with a valid email.'},400);const id=crypto.randomUUID();const record={id,name,email,country,request,status:'pending',createdAt:new Date().toISOString(),decidedAt:null,decidedBy:null};await getStore('anil-x-free-access').setJSON(`requests/${id}`,record);return json({ok:true,id,status:'pending'},201)}catch{return json({error:'Unable to save request.'},500)}};
