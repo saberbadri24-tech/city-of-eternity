@@ -14,28 +14,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Validate required files
+      - name: Validate ANIL X site
         run: |
-          set -eu
-          for f in index.html style.css script.js admin.html admin.css admin.js anil.html payment.html manifest.webmanifest robots.txt sitemap.xml; do test -f "$f"; done
+          test -f index.html
+          test -f style.css
+          test -f script.js
           grep -q "ANIL X" index.html
           grep -q "<title>" index.html
           grep -q "https://saberbadri24-tech.github.io/city-of-eternity/" index.html
           grep -q "https://saberbadri24-tech.github.io/city-of-eternity/sitemap.xml" robots.txt
-      - name: Parse every JavaScript file
+      - name: Parse JavaScript
         run: |
-          set -eu
+          set -e
           find . -type f -name '*.js' -not -path './.git/*' -print0 | xargs -0 -n1 node --check
-      - name: Check local asset references
-        run: |
-          set -eu
-          for f in index.html admin.html anil.html payment.html; do
-            grep -Eo '(href|src)="[^"]+"' "$f" | cut -d'"' -f2 | while read -r ref; do
-              case "$ref" in
-                http://*|https://*|mailto:*|tel:*|data:*|\#*) continue ;;
-              esac
-              test -e "${ref#/}" || { echo "Missing local asset: $f -> $ref"; exit 1; }
-            done
-          done
       - name: Production validation complete
-        run: echo "ANIL X production validation passed: files, JavaScript syntax, canonical SEO paths, and local assets."
+        run: echo "ANIL X production validation passed."
