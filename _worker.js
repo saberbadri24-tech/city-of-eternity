@@ -1,30 +1,9 @@
-export default {
-  async fetch(request, env) {
-    const url = new URL(request.url);
-
-    if (url.pathname === '/api/health') {
-      return new Response(JSON.stringify({ ok: true, service: 'ANIL X', runtime: 'cloudflare-pages-worker' }), {
-        headers: { 'content-type': 'application/json; charset=utf-8' }
-      });
-    }
-
-    if (url.pathname === '/api/analyze' && request.method === 'POST') {
-      try {
-        const body = await request.json();
-        const text = String(body?.text || '').trim().toLowerCase();
-        const routes = [
-          { id:'video', keys:['تیزر','ویدیو','فیلم','کلیپ'], title:'مسیر تولید تیزر', desc:'از ایده تا نسخه نهایی و آماده انتشار.', steps:['ایده و هدف','سناریو و متن','طراحی تصویر','تولید و تدوین','صدا و نسخه‌ها','انتشار و رشد'] },
-          { id:'website', keys:['سایت','وب سایت','وب‌سایت','وبسایت','فروشگاه','لندینگ'], title:'مسیر ساخت سایت', desc:'هدف، ساختار، طراحی، اجرا و رشد را یکجا جلو می‌بریم.', steps:['هدف و مخاطب','ساختار و محتوا','طراحی','توسعه','تست و انتشار','SEO و رشد'] },
-          { id:'fix', keys:['خطا','خراب','درست نمی','مشکل','ارور','کند','کار نمی','رفع'], title:'مسیر رفع مشکل', desc:'مشکل را از تشخیص تا تست نهایی دنبال می‌کنیم.', steps:['دریافت مشکل','تشخیص','اولویت‌بندی','راه‌حل','اجرا','تست و تحویل'] },
-          { id:'growth', keys:['فروش','مشتری','رشد','تبلیغ','سئو','seo','بازدید','درآمد'], title:'مسیر رشد', desc:'از هدف کسب‌وکار تا جذب، تبدیل و اندازه‌گیری.', steps:['هدف','مخاطب','پیشنهاد','جذب','تبدیل','اندازه‌گیری'] }
-        ];
-        const route = routes.find(r => r.keys.some(k => text.includes(k))) || { id:'custom', title:'مسیر اختصاصی ANIL X', desc:'خواسته‌ات را به قدم‌های قابل اجرا تبدیل می‌کنیم.', steps:['فهم خواسته','کشف نیاز','ساخت مسیر','پیش‌نمایش','اجرا','ادامه و رشد'] };
-        return new Response(JSON.stringify({ ok:true, route, confidence:0.92 }), { headers:{'content-type':'application/json; charset=utf-8'} });
-      } catch {
-        return new Response(JSON.stringify({ ok:false, error:'invalid_request' }), { status:400, headers:{'content-type':'application/json; charset=utf-8'} });
-      }
-    }
-
-    return env.ASSETS.fetch(request);
-  }
-};
+const JSON_HEADERS={'content-type':'application/json; charset=utf-8','access-control-allow-origin':'*','access-control-allow-methods':'POST,GET,OPTIONS','access-control-allow-headers':'content-type'};
+const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers:JSON_HEADERS});
+const normalize=s=>String(s||'').trim();
+const routeLocal=text=>{const t=normalize(text).toLowerCase();const rules=[['website',['site','website','سایت','وب سایت','وب‌سایت','فروشگاه','landing'],'ساخت و راه‌اندازی سایت'],['video',['video','teaser','تیزر','ویدیو','فیلم','کلیپ'],'تولید محتوای ویدیویی'],['fix',['bug','error','fix','خطا','خراب','مشکل','ارور','کند','کار نمی','رفع'],'تشخیص و رفع مشکل'],['growth',['sales','growth','seo','فروش','مشتری','رشد','تبلیغ','سئو','بازدید','درآمد'],'موتور رشد کسب‌وکار']];const hit=rules.find(([,keys])=>keys.some(k=>t.includes(k)));return hit?{id:hit[0],title:hit[2]}:{id:'custom',title:'مسیر اختصاصی ANIL X'};};
+const localPlan=(text)=>{const r=routeLocal(text);const t=normalize(text).toLowerCase();if(/نه|نمیخوام|اشتباه|این نیست|عوضش|بیخیال|لغو|cancel|no\b/.test(t))return{title:'مسیر دوباره تنظیم شد',desc:'اصلاح تو ثبت شد؛ مسیر قبلی مبنا نیست.',moves:['خواسته جدید','اقدام مناسب همین لحظه','اجرا یا پیش‌نمایش','بررسی نتیجه']};if(/فوری|سریع|الان|همین|فقط/.test(t))return{title:'اقدام مستقیم',desc:'مسیر کوتاه شده و فقط اقدام‌های ضروری باقی مانده‌اند.',moves:['اقدام بعدی','اجرا','تأیید نتیجه']};return{title:r.title,desc:'مسیر بر اساس خواسته فعلی ساخته می‌شود و با هر اصلاح دوباره تنظیم می‌شود.',moves:['فهم نتیجه مطلوب','انتخاب اقدام بعدی','اجرا','بررسی و اصلاح']};};
+async function openAI(env,prompt){if(!env.OPENAI_API_KEY)return null;const model=env.ASTRA_MODEL||'gpt-5-mini';const r=await fetch('https://api.openai.com/v1/chat/completions',{method:'POST',headers:{'content-type':'application/json','authorization':`Bearer ${env.OPENAI_API_KEY}`},body:JSON.stringify({model,messages:[{role:'system',content:'You are Astra, the central ANIL X orchestrator. Adapt to the user instead of forcing a fixed workflow. Return concise JSON with keys title, desc, moves, reply, confidence. Never claim an action was completed unless evidence exists.'},{role:'user',content:prompt}],temperature:.2})});if(!r.ok)throw Error(`openai_${r.status}`);const d=await r.json();const raw=d?.choices?.[0]?.message?.content||'';try{return JSON.parse(raw)}catch{const m=raw.match(/\{[\s\S]*\}/);return m?JSON.parse(m[0]):null;}}
+async function claudeCheck(env,prompt){if(!env.ANTHROPIC_API_KEY)return null;const model=env.CLAUDE_MODEL||'claude-sonnet-4-5';const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'content-type':'application/json','x-api-key':env.ANTHROPIC_API_KEY,'anthropic-version':'2023-06-01'},body:JSON.stringify({model,max_tokens:700,system:'You are ANIL X engineering and safety reviewer. Check the proposed plan for contradictions, unsupported completion claims, unsafe actions, and needless fixed steps. Return JSON with ok, corrections, confidence.',messages:[{role:'user',content:prompt}]})});if(!r.ok)throw Error(`anthropic_${r.status}`);const d=await r.json();const raw=d?.content?.map(x=>x.text||'').join('')||'';try{return JSON.parse(raw)}catch{const m=raw.match(/\{[\s\S]*\}/);return m?JSON.parse(m[0]):null;}}
+async function council(body,env){const text=normalize(body?.text||body?.request);if(!text)return null;const fallback=localPlan(text);const context=Array.isArray(body?.turns)?body.turns.slice(-8):[];const prompt=JSON.stringify({request:text,profile:body?.profile||{},previousRoute:body?.previousRoute||'custom',conversation:context,fallback});let astra=null,review=null;try{astra=await openAI(env,prompt)}catch{}if(astra){try{review=await claudeCheck(env,JSON.stringify({request:text,plan:astra}))}catch{}if(review&&!review.ok&&Array.isArray(review.corrections)&&review.corrections.length){astra.desc=`${astra.desc||''} ${review.corrections.join(' ')}`.trim();astra.confidence=Math.min(Number(astra.confidence)||.7,Number(review.confidence)||.7)}return{ok:true,source:'ai-council',orchestrator:'astra',reviewer:review?'claude':'local',plan:{title:astra.title||fallback.title,desc:astra.desc||fallback.desc,moves:Array.isArray(astra.moves)&&astra.moves.length?astra.moves.slice(0,6):fallback.moves},reply:astra.reply||`گرفتم: ${astra.title||fallback.title}`,confidence:Number(astra.confidence)||.75};}return{ok:true,source:'local-fallback',orchestrator:'local',reviewer:'local',plan:fallback,reply:`گرفتم: ${fallback.title}`,confidence:.55};}
+export default {async fetch(request,env){const url=new URL(request.url);if(request.method==='OPTIONS')return new Response(null,{status:204,headers:JSON_HEADERS});if(url.pathname==='/api/health')return json({ok:true,service:'ANIL X',runtime:'cloudflare-pages-worker',aiCouncil:Boolean(env.OPENAI_API_KEY),reviewer:Boolean(env.ANTHROPIC_API_KEY)});if((url.pathname==='/api/plan'||url.pathname==='/api/analyze')&&request.method==='POST'){try{return json(await council(await request.json(),env));}catch(e){return json({ok:false,error:'engine_failure',message:String(e?.message||e)},502);}}return env.ASSETS.fetch(request);}};
