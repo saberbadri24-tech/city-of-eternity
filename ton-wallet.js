@@ -1,5 +1,5 @@
 (()=>{'use strict';
-const manifest='https://anil-x-global-live.netlify.app/tonconnect-manifest.json';
+const manifest='https://city-of-eternity.vercel.app/tonconnect-manifest.json';
 function boot(){
  if(!window.TON_CONNECT_UI)return setTimeout(boot,300);
  const root=document.getElementById('ton-connect'); if(!root)return;
