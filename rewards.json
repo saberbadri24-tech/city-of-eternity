@@ -1,1 +1,36 @@
-{"guard":"ANIL X Immortal Guard","lastVerified":"2026-09-18","sources":[{"name":"Binance Bitcoin Learn & Earn","type":"learn-and-earn","reward":"0.00001 BTC voucher","eligibility":"New Binance users registered after 2026-09-01 UTC; KYC; first 5,000 monthly","url":"https://www.binance.com/en/support/announcement/detail/41cd1e09c4814c27bf6d5ce9d61f6e51","status":"verify-before-claim"},{"name":"Binance Airdrop Portal","type":"airdrop-portal","reward":"Varies","eligibility":"Campaign-specific","url":"https://www.binance.com/en/airdrop","status":"monitor"},{"name":"XDAO TON Airdrop","type":"airdrop","reward":"$DAO","eligibility":"Activity/snapshot based; official docs","url":"https://docs.xdao.app/ton/airdrop/","status":"check-eligibility"}]}
+{
+  "guard": "ANIL X Immortal Guard",
+  "lastVerified": "2026-09-18",
+  "sources": [
+    {
+      "name": "Binance Bitcoin Learn & Earn",
+      "type": "learn-and-earn",
+      "reward": "0.00001 BTC voucher",
+      "eligibility": "New Binance users registered after 2026-09-01 UTC; KYC; first 5,000 monthly",
+      "url": "https://www.binance.com/en/support/announcement/detail/41cd1e09c4814c27bf6d5ce9d61f6e51",
+      "status": "verify-before-claim",
+      "actionUrl": "https://www.binance.com/en/support/announcement/detail/41cd1e09c4814c27bf6d5ce9d61f6e51",
+      "actionLabel": "باز کردن مسیر رسمی Binance"
+    },
+    {
+      "name": "Binance Airdrop Portal",
+      "type": "airdrop-portal",
+      "reward": "Varies",
+      "eligibility": "Campaign-specific",
+      "url": "https://www.binance.com/en/airdrop",
+      "status": "monitor",
+      "actionUrl": "https://www.binance.com/en/airdrop",
+      "actionLabel": "باز کردن Airdrop رسمی Binance"
+    },
+    {
+      "name": "XDAO TON Airdrop",
+      "type": "airdrop",
+      "reward": "$DAO",
+      "eligibility": "Activity/snapshot based; official docs",
+      "url": "https://docs.xdao.app/ton/airdrop/",
+      "status": "check-eligibility",
+      "actionUrl": "https://t.me/xdao_ton_bot",
+      "actionLabel": "باز کردن Mini App رسمی XDAO"
+    }
+  ]
+}
