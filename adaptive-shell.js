@@ -23,7 +23,7 @@ function inject(){
  if(document.querySelector('#axAdaptiveShell'))return;
  const input=composer(); if(!input)return;
  const shell=document.createElement('div');shell.id='axAdaptiveShell';
- shell.innerHTML='<div class="ax-examples-title">از نتیجه شروع کن</div><div class="ax-examples"></div><div class="ax-resume" hidden></div><button class="ax-guest" type="button">ورود مهم نیست؛ اول امتحان کن</button>';
+ shell.innerHTML='<div class="ax-examples-title">'+(isFa?'از نتیجه شروع کن':'Start with a result')+'</div><div class="ax-examples"></div><div class="ax-resume" hidden></div><button class="ax-guest" type="button">'+(isFa?'ورود مهم نیست؛ اول امتحان کن':'No login needed; try it first')+'</button>';
  const list=shell.querySelector('.ax-examples');
  examples.forEach(([label,value])=>{const b=document.createElement('button');b.type='button';b.dataset.value=value;b.textContent=label;list.appendChild(b)});
  input.parentNode.insertBefore(shell,input.nextSibling);
