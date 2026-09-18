@@ -1,0 +1,11 @@
+{
+  "guard": "ANIL X Immortal Guard",
+  "version": "2.0-safe-monitor",
+  "lastScan": null,
+  "mode": "autonomous-monitoring",
+  "financialActions": "disabled",
+  "walletPrivateKeys": "never-collected",
+  "ownerApprovalRequired": true,
+  "blockers": ["Initial state: waiting for first scheduled guard scan."],
+  "sources": []
+}
