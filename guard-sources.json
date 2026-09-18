@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "policy": "Official/public sources only. The Guard may learn prioritization from these sources but never bypass account, KYC, CAPTCHA, anti-Sybil or wallet-signature controls.",
+  "sources": [
+    {
+      "name": "Binance Airdrop Portal",
+      "type": "airdrop-portal",
+      "url": "https://www.binance.com/en/airdrop"
+    },
+    {
+      "name": "Binance Learn & Earn",
+      "type": "learn-and-earn",
+      "url": "https://www.binance.com/en/support/announcement/detail/41cd1e09c4814c27bf6d5ce9d61f6e51"
+    },
+    {
+      "name": "Binance Alpha",
+      "type": "alpha-rewards",
+      "url": "https://www.binance.com/en/alpha"
+    },
+    {
+      "name": "Galxe",
+      "type": "quest-rewards",
+      "url": "https://galxe.com/"
+    },
+    {
+      "name": "Layer3",
+      "type": "quest-rewards",
+      "url": "https://layer3.xyz/"
+    },
+    {
+      "name": "Zealy",
+      "type": "quest-rewards",
+      "url": "https://zealy.io/"
+    },
+    {
+      "name": "QuestN",
+      "type": "quest-rewards",
+      "url": "https://app.questn.com/"
+    },
+    {
+      "name": "XDAO TON Airdrop Docs",
+      "type": "airdrop",
+      "url": "https://docs.xdao.app/ton/airdrop/"
+    }
+  ]
+}
