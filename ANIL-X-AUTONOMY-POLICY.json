@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "autonomy": {
+    "research": true,
+    "observe": true,
+    "propose": true,
+    "sandbox": true,
+    "deterministic_tests": true,
+    "production_code_mutation": false,
+    "payment_execution": false,
+    "secret_rotation": false,
+    "dns_changes": false
+  },
+  "promotion": {
+    "required": ["tests_pass", "performance_not_regressed", "security_check", "rollback_available"],
+    "consequential_changes_require_owner_approval": true
+  },
+  "telemetry": {
+    "store_raw_prompts": false,
+    "store_sensitive_traits": false,
+    "prefer_derived_signals": true
+  }
+}
