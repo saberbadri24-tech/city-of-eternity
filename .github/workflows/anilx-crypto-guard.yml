@@ -1,0 +1,35 @@
+name: ANIL X — Immortal Crypto Guard
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/15 * * * *'
+permissions:
+  contents: write
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify official reward sources
+        run: |
+          python3 - <<'PY'
+          import json, urllib.request, datetime
+          p='rewards.json'
+          d=json.load(open(p))
+          for s in d['sources']:
+              try:
+                  req=urllib.request.Request(s['url'],headers={'User-Agent':'ANIL-X-Immortal-Guard/1.0'})
+                  with urllib.request.urlopen(req,timeout=20) as r:
+                      s['httpStatus']=r.status
+              except Exception:
+                  s['httpStatus']=None
+          d['lastScan']=datetime.datetime.now(datetime.timezone.utc).isoformat()
+          open(p,'w').write(json.dumps(d,ensure_ascii=False,indent=2)+'\n')
+          PY
+      - name: Commit scan state
+        run: |
+          git config user.name 'ANIL X Immortal Guard'
+          git config user.email 'actions@users.noreply.github.com'
+          git add rewards.json
+          git diff --cached --quiet || git commit -m 'chore: crypto guard scan'
+          git push
