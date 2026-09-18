@@ -42,7 +42,7 @@ jobs:
               s['lastScan']=now
               s['guardMode']='monitor-only'
               s['claim']='not-automated'
-              if status != 200:
+              if status is None or not (200 <= status < 300):
                   s['status']='unavailable'
                   blockers.append(f"{s['name']}: source HTTP {status}")
                   continue
@@ -63,7 +63,7 @@ jobs:
                   blockers.append(f"{s['name']}: wallet proof/signature may be required")
 
           rewards['lastScan']=now
-          rewards['guardVersion']='2.0-safe-monitor'
+          rewards['guardVersion']='2.1-safe-opportunity-scanner'
           rewards['policy']='No seed/private key; no KYC/CAPTCHA bypass; no wallet signature or approval without owner action; no fabricated claims.'
 
           approvals=[]
