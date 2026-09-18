@@ -72,6 +72,17 @@ async function claudeCheck(env, prompt) {
   }
 }
 
+async function geminiCheck(env, prompt) {
+  if (!env.GEMINI_API_KEY) return null;
+  const model = env.GEMINI_MODEL || 'gemini-2.5-flash';
+  const url = 'https://generativelanguage.googleapis.com/v1beta/models/' + encodeURIComponent(model) + ':generateContent?key=' + encodeURIComponent(env.GEMINI_API_KEY);
+  const response = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: 'You are ANIL X research verifier. Check this plan for factual overreach, missing assumptions and whether the next step is actually supported by the request. Return JSON with ok, corrections, confidence.\n\n' + prompt }] }] }) });
+  if (!response.ok) throw new Error('gemini_' + response.status);
+  const data = await response.json();
+  const raw = data?.candidates?.[0]?.content?.parts?.map((x) => x.text || '').join('') || '';
+  try { return JSON.parse(raw); } catch { const match = raw.match(/\{[\s\S]*\}/); return match ? JSON.parse(match[0]) : null; }
+}
+
 async function council(body, env) {
   const requestText = text(body?.text || body?.request);
   if (!requestText) return { ok: false, error: 'missing_request' };
@@ -79,16 +90,18 @@ async function council(body, env) {
   const prompt = JSON.stringify({ request: requestText, profile: body?.profile || {}, previousRoute: body?.previousRoute || 'custom', conversation: Array.isArray(body?.turns) ? body.turns.slice(-8) : [], fallback });
   let astra = null;
   let review = null;
+  let research = null;
   try { astra = await openAI(env, prompt); } catch {}
   if (astra) {
     try { review = await claudeCheck(env, JSON.stringify({ request: requestText, plan: astra })); } catch {}
+    try { research = await geminiCheck(env, JSON.stringify({ request: requestText, plan: astra })); } catch {}
     if (review && review.ok === false && Array.isArray(review.corrections)) {
       astra.desc = `${astra.desc || ''} ${review.corrections.join(' ')}`.trim();
       astra.confidence = Math.min(Number(astra.confidence) || 0.7, Number(review.confidence) || 0.7);
     }
-    return { ok: true, source: 'ai-council', orchestrator: 'astra', reviewer: review ? 'claude' : 'local', plan: { title: astra.title || fallback.title, desc: astra.desc || fallback.desc, moves: Array.isArray(astra.moves) && astra.moves.length ? astra.moves.slice(0, 6) : fallback.moves }, reply: astra.reply || `گرفتم: ${astra.title || fallback.title}`, confidence: Number(astra.confidence) || 0.75 };
+    return { ok: true, source: 'ai-council', orchestrator: 'astra', reviewer: review ? 'claude' : 'local', research: research ? 'gemini' : 'local', specialists: { astra: { live: true }, claude: { live: !!review }, gemini: { live: !!research }, vision: { live: false }, voice: { live: false } }, plan: { title: astra.title || fallback.title, desc: astra.desc || fallback.desc, moves: Array.isArray(astra.moves) && astra.moves.length ? astra.moves.slice(0, 6) : fallback.moves }, reply: astra.reply || `گرفتم: ${astra.title || fallback.title}`, confidence: Number(astra.confidence) || 0.75 };
   }
-  return { ok: true, source: 'local-fallback', orchestrator: 'local', reviewer: 'local', plan: fallback, reply: `گرفتم: ${fallback.title}`, confidence: 0.55 };
+  return { ok: true, source: 'local-fallback', orchestrator: 'local', reviewer: 'local', research: 'local', specialists: { astra: { live: false }, claude: { live: false }, gemini: { live: false }, vision: { live: false }, voice: { live: false } }, plan: fallback, reply: `گرفتم: ${fallback.title}`, confidence: 0.55 };
 }
 
 export default async (request, context) => {
