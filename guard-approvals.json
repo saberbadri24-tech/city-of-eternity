@@ -1,1 +1,15 @@
-{"guard":"ANIL X Immortal Guard","updatedAt":null,"approvals":[]}
+{
+  "guard": "ANIL X Immortal Guard",
+  "updatedAt": "2026-09-18T19:45:17.077708+00:00",
+  "approvals": [
+    {
+      "id": "xdao-ton-airdrop",
+      "name": "XDAO TON Airdrop",
+      "requiresOwnerApproval": true,
+      "reason": "XDAO TON Airdrop: wallet proof/signature may be required",
+      "transaction": null,
+      "createdAt": "2026-09-18T19:45:17.077708+00:00",
+      "status": "waiting-owner-or-official-payload"
+    }
+  ]
+}

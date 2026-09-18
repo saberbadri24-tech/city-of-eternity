@@ -8,9 +8,13 @@
       "reward": "0.00001 BTC voucher",
       "eligibility": "New Binance users registered after 2026-09-01 UTC; KYC; first 5,000 monthly",
       "url": "https://www.binance.com/en/support/announcement/detail/41cd1e09c4814c27bf6d5ce9d61f6e51",
-      "status": "verify-before-claim",
+      "status": "unavailable",
       "actionUrl": "https://www.binance.com/en/support/announcement/detail/41cd1e09c4814c27bf6d5ce9d61f6e51",
-      "actionLabel": "باز کردن مسیر رسمی Binance"
+      "actionLabel": "باز کردن مسیر رسمی Binance",
+      "httpStatus": 202,
+      "lastScan": "2026-09-18T19:45:17.077708+00:00",
+      "guardMode": "monitor-only",
+      "claim": "not-automated"
     },
     {
       "name": "Binance Airdrop Portal",
@@ -18,9 +22,13 @@
       "reward": "Varies",
       "eligibility": "Campaign-specific",
       "url": "https://www.binance.com/en/airdrop",
-      "status": "monitor",
+      "status": "unavailable",
       "actionUrl": "https://www.binance.com/en/airdrop",
-      "actionLabel": "باز کردن Airdrop رسمی Binance"
+      "actionLabel": "باز کردن Airdrop رسمی Binance",
+      "httpStatus": 202,
+      "lastScan": "2026-09-18T19:45:17.077708+00:00",
+      "guardMode": "monitor-only",
+      "claim": "not-automated"
     },
     {
       "name": "XDAO TON Airdrop",
@@ -28,9 +36,16 @@
       "reward": "$DAO",
       "eligibility": "Activity/snapshot based; official docs",
       "url": "https://docs.xdao.app/ton/airdrop/",
-      "status": "check-eligibility",
+      "status": "official-source-live",
       "actionUrl": "https://t.me/xdao_ton_bot",
-      "actionLabel": "باز کردن Mini App رسمی XDAO"
+      "actionLabel": "باز کردن Mini App رسمی XDAO",
+      "httpStatus": 200,
+      "lastScan": "2026-09-18T19:45:17.077708+00:00",
+      "guardMode": "monitor-only",
+      "claim": "not-automated"
     }
-  ]
+  ],
+  "lastScan": "2026-09-18T19:45:17.077708+00:00",
+  "guardVersion": "2.0-safe-monitor",
+  "policy": "No seed/private key; no KYC/CAPTCHA bypass; no wallet signature or approval without owner action; no fabricated claims."
 }
