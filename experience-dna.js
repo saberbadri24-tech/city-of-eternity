@@ -61,7 +61,7 @@ const trackSearch=()=>{
  input.addEventListener('input',()=>{if(input.value.trim()) classify(input.value)});
  input.addEventListener('blur',()=>{const q=input.value.trim();if(q)record('search',{q:q.slice(0,240),dwell:Math.min(now()-(started||now()),120000),hits:classify(q)});adapt()},{passive:true});
 };
-const personalPanel=()=>{
+const personalPanel=()=>{ return; /* personalization remains internal; public controls removed */
  if(document.querySelector('#axDNA'))return;
  const b=document.body, box=document.createElement('div');box.id='axDNA';
  box.innerHTML='<button id="axDNAOpen" type="button" aria-label="تنظیم تجربه">◈ تجربه من</button><div id="axDNAPanel" hidden><b>تجربه ANIL X</b><span id="axDNAState"></span><button data-dna="direct">مستقیم</button><button data-dna="guided">راهنما</button><button data-dna="rich">تصویری/صوتی</button><button data-dna="simple">ساده</button><button data-dna="reset">بازنشانی</button></div>';
@@ -87,6 +87,6 @@ const discovery=()=>{
  document.addEventListener('click',e=>{if(!e.target.closest('.xmark'))return;taps++;clearTimeout(timer);timer=setTimeout(()=>taps=0,1400);if(taps>=4){taps=0;unlock('fourfold-gate');const n=document.createElement('div');n.textContent='✦ یک مسیر پنهان برای تو باز شد';n.style.cssText='position:fixed;top:20%;left:50%;transform:translateX(-50%);z-index:99999;padding:14px 20px;border:1px solid #d8ad4f;border-radius:18px;background:#0b0805;color:#ffe0a0;box-shadow:0 20px 80px #000;font:700 13px system-ui';document.body.append(n);setTimeout(()=>n.remove(),3000)}},{passive:true});
 };
 const css=()=>{if(document.querySelector('#axDNAStyle'))return;const s=document.createElement('style');s.id='axDNAStyle';s.textContent='#axDNA{position:fixed;left:12px;bottom:12px;z-index:9990;font:10px system-ui;color:#f0d18a;pointer-events:none}#axDNAOpen{pointer-events:auto;border:1px solid rgba(216,173,79,.28);background:rgba(8,6,4,.58);color:#f0d18a;border-radius:999px;padding:5px 8px;font-size:10px;opacity:.72;box-shadow:0 4px 16px rgba(0,0,0,.16)}#axDNAOpen:hover{opacity:1}#axDNAPanel{pointer-events:auto;margin-top:5px;display:flex;flex-direction:column;gap:4px;padding:7px;border:1px solid rgba(216,173,79,.18);border-radius:12px;background:rgba(8,6,4,.82);box-shadow:0 8px 24px rgba(0,0,0,.18)}#axDNAPanel button{border:1px solid rgba(216,173,79,.25);background:rgba(8,6,4,.55);color:#f0d18a;border-radius:9px;padding:6px 8px;font-size:10px}#axDNAPanel span{color:#968a77;padding:3px}.ax-discovery-mode .heritage-card,.ax-discovery-mode .hero-orbit{filter:saturate(1.12)}[data-ax-mode="direct"] .composer em{display:none}@media(max-width:600px){#axDNA{left:7px;bottom:7px}#axDNAOpen{padding:4px 7px;font-size:9px}}';document.head.appendChild(s)};
-const boot=()=>{css();personalPanel();trackClicks();trackSearch();discovery();adapt();record('session',{lang:navigator.language||'unknown',width:innerWidth,ref:document.referrer?new URL(document.referrer).hostname:'direct'});};
+const boot=()=>{trackClicks();trackSearch();discovery();adapt();record('session',{lang:navigator.language||'unknown',width:innerWidth,ref:document.referrer?new URL(document.referrer).hostname:'direct'});};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
