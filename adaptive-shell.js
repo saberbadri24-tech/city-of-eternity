@@ -5,12 +5,19 @@ const state=safe(()=>JSON.parse(localStorage.getItem(KEY)||'{}'),{});
 const save=()=>safe(()=>localStorage.setItem(KEY,JSON.stringify(state)),null);
 const composer=()=>document.querySelector('#requestInput')||document.querySelector('#q');
 const setRequest=(v)=>{const el=composer();if(!el)return false;el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));el.focus();return true};
-const examples=[
+const isFa=document.documentElement.lang==='fa'||document.documentElement.dir==='rtl';
+const examples=isFa?[
  ['ساخت سایت','می‌خواهم یک سایت حرفه‌ای برای کسب‌وکارم بسازم'],
  ['رفع مشکل','سایتم مشکل دارد؛ بررسی و راه‌حل بده'],
  ['رشد کسب‌وکار','می‌خواهم مشتری و فروش بیشتری بگیرم'],
  ['ساخت تیزر','برای محصولم یک تیزر حرفه‌ای می‌خواهم'],
  ['کشف ANIL X','می‌خواهم دنیای مخفی ANIL X را کشف کنم']
+]:[
+ ['Build a website','I want to build a professional website for my business'],
+ ['Fix a problem','My website has a problem; inspect it and give me a solution'],
+ ['Grow my business','I want more customers and sales'],
+ ['Create a teaser','I want a professional teaser for my product'],
+ ['Discover ANIL X','I want to discover the hidden world of ANIL X']
 ];
 function inject(){
  if(document.querySelector('#axAdaptiveShell'))return;
