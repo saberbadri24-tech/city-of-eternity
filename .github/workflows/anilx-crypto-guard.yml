@@ -20,6 +20,7 @@ jobs:
 
           REWARDS='rewards.json'
           STATUS='guard-status.json'
+          APPROVALS='guard-approvals.json'
           rewards=json.load(open(REWARDS))
           now=datetime.datetime.now(datetime.timezone.utc).isoformat()
 
@@ -65,6 +66,19 @@ jobs:
           rewards['guardVersion']='2.0-safe-monitor'
           rewards['policy']='No seed/private key; no KYC/CAPTCHA bypass; no wallet signature or approval without owner action; no fabricated claims.'
 
+          approvals=[]
+          for s in rewards.get('sources',[]):
+              if s.get('status')=='official-source-live':
+                  approvals.append({
+                      'id':re.sub(r'[^a-z0-9-]+','-',s.get('name','approval').lower()).strip('-'),
+                      'name':s.get('name'),
+                      'requiresOwnerApproval':True,
+                      'reason':next((b for b in blockers if s.get('name','') in b),'مالک باید مرحله مجاز را تأیید کند.'),
+                      'transaction':None,
+                      'createdAt':now,
+                      'status':'waiting-owner-or-official-payload'
+                  })
+
           report={
               'guard':'ANIL X Immortal Guard',
               'version':'2.0-safe-monitor',
@@ -85,11 +99,12 @@ jobs:
 
           open(REWARDS,'w').write(json.dumps(rewards,ensure_ascii=False,indent=2)+'\n')
           open(STATUS,'w').write(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+          open(APPROVALS,'w').write(json.dumps({'guard':'ANIL X Immortal Guard','updatedAt':now,'approvals':approvals},ensure_ascii=False,indent=2)+'\n')
           PY
       - name: Commit guard state
         run: |
           git config user.name 'ANIL X Immortal Guard'
           git config user.email 'actions@users.noreply.github.com'
-          git add rewards.json guard-status.json
+          git add rewards.json guard-status.json guard-approvals.json
           git diff --cached --quiet || git commit -m 'chore: immortal guard autonomous scan'
           git push
