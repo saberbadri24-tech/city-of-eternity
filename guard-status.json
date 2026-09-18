@@ -1,7 +1,7 @@
 {
   "guard": "ANIL X Immortal Guard",
   "version": "2.0-safe-monitor",
-  "lastScan": "2026-09-18T19:45:17.077708+00:00",
+  "lastScan": "2026-09-18T21:56:58.205209+00:00",
   "mode": "autonomous-monitoring",
   "financialActions": "disabled",
   "walletPrivateKeys": "never-collected",
@@ -17,21 +17,21 @@
       "status": "unavailable",
       "httpStatus": 202,
       "claim": "not-automated",
-      "lastScan": "2026-09-18T19:45:17.077708+00:00"
+      "lastScan": "2026-09-18T21:56:58.205209+00:00"
     },
     {
       "name": "Binance Airdrop Portal",
       "status": "unavailable",
       "httpStatus": 202,
       "claim": "not-automated",
-      "lastScan": "2026-09-18T19:45:17.077708+00:00"
+      "lastScan": "2026-09-18T21:56:58.205209+00:00"
     },
     {
       "name": "XDAO TON Airdrop",
       "status": "official-source-live",
       "httpStatus": 200,
       "claim": "not-automated",
-      "lastScan": "2026-09-18T19:45:17.077708+00:00"
+      "lastScan": "2026-09-18T21:56:58.205209+00:00"
     }
   ]
 }

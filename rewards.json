@@ -12,7 +12,7 @@
       "actionUrl": "https://www.binance.com/en/support/announcement/detail/41cd1e09c4814c27bf6d5ce9d61f6e51",
       "actionLabel": "باز کردن مسیر رسمی Binance",
       "httpStatus": 202,
-      "lastScan": "2026-09-18T19:45:17.077708+00:00",
+      "lastScan": "2026-09-18T21:56:58.205209+00:00",
       "guardMode": "monitor-only",
       "claim": "not-automated"
     },
@@ -26,7 +26,7 @@
       "actionUrl": "https://www.binance.com/en/airdrop",
       "actionLabel": "باز کردن Airdrop رسمی Binance",
       "httpStatus": 202,
-      "lastScan": "2026-09-18T19:45:17.077708+00:00",
+      "lastScan": "2026-09-18T21:56:58.205209+00:00",
       "guardMode": "monitor-only",
       "claim": "not-automated"
     },
@@ -40,12 +40,12 @@
       "actionUrl": "https://t.me/xdao_ton_bot",
       "actionLabel": "باز کردن Mini App رسمی XDAO",
       "httpStatus": 200,
-      "lastScan": "2026-09-18T19:45:17.077708+00:00",
+      "lastScan": "2026-09-18T21:56:58.205209+00:00",
       "guardMode": "monitor-only",
       "claim": "not-automated"
     }
   ],
-  "lastScan": "2026-09-18T19:45:17.077708+00:00",
+  "lastScan": "2026-09-18T21:56:58.205209+00:00",
   "guardVersion": "2.0-safe-monitor",
   "policy": "No seed/private key; no KYC/CAPTCHA bypass; no wallet signature or approval without owner action; no fabricated claims."
 }
