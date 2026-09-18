@@ -1,4 +1,4 @@
-const CACHE='anilx-v13';
+const CACHE='anilx-v9-core100';
 const ASSETS=['./','./index.html','./en.html','./services.html','./style.css','./script.js','./anilx-enhance.js','./experience-dna.js','./adaptive-shell.js','./webmcp.js','./manifest.webmanifest','./icon.png','./robots.txt','./sitemap.xml','./tonconnect-manifest.json'];
 
 self.addEventListener('install', event => {
