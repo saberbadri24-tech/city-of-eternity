@@ -10,26 +10,86 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify official reward sources
+      - name: Run safe crypto guard
+        env:
+          TZ: UTC
         run: |
           python3 - <<'PY'
-          import json, urllib.request, datetime
-          p='rewards.json'
-          d=json.load(open(p))
-          for s in d['sources']:
+          import json, urllib.request, datetime, re
+          from urllib.error import HTTPError, URLError
+
+          REWARDS='rewards.json'
+          STATUS='guard-status.json'
+          rewards=json.load(open(REWARDS))
+          now=datetime.datetime.now(datetime.timezone.utc).isoformat()
+
+          def fetch(url):
               try:
-                  req=urllib.request.Request(s['url'],headers={'User-Agent':'ANIL-X-Immortal-Guard/1.0'})
-                  with urllib.request.urlopen(req,timeout=20) as r:
-                      s['httpStatus']=r.status
-              except Exception:
-                  s['httpStatus']=None
-          d['lastScan']=datetime.datetime.now(datetime.timezone.utc).isoformat()
-          open(p,'w').write(json.dumps(d,ensure_ascii=False,indent=2)+'\n')
+                  req=urllib.request.Request(url,headers={'User-Agent':'ANIL-X-Immortal-Guard/2.0'})
+                  with urllib.request.urlopen(req,timeout=25) as r:
+                      body=r.read(250000).decode('utf-8','ignore')
+                      return r.status, body[:120000]
+              except HTTPError as e:
+                  return e.code, ''
+              except (URLError, TimeoutError, Exception):
+                  return None, ''
+
+          blockers=[]
+          for s in rewards.get('sources',[]):
+              status, body=fetch(s['url'])
+              s['httpStatus']=status
+              s['lastScan']=now
+              s['guardMode']='monitor-only'
+              s['claim']='not-automated'
+              if status != 200:
+                  s['status']='unavailable'
+                  blockers.append(f"{s['name']}: source HTTP {status}")
+                  continue
+
+              text=re.sub(r'\\s+',' ',body).lower()
+              if s['type']=='learn-and-earn':
+                  needs=[]
+                  for word in ('kyc','register','quiz'):
+                      if word not in text: needs.append(word)
+                  s['status']='official-source-live'
+                  s['requirementsObserved']=needs
+                  blockers.append(f"{s['name']}: owner account/KYC/quiz required")
+              elif s['type']=='airdrop-portal':
+                  s['status']='official-source-live'
+                  blockers.append(f"{s['name']}: campaign eligibility must be checked per account")
+              else:
+                  s['status']='official-source-live'
+                  blockers.append(f"{s['name']}: wallet proof/signature may be required")
+
+          rewards['lastScan']=now
+          rewards['guardVersion']='2.0-safe-monitor'
+          rewards['policy']='No seed/private key; no KYC/CAPTCHA bypass; no wallet signature or approval without owner action; no fabricated claims.'
+
+          report={
+              'guard':'ANIL X Immortal Guard',
+              'version':'2.0-safe-monitor',
+              'lastScan':now,
+              'mode':'autonomous-monitoring',
+              'financialActions':'disabled',
+              'walletPrivateKeys':'never-collected',
+              'ownerApprovalRequired':True,
+              'blockers':blockers,
+              'sources':[{
+                  'name':s.get('name'),
+                  'status':s.get('status'),
+                  'httpStatus':s.get('httpStatus'),
+                  'claim':s.get('claim'),
+                  'lastScan':s.get('lastScan')
+              } for s in rewards.get('sources',[])]
+          }
+
+          open(REWARDS,'w').write(json.dumps(rewards,ensure_ascii=False,indent=2)+'\n')
+          open(STATUS,'w').write(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
           PY
-      - name: Commit scan state
+      - name: Commit guard state
         run: |
           git config user.name 'ANIL X Immortal Guard'
           git config user.email 'actions@users.noreply.github.com'
-          git add rewards.json
-          git diff --cached --quiet || git commit -m 'chore: crypto guard scan'
+          git add rewards.json guard-status.json
+          git diff --cached --quiet || git commit -m 'chore: immortal guard autonomous scan'
           git push
