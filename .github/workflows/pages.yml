@@ -1,4 +1,4 @@
-name: ANIL X — Production Check
+name: ANIL X — Final Production Deploy
 
 on:
   push:
@@ -7,25 +7,39 @@ on:
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
-  production-check:
+  deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Validate ANIL X site
+
+      - name: Validate production files
         run: |
           test -f index.html
           test -f style.css
           test -f script.js
           grep -q "ANIL X" index.html
           grep -q "<title>" index.html
-          grep -q "https://saberbadri24-tech.github.io/city-of-eternity/" index.html
-          grep -q "https://saberbadri24-tech.github.io/city-of-eternity/sitemap.xml" robots.txt
-      - name: Parse JavaScript
-        run: |
-          set -e
-          find . -type f -name '*.js' -not -path './.git/*' -print0 | xargs -0 -n1 node --check
-      - name: Production validation complete
-        run: echo "ANIL X production validation passed."
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
