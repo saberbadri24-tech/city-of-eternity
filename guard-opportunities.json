@@ -1,21 +1,8 @@
 {
   "guard": "ANIL X Immortal Guard",
   "engine": "Airdrop+ X",
-  "updatedAt": "2026-09-19T00:09:12.293771+00:00",
+  "updatedAt": "2026-09-19T04:39:53.614199+00:00",
   "opportunities": [
-    {
-      "id": "binance-bitcoin-learn-earn",
-      "name": "Binance Bitcoin Learn & Earn",
-      "source": "https://www.binance.com/en/support/announcement/detail/41cd1e09c4814c27bf6d5ce9d61f6e51",
-      "type": "learn-and-earn",
-      "score": 62.4,
-      "signals": [],
-      "requirements": [],
-      "status": "WATCH",
-      "detectedAt": "2026-09-19T00:09:12.293771+00:00",
-      "actionMode": "owner-approval-when-required",
-      "walletSigning": "never-automatic"
-    },
     {
       "id": "binance-airdrop-portal",
       "name": "Binance Airdrop Portal",
@@ -25,31 +12,20 @@
       "signals": [],
       "requirements": [],
       "status": "WATCH",
-      "detectedAt": "2026-09-19T00:09:12.293771+00:00",
+      "detectedAt": "2026-09-19T04:39:53.614199+00:00",
       "actionMode": "owner-approval-when-required",
       "walletSigning": "never-automatic"
     },
     {
-      "id": "xdao-ton-airdrop",
-      "name": "XDAO TON Airdrop",
-      "source": "https://docs.xdao.app/ton/airdrop/",
-      "type": "airdrop",
-      "score": 82.9,
-      "signals": [
-        "airdrop",
-        "points",
-        "quest",
-        "snapshot",
-        "deadline",
-        "referral",
-        "claim"
-      ],
-      "requirements": [
-        "register",
-        "signature"
-      ],
-      "status": "HIGH_PRIORITY",
-      "detectedAt": "2026-09-19T00:09:12.293771+00:00",
+      "id": "binance-learn-earn",
+      "name": "Binance Learn & Earn",
+      "source": "https://www.binance.com/en/support/announcement/detail/41cd1e09c4814c27bf6d5ce9d61f6e51",
+      "type": "learn-and-earn",
+      "score": 62.4,
+      "signals": [],
+      "requirements": [],
+      "status": "WATCH",
+      "detectedAt": "2026-09-19T04:39:53.614199+00:00",
       "actionMode": "owner-approval-when-required",
       "walletSigning": "never-automatic"
     },
@@ -62,7 +38,7 @@
       "signals": [],
       "requirements": [],
       "status": "WATCH",
-      "detectedAt": "2026-09-19T00:09:12.293771+00:00",
+      "detectedAt": "2026-09-19T04:39:53.614199+00:00",
       "actionMode": "owner-approval-when-required",
       "walletSigning": "never-automatic"
     },
@@ -78,7 +54,7 @@
       ],
       "requirements": [],
       "status": "WATCH",
-      "detectedAt": "2026-09-19T00:09:12.293771+00:00",
+      "detectedAt": "2026-09-19T04:39:53.614199+00:00",
       "actionMode": "owner-approval-when-required",
       "walletSigning": "never-automatic"
     },
@@ -103,7 +79,31 @@
         "signature"
       ],
       "status": "HIGH_PRIORITY",
-      "detectedAt": "2026-09-19T00:09:12.293771+00:00",
+      "detectedAt": "2026-09-19T04:39:53.614199+00:00",
+      "actionMode": "owner-approval-when-required",
+      "walletSigning": "never-automatic"
+    },
+    {
+      "id": "xdao-ton-airdrop-docs",
+      "name": "XDAO TON Airdrop Docs",
+      "source": "https://docs.xdao.app/ton/airdrop/",
+      "type": "airdrop",
+      "score": 82.9,
+      "signals": [
+        "airdrop",
+        "points",
+        "quest",
+        "snapshot",
+        "deadline",
+        "referral",
+        "claim"
+      ],
+      "requirements": [
+        "register",
+        "signature"
+      ],
+      "status": "HIGH_PRIORITY",
+      "detectedAt": "2026-09-19T04:39:53.614199+00:00",
       "actionMode": "owner-approval-when-required",
       "walletSigning": "never-automatic"
     }
