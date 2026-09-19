@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "weights": {
+    "reward": 0.24,
+    "eligibility": 0.2,
+    "speed": 0.14,
+    "cost": 0.12,
+    "trust": 0.14,
+    "freshness": 0.08,
+    "complexity": 0.08
+  },
+  "outcomes": [],
+  "lastUpdate": "2026-09-19T00:09:12.293771+00:00",
+  "policy": "Learns from observed outcomes and source signals; never self-edits executable code, secrets, wallet keys, or security policy."
+}\n

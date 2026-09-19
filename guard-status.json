@@ -1,37 +1,22 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "version": "2.0-safe-monitor",
-  "lastScan": "2026-09-18T21:56:58.205209+00:00",
-  "mode": "autonomous-monitoring",
+  "engine": "Airdrop+ X",
+  "version": "3.0-self-learning-opportunity-engine",
+  "lastScan": "2026-09-19T00:09:12.293771+00:00",
+  "mode": "autonomous-monitoring-and-learning",
+  "selfUpdate": "adaptive-data-and-rules-only",
   "financialActions": "disabled",
   "walletPrivateKeys": "never-collected",
   "ownerApprovalRequired": true,
+  "antiSybil": "respected",
+  "kycBypass": "disabled",
+  "captchaBypass": "disabled",
+  "signatureAutomation": "disabled",
+  "sourcesScanned": 8,
+  "highPriority": 2,
+  "watch": 4,
   "blockers": [
-    "Binance Bitcoin Learn & Earn: source HTTP 202",
-    "Binance Airdrop Portal: source HTTP 202",
-    "XDAO TON Airdrop: wallet proof/signature may be required"
-  ],
-  "sources": [
-    {
-      "name": "Binance Bitcoin Learn & Earn",
-      "status": "unavailable",
-      "httpStatus": 202,
-      "claim": "not-automated",
-      "lastScan": "2026-09-18T21:56:58.205209+00:00"
-    },
-    {
-      "name": "Binance Airdrop Portal",
-      "status": "unavailable",
-      "httpStatus": 202,
-      "claim": "not-automated",
-      "lastScan": "2026-09-18T21:56:58.205209+00:00"
-    },
-    {
-      "name": "XDAO TON Airdrop",
-      "status": "official-source-live",
-      "httpStatus": 200,
-      "claim": "not-automated",
-      "lastScan": "2026-09-18T21:56:58.205209+00:00"
-    }
+    "Layer3: source HTTP 403",
+    "QuestN: source HTTP 403"
   ]
-}
+}\n

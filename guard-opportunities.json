@@ -1,0 +1,111 @@
+{
+  "guard": "ANIL X Immortal Guard",
+  "engine": "Airdrop+ X",
+  "updatedAt": "2026-09-19T00:09:12.293771+00:00",
+  "opportunities": [
+    {
+      "id": "binance-bitcoin-learn-earn",
+      "name": "Binance Bitcoin Learn & Earn",
+      "source": "https://www.binance.com/en/support/announcement/detail/41cd1e09c4814c27bf6d5ce9d61f6e51",
+      "type": "learn-and-earn",
+      "score": 62.4,
+      "signals": [],
+      "requirements": [],
+      "status": "WATCH",
+      "detectedAt": "2026-09-19T00:09:12.293771+00:00",
+      "actionMode": "owner-approval-when-required",
+      "walletSigning": "never-automatic"
+    },
+    {
+      "id": "binance-airdrop-portal",
+      "name": "Binance Airdrop Portal",
+      "source": "https://www.binance.com/en/airdrop",
+      "type": "airdrop-portal",
+      "score": 62.4,
+      "signals": [],
+      "requirements": [],
+      "status": "WATCH",
+      "detectedAt": "2026-09-19T00:09:12.293771+00:00",
+      "actionMode": "owner-approval-when-required",
+      "walletSigning": "never-automatic"
+    },
+    {
+      "id": "xdao-ton-airdrop",
+      "name": "XDAO TON Airdrop",
+      "source": "https://docs.xdao.app/ton/airdrop/",
+      "type": "airdrop",
+      "score": 82.9,
+      "signals": [
+        "airdrop",
+        "points",
+        "quest",
+        "snapshot",
+        "deadline",
+        "referral",
+        "claim"
+      ],
+      "requirements": [
+        "register",
+        "signature"
+      ],
+      "status": "HIGH_PRIORITY",
+      "detectedAt": "2026-09-19T00:09:12.293771+00:00",
+      "actionMode": "owner-approval-when-required",
+      "walletSigning": "never-automatic"
+    },
+    {
+      "id": "binance-alpha",
+      "name": "Binance Alpha",
+      "source": "https://www.binance.com/en/alpha",
+      "type": "alpha-rewards",
+      "score": 62.4,
+      "signals": [],
+      "requirements": [],
+      "status": "WATCH",
+      "detectedAt": "2026-09-19T00:09:12.293771+00:00",
+      "actionMode": "owner-approval-when-required",
+      "walletSigning": "never-automatic"
+    },
+    {
+      "id": "galxe",
+      "name": "Galxe",
+      "source": "https://galxe.com/",
+      "type": "quest-rewards",
+      "score": 83.6,
+      "signals": [
+        "quest",
+        "tge"
+      ],
+      "requirements": [],
+      "status": "WATCH",
+      "detectedAt": "2026-09-19T00:09:12.293771+00:00",
+      "actionMode": "owner-approval-when-required",
+      "walletSigning": "never-automatic"
+    },
+    {
+      "id": "zealy",
+      "name": "Zealy",
+      "source": "https://zealy.io/",
+      "type": "quest-rewards",
+      "score": 84.3,
+      "signals": [
+        "airdrop",
+        "points",
+        "quest",
+        "deadline",
+        "reward",
+        "referral",
+        "claim"
+      ],
+      "requirements": [
+        "register",
+        "connect wallet",
+        "signature"
+      ],
+      "status": "HIGH_PRIORITY",
+      "detectedAt": "2026-09-19T00:09:12.293771+00:00",
+      "actionMode": "owner-approval-when-required",
+      "walletSigning": "never-automatic"
+    }
+  ]
+}\n
