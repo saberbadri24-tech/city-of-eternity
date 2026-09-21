@@ -16,12 +16,12 @@ export async function onRequestPost({ request, env }) {
     const client = String(body?.client || 'مشتری ANIL X').trim().slice(0, 120);
     const description = String(body?.description || 'پرداخت ANIL X').trim().slice(0, 240);
     const origin = new URL(request.url).origin;
-    const returnUrl = String(body?.returnUrl || env.VARIZA_RETURN_URL || `${origin}/payment.html?order=${encodeURIComponent(orderId)}`).slice(0, 500);
+    const returnUrl = String(body?.returnUrl || env.VARIZA_RETURN_URL || `${origin}/payment.html?order=${encodeURIComponent(orderId)}`).slice(0, 500);\n    if (!/^https:\\/\\//i.test(returnUrl)) return json({ ok: false, error: 'invalid_return_url' }, 400);
 
     const response = await fetch('https://variza.ir/api/v1/pay', {
       method: 'POST',
       headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount, return_url: returnUrl })
+      body: JSON.stringify({ amount, return_url: returnUrl, title: description, expires_in: '1h' })
     });
     const raw = await response.text();
     let result; try { result = JSON.parse(raw); } catch { result = { raw }; }
