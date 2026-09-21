@@ -6,7 +6,7 @@
   function run(){
     const E=window.JavidanOpportunityEngine;
     if(!E)throw new Error("engine_missing");
-    if(E.version!=="2.2.0")throw new Error("engine_version_mismatch");
+    if(E.version!=="2.3.0")throw new Error("engine_version_mismatch");
     const bad=E.officialUrl("https://evil.example/claim");
     if(bad)throw new Error("official_domain_gate_failed");
     const good=E.officialUrl("https://airdrop.boundless.network/");
