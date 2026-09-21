@@ -277,9 +277,24 @@
     return {queueItem:item,officialUrl:x.officialUrl,requiresUserApproval:true,autoSigning:false,autoReceiveOnly:true,evidence,instruction:"Open the verified official page, re-check eligibility and transaction details, then approve/sign only in your own wallet."};
   }
   function explainScore(x){return {score:x.score,type:x.type,officialVerified:x.officialVerified||false,claimable:x.claimable||false,action:x.action,source:x.source,sourceConfidence:sourceConfidence(x),evidence:x.evidence||null,riskFlags:x.riskFlags||[]}}
+  const TON_MAINNET='-239';
+  function validTonAddress(a){return /^[EU]Q[A-Za-z0-9_-]{46}$/.test(String(a||''))}
+  async function monitorTonWallet(address,options){
+    if(!validTonAddress(address))throw new Error('invalid_public_ton_address');
+    const timeoutMs=Number(options?.timeoutMs||8000),ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),timeoutMs);
+    try{
+      const url='https://toncenter.com/api/v2/getAddressInformation?address='+encodeURIComponent(address);
+      const r=await fetch(url,{cache:'no-store',signal:ctrl.signal,headers:{accept:'application/json'}});
+      if(!r.ok)throw new Error('ton_api_http_'+r.status);
+      const d=await r.json();
+      const balance=String(d?.result?.balance||'0');
+      return {network:TON_MAINNET,address,balanceNano:balance,balanceTon:Number(balance)/1e9,state:d?.result?.state||null,readOnly:true,autoReceive:true,autoSign:false,autoTrade:false,autoWithdraw:false,checkedAt:new Date().toISOString()};
+    }finally{clearTimeout(timer)}
+  }
+  function autoReceivePolicy(){return Object.freeze({enabled:true,meaning:'monitor incoming assets to the connected public wallet',requiresPrivateKey:false,requiresSeedPhrase:false,requiresOutgoingSignature:false,claimTransactionsStillRequireWalletApproval:true})}
   function safeSummary(x){
     if(!x||!Array.isArray(x.opportunities))throw new Error("invalid_opportunity_result");
     return {guard:x.guard,version:x.version,mode:x.mode,generatedAt:x.generatedAt,sources:x.sources,safety:x.safety,opportunities:x.opportunities.slice(0,20).map(x=>Object.assign({},x,{scoreExplanation:explainScore(x)}))};
   }
-  window.JavidanOpportunityEngine=Object.freeze({version:"2.6.0",scan,scanWallet,safeSummary,config:DEFAULTS,verifyAirdrop,officialUrl,rankOpportunity,queueAdd,queueList,queueRemove,queuePrepare,claimPacket,evidenceGate,decodeEvmCalldata,simulateEvmTransaction,preSignReview,FAILURE_RULES,EVM_SELECTORS});
+  window.JavidanOpportunityEngine=Object.freeze({version:"2.6.0",scan,scanWallet,monitorTonWallet,autoReceivePolicy,safeSummary,config:DEFAULTS,verifyAirdrop,officialUrl,rankOpportunity,queueAdd,queueList,queueRemove,queuePrepare,claimPacket,evidenceGate,decodeEvmCalldata,simulateEvmTransaction,preSignReview,FAILURE_RULES,EVM_SELECTORS});
 })();
