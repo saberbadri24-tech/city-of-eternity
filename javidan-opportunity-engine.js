@@ -2,7 +2,7 @@
  * Real public-data opportunity discovery.
  * Sources: CoinGecko markets + DefiLlama yields.
  * No private keys, seed phrases, withdrawals, trades or autonomous signing.
- * v2.4: persistent approval queue + deadline watcher + claim packets.
+ * v2.5: final evidence gate + public transaction simulation + explainable pre-sign review.
  */
 (function(){
   "use strict";
@@ -23,13 +23,17 @@
   ]);
   const EVIDENCE_RULES=Object.freeze({officialDomain:true,officialStatus:true,freshnessHours:24,deadlineRequired:false,capitalRequiredBlocks:false,unlimitedApprovalBlocks:true});
   function evidenceGate(x){
-    const flags=[]; const official=Boolean(x.officialVerified); const age=x.checkedAt?((Date.now()-Date.parse(x.checkedAt))/3600000):99999;
+    const flags=[]; const official=Boolean(x.officialVerified);
+    const stamp=x.evidenceRetrievedAt||x.checkedAt; const age=stamp?((Date.now()-Date.parse(stamp))/3600000):99999;
     if(!official)flags.push("official_domain_unverified");
-    if(age>24)flags.push("evidence_stale");
+    if(!Number.isFinite(age)||age>24)flags.push("evidence_stale");
     if(x.requiresCapital)flags.push("capital_required");
     if(x.unlimitedApproval)flags.push("unlimited_approval");
+    if(x.seedPhraseRequested)flags.push("seed_phrase_request");
+    if(x.privateKeyRequested)flags.push("private_key_request");
+    if(x.arbitraryRecipient)flags.push("arbitrary_recipient");
     if(x.deadline&&Date.parse(x.deadline)<=Date.now())flags.push("deadline_expired");
-    return {pass:official&&age<=24&&!x.requiresCapital&&!x.unlimitedApproval&&!(x.deadline&&Date.parse(x.deadline)<=Date.now()),flags,checkedHoursAgo:Number(age.toFixed(1))};
+    return {pass:official&&Number.isFinite(age)&&age<=24&&!x.requiresCapital&&!x.unlimitedApproval&&!x.seedPhraseRequested&&!x.privateKeyRequested&&!x.arbitraryRecipient&&!(x.deadline&&Date.parse(x.deadline)<=Date.now()),flags,checkedHoursAgo:Number.isFinite(age)?Number(age.toFixed(1)):null};
   }
   function airdrops(){
     return AIRDROP_REGISTRY.map(x=>({
@@ -131,6 +135,45 @@
     }
     return {address,readOnly:true,seedPhraseRequested:false,privateKeyRequested:false,chains:out,checkedAt:new Date().toISOString()};
   }
+  const FAILURE_RULES=Object.freeze({
+    seedPhraseRequest:"BLOCK",privateKeyRequest:"BLOCK",unverifiedDomain:"BLOCK",staleEvidence:"RECHECK",
+    unlimitedApproval:"BLOCK",arbitraryRecipient:"BLOCK",expiredDeadline:"EXPIRED",unknownContract:"RECHECK",
+    capitalRequired:"REVIEW",highGas:"REVIEW",undecodableCalldata:"BLOCK"
+  });
+  const EVM_SELECTORS=Object.freeze({"095ea7b3":"ERC20 approve","23b872dd":"ERC20 transferFrom","a9059cbb":"ERC20 transfer","39509351":"ERC20 increaseAllowance","dd62ed3e":"ERC20 allowance","70a08231":"ERC20 balanceOf"});
+  function hexToBigInt(v){try{return BigInt(v||"0x0")}catch{return 0n}}
+  function decodeEvmCalldata(data){
+    const raw=String(data||""); if(!/^0x[0-9a-fA-F]*$/.test(raw))return {decodable:false,flags:["undecodable_calldata"]};
+    const selector=raw.slice(2,10).toLowerCase(), body=raw.slice(10), words=[];
+    for(let i=0;i<body.length;i+=64)if(body.slice(i,i+64).length===64)words.push(body.slice(i,i+64));
+    const out={decodable:true,selector,functionName:EVM_SELECTORS[selector]||"unknown",arguments:words.length,flags:[]};
+    if(!EVM_SELECTORS[selector])out.flags.push("unknown_contract_function");
+    if(selector==="095ea7b3"||selector==="39509351"){
+      const amount=words[1]?hexToBigInt("0x"+words[1]):0n;
+      if(amount===((1n<<256n)-1n))out.flags.push("unlimited_approval");
+    }
+    return out;
+  }
+  async function simulateEvmTransaction(chainKey,tx,options){
+    const ch=CHAINS[chainKey]; if(!ch)throw new Error("unsupported_chain");
+    if(!tx||!validEvmAddress(tx.to))throw new Error("invalid_transaction_target");
+    const data=String(tx.data||"0x"),decoded=decodeEvmCalldata(data),value=tx.value||"0x0";
+    const from=validEvmAddress(tx.from||"")?tx.from:undefined;
+    const [call,gas]=await Promise.allSettled([
+      rpc(ch.rpc,"eth_call",[{from,to:tx.to,data,value},"latest"],(options&&options.timeoutMs)||8000),
+      rpc(ch.rpc,"eth_estimateGas",[{from,to:tx.to,data,value}],(options&&options.timeoutMs)||8000)
+    ]);
+    const flags=[...decoded.flags]; if(call.status!=="fulfilled")flags.push("eth_call_failed"); if(gas.status!=="fulfilled")flags.push("gas_estimate_failed");
+    return {chain:chainKey,readOnly:true,simulatedAt:new Date().toISOString(),to:tx.to,data,value,decoded,callOk:call.status==="fulfilled",gasEstimate:gas.status==="fulfilled"?gas.value:null,flags,signAllowed:false,userApprovalRequired:true};
+  }
+  function preSignReview(packet){
+    const p=packet||{},flags=[...(p.flags||[])];
+    if(p.officialVerified===false)flags.push("official_domain_unverified");
+    if(p.evidence&&!p.evidence.pass)flags.push(...(p.evidence.flags||[]));
+    if(p.decoded?.flags)flags.push(...p.decoded.flags);
+    const blocked=flags.some(v=>["seed_phrase_request","private_key_request","official_domain_unverified","unlimited_approval","arbitrary_recipient","undecodable_calldata","unknown_contract_function"].includes(v));
+    return {allowedToPresentForUser:!blocked,blocked,flags:[...new Set(flags)],requiresUserApproval:true,autoSign:false,reviewedAt:new Date().toISOString()};
+  }
   function sourceConfidence(x){if(x.type==="airdrop")return x.evidence?.pass?100:(x.officialVerified?70:20);if(x.source==="DefiLlama"||x.source==="CoinGecko")return 80;return 30}
   function rankOpportunity(x){
     const base=n(x.score); const confidence=sourceConfidence(x);
@@ -176,7 +219,7 @@
     })).filter(x=>x.rank<=250&&x.volume24hUsd>=1000000).sort((a,b)=>b.score-a.score).slice(0,10);
     const data={
       guard:"JAVIDAN",
-      version:"2.4.0",
+      version:"2.5.0",
       mode:"OPPORTUNITY_DISCOVERY",
       generatedAt:new Date().toISOString(),
       sources:{
@@ -228,14 +271,14 @@
   function claimPacket(x){
     if(!x||x.type!=="airdrop")throw new Error("claim_only_for_verified_airdrop");
     if(!x.officialVerified||!x.officialUrl)throw new Error("official_claim_domain_not_verified");
+    const evidence=x.evidence||evidenceGate(x); if(!evidence.pass)throw new Error("claim_evidence_gate_blocked");
     const item=queueAdd(x);
-    return {queueItem:item,officialUrl:x.officialUrl,requiresUserApproval:true,autoSigning:false,
-      instruction:"Open the verified official page, re-check the claim details, then approve/sign in your own wallet."}
+    return {queueItem:item,officialUrl:x.officialUrl,requiresUserApproval:true,autoSigning:false,evidence,instruction:"Open the verified official page, re-check eligibility and transaction details, then approve/sign only in your own wallet."};
   }
   function explainScore(x){return {score:x.score,type:x.type,officialVerified:x.officialVerified||false,claimable:x.claimable||false,action:x.action,source:x.source,sourceConfidence:sourceConfidence(x),evidence:x.evidence||null,riskFlags:x.riskFlags||[]}}
   function safeSummary(x){
     if(!x||!Array.isArray(x.opportunities))throw new Error("invalid_opportunity_result");
     return {guard:x.guard,version:x.version,mode:x.mode,generatedAt:x.generatedAt,sources:x.sources,safety:x.safety,opportunities:x.opportunities.slice(0,20).map(x=>Object.assign({},x,{scoreExplanation:explainScore(x)}))};
   }
-  window.JavidanOpportunityEngine=Object.freeze({version:"2.4.0",scan,scanWallet,safeSummary,config:DEFAULTS,verifyAirdrop,officialUrl,rankOpportunity,queueAdd,queueList,queueRemove,queuePrepare,claimPacket});
+  window.JavidanOpportunityEngine=Object.freeze({version:"2.5.0",scan,scanWallet,safeSummary,config:DEFAULTS,verifyAirdrop,officialUrl,rankOpportunity,queueAdd,queueList,queueRemove,queuePrepare,claimPacket});
 })();
