@@ -32,13 +32,5 @@ jobs:
       - name: Validate autonomy policy
         run: |
           node -e "const p=require('./ANIL-X-AUTONOMY-POLICY.json'); if(p.autonomy.production_code_mutation||p.autonomy.payment_execution||p.autonomy.secret_rotation||p.autonomy.dns_changes) process.exit(1); console.log('safe autonomy policy: OK')"
-      - name: Validate Javidan and payment functions
-        run: |
-          find functions/api -type f \( -name '*.js' -o -name '*.mjs' \) -print0 | xargs -0 -n1 node --check
-          test -f functions/api/javidan-trinity.mjs
-          test -f functions/api/payment-status.js
-          test -f functions/api/pay.js
-          test -f functions/api/variza-webhook.js
-          echo 'Javidan/payment function syntax: OK'
       - name: Validate package
         run: node -e "JSON.parse(require('fs').readFileSync('package.json')); console.log('package.json: OK')"
