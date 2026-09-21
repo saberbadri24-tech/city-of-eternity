@@ -1,4 +1,4 @@
-/* ANIL X — Javidan Guard self-test v2.6
+/* ANIL X — Javidan Guard self-test v2.7
  * Deterministic browser-safe invariant/fuzz checks.
  * No wallet, signing, network write, private key or funds are touched.
  */
@@ -45,26 +45,32 @@
       "unlimited_approval","arbitrary_recipient","undecodable_calldata","unknown_contract_function"
     ];
     for(let i=0;i<blockedFlags.length;i++){
-      const r=E.preSignReview({officialVerified:true,flags:[blockedFlags[i]]});
+      const r=E.preSignReview({officialVerified:true,flags:[blockedFlags[i]],decoded:{flags:[blockedFlags[i]]}});
       must(r.blocked&&r.requiresUserApproval&&!r.autoSign,"failure_rule_"+blockedFlags[i]);
     }
     tests.push("failure-rule-matrix");
 
-    // 2,000 deterministic adversarial inputs: no randomness, reproducible on every deploy.
+    // 2,000 deterministic adversarial inputs: reproducible and wallet-safe.
     let fuzz=0;
     for(let i=0;i<2000;i++){
       const selector=(i%5===0)?"095ea7b3":(i%5===1?"a9059cbb":"deadbeef");
-      const data="0x"+selector+"0".repeat((i%3)*64);
+      // Every approval case carries an explicit max uint256 allowance so the
+      // decoder must classify it as unlimited_approval rather than relying on
+      // malformed/short calldata behavior.
+      const body=(selector==="095ea7b3")
+        ? "0".repeat(64)+"f".repeat(64)
+        : "0".repeat((i%3)*64);
+      const data="0x"+selector+body;
       const d=E.decodeEvmCalldata(data);
       must(d&&typeof d.decodable==="boolean","fuzz_decode_contract");
       const review=E.preSignReview({officialVerified:(i%7)!==0,decoded:d});
       must(review&&review.requiresUserApproval===true&&review.autoSign===false,"fuzz_safety_contract");
-      if((i%5===0)&&i%2===0)must(review.blocked,"fuzz_approval_block");
+      if(selector==="095ea7b3")must(review.blocked,"fuzz_approval_block");
+      if((i%7)===0)must(review.blocked,"fuzz_unverified_domain_block");
       fuzz++;
     }
     tests.push("deterministic-fuzz-2000");
 
-    // Score/ranking must remain bounded and never become negative.
     for(let i=0;i<500;i++){
       const score=E.rankOpportunity({
         score:i%151,
