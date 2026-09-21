@@ -8,7 +8,7 @@
   function run(){
     const E=window.JavidanOpportunityEngine;
     must(E,"engine_missing");
-    must(E.version==="2.5.0","engine_version_mismatch");
+    must(E.version==="2.6.0","engine_version_mismatch");
 
     const tests=[];
     const bad=E.officialUrl("https://evil.example/claim");
@@ -82,6 +82,13 @@
       must(Number.isFinite(score)&&score>=0&&score<=100,"score_bounds_failed");
     }
     tests.push("score-bounds-500");
+
+    must(E.validTonAddress===undefined || typeof E.validTonAddress==="function","ton-validator-contract");
+    if(typeof E.validTonAddress==="function"){
+      must(E.validTonAddress("EQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"),"ton-valid-address-contract");
+      must(!E.validTonAddress("not-a-ton-address"),"ton-invalid-address-contract");
+    }
+    tests.push("ton-address-safety-contract");
 
     return {ok:true,version:E.version,tests,caseCount:2515};
   }
