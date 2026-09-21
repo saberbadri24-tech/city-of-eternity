@@ -88,6 +88,46 @@
       reason:"Public yield opportunity; eligibility and contract safety must be verified before any user-approved transaction."
     };
   }
+  const CHAINS=Object.freeze({
+    ethereum:{name:"Ethereum",rpc:"https://cloudflare-eth.com"},
+    arbitrum:{name:"Arbitrum",rpc:"https://arb1.arbitrum.io/rpc"},
+    base:{name:"Base",rpc:"https://mainnet.base.org"},
+    optimism:{name:"Optimism",rpc:"https://mainnet.optimism.io"},
+    polygon:{name:"Polygon",rpc:"https://polygon-rpc.com"}
+  });
+  function validEvmAddress(a){return /^0x[a-fA-F0-9]{40}$/.test(String(a||""))}
+  async function rpc(rpcUrl,method,params,timeoutMs=8000){
+    const c=new AbortController(),t=setTimeout(()=>c.abort(),timeoutMs);
+    try{
+      const r=await fetch(rpcUrl,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method,params}),signal:c.signal});
+      if(!r.ok)throw new Error("rpc_http_"+r.status);
+      const j=await r.json(); if(j.error)throw new Error(j.error.message||"rpc_error"); return j.result;
+    }finally{clearTimeout(t)}
+  }
+  async function scanWallet(address,options){
+    if(!validEvmAddress(address))throw new Error("invalid_public_evm_address");
+    const cfg=Object.assign({chains:Object.keys(CHAINS)},options||{});
+    const out=[];
+    for(const key of cfg.chains){
+      const ch=CHAINS[key]; if(!ch)continue;
+      try{
+        const [balance,nonce,block]=await Promise.all([
+          rpc(ch.rpc,"eth_getBalance",[address,"latest"]),
+          rpc(ch.rpc,"eth_getTransactionCount",[address,"latest"]),
+          rpc(ch.rpc,"eth_blockNumber",[])
+        ]);
+        out.push({chain:key,name:ch.name,address,balanceWei:balance,nonce:Number.parseInt(nonce,16),latestBlock:Number.parseInt(block,16),readOnly:true});
+      }catch(e){out.push({chain:key,name:ch.name,address,readOnly:true,error:String(e.message||e)})}
+    }
+    return {address,readOnly:true,seedPhraseRequested:false,privateKeyRequested:false,chains:out,checkedAt:new Date().toISOString()};
+  }
+  function rankOpportunity(x){
+    const base=n(x.score);
+    const freshness=x.claimLive?10:0;
+    const safety=x.officialVerified?10:0;
+    const cost=(x.riskFlags||[]).some(v=>/capital|deposit|trade|bridge|approval/.test(v))?-10:0;
+    return Math.max(0,Math.min(100,base+freshness+safety+cost));
+  }
   async function scan(options){
     const cfg=Object.assign({},DEFAULTS,options||{});
     const now=Date.now();
@@ -125,14 +165,14 @@
     })).filter(x=>x.rank<=250&&x.volume24hUsd>=1000000).sort((a,b)=>b.score-a.score).slice(0,10);
     const data={
       guard:"JAVIDAN",
-      version:"2.2.0",
+      version:"2.3.0",
       mode:"OPPORTUNITY_DISCOVERY",
       generatedAt:new Date().toISOString(),
       sources:{
         defiLlama:yields.length>0,
         coinGecko:markets.length>0
       },
-      opportunities:[...airdrops().map(verifyAirdrop),...yields,...marketCandidates].sort((a,b)=>b.score-a.score).slice(0,cfg.maxResults),
+      opportunities:[...airdrops().map(verifyAirdrop),...yields,...marketCandidates].map(x=>Object.assign(x,{score:rankOpportunity(x)})).sort((a,b)=>b.score-a.score).slice(0,cfg.maxResults),
       safety:{
         seedPhraseRequested:false,
         privateKeyRequested:false,
@@ -150,5 +190,5 @@
     if(!x||!Array.isArray(x.opportunities))throw new Error("invalid_opportunity_result");
     return {guard:x.guard,version:x.version,mode:x.mode,generatedAt:x.generatedAt,sources:x.sources,safety:x.safety,opportunities:x.opportunities.slice(0,20).map(x=>Object.assign({},x,{scoreExplanation:explainScore(x)}))};
   }
-  window.JavidanOpportunityEngine=Object.freeze({version:"2.2.0",scan,safeSummary,config:DEFAULTS,verifyAirdrop,officialUrl});
+  window.JavidanOpportunityEngine=Object.freeze({version:"2.3.0",scan,scanWallet,safeSummary,config:DEFAULTS,verifyAirdrop,officialUrl,rankOpportunity});
 })();
