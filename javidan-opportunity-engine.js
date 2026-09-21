@@ -221,6 +221,7 @@
       guard:"JAVIDAN",
       version:"2.5.0",
       mode:"OPPORTUNITY_DISCOVERY",
+      lifecycle:{discovered:true,verifiedRequiresFreshOfficialEvidence:true,readyForUserReview:true,autoReceiveOnly:true,autoSign:false,autoTrade:false,autoWithdraw:false},
       generatedAt:new Date().toISOString(),
       sources:{
         defiLlama:yields.length>0,
@@ -273,12 +274,12 @@
     if(!x.officialVerified||!x.officialUrl)throw new Error("official_claim_domain_not_verified");
     const evidence=x.evidence||evidenceGate(x); if(!evidence.pass)throw new Error("claim_evidence_gate_blocked");
     const item=queueAdd(x);
-    return {queueItem:item,officialUrl:x.officialUrl,requiresUserApproval:true,autoSigning:false,evidence,instruction:"Open the verified official page, re-check eligibility and transaction details, then approve/sign only in your own wallet."};
+    return {queueItem:item,officialUrl:x.officialUrl,requiresUserApproval:true,autoSigning:false,autoReceiveOnly:true,evidence,instruction:"Open the verified official page, re-check eligibility and transaction details, then approve/sign only in your own wallet."};
   }
   function explainScore(x){return {score:x.score,type:x.type,officialVerified:x.officialVerified||false,claimable:x.claimable||false,action:x.action,source:x.source,sourceConfidence:sourceConfidence(x),evidence:x.evidence||null,riskFlags:x.riskFlags||[]}}
   function safeSummary(x){
     if(!x||!Array.isArray(x.opportunities))throw new Error("invalid_opportunity_result");
     return {guard:x.guard,version:x.version,mode:x.mode,generatedAt:x.generatedAt,sources:x.sources,safety:x.safety,opportunities:x.opportunities.slice(0,20).map(x=>Object.assign({},x,{scoreExplanation:explainScore(x)}))};
   }
-  window.JavidanOpportunityEngine=Object.freeze({version:"2.5.0",scan,scanWallet,safeSummary,config:DEFAULTS,verifyAirdrop,officialUrl,rankOpportunity,queueAdd,queueList,queueRemove,queuePrepare,claimPacket,evidenceGate,decodeEvmCalldata,simulateEvmTransaction,preSignReview,FAILURE_RULES,EVM_SELECTORS});
+  window.JavidanOpportunityEngine=Object.freeze({version:"2.6.0",scan,scanWallet,safeSummary,config:DEFAULTS,verifyAirdrop,officialUrl,rankOpportunity,queueAdd,queueList,queueRemove,queuePrepare,claimPacket,evidenceGate,decodeEvmCalldata,simulateEvmTransaction,preSignReview,FAILURE_RULES,EVM_SELECTORS});
 })();
