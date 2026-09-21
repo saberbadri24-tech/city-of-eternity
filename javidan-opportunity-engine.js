@@ -21,11 +21,21 @@
     {name:"Infinex",scoreBase:70,claimLive:true,url:"https://infinex.xyz/"},
     {name:"Rainbow",scoreBase:68,claimLive:true,url:"https://rainbow.me/"}
   ]);
+  const EVIDENCE_RULES=Object.freeze({officialDomain:true,officialStatus:true,freshnessHours:24,deadlineRequired:false,capitalRequiredBlocks:false,unlimitedApprovalBlocks:true});
+  function evidenceGate(x){
+    const flags=[]; const official=Boolean(x.officialVerified); const age=x.checkedAt?((Date.now()-Date.parse(x.checkedAt))/3600000):99999;
+    if(!official)flags.push("official_domain_unverified");
+    if(age>24)flags.push("evidence_stale");
+    if(x.requiresCapital)flags.push("capital_required");
+    if(x.unlimitedApproval)flags.push("unlimited_approval");
+    if(x.deadline&&Date.parse(x.deadline)<=Date.now())flags.push("deadline_expired");
+    return {pass:official&&age<=24&&!x.requiresCapital&&!x.unlimitedApproval&&!(x.deadline&&Date.parse(x.deadline)<=Date.now()),flags,checkedHoursAgo:Number(age.toFixed(1))};
+  }
   function airdrops(){
     return AIRDROP_REGISTRY.map(x=>({
       type:"airdrop",title:x.name,score:x.scoreBase+12,claimLive:x.claimLive,
       source:"Javidan verified candidate registry",sourceUrl:x.url,
-      officialVerificationRequired:true,claimable:false,
+      officialVerificationRequired:true,claimable:false,checkedAt:new Date().toISOString(),evidenceSource:"official-domain-gate",
       action:"VERIFY_AND_REVIEW",
       reason:"Current candidate; Javidan must verify the official domain and wallet eligibility before any claim.",
       riskFlags:["read_only_eligibility_first","official_domain_required","user_approval_required"]
@@ -121,12 +131,13 @@
     }
     return {address,readOnly:true,seedPhraseRequested:false,privateKeyRequested:false,chains:out,checkedAt:new Date().toISOString()};
   }
+  function sourceConfidence(x){if(x.type==="airdrop")return x.evidence?.pass?100:(x.officialVerified?70:20);if(x.source==="DefiLlama"||x.source==="CoinGecko")return 80;return 30}
   function rankOpportunity(x){
-    const base=n(x.score);
+    const base=n(x.score); const confidence=sourceConfidence(x);
     const freshness=x.claimLive?10:0;
     const safety=x.officialVerified?10:0;
     const cost=(x.riskFlags||[]).some(v=>/capital|deposit|trade|bridge|approval/.test(v))?-10:0;
-    return Math.max(0,Math.min(100,base+freshness+safety+cost));
+    return Math.max(0,Math.min(100,Math.round((base+freshness+safety+cost)*0.75+confidence*0.25)));
   }
   async function scan(options){
     const cfg=Object.assign({},DEFAULTS,options||{});
@@ -221,7 +232,7 @@
     return {queueItem:item,officialUrl:x.officialUrl,requiresUserApproval:true,autoSigning:false,
       instruction:"Open the verified official page, re-check the claim details, then approve/sign in your own wallet."}
   }
-  function explainScore(x){return {score:x.score,type:x.type,officialVerified:x.officialVerified||false,claimable:x.claimable||false,action:x.action,source:x.source,riskFlags:x.riskFlags||[]}}
+  function explainScore(x){return {score:x.score,type:x.type,officialVerified:x.officialVerified||false,claimable:x.claimable||false,action:x.action,source:x.source,sourceConfidence:sourceConfidence(x),evidence:x.evidence||null,riskFlags:x.riskFlags||[]}}
   function safeSummary(x){
     if(!x||!Array.isArray(x.opportunities))throw new Error("invalid_opportunity_result");
     return {guard:x.guard,version:x.version,mode:x.mode,generatedAt:x.generatedAt,sources:x.sources,safety:x.safety,opportunities:x.opportunities.slice(0,20).map(x=>Object.assign({},x,{scoreExplanation:explainScore(x)}))};
