@@ -12,31 +12,24 @@
   });
 
   const AIRDROP_REGISTRY = Object.freeze([
-    {name:"Laptop",slug:"laptop",confirmed:true,claimLive:true,scoreBase:88,actions:["eligibility","claim"],url:"https://airdrops.io/laptop/"},
-    {name:"Boundless",slug:"boundless",confirmed:true,claimLive:true,scoreBase:78,actions:["eligibility","claim"],url:"https://airdrop.boundless.network/"},
-    {name:"Sonic",slug:"sonic",confirmed:true,claimLive:true,scoreBase:78,actions:["eligibility","claim"],url:"https://airdrop.soniclabs.com/"},
-    {name:"dappOS",slug:"dappos",confirmed:true,claimLive:true,scoreBase:76,actions:["eligibility","claim"],url:"https://airdrop.dappos.com/"},
-    {name:"RateX",slug:"ratex",confirmed:true,claimLive:true,scoreBase:74,actions:["eligibility","claim"],url:"https://rate-x.io/"},
-    {name:"Pharos Network",slug:"pharos-network",confirmed:true,claimLive:true,scoreBase:73,actions:["eligibility","claim"],url:"https://pharosnetwork.xyz/"},
-    {name:"Lighter",slug:"lighter",confirmed:true,claimLive:true,scoreBase:72,actions:["eligibility","claim"],url:"https://lighter.xyz/"},
-    {name:"Infinex",slug:"infinex",confirmed:true,claimLive:true,scoreBase:70,actions:["eligibility","claim"],url:"https://infinex.xyz/"},
-    {name:"Rainbow",slug:"rainbow",confirmed:true,claimLive:true,scoreBase:68,actions:["eligibility","claim"],url:"https://rainbow.me/"},
-    {name:"Beldex",slug:"beldex",confirmed:true,claimLive:false,scoreBase:72,actions:["social","referrals","check-in"],url:"https://airdrops.io/beldex/"},
-    {name:"Gyndore",slug:"gyndore",confirmed:true,claimLive:false,scoreBase:76,actions:["wallet-verification","registration"],url:"https://airdrops.io/gyndore/"}
+    {name:"Boundless",scoreBase:78,claimLive:true,url:"https://airdrop.boundless.network/"},
+    {name:"Sonic",scoreBase:78,claimLive:true,url:"https://airdrop.soniclabs.com/"},
+    {name:"dappOS",scoreBase:76,claimLive:true,url:"https://airdrop.dappos.com/"},
+    {name:"RateX",scoreBase:74,claimLive:true,url:"https://rate-x.io/"},
+    {name:"Pharos Network",scoreBase:73,claimLive:true,url:"https://pharosnetwork.xyz/"},
+    {name:"Lighter",scoreBase:72,claimLive:true,url:"https://lighter.xyz/"},
+    {name:"Infinex",scoreBase:70,claimLive:true,url:"https://infinex.xyz/"},
+    {name:"Rainbow",scoreBase:68,claimLive:true,url:"https://rainbow.me/"}
   ]);
   function airdrops(){
-    return AIRDROP_REGISTRY.map(x=>{
-      const claim=x.claimLive?12:0;
-      const score=Math.max(0,Math.min(100,x.scoreBase+claim));
-      return {
-        type:"airdrop",title:x.name,score,confirmed:x.confirmed,claimLive:x.claimLive,
-        actions:x.actions,source:"current discovery registry",sourceUrl:x.url,
-        officialVerificationRequired:true,claimable:x.claimLive,
-        action:x.claimLive?"VERIFY_OFFICIAL_CLAIM":"FARM_REVIEW",
-        reason:x.claimLive?"Claim/checker is reported open by a current discovery source; official-domain verification is mandatory before signing.":"Current campaign listing; eligibility and official claim path still require verification.",
-        riskFlags:x.claimLive?["official_domain_must_match","wallet_signature_required"]:["eligibility_unverified"]
-      };
-    });
+    return AIRDROP_REGISTRY.map(x=>({
+      type:"airdrop",title:x.name,score:x.scoreBase+12,claimLive:x.claimLive,
+      source:"Javidan verified candidate registry",sourceUrl:x.url,
+      officialVerificationRequired:true,claimable:false,
+      action:"VERIFY_AND_REVIEW",
+      reason:"Current candidate; Javidan must verify the official domain and wallet eligibility before any claim.",
+      riskFlags:["read_only_eligibility_first","official_domain_required","user_approval_required"]
+    }));
   }
   const OFFICIAL_HOSTS=Object.freeze(new Set(["boundless.network","soniclabs.com","dappos.com","rate-x.io","pharosnetwork.xyz","lighter.xyz","infinex.xyz","rainbow.me"]));
   function officialUrl(url){try{const u=new URL(url);const h=u.hostname.toLowerCase().replace(/^www\./,"");return [...OFFICIAL_HOSTS].some(x=>h===x||h.endsWith("."+x))?u.toString():""}catch{return ""}}
