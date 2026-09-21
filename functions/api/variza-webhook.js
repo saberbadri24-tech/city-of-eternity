@@ -21,7 +21,7 @@ export async function onRequestPost({ request, env }) {
   if (!secret) return json({ ok: false, error: 'webhook_not_configured' }, 503);
   try {
     const body = new Uint8Array(await request.arrayBuffer());
-    const signature = request.headers.get('x-webhook-signature') || '';
+    const signature = request.headers.get('x-webhook-signature') || '';\n    const eventHeader = request.headers.get('x-event') || 'payment.paid';\n    if (eventHeader !== 'payment.paid') return json({ ok: true, ignored: true });
     const expected = await hmac(secret, body);
     if (!safeEqual(expected, signature)) return json({ ok: false, error: 'invalid_signature' }, 400);
     const payload = JSON.parse(new TextDecoder().decode(body));
@@ -35,7 +35,7 @@ export async function onRequestPost({ request, env }) {
     const orderId = map?.orderId;
     const order = orderId ? await env.PAYMENTS.get(`orders/${orderId}`, 'json') : null;
     if (order) {
-      const paid = Number(payload.amount) === Number(order.amount);
+      const paid = Number.isFinite(Number(payload.amount)) && Number(payload.amount) >= Number(order.amount);
       const updated = { ...order, status: paid ? 'paid' : 'amount_mismatch', paidAt: new Date().toISOString(), attemptCode: payload.attempt_code || null, deliveryId, webhook: payload };
       await env.PAYMENTS.put(`orders/${orderId}`, JSON.stringify(updated));
       await env.PAYMENTS.put(deliveryKey, JSON.stringify({ orderId, receivedAt: new Date().toISOString() }));
