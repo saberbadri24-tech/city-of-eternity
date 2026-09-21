@@ -1,7 +1,7 @@
 /* ANIL X — Javidan Opportunity Engine v2
  * Real public-data opportunity discovery.
  * Sources: CoinGecko markets + DefiLlama yields.
- * No private keys, seed phrases, withdrawals, trades or autonomous signing.
+ * No private keys, seed phrases, withdrawals, trades or autonomous signing.\n * v2.1: current airdrop discovery registry with explicit verification gates.
  */
 (function(){
   "use strict";
@@ -9,6 +9,39 @@
     markets:"https://api.coingecko.com/api/v3/coins/markets",
     yields:"https://yields.llama.fi/pools"
   });
+
+  const AIRDROP_REGISTRY = Object.freeze([
+    {name:"Laptop",slug:"laptop",confirmed:true,claimLive:true,scoreBase:88,actions:["eligibility","claim"],url:"https://airdrops.io/laptop/"},
+    {name:"Beldex",slug:"beldex",confirmed:true,claimLive:false,scoreBase:72,actions:["tasks","referrals","check-in"],url:"https://airdrops.io/beldex/"},
+    {name:"Gyndore",slug:"gyndore",confirmed:true,claimLive:false,scoreBase:76,actions:["wallet-verification","registration"],url:"https://airdrops.io/gyndore/"},
+    {name:"Flop Labs",slug:"flop-labs",confirmed:true,claimLive:false,scoreBase:70,actions:["social","network-role","testnet"],url:"https://airdrops.io/flop-labs/"},
+    {name:"TBook",slug:"tbook",confirmed:true,claimLive:false,scoreBase:69,actions:["score","campaigns","deposit"],url:"https://airdrops.io/tbook/"},
+    {name:"Omega",slug:"omega",confirmed:true,claimLive:false,scoreBase:68,actions:["testnet-token","trade","predict"],url:"https://airdrops.io/omega/"},
+    {name:"MINT",slug:"mint",confirmed:true,claimLive:false,scoreBase:67,actions:["fund","games","stake"],url:"https://airdrops.io/mint/"},
+    {name:"HertzFlow",slug:"hertzflow",confirmed:true,claimLive:false,scoreBase:65,actions:["deposit","hold","perps"],url:"https://airdrops.io/hertzflow/"},
+    {name:"Nowa",slug:"nowa",confirmed:true,claimLive:false,scoreBase:67,actions:["social","trade","stake","referral"],url:"https://airdrops.io/nowa/"},
+    {name:"Sweep Finance",slug:"sweep-finance",confirmed:true,claimLive:false,scoreBase:66,actions:["tasks","XP","competition"],url:"https://airdrops.io/sweep-finance/"},
+    {name:"Wager Predict",slug:"wager-predict",confirmed:true,claimLive:false,scoreBase:64,actions:["testnet-USDC","trade","referral"],url:"https://airdrops.io/wager-predict/"},
+    {name:"AlloX",slug:"allox",confirmed:true,claimLive:false,scoreBase:64,actions:["AI-portfolio","bonus","tasks"],url:"https://airdrops.io/allox/"},
+    {name:"Push Chain",slug:"push-chain",confirmed:true,claimLive:false,scoreBase:63,actions:["signup","social","quests","referral"],url:"https://airdrops.io/push-chain/"},
+    {name:"Brownian",slug:"brownian",confirmed:true,claimLive:false,scoreBase:61,actions:["signup","deposit","perps"],url:"https://airdrops.io/brownian/"},
+    {name:"Perpl",slug:"perpl",confirmed:true,claimLive:false,scoreBase:60,actions:["fund","perps","referral"],url:"https://airdrops.io/perpl/"},
+    {name:"MoonPay",slug:"moonpay",confirmed:true,claimLive:false,scoreBase:58,actions:["signup","PayBox","X-connect"],url:"https://airdrops.io/moonpay/"},
+    {name:"WheelX",slug:"wheelx",confirmed:true,claimLive:false,scoreBase:59,actions:["bridge","swap","quests","referral"],url:"https://airdrops.io/wheelx/"},
+    {name:"Kryvora Network",slug:"kryvora-network",confirmed:true,claimLive:false,scoreBase:57,actions:["testnet","tasks","referral"],url:"https://airdrops.io/kryvora-network/"},
+    {name:"Memebook",slug:"memebook",confirmed:true,claimLive:false,scoreBase:55,actions:["mint-pass","app","social"],url:"https://airdrops.io/memebook/"}
+  ]);
+  function airdrops(){
+    return AIRDROP_REGISTRY.map(x=>{
+      const claim=x.claimLive?12:0;
+      const confirmation=x.confirmed?15:0;
+      const costPenalty=x.actions.some(a=>/deposit|perps|fund|trade|stake|bridge|swap/.test(a))?12:0;
+      const referralPenalty=x.actions.includes("referral")?5:0;
+      const score=Math.max(0,Math.min(100,x.scoreBase+claim+confirmation-costPenalty-referralPenalty));
+      return {type:"airdrop",title:x.name,score,confirmed:x.confirmed,claimLive:x.claimLive,actions:x.actions,source:"Airdrops.io discovery feed",sourceUrl:x.url,officialVerificationRequired:true,claimable:x.claimLive,action:x.claimLive?"REVIEW_CLAIM":"FARM_REVIEW",reason:x.claimLive?"Claim is reported live by the discovery source; verify the project's official claim domain and wallet eligibility before signing.":"Confirmed listing; eligibility and official claim path still require verification.",riskFlags:[...(costPenalty?["capital_or_trading_required"]:[]),...(referralPenalty?["referral_dependency"]:[])]};
+    }).sort((a,b)=>b.score-a.score);
+  }
+
   const DEFAULTS = Object.freeze({
     minTvlUsd:1000000,
     maxApy:500,
@@ -100,14 +133,14 @@
     })).filter(x=>x.rank<=250&&x.volume24hUsd>=1000000).sort((a,b)=>b.score-a.score).slice(0,10);
     const data={
       guard:"JAVIDAN",
-      version:"2.0.0",
+      version:"2.1.0",
       mode:"OPPORTUNITY_DISCOVERY",
       generatedAt:new Date().toISOString(),
       sources:{
         defiLlama:yields.length>0,
         coinGecko:markets.length>0
       },
-      opportunities:[...yields,...marketCandidates].sort((a,b)=>b.score-a.score).slice(0,cfg.maxResults),
+      opportunities:[...airdrops(),...yields,...marketCandidates].sort((a,b)=>b.score-a.score).slice(0,cfg.maxResults),
       safety:{
         seedPhraseRequested:false,
         privateKeyRequested:false,
