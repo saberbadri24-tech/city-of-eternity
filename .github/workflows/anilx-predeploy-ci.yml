@@ -1,0 +1,29 @@
+name: ANIL X Predeploy CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate package
+        run: node -e "JSON.parse(require('fs').readFileSync('package.json')); console.log('package ok')"
+      - name: Validate autonomy
+        run: node -e "const p=require('./ANIL-X-AUTONOMY-POLICY.json'); const a=p.autonomy||{}; if(a.production_code_mutation||a.payment_execution||a.secret_rotation||a.dns_changes) throw new Error('unsafe autonomy policy'); console.log('policy ok')"
+      - name: Validate functions
+        run: |
+          for f in functions/*.js functions/*.mjs; do
+            [ -f "$f" ] && node --check "$f"
+          done
+          for f in functions/*.mts; do
+            [ -f "$f" ] || continue
+            cp "$f" "/tmp/$(basename "$f" .mts).mjs"
+            node --check "/tmp/$(basename "$f" .mts).mjs"
+          done
