@@ -12,36 +12,31 @@
 
   const AIRDROP_REGISTRY = Object.freeze([
     {name:"Laptop",slug:"laptop",confirmed:true,claimLive:true,scoreBase:88,actions:["eligibility","claim"],url:"https://airdrops.io/laptop/"},
-    {name:"Beldex",slug:"beldex",confirmed:true,claimLive:false,scoreBase:72,actions:["tasks","referrals","check-in"],url:"https://airdrops.io/beldex/"},
-    {name:"Gyndore",slug:"gyndore",confirmed:true,claimLive:false,scoreBase:76,actions:["wallet-verification","registration"],url:"https://airdrops.io/gyndore/"},
-    {name:"Flop Labs",slug:"flop-labs",confirmed:true,claimLive:false,scoreBase:70,actions:["social","network-role","testnet"],url:"https://airdrops.io/flop-labs/"},
-    {name:"TBook",slug:"tbook",confirmed:true,claimLive:false,scoreBase:69,actions:["score","campaigns","deposit"],url:"https://airdrops.io/tbook/"},
-    {name:"Omega",slug:"omega",confirmed:true,claimLive:false,scoreBase:68,actions:["testnet-token","trade","predict"],url:"https://airdrops.io/omega/"},
-    {name:"MINT",slug:"mint",confirmed:true,claimLive:false,scoreBase:67,actions:["fund","games","stake"],url:"https://airdrops.io/mint/"},
-    {name:"HertzFlow",slug:"hertzflow",confirmed:true,claimLive:false,scoreBase:65,actions:["deposit","hold","perps"],url:"https://airdrops.io/hertzflow/"},
-    {name:"Nowa",slug:"nowa",confirmed:true,claimLive:false,scoreBase:67,actions:["social","trade","stake","referral"],url:"https://airdrops.io/nowa/"},
-    {name:"Sweep Finance",slug:"sweep-finance",confirmed:true,claimLive:false,scoreBase:66,actions:["tasks","XP","competition"],url:"https://airdrops.io/sweep-finance/"},
-    {name:"Wager Predict",slug:"wager-predict",confirmed:true,claimLive:false,scoreBase:64,actions:["testnet-USDC","trade","referral"],url:"https://airdrops.io/wager-predict/"},
-    {name:"AlloX",slug:"allox",confirmed:true,claimLive:false,scoreBase:64,actions:["AI-portfolio","bonus","tasks"],url:"https://airdrops.io/allox/"},
-    {name:"Push Chain",slug:"push-chain",confirmed:true,claimLive:false,scoreBase:63,actions:["signup","social","quests","referral"],url:"https://airdrops.io/push-chain/"},
-    {name:"Brownian",slug:"brownian",confirmed:true,claimLive:false,scoreBase:61,actions:["signup","deposit","perps"],url:"https://airdrops.io/brownian/"},
-    {name:"Perpl",slug:"perpl",confirmed:true,claimLive:false,scoreBase:60,actions:["fund","perps","referral"],url:"https://airdrops.io/perpl/"},
-    {name:"MoonPay",slug:"moonpay",confirmed:true,claimLive:false,scoreBase:58,actions:["signup","PayBox","X-connect"],url:"https://airdrops.io/moonpay/"},
-    {name:"WheelX",slug:"wheelx",confirmed:true,claimLive:false,scoreBase:59,actions:["bridge","swap","quests","referral"],url:"https://airdrops.io/wheelx/"},
-    {name:"Kryvora Network",slug:"kryvora-network",confirmed:true,claimLive:false,scoreBase:57,actions:["testnet","tasks","referral"],url:"https://airdrops.io/kryvora-network/"},
-    {name:"Memebook",slug:"memebook",confirmed:true,claimLive:false,scoreBase:55,actions:["mint-pass","app","social"],url:"https://airdrops.io/memebook/"}
+    {name:"Boundless",slug:"boundless",confirmed:true,claimLive:true,scoreBase:78,actions:["eligibility","claim"],url:"https://airdrop.boundless.network/"},
+    {name:"Sonic",slug:"sonic",confirmed:true,claimLive:true,scoreBase:78,actions:["eligibility","claim"],url:"https://airdrop.soniclabs.com/"},
+    {name:"dappOS",slug:"dappos",confirmed:true,claimLive:true,scoreBase:76,actions:["eligibility","claim"],url:"https://airdrop.dappos.com/"},
+    {name:"RateX",slug:"ratex",confirmed:true,claimLive:true,scoreBase:74,actions:["eligibility","claim"],url:"https://rate-x.io/"},
+    {name:"Pharos Network",slug:"pharos-network",confirmed:true,claimLive:true,scoreBase:73,actions:["eligibility","claim"],url:"https://pharosnetwork.xyz/"},
+    {name:"Lighter",slug:"lighter",confirmed:true,claimLive:true,scoreBase:72,actions:["eligibility","claim"],url:"https://lighter.xyz/"},
+    {name:"Infinex",slug:"infinex",confirmed:true,claimLive:true,scoreBase:70,actions:["eligibility","claim"],url:"https://infinex.xyz/"},
+    {name:"Rainbow",slug:"rainbow",confirmed:true,claimLive:true,scoreBase:68,actions:["eligibility","claim"],url:"https://rainbow.me/"},
+    {name:"Beldex",slug:"beldex",confirmed:true,claimLive:false,scoreBase:72,actions:["social","referrals","check-in"],url:"https://airdrops.io/beldex/"},
+    {name:"Gyndore",slug:"gyndore",confirmed:true,claimLive:false,scoreBase:76,actions:["wallet-verification","registration"],url:"https://airdrops.io/gyndore/"}
   ]);
   function airdrops(){
     return AIRDROP_REGISTRY.map(x=>{
       const claim=x.claimLive?12:0;
-      const confirmation=x.confirmed?15:0;
-      const costPenalty=x.actions.some(a=>/deposit|perps|fund|trade|stake|bridge|swap/.test(a))?12:0;
-      const referralPenalty=x.actions.includes("referral")?5:0;
-      const score=Math.max(0,Math.min(100,x.scoreBase+claim+confirmation-costPenalty-referralPenalty));
-      return {type:"airdrop",title:x.name,score,confirmed:x.confirmed,claimLive:x.claimLive,actions:x.actions,source:"Airdrops.io discovery feed",sourceUrl:x.url,officialVerificationRequired:true,claimable:x.claimLive,action:x.claimLive?"REVIEW_CLAIM":"FARM_REVIEW",reason:x.claimLive?"Claim is reported live by the discovery source; verify the project's official claim domain and wallet eligibility before signing.":"Confirmed listing; eligibility and official claim path still require verification.",riskFlags:[...(costPenalty?["capital_or_trading_required"]:[]),...(referralPenalty?["referral_dependency"]:[])]};
-    }).sort((a,b)=>b.score-a.score);
+      const score=Math.max(0,Math.min(100,x.scoreBase+claim));
+      return {
+        type:"airdrop",title:x.name,score,confirmed:x.confirmed,claimLive:x.claimLive,
+        actions:x.actions,source:"current discovery registry",sourceUrl:x.url,
+        officialVerificationRequired:true,claimable:x.claimLive,
+        action:x.claimLive?"VERIFY_OFFICIAL_CLAIM":"FARM_REVIEW",
+        reason:x.claimLive?"Claim/checker is reported open by a current discovery source; official-domain verification is mandatory before signing.":"Current campaign listing; eligibility and official claim path still require verification.",
+        riskFlags:x.claimLive?["official_domain_must_match","wallet_signature_required"]:["eligibility_unverified"]
+      };
+    });
   }
-
   const DEFAULTS = Object.freeze({
     minTvlUsd:1000000,
     maxApy:500,
