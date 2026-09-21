@@ -165,7 +165,7 @@
     })).filter(x=>x.rank<=250&&x.volume24hUsd>=1000000).sort((a,b)=>b.score-a.score).slice(0,10);
     const data={
       guard:"JAVIDAN",
-      version:"2.3.0",
+      version:"2.4.0",
       mode:"OPPORTUNITY_DISCOVERY",
       generatedAt:new Date().toISOString(),
       sources:{
@@ -185,10 +185,46 @@
     cache={at:now,data};
     return data;
   }
+  const QUEUE_KEY="ANILX_JAVIDAN_APPROVAL_QUEUE_V1";
+  function queueLoad(){
+    try{const x=JSON.parse(localStorage.getItem(QUEUE_KEY)||"[]");return Array.isArray(x)?x:[]}catch{return []}
+  }
+  function queueSave(q){try{localStorage.setItem(QUEUE_KEY,JSON.stringify(q));return q}catch{return q}}
+  function queueAdd(x){
+    const q=queueLoad();
+    const id=String(x.id||((x.type||"op")+"_"+String(x.title||"").replace(/[^a-z0-9]+/gi,"_").slice(0,80)));
+    const existing=q.find(v=>v.id===id);
+    if(existing)return existing;
+    const item={id,type:x.type,title:x.title,officialUrl:x.officialUrl||x.sourceUrl||x.url||"",score:x.score||0,
+      addedAt:new Date().toISOString(),deadline:x.deadline||null,status:"PENDING_REVIEW",
+      requiresUserApproval:true,neverAutoSign:true};
+    q.push(item);queueSave(q);return item
+  }
+  function queueList(){
+    const now=Date.now(),q=queueLoad().map(v=>{
+      if(v.deadline&&Date.parse(v.deadline)<=now&&v.status==="PENDING_REVIEW")return Object.assign({},v,{status:"EXPIRED"});
+      return v
+    });
+    queueSave(q);return q
+  }
+  function queueRemove(id){const q=queueList().filter(v=>v.id!==id);queueSave(q);return q}
+  function queuePrepare(id){
+    const q=queueList(),item=q.find(v=>v.id===id);
+    if(!item)throw new Error("queue_item_not_found");
+    if(item.status==="EXPIRED")throw new Error("claim_deadline_expired");
+    item.status="READY_FOR_USER_REVIEW";item.revalidatedAt=new Date().toISOString();queueSave(q);return item
+  }
+  function claimPacket(x){
+    if(!x||x.type!=="airdrop")throw new Error("claim_only_for_verified_airdrop");
+    if(!x.officialVerified||!x.officialUrl)throw new Error("official_claim_domain_not_verified");
+    const item=queueAdd(x);
+    return {queueItem:item,officialUrl:x.officialUrl,requiresUserApproval:true,autoSigning:false,
+      instruction:"Open the verified official page, re-check the claim details, then approve/sign in your own wallet."}
+  }
   function explainScore(x){return {score:x.score,type:x.type,officialVerified:x.officialVerified||false,claimable:x.claimable||false,action:x.action,source:x.source,riskFlags:x.riskFlags||[]}}
   function safeSummary(x){
     if(!x||!Array.isArray(x.opportunities))throw new Error("invalid_opportunity_result");
     return {guard:x.guard,version:x.version,mode:x.mode,generatedAt:x.generatedAt,sources:x.sources,safety:x.safety,opportunities:x.opportunities.slice(0,20).map(x=>Object.assign({},x,{scoreExplanation:explainScore(x)}))};
   }
-  window.JavidanOpportunityEngine=Object.freeze({version:"2.3.0",scan,scanWallet,safeSummary,config:DEFAULTS,verifyAirdrop,officialUrl,rankOpportunity});
+  window.JavidanOpportunityEngine=Object.freeze({version:"2.4.0",scan,scanWallet,safeSummary,config:DEFAULTS,verifyAirdrop,officialUrl,rankOpportunity,queueAdd,queueList,queueRemove,queuePrepare,claimPacket});
 })();
