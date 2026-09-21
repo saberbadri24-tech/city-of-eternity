@@ -17,13 +17,12 @@ jobs:
         run: node -e "JSON.parse(require('fs').readFileSync('package.json')); console.log('package ok')"
       - name: Validate autonomy
         run: node -e "const p=require('./ANIL-X-AUTONOMY-POLICY.json'); const a=p.autonomy||{}; if(a.production_code_mutation||a.payment_execution||a.secret_rotation||a.dns_changes) throw new Error('unsafe autonomy policy'); console.log('policy ok')"
-      - name: Validate functions
+      - name: Validate functions recursively
         run: |
-          for f in functions/*.js functions/*.mjs; do
-            [ -f "$f" ] && node --check "$f"
-          done
-          for f in functions/*.mts; do
-            [ -f "$f" ] || continue
+          find functions -type f \( -name '*.js' -o -name '*.mjs' \) -print0 | xargs -0 -r -n1 node --check
+          find functions -type f -name '*.mts' -print0 | while IFS= read -r -d '' f; do
             cp "$f" "/tmp/$(basename "$f" .mts).mjs"
             node --check "/tmp/$(basename "$f" .mts).mjs"
           done
+      - name: Run Javidan deterministic self-test
+        run: node scripts/javidan-node-selftest.mjs
