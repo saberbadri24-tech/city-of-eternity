@@ -4,6 +4,7 @@ const str=v=>String(v??'').trim().slice(0,12000);
 const HOSTS=Object.freeze(new Set(['boundless.network','soniclabs.com','dappos.com','rate-x.io','pharosnetwork.xyz','lighter.xyz','infinex.xyz','rainbow.me']));
 const safeHost=h=>{const x=String(h||'').toLowerCase().replace(/^www\./,'');return [...HOSTS].some(v=>x===v||x.endsWith('.'+v))};
 const safeInput=x=>({kind:str(x?.kind||'opportunity'),title:str(x?.title),url:str(x?.url),domain:str(x?.domain),network:str(x?.network),contract:str(x?.contract),calldata:str(x?.calldata),reward:str(x?.reward),cost:str(x?.cost),deadline:str(x?.deadline),officialVerified:false,evidencePass:false,riskFlags:Array.isArray(x?.riskFlags)?x.riskFlags.slice(0,30):[]});
+const inspectCalldata=data=>{const raw=String(data||'').toLowerCase(),flags=[];if(!raw)return flags;if(!/^0x[0-9a-f]*$/.test(raw)||raw.length<10){flags.push('undecodable_calldata');return flags}const selector=raw.slice(2,10);if(['095ea7b3','39509351'].includes(selector)){const words=raw.slice(10);const amount=words.slice(64,128);if(amount.length===64&&/^f{64}$/.test(amount))flags.push('unlimited_approval')}if(['23b872dd','a9059cbb'].includes(selector)&&raw.length<138)flags.push('undecodable_calldata');return flags};
 const extract=raw=>{try{return JSON.parse(raw)}catch{const m=String(raw||'').match(/\{[\s\S]*\}/);try{return m?JSON.parse(m[0]):null}catch{return null}}};
 async function verifyOfficial(url){
  try{
@@ -48,6 +49,7 @@ function gate(input,brains,evidence){
 }
 export default async(request)=>{if(request.method==='OPTIONS')return new Response(null,{status:204,headers:H});if(request.method!=='POST')return json({ok:false,error:'method_not_allowed'},405);try{
  const body=await request.json();const input=safeInput(body?.opportunity||body);const evidence=await verifyOfficial(input.url);const secured={...input,officialVerified:evidence.pass,evidencePass:evidence.pass,officialEvidence:evidence};
+ const secured={...secured,riskFlags:[...new Set([...secured.riskFlags,...inspectCalldata(secured.calldata)])]};
  const prompt=JSON.stringify(secured);
  const [a,c,g]=await Promise.allSettled([openai(Netlify.env,prompt),claude(Netlify.env,prompt),gemini(Netlify.env,prompt)]);
  const pick=x=>x.status==='fulfilled'?x.value:null;
