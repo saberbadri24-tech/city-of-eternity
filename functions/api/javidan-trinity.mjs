@@ -48,8 +48,8 @@ function gate(input,brains,evidence){
  return {verdict:'ALLOW',reason:'three_brain_consensus',risk};
 }
 export default async(request)=>{if(request.method==='OPTIONS')return new Response(null,{status:204,headers:H});if(request.method!=='POST')return json({ok:false,error:'method_not_allowed'},405);try{
- const body=await request.json();const input=safeInput(body?.opportunity||body);const evidence=await verifyOfficial(input.url);const secured={...input,officialVerified:evidence.pass,evidencePass:evidence.pass,officialEvidence:evidence};
- const secured={...secured,riskFlags:[...new Set([...secured.riskFlags,...inspectCalldata(secured.calldata)])]};
+ const body=await request.json();const input=safeInput(body?.opportunity||body);const evidence=await verifyOfficial(input.url);let secured={...input,officialVerified:evidence.pass,evidencePass:evidence.pass,officialEvidence:evidence};
+ secured={...secured,riskFlags:[...new Set([...secured.riskFlags,...inspectCalldata(secured.calldata)])]};
  const prompt=JSON.stringify(secured);
  const [a,c,g]=await Promise.allSettled([openai(Netlify.env,prompt),claude(Netlify.env,prompt),gemini(Netlify.env,prompt)]);
  const pick=x=>x.status==='fulfilled'?x.value:null;
