@@ -1,7 +1,8 @@
 /* ANIL X — Javidan Opportunity Engine v2
  * Real public-data opportunity discovery.
  * Sources: CoinGecko markets + DefiLlama yields.
- * No private keys, seed phrases, withdrawals, trades or autonomous signing.\n * v2.2: current airdrop discovery registry with explicit verification gates.
+ * No private keys, seed phrases, withdrawals, trades or autonomous signing.
+ * v2.2: current airdrop discovery registry with explicit verification gates.
  */
 (function(){
   "use strict";
@@ -155,5 +156,5 @@
     if(!x||!Array.isArray(x.opportunities))throw new Error("invalid_opportunity_result");
     return {guard:x.guard,version:x.version,mode:x.mode,generatedAt:x.generatedAt,sources:x.sources,safety:x.safety,opportunities:x.opportunities.slice(0,20)};
   }
-  window.JavidanOpportunityEngine=Object.freeze({version:"2.0.0",scan,safeSummary,config:DEFAULTS});
+  window.JavidanOpportunityEngine=Object.freeze({version:"2.2.0",scan,safeSummary,config:DEFAULTS,verifyAirdrop,officialUrl});
 })();
