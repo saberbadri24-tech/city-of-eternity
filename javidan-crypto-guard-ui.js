@@ -28,6 +28,8 @@ function boot(){
    const data=window.JavidanOpportunityEngine.safeSummary(await window.JavidanOpportunityEngine.scan());
    const selfTest=window.JavidanGuardSelfTest?.run?.();
    const rows=data.opportunities||[];
+   rows.filter(x=>x.type==="airdrop"&&x.evidence?.pass).forEach(x=>{try{window.JavidanOpportunityEngine.queueAdd(x)}catch(_){ }});
+   document.dispatchEvent(new CustomEvent("javidan:scan-results",{detail:data}));
    if(!rows.length){out.textContent="در این اسکن فرصت قابل‌ارزیابی پیدا نشد.";return}
    out.innerHTML="<div style='margin-bottom:10px'>منابع: "+(data.sources.defiLlama?"DefiLlama ✓ ":"")+" "+(data.sources.coinGecko?"CoinGecko ✓":"")+"</div>"+
     rows.map((x,i)=>{
