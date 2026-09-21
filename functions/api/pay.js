@@ -21,7 +21,7 @@ export async function onRequestPost({ request, env }) {
     const response = await fetch('https://variza.ir/api/v1/pay', {
       method: 'POST',
       headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount, return_url: returnUrl, title: description, expires_in: '1h' })
+      body: JSON.stringify({ amount, return_url: returnUrl, title: description, expires_in: '1h', card_last_4: body?.settlementMode === 'variza' ? 'variza' : undefined })
     });
     const raw = await response.text();
     let result; try { result = JSON.parse(raw); } catch { result = { raw }; }
