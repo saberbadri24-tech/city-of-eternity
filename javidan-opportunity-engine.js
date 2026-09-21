@@ -145,9 +145,10 @@
     cache={at:now,data};
     return data;
   }
+  function explainScore(x){return {score:x.score,type:x.type,officialVerified:x.officialVerified||false,claimable:x.claimable||false,action:x.action,source:x.source,riskFlags:x.riskFlags||[]}}
   function safeSummary(x){
     if(!x||!Array.isArray(x.opportunities))throw new Error("invalid_opportunity_result");
-    return {guard:x.guard,version:x.version,mode:x.mode,generatedAt:x.generatedAt,sources:x.sources,safety:x.safety,opportunities:x.opportunities.slice(0,20)};
+    return {guard:x.guard,version:x.version,mode:x.mode,generatedAt:x.generatedAt,sources:x.sources,safety:x.safety,opportunities:x.opportunities.slice(0,20).map(x=>Object.assign({},x,{scoreExplanation:explainScore(x)}))};
   }
   window.JavidanOpportunityEngine=Object.freeze({version:"2.2.0",scan,safeSummary,config:DEFAULTS,verifyAirdrop,officialUrl});
 })();
