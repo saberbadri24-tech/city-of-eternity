@@ -16,17 +16,18 @@ function boot(){
   try{
    if(!window.JavidanOpportunityEngine)throw new Error("opportunity_engine_missing");
    const data=window.JavidanOpportunityEngine.safeSummary(await window.JavidanOpportunityEngine.scan());
+   const selfTest=window.JavidanGuardSelfTest?.run?.();
    const rows=data.opportunities||[];
    if(!rows.length){out.textContent="در این اسکن فرصت قابل‌ارزیابی پیدا نشد.";return}
    out.innerHTML="<div style='margin-bottom:10px'>منابع: "+(data.sources.defiLlama?"DefiLlama ✓ ":"")+" "+(data.sources.coinGecko?"CoinGecko ✓":"")+"</div>"+
     rows.map((x,i)=>{
-      const isYield=x.type==="defi_yield";
-      const risk=isYield?" · ریسک: "+x.riskScore+"/100":"";
-      const val=isYield?" · APY: "+x.apy+"% · TVL: $"+Math.round(x.tvlUsd).toLocaleString():" · تغییر ۲۴س: "+Number(x.change24h||0).toFixed(2)+"%";
+      const isYield=x.type==="defi_yield"; const isAirdrop=x.type==="airdrop";
+      const risk=isYield?" · ریسک: "+x.riskScore+"/100":(isAirdrop?" · "+(x.officialVerified?"دامنه رسمی تأیید شد":"دامنه رسمی تأیید نشد"):"");
+      const val=isYield?" · APY: "+x.apy+"% · TVL: $"+Math.round(x.tvlUsd).toLocaleString():(isAirdrop?" · وضعیت: "+x.action:" · تغییر ۲۴س: "+Number(x.change24h||0).toFixed(2)+"%");
       const link=x.url?'<a target="_blank" rel="noopener noreferrer" href="'+esc(x.url)+'" style="color:#d9c48a">بررسی منبع رسمی</a>':"منبع مستقیم موجود نیست";
       return "<div style='padding:9px 0;border-bottom:1px solid #292216'><b>"+(i+1)+". "+esc(x.title)+"</b><br>امتیاز: "+x.score+val+risk+"<br><span style='color:#8f99a9'>"+esc(x.reason)+"</span><br>"+link+"</div>"
     }).join("");
-   if(status)status.textContent="گارد جاویدان: فرصت‌ها پیدا شدند";
+   if(status)status.textContent="گارد جاویدان: فرصت‌ها پیدا شدند · تست امنیت: "+(selfTest?.ok?"✓":"خطا");
   }catch(e){out.textContent="جستجو انجام نشد: "+String(e&&e.message||e);if(status)status.textContent="گارد جاویدان: خطا"}
   finally{busy=false;btn.disabled=false;btn.textContent="جستجوی دوباره"}
  });
