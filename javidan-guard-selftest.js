@@ -85,7 +85,7 @@
 
     must(E.validTonAddress===undefined || typeof E.validTonAddress==="function","ton-validator-contract");
     if(typeof E.validTonAddress==="function"){
-      must(E.validTonAddress("EQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"),"ton-valid-address-contract");
+      must(E.validTonAddress("UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW"),"ton-valid-address-contract");
       must(!E.validTonAddress("not-a-ton-address"),"ton-invalid-address-contract");
     }
     tests.push("ton-address-safety-contract");
