@@ -2,7 +2,7 @@
  * Real public-data opportunity discovery.
  * Sources: CoinGecko markets + DefiLlama yields.
  * No private keys, seed phrases, withdrawals, trades or autonomous signing.
- * v2.2: current airdrop discovery registry with explicit verification gates.
+ * v2.4: persistent approval queue + deadline watcher + claim packets.
  */
 (function(){
   "use strict";
