@@ -1,6 +1,6 @@
 /* ANIL X — Javidan Crypto Guard
  * Read-only crypto discovery. No trading, withdrawal, private keys or automatic signing.
- * v1.1: validation, cache, rate-limit handling and safe UI adapter.
+ * v1.2: correct metric semantics and defensive source-row validation.
  */
 (function () {
   "use strict";
@@ -13,7 +13,7 @@
     minLiquidityRatio: 0.02,
     maxRank: 250,
     max24hLoss: -25,
-    min24hVolumeChange: -80,
+    min24hVolumeChange: null,
     blacklist: ["wrapped", "bridged", "testnet", "fake", "scam"],
     timeoutMs: 9000,
     cacheMs: 300000
@@ -35,7 +35,7 @@
     x.minMarketCapUsd = Math.max(0, num(x.minMarketCapUsd));
     x.minLiquidityRatio = Math.max(0, num(x.minLiquidityRatio));
     x.max24hLoss = Math.min(0, num(x.max24hLoss, -25));
-    x.min24hVolumeChange = Math.max(-100, Math.min(1000, num(x.min24hVolumeChange, -80)));
+    x.min24hVolumeChange = null;
     x.timeoutMs = Math.max(3000, Math.min(20000, num(x.timeoutMs, 9000)));
     x.cacheMs = Math.max(0, Math.min(1800000, num(x.cacheMs, 300000)));
     x.blacklist = Array.isArray(x.blacklist) ? x.blacklist.map(String).filter(Boolean) : DEFAULTS.blacklist.slice();
@@ -53,7 +53,7 @@
     const cap = num(coin.market_cap);
     const rank = num(coin.market_cap_rank, 999999);
     const change = num(coin.price_change_percentage_24h);
-    const volumeChange = num(coin.price_change_percentage_24h_in_currency);
+    const volumeChange = NaN; // CoinGecko field is price-change-in-currency, not volume-change.
     const liquidityRatio = cap > 0 ? volume / cap : 0;
     const reasons = [];
 
@@ -64,7 +64,7 @@
     if (cap < cfg.minMarketCapUsd) reasons.push("low_market_cap");
     if (liquidityRatio < cfg.minLiquidityRatio) reasons.push("thin_liquidity");
     if (change < cfg.max24hLoss) reasons.push("excessive_24h_drop");
-    if (Number.isFinite(volumeChange) && volumeChange < cfg.min24hVolumeChange) reasons.push("volume_drop");
+    // Do not treat price_change_percentage_24h_in_currency as volume change.
 
     return { passed: reasons.length === 0, reasons, price, volume, cap, rank, change, volumeChange, liquidityRatio };
   }
@@ -132,7 +132,7 @@
 
     const result = {
       guard: "JAVIDAN",
-      version: "1.1.0",
+      version: "1.2.0",
       mode: "READ_ONLY_DISCOVERY",
       generatedAt: new Date().toISOString(),
       stale: false,
@@ -160,5 +160,5 @@
     };
   }
 
-  window.JavidanCryptoGuard = Object.freeze({ version: "1.1.0", config: DEFAULTS, scan, safeSummary });
+  window.JavidanCryptoGuard = Object.freeze({ version: "1.2.0", config: DEFAULTS, scan, safeSummary });
 })();
