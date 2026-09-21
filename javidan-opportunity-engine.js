@@ -1,7 +1,7 @@
 /* ANIL X — Javidan Opportunity Engine v2
  * Real public-data opportunity discovery.
  * Sources: CoinGecko markets + DefiLlama yields.
- * No private keys, seed phrases, withdrawals, trades or autonomous signing.\n * v2.1: current airdrop discovery registry with explicit verification gates.
+ * No private keys, seed phrases, withdrawals, trades or autonomous signing.\n * v2.2: current airdrop discovery registry with explicit verification gates.
  */
 (function(){
   "use strict";
@@ -37,6 +37,9 @@
       };
     });
   }
+  const OFFICIAL_HOSTS=Object.freeze(new Set(["boundless.network","soniclabs.com","dappos.com","rate-x.io","pharosnetwork.xyz","lighter.xyz","infinex.xyz","rainbow.me"]));
+  function officialUrl(url){try{const u=new URL(url);const h=u.hostname.toLowerCase().replace(/^www\./,"");return [...OFFICIAL_HOSTS].some(x=>h===x||h.endsWith("."+x))?u.toString():""}catch{return ""}}
+  function verifyAirdrop(x){const official=officialUrl(x.url);return Object.assign({},x,{officialUrl:official,officialVerified:Boolean(official),claimable:Boolean(x.claimLive&&official),action:x.claimLive?(official?"VERIFY_AND_REVIEW":"BLOCK_UNVERIFIED_DOMAIN"):"FARM_REVIEW",riskFlags:[...(x.claimLive?["wallet_signature_required"]:[]),...(official?[]:["official_domain_unverified"])]})}
   const DEFAULTS = Object.freeze({
     minTvlUsd:1000000,
     maxApy:500,
@@ -128,14 +131,14 @@
     })).filter(x=>x.rank<=250&&x.volume24hUsd>=1000000).sort((a,b)=>b.score-a.score).slice(0,10);
     const data={
       guard:"JAVIDAN",
-      version:"2.1.0",
+      version:"2.2.0",
       mode:"OPPORTUNITY_DISCOVERY",
       generatedAt:new Date().toISOString(),
       sources:{
         defiLlama:yields.length>0,
         coinGecko:markets.length>0
       },
-      opportunities:[...airdrops(),...yields,...marketCandidates].sort((a,b)=>b.score-a.score).slice(0,cfg.maxResults),
+      opportunities:[...airdrops().map(verifyAirdrop),...yields,...marketCandidates].sort((a,b)=>b.score-a.score).slice(0,cfg.maxResults),
       safety:{
         seedPhraseRequested:false,
         privateKeyRequested:false,
