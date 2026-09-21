@@ -47,7 +47,7 @@
   }
   const OFFICIAL_HOSTS=Object.freeze(new Set(["boundless.network","soniclabs.com","dappos.com","rate-x.io","pharosnetwork.xyz","lighter.xyz","infinex.xyz","rainbow.me"]));
   function officialUrl(url){try{const u=new URL(url);const h=u.hostname.toLowerCase().replace(/^www\./,"");return [...OFFICIAL_HOSTS].some(x=>h===x||h.endsWith("."+x))?u.toString():""}catch{return ""}}
-  function verifyAirdrop(x){const official=officialUrl(x.url);return Object.assign({},x,{officialUrl:official,officialVerified:Boolean(official),claimable:Boolean(x.claimLive&&official),action:x.claimLive?(official?"VERIFY_AND_REVIEW":"BLOCK_UNVERIFIED_DOMAIN"):"FARM_REVIEW",riskFlags:[...(x.claimLive?["wallet_signature_required"]:[]),...(official?[]:["official_domain_unverified"])]})}
+  function verifyAirdrop(x){const official=officialUrl(x.url);const evidence=evidenceGate(Object.assign({},x,{officialVerified:Boolean(official),evidenceRetrievedAt:x.evidenceRetrievedAt||x.checkedAt}));return Object.assign({},x,{officialUrl:official,officialVerified:Boolean(official),evidence,claimable:Boolean(x.claimLive&&evidence.pass),action:x.claimLive?(evidence.pass?"VERIFY_AND_REVIEW":"BLOCK_SAFETY_GATE"):"FARM_REVIEW",riskFlags:[...(x.claimLive?["wallet_signature_required"]:[]),...(evidence.flags||[])]})}
   const DEFAULTS = Object.freeze({
     minTvlUsd:1000000,
     maxApy:500,
