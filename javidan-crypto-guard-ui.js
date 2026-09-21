@@ -7,10 +7,20 @@ function boot(){
  toggle.addEventListener("click",()=>panel.classList.toggle("open"));
  const box=document.createElement("div");box.className="guard-item";
  box.innerHTML="<b>🛡️ شکار فرصت‌های جاویدان</b><p>داده واقعی عمومی از بازار و پروتکل‌ها؛ اول کشف و ارزیابی، بعد تأیید مالک.</p>";
- const btn=document.createElement("button");btn.className="approve";btn.type="button";btn.textContent="جستجوی فرصت‌ها";
+ const addr=document.createElement("input");addr.type="text";addr.inputMode="text";addr.autocomplete="off";addr.placeholder="آدرس عمومی EVM (اختیاری)";addr.dir="ltr";addr.style.cssText="width:100%;margin:8px 0;padding:10px;border-radius:8px;border:1px solid #3a3325;background:#111;color:#eee";box.appendChild(addr); const walletBtn=document.createElement("button");walletBtn.className="approve";walletBtn.type="button";walletBtn.textContent="بررسی کیف پول (فقط خواندنی)"; const btn=document.createElement("button");btn.className="approve";btn.type="button";btn.textContent="جستجوی فرصت‌ها";
  const out=document.createElement("div");out.style.cssText="margin-top:12px;color:#c8ced8;font-size:13px;line-height:1.8";
- box.append(btn,out);grid.prepend(box);
+ box.append(walletBtn,btn,out);grid.prepend(box);
  let busy=false;
+ walletBtn.addEventListener("click",async()=>{
+  const address=addr.value.trim();
+  if(!address){out.textContent="آدرس عمومی را وارد کن؛ Seed و Private Key هرگز وارد نمی‌شوند.";return}
+  walletBtn.disabled=true; walletBtn.textContent="در حال بررسی…";
+  try{
+   const data=await window.JavidanOpportunityEngine.scanWallet(address);
+   out.innerHTML="<b>بررسی فقط‌خواندنی انجام شد</b><br>"+data.chains.map(x=>"<div style='padding:6px 0'>"+esc(x.name)+" · "+(x.error?"خطا":"فعال")+" · nonce: "+(x.nonce??"-")+"</div>").join("");
+  }catch(e){out.textContent="بررسی انجام نشد: "+esc(e.message||e)}
+  finally{walletBtn.disabled=false;walletBtn.textContent="بررسی کیف پول (فقط خواندنی)"}
+ });
  btn.addEventListener("click",async()=>{
   if(busy)return;busy=true;btn.disabled=true;btn.textContent="در حال شکار…";out.textContent="در حال بررسی منابع واقعی…";
   try{
