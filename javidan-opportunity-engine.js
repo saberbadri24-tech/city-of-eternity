@@ -219,7 +219,7 @@
     })).filter(x=>x.rank<=250&&x.volume24hUsd>=1000000).sort((a,b)=>b.score-a.score).slice(0,10);
     const data={
       guard:"JAVIDAN",
-      version:"2.5.0",
+      version:"2.6.0",
       mode:"OPPORTUNITY_DISCOVERY",
       lifecycle:{discovered:true,verifiedRequiresFreshOfficialEvidence:true,readyForUserReview:true,autoReceiveOnly:true,autoSign:false,autoTrade:false,autoWithdraw:false},
       generatedAt:new Date().toISOString(),
