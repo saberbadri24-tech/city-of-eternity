@@ -1,22 +1,22 @@
 {
   "guard": "ANIL X Immortal Guard",
   "engine": "Airdrop+ X",
-  "version": "3.0-self-learning-opportunity-engine",
-  "lastScan": "2026-09-22T09:30:41.791812+00:00",
-  "mode": "autonomous-monitoring-and-learning",
-  "selfUpdate": "adaptive-data-and-rules-only",
-  "financialActions": "disabled",
+  "version": "4.0-claim-pipeline",
+  "lastScan": "2026-09-22T12:14:07.771363+00:00",
+  "mode": "monitor -> classify -> claim-ready -> owner approval -> temp wallet -> transfer-ready",
+  "financialActions": "owner-approved-only",
   "walletPrivateKeys": "never-collected",
+  "temporaryWallet": "configured",
   "ownerApprovalRequired": true,
   "antiSybil": "respected",
   "kycBypass": "disabled",
   "captchaBypass": "disabled",
   "signatureAutomation": "disabled",
   "sourcesScanned": 8,
-  "highPriority": 2,
-  "watch": 4,
+  "readyToClaim": 0,
+  "waitingOwner": 2,
   "blockers": [
     "Layer3: source HTTP 403",
     "QuestN: source HTTP 403"
   ]
-}\n
+}

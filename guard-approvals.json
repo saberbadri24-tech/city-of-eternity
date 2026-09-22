@@ -1,25 +1,25 @@
 {
   "guard": "ANIL X Immortal Guard",
   "engine": "Airdrop+ X",
-  "updatedAt": "2026-09-22T09:30:41.791812+00:00",
+  "updatedAt": "2026-09-22T12:14:07.771363+00:00",
   "approvals": [
     {
       "id": "zealy",
       "name": "Zealy",
-      "requiresOwnerApproval": true,
-      "reason": "High-value official opportunity detected; owner must approve any login/KYC/signature/payment/claim step.",
       "source": "https://zealy.io/",
-      "createdAt": "2026-09-22T09:30:41.791812+00:00",
-      "status": "waiting-owner"
+      "requiresOwnerApproval": true,
+      "status": "waiting-owner",
+      "action": "complete required login/connection/signature manually, then resume claim",
+      "createdAt": "2026-09-22T12:14:07.771363+00:00"
     },
     {
       "id": "xdao-ton-airdrop-docs",
       "name": "XDAO TON Airdrop Docs",
-      "requiresOwnerApproval": true,
-      "reason": "High-value official opportunity detected; owner must approve any login/KYC/signature/payment/claim step.",
       "source": "https://docs.xdao.app/ton/airdrop/",
-      "createdAt": "2026-09-22T09:30:41.791812+00:00",
-      "status": "waiting-owner"
+      "requiresOwnerApproval": true,
+      "status": "waiting-owner",
+      "action": "complete required login/connection/signature manually, then resume claim",
+      "createdAt": "2026-09-22T12:14:07.771363+00:00"
     }
   ]
-}\n
+}

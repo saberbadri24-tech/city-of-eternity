@@ -6,195 +6,81 @@
       "type": "airdrop-portal",
       "url": "https://www.binance.com/en/airdrop",
       "httpStatus": 202,
-      "lastScan": "2026-09-22T09:30:41.791812+00:00",
-      "guardVersion": "3.0-airdrop-plus",
-      "guardMode": "adaptive-monitor",
-      "claim": "not-automated",
-      "status": "official-source-live",
-      "contentFingerprint": "e3b0c44298fc1c14",
-      "opportunityScore": 62.4,
-      "scoreFactors": {
-        "reward": 0.2,
-        "eligibility": 0.85,
-        "speed": 0.55,
-        "cost": 0.8,
-        "trust": 0.95,
-        "freshness": 0.5,
-        "complexity": 0.75
-      },
-      "signals": [],
-      "requirementsObserved": []
+      "lastScan": "2026-09-22T12:14:07.771363+00:00",
+      "guardVersion": "4.0-claim-pipeline",
+      "guardMode": "autonomous-monitoring-and-owner-approved-execution"
     },
     {
       "name": "Binance Learn & Earn",
       "type": "learn-and-earn",
       "url": "https://www.binance.com/en/support/announcement/detail/41cd1e09c4814c27bf6d5ce9d61f6e51",
       "httpStatus": 202,
-      "lastScan": "2026-09-22T09:30:41.791812+00:00",
-      "guardVersion": "3.0-airdrop-plus",
-      "guardMode": "adaptive-monitor",
-      "claim": "not-automated",
-      "status": "official-source-live",
-      "contentFingerprint": "e3b0c44298fc1c14",
-      "opportunityScore": 62.4,
-      "scoreFactors": {
-        "reward": 0.2,
-        "eligibility": 0.85,
-        "speed": 0.55,
-        "cost": 0.8,
-        "trust": 0.95,
-        "freshness": 0.5,
-        "complexity": 0.75
-      },
-      "signals": [],
-      "requirementsObserved": []
+      "lastScan": "2026-09-22T12:14:07.771363+00:00",
+      "guardVersion": "4.0-claim-pipeline",
+      "guardMode": "autonomous-monitoring-and-owner-approved-execution"
     },
     {
       "name": "Binance Alpha",
       "type": "alpha-rewards",
       "url": "https://www.binance.com/en/alpha",
       "httpStatus": 202,
-      "lastScan": "2026-09-22T09:30:41.791812+00:00",
-      "guardVersion": "3.0-airdrop-plus",
-      "guardMode": "adaptive-monitor",
-      "claim": "not-automated",
-      "status": "official-source-live",
-      "contentFingerprint": "e3b0c44298fc1c14",
-      "opportunityScore": 62.4,
-      "scoreFactors": {
-        "reward": 0.2,
-        "eligibility": 0.85,
-        "speed": 0.55,
-        "cost": 0.8,
-        "trust": 0.95,
-        "freshness": 0.5,
-        "complexity": 0.75
-      },
-      "signals": [],
-      "requirementsObserved": []
+      "lastScan": "2026-09-22T12:14:07.771363+00:00",
+      "guardVersion": "4.0-claim-pipeline",
+      "guardMode": "autonomous-monitoring-and-owner-approved-execution"
     },
     {
       "name": "Galxe",
       "type": "quest-rewards",
       "url": "https://galxe.com/",
       "httpStatus": 200,
-      "lastScan": "2026-09-22T09:30:41.791812+00:00",
-      "guardVersion": "3.0-airdrop-plus",
-      "guardMode": "adaptive-monitor",
-      "claim": "not-automated",
-      "status": "official-source-live",
-      "contentFingerprint": "f838b914eae332f0",
-      "opportunityScore": 83.6,
-      "scoreFactors": {
-        "reward": 1.0,
-        "eligibility": 0.85,
-        "speed": 0.55,
-        "cost": 0.8,
-        "trust": 0.95,
-        "freshness": 1.0,
-        "complexity": 0.5
-      },
-      "signals": [
-        "quest",
-        "tge"
-      ],
-      "requirementsObserved": []
+      "lastScan": "2026-09-22T12:14:07.771363+00:00",
+      "guardVersion": "4.0-claim-pipeline",
+      "guardMode": "autonomous-monitoring-and-owner-approved-execution"
     },
     {
       "name": "Layer3",
       "type": "quest-rewards",
       "url": "https://layer3.xyz/",
       "httpStatus": 403,
-      "lastScan": "2026-09-22T09:30:41.791812+00:00",
-      "guardVersion": "3.0-airdrop-plus",
-      "guardMode": "adaptive-monitor",
-      "claim": "not-automated",
-      "status": "unavailable"
+      "lastScan": "2026-09-22T12:14:07.771363+00:00",
+      "guardVersion": "4.0-claim-pipeline",
+      "guardMode": "autonomous-monitoring-and-owner-approved-execution",
+      "status": "unavailable",
+      "actionStage": "SOURCE_BLOCKED",
+      "claim": "not-executed"
     },
     {
       "name": "Zealy",
       "type": "quest-rewards",
       "url": "https://zealy.io/",
       "httpStatus": 200,
-      "lastScan": "2026-09-22T09:30:41.791812+00:00",
-      "guardVersion": "3.0-airdrop-plus",
-      "guardMode": "adaptive-monitor",
-      "claim": "not-automated",
-      "status": "official-source-live",
-      "contentFingerprint": "a6fd404dc104726d",
-      "opportunityScore": 84.3,
-      "scoreFactors": {
-        "reward": 1.0,
-        "eligibility": 0.85,
-        "speed": 0.9,
-        "cost": 0.45,
-        "trust": 0.95,
-        "freshness": 1.0,
-        "complexity": 0.5
-      },
-      "signals": [
-        "airdrop",
-        "points",
-        "quest",
-        "deadline",
-        "reward",
-        "referral",
-        "claim"
-      ],
-      "requirementsObserved": [
-        "register",
-        "connect wallet",
-        "signature"
-      ]
+      "lastScan": "2026-09-22T12:14:07.771363+00:00",
+      "guardVersion": "4.0-claim-pipeline",
+      "guardMode": "autonomous-monitoring-and-owner-approved-execution"
     },
     {
       "name": "QuestN",
       "type": "quest-rewards",
       "url": "https://app.questn.com/",
       "httpStatus": 403,
-      "lastScan": "2026-09-22T09:30:41.791812+00:00",
-      "guardVersion": "3.0-airdrop-plus",
-      "guardMode": "adaptive-monitor",
-      "claim": "not-automated",
-      "status": "unavailable"
+      "lastScan": "2026-09-22T12:14:07.771363+00:00",
+      "guardVersion": "4.0-claim-pipeline",
+      "guardMode": "autonomous-monitoring-and-owner-approved-execution",
+      "status": "unavailable",
+      "actionStage": "SOURCE_BLOCKED",
+      "claim": "not-executed"
     },
     {
       "name": "XDAO TON Airdrop Docs",
       "type": "airdrop",
       "url": "https://docs.xdao.app/ton/airdrop/",
       "httpStatus": 200,
-      "lastScan": "2026-09-22T09:30:41.791812+00:00",
-      "guardVersion": "3.0-airdrop-plus",
-      "guardMode": "adaptive-monitor",
-      "claim": "not-automated",
-      "status": "official-source-live",
-      "contentFingerprint": "a6ebd86c07e64e11",
-      "opportunityScore": 82.9,
-      "scoreFactors": {
-        "reward": 1.0,
-        "eligibility": 0.85,
-        "speed": 0.9,
-        "cost": 0.8,
-        "trust": 0.55,
-        "freshness": 1.0,
-        "complexity": 0.5
-      },
-      "signals": [
-        "airdrop",
-        "points",
-        "quest",
-        "snapshot",
-        "deadline",
-        "referral",
-        "claim"
-      ],
-      "requirementsObserved": [
-        "register",
-        "signature"
-      ]
+      "lastScan": "2026-09-22T12:14:07.771363+00:00",
+      "guardVersion": "4.0-claim-pipeline",
+      "guardMode": "autonomous-monitoring-and-owner-approved-execution"
     }
   ],
-  "lastScan": "2026-09-22T09:30:41.791812+00:00",
-  "guardVersion": "3.0-self-learning-opportunity-engine",
-  "policy": "No seed/private key; no KYC/CAPTCHA bypass; no Sybil/multi-account abuse; no wallet signature or approval without owner action; no fabricated claims. Guard may learn scores, source freshness and prioritization from observed results."
-}\n
+  "lastScan": "2026-09-22T12:14:07.771363+00:00",
+  "guardVersion": "4.0-claim-pipeline",
+  "policy": "Claim pipeline activated; no seed/private key; no KYC/CAPTCHA bypass; no Sybil abuse; no automatic wallet signature; owner approval required for financial or signing actions."
+}
