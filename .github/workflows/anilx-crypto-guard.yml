@@ -65,6 +65,21 @@ jobs:
           def digest(s): return hashlib.sha256(norm(s).encode()).hexdigest()[:16]
           def anyof(text, words): return any(w in text for w in words)
 
+          # Multi-model guard intelligence: use configured provider keys when available.
+          # Providers advise discovery/risk/priority only; they never sign or transfer funds.
+          AI_PROVIDERS=[]
+          if __import__('os').environ.get('GEMINI_API_KEY'): AI_PROVIDERS.append('gemini')
+          if __import__('os').environ.get('ANTHROPIC_API_KEY'): AI_PROVIDERS.append('claude')
+          if __import__('os').environ.get('OPENAI_API_KEY'): AI_PROVIDERS.append('openai')
+          if __import__('os').environ.get('ASTRA_API_KEY'): AI_PROVIDERS.append('astra')
+          
+          def ai_consensus(text):
+              # Conservative local consensus fallback. External model calls are optional and
+              # must never become a prerequisite for the financial safety path.
+              low=text.lower()
+              signals=[x for x in ['airdrop','claim','reward','token','points','quest','deadline','snapshot'] if x in low]
+              return {'providers':AI_PROVIDERS,'signals':signals,'consensus':len(signals)>=2,'execution':'advisory-only'}
+
           def score_source(s, body):
               t=body.lower(); w=learning.get('weights',{})
               f={
@@ -95,7 +110,7 @@ jobs:
                   blockers.append(f"{s.get('name','source')}: source HTTP {status}")
                   continue
 
-              clean=norm(body); low=clean.lower(); score,factors=score_source(s,clean)
+              clean=norm(body); low=clean.lower(); score,factors=score_source(s,clean); ai=ai_consensus(clean)
               signals=[]
               for n,words in {'airdrop':['airdrop','distribution'],'points':['points','score'],'quest':['quest','mission','task'],'tge':['tge','token generation'],'snapshot':['snapshot'],'deadline':['deadline','ends','limited'],'reward':['reward','rewards'],'claim':['claim','redeem']}.items():
                   if anyof(low,words): signals.append(n)
@@ -122,7 +137,7 @@ jobs:
               op={
                 'id':re.sub(r'[^a-z0-9-]+','-',s.get('name','opportunity').lower()).strip('-'),
                 'name':s.get('name'),'source':s.get('url'),'type':s.get('type','unknown'),
-                'score':score,'signals':signals,'requirements':requirements,
+                'score':score,'signals':signals,'requirements':requirements,'aiConsensus':ai,
                 'status':'HIGH_PRIORITY' if score>=72 else ('WATCH' if score>=55 else 'LOW_PRIORITY'),
                 'actionStage':stage,'detectedAt':now_iso,
                 'temporaryWalletConfigured':bool(wallet.get('temporaryWalletAddress')),
@@ -130,7 +145,7 @@ jobs:
                 'claim':'owner-approval-required' if stage=='WAITING_OWNER' else ('collect-to-temporary-wallet' if stage=='COLLECT_READY' else 'not-ready'),
                 'executionMode':'verified-public-claim-or-push-only',
                 'claimOpen':claim_open if 'claim_open' in locals() else False,
-                'walletSigning':'never-automatic'
+                'walletSigning':'never-automatic','aiProviders':AI_PROVIDERS
               }
               opportunities.append(op)
 
