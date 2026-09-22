@@ -2,7 +2,7 @@
   "guard": "ANIL X Immortal Guard",
   "engine": "Airdrop+ X",
   "version": "4.0-claim-pipeline",
-  "lastScan": "2026-09-22T12:19:17.702738+00:00",
+  "lastScan": "2026-09-22T12:31:23.793553+00:00",
   "mode": "monitor -> classify -> collect-ready -> temporary-wallet -> owner-approved-transfer",
   "financialActions": "temporary-wallet-collection-only; main-wallet-transfer-owner-approved",
   "walletPrivateKeys": "never-collected",

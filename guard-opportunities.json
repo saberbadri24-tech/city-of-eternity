@@ -1,7 +1,7 @@
 {
   "guard": "ANIL X Immortal Guard",
   "engine": "Airdrop+ X",
-  "updatedAt": "2026-09-22T12:19:17.702738+00:00",
+  "updatedAt": "2026-09-22T12:31:23.793553+00:00",
   "opportunities": [
     {
       "id": "binance-airdrop-portal",
@@ -13,10 +13,12 @@
       "requirements": [],
       "status": "WATCH",
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-22T12:19:17.702738+00:00",
+      "detectedAt": "2026-09-22T12:31:23.793553+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-ready",
+      "executionMode": "verified-public-claim-or-push-only",
+      "claimOpen": false,
       "walletSigning": "never-automatic"
     },
     {
@@ -29,10 +31,12 @@
       "requirements": [],
       "status": "WATCH",
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-22T12:19:17.702738+00:00",
+      "detectedAt": "2026-09-22T12:31:23.793553+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-ready",
+      "executionMode": "verified-public-claim-or-push-only",
+      "claimOpen": false,
       "walletSigning": "never-automatic"
     },
     {
@@ -45,10 +49,12 @@
       "requirements": [],
       "status": "WATCH",
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-22T12:19:17.702738+00:00",
+      "detectedAt": "2026-09-22T12:31:23.793553+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-ready",
+      "executionMode": "verified-public-claim-or-push-only",
+      "claimOpen": false,
       "walletSigning": "never-automatic"
     },
     {
@@ -64,10 +70,12 @@
       "requirements": [],
       "status": "HIGH_PRIORITY",
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-22T12:19:17.702738+00:00",
+      "detectedAt": "2026-09-22T12:31:23.793553+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-ready",
+      "executionMode": "verified-public-claim-or-push-only",
+      "claimOpen": false,
       "walletSigning": "never-automatic"
     },
     {
@@ -93,10 +101,12 @@
       ],
       "status": "HIGH_PRIORITY",
       "actionStage": "WAITING_OWNER",
-      "detectedAt": "2026-09-22T12:19:17.702738+00:00",
+      "detectedAt": "2026-09-22T12:31:23.793553+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
-      "claim": "owner-approved-execution-required",
+      "claim": "owner-approval-required",
+      "executionMode": "verified-public-claim-or-push-only",
+      "claimOpen": false,
       "walletSigning": "never-automatic"
     },
     {
@@ -119,10 +129,12 @@
       ],
       "status": "HIGH_PRIORITY",
       "actionStage": "WAITING_OWNER",
-      "detectedAt": "2026-09-22T12:19:17.702738+00:00",
+      "detectedAt": "2026-09-22T12:31:23.793553+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
-      "claim": "owner-approved-execution-required",
+      "claim": "owner-approval-required",
+      "executionMode": "verified-public-claim-or-push-only",
+      "claimOpen": false,
       "walletSigning": "never-automatic"
     }
   ]
