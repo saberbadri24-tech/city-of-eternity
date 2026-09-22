@@ -103,15 +103,19 @@ jobs:
               requirements=[x for x in ['kyc','register','quiz','connect wallet','signature','captcha','login'] if x in low]
               blocked=any(x in requirements for x in ['kyc','captcha'])
               needs_owner=any(x in requirements for x in ['register','connect wallet','signature','login'])
+              claim_open=anyof(low,['claim is open','claim now','claim available','claiming is open','redeem now','withdraw now'])
+              push_reward=anyof(low,['automatically sent','automatically distributed','push payout','sent directly'])
 
-              if not signals:
-                  stage='WATCH'
-              elif blocked:
+              if blocked:
                   stage='WAITING_OWNER'
-              elif needs_owner:
-                  stage='WAITING_OWNER'
-              elif score >= 72 and ('claim' in signals or 'airdrop' in signals or 'reward' in signals):
+              elif push_reward and score >= 72:
                   stage='COLLECT_READY'
+              elif claim_open and not needs_owner and score >= 72 and ('claim' in signals or 'airdrop' in signals or 'reward' in signals):
+                  stage='COLLECT_READY'
+              elif needs_owner and ('claim' in signals or 'airdrop' in signals or 'reward' in signals):
+                  stage='WAITING_OWNER'
+              elif not signals:
+                  stage='WATCH'
               else:
                   stage='WATCH'
 
@@ -123,7 +127,9 @@ jobs:
                 'actionStage':stage,'detectedAt':now_iso,
                 'temporaryWalletConfigured':bool(wallet.get('temporaryWalletAddress')),
                 'temporaryWalletAddress':wallet.get('temporaryWalletAddress','') if wallet.get('temporaryWalletAddress') else None,
-                'claim':'owner-approved-execution-required' if stage=='WAITING_OWNER' else ('collect-to-temporary-wallet' if stage=='COLLECT_READY' else 'not-ready'),
+                'claim':'owner-approval-required' if stage=='WAITING_OWNER' else ('collect-to-temporary-wallet' if stage=='COLLECT_READY' else 'not-ready'),
+                'executionMode':'verified-public-claim-or-push-only',
+                'claimOpen':claim_open if 'claim_open' in locals() else False,
                 'walletSigning':'never-automatic'
               }
               opportunities.append(op)
