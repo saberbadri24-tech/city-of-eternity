@@ -111,7 +111,7 @@ jobs:
               elif needs_owner:
                   stage='WAITING_OWNER'
               elif score >= 72 and ('claim' in signals or 'airdrop' in signals or 'reward' in signals):
-                  stage='READY_TO_CLAIM'
+                  stage='COLLECT_READY'
               else:
                   stage='WATCH'
 
@@ -123,7 +123,7 @@ jobs:
                 'actionStage':stage,'detectedAt':now_iso,
                 'temporaryWalletConfigured':bool(wallet.get('temporaryWalletAddress')),
                 'temporaryWalletAddress':wallet.get('temporaryWalletAddress','') if wallet.get('temporaryWalletAddress') else None,
-                'claim':'owner-approved-execution-required' if stage=='WAITING_OWNER' else ('claim-ready' if stage=='READY_TO_CLAIM' else 'not-ready'),
+                'claim':'owner-approved-execution-required' if stage=='WAITING_OWNER' else ('collect-to-temporary-wallet' if stage=='COLLECT_READY' else 'not-ready'),
                 'walletSigning':'never-automatic'
               }
               opportunities.append(op)
@@ -135,22 +135,22 @@ jobs:
                     'action':'complete required login/connection/signature manually, then resume claim',
                     'createdAt':now_iso
                   })
-              elif stage=='READY_TO_CLAIM':
+              elif stage=='COLLECT_READY':
                   approvals.append({
                     'id':op['id'],'name':op['name'],'source':op['source'],
-                    'requiresOwnerApproval':True,'status':'ready-to-claim',
-                    'action':'owner must approve claim transaction before any wallet signature',
+                    'requiresOwnerApproval':True,'status':'collect-ready',
+                    'action':'collect to configured temporary wallet; never transfer to main wallet',
                     'createdAt':now_iso
                   })
 
           report={
             'guard':'ANIL X Immortal Guard','engine':'Airdrop+ X','version':'4.0-claim-pipeline',
-            'lastScan':now_iso,'mode':'monitor -> classify -> claim-ready -> owner approval -> temp wallet -> transfer-ready',
-            'financialActions':'owner-approved-only','walletPrivateKeys':'never-collected',
+            'lastScan':now_iso,'mode':'monitor -> classify -> collect-ready -> temporary-wallet -> owner-approved-transfer',
+            'financialActions':'temporary-wallet-collection-only; main-wallet-transfer-owner-approved','walletPrivateKeys':'never-collected',
             'temporaryWallet': 'configured' if wallet.get('temporaryWalletAddress') else 'not-configured',
             'ownerApprovalRequired':True,'antiSybil':'respected','kycBypass':'disabled','captchaBypass':'disabled',
             'signatureAutomation':'disabled','sourcesScanned':len(rewards['sources']),
-            'readyToClaim':sum(1 for x in opportunities if x['actionStage']=='READY_TO_CLAIM'),
+            'collectReady':sum(1 for x in opportunities if x['actionStage']=='COLLECT_READY'),
             'waitingOwner':sum(1 for x in opportunities if x['actionStage']=='WAITING_OWNER'),
             'blockers':blockers
           }
