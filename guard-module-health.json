@@ -1,0 +1,143 @@
+{
+  "engine": "ANIL X Immortal Guard Modular Core",
+  "version": "1.0.0",
+  "generatedAt": "2026-09-23T16:06:10.637189+00:00",
+  "moduleCount": 8,
+  "modulesAvailable": 8,
+  "requiredStateCount": 12,
+  "validStateCount": 12,
+  "missingModules": [],
+  "missingOrInvalidState": [],
+  "modules": [
+    {
+      "module": "global_discovery",
+      "path": "scripts/global_opportunity_discovery.py",
+      "available": true,
+      "bytes": 6688
+    },
+    {
+      "module": "source_health",
+      "path": "scripts/guard_source_health.py",
+      "available": true,
+      "bytes": 2705
+    },
+    {
+      "module": "source_verification",
+      "path": "scripts/verify_global_discovery.py",
+      "available": true,
+      "bytes": 4874
+    },
+    {
+      "module": "airdrop_guard",
+      "path": "scripts/airdrop_guard.py",
+      "available": true,
+      "bytes": 13313
+    },
+    {
+      "module": "strict_free_token_hunter",
+      "path": "scripts/free_real_token_engine.py",
+      "available": true,
+      "bytes": 8026
+    },
+    {
+      "module": "ton_receipt_monitor",
+      "path": "scripts/guard_ton_receipts.py",
+      "available": true,
+      "bytes": 2496
+    },
+    {
+      "module": "opportunity_intelligence",
+      "path": "scripts/opportunity_intelligence.py",
+      "available": true,
+      "bytes": 6291
+    },
+    {
+      "module": "resilience_lab",
+      "path": "scripts/guard_resilience_lab.py",
+      "available": true,
+      "bytes": 4742
+    }
+  ],
+  "state": [
+    {
+      "file": "guard-discovery.json",
+      "valid": true,
+      "detail": "valid_json",
+      "topLevelType": "dict"
+    },
+    {
+      "file": "guard-source-health.json",
+      "valid": true,
+      "detail": "valid_json",
+      "topLevelType": "dict"
+    },
+    {
+      "file": "guard-wallet.json",
+      "valid": true,
+      "detail": "valid_json",
+      "topLevelType": "dict"
+    },
+    {
+      "file": "guard-status.json",
+      "valid": true,
+      "detail": "valid_json",
+      "topLevelType": "dict"
+    },
+    {
+      "file": "guard-opportunities.json",
+      "valid": true,
+      "detail": "valid_json",
+      "topLevelType": "dict"
+    },
+    {
+      "file": "guard-approvals.json",
+      "valid": true,
+      "detail": "valid_json",
+      "topLevelType": "dict"
+    },
+    {
+      "file": "guard-learning.json",
+      "valid": true,
+      "detail": "valid_json",
+      "topLevelType": "dict"
+    },
+    {
+      "file": "guard-sources.json",
+      "valid": true,
+      "detail": "valid_json",
+      "topLevelType": "dict"
+    },
+    {
+      "file": "guard-opportunity-history.json",
+      "valid": true,
+      "detail": "valid_json",
+      "topLevelType": "dict"
+    },
+    {
+      "file": "guard-receipts.json",
+      "valid": true,
+      "detail": "valid_json",
+      "topLevelType": "dict"
+    },
+    {
+      "file": "guard-claim-adapters.json",
+      "valid": true,
+      "detail": "valid_json",
+      "topLevelType": "dict"
+    },
+    {
+      "file": "guard-free-real-tokens.json",
+      "valid": true,
+      "detail": "valid_json",
+      "topLevelType": "dict"
+    }
+  ],
+  "executionPolicy": {
+    "claim": false,
+    "sign": false,
+    "walletConnect": false,
+    "transfer": false,
+    "ownerApprovalRequired": true
+  },
+  "status": "READY"
+}

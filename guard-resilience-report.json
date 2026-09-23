@@ -1,0 +1,92 @@
+{
+  "engine": "Guard Resilience Lab",
+  "version": "1.0.0",
+  "generatedAt": "2026-09-23T16:06:10.566500+00:00",
+  "cases": 9,
+  "passed": 9,
+  "failed": 0,
+  "results": [
+    {
+      "case": "valid-looking-but-unverified",
+      "expected": "NOT_STRICT_VERIFIED",
+      "passed": true,
+      "findings": [
+        "NOT_STRICT_VERIFIED",
+        "EVIDENCE_INCOMPLETE"
+      ]
+    },
+    {
+      "case": "http-source",
+      "expected": "UNSAFE_URL",
+      "passed": true,
+      "findings": [
+        "UNSAFE_URL",
+        "NOT_STRICT_VERIFIED",
+        "EVIDENCE_INCOMPLETE"
+      ]
+    },
+    {
+      "case": "missing-source",
+      "expected": "MISSING_SOURCE",
+      "passed": true,
+      "findings": [
+        "MISSING_SOURCE",
+        "NOT_STRICT_VERIFIED",
+        "EVIDENCE_INCOMPLETE"
+      ]
+    },
+    {
+      "case": "credential-url",
+      "expected": "URL_CREDENTIALS",
+      "passed": true,
+      "findings": [
+        "URL_CREDENTIALS",
+        "NOT_STRICT_VERIFIED",
+        "EVIDENCE_INCOMPLETE"
+      ]
+    },
+    {
+      "case": "conditional-airdrop",
+      "expected": "CONDITION_PRESENT",
+      "passed": true,
+      "findings": [
+        "CONDITION_PRESENT",
+        "NOT_STRICT_VERIFIED",
+        "EVIDENCE_INCOMPLETE"
+      ]
+    },
+    {
+      "case": "incomplete-proof",
+      "expected": "EVIDENCE_INCOMPLETE",
+      "passed": true,
+      "findings": [
+        "EVIDENCE_INCOMPLETE"
+      ]
+    },
+    {
+      "case": "unsafe-auto-claim",
+      "expected": "AUTOMATION_POLICY_VIOLATION",
+      "passed": true,
+      "findings": [
+        "NOT_STRICT_VERIFIED",
+        "EVIDENCE_INCOMPLETE",
+        "AUTOMATION_POLICY_VIOLATION"
+      ]
+    },
+    {
+      "case": "non-object",
+      "expected": "NOT_OBJECT",
+      "passed": true,
+      "findings": [
+        "NOT_OBJECT"
+      ]
+    },
+    {
+      "case": "stable-dedupe",
+      "expected": "same id yields same key",
+      "passed": true,
+      "findings": []
+    }
+  ],
+  "policy": "Offline QA only. No wallet interaction or asset movement."
+}
