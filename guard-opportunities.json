@@ -1,7 +1,7 @@
 {
   "guard": "ANIL X Immortal Guard",
   "engine": "Airdrop+ X",
-  "updatedAt": "2026-09-23T06:56:01.246546+00:00",
+  "updatedAt": "2026-09-23T10:15:02.573620+00:00",
   "opportunities": [
     {
       "id": "binance-airdrop-portal",
@@ -11,22 +11,24 @@
       "score": 62.4,
       "signals": [],
       "requirements": [],
-      "aiConsensus": {
-        "providers": [],
-        "signals": [],
-        "consensus": false,
-        "execution": "advisory-only"
-      },
       "status": "WATCH",
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T06:56:01.246546+00:00",
+      "detectedAt": "2026-09-23T10:15:02.573620+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
-      "claim": "not-ready",
-      "executionMode": "verified-public-claim-or-push-only",
+      "claim": "not-executed; no protocol-specific adapter verified",
+      "executionMode": "monitor-and-queue-only",
       "claimOpen": false,
       "walletSigning": "never-automatic",
-      "aiProviders": []
+      "aiProviders": {
+        "configuredKeys": {
+          "gemini": false,
+          "claude": false,
+          "astra": false
+        },
+        "liveCalls": "not-implemented",
+        "mode": "not-connected-advisory-only"
+      }
     },
     {
       "id": "binance-learn-earn",
@@ -36,22 +38,24 @@
       "score": 62.4,
       "signals": [],
       "requirements": [],
-      "aiConsensus": {
-        "providers": [],
-        "signals": [],
-        "consensus": false,
-        "execution": "advisory-only"
-      },
       "status": "WATCH",
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T06:56:01.246546+00:00",
+      "detectedAt": "2026-09-23T10:15:02.573620+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
-      "claim": "not-ready",
-      "executionMode": "verified-public-claim-or-push-only",
+      "claim": "not-executed; no protocol-specific adapter verified",
+      "executionMode": "monitor-and-queue-only",
       "claimOpen": false,
       "walletSigning": "never-automatic",
-      "aiProviders": []
+      "aiProviders": {
+        "configuredKeys": {
+          "gemini": false,
+          "claude": false,
+          "astra": false
+        },
+        "liveCalls": "not-implemented",
+        "mode": "not-connected-advisory-only"
+      }
     },
     {
       "id": "binance-alpha",
@@ -61,22 +65,24 @@
       "score": 62.4,
       "signals": [],
       "requirements": [],
-      "aiConsensus": {
-        "providers": [],
-        "signals": [],
-        "consensus": false,
-        "execution": "advisory-only"
-      },
       "status": "WATCH",
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T06:56:01.246546+00:00",
+      "detectedAt": "2026-09-23T10:15:02.573620+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
-      "claim": "not-ready",
-      "executionMode": "verified-public-claim-or-push-only",
+      "claim": "not-executed; no protocol-specific adapter verified",
+      "executionMode": "monitor-and-queue-only",
       "claimOpen": false,
       "walletSigning": "never-automatic",
-      "aiProviders": []
+      "aiProviders": {
+        "configuredKeys": {
+          "gemini": false,
+          "claude": false,
+          "astra": false
+        },
+        "liveCalls": "not-implemented",
+        "mode": "not-connected-advisory-only"
+      }
     },
     {
       "id": "galxe",
@@ -89,25 +95,24 @@
         "tge"
       ],
       "requirements": [],
-      "aiConsensus": {
-        "providers": [],
-        "signals": [
-          "token",
-          "quest"
-        ],
-        "consensus": true,
-        "execution": "advisory-only"
-      },
       "status": "HIGH_PRIORITY",
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T06:56:01.246546+00:00",
+      "detectedAt": "2026-09-23T10:15:02.573620+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
-      "claim": "not-ready",
-      "executionMode": "verified-public-claim-or-push-only",
+      "claim": "not-executed; no protocol-specific adapter verified",
+      "executionMode": "monitor-and-queue-only",
       "claimOpen": false,
       "walletSigning": "never-automatic",
-      "aiProviders": []
+      "aiProviders": {
+        "configuredKeys": {
+          "gemini": false,
+          "claude": false,
+          "astra": false
+        },
+        "liveCalls": "not-implemented",
+        "mode": "not-connected-advisory-only"
+      }
     },
     {
       "id": "zealy",
@@ -130,27 +135,24 @@
         "captcha",
         "login"
       ],
-      "aiConsensus": {
-        "providers": [],
-        "signals": [
-          "claim",
-          "reward",
-          "token",
-          "quest"
-        ],
-        "consensus": true,
-        "execution": "advisory-only"
-      },
       "status": "HIGH_PRIORITY",
       "actionStage": "WAITING_OWNER",
-      "detectedAt": "2026-09-23T06:56:01.246546+00:00",
+      "detectedAt": "2026-09-23T10:15:02.573620+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
-      "claim": "owner-approval-required",
-      "executionMode": "verified-public-claim-or-push-only",
+      "claim": "not-executed; no protocol-specific adapter verified",
+      "executionMode": "monitor-and-queue-only",
       "claimOpen": false,
       "walletSigning": "never-automatic",
-      "aiProviders": []
+      "aiProviders": {
+        "configuredKeys": {
+          "gemini": false,
+          "claude": false,
+          "astra": false
+        },
+        "liveCalls": "not-implemented",
+        "mode": "not-connected-advisory-only"
+      }
     },
     {
       "id": "xdao-ton-airdrop-docs",
@@ -170,29 +172,24 @@
         "register",
         "signature"
       ],
-      "aiConsensus": {
-        "providers": [],
-        "signals": [
-          "airdrop",
-          "claim",
-          "token",
-          "points",
-          "quest",
-          "snapshot"
-        ],
-        "consensus": true,
-        "execution": "advisory-only"
-      },
       "status": "HIGH_PRIORITY",
       "actionStage": "WAITING_OWNER",
-      "detectedAt": "2026-09-23T06:56:01.246546+00:00",
+      "detectedAt": "2026-09-23T10:15:02.573620+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
-      "claim": "owner-approval-required",
-      "executionMode": "verified-public-claim-or-push-only",
+      "claim": "not-executed; no protocol-specific adapter verified",
+      "executionMode": "monitor-and-queue-only",
       "claimOpen": false,
       "walletSigning": "never-automatic",
-      "aiProviders": []
+      "aiProviders": {
+        "configuredKeys": {
+          "gemini": false,
+          "claude": false,
+          "astra": false
+        },
+        "liveCalls": "not-implemented",
+        "mode": "not-connected-advisory-only"
+      }
     }
   ]
 }

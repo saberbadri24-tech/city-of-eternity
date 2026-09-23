@@ -6,8 +6,8 @@
       "type": "airdrop-portal",
       "url": "https://www.binance.com/en/airdrop",
       "httpStatus": 202,
-      "lastScan": "2026-09-23T06:56:01.246546+00:00",
-      "guardVersion": "4.0-claim-pipeline",
+      "lastScan": "2026-09-23T10:15:02.573620+00:00",
+      "guardVersion": "5.0-honest-queue",
       "guardMode": "autonomous-monitoring-and-owner-approved-execution"
     },
     {
@@ -15,8 +15,8 @@
       "type": "learn-and-earn",
       "url": "https://www.binance.com/en/support/announcement/detail/41cd1e09c4814c27bf6d5ce9d61f6e51",
       "httpStatus": 202,
-      "lastScan": "2026-09-23T06:56:01.246546+00:00",
-      "guardVersion": "4.0-claim-pipeline",
+      "lastScan": "2026-09-23T10:15:02.573620+00:00",
+      "guardVersion": "5.0-honest-queue",
       "guardMode": "autonomous-monitoring-and-owner-approved-execution"
     },
     {
@@ -24,8 +24,8 @@
       "type": "alpha-rewards",
       "url": "https://www.binance.com/en/alpha",
       "httpStatus": 202,
-      "lastScan": "2026-09-23T06:56:01.246546+00:00",
-      "guardVersion": "4.0-claim-pipeline",
+      "lastScan": "2026-09-23T10:15:02.573620+00:00",
+      "guardVersion": "5.0-honest-queue",
       "guardMode": "autonomous-monitoring-and-owner-approved-execution"
     },
     {
@@ -33,8 +33,8 @@
       "type": "quest-rewards",
       "url": "https://galxe.com/",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T06:56:01.246546+00:00",
-      "guardVersion": "4.0-claim-pipeline",
+      "lastScan": "2026-09-23T10:15:02.573620+00:00",
+      "guardVersion": "5.0-honest-queue",
       "guardMode": "autonomous-monitoring-and-owner-approved-execution"
     },
     {
@@ -42,8 +42,8 @@
       "type": "quest-rewards",
       "url": "https://layer3.xyz/",
       "httpStatus": 403,
-      "lastScan": "2026-09-23T06:56:01.246546+00:00",
-      "guardVersion": "4.0-claim-pipeline",
+      "lastScan": "2026-09-23T10:15:02.573620+00:00",
+      "guardVersion": "5.0-honest-queue",
       "guardMode": "autonomous-monitoring-and-owner-approved-execution",
       "status": "unavailable",
       "actionStage": "SOURCE_BLOCKED",
@@ -54,8 +54,8 @@
       "type": "quest-rewards",
       "url": "https://zealy.io/",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T06:56:01.246546+00:00",
-      "guardVersion": "4.0-claim-pipeline",
+      "lastScan": "2026-09-23T10:15:02.573620+00:00",
+      "guardVersion": "5.0-honest-queue",
       "guardMode": "autonomous-monitoring-and-owner-approved-execution"
     },
     {
@@ -63,8 +63,8 @@
       "type": "quest-rewards",
       "url": "https://app.questn.com/",
       "httpStatus": 403,
-      "lastScan": "2026-09-23T06:56:01.246546+00:00",
-      "guardVersion": "4.0-claim-pipeline",
+      "lastScan": "2026-09-23T10:15:02.573620+00:00",
+      "guardVersion": "5.0-honest-queue",
       "guardMode": "autonomous-monitoring-and-owner-approved-execution",
       "status": "unavailable",
       "actionStage": "SOURCE_BLOCKED",
@@ -75,12 +75,12 @@
       "type": "airdrop",
       "url": "https://docs.xdao.app/ton/airdrop/",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T06:56:01.246546+00:00",
-      "guardVersion": "4.0-claim-pipeline",
+      "lastScan": "2026-09-23T10:15:02.573620+00:00",
+      "guardVersion": "5.0-honest-queue",
       "guardMode": "autonomous-monitoring-and-owner-approved-execution"
     }
   ],
-  "lastScan": "2026-09-23T06:56:01.246546+00:00",
-  "guardVersion": "4.0-claim-pipeline",
-  "policy": "Claim pipeline activated; no seed/private key; no KYC/CAPTCHA bypass; no Sybil abuse; no automatic wallet signature; owner approval required for financial or signing actions."
+  "lastScan": "2026-09-23T10:15:02.573620+00:00",
+  "guardVersion": "5.0-honest-queue",
+  "policy": "Monitor and queue only. No protocol-specific claim adapters verified; no claims executed. Never collect private keys, bypass KYC/CAPTCHA/Sybil, or sign automatically."
 }
