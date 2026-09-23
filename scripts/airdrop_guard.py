@@ -59,7 +59,7 @@ def review_models(name, url, body):
     if gemini:
         try:
             data = post_json(
-                "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent,
+                "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent",
                 {"contents": [{"parts": [{"text": prompt}]}], "generationConfig": {"temperature": 0.1, "maxOutputTokens": 450}},
                 {"Content-Type": "application/json", "x-goog-api-key": gemini},
             )
