@@ -50,13 +50,15 @@ jobs:
       - name: Build ranked opportunity intelligence report
         run: python3 scripts/opportunity_intelligence.py
 
-      - name: Run strict token hunter regression tests
-        run: python3 -m unittest scripts/test_free_real_token_engine.py -v
+      - name: Run Guard regression suites
+        run: |
+          python3 -m unittest scripts/test_free_real_token_engine.py -v
+          python3 -m unittest scripts/test_opportunity_intelligence.py -v
 
       - name: Validate Guard state
         run: |
           python3 -m json.tool guard-discovery.json >/dev/null
-          python3 -m py_compile scripts/global_opportunity_discovery.py scripts/guard_source_health.py scripts/verify_global_discovery.py scripts/airdrop_guard.py scripts/free_real_token_engine.py scripts/guard_ton_receipts.py scripts/opportunity_intelligence.py scripts/test_free_real_token_engine.py
+          python3 -m py_compile scripts/global_opportunity_discovery.py scripts/guard_source_health.py scripts/verify_global_discovery.py scripts/airdrop_guard.py scripts/free_real_token_engine.py scripts/guard_ton_receipts.py scripts/opportunity_intelligence.py scripts/test_free_real_token_engine.py scripts/test_opportunity_intelligence.py
           python3 -m json.tool guard-source-health.json >/dev/null
           python3 -m json.tool guard-wallet.json >/dev/null
           python3 -m json.tool guard-status.json >/dev/null
