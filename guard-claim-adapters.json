@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "policy": "Adapters are declarations only. No adapter may sign, bypass KYC/CAPTCHA/Sybil controls, or transfer funds without explicit owner approval.",
+  "adapters": [
+    {"id":"ton-passive-receipt","domain":"ton.org","mode":"PASSIVE_RECEIPT_ONLY","requiresOwnerApproval":true,"signing":false},
+    {"id":"binance-rewards","domain":"binance.com","mode":"OWNER_GATED","requiresOwnerApproval":true,"signing":false},
+    {"id":"galxe-quests","domain":"galxe.com","mode":"OWNER_GATED","requiresOwnerApproval":true,"signing":false},
+    {"id":"layer3-quests","domain":"layer3.xyz","mode":"OWNER_GATED","requiresOwnerApproval":true,"signing":false},
+    {"id":"zealy-quests","domain":"zealy.io","mode":"OWNER_GATED","requiresOwnerApproval":true,"signing":false},
+    {"id":"immunefi-bounties","domain":"immunefi.com","mode":"OWNER_GATED","requiresOwnerApproval":true,"signing":false},
+    {"id":"hackerone-bounties","domain":"hackerone.com","mode":"OWNER_GATED","requiresOwnerApproval":true,"signing":false}
+  ]
+}
