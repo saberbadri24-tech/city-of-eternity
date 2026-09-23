@@ -1,24 +1,277 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-09-23T13:51:30.058138+00:00",
+  "updatedAt": "2026-09-23T14:02:39.785393+00:00",
+  "count": 27,
   "approvals": [
+    {
+      "id": "binance-airdrop-portal",
+      "name": "Binance Airdrop Portal",
+      "source": "https://www.binance.com/en/airdrop",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WATCH",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
+    {
+      "id": "binance-learn-earn",
+      "name": "Binance Learn & Earn",
+      "source": "https://www.binance.com/en/support/announcement/detail/41cd1e09c4814c27bf6d5ce9d61f6e51",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WATCH",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
+    {
+      "id": "binance-alpha",
+      "name": "Binance Alpha",
+      "source": "https://www.binance.com/en/alpha",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WATCH",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
+    {
+      "id": "galxe",
+      "name": "Galxe",
+      "source": "https://galxe.com/",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WATCH",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
     {
       "id": "zealy",
       "name": "Zealy",
       "source": "https://zealy.io/",
       "requiresOwnerApproval": true,
-      "status": "owner-action-required",
-      "action": "Review the official claim flow. This scan did not submit a claim or move funds.",
-      "createdAt": "2026-09-23T13:51:30.058138+00:00"
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WAITING_OWNER",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
     },
     {
       "id": "xdao-ton-airdrop-docs",
       "name": "XDAO TON Airdrop Docs",
       "source": "https://docs.xdao.app/ton/airdrop/",
       "requiresOwnerApproval": true,
-      "status": "owner-action-required",
-      "action": "Review the official claim flow. This scan did not submit a claim or move funds.",
-      "createdAt": "2026-09-23T13:51:30.058138+00:00"
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WAITING_OWNER",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
+    {
+      "id": "ton-blog",
+      "name": "TON Blog",
+      "source": "https://blog.ton.org/",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WATCH",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
+    {
+      "id": "solana-ecosystem",
+      "name": "Solana Ecosystem",
+      "source": "https://solana.com/ecosystem",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WATCH",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
+    {
+      "id": "base-ecosystem",
+      "name": "Base Ecosystem",
+      "source": "https://www.base.org/ecosystem",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WATCH",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
+    {
+      "id": "polygon-ecosystem",
+      "name": "Polygon Ecosystem",
+      "source": "https://polygon.technology/ecosystem",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WAITING_OWNER",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
+    {
+      "id": "avalanche-ecosystem",
+      "name": "Avalanche Ecosystem",
+      "source": "https://www.avax.network/",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WAITING_OWNER",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
+    {
+      "id": "starknet-ecosystem",
+      "name": "Starknet Ecosystem",
+      "source": "https://www.starknet.io/ecosystem/",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WAITING_OWNER",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
+    {
+      "id": "zksync-ecosystem",
+      "name": "zkSync Ecosystem",
+      "source": "https://www.zksync.io/ecosystem",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WATCH",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
+    {
+      "id": "celestia-ecosystem",
+      "name": "Celestia Ecosystem",
+      "source": "https://celestia.org/ecosystem/",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WATCH",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
+    {
+      "id": "cosmos-ecosystem",
+      "name": "Cosmos Ecosystem",
+      "source": "https://cosmos.network/ecosystem",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WATCH",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
+    {
+      "id": "near-ecosystem",
+      "name": "NEAR Ecosystem",
+      "source": "https://near.org/ecosystem/",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WAITING_OWNER",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
+    {
+      "id": "sui-ecosystem",
+      "name": "Sui Ecosystem",
+      "source": "https://sui.io/ecosystem",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WATCH",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
+    {
+      "id": "polkadot-ecosystem",
+      "name": "Polkadot Ecosystem",
+      "source": "https://polkadot.com/ecosystem",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WATCH",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
+    {
+      "id": "chainlink-ecosystem",
+      "name": "Chainlink Ecosystem",
+      "source": "https://chain.link/ecosystem",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WATCH",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
+    {
+      "id": "gitcoin",
+      "name": "Gitcoin",
+      "source": "https://www.gitcoin.co/",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WATCH",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
+    {
+      "id": "hackerone",
+      "name": "HackerOne",
+      "source": "https://www.hackerone.com/",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WAITING_OWNER",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
+    {
+      "id": "immunefi",
+      "name": "Immunefi",
+      "source": "https://immunefi.com/",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WAITING_OWNER",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
+    {
+      "id": "code4rena",
+      "name": "Code4rena",
+      "source": "https://code4rena.com/",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WAITING_OWNER",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
+    {
+      "id": "sherlock",
+      "name": "Sherlock",
+      "source": "https://www.sherlock.xyz/",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WAITING_OWNER",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
+    {
+      "id": "coinbase-learn",
+      "name": "Coinbase Learn",
+      "source": "https://www.coinbase.com/learn",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WAITING_OWNER",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
+    {
+      "id": "binance-research",
+      "name": "Binance Research",
+      "source": "https://research.binance.com/",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WATCH",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
+    },
+    {
+      "id": "coinmarketcap-airdrops",
+      "name": "CoinMarketCap Airdrops",
+      "source": "https://coinmarketcap.com/airdrop/",
+      "requiresOwnerApproval": true,
+      "status": "WAITING_OWNER_APPROVAL",
+      "lastActionStage": "WATCH",
+      "createdAt": "2026-09-23T14:02:39.785393+00:00",
+      "updatedAt": "2026-09-23T14:02:39.785393+00:00"
     }
   ]
 }

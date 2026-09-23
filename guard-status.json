@@ -2,11 +2,11 @@
   "guard": "ANIL X Immortal Guard",
   "engine": "Airdrop+ X",
   "version": "7.0-safe-advisory",
-  "lastScan": "2026-09-23T13:51:30.058138+00:00",
-  "sourcesScanned": 8,
-  "sourcesReachable": 6,
+  "lastScan": "2026-09-23T14:02:39.785393+00:00",
+  "sourcesScanned": 36,
+  "sourcesReachable": 27,
   "claimPathsDetected": 0,
-  "waitingOwner": 2,
+  "waitingOwner": 11,
   "mode": "discover -> inspect -> triage -> queue; no claim execution",
   "financialActions": "no automated claim/transfer; owner approval required for wallet signatures and transfers",
   "temporaryWallet": "configured",
@@ -32,6 +32,34 @@
     {
       "source": "QuestN",
       "httpStatus": 403
+    },
+    {
+      "source": "TON Ecosystem",
+      "httpStatus": 404
+    },
+    {
+      "source": "Ethereum Ecosystem",
+      "httpStatus": 404
+    },
+    {
+      "source": "Arbitrum Ecosystem",
+      "httpStatus": 403
+    },
+    {
+      "source": "Optimism Ecosystem",
+      "httpStatus": 404
+    },
+    {
+      "source": "Scroll Ecosystem",
+      "httpStatus": 404
+    },
+    {
+      "source": "Linea Ecosystem",
+      "httpStatus": 403
+    },
+    {
+      "source": "Aptos Ecosystem",
+      "httpStatus": 429
     }
   ]
 }

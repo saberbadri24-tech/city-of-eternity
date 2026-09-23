@@ -1,6 +1,479 @@
 {
   "version": "1.0",
-  "updatedAt": null,
-  "count": 0,
-  "items": []
+  "updatedAt": "2026-09-23T14:02:39.785393+00:00",
+  "count": 27,
+  "items": [
+    {
+      "id": "binance-airdrop-portal",
+      "name": "Binance Airdrop Portal",
+      "source": "https://www.binance.com/en/airdrop",
+      "type": "airdrop-portal",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WATCH",
+      "lastSignals": [],
+      "lastRequirements": [],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "binance-learn-earn",
+      "name": "Binance Learn & Earn",
+      "source": "https://www.binance.com/en/support/announcement/detail/41cd1e09c4814c27bf6d5ce9d61f6e51",
+      "type": "learn-and-earn",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WATCH",
+      "lastSignals": [],
+      "lastRequirements": [],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "binance-alpha",
+      "name": "Binance Alpha",
+      "source": "https://www.binance.com/en/alpha",
+      "type": "alpha-rewards",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WATCH",
+      "lastSignals": [],
+      "lastRequirements": [],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "galxe",
+      "name": "Galxe",
+      "source": "https://galxe.com/",
+      "type": "quest-rewards",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WATCH",
+      "lastSignals": [
+        "token",
+        "quest"
+      ],
+      "lastRequirements": [],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "zealy",
+      "name": "Zealy",
+      "source": "https://zealy.io/",
+      "type": "quest-rewards",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WAITING_OWNER",
+      "lastSignals": [
+        "claim",
+        "reward",
+        "token",
+        "quest"
+      ],
+      "lastRequirements": [
+        "login"
+      ],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "xdao-ton-airdrop-docs",
+      "name": "XDAO TON Airdrop Docs",
+      "source": "https://docs.xdao.app/ton/airdrop/",
+      "type": "airdrop",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WAITING_OWNER",
+      "lastSignals": [
+        "airdrop",
+        "claim",
+        "token"
+      ],
+      "lastRequirements": [
+        "register"
+      ],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "ton-blog",
+      "name": "TON Blog",
+      "source": "https://blog.ton.org/",
+      "type": "announcements",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WATCH",
+      "lastSignals": [
+        "token"
+      ],
+      "lastRequirements": [],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "solana-ecosystem",
+      "name": "Solana Ecosystem",
+      "source": "https://solana.com/ecosystem",
+      "type": "ecosystem",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WATCH",
+      "lastSignals": [
+        "claim",
+        "token",
+        "quest"
+      ],
+      "lastRequirements": [],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "base-ecosystem",
+      "name": "Base Ecosystem",
+      "source": "https://www.base.org/ecosystem",
+      "type": "ecosystem",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WATCH",
+      "lastSignals": [
+        "quest"
+      ],
+      "lastRequirements": [],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "polygon-ecosystem",
+      "name": "Polygon Ecosystem",
+      "source": "https://polygon.technology/ecosystem",
+      "type": "ecosystem",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WAITING_OWNER",
+      "lastSignals": [
+        "token"
+      ],
+      "lastRequirements": [
+        "register"
+      ],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "avalanche-ecosystem",
+      "name": "Avalanche Ecosystem",
+      "source": "https://www.avax.network/",
+      "type": "ecosystem",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WAITING_OWNER",
+      "lastSignals": [
+        "token"
+      ],
+      "lastRequirements": [
+        "register"
+      ],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "starknet-ecosystem",
+      "name": "Starknet Ecosystem",
+      "source": "https://www.starknet.io/ecosystem/",
+      "type": "ecosystem",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WAITING_OWNER",
+      "lastSignals": [
+        "claim",
+        "quest"
+      ],
+      "lastRequirements": [
+        "captcha",
+        "login"
+      ],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "zksync-ecosystem",
+      "name": "zkSync Ecosystem",
+      "source": "https://www.zksync.io/ecosystem",
+      "type": "ecosystem",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WATCH",
+      "lastSignals": [],
+      "lastRequirements": [],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "celestia-ecosystem",
+      "name": "Celestia Ecosystem",
+      "source": "https://celestia.org/ecosystem/",
+      "type": "ecosystem",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WATCH",
+      "lastSignals": [
+        "token",
+        "points",
+        "quest"
+      ],
+      "lastRequirements": [],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "cosmos-ecosystem",
+      "name": "Cosmos Ecosystem",
+      "source": "https://cosmos.network/ecosystem",
+      "type": "ecosystem",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WATCH",
+      "lastSignals": [],
+      "lastRequirements": [],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "near-ecosystem",
+      "name": "NEAR Ecosystem",
+      "source": "https://near.org/ecosystem/",
+      "type": "ecosystem",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WAITING_OWNER",
+      "lastSignals": [
+        "reward",
+        "token",
+        "points",
+        "quest"
+      ],
+      "lastRequirements": [
+        "signature"
+      ],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "sui-ecosystem",
+      "name": "Sui Ecosystem",
+      "source": "https://sui.io/ecosystem",
+      "type": "ecosystem",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WATCH",
+      "lastSignals": [
+        "token",
+        "quest"
+      ],
+      "lastRequirements": [],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "polkadot-ecosystem",
+      "name": "Polkadot Ecosystem",
+      "source": "https://polkadot.com/ecosystem",
+      "type": "ecosystem",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WATCH",
+      "lastSignals": [
+        "quest"
+      ],
+      "lastRequirements": [],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "chainlink-ecosystem",
+      "name": "Chainlink Ecosystem",
+      "source": "https://chain.link/ecosystem",
+      "type": "ecosystem",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WATCH",
+      "lastSignals": [
+        "token",
+        "quest"
+      ],
+      "lastRequirements": [],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "gitcoin",
+      "name": "Gitcoin",
+      "source": "https://www.gitcoin.co/",
+      "type": "grants-rewards",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WATCH",
+      "lastSignals": [
+        "token",
+        "quest"
+      ],
+      "lastRequirements": [],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "hackerone",
+      "name": "HackerOne",
+      "source": "https://www.hackerone.com/",
+      "type": "bug-bounty",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WAITING_OWNER",
+      "lastSignals": [
+        "token",
+        "points"
+      ],
+      "lastRequirements": [
+        "login"
+      ],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "immunefi",
+      "name": "Immunefi",
+      "source": "https://immunefi.com/",
+      "type": "bug-bounty",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WAITING_OWNER",
+      "lastSignals": [
+        "token"
+      ],
+      "lastRequirements": [
+        "login"
+      ],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "code4rena",
+      "name": "Code4rena",
+      "source": "https://code4rena.com/",
+      "type": "bug-bounty",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WAITING_OWNER",
+      "lastSignals": [
+        "reward",
+        "token"
+      ],
+      "lastRequirements": [
+        "register",
+        "login"
+      ],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "sherlock",
+      "name": "Sherlock",
+      "source": "https://www.sherlock.xyz/",
+      "type": "bug-bounty",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WAITING_OWNER",
+      "lastSignals": [
+        "quest",
+        "snapshot"
+      ],
+      "lastRequirements": [
+        "register"
+      ],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "coinbase-learn",
+      "name": "Coinbase Learn",
+      "source": "https://www.coinbase.com/learn",
+      "type": "rewards-education",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WAITING_OWNER",
+      "lastSignals": [
+        "claim",
+        "reward",
+        "token",
+        "points",
+        "quest"
+      ],
+      "lastRequirements": [
+        "kyc",
+        "captcha"
+      ],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "binance-research",
+      "name": "Binance Research",
+      "source": "https://research.binance.com/",
+      "type": "research",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WATCH",
+      "lastSignals": [],
+      "lastRequirements": [],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    },
+    {
+      "id": "coinmarketcap-airdrops",
+      "name": "CoinMarketCap Airdrops",
+      "source": "https://coinmarketcap.com/airdrop/",
+      "type": "airdrop-discovery",
+      "firstSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastSeenAt": "2026-09-23T14:02:39.785393+00:00",
+      "lastActionStage": "WATCH",
+      "lastSignals": [
+        "airdrop",
+        "token",
+        "quest",
+        "snapshot"
+      ],
+      "lastRequirements": [],
+      "status": "WAITING_OWNER_APPROVAL",
+      "ownerApprovalRequired": true,
+      "claimExecuted": false
+    }
+  ]
 }

@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-09-23T13:51:30.058138+00:00",
+  "updatedAt": "2026-09-23T14:02:39.785393+00:00",
   "opportunities": [
     {
       "id": "binance-airdrop-portal",
@@ -10,7 +10,7 @@
       "signals": [],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T13:51:30.058138+00:00",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
@@ -41,7 +41,7 @@
       "signals": [],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T13:51:30.058138+00:00",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
@@ -72,7 +72,7 @@
       "signals": [],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T13:51:30.058138+00:00",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
@@ -106,7 +106,7 @@
       ],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T13:51:30.058138+00:00",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
@@ -144,7 +144,7 @@
         "login"
       ],
       "actionStage": "WAITING_OWNER",
-      "detectedAt": "2026-09-23T13:51:30.058138+00:00",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
@@ -181,7 +181,7 @@
         "register"
       ],
       "actionStage": "WAITING_OWNER",
-      "detectedAt": "2026-09-23T13:51:30.058138+00:00",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
@@ -191,6 +191,735 @@
         "role": "local-risk-triage",
         "blocked_by_kyc_or_captcha": false,
         "owner_interaction_required": true,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
+      }
+    },
+    {
+      "id": "ton-blog",
+      "name": "TON Blog",
+      "source": "https://blog.ton.org/",
+      "type": "announcements",
+      "signals": [
+        "token"
+      ],
+      "requirements": [],
+      "actionStage": "WATCH",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
+      "temporaryWalletConfigured": true,
+      "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "executionMode": "monitor-and-queue-only",
+      "walletSigning": "never-automatic",
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": false,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
+      }
+    },
+    {
+      "id": "solana-ecosystem",
+      "name": "Solana Ecosystem",
+      "source": "https://solana.com/ecosystem",
+      "type": "ecosystem",
+      "signals": [
+        "claim",
+        "token",
+        "quest"
+      ],
+      "requirements": [],
+      "actionStage": "WATCH",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
+      "temporaryWalletConfigured": true,
+      "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "executionMode": "monitor-and-queue-only",
+      "walletSigning": "never-automatic",
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": false,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
+      }
+    },
+    {
+      "id": "base-ecosystem",
+      "name": "Base Ecosystem",
+      "source": "https://www.base.org/ecosystem",
+      "type": "ecosystem",
+      "signals": [
+        "quest"
+      ],
+      "requirements": [],
+      "actionStage": "WATCH",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
+      "temporaryWalletConfigured": true,
+      "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "executionMode": "monitor-and-queue-only",
+      "walletSigning": "never-automatic",
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": false,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
+      }
+    },
+    {
+      "id": "polygon-ecosystem",
+      "name": "Polygon Ecosystem",
+      "source": "https://polygon.technology/ecosystem",
+      "type": "ecosystem",
+      "signals": [
+        "token"
+      ],
+      "requirements": [
+        "register"
+      ],
+      "actionStage": "WAITING_OWNER",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
+      "temporaryWalletConfigured": true,
+      "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "executionMode": "monitor-and-queue-only",
+      "walletSigning": "never-automatic",
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": true,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
+      }
+    },
+    {
+      "id": "avalanche-ecosystem",
+      "name": "Avalanche Ecosystem",
+      "source": "https://www.avax.network/",
+      "type": "ecosystem",
+      "signals": [
+        "token"
+      ],
+      "requirements": [
+        "register"
+      ],
+      "actionStage": "WAITING_OWNER",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
+      "temporaryWalletConfigured": true,
+      "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "executionMode": "monitor-and-queue-only",
+      "walletSigning": "never-automatic",
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": true,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
+      }
+    },
+    {
+      "id": "starknet-ecosystem",
+      "name": "Starknet Ecosystem",
+      "source": "https://www.starknet.io/ecosystem/",
+      "type": "ecosystem",
+      "signals": [
+        "claim",
+        "quest"
+      ],
+      "requirements": [
+        "captcha",
+        "login"
+      ],
+      "actionStage": "WAITING_OWNER",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
+      "temporaryWalletConfigured": true,
+      "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "executionMode": "monitor-and-queue-only",
+      "walletSigning": "never-automatic",
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": true,
+        "owner_interaction_required": true,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
+      }
+    },
+    {
+      "id": "zksync-ecosystem",
+      "name": "zkSync Ecosystem",
+      "source": "https://www.zksync.io/ecosystem",
+      "type": "ecosystem",
+      "signals": [],
+      "requirements": [],
+      "actionStage": "WATCH",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
+      "temporaryWalletConfigured": true,
+      "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "executionMode": "monitor-and-queue-only",
+      "walletSigning": "never-automatic",
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": false,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
+      }
+    },
+    {
+      "id": "celestia-ecosystem",
+      "name": "Celestia Ecosystem",
+      "source": "https://celestia.org/ecosystem/",
+      "type": "ecosystem",
+      "signals": [
+        "token",
+        "points",
+        "quest"
+      ],
+      "requirements": [],
+      "actionStage": "WATCH",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
+      "temporaryWalletConfigured": true,
+      "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "executionMode": "monitor-and-queue-only",
+      "walletSigning": "never-automatic",
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": false,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
+      }
+    },
+    {
+      "id": "cosmos-ecosystem",
+      "name": "Cosmos Ecosystem",
+      "source": "https://cosmos.network/ecosystem",
+      "type": "ecosystem",
+      "signals": [],
+      "requirements": [],
+      "actionStage": "WATCH",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
+      "temporaryWalletConfigured": true,
+      "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "executionMode": "monitor-and-queue-only",
+      "walletSigning": "never-automatic",
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": false,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
+      }
+    },
+    {
+      "id": "near-ecosystem",
+      "name": "NEAR Ecosystem",
+      "source": "https://near.org/ecosystem/",
+      "type": "ecosystem",
+      "signals": [
+        "reward",
+        "token",
+        "points",
+        "quest"
+      ],
+      "requirements": [
+        "signature"
+      ],
+      "actionStage": "WAITING_OWNER",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
+      "temporaryWalletConfigured": true,
+      "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "executionMode": "monitor-and-queue-only",
+      "walletSigning": "never-automatic",
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": true,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
+      }
+    },
+    {
+      "id": "sui-ecosystem",
+      "name": "Sui Ecosystem",
+      "source": "https://sui.io/ecosystem",
+      "type": "ecosystem",
+      "signals": [
+        "token",
+        "quest"
+      ],
+      "requirements": [],
+      "actionStage": "WATCH",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
+      "temporaryWalletConfigured": true,
+      "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "executionMode": "monitor-and-queue-only",
+      "walletSigning": "never-automatic",
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": false,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
+      }
+    },
+    {
+      "id": "polkadot-ecosystem",
+      "name": "Polkadot Ecosystem",
+      "source": "https://polkadot.com/ecosystem",
+      "type": "ecosystem",
+      "signals": [
+        "quest"
+      ],
+      "requirements": [],
+      "actionStage": "WATCH",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
+      "temporaryWalletConfigured": true,
+      "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "executionMode": "monitor-and-queue-only",
+      "walletSigning": "never-automatic",
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": false,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
+      }
+    },
+    {
+      "id": "chainlink-ecosystem",
+      "name": "Chainlink Ecosystem",
+      "source": "https://chain.link/ecosystem",
+      "type": "ecosystem",
+      "signals": [
+        "token",
+        "quest"
+      ],
+      "requirements": [],
+      "actionStage": "WATCH",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
+      "temporaryWalletConfigured": true,
+      "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "executionMode": "monitor-and-queue-only",
+      "walletSigning": "never-automatic",
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": false,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
+      }
+    },
+    {
+      "id": "gitcoin",
+      "name": "Gitcoin",
+      "source": "https://www.gitcoin.co/",
+      "type": "grants-rewards",
+      "signals": [
+        "token",
+        "quest"
+      ],
+      "requirements": [],
+      "actionStage": "WATCH",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
+      "temporaryWalletConfigured": true,
+      "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "executionMode": "monitor-and-queue-only",
+      "walletSigning": "never-automatic",
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": false,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
+      }
+    },
+    {
+      "id": "hackerone",
+      "name": "HackerOne",
+      "source": "https://www.hackerone.com/",
+      "type": "bug-bounty",
+      "signals": [
+        "token",
+        "points"
+      ],
+      "requirements": [
+        "login"
+      ],
+      "actionStage": "WAITING_OWNER",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
+      "temporaryWalletConfigured": true,
+      "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "executionMode": "monitor-and-queue-only",
+      "walletSigning": "never-automatic",
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": true,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
+      }
+    },
+    {
+      "id": "immunefi",
+      "name": "Immunefi",
+      "source": "https://immunefi.com/",
+      "type": "bug-bounty",
+      "signals": [
+        "token"
+      ],
+      "requirements": [
+        "login"
+      ],
+      "actionStage": "WAITING_OWNER",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
+      "temporaryWalletConfigured": true,
+      "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "executionMode": "monitor-and-queue-only",
+      "walletSigning": "never-automatic",
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": true,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
+      }
+    },
+    {
+      "id": "code4rena",
+      "name": "Code4rena",
+      "source": "https://code4rena.com/",
+      "type": "bug-bounty",
+      "signals": [
+        "reward",
+        "token"
+      ],
+      "requirements": [
+        "register",
+        "login"
+      ],
+      "actionStage": "WAITING_OWNER",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
+      "temporaryWalletConfigured": true,
+      "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "executionMode": "monitor-and-queue-only",
+      "walletSigning": "never-automatic",
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": true,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
+      }
+    },
+    {
+      "id": "sherlock",
+      "name": "Sherlock",
+      "source": "https://www.sherlock.xyz/",
+      "type": "bug-bounty",
+      "signals": [
+        "quest",
+        "snapshot"
+      ],
+      "requirements": [
+        "register"
+      ],
+      "actionStage": "WAITING_OWNER",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
+      "temporaryWalletConfigured": true,
+      "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "executionMode": "monitor-and-queue-only",
+      "walletSigning": "never-automatic",
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": true,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
+      }
+    },
+    {
+      "id": "coinbase-learn",
+      "name": "Coinbase Learn",
+      "source": "https://www.coinbase.com/learn",
+      "type": "rewards-education",
+      "signals": [
+        "claim",
+        "reward",
+        "token",
+        "points",
+        "quest"
+      ],
+      "requirements": [
+        "kyc",
+        "captcha"
+      ],
+      "actionStage": "WAITING_OWNER",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
+      "temporaryWalletConfigured": true,
+      "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "executionMode": "monitor-and-queue-only",
+      "walletSigning": "never-automatic",
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": true,
+        "owner_interaction_required": false,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
+      }
+    },
+    {
+      "id": "binance-research",
+      "name": "Binance Research",
+      "source": "https://research.binance.com/",
+      "type": "research",
+      "signals": [],
+      "requirements": [],
+      "actionStage": "WATCH",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
+      "temporaryWalletConfigured": true,
+      "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "executionMode": "monitor-and-queue-only",
+      "walletSigning": "never-automatic",
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": false,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
+      }
+    },
+    {
+      "id": "coinmarketcap-airdrops",
+      "name": "CoinMarketCap Airdrops",
+      "source": "https://coinmarketcap.com/airdrop/",
+      "type": "airdrop-discovery",
+      "signals": [
+        "airdrop",
+        "token",
+        "quest",
+        "snapshot"
+      ],
+      "requirements": [],
+      "actionStage": "WATCH",
+      "detectedAt": "2026-09-23T14:02:39.785393+00:00",
+      "temporaryWalletConfigured": true,
+      "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "executionMode": "monitor-and-queue-only",
+      "walletSigning": "never-automatic",
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": false,
         "explicit_claim_language": false,
         "automatic_distribution_language": false
       },
