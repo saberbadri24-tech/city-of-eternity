@@ -4,7 +4,6 @@ import datetime as dt
 import hashlib
 import json
 from pathlib import Path
-from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 NOW = dt.datetime.now(dt.timezone.utc)
@@ -53,15 +52,12 @@ def score(item):
     evidence = item.get("evidence") or {}
     if not isinstance(evidence, dict):
         evidence = {}
-    points = 0
-    points += 35 if item.get("status") == "VERIFIED_FREE_REAL_TOKEN" else 0
+    points = 35 if item.get("status") == "VERIFIED_FREE_REAL_TOKEN" else 0
     points += min(20, 5 * len(evidence.get("live", [])))
     points += min(15, 5 * len(evidence.get("free", [])))
     points += min(15, 5 * len(evidence.get("tokenIdentity", [])))
-    url = item.get("url") or item.get("source") or item.get("link") or ""
-    host = urlparse(url).hostname or ""
-    trusted = bool(item.get("officialDomain")) or host.endswith((".org", ".com", ".io", ".xyz", ".foundation"))
-    points += 10 if trusted else 0
+    # Domain suffix alone is not proof of an official source.
+    points += 10 if item.get("officialDomain") is True or item.get("sourceTrust") == "official" else 0
     points -= 100 if evidence.get("requiredConditions") else 0
     points -= 100 if item.get("rejectionReasons") else 0
     return max(0, min(100, points))
@@ -76,19 +72,19 @@ def main():
     history_items = items_of(history, "items", "opportunities")
     discovery_items = items_of(discovery, "items", "opportunities", "results")
 
-    # Merge by stable identity; keep the strongest/latest representation without deleting leads.
+    # Merge by stable identity; keep leads from all inputs, including unverified ones.
     merged = {}
     for origin, collection in (("history", history_items), ("discovery", discovery_items), ("strict", strict_items)):
         for item in collection:
             key = identity(item)
             row = merged.setdefault(key, {"id": key, "sourcesSeenIn": []})
+            origins = row["sourcesSeenIn"]
             row.update(item)
-            if origin not in row["sourcesSeenIn"]:
-                row["sourcesSeenIn"].append(origin)
+            row["sourcesSeenIn"] = list(dict.fromkeys(origins + [origin]))
             row["id"] = key
 
     ranked = []
-    for key, item in merged.items():
+    for item in merged.values():
         row = dict(item)
         row["intelligenceScore"] = score(row)
         row["strictlyVerifiedFreeRealToken"] = row.get("status") == "VERIFIED_FREE_REAL_TOKEN"
@@ -103,34 +99,31 @@ def main():
         row["claimExecuted"] = False
         ranked.append(row)
 
-    ranked.sort(key=lambda x: (x["expiryStatus"] == "EXPIRED", x["priority"] != "P1_NOW", x["intelligenceScore"] * -1, x.get("name", "")))
+    ranked.sort(key=lambda x: (x["expiryStatus"] == "EXPIRED", x["priority"] != "P1_NOW", -x["intelligenceScore"], x.get("name", "")))
     status_counts = {}
     for item in history_items:
         status = item.get("strictFreeTokenStatus", item.get("status", "UNKNOWN"))
         status_counts[status] = status_counts.get(status, 0) + 1
-    strict_verified = sum(1 for row in ranked if row["strictlyVerifiedFreeRealToken"])
+    summary = {
+        "discoverySignals": len(discovery_items),
+        "durableHistoryRecords": len(history_items),
+        "uniqueTrackedOpportunities": len(ranked),
+        "strictVerifiedFreeTokens": sum(1 for x in ranked if x["strictlyVerifiedFreeRealToken"]),
+        "receiptRecords": len(items_of(receipts, "items", "receipts")),
+        "expiringWithin24h": sum(1 for x in ranked if x["expiryStatus"] == "EXPIRING_24H"),
+        "expired": sum(1 for x in ranked if x["expiryStatus"] == "EXPIRED"),
+        "staleOrUnknown": sum(1 for x in ranked if x["freshness"] != "FRESH_24H"),
+        "historyStatuses": status_counts,
+    }
     report = {
-        "guard": "ANIL X Immortal Guard",
-        "engine": "Opportunity Intelligence Layer",
-        "version": "2.0",
-        "generatedAt": NOW.isoformat(),
-        "summary": {
-            "discoverySignals": len(discovery_items),
-            "durableHistoryRecords": len(history_items),
-            "uniqueTrackedOpportunities": len(ranked),
-            "strictVerifiedFreeTokens": strict_verified,
-            "receiptRecords": len(items_of(receipts, "items", "receipts")),
-            "expiringWithin24h": sum(1 for x in ranked if x["expiryStatus"] == "EXPIRING_24H"),
-            "expired": sum(1 for x in ranked if x["expiryStatus"] == "EXPIRED"),
-            "staleOrUnknown": sum(1 for x in ranked if x["freshness"] != "FRESH_24H"),
-            "historyStatuses": status_counts,
-        },
+        "guard": "ANIL X Immortal Guard", "engine": "Opportunity Intelligence Layer", "version": "2.1",
+        "generatedAt": NOW.isoformat(), "summary": summary,
         "rankedVerifiedOpportunities": [x for x in ranked if x["strictlyVerifiedFreeRealToken"]],
         "trackedLeads": ranked,
         "policy": "Ranking is advisory. No claim, signing, wallet connection, KYC/CAPTCHA bypass, or transfer is initiated. Owner approval is required for every opportunity-specific action.",
     }
     (ROOT / "guard-intelligence.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps({"status": "intelligence_complete", **report["summary"]}, ensure_ascii=False))
+    print(json.dumps({"status": "intelligence_complete", **summary}, ensure_ascii=False))
 
 
 if __name__ == "__main__":
