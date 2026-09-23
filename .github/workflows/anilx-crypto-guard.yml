@@ -44,10 +44,13 @@ jobs:
           TONCENTER_API_KEY: ${{ secrets.TONCENTER_API_KEY }}
         run: python3 scripts/guard_ton_receipts.py
 
+      - name: Run strict token hunter regression tests
+        run: python3 -m unittest scripts/test_free_real_token_engine.py -v
+
       - name: Validate Guard state
         run: |
           python3 -m json.tool guard-discovery.json >/dev/null
-          python3 -m py_compile scripts/global_opportunity_discovery.py scripts/verify_global_discovery.py scripts/airdrop_guard.py scripts/free_real_token_engine.py scripts/guard_ton_receipts.py
+          python3 -m py_compile scripts/global_opportunity_discovery.py scripts/verify_global_discovery.py scripts/airdrop_guard.py scripts/free_real_token_engine.py scripts/guard_ton_receipts.py scripts/test_free_real_token_engine.py
           python3 -m json.tool guard-wallet.json >/dev/null
           python3 -m json.tool guard-status.json >/dev/null
           python3 -m json.tool guard-opportunities.json >/dev/null
