@@ -30,10 +30,27 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: python3 scripts/airdrop_guard.py
 
+      - name: Verify temporary TON wallet receipts
+        env:
+          TONCENTER_API_KEY: ${{ secrets.TONCENTER_API_KEY }}
+        run: python3 scripts/guard_ton_receipts.py
+
+      - name: Validate Guard state
+        run: |
+          python3 -m json.tool guard-wallet.json >/dev/null
+          python3 -m json.tool guard-status.json >/dev/null
+          python3 -m json.tool guard-opportunities.json >/dev/null
+          python3 -m json.tool guard-approvals.json >/dev/null
+          python3 -m json.tool guard-learning.json >/dev/null
+          python3 -m json.tool guard-sources.json >/dev/null
+          python3 -m json.tool rewards.json >/dev/null
+          python3 -m json.tool guard-opportunity-history.json >/dev/null
+          python3 -m json.tool guard-receipts.json >/dev/null
+
       - name: Commit Guard state
         run: |
           git config user.name 'ANIL X Immortal Guard'
           git config user.email 'actions@users.noreply.github.com'
-          git add rewards.json guard-status.json guard-approvals.json guard-opportunities.json guard-learning.json
+          git add rewards.json guard-status.json guard-approvals.json guard-opportunities.json guard-learning.json guard-sources.json guard-wallet.json guard-opportunity-history.json guard-receipts.json
           git diff --cached --quiet || git commit -m 'chore: refresh airdrop guard scan'
           git push
