@@ -36,6 +36,9 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: python3 scripts/airdrop_guard.py
 
+      - name: Run strict free real token hunter
+        run: python3 scripts/free_real_token_engine.py
+
       - name: Verify temporary TON wallet receipts
         env:
           TONCENTER_API_KEY: ${{ secrets.TONCENTER_API_KEY }}
@@ -44,7 +47,7 @@ jobs:
       - name: Validate Guard state
         run: |
           python3 -m json.tool guard-discovery.json >/dev/null
-          python3 -m py_compile scripts/global_opportunity_discovery.py scripts/verify_global_discovery.py scripts/airdrop_guard.py scripts/guard_ton_receipts.py
+          python3 -m py_compile scripts/global_opportunity_discovery.py scripts/verify_global_discovery.py scripts/airdrop_guard.py scripts/free_real_token_engine.py scripts/guard_ton_receipts.py
           python3 -m json.tool guard-wallet.json >/dev/null
           python3 -m json.tool guard-status.json >/dev/null
           python3 -m json.tool guard-opportunities.json >/dev/null
@@ -55,11 +58,12 @@ jobs:
           python3 -m json.tool guard-opportunity-history.json >/dev/null
           python3 -m json.tool guard-receipts.json >/dev/null
           python3 -m json.tool guard-claim-adapters.json >/dev/null
+          python3 -m json.tool guard-free-real-tokens.json >/dev/null
 
       - name: Commit Guard state
         run: |
           git config user.name 'ANIL X Immortal Guard'
           git config user.email 'actions@users.noreply.github.com'
-          git add rewards.json guard-status.json guard-approvals.json guard-opportunities.json guard-learning.json guard-sources.json guard-wallet.json guard-opportunity-history.json guard-receipts.json guard-discovery.json guard-claim-adapters.json
+          git add rewards.json guard-status.json guard-approvals.json guard-opportunities.json guard-learning.json guard-sources.json guard-wallet.json guard-opportunity-history.json guard-receipts.json guard-discovery.json guard-claim-adapters.json guard-free-real-tokens.json
           git diff --cached --quiet || git commit -m 'chore: refresh airdrop guard scan'
           git push
