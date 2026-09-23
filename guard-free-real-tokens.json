@@ -1,235 +1,1094 @@
 {
   "guard": "ANIL X Immortal Guard",
   "engine": "Free Real Token Hunter X",
-  "version": "12.0-strict",
-  "updatedAt": "2026-09-23T15:34:32.848125+00:00",
-  "definition": "Only live, real-token distributions with explicit evidence of no purchase/trade/deposit/holding/task and no KYC/CAPTCHA/signature/login requirement.",
-  "count": 0,
+  "version": "13.0-strict",
+  "updatedAt": "2026-09-23T15:36:12.004135+00:00",
+  "definition": "Real token + live distribution + explicit no-cost/no-new-condition evidence. Points, speculative airdrops, trading campaigns and gated claims are excluded.",
+  "verifiedCount": 0,
   "tokens": [],
-  "rejectedCount": 44,
-  "rejectedSample": [
+  "rejectedCount": 43,
+  "rejected": [
     {
-      "title": "Crypto Airdrops of the Week: All Week 39 Claim Deadlines - cryptoticker.io",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1KS05xRHRhYmRIdHU4cjNyS250WFBDM2wtbEFFcDk4akFXcFNFYm1QQ2pBQ2VXMDl6MnJmcDdnMS04eWVVRVo5cDhBRm82X2tra3V6T1RRR2ljYUh6MGg4UkJTNFpNcVAtX0VyVHE5UlhEQnQx?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-ec4d238c2685b5902071",
+      "name": "Crypto Airdrops of the Week: All Week 39 Claim Deadlines - CryptoTicker",
+      "officialUrl": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1KS05xRHRhYmRIdHU4cjNyS250WFBDM2wtbEFFcDk4akFXcFNFYm1QQ2pBQ2VXMDl6MnJmcDdnMS04eWVVRVo5cDhBRm82X2tra3V6T1RRR2ljYUh6MGg4UkJTNFpNcVAtX0VyVHE5UlhEQnQx?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1KS05xRHRhYmRIdHU4cjNyS250WFBDM2wtbEFFcDk4akFXcFNFYm1QQ2pBQ2VXMDl6MnJmcDdnMS04eWVVRVo5cDhBRm82X2tra3V6T1RRR2ljYUh6MGg4UkJTNFpNcVAtX0VyVHE5UlhEQnQx",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Berachain Launches Its Mainnet: Key Information for MetaMask Users To Claim Airdrop - CoinMarketCap",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNUVZzYkdpTmptck9haC1ESDAtUWhxZGp6Q1EwRW00amdvdDBxWXFOU0ducHVvTmZMc0tabXJMU0U1cmtFRlBmdXc1TldIWkUwdld4SDBpMDFCek5LTzRiQnk5S2xqWnU5Q1VPdk0wd1BoOG1Nb3JvbzhiZFFLUncyMkFHQU5RZUhZMkVjYS1mS0lqMGxodFZpaXp4NVNYZFVVVDdoUnYxYjY3NnBackVhaENKa3NUNDBzbnk4QWJOWlhydw?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-e3126d73b0241752ef34",
+      "name": "Berachain Launches Its Mainnet: Key Information for MetaMask Users To Claim Airdrop - CoinMarketCap",
+      "officialUrl": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNUVZzYkdpTmptck9haC1ESDAtUWhxZGp6Q1EwRW00amdvdDBxWXFOU0ducHVvTmZMc0tabXJMU0U1cmtFRlBmdXc1TldIWkUwdld4SDBpMDFCek5LTzRiQnk5S2xqWnU5Q1VPdk0wd1BoOG1Nb3JvbzhiZFFLUncyMkFHQU5RZUhZMkVjYS1mS0lqMGxodFZpaXp4NVNYZFVVVDdoUnYxYjY3NnBackVhaENKa3NUNDBzbnk4QWJOWlhydw?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNUVZzYkdpTmptck9haC1ESDAtUWhxZGp6Q1EwRW00amdvdDBxWXFOU0ducHVvTmZMc0tabXJMU0U1cmtFRlBmdXc1TldIWkUwdld4SDBpMDFCek5LTzRiQnk5S2xqWnU5Q1VPdk0wd1BoOG1Nb3JvbzhiZFFLUncyMkFHQU5RZUhZMkVjYS1mS0lqMGxodFZpaXp4NVNYZFVVVDdoUnYxYjY3NnBackVhaENKa3NUNDBzbnk4QWJOWlhydw",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "NEAR Protocol Achieves Historic Milestone: Price Surges 7.6% Amid Massive Airdrop - Cryptonews.net",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBQRlBOalpOc3FWdFl2TENPMFNpZk1hamFzNktJcS1hVlUtMS1Lc25zVWZQbThXMjh5MkZRcmk4eURTV1ZXRk5FR2ZKVEFjZTJMNjhhT2h4RS1nQQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-92e566c399a7e140524c",
+      "name": "NEAR Protocol Achieves Historic Milestone: Price Surges 7.6% Amid Massive Airdrop - Cryptonews.net",
+      "officialUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBQRlBOalpOc3FWdFl2TENPMFNpZk1hamFzNktJcS1hVlUtMS1Lc25zVWZQbThXMjh5MkZRcmk4eURTV1ZXRk5FR2ZKVEFjZTJMNjhhT2h4RS1nQQ?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBQRlBOalpOc3FWdFl2TENPMFNpZk1hamFzNktJcS1hVlUtMS1Lc25zVWZQbThXMjh5MkZRcmk4eURTV1ZXRk5FR2ZKVEFjZTJMNjhhT2h4RS1nQQ",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Arc Network Airdrop Guide: How to Prepare and Participate - en.cryptonomist.ch",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE1wMzhmR2xxV2ZGaVl4MXhnOG9JSjBQSmZNV0RiM3BpRG16cDk1OUdMVWc5a3g3eVpVenRmLVVTTDJJeHVhMHJfbTRCUlRrazVTbEs2ekdPUXlpazFRa3BOazYtcmYwdklzckZNMkRjTm1kdw?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-2530fc83a92fc2fac0e9",
+      "name": "Arc Network Airdrop Guide: How to Prepare and Participate - The Cryptonomist",
+      "officialUrl": "https://news.google.com/rss/articles/CBMickFVX3lxTE1wMzhmR2xxV2ZGaVl4MXhnOG9JSjBQSmZNV0RiM3BpRG16cDk1OUdMVWc5a3g3eVpVenRmLVVTTDJJeHVhMHJfbTRCUlRrazVTbEs2ekdPUXlpazFRa3BOazYtcmYwdklzckZNMkRjTm1kdw?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMickFVX3lxTE1wMzhmR2xxV2ZGaVl4MXhnOG9JSjBQSmZNV0RiM3BpRG16cDk1OUdMVWc5a3g3eVpVenRmLVVTTDJJeHVhMHJfbTRCUlRrazVTbEs2ekdPUXlpazFRa3BOazYtcmYwdklzckZNMkRjTm1kdw",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "What Is Aster? Project, Token, Airdrop, Roadmap Explained - ventureburn.com",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1KMWhxMnlPSWtVOFdQdWpGSWVHajE0RnBfTDZPV0RwVGs1WnpOd1R5M1RneFpHMmo2RzU1dnh2UXN5MGlmd2wzaWFvR19zNEXSAU9BVV95cUxNSjFocTJ5T0lrVThXUHVqRkllR2oxNEZwX0w2T1dEcFRrNVp6TndUeTNUZ3haRzJqNkc1NXZ4dlFzeTBpZndsM2lhb0dfczRF?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-88a7ba578024e10818aa",
+      "name": "News from CryptoTotem - Crypto Updates @NEARProtocol — Airdr - KuCoin",
+      "officialUrl": "https://news.google.com/rss/articles/CBMickFVX3lxTFBZOWVmRElWUFZ3TEUwbXpPOHpCaEExNll1VWR0YVRiTmtmRjdLWWtWV1lWNlhOWmZ2d3pCOGRBNURFUFc0bTFFQkUyNmhkLWoxRXdpeVpjV3ZaSnZoZ241X1RkWnEwRGpzOXl5bXNMWlBNdw?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMickFVX3lxTFBZOWVmRElWUFZ3TEUwbXpPOHpCaEExNll1VWR0YVRiTmtmRjdLWWtWV1lWNlhOWmZ2d3pCOGRBNURFUFc0bTFFQkUyNmhkLWoxRXdpeVpjV3ZaSnZoZ241X1RkWnEwRGpzOXl5bXNMWlBNdw",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "News from CryptoTotem - Crypto Updates @NEARProtocol — Airdr - KuCoin",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBZOWVmRElWUFZ3TEUwbXpPOHpCaEExNll1VWR0YVRiTmtmRjdLWWtWV1lWNlhOWmZ2d3pCOGRBNURFUFc0bTFFQkUyNmhkLWoxRXdpeVpjV3ZaSnZoZ241X1RkWnEwRGpzOXl5bXNMWlBNdw?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-f5623318c84154ecd18d",
+      "name": "Margex Launches $2.7M ETH Airdrop Campaign Celebrating 4 Years of Proof of Stake - Yellow.com",
+      "officialUrl": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQRnNvdzFyWkJEc3RqS2dKWlFHTHUtdDUzb0t1RjV4aTNlMEFXVzctRGJzXzM3T01lSDBmenVTdWI0dXRJOVNuNUdIMmRmV2F3LXFiMFF5bjEzMGhMM2NhY0lnRmEtaGZ2SU80d1dRVUhtVlAyLWJvMUhvRHo3eWFiLWlwcEVLWmFjUXlkRmNBazB6Y1ZsVmh6bGtvcURZUEQ3WGx1NmxfSXRReXpsVUR5UGtJSQ?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQRnNvdzFyWkJEc3RqS2dKWlFHTHUtdDUzb0t1RjV4aTNlMEFXVzctRGJzXzM3T01lSDBmenVTdWI0dXRJOVNuNUdIMmRmV2F3LXFiMFF5bjEzMGhMM2NhY0lnRmEtaGZ2SU80d1dRVUhtVlAyLWJvMUhvRHo3eWFiLWlwcEVLWmFjUXlkRmNBazB6Y1ZsVmh6bGtvcURZUEQ3WGx1NmxfSXRReXpsVUR5UGtJSQ",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Margex Launches $2.7M ETH Airdrop Campaign Celebrating 4 Years of Proof of Stake - yellow.com",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQRnNvdzFyWkJEc3RqS2dKWlFHTHUtdDUzb0t1RjV4aTNlMEFXVzctRGJzXzM3T01lSDBmenVTdWI0dXRJOVNuNUdIMmRmV2F3LXFiMFF5bjEzMGhMM2NhY0lnRmEtaGZ2SU80d1dRVUhtVlAyLWJvMUhvRHo3eWFiLWlwcEVLWmFjUXlkRmNBazB6Y1ZsVmh6bGtvcURZUEQ3WGx1NmxfSXRReXpsVUR5UGtJSQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-a1723e5dd843b98f1dad",
+      "name": "LAPTOP Airdrop at Bitvavo: Deadline October 10, 2026 - CryptoTicker",
+      "officialUrl": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE94ZzR5Y1VzMzd1VkRPTVNlMmRaWGtQMWU5MHpsZTZadXhQNEMyeUNENHRTSWxJTFQ3Z3FFckJPa1lzVjJMWU1HVGJ2dWRVckNzT2xBcHJmeEFFLWJyTkROVENkMjhQMWs?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE94ZzR5Y1VzMzd1VkRPTVNlMmRaWGtQMWU5MHpsZTZadXhQNEMyeUNENHRTSWxJTFQ3Z3FFckJPa1lzVjJMWU1HVGJ2dWRVckNzT2xBcHJmeEFFLWJyTkROVENkMjhQMWs",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "LAPTOP Airdrop at Bitvavo: Deadline October 10, 2026 - cryptoticker.io",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE94ZzR5Y1VzMzd1VkRPTVNlMmRaWGtQMWU5MHpsZTZadXhQNEMyeUNENHRTSWxJTFQ3Z3FFckJPa1lzVjJMWU1HVGJ2dWRVckNzT2xBcHJmeEFFLWJyTkROVENkMjhQMWs?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-e7fc0c7e99b7f2fab787",
+      "name": "What Is Unitree Robotics? How to Buy and Short It on MEXC - MEXC",
+      "officialUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQRmI2QnhwZG5HRzRDTmVLeVBlOUtnd19jTl9LeDk2Ulc2cHdFTlo0cVV6am9abWRCZ2h0dEV5SU9ZNlRhMjhuVXNieERXYVpGamZJM0EzQWpwYXUtNVQ5Q1Bnbk9Yb3NvdklvY3E5Z29kX2dYZXRIbnJGUDRkbjYzX0l4TkVwdHVrZFlCYlFMcnlRMV9EdkNYZQ?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQRmI2QnhwZG5HRzRDTmVLeVBlOUtnd19jTl9LeDk2Ulc2cHdFTlo0cVV6am9abWRCZ2h0dEV5SU9ZNlRhMjhuVXNieERXYVpGamZJM0EzQWpwYXUtNVQ5Q1Bnbk9Yb3NvdklvY3E5Z29kX2dYZXRIbnJGUDRkbjYzX0l4TkVwdHVrZFlCYlFMcnlRMV9EdkNYZQ",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Binance Alpha News: New Airdrop Model Launches as Platform Defies Market Rout - CoinMarketCap",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQc3BXeFZENURUUHdwQUNVMldzTWFSTk9uN0N3X3dTSDI3cWF0STl3SHhVNFZXeTNDNDlPQVh1eWU1ZVBuQkhpbnZBTTd2eGZBdU9yVWVtQ2RudXlkXzZmZm5XZ0ZhNWxpYmVsVktJbjhfc21sRW9oX3FnNXMwcWxOeG52U0h0WWh0T3BiY2NLT2NteWVtbHhYRkFkLWpmUVBGVk0wLTJFVG13eTFlTmFPQWs2WU1zNnJDY0E?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-d830f14804d6a2064182",
+      "name": "Binance Alpha News: New Airdrop Model Launches as Platform Defies Market Rout - CoinMarketCap",
+      "officialUrl": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQc3BXeFZENURUUHdwQUNVMldzTWFSTk9uN0N3X3dTSDI3cWF0STl3SHhVNFZXeTNDNDlPQVh1eWU1ZVBuQkhpbnZBTTd2eGZBdU9yVWVtQ2RudXlkXzZmZm5XZ0ZhNWxpYmVsVktJbjhfc21sRW9oX3FnNXMwcWxOeG52U0h0WWh0T3BiY2NLT2NteWVtbHhYRkFkLWpmUVBGVk0wLTJFVG13eTFlTmFPQWs2WU1zNnJDY0E?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQc3BXeFZENURUUHdwQUNVMldzTWFSTk9uN0N3X3dTSDI3cWF0STl3SHhVNFZXeTNDNDlPQVh1eWU1ZVBuQkhpbnZBTTd2eGZBdU9yVWVtQ2RudXlkXzZmZm5XZ0ZhNWxpYmVsVktJbjhfc21sRW9oX3FnNXMwcWxOeG52U0h0WWh0T3BiY2NLT2NteWVtbHhYRkFkLWpmUVBGVk0wLTJFVG13eTFlTmFPQWs2WU1zNnJDY0E",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "What Is Unitree Robotics? How to Buy and Short It on MEXC - mexc.co",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNclE5NkFGbi0weERoS2hwS1pjUmZuSU9idnRneTJLTDN3VURrSmgtUDhLZG1IVlBPb3pMWm5udTIxd3FRdWxGT2FqZmFsc3h2RXBXdllmYlBhT0w0M0xCQ2dhNVo3YUx4T1ZHczR3SlJTa1I2WjVXbTZ1ZFl0RUtwRGxDZDRiUWxiQmdDcmhFQi1hTkxNaEFv?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-fa8cc0c42cb3f6abc63f",
+      "name": "What Is Kalshi? Project, Token, Airdrop, Roadmap Explained - Ventureburn",
+      "officialUrl": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5BTFR1aERsYjVCRENfZExRbUFaTDRhNllXX1FkYTJWVXJHVEwyZVAtVUJnaWZ1R01vcWJVWXlHZm1vZEpXMG91NHBxSUxIeDY30gFQQVVfeXFMTkFMVHVoRGxiNUJEQ19kTFFtQVpMNGE2WVdfUWRhMlZVckdUTDJlUC1VQmdpZnVHTW9xYlVZeUdmbW9kSlcwb3U0cHFJTEh4Njc?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5BTFR1aERsYjVCRENfZExRbUFaTDRhNllXX1FkYTJWVXJHVEwyZVAtVUJnaWZ1R01vcWJVWXlHZm1vZEpXMG91NHBxSUxIeDY30gFQQVVfeXFMTkFMVHVoRGxiNUJEQ19kTFFtQVpMNGE2WVdfUWRhMlZVckdUTDJlUC1VQmdpZnVHTW9xYlVZeUdmbW9kSlcwb3U0cHFJTEh4Njc",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "What Is Kalshi? Project, Token, Airdrop, Roadmap Explained - ventureburn.com",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5BTFR1aERsYjVCRENfZExRbUFaTDRhNllXX1FkYTJWVXJHVEwyZVAtVUJnaWZ1R01vcWJVWXlHZm1vZEpXMG91NHBxSUxIeDY30gFQQVVfeXFMTkFMVHVoRGxiNUJEQ19kTFFtQVpMNGE2WVdfUWRhMlZVckdUTDJlUC1VQmdpZnVHTW9xYlVZeUdmbW9kSlcwb3U0cHFJTEh4Njc?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-4aada8756e11e7a15eee",
+      "name": "NEAR Protocol Surges 5.5% on Milestone Incentive, Strong Momentum - CoinMarketCap",
+      "officialUrl": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1XUzA0aTZxUENpeGdKUmJIbGdLU0NqTHJjWlA0WVRTTEp6YlBzRmRwYzBLclBEb1ozLUdlTk5CdUx1UmhmX0VCQkk0UERrYVFPRW9aSmtaNlo1bzNSTTZhYVJKSElWTUM4UWVBRmdxRF8?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1XUzA0aTZxUENpeGdKUmJIbGdLU0NqTHJjWlA0WVRTTEp6YlBzRmRwYzBLclBEb1ozLUdlTk5CdUx1UmhmX0VCQkk0UERrYVFPRW9aSmtaNlo1bzNSTTZhYVJKSElWTUM4UWVBRmdxRF8",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "NEAR Protocol Surges 5.5% on Milestone Incentive, Strong Momentum - CoinMarketCap",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1XUzA0aTZxUENpeGdKUmJIbGdLU0NqTHJjWlA0WVRTTEp6YlBzRmRwYzBLclBEb1ozLUdlTk5CdUx1UmhmX0VCQkk0UERrYVFPRW9aSmtaNlo1bzNSTTZhYVJKSElWTUM4UWVBRmdxRF8?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-b0ad999d7a744e6f6eb2",
+      "name": "Best Crypto Sign Up Bonus With Free Bitcoin & USDT Promo Codes (August 2026) - Ventureburn",
+      "officialUrl": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBtREp5QURyNk9LOXBZbTVGcnpXRGJlM3VTMF9iYUhxeE9WVTdna2dYZHYzNjFmbmZIdXpmd05zd1NacDNZNXpYTFF4ZWNBMWEwVGNzUVkyQ1fSAVhBVV95cUxQbURKeUFEcjZPSzlwWW01RnJ6V0RiZTN1UzBfYmFIcXhPVlU3Z2tnWGR2MzYxZm5mSHV6ZndOc3dTWnAzWTV6WExReGVjQTFhMFRjc1FZMkNX?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBtREp5QURyNk9LOXBZbTVGcnpXRGJlM3VTMF9iYUhxeE9WVTdna2dYZHYzNjFmbmZIdXpmd05zd1NacDNZNXpYTFF4ZWNBMWEwVGNzUVkyQ1fSAVhBVV95cUxQbURKeUFEcjZPSzlwWW01RnJ6V0RiZTN1UzBfYmFIcXhPVlU3Z2tnWGR2MzYxZm5mSHV6ZndOc3dTWnAzWTV6WExReGVjQTFhMFRjc1FZMkNX",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Tomarket Launches TOMA Token Airdrop on The Open Network - CoinMarketCap",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOTFVaM3g1UklCQXVneDhJTnVTeTRoeHN6VlpDYnQ2TGtDMDBpMVVTYUgwaUxkS0FCTVBtVmctWXFBd0J5TGl2WDRfOVI5QXZCazVrMnRRaGJKNk50a0ZJQmhwY2RZdUUtMW44cWhmb3RPVDR5UDNOVkt3ZWNrR0c4NG55VFQ0VzRtQnktMXNxLTBMUmhnTTktMU5OV3RCdVE?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-20fee1933d892847be15",
+      "name": "Tomarket Launches TOMA Token Airdrop on The Open Network - CoinMarketCap",
+      "officialUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOTFVaM3g1UklCQXVneDhJTnVTeTRoeHN6VlpDYnQ2TGtDMDBpMVVTYUgwaUxkS0FCTVBtVmctWXFBd0J5TGl2WDRfOVI5QXZCazVrMnRRaGJKNk50a0ZJQmhwY2RZdUUtMW44cWhmb3RPVDR5UDNOVkt3ZWNrR0c4NG55VFQ0VzRtQnktMXNxLTBMUmhnTTktMU5OV3RCdVE?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOTFVaM3g1UklCQXVneDhJTnVTeTRoeHN6VlpDYnQ2TGtDMDBpMVVTYUgwaUxkS0FCTVBtVmctWXFBd0J5TGl2WDRfOVI5QXZCazVrMnRRaGJKNk50a0ZJQmhwY2RZdUUtMW44cWhmb3RPVDR5UDNOVkt3ZWNrR0c4NG55VFQ0VzRtQnktMXNxLTBMUmhnTTktMU5OV3RCdVE",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Best Crypto Sign Up Bonus With Free Bitcoin & USDT Promo Codes (August 2026) - ventureburn.com",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBtREp5QURyNk9LOXBZbTVGcnpXRGJlM3VTMF9iYUhxeE9WVTdna2dYZHYzNjFmbmZIdXpmd05zd1NacDNZNXpYTFF4ZWNBMWEwVGNzUVkyQ1fSAVhBVV95cUxQbURKeUFEcjZPSzlwWW01RnJ6V0RiZTN1UzBfYmFIcXhPVlU3Z2tnWGR2MzYxZm5mSHV6ZndOc3dTWnAzWTV6WExReGVjQTFhMFRjc1FZMkNX?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-ba9bc1a9e95ac3abfcba",
+      "name": "Spanish Embassy's X Account Found Hunting Crypto Airdrops - CoinMarketCap",
+      "officialUrl": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOOFBkaUUwQU5YT1lpNGwtUHRsTU9tTkZyYVdzRWIyOUk2ZnRFN3VmcEczSFFqTDFfRDlCblRDOHFfREtKQWdnZms5bnJpemdTZk1DdlVWdV92YVRiTFRnSGJGR0JjenNsV3BZc3JRal9uWm1QYmJyY01XUUVYc3VNNFBFRERDbkZJQ1N1STJsT3I4MnVlaUFyMkFCTQ?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOOFBkaUUwQU5YT1lpNGwtUHRsTU9tTkZyYVdzRWIyOUk2ZnRFN3VmcEczSFFqTDFfRDlCblRDOHFfREtKQWdnZms5bnJpemdTZk1DdlVWdV92YVRiTFRnSGJGR0JjenNsV3BZc3JRal9uWm1QYmJyY01XUUVYc3VNNFBFRERDbkZJQ1N1STJsT3I4MnVlaUFyMkFCTQ",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Spanish Embassy's X Account Found Hunting Crypto Airdrops - CoinMarketCap",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOOFBkaUUwQU5YT1lpNGwtUHRsTU9tTkZyYVdzRWIyOUk2ZnRFN3VmcEczSFFqTDFfRDlCblRDOHFfREtKQWdnZms5bnJpemdTZk1DdlVWdV92YVRiTFRnSGJGR0JjenNsV3BZc3JRal9uWm1QYmJyY01XUUVYc3VNNFBFRERDbkZJQ1N1STJsT3I4MnVlaUFyMkFCTQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-e315dd7e2f9717b79922",
+      "name": "Crypto Airdrops 2026: Free Tokens & Live Tracker - Coin Gabbar",
+      "officialUrl": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBsTGszMTFKOXFxQTQzOWxSUXdhaVEwZzc2bTBKOF9EUDBtc3c5SVlhc3NVRm1OUzJZVTZWeDFNUkRVUnc3Q21iY1JIaGJQUUp2NWVzUlV5Y20?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBsTGszMTFKOXFxQTQzOWxSUXdhaVEwZzc2bTBKOF9EUDBtc3c5SVlhc3NVRm1OUzJZVTZWeDFNUkRVUnc3Q21iY1JIaGJQUUp2NWVzUlV5Y20",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Crypto Airdrops 2026: Free Tokens & Live Tracker - Coin Gabbar",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBsTGszMTFKOXFxQTQzOWxSUXdhaVEwZzc2bTBKOF9EUDBtc3c5SVlhc3NVRm1OUzJZVTZWeDFNUkRVUnc3Q21iY1JIaGJQUUp2NWVzUlV5Y20?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-5f9289811b3d3781e230",
+      "name": "ORO: Airdrop Claims Now Live on Portal - blockchain.news",
+      "officialUrl": "https://news.google.com/rss/articles/CBMid0FVX3lxTE4zVjg4NUtDTkpHTGVIeVlOdnZRcnlwYkFlQXlvTFM5QWFfbS04R1pjdTFrOUdVcVRLOW9xRVhHell0TXdWbUJTWmNuSlhOMXFUQ1h0emlEYTlKTlh5WmRqMVBXcnlOUlNYc3dVXzUteUc3bENMNEhV?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMid0FVX3lxTE4zVjg4NUtDTkpHTGVIeVlOdnZRcnlwYkFlQXlvTFM5QWFfbS04R1pjdTFrOUdVcVRLOW9xRVhHell0TXdWbUJTWmNuSlhOMXFUQ1h0emlEYTlKTlh5WmRqMVBXcnlOUlNYc3dVXzUteUc3bENMNEhV",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "ORO: Airdrop Claims Now Live on Portal - blockchain.news",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE4zVjg4NUtDTkpHTGVIeVlOdnZRcnlwYkFlQXlvTFM5QWFfbS04R1pjdTFrOUdVcVRLOW9xRVhHell0TXdWbUJTWmNuSlhOMXFUQ1h0emlEYTlKTlh5WmRqMVBXcnlOUlNYc3dVXzUteUc3bENMNEhV?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-ca91944fb9f711d4dbba",
+      "name": "StabyLink Airdrop 2026: Rewards, Eligibility & Claim Guide - Coin Gabbar",
+      "officialUrl": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9yYUdNVjI2bXhkeUkwOGwzZ05nTVpObFRjcUxIVlBKQzFXdjZ0NVBXX0xTSFhGdmdjR1BhWUYzUjdsTUxPMV9NMll3WVV3T0l1RVZaa2JYUEJSX3NHV3ZPc1Nn?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9yYUdNVjI2bXhkeUkwOGwzZ05nTVpObFRjcUxIVlBKQzFXdjZ0NVBXX0xTSFhGdmdjR1BhWUYzUjdsTUxPMV9NMll3WVV3T0l1RVZaa2JYUEJSX3NHV3ZPc1Nn",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "StabyLink Airdrop 2026: Rewards, Eligibility & Claim Guide - Coin Gabbar",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9yYUdNVjI2bXhkeUkwOGwzZ05nTVpObFRjcUxIVlBKQzFXdjZ0NVBXX0xTSFhGdmdjR1BhWUYzUjdsTUxPMV9NMll3WVV3T0l1RVZaa2JYUEJSX3NHV3ZPc1Nn?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-efda0d725c7324b0c412",
+      "name": "Solarious Airdrop 2026: Eligibility, Rewards, Tasks & How to Claim - Coin Gabbar",
+      "officialUrl": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1LZzlpckRRWmpmcW1hM3pYZEFGT0lnZ3VvNzRGbnhHcHhleXhuMVdHdzNTRjRKaUNOdHd0TmZaUE02SVFWdnZVbnV6WlRlcE11V2p5bHdKTWhmVGdxal85M3ZR?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1LZzlpckRRWmpmcW1hM3pYZEFGT0lnZ3VvNzRGbnhHcHhleXhuMVdHdzNTRjRKaUNOdHd0TmZaUE02SVFWdnZVbnV6WlRlcE11V2p5bHdKTWhmVGdxal85M3ZR",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Solarious Airdrop 2026: Eligibility, Rewards, Tasks & How to Claim - Coin Gabbar",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1LZzlpckRRWmpmcW1hM3pYZEFGT0lnZ3VvNzRGbnhHcHhleXhuMVdHdzNTRjRKaUNOdHd0TmZaUE02SVFWdnZVbnV6WlRlcE11V2p5bHdKTWhmVGdxal85M3ZR?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-53b6901e9553e3f39f40",
+      "name": "VOIDTRACE AI Airdrop 2026: Eligibility and Rewards - Coin Gabbar",
+      "officialUrl": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1HN0Q3Q1BzNlFoOTA2VDBycXZJX2VnNG9kX1hkelBDR2Jkd1RuRUw5OUhuTFgwYXI0ZUZQSjZsNC1MUDZ4X2o5R1hJcWRMV3NPdmp2em02RFZ3QXU5d1JmYlpWeTFtUQ?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1HN0Q3Q1BzNlFoOTA2VDBycXZJX2VnNG9kX1hkelBDR2Jkd1RuRUw5OUhuTFgwYXI0ZUZQSjZsNC1MUDZ4X2o5R1hJcWRMV3NPdmp2em02RFZ3QXU5d1JmYlpWeTFtUQ",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "VOIDTRACE AI Airdrop 2026: Eligibility and Rewards - Coin Gabbar",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1HN0Q3Q1BzNlFoOTA2VDBycXZJX2VnNG9kX1hkelBDR2Jkd1RuRUw5OUhuTFgwYXI0ZUZQSjZsNC1MUDZ4X2o5R1hJcWRMV3NPdmp2em02RFZ3QXU5d1JmYlpWeTFtUQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-67890982d61aa0e8aad7",
+      "name": "SelsiWorld Airdrop 2026: Tasks, Rewards, POH & Claim Process - Coin Gabbar",
+      "officialUrl": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE82elZLaDA4UlVyVFU1a2k1a1U2aGxKLURRQ1UxTVhUOTAyTXctWkFndXZNWUY4N2ZoRkZLWjIzMUlsbkc1RllRT3FNSEJjWjlPQUdDM00yRnBhN3ZUUXNnYnE2MA?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE82elZLaDA4UlVyVFU1a2k1a1U2aGxKLURRQ1UxTVhUOTAyTXctWkFndXZNWUY4N2ZoRkZLWjIzMUlsbkc1RllRT3FNSEJjWjlPQUdDM00yRnBhN3ZUUXNnYnE2MA",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "SelsiWorld Airdrop 2026: Tasks, Rewards, POH & Claim Process - Coin Gabbar",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE82elZLaDA4UlVyVFU1a2k1a1U2aGxKLURRQ1UxTVhUOTAyTXctWkFndXZNWUY4N2ZoRkZLWjIzMUlsbkc1RllRT3FNSEJjWjlPQUdDM00yRnBhN3ZUUXNnYnE2MA?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-65cdce2f5bec859f170f",
+      "name": "Ethereum: Fib 0.5 Pullback Eyes $2,089 - blockchain.news",
+      "officialUrl": "https://news.google.com/rss/articles/CBMiekFVX3lxTE9iRkprWXFMbHNSbm05NGxTMFF4Z1JXWkY4RHNYRmNhWERYWUE2UmdnTWV2UjFGUzFDZ21nNWhoaGpueDFGRDd1TVgxelZucG1oQl9WajRPcm5aRFF3dEFvMllQd1Z1THVBcFFRbFBlQTN6ZE9KU2dWXzRn?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMiekFVX3lxTE9iRkprWXFMbHNSbm05NGxTMFF4Z1JXWkY4RHNYRmNhWERYWUE2UmdnTWV2UjFGUzFDZ21nNWhoaGpueDFGRDd1TVgxelZucG1oQl9WajRPcm5aRFF3dEFvMllQd1Z1THVBcFFRbFBlQTN6ZE9KU2dWXzRn",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Ethereum: Fib 0.5 Pullback Eyes $2,089 - blockchain.news",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE9iRkprWXFMbHNSbm05NGxTMFF4Z1JXWkY4RHNYRmNhWERYWUE2UmdnTWV2UjFGUzFDZ21nNWhoaGpueDFGRDd1TVgxelZucG1oQl9WajRPcm5aRFF3dEFvMllQd1Z1THVBcFFRbFBlQTN6ZE9KU2dWXzRn?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-07ad974f21d0e2b68113",
+      "name": "Grass Airdrop Season 2 Claim Deadline and $32.1M DataCo Revenue Update - Coin Gabbar",
+      "officialUrl": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPMDU0Q29aMl82WHRZUGV4M3hhLUF0b1NQd3pyV3JYTUZSUmhfblJJZVU3OWZReFBVdkp3NnBkU2UzUFlWSTRETVpFRl9laXQ2d1lESVJYVkZjUDhUOUJlelpQdkhlYXNuakhSS19rOTNVWjlIcW82TndBYTNVMnliNFhGX1JfaTg5WnZOcGln?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPMDU0Q29aMl82WHRZUGV4M3hhLUF0b1NQd3pyV3JYTUZSUmhfblJJZVU3OWZReFBVdkp3NnBkU2UzUFlWSTRETVpFRl9laXQ2d1lESVJYVkZjUDhUOUJlelpQdkhlYXNuakhSS19rOTNVWjlIcW82TndBYTNVMnliNFhGX1JfaTg5WnZOcGln",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Grass Airdrop Season 2 Claim Deadline and $32.1M DataCo Revenue Update - Coin Gabbar",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPMDU0Q29aMl82WHRZUGV4M3hhLUF0b1NQd3pyV3JYTUZSUmhfblJJZVU3OWZReFBVdkp3NnBkU2UzUFlWSTRETVpFRl9laXQ2d1lESVJYVkZjUDhUOUJlelpQdkhlYXNuakhSS19rOTNVWjlIcW82TndBYTNVMnliNFhGX1JfaTg5WnZOcGln?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-4706ed8429a366d5da4c",
+      "name": "Orbition Network Mining Update: Roadmap Nears Listing And Price - Coin Gabbar",
+      "officialUrl": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNUzd0UE1KcGZTcnZlUU90UmJDb0pXMF9mWXdKWUEzUFZObnp2TUlKdUZ5LUZNUEl6Zk5ucnYtREpCbE1udXR4ZXBVVExWeTBPbVU0UWdEZEdmVDFGSlJhdlFidklGQXNsOFFzMF9sWGd3aEFoN0J5X3ZqVkJuSWh4UXJid2RLSTQ?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNUzd0UE1KcGZTcnZlUU90UmJDb0pXMF9mWXdKWUEzUFZObnp2TUlKdUZ5LUZNUEl6Zk5ucnYtREpCbE1udXR4ZXBVVExWeTBPbVU0UWdEZEdmVDFGSlJhdlFidklGQXNsOFFzMF9sWGd3aEFoN0J5X3ZqVkJuSWh4UXJid2RLSTQ",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Orbition Network Mining Update: Roadmap Nears Listing And Price - Coin Gabbar",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNUzd0UE1KcGZTcnZlUU90UmJDb0pXMF9mWXdKWUEzUFZObnp2TUlKdUZ5LUZNUEl6Zk5ucnYtREpCbE1udXR4ZXBVVExWeTBPbVU0UWdEZEdmVDFGSlJhdlFidklGQXNsOFFzMF9sWGd3aEFoN0J5X3ZqVkJuSWh4UXJid2RLSTQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-e78a8c7f0f3c54ab5b25",
+      "name": "Ritual Airdrop Guide: 50M RITUAL Allocated to Early Users - UseTheBitcoin",
+      "officialUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5wOFMwdW9uOWczUHJYYUhSdTNCVUt2NWdKQzR4QmJMNGhBM1R0QmRkWENQWXNER1ZLZmRkN1Voa3VkbW9pR2diR3VfX054UnJuRjlR?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5wOFMwdW9uOWczUHJYYUhSdTNCVUt2NWdKQzR4QmJMNGhBM1R0QmRkWENQWXNER1ZLZmRkN1Voa3VkbW9pR2diR3VfX054UnJuRjlR",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Ritual Airdrop Guide: 50M RITUAL Allocated to Early Users - UseTheBitcoin",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5wOFMwdW9uOWczUHJYYUhSdTNCVUt2NWdKQzR4QmJMNGhBM1R0QmRkWENQWXNER1ZLZmRkN1Voa3VkbW9pR2diR3VfX054UnJuRjlR?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-74db62844501c59a435c",
+      "name": "Cathie Wood Rejects Claim That Bitcoin Is Fading - Hokanews",
+      "officialUrl": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNNVpFTGFHNmZQb1dueDlpc2pCQUZ5Z05SQklsNkV1RTk4dGlQX2VzREk2cGw1Y0N6M2VTLUNoQWlRaFFNSHNYTk80Tm82cDFBSUV1SWNXdFpEbGxNSkUyRUh4WlBEejYtUWpDRDd3STdHWTZtblh4c1RyODRueF92Y0RR?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNNVpFTGFHNmZQb1dueDlpc2pCQUZ5Z05SQklsNkV1RTk4dGlQX2VzREk2cGw1Y0N6M2VTLUNoQWlRaFFNSHNYTk80Tm82cDFBSUV1SWNXdFpEbGxNSkUyRUh4WlBEejYtUWpDRDd3STdHWTZtblh4c1RyODRueF92Y0RR",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Cathie Wood Rejects Claim That Bitcoin Is Fading - Hokanews",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNNVpFTGFHNmZQb1dueDlpc2pCQUZ5Z05SQklsNkV1RTk4dGlQX2VzREk2cGw1Y0N6M2VTLUNoQWlRaFFNSHNYTk80Tm82cDFBSUV1SWNXdFpEbGxNSkUyRUh4WlBEejYtUWpDRDd3STdHWTZtblh4c1RyODRueF92Y0RR?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-cb6a83997c6954b89962",
+      "name": "Fed Begins Treasury Purchases as $16.5 Billion Liquidity Claim Circulates - Hokanews",
+      "officialUrl": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5ITHoydEwtUTdPV1Y4UHVQSFk4bElvZ0d3MVZld1ppWW9LVFBITElDLW9pU09DR3I5SGY4TjR1dThZaW9lVTFiSW9XeWZzUHcybElXQ0hZejR4LVl0eGNrSktsQUNNRFNsOTJpbXFVTy1tTzJ5ODR4ZVEzV3hycVk?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5ITHoydEwtUTdPV1Y4UHVQSFk4bElvZ0d3MVZld1ppWW9LVFBITElDLW9pU09DR3I5SGY4TjR1dThZaW9lVTFiSW9XeWZzUHcybElXQ0hZejR4LVl0eGNrSktsQUNNRFNsOTJpbXFVTy1tTzJ5ODR4ZVEzV3hycVk",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Fed Begins Treasury Purchases as $16.5 Billion Liquidity Claim Circulates - Hokanews",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5ITHoydEwtUTdPV1Y4UHVQSFk4bElvZ0d3MVZld1ppWW9LVFBITElDLW9pU09DR3I5SGY4TjR1dThZaW9lVTFiSW9XeWZzUHcybElXQ0hZejR4LVl0eGNrSktsQUNNRFNsOTJpbXFVTy1tTzJ5ODR4ZVEzV3hycVk?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-484464cdf56420cc534d",
+      "name": "Marina Protocol Daily Quiz Answer September 22, 2026: Today’s Update - Hokanews",
+      "officialUrl": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNcGVrZEI1NjZKR0doZnBMdlRWalJQYUVyZHBXcno2QXFNR0t1aGhGWDJ5ZW9MSkY5cll6aFBPVkphRGhlWXl4UG93YkZBM1dTR09UTDZaX0pBcTBpZm4tZVRGMWdrU1h6ZWVKVV9wRzhVR3MxWVpuN09QWk5SWWhwVXFPNTNoc1dycUhZ?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNcGVrZEI1NjZKR0doZnBMdlRWalJQYUVyZHBXcno2QXFNR0t1aGhGWDJ5ZW9MSkY5cll6aFBPVkphRGhlWXl4UG93YkZBM1dTR09UTDZaX0pBcTBpZm4tZVRGMWdrU1h6ZWVKVV9wRzhVR3MxWVpuN09QWk5SWWhwVXFPNTNoc1dycUhZ",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Marina Protocol Daily Quiz Answer September 22, 2026: Today’s Update - Hokanews",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNcGVrZEI1NjZKR0doZnBMdlRWalJQYUVyZHBXcno2QXFNR0t1aGhGWDJ5ZW9MSkY5cll6aFBPVkphRGhlWXl4UG93YkZBM1dTR09UTDZaX0pBcTBpZm4tZVRGMWdrU1h6ZWVKVV9wRzhVR3MxWVpuN09QWk5SWWhwVXFPNTNoc1dycUhZ?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-16188d6a82df0a251dde",
+      "name": "KuCoin Web3 Wallet × xStocks Trading Competition II: Share Up to 3,000 USDT! - KuCoin",
+      "officialUrl": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1tMWplUnpqZ0hsY1FoS2dkbUdpRjFhN0hhQk4wdFhrNmN3ZkFudXRLZ3hLZUhjZTVHZHVzWEtMaURkUTZLcDJ2ZmRDYU15dUczYTlnNDhyczFfZEdMYU9r?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1tMWplUnpqZ0hsY1FoS2dkbUdpRjFhN0hhQk4wdFhrNmN3ZkFudXRLZ3hLZUhjZTVHZHVzWEtMaURkUTZLcDJ2ZmRDYU15dUczYTlnNDhyczFfZEdMYU9r",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "KuCoin Web3 Wallet × xStocks Trading Competition II: Share Up to 3,000 USDT! - KuCoin",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1tMWplUnpqZ0hsY1FoS2dkbUdpRjFhN0hhQk4wdFhrNmN3ZkFudXRLZ3hLZUhjZTVHZHVzWEtMaURkUTZLcDJ2ZmRDYU15dUczYTlnNDhyczFfZEdMYU9r?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-ba9cc8aa8291e5ae9552",
+      "name": "Get Started with Binance Simple Earn Flexible Products - Binance",
+      "officialUrl": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOR0NOM1M2Zjd0QzU0dms3LUxCN1VHOExkSzl2aFQ0QTRfZUFsVGk5OGUwZE1Ock9YUWVMZ1g0ZDAwdTBGWExKemRFdFBnWnZpbFI2aHJ4NlVLX2xQTnY5SllDMDhPRHZrenMxZllQZWNJN2lQRW5ZQVRaU1Bod1BoQXI2Q1U?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOR0NOM1M2Zjd0QzU0dms3LUxCN1VHOExkSzl2aFQ0QTRfZUFsVGk5OGUwZE1Ock9YUWVMZ1g0ZDAwdTBGWExKemRFdFBnWnZpbFI2aHJ4NlVLX2xQTnY5SllDMDhPRHZrenMxZllQZWNJN2lQRW5ZQVRaU1Bod1BoQXI2Q1U",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Get Started with Binance Simple Earn Flexible Products - Binance",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOR0NOM1M2Zjd0QzU0dms3LUxCN1VHOExkSzl2aFQ0QTRfZUFsVGk5OGUwZE1Ock9YUWVMZ1g0ZDAwdTBGWExKemRFdFBnWnZpbFI2aHJ4NlVLX2xQTnY5SllDMDhPRHZrenMxZllQZWNJN2lQRW5ZQVRaU1Bod1BoQXI2Q1U?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-2a24932e18f57fa2093a",
+      "name": "ETH Faucet Explained: How to Get Free Ethereum - MEXC",
+      "officialUrl": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQS3hQalZGOUEzajBJT1FIWU82eEpfY2NIZHR6eUFhSDNhMTVFY0dLMTNuUDRjUjNqTE9vTGMxcUdHM0RwLUhfY3A3VnA2dXR2ZWthV2xhYXoycFlRa0l2T1RWRER2clJ3dURrYmVackFEUHRjUGQ4LV9OZzlmSzZIaXB3d2pkQUt2Vnc?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQS3hQalZGOUEzajBJT1FIWU82eEpfY2NIZHR6eUFhSDNhMTVFY0dLMTNuUDRjUjNqTE9vTGMxcUdHM0RwLUhfY3A3VnA2dXR2ZWthV2xhYXoycFlRa0l2T1RWRER2clJ3dURrYmVackFEUHRjUGQ4LV9OZzlmSzZIaXB3d2pkQUt2Vnc",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "ETH Faucet Explained: How to Get Free Ethereum - MEXC",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQS3hQalZGOUEzajBJT1FIWU82eEpfY2NIZHR6eUFhSDNhMTVFY0dLMTNuUDRjUjNqTE9vTGMxcUdHM0RwLUhfY3A3VnA2dXR2ZWthV2xhYXoycFlRa0l2T1RWRER2clJ3dURrYmVackFEUHRjUGQ4LV9OZzlmSzZIaXB3d2pkQUt2Vnc?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-d4405b92ae272c5589e3",
+      "name": "Arc Network Airdrop Guide: How to Use Arc and Track Potential Rewards - UseTheBitcoin",
+      "officialUrl": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5malh2MlRxT2swdUh0TXlIaGpRV1BQbzg3M2NMMF8xZWtteFRNYllnVDQxeVY0MGdacGVrQll1aGZIakFtLXRRenFEU1NtQldOdmcxUFFBUDZzMENRS3hPNzh3?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5malh2MlRxT2swdUh0TXlIaGpRV1BQbzg3M2NMMF8xZWtteFRNYllnVDQxeVY0MGdacGVrQll1aGZIakFtLXRRenFEU1NtQldOdmcxUFFBUDZzMENRS3hPNzh3",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Arc Network Airdrop Guide: How to Use Arc and Track Potential Rewards - UseTheBitcoin",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5malh2MlRxT2swdUh0TXlIaGpRV1BQbzg3M2NMMF8xZWtteFRNYllnVDQxeVY0MGdacGVrQll1aGZIakFtLXRRenFEU1NtQldOdmcxUFFBUDZzMENRS3hPNzh3?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-3ef5342626561e9639b9",
+      "name": "crypto isn’t just trading for CRYPTO:BTCUSD by currencynerd - tradingview.com",
+      "officialUrl": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOVjI1MTU3QVpUS0Qzd3pFUk9YcUpmaC1Lckd5M2hSR05hbzk2Wl9jYmxwd1BPNUxwMnJwT3hzTjJMa21GUkM4OFlVb1ZBN2JwbS1TU3YyMWlzTUNaVXVZeF9wQm9HX1haY3I3aExyM1R2Ym91QUh5VVM3UXdWN0lNMzdB?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOVjI1MTU3QVpUS0Qzd3pFUk9YcUpmaC1Lckd5M2hSR05hbzk2Wl9jYmxwd1BPNUxwMnJwT3hzTjJMa21GUkM4OFlVb1ZBN2JwbS1TU3YyMWlzTUNaVXVZeF9wQm9HX1haY3I3aExyM1R2Ym91QUh5VVM3UXdWN0lNMzdB",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "crypto isn’t just trading for CRYPTO:BTCUSD by currencynerd - TradingView",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOVjI1MTU3QVpUS0Qzd3pFUk9YcUpmaC1Lckd5M2hSR05hbzk2Wl9jYmxwd1BPNUxwMnJwT3hzTjJMa21GUkM4OFlVb1ZBN2JwbS1TU3YyMWlzTUNaVXVZeF9wQm9HX1haY3I3aExyM1R2Ym91QUh5VVM3UXdWN0lNMzdB?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-c27ae532e2c97b081139",
+      "name": "Best Play-to-Earn Games 2026 | Top NFT & Blockchain Games to Earn Crypto - NFT Evening",
+      "officialUrl": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5FQkhZdkk0cExKcnJQbGVXeXVQY3ZsMzNUYXBYcHlFYTRHWjFaMzN1M0FMeGJaRy1URkZGYWljOVJPdVJrazZSODJHczNjV3c5TWxZei0xWEhJZ0E?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5FQkhZdkk0cExKcnJQbGVXeXVQY3ZsMzNUYXBYcHlFYTRHWjFaMzN1M0FMeGJaRy1URkZGYWljOVJPdVJrazZSODJHczNjV3c5TWxZei0xWEhJZ0E",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Best Play-to-Earn Games 2026 | Top NFT & Blockchain Games to Earn Crypto - NFT Evening",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5FQkhZdkk0cExKcnJQbGVXeXVQY3ZsMzNUYXBYcHlFYTRHWjFaMzN1M0FMeGJaRy1URkZGYWljOVJPdVJrazZSODJHczNjV3c5TWxZei0xWEhJZ0E?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-34f95f720985e784bd79",
+      "name": "Binance Will Support the Terra (LUNA) Network Upgrade - 2026-09-21 - Binance",
+      "officialUrl": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNOFNYV3EwQS1odk4xeFhxTTRrWTc0d28yanBwTjN5OC1LZW1lQ3VIcGoxMEpEY0xiQ0xvSFBsMmg0eF84eUpZX0ZVUHEyc3pDUDA2dTRXNEM2aEpGbUdzTzdQSDVMeUpoUGJDVUJtQ2VPSVJtRWV0cXhNaXNyTVIxY2MzdFBibkVZZFc1LXFVSkU?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNOFNYV3EwQS1odk4xeFhxTTRrWTc0d28yanBwTjN5OC1LZW1lQ3VIcGoxMEpEY0xiQ0xvSFBsMmg0eF84eUpZX0ZVUHEyc3pDUDA2dTRXNEM2aEpGbUdzTzdQSDVMeUpoUGJDVUJtQ2VPSVJtRWV0cXhNaXNyTVIxY2MzdFBibkVZZFc1LXFVSkU",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Binance Will Support the Terra (LUNA) Network Upgrade - 2026-09-21 - Binance",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNOFNYV3EwQS1odk4xeFhxTTRrWTc0d28yanBwTjN5OC1LZW1lQ3VIcGoxMEpEY0xiQ0xvSFBsMmg0eF84eUpZX0ZVUHEyc3pDUDA2dTRXNEM2aEpGbUdzTzdQSDVMeUpoUGJDVUJtQ2VPSVJtRWV0cXhNaXNyTVIxY2MzdFBibkVZZFc1LXFVSkU?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-5544147902b3ef4ecdc3",
+      "name": "How to Launch and Reward Tokens Using INJ on StonkFun - blockchain.news",
+      "officialUrl": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBRNk5RTkdNLUNPSDE2cTNGblBNelFXT19yM1BKczllQVdGOFRBaVBGRTVUTDZNV19USkwzc3dnWHF1Qmltb1Y5T1JrTVA3RmlrQVZtQ2VuUi11Y3c2V3VZbVBuTE5BbTJJZHFFSkUyYw?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBRNk5RTkdNLUNPSDE2cTNGblBNelFXT19yM1BKczllQVdGOFRBaVBGRTVUTDZNV19USkwzc3dnWHF1Qmltb1Y5T1JrTVA3RmlrQVZtQ2VuUi11Y3c2V3VZbVBuTE5BbTJJZHFFSkUyYw",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "How to Launch and Reward Tokens Using INJ on StonkFun - blockchain.news",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBRNk5RTkdNLUNPSDE2cTNGblBNelFXT19yM1BKczllQVdGOFRBaVBGRTVUTDZNV19USkwzc3dnWHF1Qmltb1Y5T1JrTVA3RmlrQVZtQ2VuUi11Y3c2V3VZbVBuTE5BbTJJZHFFSkUyYw?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-0da2360a4a46b488bdfb",
+      "name": "Broke Billionaire (BROQ) Announces $10 Million in Token Rewards Across Two Launch Campaigns on QIE Blockchain - Cryptopolitan",
+      "officialUrl": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQWENOWE9wVVdnTm9zMGJwc2FiNUl3dUlnTTRYc1F2R3hwc04zcXd4eVZYYTZhcmNrWkxkZS13SlFZQkwxQ2toSjlTS1BLcWdZV05COEllbGZyU2IwTHRIM1NfQjVGM3k0VlN3Y0FkUDMtcWpoa0hIUWxnc1J0NmVyY2RrM2lOMWI1NXpMVHN6bWQ1V1dYOHZHZ0szSEpmVTkxVzRjOVdyS1JrSmoyOGRvbTlWZ0ZQdDBQY25HQktPX0R4RTZFZ01FLVZkV2tNVkF6dm1r?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQWENOWE9wVVdnTm9zMGJwc2FiNUl3dUlnTTRYc1F2R3hwc04zcXd4eVZYYTZhcmNrWkxkZS13SlFZQkwxQ2toSjlTS1BLcWdZV05COEllbGZyU2IwTHRIM1NfQjVGM3k0VlN3Y0FkUDMtcWpoa0hIUWxnc1J0NmVyY2RrM2lOMWI1NXpMVHN6bWQ1V1dYOHZHZ0szSEpmVTkxVzRjOVdyS1JrSmoyOGRvbTlWZ0ZQdDBQY25HQktPX0R4RTZFZ01FLVZkV2tNVkF6dm1r",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Broke Billionaire (BROQ) Announces $10 Million in Token Rewards Across Two Launch Campaigns on QIE Blockchain - Cryptopolitan",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQWENOWE9wVVdnTm9zMGJwc2FiNUl3dUlnTTRYc1F2R3hwc04zcXd4eVZYYTZhcmNrWkxkZS13SlFZQkwxQ2toSjlTS1BLcWdZV05COEllbGZyU2IwTHRIM1NfQjVGM3k0VlN3Y0FkUDMtcWpoa0hIUWxnc1J0NmVyY2RrM2lOMWI1NXpMVHN6bWQ1V1dYOHZHZ0szSEpmVTkxVzRjOVdyS1JrSmoyOGRvbTlWZ0ZQdDBQY25HQktPX0R4RTZFZ01FLVZkV2tNVkF6dm1r?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-400f4d529efb559fcb1f",
+      "name": "KiiChain Mainnet: Latest Network Updates, KII Utility and Roadmap - Coin Gabbar",
+      "officialUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPZ0M1TGg5cGFsdXlWU1ZlMVI4bzl4NmtMb2ZOSlV3ZHV3WE11VHZMM0VkMHcwWUt3RzdndzdnOTdMYlJCR0dqYXNobnZVOW1Eb0R0eXJJMHNTX21NRUkxSUMzOHdQck1tWUlCT1VCamxKSUF5aU96Ny1lLVJKOHNwQW4yVzh6NlJjOEw0SU9FWVQ2VWxOZEktMg?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPZ0M1TGg5cGFsdXlWU1ZlMVI4bzl4NmtMb2ZOSlV3ZHV3WE11VHZMM0VkMHcwWUt3RzdndzdnOTdMYlJCR0dqYXNobnZVOW1Eb0R0eXJJMHNTX21NRUkxSUMzOHdQck1tWUlCT1VCamxKSUF5aU96Ny1lLVJKOHNwQW4yVzh6NlJjOEw0SU9FWVQ2VWxOZEktMg",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "KiiChain Mainnet: Latest Network Updates, KII Utility and Roadmap - Coin Gabbar",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPZ0M1TGg5cGFsdXlWU1ZlMVI4bzl4NmtMb2ZOSlV3ZHV3WE11VHZMM0VkMHcwWUt3RzdndzdnOTdMYlJCR0dqYXNobnZVOW1Eb0R0eXJJMHNTX21NRUkxSUMzOHdQck1tWUlCT1VCamxKSUF5aU96Ny1lLVJKOHNwQW4yVzh6NlJjOEw0SU9FWVQ2VWxOZEktMg?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-a4ef086109c7b7c6d0b6",
+      "name": "Fortnite Birthday Event 2026 Now Live with Rewards and Quests - SSBCrack",
+      "officialUrl": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOLXFfRGFVeE5nQVpPc19XS0J2SE1XbFBPTnRrRFp0TlFneEozUDd4c21xTlBScU5RNFNYaTZJOWk5Nk5XTEh6amJaRlpBQ2duSmV3aDlFWnUxUnFhVzd0cEV4eFotakJnNHVOeFBmSldndEtiVnR3RHFLWmpYM0pubHdMdWstdVZHeGtLZ1hnbnRTUQ?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOLXFfRGFVeE5nQVpPc19XS0J2SE1XbFBPTnRrRFp0TlFneEozUDd4c21xTlBScU5RNFNYaTZJOWk5Nk5XTEh6amJaRlpBQ2duSmV3aDlFWnUxUnFhVzd0cEV4eFotakJnNHVOeFBmSldndEtiVnR3RHFLWmpYM0pubHdMdWstdVZHeGtLZ1hnbnRTUQ",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Fortnite Birthday Event 2026 Now Live with Rewards and Quests - SSBCrack",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOLXFfRGFVeE5nQVpPc19XS0J2SE1XbFBPTnRrRFp0TlFneEozUDd4c21xTlBScU5RNFNYaTZJOWk5Nk5XTEh6amJaRlpBQ2duSmV3aDlFWnUxUnFhVzd0cEV4eFotakJnNHVOeFBmSldndEtiVnR3RHFLWmpYM0pubHdMdWstdVZHeGtLZ1hnbnRTUQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-f4be9f74c9fc38bc2aa7",
+      "name": "Best Web3 Tokens to Invest In: September 2026 - CoinDCX",
+      "officialUrl": "https://news.google.com/rss/articles/CBMickFVX3lxTFB0cWhncUJ1QkhTTU5UVXVoLVF4cVpJNlB3N25KV1JnZ2V1SnRGNkhJc1FYczVZSkZSVW9iRm45eExvZHQ0czUwUEJLbkVYWW9zUEw4RlNhNDlZWXpaYmk0UFczYk9nemJMOWkwZ19Xa3Fodw?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMickFVX3lxTFB0cWhncUJ1QkhTTU5UVXVoLVF4cVpJNlB3N25KV1JnZ2V1SnRGNkhJc1FYczVZSkZSVW9iRm45eExvZHQ0czUwUEJLbkVYWW9zUEw4RlNhNDlZWXpaYmk0UFczYk9nemJMOWkwZ19Xa3Fodw",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Best Web3 Tokens to Invest In: September 2026 - CoinDCX",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFB0cWhncUJ1QkhTTU5UVXVoLVF4cVpJNlB3N25KV1JnZ2V1SnRGNkhJc1FYczVZSkZSVW9iRm45eExvZHQ0czUwUEJLbkVYWW9zUEw4RlNhNDlZWXpaYmk0UFczYk9nemJMOWkwZ19Xa3Fodw?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-ea7dcad5eb1caf88fd1a",
+      "name": "Best Telegram Tap-to-Earn Games to Watch in 2026 - CoinDCX",
+      "officialUrl": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBhOTQtVWRQeVlsV0RPYnhRNGtIbXpFN0NoWGdyMUU1aVZRRHFQYUF2T3hVQ2NIS1lJa0FwUjNQVXVwZEU3cDRHZDhUMmNldjFmWkVuM0tiaXcxRHBNZjE2SjlraGFOV0c5R3NYYVU5Q1U4bkU?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBhOTQtVWRQeVlsV0RPYnhRNGtIbXpFN0NoWGdyMUU1aVZRRHFQYUF2T3hVQ2NIS1lJa0FwUjNQVXVwZEU3cDRHZDhUMmNldjFmWkVuM0tiaXcxRHBNZjE2SjlraGFOV0c5R3NYYVU5Q1U4bkU",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Best Telegram Tap-to-Earn Games to Watch in 2026 - CoinDCX",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBhOTQtVWRQeVlsV0RPYnhRNGtIbXpFN0NoWGdyMUU1aVZRRHFQYUF2T3hVQ2NIS1lJa0FwUjNQVXVwZEU3cDRHZDhUMmNldjFmWkVuM0tiaXcxRHBNZjE2SjlraGFOV0c5R3NYYVU5Q1U4bkU?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-6daafd4cdd7ae1f80b29",
+      "name": "X Empire To Launch X Token and Airdrop on October 24 - CoinMarketCap",
+      "officialUrl": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQZDVkelliUW5sMjdLektpWHJzcVJJTG1GN0t5cnMzQlB4c1huNlBpa0N0akRmeENfWTZGNlZHQWY5TkhpbzRPM3huNDNJRnZ1cmRSMWlqeHVwemw4aHBkcEEtMjRITUFYckE4Vy1yMXkyb0NnSHpaQTFIbHgybTNEbXhqTmEyMUJzTGIyb09iVjIwRXlzMDd6WUVB?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQZDVkelliUW5sMjdLektpWHJzcVJJTG1GN0t5cnMzQlB4c1huNlBpa0N0akRmeENfWTZGNlZHQWY5TkhpbzRPM3huNDNJRnZ1cmRSMWlqeHVwemw4aHBkcEEtMjRITUFYckE4Vy1yMXkyb0NnSHpaQTFIbHgybTNEbXhqTmEyMUJzTGIyb09iVjIwRXlzMDd6WUVB",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "X Empire To Launch X Token and Airdrop on October 24 - CoinMarketCap",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQZDVkelliUW5sMjdLektpWHJzcVJJTG1GN0t5cnMzQlB4c1huNlBpa0N0akRmeENfWTZGNlZHQWY5TkhpbzRPM3huNDNJRnZ1cmRSMWlqeHVwemw4aHBkcEEtMjRITUFYckE4Vy1yMXkyb0NnSHpaQTFIbHgybTNEbXhqTmEyMUJzTGIyb09iVjIwRXlzMDd6WUVB?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-4afc759859cf964831a5",
+      "name": "Hamster Kombat Launches Hamster Network on TON Layer-2 - CoinMarketCap",
+      "officialUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNNWdPTGZ2TGxSVGtYdGtQOGtDaGM2UVVvT3pGT1FYdVYxclBuMGdadnFYYmJaNGhBcFJQWGVGYUt0blktNU5Sb3c1X1VfcVJveEVfbG5iZF9tNGpRcnpKS0N3bGxuQ2dZdXFtRW5rbUNvQlJwU21rWU1yeEVJdVA4YUp2eGpSblQ5UUhLY1ZIUTF1aXI2NDZOOHhwcTg?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNNWdPTGZ2TGxSVGtYdGtQOGtDaGM2UVVvT3pGT1FYdVYxclBuMGdadnFYYmJaNGhBcFJQWGVGYUt0blktNU5Sb3c1X1VfcVJveEVfbG5iZF9tNGpRcnpKS0N3bGxuQ2dZdXFtRW5rbUNvQlJwU21rWU1yeEVJdVA4YUp2eGpSblQ5UUhLY1ZIUTF1aXI2NDZOOHhwcTg",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     },
     {
-      "title": "Hamster Kombat Launches Hamster Network on TON Layer-2 - CoinMarketCap",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNNWdPTGZ2TGxSVGtYdGtQOGtDaGM2UVVvT3pGT1FYdVYxclBuMGdadnFYYmJaNGhBcFJQWGVGYUt0blktNU5Sb3c1X1VfcVJveEVfbG5iZF9tNGpRcnpKS0N3bGxuQ2dZdXFtRW5rbUNvQlJwU21rWU1yeEVJdVA4YUp2eGpSblQ5UUhLY1ZIUTF1aXI2NDZOOHhwcTg?oc=5&hl=en-US&gl=US&ceid=US:en"
-    },
-    {
-      "title": "Telegram Game Major Announces Token Launch Date and Airdrop Plans - CoinMarketCap",
-      "reason": "not-officially-verified",
-      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNWjBwTkZJVGhEY3dacmFkZ2RVZVhUQlVXS25vU243Z3JSeWo4SnE3bVZxSUNEYUduSEdqZldmS3BtNFBmTE90Y2lvSThEWlpKdGZSbTdrSFhibjlQUHNGSWhGS3BIcFF3ZVc5MUQ1WDAtb3hWSTEzbGgxSjhKNVM0WFlZODZ0dTJ1SkpVS2JPTEpCZVVpODdrTHJFc1pCSGpuMzNDYkkxb1JLYXM?oc=5&hl=en-US&gl=US&ceid=US:en"
+      "accepted": false,
+      "id": "free-45a5262770c7a473d877",
+      "name": "Telegram Game Major Announces Token Launch Date and Airdrop Plans - CoinMarketCap",
+      "officialUrl": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNWjBwTkZJVGhEY3dacmFkZ2RVZVhUQlVXS25vU243Z3JSeWo4SnE3bVZxSUNEYUduSEdqZldmS3BtNFBmTE90Y2lvSThEWlpKdGZSbTdrSFhibjlQUHNGSWhGS3BIcFF3ZVc5MUQ1WDAtb3hWSTEzbGgxSjhKNVM0WFlZODZ0dTJ1SkpVS2JPTEpCZVVpODdrTHJFc1pCSGpuMzNDYkkxb1JLYXM?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNWjBwTkZJVGhEY3dacmFkZ2RVZVhUQlVXS25vU243Z3JSeWo4SnE3bVZxSUNEYUduSEdqZldmS3BtNFBmTE90Y2lvSThEWlpKdGZSbTdrSFhibjlQUHNGSWhGS3BIcFF3ZVc5MUQ1WDAtb3hWSTEzbGgxSjhKNVM0WFlZODZ0dTJ1SkpVS2JPTEpCZVVpODdrTHJFc1pCSGpuMzNDYkkxb1JLYXM",
+      "officialDomain": "news.google.com",
+      "httpStatus": 200,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "blocked": [],
+        "speculative": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "no_live_distribution_evidence",
+        "no_explicit_no-cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-09-23T15:36:12.004135+00:00"
     }
   ],
   "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
-  "transferPolicy": "Never auto-transfer temporary wallet to permanent wallet.",
-  "signingPolicy": "Never store or use seed/private keys; never bypass KYC/CAPTCHA/anti-Sybil or signatures."
+  "automaticClaim": false,
+  "automaticSigning": false,
+  "automaticTransfer": false,
+  "privateKeys": "never-collected",
+  "ownerGate": "Required for any opportunity-specific action.",
+  "receiptMode": "Passive on-chain monitoring only."
 }
