@@ -6,7 +6,7 @@
       "type": "airdrop-portal",
       "url": "https://www.binance.com/en/airdrop",
       "httpStatus": 202,
-      "lastScan": "2026-09-23T12:42:23.103605+00:00",
+      "lastScan": "2026-09-23T13:51:30.058138+00:00",
       "guardVersion": "5.0-honest-queue",
       "guardMode": "autonomous-monitoring-and-owner-approved-execution"
     },
@@ -15,7 +15,7 @@
       "type": "learn-and-earn",
       "url": "https://www.binance.com/en/support/announcement/detail/41cd1e09c4814c27bf6d5ce9d61f6e51",
       "httpStatus": 202,
-      "lastScan": "2026-09-23T12:42:23.103605+00:00",
+      "lastScan": "2026-09-23T13:51:30.058138+00:00",
       "guardVersion": "5.0-honest-queue",
       "guardMode": "autonomous-monitoring-and-owner-approved-execution"
     },
@@ -24,7 +24,7 @@
       "type": "alpha-rewards",
       "url": "https://www.binance.com/en/alpha",
       "httpStatus": 202,
-      "lastScan": "2026-09-23T12:42:23.103605+00:00",
+      "lastScan": "2026-09-23T13:51:30.058138+00:00",
       "guardVersion": "5.0-honest-queue",
       "guardMode": "autonomous-monitoring-and-owner-approved-execution"
     },
@@ -33,7 +33,7 @@
       "type": "quest-rewards",
       "url": "https://galxe.com/",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T12:42:23.103605+00:00",
+      "lastScan": "2026-09-23T13:51:30.058138+00:00",
       "guardVersion": "5.0-honest-queue",
       "guardMode": "autonomous-monitoring-and-owner-approved-execution"
     },
@@ -42,7 +42,7 @@
       "type": "quest-rewards",
       "url": "https://layer3.xyz/",
       "httpStatus": 403,
-      "lastScan": "2026-09-23T12:42:23.103605+00:00",
+      "lastScan": "2026-09-23T13:51:30.058138+00:00",
       "guardVersion": "5.0-honest-queue",
       "guardMode": "autonomous-monitoring-and-owner-approved-execution",
       "status": "unavailable",
@@ -54,7 +54,7 @@
       "type": "quest-rewards",
       "url": "https://zealy.io/",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T12:42:23.103605+00:00",
+      "lastScan": "2026-09-23T13:51:30.058138+00:00",
       "guardVersion": "5.0-honest-queue",
       "guardMode": "autonomous-monitoring-and-owner-approved-execution"
     },
@@ -63,7 +63,7 @@
       "type": "quest-rewards",
       "url": "https://app.questn.com/",
       "httpStatus": 403,
-      "lastScan": "2026-09-23T12:42:23.103605+00:00",
+      "lastScan": "2026-09-23T13:51:30.058138+00:00",
       "guardVersion": "5.0-honest-queue",
       "guardMode": "autonomous-monitoring-and-owner-approved-execution",
       "status": "unavailable",
@@ -75,12 +75,12 @@
       "type": "airdrop",
       "url": "https://docs.xdao.app/ton/airdrop/",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T12:42:23.103605+00:00",
+      "lastScan": "2026-09-23T13:51:30.058138+00:00",
       "guardVersion": "5.0-honest-queue",
       "guardMode": "autonomous-monitoring-and-owner-approved-execution"
     }
   ],
-  "lastScan": "2026-09-23T12:42:23.103605+00:00",
+  "lastScan": "2026-09-23T13:51:30.058138+00:00",
   "guardVersion": "7.0-safe-advisory",
   "policy": "Monitoring and advisory only. No project-specific claim adapter verified; no claim transaction executed. Never collect private keys or bypass KYC/CAPTCHA/Sybil controls."
 }

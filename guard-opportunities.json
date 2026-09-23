@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-09-23T12:42:23.103605+00:00",
+  "updatedAt": "2026-09-23T13:51:30.058138+00:00",
   "opportunities": [
     {
       "id": "binance-airdrop-portal",
@@ -10,7 +10,7 @@
       "signals": [],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T12:42:23.103605+00:00",
+      "detectedAt": "2026-09-23T13:51:30.058138+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
@@ -25,7 +25,12 @@
       },
       "modelReview": {
         "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
-        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY"
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
       }
     },
     {
@@ -36,7 +41,7 @@
       "signals": [],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T12:42:23.103605+00:00",
+      "detectedAt": "2026-09-23T13:51:30.058138+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
@@ -51,7 +56,12 @@
       },
       "modelReview": {
         "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
-        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY"
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
       }
     },
     {
@@ -62,7 +72,7 @@
       "signals": [],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T12:42:23.103605+00:00",
+      "detectedAt": "2026-09-23T13:51:30.058138+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
@@ -77,7 +87,12 @@
       },
       "modelReview": {
         "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
-        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY"
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
       }
     },
     {
@@ -91,7 +106,7 @@
       ],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T12:42:23.103605+00:00",
+      "detectedAt": "2026-09-23T13:51:30.058138+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
@@ -106,7 +121,12 @@
       },
       "modelReview": {
         "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
-        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY"
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
       }
     },
     {
@@ -124,7 +144,7 @@
         "login"
       ],
       "actionStage": "WAITING_OWNER",
-      "detectedAt": "2026-09-23T12:42:23.103605+00:00",
+      "detectedAt": "2026-09-23T13:51:30.058138+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
@@ -139,7 +159,12 @@
       },
       "modelReview": {
         "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
-        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY"
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
       }
     },
     {
@@ -156,7 +181,7 @@
         "register"
       ],
       "actionStage": "WAITING_OWNER",
-      "detectedAt": "2026-09-23T12:42:23.103605+00:00",
+      "detectedAt": "2026-09-23T13:51:30.058138+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
@@ -171,7 +196,12 @@
       },
       "modelReview": {
         "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
-        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY"
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY",
+        "openai_status": "missing_GitHub_secret_OPENAI_API_KEY",
+        "astra": {
+          "role": "local-deterministic-risk-triage",
+          "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+        }
       }
     }
   ]
