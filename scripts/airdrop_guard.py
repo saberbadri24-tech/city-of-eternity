@@ -4,6 +4,7 @@ import json
 import os
 import re
 import urllib.request
+import urllib.parse
 from urllib.error import HTTPError, URLError
 from pathlib import Path
 
@@ -18,6 +19,8 @@ FILES = {
     "opportunities": ROOT / "guard-opportunities.json",
     "approvals": ROOT / "guard-approvals.json",
     "history": ROOT / "guard-opportunity-history.json",
+    "discovery": ROOT / "guard-discovery.json",
+    "adapters": ROOT / "guard-claim-adapters.json",
 }
 
 def load(path, default):
@@ -113,11 +116,13 @@ def main():
     wallet = load(FILES["wallet"], {})
     learning = load(FILES["learning"], {"version": "1.0", "weights": {}, "outcomes": []})
     history = load(FILES["history"], {"version": "1.0", "items": []})
+    discovery = load(FILES["discovery"], {"items": []})
+    adapters = load(FILES["adapters"], {"version": "1.0", "adapters": []})
     sources = {x.get("url"): x for x in rewards.get("sources", []) if x.get("url")}
     for item in registry.get("sources", []):
         if item.get("url"):
             sources.setdefault(item["url"], item)
-
+    trusted_domains = {re.sub(r"^www\\.", "", urllib.parse.urlparse(x.get("url","")).netloc.lower()) for x in registry.get("sources", []) if x.get("url")}\n    for item in discovery.get("items", []):\n        resolved = item.get("resolvedUrl") or item.get("canonicalUrl")\n        resolved_domain = re.sub(r"^www\\.", "", (item.get("resolvedDomain") or "").lower())\n        if resolved and resolved_domain in trusted_domains and item.get("verification") == "resolved-official-source":\n            sources.setdefault(resolved, {"name": item.get("title") or item.get("name") or "Verified discovery", "url": resolved, "type": "verified-discovery"})\n
     opportunities, approvals, blockers = [], [], []
     model_calls = {"gemini": 0, "claude": 0}
     for source in sources.values():
@@ -155,6 +160,7 @@ def main():
             "detectedAt": NOW, "temporaryWalletConfigured": bool(wallet.get("temporaryWalletAddress")),
             "temporaryWalletAddress": wallet.get("temporaryWalletAddress") or None,
             "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+            "adapter": next((a for a in adapters.get("adapters", []) if a.get("source") == source.get("url") or a.get("domain") == urllib.parse.urlparse(source.get("url","")).netloc.lower().removeprefix("www.")), None),
             "executionMode": "monitor-and-queue-only", "walletSigning": "never-automatic",
             "astraReview": astra, "modelReview": ai,
         }
