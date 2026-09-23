@@ -21,172 +21,71 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run Airdrop+ claim pipeline
+      - name: Run Airdrop+ monitor and safe queue
         env:
           TZ: UTC
         run: |
           python3 - <<'PY'
-          import json, urllib.request, datetime, re, hashlib
-          from urllib.error import HTTPError, URLError
+          import json, urllib.request, datetime, re, hashlib, os
+          from urllib.error import HTTPError
 
-          REWARDS='rewards.json'
-          STATUS='guard-status.json'
-          APPROVALS='guard-approvals.json'
-          OPS='guard-opportunities.json'
-          LEARN='guard-learning.json'
-          SOURCES='guard-sources.json'
-          WALLET='guard-wallet.json'
-
-          now=datetime.datetime.now(datetime.timezone.utc)
-          now_iso=now.isoformat()
-
-          def load(path, default):
+          REWARDS='rewards.json'; STATUS='guard-status.json'; APPROVALS='guard-approvals.json'
+          OPS='guard-opportunities.json'; LEARN='guard-learning.json'; SOURCES='guard-sources.json'; WALLET='guard-wallet.json'
+          now=datetime.datetime.now(datetime.timezone.utc); now_iso=now.isoformat()
+          def load(p,d):
               try:
-                  with open(path, encoding='utf-8') as f: return json.load(f)
-              except Exception: return default
-
-          def save(path, value):
-              open(path,'w',encoding='utf-8').write(json.dumps(value,ensure_ascii=False,indent=2)+'\n')
-
-          rewards=load(REWARDS, {'guard':'ANIL X Immortal Guard','sources':[]})
-          learning=load(LEARN, {'version':'1.0','weights':{'reward':.24,'eligibility':.20,'speed':.14,'cost':.12,'trust':.14,'freshness':.08,'complexity':.08},'outcomes':[],'lastUpdate':None})
-          source_registry=load(SOURCES, {'sources':[]})
-          wallet=load(WALLET, {'temporaryWalletAddress':'','mainWalletAddress':'','mode':'owner-approval'})
-
+                  with open(p,encoding='utf-8') as f: return json.load(f)
+              except Exception: return d
+          def save(p,v):
+              with open(p,'w',encoding='utf-8') as f: json.dump(v,f,ensure_ascii=False,indent=2); f.write('\n')
+          rewards=load(REWARDS,{'guard':'ANIL X Immortal Guard','sources':[]})
+          learning=load(LEARN,{'version':'1.0','weights':{'reward':.24,'eligibility':.20,'speed':.14,'cost':.12,'trust':.14,'freshness':.08,'complexity':.08},'outcomes':[],'lastUpdate':None})
+          registry=load(SOURCES,{'sources':[]}); wallet=load(WALLET,{'temporaryWalletAddress':'','mainWalletAddress':'','mode':'owner-approval'})
           def fetch(url):
               try:
-                  req=urllib.request.Request(url,headers={'User-Agent':'ANIL-X-Immortal-Guard-AirdropPlus/4.0'})
-                  with urllib.request.urlopen(req,timeout=18) as r:
-                      return r.status,r.read(300000).decode('utf-8','ignore')[:160000]
+                  req=urllib.request.Request(url,headers={'User-Agent':'ANIL-X-Immortal-Guard-AirdropPlus/5.0'})
+                  with urllib.request.urlopen(req,timeout=18) as r: return r.status,r.read(300000).decode('utf-8','ignore')[:160000]
               except HTTPError as e: return e.code,''
               except Exception: return None,''
-
           def norm(s): return re.sub(r'\s+',' ',str(s or '')).strip()
-          def digest(s): return hashlib.sha256(norm(s).encode()).hexdigest()[:16]
-          def anyof(text, words): return any(w in text for w in words)
-
-          # Multi-model guard intelligence: use configured provider keys when available.
-          # Providers advise discovery/risk/priority only; they never sign or transfer funds.
-          AI_PROVIDERS=[]
-          if __import__('os').environ.get('GEMINI_API_KEY'): AI_PROVIDERS.append('gemini')
-          if __import__('os').environ.get('ANTHROPIC_API_KEY'): AI_PROVIDERS.append('claude')
-          if __import__('os').environ.get('OPENAI_API_KEY'): AI_PROVIDERS.append('openai')
-          if __import__('os').environ.get('ASTRA_API_KEY'): AI_PROVIDERS.append('astra')
-          
-          def ai_consensus(text):
-              # Conservative local consensus fallback. External model calls are optional and
-              # must never become a prerequisite for the financial safety path.
-              low=text.lower()
-              signals=[x for x in ['airdrop','claim','reward','token','points','quest','deadline','snapshot'] if x in low]
-              return {'providers':AI_PROVIDERS,'signals':signals,'consensus':len(signals)>=2,'execution':'advisory-only'}
-
-          def score_source(s, body):
-              t=body.lower(); w=learning.get('weights',{})
-              f={
-                'reward':1.0 if anyof(t,['reward','airdrop','token','points','quest','campaign']) else .2,
-                'eligibility':.55 if anyof(t,['sybil','multiple accounts','disqualified']) else .85,
-                'speed':.9 if anyof(t,['ends','deadline','limited','first come','snapshot']) else .55,
-                'cost':.45 if anyof(t,['fee','deposit required','minimum deposit']) else .8,
-                'trust':.95 if any(x in s.get('url','').lower() for x in ['binance.com','galxe.com','layer3.xyz','zealy.io','questn.com']) else .55,
-                'freshness':1.0 if anyof(t,['2026','today','recent','new','launch']) else .5,
-                'complexity':.75 if len(body)<60000 else .5
-              }
-              return round(100*sum(f[k]*w.get(k,0) for k in f),1),f
-
+          def anyof(t,ws): return any(w in t for w in ws)
+          weights=learning.get('weights',{})
+          def score_source(s,body):
+              t=body.lower(); f={'reward':1.0 if anyof(t,['reward','airdrop','token','points','quest','campaign']) else .2,'eligibility':.55 if anyof(t,['sybil','multiple accounts','disqualified']) else .85,'speed':.9 if anyof(t,['ends','deadline','limited','first come','snapshot']) else .55,'cost':.45 if anyof(t,['fee','deposit required','minimum deposit']) else .8,'trust':.95 if any(x in s.get('url','').lower() for x in ['binance.com','galxe.com','layer3.xyz','zealy.io','questn.com']) else .55,'freshness':1.0 if anyof(t,['2026','today','recent','new','launch']) else .5,'complexity':.75 if len(body)<60000 else .5}
+              return round(100*sum(f[k]*weights.get(k,0) for k in f),1),f
+          # No provider is represented as connected unless a real request is implemented and verified.
+          ai_config={'gemini':bool(os.environ.get('GEMINI_API_KEY')),'claude':bool(os.environ.get('ANTHROPIC_API_KEY')),'astra':bool(os.environ.get('ASTRA_API_KEY'))}
           existing={s.get('url'):s for s in rewards.get('sources',[]) if s.get('url')}
-          for s in source_registry.get('sources',[]):
+          for s in registry.get('sources',[]):
               if s.get('url'): existing.setdefault(s['url'],s)
-          rewards['sources']=list(existing.values())
-
-          blockers=[]
-          opportunities=[]
-          approvals=[]
-
+          rewards['sources']=list(existing.values()); blockers=[]; opportunities=[]; approvals=[]
           for s in rewards['sources']:
-              status,body=fetch(s.get('url',''))
-              s.update({'httpStatus':status,'lastScan':now_iso,'guardVersion':'4.0-claim-pipeline','guardMode':'autonomous-monitoring-and-owner-approved-execution'})
-              if status is None or not 200 <= status < 300:
-                  s.update({'status':'unavailable','actionStage':'SOURCE_BLOCKED','claim':'not-executed'})
-                  blockers.append(f"{s.get('name','source')}: source HTTP {status}")
-                  continue
-
-              clean=norm(body); low=clean.lower(); score,factors=score_source(s,clean); ai=ai_consensus(clean)
+              status,body=fetch(s.get('url','')); s.update({'httpStatus':status,'lastScan':now_iso,'guardVersion':'5.0-honest-queue'})
+              if status is None or not 200<=status<300:
+                  s.update({'status':'unavailable','actionStage':'SOURCE_BLOCKED','claim':'not-executed'}); blockers.append(f"{s.get('name','source')}: HTTP {status}"); continue
+              clean=norm(body); low=clean.lower(); score,factors=score_source(s,clean)
               signals=[]
-              for n,words in {'airdrop':['airdrop','distribution'],'points':['points','score'],'quest':['quest','mission','task'],'tge':['tge','token generation'],'snapshot':['snapshot'],'deadline':['deadline','ends','limited'],'reward':['reward','rewards'],'claim':['claim','redeem']}.items():
-                  if anyof(low,words): signals.append(n)
-
+              for n,ws in {'airdrop':['airdrop','distribution'],'points':['points','score'],'quest':['quest','mission','task'],'tge':['tge','token generation'],'snapshot':['snapshot'],'deadline':['deadline','ends','limited'],'reward':['reward','rewards'],'claim':['claim','redeem']}.items():
+                  if anyof(low,ws): signals.append(n)
               requirements=[x for x in ['kyc','register','quiz','connect wallet','signature','captcha','login'] if x in low]
-              blocked=any(x in requirements for x in ['kyc','captcha'])
-              needs_owner=any(x in requirements for x in ['register','connect wallet','signature','login'])
+              blocked=any(x in requirements for x in ['kyc','captcha']); needs_owner=any(x in requirements for x in ['register','connect wallet','signature','login'])
               claim_open=anyof(low,['claim is open','claim now','claim available','claiming is open','redeem now','withdraw now'])
               push_reward=anyof(low,['automatically sent','automatically distributed','push payout','sent directly'])
-
-              if blocked:
-                  stage='WAITING_OWNER'
-              elif push_reward and score >= 72:
-                  stage='COLLECT_READY'
-              elif claim_open and not needs_owner and score >= 72 and ('claim' in signals or 'airdrop' in signals or 'reward' in signals):
-                  stage='COLLECT_READY'
-              elif needs_owner and ('claim' in signals or 'airdrop' in signals or 'reward' in signals):
-                  stage='WAITING_OWNER'
-              elif not signals:
-                  stage='WATCH'
-              else:
-                  stage='WATCH'
-
-              op={
-                'id':re.sub(r'[^a-z0-9-]+','-',s.get('name','opportunity').lower()).strip('-'),
-                'name':s.get('name'),'source':s.get('url'),'type':s.get('type','unknown'),
-                'score':score,'signals':signals,'requirements':requirements,'aiConsensus':ai,
-                'status':'HIGH_PRIORITY' if score>=72 else ('WATCH' if score>=55 else 'LOW_PRIORITY'),
-                'actionStage':stage,'detectedAt':now_iso,
-                'temporaryWalletConfigured':bool(wallet.get('temporaryWalletAddress')),
-                'temporaryWalletAddress':wallet.get('temporaryWalletAddress','') if wallet.get('temporaryWalletAddress') else None,
-                'claim':'owner-approval-required' if stage=='WAITING_OWNER' else ('collect-to-temporary-wallet' if stage=='COLLECT_READY' else 'not-ready'),
-                'executionMode':'verified-public-claim-or-push-only',
-                'claimOpen':claim_open if 'claim_open' in locals() else False,
-                'walletSigning':'never-automatic','aiProviders':AI_PROVIDERS
-              }
+              if blocked or needs_owner: stage='WAITING_OWNER'
+              elif push_reward or claim_open: stage='CLAIM_PATH_DETECTED'
+              else: stage='WATCH'
+              op={'id':re.sub(r'[^a-z0-9-]+','-',s.get('name','opportunity').lower()).strip('-'),'name':s.get('name'),'source':s.get('url'),'type':s.get('type','unknown'),'score':score,'signals':signals,'requirements':requirements,'status':'HIGH_PRIORITY' if score>=72 else ('WATCH' if score>=55 else 'LOW_PRIORITY'),'actionStage':stage,'detectedAt':now_iso,'temporaryWalletConfigured':bool(wallet.get('temporaryWalletAddress')),'temporaryWalletAddress':wallet.get('temporaryWalletAddress') or None,'claim':'not-executed; no protocol-specific adapter verified','executionMode':'monitor-and-queue-only','claimOpen':claim_open,'walletSigning':'never-automatic','aiProviders':{'configuredKeys':ai_config,'liveCalls':'not-implemented','mode':'not-connected-advisory-only'}}
               opportunities.append(op)
-
-              if stage=='WAITING_OWNER':
-                  approvals.append({
-                    'id':op['id'],'name':op['name'],'source':op['source'],
-                    'requiresOwnerApproval':True,'status':'waiting-owner',
-                    'action':'complete required login/connection/signature manually, then resume claim',
-                    'createdAt':now_iso
-                  })
-              elif stage=='COLLECT_READY':
-                  approvals.append({
-                    'id':op['id'],'name':op['name'],'source':op['source'],
-                    'requiresOwnerApproval':True,'status':'collect-ready',
-                    'action':'collect to configured temporary wallet; never transfer to main wallet',
-                    'createdAt':now_iso
-                  })
-
-          report={
-            'guard':'ANIL X Immortal Guard','engine':'Airdrop+ X','version':'4.0-claim-pipeline',
-            'lastScan':now_iso,'mode':'monitor -> classify -> collect-ready -> temporary-wallet -> owner-approved-transfer',
-            'financialActions':'temporary-wallet-collection-only; main-wallet-transfer-owner-approved','walletPrivateKeys':'never-collected',
-            'temporaryWallet': 'configured' if wallet.get('temporaryWalletAddress') else 'not-configured',
-            'ownerApprovalRequired':True,'antiSybil':'respected','kycBypass':'disabled','captchaBypass':'disabled',
-            'signatureAutomation':'disabled','sourcesScanned':len(rewards['sources']),
-            'collectReady':sum(1 for x in opportunities if x['actionStage']=='COLLECT_READY'),
-            'waitingOwner':sum(1 for x in opportunities if x['actionStage']=='WAITING_OWNER'),
-            'blockers':blockers
-          }
-
-          rewards['lastScan']=now_iso
-          rewards['guardVersion']='4.0-claim-pipeline'
-          rewards['policy']='Claim pipeline activated; no seed/private key; no KYC/CAPTCHA bypass; no Sybil abuse; no automatic wallet signature; owner approval required for financial or signing actions.'
-
+              if stage in ['WAITING_OWNER','CLAIM_PATH_DETECTED']:
+                  approvals.append({'id':op['id'],'name':op['name'],'source':op['source'],'requiresOwnerApproval':True,'status':'owner-action-required' if stage=='WAITING_OWNER' else 'claim-path-detected-not-executed','action':'Review official project flow; no claim transaction or wallet transfer has been executed by this monitor.','createdAt':now_iso})
+          report={'guard':'ANIL X Immortal Guard','engine':'Airdrop+ X','version':'5.0-honest-queue','lastScan':now_iso,'mode':'monitor -> classify -> queue -> owner review','financialActions':'no-claim-transaction-executed; main-wallet-transfer-owner-approved-only','walletPrivateKeys':'never-collected','temporaryWallet':'configured' if wallet.get('temporaryWalletAddress') else 'not-configured','ownerApprovalRequired':True,'antiSybil':'respected','kycBypass':'disabled','captchaBypass':'disabled','signatureAutomation':'disabled','sourcesScanned':len(rewards['sources']),'claimPathsDetected':sum(1 for x in opportunities if x['actionStage']=='CLAIM_PATH_DETECTED'),'waitingOwner':sum(1 for x in opportunities if x['actionStage']=='WAITING_OWNER'),'aiProviders':{'configuredKeys':ai_config,'liveCalls':'not-implemented','mode':'not-connected-advisory-only'},'blockers':blockers}
+          rewards['lastScan']=now_iso; rewards['guardVersion']='5.0-honest-queue'; rewards['policy']='Monitor and queue only. No protocol-specific claim adapters verified; no claims executed. Never collect private keys, bypass KYC/CAPTCHA/Sybil, or sign automatically.'
           save(REWARDS,rewards); save(STATUS,report); save(APPROVALS,{'guard':'ANIL X Immortal Guard','engine':'Airdrop+ X','updatedAt':now_iso,'approvals':approvals}); save(OPS,{'guard':'ANIL X Immortal Guard','engine':'Airdrop+ X','updatedAt':now_iso,'opportunities':opportunities}); learning['lastUpdate']=now_iso; save(LEARN,learning)
           PY
-
       - name: Commit Guard state
         run: |
           git config user.name 'ANIL X Immortal Guard'
           git config user.email 'actions@users.noreply.github.com'
           git add rewards.json guard-status.json guard-approvals.json guard-opportunities.json guard-learning.json
-          git diff --cached --quiet || git commit -m 'feat: activate airdrop claim approval pipeline'
+          git diff --cached --quiet || git commit -m 'chore: refresh honest guard monitor state'
           git push
