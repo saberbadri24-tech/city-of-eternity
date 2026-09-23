@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-09-23T14:09:52.236128+00:00",
+  "updatedAt": "2026-09-23T14:39:23.125307+00:00",
   "opportunities": [
     {
       "id": "binance-airdrop-portal",
@@ -10,10 +10,17 @@
       "signals": [],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": {
+        "id": "binance-rewards",
+        "domain": "binance.com",
+        "mode": "OWNER_GATED",
+        "requiresOwnerApproval": true,
+        "signing": false
+      },
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -41,10 +48,17 @@
       "signals": [],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": {
+        "id": "binance-rewards",
+        "domain": "binance.com",
+        "mode": "OWNER_GATED",
+        "requiresOwnerApproval": true,
+        "signing": false
+      },
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -72,10 +86,17 @@
       "signals": [],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": {
+        "id": "binance-rewards",
+        "domain": "binance.com",
+        "mode": "OWNER_GATED",
+        "requiresOwnerApproval": true,
+        "signing": false
+      },
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -106,10 +127,17 @@
       ],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": {
+        "id": "galxe-quests",
+        "domain": "galxe.com",
+        "mode": "OWNER_GATED",
+        "requiresOwnerApproval": true,
+        "signing": false
+      },
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -144,10 +172,17 @@
         "login"
       ],
       "actionStage": "WAITING_OWNER",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": {
+        "id": "zealy-quests",
+        "domain": "zealy.io",
+        "mode": "OWNER_GATED",
+        "requiresOwnerApproval": true,
+        "signing": false
+      },
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -181,10 +216,11 @@
         "register"
       ],
       "actionStage": "WAITING_OWNER",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": null,
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -214,10 +250,11 @@
       ],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": null,
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -249,10 +286,11 @@
       ],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": null,
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -282,10 +320,11 @@
       ],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": null,
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -317,10 +356,11 @@
         "register"
       ],
       "actionStage": "WAITING_OWNER",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": null,
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -352,10 +392,11 @@
         "register"
       ],
       "actionStage": "WAITING_OWNER",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": null,
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -389,10 +430,11 @@
         "login"
       ],
       "actionStage": "WAITING_OWNER",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": null,
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -420,10 +462,11 @@
       "signals": [],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": null,
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -455,10 +498,11 @@
       ],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": null,
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -483,13 +527,16 @@
       "name": "Cosmos Ecosystem",
       "source": "https://cosmos.network/ecosystem",
       "type": "ecosystem",
-      "signals": [],
+      "signals": [
+        "quest"
+      ],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": null,
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -524,10 +571,11 @@
         "signature"
       ],
       "actionStage": "WAITING_OWNER",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": null,
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -558,10 +606,11 @@
       ],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": null,
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -591,10 +640,11 @@
       ],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": null,
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -625,10 +675,11 @@
       ],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": null,
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -659,10 +710,11 @@
       ],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": null,
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -695,10 +747,17 @@
         "login"
       ],
       "actionStage": "WAITING_OWNER",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": {
+        "id": "hackerone-bounties",
+        "domain": "hackerone.com",
+        "mode": "OWNER_GATED",
+        "requiresOwnerApproval": true,
+        "signing": false
+      },
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -730,10 +789,17 @@
         "login"
       ],
       "actionStage": "WAITING_OWNER",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": {
+        "id": "immunefi-bounties",
+        "domain": "immunefi.com",
+        "mode": "OWNER_GATED",
+        "requiresOwnerApproval": true,
+        "signing": false
+      },
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -767,10 +833,11 @@
         "login"
       ],
       "actionStage": "WAITING_OWNER",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": null,
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -803,10 +870,11 @@
         "register"
       ],
       "actionStage": "WAITING_OWNER",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": null,
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -843,10 +911,11 @@
         "captcha"
       ],
       "actionStage": "WAITING_OWNER",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": null,
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -874,10 +943,11 @@
       "signals": [],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": null,
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -910,10 +980,11 @@
       ],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": null,
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
@@ -946,10 +1017,11 @@
       ],
       "requirements": [],
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T14:09:52.236128+00:00",
+      "detectedAt": "2026-09-23T14:39:23.125307+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
       "claim": "not-executed; protocol-specific adapter and eligibility verification required",
+      "adapter": null,
       "executionMode": "monitor-and-queue-only",
       "walletSigning": "never-automatic",
       "astraReview": {
