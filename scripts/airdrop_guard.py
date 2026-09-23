@@ -17,6 +17,7 @@ FILES = {
     "status": ROOT / "guard-status.json",
     "opportunities": ROOT / "guard-opportunities.json",
     "approvals": ROOT / "guard-approvals.json",
+    "history": ROOT / "guard-opportunity-history.json",
 }
 
 def load(path, default):
@@ -58,9 +59,9 @@ def review_models(name, url, body):
     if gemini:
         try:
             data = post_json(
-                "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + gemini,
+                "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent,
                 {"contents": [{"parts": [{"text": prompt}]}], "generationConfig": {"temperature": 0.1, "maxOutputTokens": 450}},
-                {"Content-Type": "application/json"},
+                {"Content-Type": "application/json", "x-goog-api-key": gemini},
             )
             result["gemini"] = data.get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "")[:2500]
         except Exception as exc:
@@ -73,7 +74,7 @@ def review_models(name, url, body):
         try:
             data = post_json(
                 "https://api.anthropic.com/v1/messages",
-                {"model": "claude-3-5-haiku-latest", "max_tokens": 450, "temperature": 0.1,
+                {"model": "claude-sonnet-4-6", "max_tokens": 450, "temperature": 0.1,
                  "messages": [{"role": "user", "content": prompt}]},
                 {"Content-Type": "application/json", "x-api-key": claude, "anthropic-version": "2023-06-01"},
             )
@@ -88,7 +89,7 @@ def review_models(name, url, body):
         try:
             data = post_json(
                 "https://api.openai.com/v1/chat/completions",
-                {"model": "gpt-5-mini", "temperature": 0.1, "max_tokens": 450,
+                {"model": "gpt-5.6-luna", "temperature": 0.1, "max_tokens": 450,
                  "messages": [{"role": "system", "content": "Be a conservative crypto-opportunity reviewer. Never claim a transaction occurred and never provide signing or bypass instructions."},
                               {"role": "user", "content": prompt}]},
                 {"Content-Type": "application/json", "Authorization": "Bearer " + openai_key},
@@ -111,6 +112,7 @@ def main():
     registry = load(FILES["sources"], {"sources": []})
     wallet = load(FILES["wallet"], {})
     learning = load(FILES["learning"], {"version": "1.0", "weights": {}, "outcomes": []})
+    history = load(FILES["history"], {"version": "1.0", "items": []})
     sources = {x.get("url"): x for x in rewards.get("sources", []) if x.get("url")}
     for item in registry.get("sources", []):
         if item.get("url"):
@@ -157,6 +159,24 @@ def main():
             "astraReview": astra, "modelReview": ai,
         }
         opportunities.append(op)
+        existing = {x.get("id"): x for x in history.get("items", []) if x.get("id")}
+        previous = existing.get(oid, {})
+        existing[oid] = {
+            **previous,
+            "id": oid,
+            "name": op["name"],
+            "source": op["source"],
+            "type": op["type"],
+            "firstSeenAt": previous.get("firstSeenAt", NOW),
+            "lastSeenAt": NOW,
+            "lastActionStage": stage,
+            "lastSignals": signals,
+            "lastRequirements": requirements,
+            "status": previous.get("status", "WAITING_OWNER_APPROVAL"),
+            "ownerApprovalRequired": True,
+            "claimExecuted": False
+        }
+        history["items"] = list(existing.values())
         if stage != "WATCH":
             approvals.append({
                 "id": oid, "name": op["name"], "source": op["source"], "requiresOwnerApproval": True,
@@ -186,7 +206,16 @@ def main():
     save(FILES["rewards"], rewards)
     save(FILES["status"], report)
     save(FILES["opportunities"], {"guard": "ANIL X Immortal Guard", "updatedAt": NOW, "opportunities": opportunities})
-    save(FILES["approvals"], {"guard": "ANIL X Immortal Guard", "updatedAt": NOW, "approvals": approvals})
+    history["updatedAt"] = NOW
+    history["count"] = len(history.get("items", []))
+    save(FILES["history"], history)
+    durable_approvals = [{
+        "id": item.get("id"), "name": item.get("name"), "source": item.get("source"),
+        "requiresOwnerApproval": True, "status": item.get("status", "WAITING_OWNER_APPROVAL"),
+        "lastActionStage": item.get("lastActionStage"), "createdAt": item.get("firstSeenAt"),
+        "updatedAt": item.get("lastSeenAt")
+    } for item in history.get("items", [])]
+    save(FILES["approvals"], {"guard": "ANIL X Immortal Guard", "updatedAt": NOW, "count": len(durable_approvals), "approvals": durable_approvals})
     learning["lastUpdate"] = NOW
     save(FILES["learning"], learning)
     print(json.dumps({"status": "scan_complete", "sources": len(sources), "reachable": len(opportunities), "blockers": len(blockers), "modelCalls": model_calls}, ensure_ascii=False))
