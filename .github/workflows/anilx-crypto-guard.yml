@@ -56,10 +56,13 @@ jobs:
           python3 -m unittest scripts/test_opportunity_intelligence.py -v
           python3 scripts/guard_resilience_lab.py > guard-resilience-report.json
 
+      - name: Audit modular engine and state health
+        run: python3 scripts/guard_module_engine.py
+
       - name: Validate Guard state
         run: |
           python3 -m json.tool guard-discovery.json >/dev/null
-          python3 -m py_compile scripts/global_opportunity_discovery.py scripts/guard_source_health.py scripts/verify_global_discovery.py scripts/airdrop_guard.py scripts/free_real_token_engine.py scripts/guard_ton_receipts.py scripts/opportunity_intelligence.py scripts/test_free_real_token_engine.py scripts/test_opportunity_intelligence.py scripts/guard_resilience_lab.py
+          python3 -m py_compile scripts/global_opportunity_discovery.py scripts/guard_source_health.py scripts/verify_global_discovery.py scripts/airdrop_guard.py scripts/free_real_token_engine.py scripts/guard_ton_receipts.py scripts/opportunity_intelligence.py scripts/test_free_real_token_engine.py scripts/test_opportunity_intelligence.py scripts/guard_resilience_lab.py scripts/guard_module_engine.py
           python3 -m json.tool guard-source-health.json >/dev/null
           python3 -m json.tool guard-wallet.json >/dev/null
           python3 -m json.tool guard-status.json >/dev/null
@@ -74,11 +77,12 @@ jobs:
           python3 -m json.tool guard-free-real-tokens.json >/dev/null
           python3 -m json.tool guard-intelligence.json >/dev/null
           python3 -m json.tool guard-resilience-report.json >/dev/null
+          python3 -m json.tool guard-module-health.json >/dev/null
 
       - name: Commit Guard state
         run: |
           git config user.name 'ANIL X Immortal Guard'
           git config user.email 'actions@users.noreply.github.com'
-          git add rewards.json guard-status.json guard-approvals.json guard-opportunities.json guard-learning.json guard-sources.json guard-wallet.json guard-opportunity-history.json guard-receipts.json guard-discovery.json guard-claim-adapters.json guard-free-real-tokens.json guard-source-health.json guard-intelligence.json guard-resilience-report.json
+          git add rewards.json guard-status.json guard-approvals.json guard-opportunities.json guard-learning.json guard-sources.json guard-wallet.json guard-opportunity-history.json guard-receipts.json guard-discovery.json guard-claim-adapters.json guard-free-real-tokens.json guard-source-health.json guard-intelligence.json guard-resilience-report.json guard-module-health.json
           git diff --cached --quiet || git commit -m 'chore: refresh airdrop guard scan'
           git push
