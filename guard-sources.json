@@ -187,9 +187,93 @@
       "url": "https://questn.com/",
       "type": "quest-rewards",
       "status": "pending-scan"
+    },
+    {
+      "name": "Berachain",
+      "url": "https://www.berachain.com/",
+      "type": "ecosystem",
+      "status": "pending-scan"
+    },
+    {
+      "name": "Monad",
+      "url": "https://www.monad.xyz/",
+      "type": "ecosystem",
+      "status": "pending-scan"
+    },
+    {
+      "name": "Sei",
+      "url": "https://www.sei.io/",
+      "type": "ecosystem",
+      "status": "pending-scan"
+    },
+    {
+      "name": "Injective",
+      "url": "https://injective.com/",
+      "type": "ecosystem",
+      "status": "pending-scan"
+    },
+    {
+      "name": "Mantle",
+      "url": "https://www.mantle.xyz/",
+      "type": "ecosystem",
+      "status": "pending-scan"
+    },
+    {
+      "name": "Hyperliquid",
+      "url": "https://hyperliquid.xyz/",
+      "type": "ecosystem",
+      "status": "pending-scan"
+    },
+    {
+      "name": "Movement",
+      "url": "https://movementlabs.xyz/",
+      "type": "ecosystem",
+      "status": "pending-scan"
+    },
+    {
+      "name": "Mina",
+      "url": "https://minaprotocol.com/",
+      "type": "ecosystem",
+      "status": "pending-scan"
+    },
+    {
+      "name": "Internet Computer",
+      "url": "https://internetcomputer.org/",
+      "type": "ecosystem",
+      "status": "pending-scan"
+    },
+    {
+      "name": "Hedera",
+      "url": "https://hedera.com/",
+      "type": "ecosystem",
+      "status": "pending-scan"
+    },
+    {
+      "name": "Algorand",
+      "url": "https://algorand.co/",
+      "type": "ecosystem",
+      "status": "pending-scan"
+    },
+    {
+      "name": "Cardano",
+      "url": "https://cardano.org/",
+      "type": "ecosystem",
+      "status": "pending-scan"
+    },
+    {
+      "name": "Tezos",
+      "url": "https://tezos.com/",
+      "type": "ecosystem",
+      "status": "pending-scan"
+    },
+    {
+      "name": "Kaspa",
+      "url": "https://kaspa.org/",
+      "type": "ecosystem",
+      "status": "pending-scan"
     }
   ],
   "updatedAt": "2026-09-23T14:00:32.374Z",
-  "lastDiscovery": "2026-09-23T15:35:49.056120+00:00",
-  "discoveryCount": 43
+  "lastDiscovery": "2026-09-23T15:41:54.412918+00:00",
+  "discoveryCount": 500
 }

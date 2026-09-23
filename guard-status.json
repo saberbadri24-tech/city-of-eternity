@@ -2,11 +2,11 @@
   "guard": "ANIL X Immortal Guard",
   "engine": "Airdrop+ X",
   "version": "7.0-safe-advisory",
-  "lastScan": "2026-09-23T15:36:01.717277+00:00",
-  "sourcesScanned": 37,
-  "sourcesReachable": 28,
+  "lastScan": "2026-09-23T15:43:27.522088+00:00",
+  "sourcesScanned": 51,
+  "sourcesReachable": 40,
   "claimPathsDetected": 0,
-  "waitingOwner": 11,
+  "waitingOwner": 13,
   "mode": "discover -> inspect -> triage -> queue; no claim execution",
   "financialActions": "no automated claim/transfer; owner approval required for wallet signatures and transfers",
   "temporaryWallet": "configured",
@@ -60,6 +60,14 @@
     {
       "source": "Aptos Ecosystem",
       "httpStatus": 429
+    },
+    {
+      "source": "Berachain",
+      "httpStatus": 429
+    },
+    {
+      "source": "Movement",
+      "httpStatus": null
     }
   ]
 }
