@@ -122,7 +122,21 @@ def main():
     for item in registry.get("sources", []):
         if item.get("url"):
             sources.setdefault(item["url"], item)
-    trusted_domains = {re.sub(r"^www\\.", "", urllib.parse.urlparse(x.get("url","")).netloc.lower()) for x in registry.get("sources", []) if x.get("url")}\n    for item in discovery.get("items", []):\n        resolved = item.get("resolvedUrl") or item.get("canonicalUrl")\n        resolved_domain = re.sub(r"^www\\.", "", (item.get("resolvedDomain") or "").lower())\n        if resolved and resolved_domain in trusted_domains and item.get("verification") == "resolved-official-source":\n            sources.setdefault(resolved, {"name": item.get("title") or item.get("name") or "Verified discovery", "url": resolved, "type": "verified-discovery"})\n
+    trusted_domains = {
+        re.sub(r"^www\.", "", urllib.parse.urlparse(x.get("url", "")).netloc.lower())
+        for x in registry.get("sources", [])
+        if x.get("url")
+    }
+    for item in discovery.get("items", []):
+        resolved = item.get("resolvedUrl") or item.get("canonicalUrl")
+        resolved_domain = re.sub(r"^www\.", "", (item.get("resolvedDomain") or "").lower())
+        if resolved and resolved_domain in trusted_domains and item.get("verification") == "resolved-official-source":
+            sources.setdefault(resolved, {
+                "name": item.get("title") or item.get("name") or "Verified discovery",
+                "url": resolved,
+                "type": "verified-discovery",
+            })
+
     opportunities, approvals, blockers = [], [], []
     model_calls = {"gemini": 0, "claude": 0}
     for source in sources.values():
