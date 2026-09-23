@@ -1,4 +1,5 @@
 import datetime as dt
+import hashlib
 import html
 import json
 import re
@@ -9,145 +10,246 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 NOW = dt.datetime.now(dt.timezone.utc).isoformat()
 DISCOVERY = ROOT / "guard-discovery.json"
-FREE = ROOT / "guard-free-real-tokens.json"
 SOURCES = ROOT / "guard-sources.json"
 WALLET = ROOT / "guard-wallet.json"
+OUT = ROOT / "guard-free-real-tokens.json"
+HISTORY = ROOT / "guard-opportunity-history.json"
 
-UA = "ANIL-X-Immortal-Guard/12.0-Free-Real-Token-Engine"
+UA = "ANIL-X-Immortal-Guard/13.0-Free-Real-Token-Hunter-X"
+TIMEOUT = 15
+MAX_BODY = 600_000
 
-# A candidate is admitted only when the public evidence supports all of:
-# real token + live distribution + no new money/trade/hold/task consideration.
-# Login/KYC/CAPTCHA/signature are never bypassed and are excluded from this lane.
+# STRICT LANE:
+# Admit only a live, publicly evidenced token distribution that requires
+# no new money, trade, deposit, hold, stake, referral, quest, KYC, CAPTCHA,
+# login, wallet connection/signature, or paid fee.
+# The Guard may monitor passive incoming transfers, but never signs or
+# moves funds automatically.
 
-FREE_MARKERS = (
-    "free of charge", "no purchase", "no purchase required",
-    "no trade", "no trading required", "no deposit", "no deposit required",
-    "no holding", "no holding required", "without purchase", "without trading",
-    "without deposit", "without holding", "no task", "no tasks required",
-)
-LIVE_MARKERS = (
+LIVE = (
     "claim now", "claim is live", "claim is open", "claim available",
-    "redeem now", "withdraw now", "distribution is live", "distribution is now live",
+    "redeem now", "withdraw now", "distribution is live",
+    "distribution is now live", "tokens are being distributed",
+    "tokens will be sent", "tokens have been distributed"
 )
-BLOCK_MARKERS = (
-    "kyc", "captcha", "connect wallet", "wallet signature", "sign transaction",
-    "deposit required", "trade required", "trading volume", "purchase required",
-    "hold required", "complete tasks", "invite friends", "referral required",
-    "stake required", "bridge required", "pay a fee",
+FREE = (
+    "no purchase", "no purchase required", "no trading", "no trade required",
+    "no deposit", "no deposit required", "no holding", "no holding required",
+    "without purchase", "without trading", "without deposit", "without holding",
+    "free to claim", "free claim", "free distribution", "no fee"
 )
-TOKEN_MARKERS = (
-    "contract address", "token address", "token contract", "ca:",
-    "erc-20", "erc20", "jetton", "spl token", "token mint", "mint address",
+BLOCK = (
+    "kyc", "know your customer", "captcha", "connect wallet",
+    "wallet connection", "sign transaction", "wallet signature",
+    "approve transaction", "deposit required", "trade required",
+    "trading volume", "purchase required", "hold required", "holding required",
+    "complete tasks", "complete quests", "invite friends", "referral required",
+    "stake required", "staking required", "bridge required", "pay a fee",
+    "login required", "account required", "registration required"
+)
+TOKEN_ID = (
+    "contract address", "token address", "token contract", "contract:",
+    "ca:", "erc-20", "erc20", "jetton", "spl token", "token mint",
+    "mint address", "token symbol", "ticker"
+)
+FAKE_WORDS = (
+    "points", "points program", "testnet points", "potential airdrop",
+    "future airdrop", "airdrop speculation", "maybe eligible",
+    "coming soon", "waitlist"
 )
 
 def fetch(url):
     try:
-        req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "text/html,application/xhtml+xml,*/*;q=0.8"})
-        with urllib.request.urlopen(req, timeout=18) as r:
-            return r.geturl(), r.read(500_000).decode("utf-8", "ignore"), r.status
+        if not url.startswith("https://"):
+            return "", "", None
+        req = urllib.request.Request(
+            url,
+            headers={"User-Agent": UA, "Accept": "text/html,application/xhtml+xml,*/*;q=0.8"},
+        )
+        with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
+            return r.geturl(), r.read(MAX_BODY).decode("utf-8", "ignore"), r.status
     except Exception:
         return "", "", None
 
 def clean(body):
-    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html.unescape(body))).strip()
+    body = html.unescape(body or "")
+    body = re.sub(r"<script[\s\S]*?</script>", " ", body, flags=re.I)
+    body = re.sub(r"<style[\s\S]*?</style>", " ", body, flags=re.I)
+    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", body)).strip()
 
 def domain(url):
     try:
-        return urllib.parse.urlparse(url).netloc.lower().removeprefix("www.")
+        return urllib.parse.urlparse(url).netloc.lower().split(":")[0].removeprefix("www.")
     except Exception:
         return ""
 
-def official_domains():
+def trusted_domains():
     try:
-        data=json.loads(SOURCES.read_text(encoding="utf-8"))
+        data = json.loads(SOURCES.read_text(encoding="utf-8"))
     except Exception:
-        data={"sources":[]}
-    return {domain(x.get("url","")) for x in data.get("sources",[]) if x.get("url")}
+        data = {"sources": []}
+    return {domain(x.get("url", "")) for x in data.get("sources", []) if x.get("url")}
 
-def score(text):
-    low=text.lower()
-    live=[x for x in LIVE_MARKERS if x in low]
-    free=[x for x in FREE_MARKERS if x in low]
-    blocked=[x for x in BLOCK_MARKERS if x in low]
-    token=[x for x in TOKEN_MARKERS if x in low]
-    return live, free, blocked, token
+def hits(text, terms):
+    low = text.lower()
+    return [x for x in terms if x in low]
+
+def canonical(body):
+    m = re.search(
+        r'<link[^>]+rel=["\']canonical["\'][^>]+href=["\']([^"\']+)',
+        body or "", re.I,
+    )
+    return html.unescape(m.group(1)).strip() if m else ""
+
+def token_contract_evidence(text):
+    # Keep evidence, not arbitrary extracted addresses, because a page can
+    # contain unrelated wallet/contract addresses.
+    return hits(text, TOKEN_ID)
+
+def stable_id(name, url):
+    raw = (name + "|" + url).encode("utf-8")
+    return "free-" + hashlib.sha256(raw).hexdigest()[:20]
+
+def evaluate(item, trusted):
+    source = item.get("resolvedUrl") or item.get("canonicalUrl") or item.get("url", "")
+    final, body, status = fetch(source)
+    text = clean(body)
+    d = domain(final or source)
+    live = hits(text, LIVE)
+    free = hits(text, FREE)
+    blocked = hits(text, BLOCK)
+    token = token_contract_evidence(text)
+    fake = hits(text, FAKE_WORDS)
+
+    # Official-domain proof is mandatory. A news article is never enough.
+    official = (
+        item.get("verification") == "resolved-official-source"
+        and d in trusted
+        and bool(d)
+    )
+
+    reasons = []
+    if not official:
+        reasons.append("official_source_not_proven")
+    if not (status and 200 <= status < 300):
+        reasons.append("source_unavailable")
+    if not live:
+        reasons.append("no_live_distribution_evidence")
+    if not free:
+        reasons.append("no_explicit_no-cost_evidence")
+    if blocked:
+        reasons.append("owner_or_cost_condition_detected")
+    if not token:
+        reasons.append("token_identity_not_proven")
+    if fake:
+        reasons.append("speculative_or_points_language_detected")
+
+    accepted = not reasons
+    return {
+        "accepted": accepted,
+        "id": stable_id(str(item.get("title") or "token"), final or source),
+        "name": item.get("title") or "Verified token distribution",
+        "officialUrl": final or source,
+        "canonicalUrl": canonical(body) or None,
+        "officialDomain": d or None,
+        "httpStatus": status,
+        "evidence": {
+            "live": live[:12],
+            "free": free[:12],
+            "tokenIdentity": token[:12],
+            "blocked": blocked[:20],
+            "speculative": fake[:12],
+        },
+        "rejectionReasons": reasons,
+        "status": "VERIFIED_FREE_REAL_TOKEN" if accepted else "REJECTED",
+        "executionMode": "PASSIVE_RECEIPT_ONLY" if accepted else "NONE",
+        "verifiedAt": NOW,
+    }
 
 def main():
     try:
-        discovery=json.loads(DISCOVERY.read_text(encoding="utf-8"))
+        discovery = json.loads(DISCOVERY.read_text(encoding="utf-8"))
     except Exception:
-        discovery={"items":[]}
-    trusted=official_domains()
-    wallet={}
+        discovery = {"items": []}
+    trusted = trusted_domains()
+
     try:
-        wallet=json.loads(WALLET.read_text(encoding="utf-8"))
+        wallet = json.loads(WALLET.read_text(encoding="utf-8"))
     except Exception:
-        pass
-    temp=wallet.get("temporaryWalletAddress")
+        wallet = {}
+    temp = wallet.get("temporaryWalletAddress")
 
-    candidates=[]
-    rejected=[]
-    for item in discovery.get("items",[]):
-        url=item.get("resolvedUrl") or item.get("canonicalUrl") or item.get("url","")
-        if not url:
-            continue
-        d=domain(url)
-        if item.get("verification")!="resolved-official-source" or d not in trusted:
-            rejected.append({"title":item.get("title"),"reason":"not-officially-verified","url":url})
-            continue
-        final,body,status=fetch(url)
-        text=clean(body)
-        live,free,blocked,token=score(text)
-        # "Unconditional" means no new money, trade, deposit, holding, task,
-        # referral, KYC/CAPTCHA, wallet signature or paid fee is required.
-        if not (200 <= (status or 0) < 300):
-            rejected.append({"title":item.get("title"),"reason":"source-unavailable","url":url})
-            continue
-        if not live:
-            rejected.append({"title":item.get("title"),"reason":"no-live-claim-evidence","url":final or url})
-            continue
-        if not free:
-            rejected.append({"title":item.get("title"),"reason":"no-explicit-free-evidence","url":final or url})
-            continue
-        if blocked:
-            rejected.append({"title":item.get("title"),"reason":"has-new-condition-or-owner-action","blockedSignals":blocked[:12],"url":final or url})
-            continue
-        if not token:
-            rejected.append({"title":item.get("title"),"reason":"token-identity-not-evidenced","url":final or url})
-            continue
-        candidates.append({
-            "id": re.sub(r"[^a-z0-9-]+","-",str(item.get("title") or "token").lower()).strip("-"),
-            "name": item.get("title") or "Verified token distribution",
-            "officialUrl": final or url,
-            "officialDomain": d,
-            "httpStatus": status,
-            "liveEvidence": live,
-            "freeEvidence": free,
-            "tokenEvidence": token,
-            "conditionSignals": [],
-            "action": "DIRECT_TO_TEMP_WALLET_WHEN_PROTOCOL_PUSHES",
-            "temporaryWalletAddress": temp or None,
-            "execution": "PASSIVE_RECEIPT_ONLY",
-            "status": "VERIFIED_FREE_REAL_TOKEN",
-            "verifiedAt": NOW
-        })
+    accepted = []
+    rejected = []
+    seen = set()
 
-    out={
-        "guard":"ANIL X Immortal Guard",
-        "engine":"Free Real Token Hunter X",
-        "version":"12.0-strict",
-        "updatedAt":NOW,
-        "definition":"Only live, real-token distributions with explicit evidence of no purchase/trade/deposit/holding/task and no KYC/CAPTCHA/signature/login requirement.",
-        "count":len(candidates),
-        "tokens":candidates,
-        "rejectedCount":len(rejected),
-        "rejectedSample":rejected[-100:],
-        "temporaryWalletAddress":temp or None,
-        "transferPolicy":"Never auto-transfer temporary wallet to permanent wallet.",
-        "signingPolicy":"Never store or use seed/private keys; never bypass KYC/CAPTCHA/anti-Sybil or signatures."
+    for item in discovery.get("items", []):
+        result = evaluate(item, trusted)
+        if result["id"] in seen:
+            continue
+        seen.add(result["id"])
+        if result["accepted"]:
+            result["temporaryWalletAddress"] = temp or None
+            result["policy"] = (
+                "Eligible for passive receipt monitoring only. "
+                "No automatic signing, claiming, or temporary-to-permanent transfer."
+            )
+            accepted.append(result)
+        else:
+            rejected.append(result)
+
+    # Preserve durable discovery history; this engine never deletes a found item.
+    try:
+        history = json.loads(HISTORY.read_text(encoding="utf-8"))
+    except Exception:
+        history = {"version": "1.0", "items": []}
+    old = {x.get("id"): x for x in history.get("items", []) if x.get("id")}
+    for result in accepted + rejected:
+        hid = result["id"]
+        previous = old.get(hid, {})
+        old[hid] = {
+            **previous,
+            "id": hid,
+            "name": result["name"],
+            "source": result["officialUrl"],
+            "firstSeenAt": previous.get("firstSeenAt", NOW),
+            "lastSeenAt": NOW,
+            "strictFreeTokenStatus": result["status"],
+            "strictFreeTokenReasons": result["rejectionReasons"],
+            "ownerApprovalRequired": True,
+        }
+    history["items"] = list(old.values())
+    history["count"] = len(history["items"])
+    history["updatedAt"] = NOW
+    HISTORY.write_text(json.dumps(history, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    output = {
+        "guard": "ANIL X Immortal Guard",
+        "engine": "Free Real Token Hunter X",
+        "version": "13.0-strict",
+        "updatedAt": NOW,
+        "definition": (
+            "Real token + live distribution + explicit no-cost/no-new-condition evidence. "
+            "Points, speculative airdrops, trading campaigns and gated claims are excluded."
+        ),
+        "verifiedCount": len(accepted),
+        "tokens": accepted,
+        "rejectedCount": len(rejected),
+        "rejected": rejected[-250:],
+        "temporaryWalletAddress": temp or None,
+        "automaticClaim": False,
+        "automaticSigning": False,
+        "automaticTransfer": False,
+        "privateKeys": "never-collected",
+        "ownerGate": "Required for any opportunity-specific action.",
+        "receiptMode": "Passive on-chain monitoring only.",
     }
-    FREE.write_text(json.dumps(out,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-    print(json.dumps({"status":"free_real_token_scan_complete","verified":len(candidates),"rejected":len(rejected)},ensure_ascii=False))
+    OUT.write_text(json.dumps(output, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps({
+        "status": "free_real_token_hunter_complete",
+        "verifiedFreeRealTokens": len(accepted),
+        "rejected": len(rejected),
+    }, ensure_ascii=False))
 
-if __name__=="__main__":
+if __name__ == "__main__":
     main()
