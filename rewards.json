@@ -6,7 +6,7 @@
       "type": "airdrop-portal",
       "url": "https://www.binance.com/en/airdrop",
       "httpStatus": 202,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00",
+      "lastScan": "2026-09-23T15:34:19.891409+00:00",
       "guardVersion": "5.0-honest-queue",
       "guardMode": "autonomous-monitoring-and-owner-approved-execution"
     },
@@ -15,7 +15,7 @@
       "type": "learn-and-earn",
       "url": "https://www.binance.com/en/support/announcement/detail/41cd1e09c4814c27bf6d5ce9d61f6e51",
       "httpStatus": 202,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00",
+      "lastScan": "2026-09-23T15:34:19.891409+00:00",
       "guardVersion": "5.0-honest-queue",
       "guardMode": "autonomous-monitoring-and-owner-approved-execution"
     },
@@ -24,7 +24,7 @@
       "type": "alpha-rewards",
       "url": "https://www.binance.com/en/alpha",
       "httpStatus": 202,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00",
+      "lastScan": "2026-09-23T15:34:19.891409+00:00",
       "guardVersion": "5.0-honest-queue",
       "guardMode": "autonomous-monitoring-and-owner-approved-execution"
     },
@@ -33,7 +33,7 @@
       "type": "quest-rewards",
       "url": "https://galxe.com/",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00",
+      "lastScan": "2026-09-23T15:34:19.891409+00:00",
       "guardVersion": "5.0-honest-queue",
       "guardMode": "autonomous-monitoring-and-owner-approved-execution"
     },
@@ -42,7 +42,7 @@
       "type": "quest-rewards",
       "url": "https://layer3.xyz/",
       "httpStatus": 403,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00",
+      "lastScan": "2026-09-23T15:34:19.891409+00:00",
       "guardVersion": "5.0-honest-queue",
       "guardMode": "autonomous-monitoring-and-owner-approved-execution",
       "status": "unavailable",
@@ -54,7 +54,7 @@
       "type": "quest-rewards",
       "url": "https://zealy.io/",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00",
+      "lastScan": "2026-09-23T15:34:19.891409+00:00",
       "guardVersion": "5.0-honest-queue",
       "guardMode": "autonomous-monitoring-and-owner-approved-execution"
     },
@@ -63,7 +63,7 @@
       "type": "quest-rewards",
       "url": "https://app.questn.com/",
       "httpStatus": 403,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00",
+      "lastScan": "2026-09-23T15:34:19.891409+00:00",
       "guardVersion": "5.0-honest-queue",
       "guardMode": "autonomous-monitoring-and-owner-approved-execution",
       "status": "unavailable",
@@ -75,7 +75,7 @@
       "type": "airdrop",
       "url": "https://docs.xdao.app/ton/airdrop/",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00",
+      "lastScan": "2026-09-23T15:34:19.891409+00:00",
       "guardVersion": "5.0-honest-queue",
       "guardMode": "autonomous-monitoring-and-owner-approved-execution"
     },
@@ -84,7 +84,7 @@
       "type": "ecosystem",
       "url": "https://ton.org/ecosystem",
       "httpStatus": 404,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00",
+      "lastScan": "2026-09-23T15:34:19.891409+00:00",
       "status": "unavailable",
       "actionStage": "SOURCE_BLOCKED"
     },
@@ -93,14 +93,14 @@
       "type": "announcements",
       "url": "https://blog.ton.org/",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00"
+      "lastScan": "2026-09-23T15:34:19.891409+00:00"
     },
     {
       "name": "Ethereum Ecosystem",
       "type": "ecosystem",
       "url": "https://ethereum.org/en/ecosystem/",
       "httpStatus": 404,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00",
+      "lastScan": "2026-09-23T15:34:19.891409+00:00",
       "status": "unavailable",
       "actionStage": "SOURCE_BLOCKED"
     },
@@ -109,21 +109,21 @@
       "type": "ecosystem",
       "url": "https://solana.com/ecosystem",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00"
+      "lastScan": "2026-09-23T15:34:19.891409+00:00"
     },
     {
       "name": "Base Ecosystem",
       "type": "ecosystem",
       "url": "https://www.base.org/ecosystem",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00"
+      "lastScan": "2026-09-23T15:34:19.891409+00:00"
     },
     {
       "name": "Arbitrum Ecosystem",
       "type": "ecosystem",
       "url": "https://arbitrum.io/ecosystem",
       "httpStatus": 403,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00",
+      "lastScan": "2026-09-23T15:34:19.891409+00:00",
       "status": "unavailable",
       "actionStage": "SOURCE_BLOCKED"
     },
@@ -132,7 +132,7 @@
       "type": "ecosystem",
       "url": "https://www.optimism.io/ecosystem",
       "httpStatus": 404,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00",
+      "lastScan": "2026-09-23T15:34:19.891409+00:00",
       "status": "unavailable",
       "actionStage": "SOURCE_BLOCKED"
     },
@@ -141,35 +141,35 @@
       "type": "ecosystem",
       "url": "https://polygon.technology/ecosystem",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00"
+      "lastScan": "2026-09-23T15:34:19.891409+00:00"
     },
     {
       "name": "Avalanche Ecosystem",
       "type": "ecosystem",
       "url": "https://www.avax.network/",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00"
+      "lastScan": "2026-09-23T15:34:19.891409+00:00"
     },
     {
       "name": "Starknet Ecosystem",
       "type": "ecosystem",
       "url": "https://www.starknet.io/ecosystem/",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00"
+      "lastScan": "2026-09-23T15:34:19.891409+00:00"
     },
     {
       "name": "zkSync Ecosystem",
       "type": "ecosystem",
       "url": "https://www.zksync.io/ecosystem",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00"
+      "lastScan": "2026-09-23T15:34:19.891409+00:00"
     },
     {
       "name": "Scroll Ecosystem",
       "type": "ecosystem",
       "url": "https://scroll.io/ecosystem",
       "httpStatus": 404,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00",
+      "lastScan": "2026-09-23T15:34:19.891409+00:00",
       "status": "unavailable",
       "actionStage": "SOURCE_BLOCKED"
     },
@@ -178,7 +178,7 @@
       "type": "ecosystem",
       "url": "https://linea.build/ecosystem",
       "httpStatus": 403,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00",
+      "lastScan": "2026-09-23T15:34:19.891409+00:00",
       "status": "unavailable",
       "actionStage": "SOURCE_BLOCKED"
     },
@@ -187,35 +187,35 @@
       "type": "ecosystem",
       "url": "https://celestia.org/ecosystem/",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00"
+      "lastScan": "2026-09-23T15:34:19.891409+00:00"
     },
     {
       "name": "Cosmos Ecosystem",
       "type": "ecosystem",
       "url": "https://cosmos.network/ecosystem",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00"
+      "lastScan": "2026-09-23T15:34:19.891409+00:00"
     },
     {
       "name": "NEAR Ecosystem",
       "type": "ecosystem",
       "url": "https://near.org/ecosystem/",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00"
+      "lastScan": "2026-09-23T15:34:19.891409+00:00"
     },
     {
       "name": "Sui Ecosystem",
       "type": "ecosystem",
       "url": "https://sui.io/ecosystem",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00"
+      "lastScan": "2026-09-23T15:34:19.891409+00:00"
     },
     {
       "name": "Aptos Ecosystem",
       "type": "ecosystem",
       "url": "https://aptosfoundation.org/ecosystem",
       "httpStatus": 429,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00",
+      "lastScan": "2026-09-23T15:34:19.891409+00:00",
       "status": "unavailable",
       "actionStage": "SOURCE_BLOCKED"
     },
@@ -224,70 +224,70 @@
       "type": "ecosystem",
       "url": "https://polkadot.com/ecosystem",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00"
+      "lastScan": "2026-09-23T15:34:19.891409+00:00"
     },
     {
       "name": "Chainlink Ecosystem",
       "type": "ecosystem",
       "url": "https://chain.link/ecosystem",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00"
+      "lastScan": "2026-09-23T15:34:19.891409+00:00"
     },
     {
       "name": "Gitcoin",
       "type": "grants-rewards",
       "url": "https://www.gitcoin.co/",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00"
+      "lastScan": "2026-09-23T15:34:19.891409+00:00"
     },
     {
       "name": "HackerOne",
       "type": "bug-bounty",
       "url": "https://www.hackerone.com/",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00"
+      "lastScan": "2026-09-23T15:34:19.891409+00:00"
     },
     {
       "name": "Immunefi",
       "type": "bug-bounty",
       "url": "https://immunefi.com/",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00"
+      "lastScan": "2026-09-23T15:34:19.891409+00:00"
     },
     {
       "name": "Code4rena",
       "type": "bug-bounty",
       "url": "https://code4rena.com/",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00"
+      "lastScan": "2026-09-23T15:34:19.891409+00:00"
     },
     {
       "name": "Sherlock",
       "type": "bug-bounty",
       "url": "https://www.sherlock.xyz/",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00"
+      "lastScan": "2026-09-23T15:34:19.891409+00:00"
     },
     {
       "name": "Coinbase Learn",
       "type": "rewards-education",
       "url": "https://www.coinbase.com/learn",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00"
+      "lastScan": "2026-09-23T15:34:19.891409+00:00"
     },
     {
       "name": "Binance Research",
       "type": "research",
       "url": "https://research.binance.com/",
       "httpStatus": 202,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00"
+      "lastScan": "2026-09-23T15:34:19.891409+00:00"
     },
     {
       "name": "CoinMarketCap Airdrops",
       "type": "airdrop-discovery",
       "url": "https://coinmarketcap.com/airdrop/",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00"
+      "lastScan": "2026-09-23T15:34:19.891409+00:00"
     },
     {
       "name": "QuestN",
@@ -295,10 +295,10 @@
       "type": "quest-rewards",
       "status": "pending-scan",
       "httpStatus": 200,
-      "lastScan": "2026-09-23T14:39:23.125307+00:00"
+      "lastScan": "2026-09-23T15:34:19.891409+00:00"
     }
   ],
-  "lastScan": "2026-09-23T14:39:23.125307+00:00",
+  "lastScan": "2026-09-23T15:34:19.891409+00:00",
   "guardVersion": "7.0-safe-advisory",
   "policy": "Monitoring and advisory only. No project-specific claim adapter verified; no claim transaction executed. Never collect private keys or bypass KYC/CAPTCHA/Sybil controls."
 }
