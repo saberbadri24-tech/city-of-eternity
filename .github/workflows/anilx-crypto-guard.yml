@@ -25,6 +25,9 @@ jobs:
       - name: Global opportunity discovery
         run: python3 scripts/global_opportunity_discovery.py
 
+      - name: Verify discovered opportunities against resolved sources
+        run: python3 scripts/verify_global_discovery.py
+
       - name: Run Airdrop+ scan and advisory queue
         env:
           TZ: UTC
@@ -41,6 +44,7 @@ jobs:
       - name: Validate Guard state
         run: |
           python3 -m json.tool guard-discovery.json >/dev/null
+          python3 -m py_compile scripts/global_opportunity_discovery.py scripts/verify_global_discovery.py scripts/airdrop_guard.py scripts/guard_ton_receipts.py
           python3 -m json.tool guard-wallet.json >/dev/null
           python3 -m json.tool guard-status.json >/dev/null
           python3 -m json.tool guard-opportunities.json >/dev/null
