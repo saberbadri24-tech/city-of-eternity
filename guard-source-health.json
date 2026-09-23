@@ -1,0 +1,164 @@
+{
+  "guard": "ANIL X Immortal Guard",
+  "updatedAt": "2026-09-23T15:47:52.253643+00:00",
+  "status": "healthy",
+  "sourceCount": 51,
+  "validHttpsSourceCount": 51,
+  "invalidSourceCount": 0,
+  "uniqueOfficialDomains": 49,
+  "sourceTypes": {
+    "airdrop-portal": 1,
+    "learn-and-earn": 1,
+    "alpha-rewards": 1,
+    "quest-rewards": 5,
+    "airdrop": 1,
+    "ecosystem": 33,
+    "announcements": 1,
+    "grants-rewards": 1,
+    "bug-bounty": 4,
+    "rewards-education": 1,
+    "research": 1,
+    "airdrop-discovery": 1
+  },
+  "discoveryCandidateCount": 500,
+  "uniqueNewsPublishers": 233,
+  "topPublishers": [
+    {
+      "publisher": "x.com",
+      "count": 46
+    },
+    {
+      "publisher": "facebook.com",
+      "count": 30
+    },
+    {
+      "publisher": "BitDegree",
+      "count": 24
+    },
+    {
+      "publisher": "Binance",
+      "count": 17
+    },
+    {
+      "publisher": "CCN.com",
+      "count": 16
+    },
+    {
+      "publisher": "YouTube",
+      "count": 15
+    },
+    {
+      "publisher": "instagram.com",
+      "count": 11
+    },
+    {
+      "publisher": "reddit.com",
+      "count": 10
+    },
+    {
+      "publisher": "AirdropAlert",
+      "count": 10
+    },
+    {
+      "publisher": "Uniswap",
+      "count": 7
+    },
+    {
+      "publisher": "World - The real human network",
+      "count": 7
+    },
+    {
+      "publisher": "Medium",
+      "count": 7
+    },
+    {
+      "publisher": "Blockchair",
+      "count": 7
+    },
+    {
+      "publisher": "ACM Digital Library",
+      "count": 6
+    },
+    {
+      "publisher": "quora.com",
+      "count": 6
+    },
+    {
+      "publisher": "Bitget",
+      "count": 6
+    },
+    {
+      "publisher": "Zipmex",
+      "count": 5
+    },
+    {
+      "publisher": "LinkedIn",
+      "count": 5
+    },
+    {
+      "publisher": "DropsTab",
+      "count": 5
+    },
+    {
+      "publisher": "Coin Gabbar",
+      "count": 5
+    }
+  ],
+  "invalidSources": [],
+  "sourceDomains": [
+    "algorand.co",
+    "app.questn.com",
+    "aptosfoundation.org",
+    "arbitrum.io",
+    "avax.network",
+    "base.org",
+    "berachain.com",
+    "binance.com",
+    "blog.ton.org",
+    "cardano.org",
+    "celestia.org",
+    "chain.link",
+    "code4rena.com",
+    "coinbase.com",
+    "coinmarketcap.com",
+    "cosmos.network",
+    "docs.xdao.app",
+    "ethereum.org",
+    "galxe.com",
+    "gitcoin.co",
+    "hackerone.com",
+    "hedera.com",
+    "hyperliquid.xyz",
+    "immunefi.com",
+    "injective.com",
+    "internetcomputer.org",
+    "kaspa.org",
+    "layer3.xyz",
+    "linea.build",
+    "mantle.xyz",
+    "minaprotocol.com",
+    "monad.xyz",
+    "movementlabs.xyz",
+    "near.org",
+    "optimism.io",
+    "polkadot.com",
+    "polygon.technology",
+    "questn.com",
+    "research.binance.com",
+    "scroll.io",
+    "sei.io",
+    "sherlock.xyz",
+    "solana.com",
+    "starknet.io",
+    "sui.io",
+    "tezos.com",
+    "ton.org",
+    "zealy.io",
+    "zksync.io"
+  ],
+  "limitations": [
+    "Registry presence does not prove a source is reachable or currently distributing rewards.",
+    "News candidates are leads only; they are not verified or claim-authorized.",
+    "This report performs no wallet connection, signing, claiming, or transfer."
+  ]
+}
