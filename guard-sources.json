@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "2.0",
   "policy": "Official/public sources only. The Guard may learn prioritization from these sources but never bypass account, KYC, CAPTCHA, anti-Sybil or wallet-signature controls.",
   "sources": [
     {
@@ -41,6 +41,147 @@
       "name": "XDAO TON Airdrop Docs",
       "type": "airdrop",
       "url": "https://docs.xdao.app/ton/airdrop/"
+    },
+    {
+      "name": "TON Ecosystem",
+      "type": "ecosystem",
+      "url": "https://ton.org/ecosystem"
+    },
+    {
+      "name": "TON Blog",
+      "type": "announcements",
+      "url": "https://blog.ton.org/"
+    },
+    {
+      "name": "Ethereum Ecosystem",
+      "type": "ecosystem",
+      "url": "https://ethereum.org/en/ecosystem/"
+    },
+    {
+      "name": "Solana Ecosystem",
+      "type": "ecosystem",
+      "url": "https://solana.com/ecosystem"
+    },
+    {
+      "name": "Base Ecosystem",
+      "type": "ecosystem",
+      "url": "https://www.base.org/ecosystem"
+    },
+    {
+      "name": "Arbitrum Ecosystem",
+      "type": "ecosystem",
+      "url": "https://arbitrum.io/ecosystem"
+    },
+    {
+      "name": "Optimism Ecosystem",
+      "type": "ecosystem",
+      "url": "https://www.optimism.io/ecosystem"
+    },
+    {
+      "name": "Polygon Ecosystem",
+      "type": "ecosystem",
+      "url": "https://polygon.technology/ecosystem"
+    },
+    {
+      "name": "Avalanche Ecosystem",
+      "type": "ecosystem",
+      "url": "https://www.avax.network/"
+    },
+    {
+      "name": "Starknet Ecosystem",
+      "type": "ecosystem",
+      "url": "https://www.starknet.io/ecosystem/"
+    },
+    {
+      "name": "zkSync Ecosystem",
+      "type": "ecosystem",
+      "url": "https://www.zksync.io/ecosystem"
+    },
+    {
+      "name": "Scroll Ecosystem",
+      "type": "ecosystem",
+      "url": "https://scroll.io/ecosystem"
+    },
+    {
+      "name": "Linea Ecosystem",
+      "type": "ecosystem",
+      "url": "https://linea.build/ecosystem"
+    },
+    {
+      "name": "Celestia Ecosystem",
+      "type": "ecosystem",
+      "url": "https://celestia.org/ecosystem/"
+    },
+    {
+      "name": "Cosmos Ecosystem",
+      "type": "ecosystem",
+      "url": "https://cosmos.network/ecosystem"
+    },
+    {
+      "name": "NEAR Ecosystem",
+      "type": "ecosystem",
+      "url": "https://near.org/ecosystem/"
+    },
+    {
+      "name": "Sui Ecosystem",
+      "type": "ecosystem",
+      "url": "https://sui.io/ecosystem"
+    },
+    {
+      "name": "Aptos Ecosystem",
+      "type": "ecosystem",
+      "url": "https://aptosfoundation.org/ecosystem"
+    },
+    {
+      "name": "Polkadot Ecosystem",
+      "type": "ecosystem",
+      "url": "https://polkadot.com/ecosystem"
+    },
+    {
+      "name": "Chainlink Ecosystem",
+      "type": "ecosystem",
+      "url": "https://chain.link/ecosystem"
+    },
+    {
+      "name": "Gitcoin",
+      "type": "grants-rewards",
+      "url": "https://www.gitcoin.co/"
+    },
+    {
+      "name": "HackerOne",
+      "type": "bug-bounty",
+      "url": "https://www.hackerone.com/"
+    },
+    {
+      "name": "Immunefi",
+      "type": "bug-bounty",
+      "url": "https://immunefi.com/"
+    },
+    {
+      "name": "Code4rena",
+      "type": "bug-bounty",
+      "url": "https://code4rena.com/"
+    },
+    {
+      "name": "Sherlock",
+      "type": "bug-bounty",
+      "url": "https://www.sherlock.xyz/"
+    },
+    {
+      "name": "Coinbase Learn",
+      "type": "rewards-education",
+      "url": "https://www.coinbase.com/learn"
+    },
+    {
+      "name": "Binance Research",
+      "type": "research",
+      "url": "https://research.binance.com/"
+    },
+    {
+      "name": "CoinMarketCap Airdrops",
+      "type": "airdrop-discovery",
+      "url": "https://coinmarketcap.com/airdrop/"
     }
-  ]
+  ],
+  "updatedAt": "2026-09-23T14:00:32.374Z"
 }
