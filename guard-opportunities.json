@@ -1,33 +1,31 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "engine": "Airdrop+ X",
-  "updatedAt": "2026-09-23T10:15:02.573620+00:00",
+  "updatedAt": "2026-09-23T11:00:24.101454+00:00",
   "opportunities": [
     {
       "id": "binance-airdrop-portal",
       "name": "Binance Airdrop Portal",
       "source": "https://www.binance.com/en/airdrop",
       "type": "airdrop-portal",
-      "score": 62.4,
       "signals": [],
       "requirements": [],
-      "status": "WATCH",
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T10:15:02.573620+00:00",
+      "detectedAt": "2026-09-23T11:00:24.101454+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
-      "claim": "not-executed; no protocol-specific adapter verified",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
       "executionMode": "monitor-and-queue-only",
-      "claimOpen": false,
       "walletSigning": "never-automatic",
-      "aiProviders": {
-        "configuredKeys": {
-          "gemini": false,
-          "claude": false,
-          "astra": false
-        },
-        "liveCalls": "not-implemented",
-        "mode": "not-connected-advisory-only"
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": false,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY"
       }
     },
     {
@@ -35,26 +33,25 @@
       "name": "Binance Learn & Earn",
       "source": "https://www.binance.com/en/support/announcement/detail/41cd1e09c4814c27bf6d5ce9d61f6e51",
       "type": "learn-and-earn",
-      "score": 62.4,
       "signals": [],
       "requirements": [],
-      "status": "WATCH",
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T10:15:02.573620+00:00",
+      "detectedAt": "2026-09-23T11:00:24.101454+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
-      "claim": "not-executed; no protocol-specific adapter verified",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
       "executionMode": "monitor-and-queue-only",
-      "claimOpen": false,
       "walletSigning": "never-automatic",
-      "aiProviders": {
-        "configuredKeys": {
-          "gemini": false,
-          "claude": false,
-          "astra": false
-        },
-        "liveCalls": "not-implemented",
-        "mode": "not-connected-advisory-only"
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": false,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY"
       }
     },
     {
@@ -62,26 +59,25 @@
       "name": "Binance Alpha",
       "source": "https://www.binance.com/en/alpha",
       "type": "alpha-rewards",
-      "score": 62.4,
       "signals": [],
       "requirements": [],
-      "status": "WATCH",
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T10:15:02.573620+00:00",
+      "detectedAt": "2026-09-23T11:00:24.101454+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
-      "claim": "not-executed; no protocol-specific adapter verified",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
       "executionMode": "monitor-and-queue-only",
-      "claimOpen": false,
       "walletSigning": "never-automatic",
-      "aiProviders": {
-        "configuredKeys": {
-          "gemini": false,
-          "claude": false,
-          "astra": false
-        },
-        "liveCalls": "not-implemented",
-        "mode": "not-connected-advisory-only"
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": false,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY"
       }
     },
     {
@@ -89,29 +85,28 @@
       "name": "Galxe",
       "source": "https://galxe.com/",
       "type": "quest-rewards",
-      "score": 83.6,
       "signals": [
-        "quest",
-        "tge"
+        "token",
+        "quest"
       ],
       "requirements": [],
-      "status": "HIGH_PRIORITY",
       "actionStage": "WATCH",
-      "detectedAt": "2026-09-23T10:15:02.573620+00:00",
+      "detectedAt": "2026-09-23T11:00:24.101454+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
-      "claim": "not-executed; no protocol-specific adapter verified",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
       "executionMode": "monitor-and-queue-only",
-      "claimOpen": false,
       "walletSigning": "never-automatic",
-      "aiProviders": {
-        "configuredKeys": {
-          "gemini": false,
-          "claude": false,
-          "astra": false
-        },
-        "liveCalls": "not-implemented",
-        "mode": "not-connected-advisory-only"
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": false,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY"
       }
     },
     {
@@ -119,39 +114,32 @@
       "name": "Zealy",
       "source": "https://zealy.io/",
       "type": "quest-rewards",
-      "score": 84.3,
       "signals": [
-        "airdrop",
-        "points",
-        "quest",
-        "deadline",
+        "claim",
         "reward",
-        "claim"
+        "token",
+        "quest"
       ],
       "requirements": [
-        "register",
-        "connect wallet",
-        "signature",
-        "captcha",
         "login"
       ],
-      "status": "HIGH_PRIORITY",
       "actionStage": "WAITING_OWNER",
-      "detectedAt": "2026-09-23T10:15:02.573620+00:00",
+      "detectedAt": "2026-09-23T11:00:24.101454+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
-      "claim": "not-executed; no protocol-specific adapter verified",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
       "executionMode": "monitor-and-queue-only",
-      "claimOpen": false,
       "walletSigning": "never-automatic",
-      "aiProviders": {
-        "configuredKeys": {
-          "gemini": false,
-          "claude": false,
-          "astra": false
-        },
-        "liveCalls": "not-implemented",
-        "mode": "not-connected-advisory-only"
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": true,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY"
       }
     },
     {
@@ -159,36 +147,31 @@
       "name": "XDAO TON Airdrop Docs",
       "source": "https://docs.xdao.app/ton/airdrop/",
       "type": "airdrop",
-      "score": 82.9,
       "signals": [
         "airdrop",
-        "points",
-        "quest",
-        "snapshot",
-        "deadline",
-        "claim"
+        "claim",
+        "token"
       ],
       "requirements": [
-        "register",
-        "signature"
+        "register"
       ],
-      "status": "HIGH_PRIORITY",
       "actionStage": "WAITING_OWNER",
-      "detectedAt": "2026-09-23T10:15:02.573620+00:00",
+      "detectedAt": "2026-09-23T11:00:24.101454+00:00",
       "temporaryWalletConfigured": true,
       "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
-      "claim": "not-executed; no protocol-specific adapter verified",
+      "claim": "not-executed; protocol-specific adapter and eligibility verification required",
       "executionMode": "monitor-and-queue-only",
-      "claimOpen": false,
       "walletSigning": "never-automatic",
-      "aiProviders": {
-        "configuredKeys": {
-          "gemini": false,
-          "claude": false,
-          "astra": false
-        },
-        "liveCalls": "not-implemented",
-        "mode": "not-connected-advisory-only"
+      "astraReview": {
+        "role": "local-risk-triage",
+        "blocked_by_kyc_or_captcha": false,
+        "owner_interaction_required": true,
+        "explicit_claim_language": false,
+        "automatic_distribution_language": false
+      },
+      "modelReview": {
+        "gemini_status": "missing_GitHub_secret_GEMINI_API_KEY",
+        "claude_status": "missing_GitHub_secret_ANTHROPIC_API_KEY"
       }
     }
   ]

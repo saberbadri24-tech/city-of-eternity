@@ -1,31 +1,37 @@
 {
   "guard": "ANIL X Immortal Guard",
   "engine": "Airdrop+ X",
-  "version": "5.0-honest-queue",
-  "lastScan": "2026-09-23T10:15:02.573620+00:00",
-  "mode": "monitor -> classify -> queue -> owner review",
-  "financialActions": "no-claim-transaction-executed; main-wallet-transfer-owner-approved-only",
-  "walletPrivateKeys": "never-collected",
-  "temporaryWallet": "configured",
-  "ownerApprovalRequired": true,
-  "antiSybil": "respected",
-  "kycBypass": "disabled",
-  "captchaBypass": "disabled",
-  "signatureAutomation": "disabled",
+  "version": "7.0-safe-advisory",
+  "lastScan": "2026-09-23T11:00:24.101454+00:00",
   "sourcesScanned": 8,
+  "sourcesReachable": 6,
   "claimPathsDetected": 0,
   "waitingOwner": 2,
+  "mode": "discover -> inspect -> triage -> queue; no claim execution",
+  "financialActions": "no automated claim/transfer; owner approval required for wallet signatures and transfers",
+  "temporaryWallet": "configured",
+  "walletPrivateKeys": "never-collected",
+  "automaticSigning": false,
   "aiProviders": {
-    "configuredKeys": {
+    "configured": {
       "gemini": false,
       "claude": false,
-      "astra": false
+      "astra": "local-risk-triage"
     },
-    "liveCalls": "not-implemented",
-    "mode": "not-connected-advisory-only"
+    "successfulCallsThisRun": {
+      "gemini": 0,
+      "claude": 0
+    },
+    "astra": "local deterministic triage; not an external LLM"
   },
   "blockers": [
-    "Layer3: HTTP 403",
-    "QuestN: HTTP 403"
+    {
+      "source": "Layer3",
+      "httpStatus": 403
+    },
+    {
+      "source": "QuestN",
+      "httpStatus": 403
+    }
   ]
 }

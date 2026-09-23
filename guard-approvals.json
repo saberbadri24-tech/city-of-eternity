@@ -1,7 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "engine": "Airdrop+ X",
-  "updatedAt": "2026-09-23T10:15:02.573620+00:00",
+  "updatedAt": "2026-09-23T11:00:24.101454+00:00",
   "approvals": [
     {
       "id": "zealy",
@@ -9,8 +8,8 @@
       "source": "https://zealy.io/",
       "requiresOwnerApproval": true,
       "status": "owner-action-required",
-      "action": "Review official project flow; no claim transaction or wallet transfer has been executed by this monitor.",
-      "createdAt": "2026-09-23T10:15:02.573620+00:00"
+      "action": "Review the official claim flow. This scan did not submit a claim or move funds.",
+      "createdAt": "2026-09-23T11:00:24.101454+00:00"
     },
     {
       "id": "xdao-ton-airdrop-docs",
@@ -18,8 +17,8 @@
       "source": "https://docs.xdao.app/ton/airdrop/",
       "requiresOwnerApproval": true,
       "status": "owner-action-required",
-      "action": "Review official project flow; no claim transaction or wallet transfer has been executed by this monitor.",
-      "createdAt": "2026-09-23T10:15:02.573620+00:00"
+      "action": "Review the official claim flow. This scan did not submit a claim or move funds.",
+      "createdAt": "2026-09-23T11:00:24.101454+00:00"
     }
   ]
 }
