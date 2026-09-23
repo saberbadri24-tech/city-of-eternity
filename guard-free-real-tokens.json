@@ -1,0 +1,13 @@
+{
+  "guard": "ANIL X Immortal Guard",
+  "engine": "Free Real Token Hunter X",
+  "version": "12.0-strict",
+  "updatedAt": null,
+  "count": 0,
+  "tokens": [],
+  "rejectedCount": 0,
+  "rejectedSample": [],
+  "temporaryWalletAddress": null,
+  "transferPolicy": "Never auto-transfer temporary wallet to permanent wallet.",
+  "signingPolicy": "Never store or use seed/private keys; never bypass KYC/CAPTCHA/anti-Sybil or signatures."
+}
