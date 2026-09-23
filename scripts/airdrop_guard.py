@@ -82,6 +82,28 @@ def review_models(name, url, body):
             result["claude_error"] = type(exc).__name__
     else:
         result["claude_status"] = "missing_GitHub_secret_ANTHROPIC_API_KEY"
+
+    openai_key = os.getenv("OPENAI_API_KEY", "")
+    if openai_key:
+        try:
+            data = post_json(
+                "https://api.openai.com/v1/chat/completions",
+                {"model": "gpt-5-mini", "temperature": 0.1, "max_tokens": 450,
+                 "messages": [{"role": "system", "content": "Be a conservative crypto-opportunity reviewer. Never claim a transaction occurred and never provide signing or bypass instructions."},
+                              {"role": "user", "content": prompt}]},
+                {"Content-Type": "application/json", "Authorization": "Bearer " + openai_key},
+            )
+            result["openai"] = data.get("choices", [{}])[0].get("message", {}).get("content", "")[:2500]
+        except Exception as exc:
+            result["openai_error"] = type(exc).__name__
+    else:
+        result["openai_status"] = "missing_GitHub_secret_OPENAI_API_KEY"
+
+    # Astra is the local deterministic reviewer below; it never receives secrets.
+    result["astra"] = {
+        "role": "local-deterministic-risk-triage",
+        "rule": "official-source + explicit-claim-evidence + owner-gated-signing"
+    }
     return result
 
 def main():
