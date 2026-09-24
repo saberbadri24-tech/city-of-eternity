@@ -50,7 +50,7 @@ QUERIES=[
 "site:*.com \"contract address\" \"claim\" Aptos","crypto airdrop claim official token distribution when:3d",
 "web3 free token claim official no purchase when:3d","crypto token distribution live official when:3d",
 "TON free token distribution official when:3d",
-"site:immunefi.com bug bounty $10000 crypto","site:hackerone.com crypto bug bounty $10000","site:code4rena.com contest prize pool crypto","site:sherlock.xyz contest prize pool crypto","web3 security bounty $50000 live official","smart contract bug bounty $100000 official","crypto grant $10000 application open web3","web3 grant $50000 application open","crypto hackathon $10000 prize pool 2026","web3 hackathon $50000 prize pool 2026","developer bounty $10000 blockchain open","retroactive rewards program web3 official 2026","protocol rewards claim official 2026","crypto ecosystem incentive program rewards official 2026","liquidity mining rewards official program 2026","testnet rewards official blockchain 2026","DeFi trading competition prize pool $10000 official","NFT creator grant $10000 web3 official"]
+"site:immunefi.com bug bounty $10000 crypto","site:hackerone.com crypto bug bounty $10000","site:code4rena.com contest prize pool crypto","site:sherlock.xyz contest prize pool crypto","web3 security bounty $50000 live official","smart contract bug bounty $100000 official","crypto grant $10000 application open web3","web3 grant $50000 application open","crypto hackathon $10000 prize pool 2026","web3 hackathon $50000 prize pool 2026","developer bounty $10000 blockchain open","retroactive rewards program web3 official 2026","protocol rewards claim official 2026","crypto ecosystem incentive program rewards official 2026","liquidity mining rewards official program 2026","testnet rewards official blockchain 2026","DeFi trading competition prize pool $10000 official","NFT creator grant $10000 web3 official","token airdrop claim gratis criptomoneda cuando:3d","recompensa crypto bounty 10000 cuando:7d","airdrop token gratuit quand:3d","prime crypto bounty 10000 quand:7d","kostenloser token airdrop jetzt wenn:3d","crypto bounty 10000 euro deutsch wenn:7d","airdrop cripto gratis quando:3d","recompensa web3 10000 quando:7d","ücretsiz token airdrop resmi ne zaman:3d","kripto ödül bounty 10000 resmi:7d","крипто airdrop бесплатно когда:3d","награда bounty 10000 crypto когда:7d","免费代币空投 领取 近3天","区块链 赏金 10000 美元 近7天","暗号資産 エアドロップ 無料 直近3日","web3 バウンティ 10000ドル 直近7日","무료 토큰 에어드롭 클레임 최근 3일","웹3 바운티 10000달러 최근 7일"]
 
 def fetch(url,timeout=12):
     try:
@@ -83,7 +83,7 @@ def main():
     for name,url,typ in FIXED:existing.setdefault(url,{"name":name,"url":url,"type":typ,"status":"pending-scan"})
     news=news_candidates()
     DISCOVERY.write_text(json.dumps({"guard":"ANIL X Immortal Guard","engine":"Airdrop+ X Global Discovery",
-        "version":"14.0-multifeed","updatedAt":NOW,"queries":QUERIES,"count":len(news),"items":news,
+        "version":"15.0-multilingual-multifeed","updatedAt":NOW,"queries":QUERIES,"count":len(news),"items":news,
         "policy":"Discovery only. No claim, signing, wallet connection, KYC/CAPTCHA bypass, or transfer."},
         ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     registry["sources"]=list(existing.values());registry["lastDiscovery"]=NOW;registry["discoveryCount"]=len(news)
