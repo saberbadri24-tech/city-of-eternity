@@ -25,6 +25,12 @@ jobs:
       - name: Final Guard preflight contract
         run: python3 scripts/guard_final_preflight.py
 
+      - name: Immortal Core contracts
+        run: |
+          python3 scripts/guard_agent_contract.py
+          python3 scripts/guard_evidence_ledger.py
+          python3 scripts/guard_anomaly_engine.py
+
       - name: Evolution and 2050 horizon audit
         run: |
           python3 scripts/guard_evolution_engine.py
@@ -63,8 +69,9 @@ jobs:
       - name: Build high-value multi-brain opportunity report
         run: python3 scripts/high_value_opportunity_engine.py
 
-      - name: Run Guard regression and resilience suites
+      - name: Replay and security regression
         run: |
+          python3 scripts/guard_replay_engine.py
           python3 -m unittest scripts/test_free_real_token_engine.py -v
           python3 -m unittest scripts/test_opportunity_intelligence.py -v
           python3 -m unittest scripts/test_high_value_opportunity_engine.py -v
@@ -76,38 +83,20 @@ jobs:
         run: |
           python3 scripts/guard_module_engine.py
           python3 scripts/guard_modular_core.py
+          python3 scripts/guard_evidence_ledger.py
+          python3 scripts/guard_anomaly_engine.py
+          python3 scripts/guard_replay_engine.py
           python3 scripts/guard_final_preflight.py
 
       - name: Validate Guard state
         run: |
-          python3 -m json.tool guard-discovery.json >/dev/null
-          python3 -m py_compile scripts/global_opportunity_discovery.py scripts/guard_source_health.py scripts/verify_global_discovery.py scripts/airdrop_guard.py scripts/free_real_token_engine.py scripts/guard_ton_receipts.py scripts/opportunity_intelligence.py scripts/high_value_opportunity_engine.py scripts/test_high_value_opportunity_engine.py scripts/test_free_real_token_engine.py scripts/test_opportunity_intelligence.py scripts/guard_resilience_lab.py scripts/guard_module_engine.py scripts/guard_modular_core.py scripts/guard_final_preflight.py
-          python3 -m json.tool guard-source-health.json >/dev/null
-          python3 -m json.tool guard-wallet.json >/dev/null
-          python3 -m json.tool guard-status.json >/dev/null
-          python3 -m json.tool guard-opportunities.json >/dev/null
-          python3 -m json.tool guard-approvals.json >/dev/null
-          python3 -m json.tool guard-learning.json >/dev/null
-          python3 -m json.tool guard-sources.json >/dev/null
-          python3 -m json.tool rewards.json >/dev/null
-          python3 -m json.tool guard-opportunity-history.json >/dev/null
-          python3 -m json.tool guard-receipts.json >/dev/null
-          python3 -m json.tool guard-claim-adapters.json >/dev/null
-          python3 -m json.tool guard-free-real-tokens.json >/dev/null
-          python3 -m json.tool guard-intelligence.json >/dev/null
-          python3 -m json.tool guard-high-value.json >/dev/null
-          python3 -m json.tool guard-resilience-report.json >/dev/null
-          python3 -m json.tool guard-module-health.json >/dev/null
-          python3 -m json.tool guard-modular-core.json >/dev/null
-          python3 -m json.tool guard-capabilities.json >/dev/null
-          python3 -m json.tool guard-horizon.json >/dev/null
-          python3 -m json.tool guard-future-signals.json >/dev/null
-          python3 -m json.tool guard-threat-report.json >/dev/null
+          for f in guard-discovery.json guard-source-health.json guard-wallet.json guard-status.json guard-opportunities.json guard-approvals.json guard-learning.json guard-sources.json rewards.json guard-opportunity-history.json guard-receipts.json guard-claim-adapters.json guard-free-real-tokens.json guard-intelligence.json guard-high-value.json guard-resilience-report.json guard-module-health.json guard-modular-core.json guard-capabilities.json guard-horizon.json guard-future-signals.json guard-threat-report.json guard-agent-contract.json guard-agent-contract-report.json guard-evidence-ledger.json guard-anomaly-report.json guard-replay-report.json; do python3 -m json.tool "$f" >/dev/null; done
+          python3 -m py_compile scripts/*.py
 
       - name: Commit Guard state
         run: |
           git config user.name 'ANIL X Immortal Guard'
           git config user.email 'actions@users.noreply.github.com'
-          git add rewards.json guard-status.json guard-approvals.json guard-opportunities.json guard-learning.json guard-sources.json guard-wallet.json guard-opportunity-history.json guard-receipts.json guard-discovery.json guard-claim-adapters.json guard-free-real-tokens.json guard-source-health.json guard-intelligence.json guard-high-value.json guard-resilience-report.json guard-module-health.json guard-modular-core.json guard-capabilities.json guard-horizon.json guard-future-signals.json guard-threat-report.json
-          git diff --cached --quiet || git commit -m 'chore: refresh airdrop guard scan'
+          git add rewards.json guard-status.json guard-approvals.json guard-opportunities.json guard-learning.json guard-sources.json guard-wallet.json guard-opportunity-history.json guard-receipts.json guard-discovery.json guard-claim-adapters.json guard-free-real-tokens.json guard-source-health.json guard-intelligence.json guard-high-value.json guard-resilience-report.json guard-module-health.json guard-modular-core.json guard-capabilities.json guard-horizon.json guard-future-signals.json guard-threat-report.json guard-agent-contract.json guard-agent-contract-report.json guard-evidence-ledger.json guard-anomaly-report.json guard-replay-report.json
+          git diff --cached --quiet || git commit -m 'chore: refresh immortal guard state'
           git push
