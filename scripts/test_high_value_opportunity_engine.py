@@ -40,5 +40,28 @@ class HighValueEngineTests(unittest.TestCase):
         row=out["ranked"][0]
         self.assertTrue(row["stale"]); self.assertNotEqual(row["priority"],"H1_HIGH_VALUE")
 
+    def test_same_project_cannot_double_count_portfolio(self):
+        out=self.run_engine({"trackedLeads":[
+            {"id":"a1","projectId":"same","rewardUsd":6000,"url":"https://a.example/1"},
+            {"id":"a2","projectId":"same","rewardUsd":6000,"url":"https://a.example/2"},
+            {"id":"b","projectId":"other","rewardUsd":5000}]})
+        self.assertEqual(out["portfolioPlan"]["potentialValueUsd"],11000)
+        self.assertEqual(out["portfolioPlan"]["candidateCount"],2)
+
+    def test_prize_pool_not_counted_as_individual_reward(self):
+        out=self.run_engine({"trackedLeads":[
+            {"id":"pool","prize":50000,"projectId":"contest"},
+            {"id":"b","rewardUsd":2500,"projectId":"b"}]})
+        self.assertEqual(out["portfolioPlan"]["potentialValueUsd"],2500)
+        self.assertEqual(out["ranked"][0]["rewardType"],"prize_pool" if out["ranked"][0]["id"]=="pool" else "individual_reward")
+
+    def test_expired_opportunity_is_excluded(self):
+        out=self.run_engine({"trackedLeads":[
+            {"id":"old","rewardUsd":5000,"deadline":"2020-01-01T00:00:00+00:00"}]})
+        row=out["ranked"][0]
+        self.assertTrue(row["expired"])
+        self.assertFalse(row["highValueLane"])
+        self.assertEqual(out["portfolioPlan"]["potentialValueUsd"],0)
+
 if __name__=="__main__":
     unittest.main()
