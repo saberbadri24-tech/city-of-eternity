@@ -44,6 +44,7 @@ def main():
     if "PROPOSE_ONLY" not in raw: violations.append("T06")
     report={"engine":"Immortal Core Threat Engine","version":"1.2","status":"PASS" if not violations else "FAIL","rules":RULES,"violations":sorted(set(violations)),"boundaryHash":hashlib.sha256("\n".join(f"{a}:{b}" for a,b,_ in RULES).encode()).hexdigest(),"policy":"Internal adversarial validation only; untrusted content is never treated as authority."}
     (ROOT/"guard-threat-report.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-    print("IMMORTAL_CORE_THREAT="+report["status"])\n    if violations: print("IMMORTAL_CORE_VIOLATIONS="+",".join(sorted(set(violations))))
+    print("IMMORTAL_CORE_THREAT="+report["status"])
+    if violations: print("IMMORTAL_CORE_VIOLATIONS="+",".join(sorted(set(violations))))
     if violations: raise SystemExit(1)
 if __name__=="__main__": main()
