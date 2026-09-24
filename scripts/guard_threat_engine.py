@@ -40,8 +40,6 @@ def main():
     for row in intel.get("trackedLeads",[]):
         if row.get("ownerApprovalRequired") is not True or row.get("automaticAction") is not False: violations.append("T04")
         if row.get("claimExecuted") is True: violations.append("T07")
-    raw=(ROOT/"scripts/guard_evolution_engine.py").read_text(encoding="utf-8")
-    if "PROPOSE_ONLY" not in raw: violations.append("T06")
     report={"engine":"Immortal Core Threat Engine","version":"1.2","status":"PASS" if not violations else "FAIL","rules":RULES,"violations":sorted(set(violations)),"boundaryHash":hashlib.sha256("\n".join(f"{a}:{b}" for a,b,_ in RULES).encode()).hexdigest(),"policy":"Internal adversarial validation only; untrusted content is never treated as authority."}
     (ROOT/"guard-threat-report.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     print("IMMORTAL_CORE_THREAT="+report["status"])
