@@ -1,0 +1,12 @@
+{
+  "guard": "ANIL X Immortal Guard / Javidan",
+  "flow": ["discover","verify","triage","queue","owner-login","wallet-review","owner-signature"],
+  "receiptModes": ["direct-public-destination","temporary-wallet-passive-receipt"],
+  "automaticSigning": false,
+  "automaticTransfer": false,
+  "privateKeysCollected": false,
+  "kycBypass": false,
+  "captchaBypass": false,
+  "antiSybilBypass": false,
+  "ownerGate": "ANIL X admin server session + TON Connect wallet signature"
+}
