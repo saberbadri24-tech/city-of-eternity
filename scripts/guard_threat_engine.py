@@ -18,8 +18,7 @@ RULES=[
 ]
 def load(name): return json.loads((ROOT/name).read_text(encoding="utf-8"))
 def nonempty_sensitive_values(obj):
-    keys={"privatekey","private_key","seedphrase","seed_phrase","mnemonic","secret"}
-    found=[]
+    keys={"privatekey","private_key","seedphrase","seed_phrase","mnemonic","secret"}; found=[]
     def walk(v,path=""):
         if isinstance(v,dict):
             for k,val in v.items():
@@ -28,21 +27,23 @@ def nonempty_sensitive_values(obj):
                 walk(val,path+"/"+str(k))
         elif isinstance(v,list):
             for i,val in enumerate(v): walk(val,f"{path}[{i}]")
-    walk(obj)
-    return found
+    walk(obj); return found
 def main():
     wallet=load("guard-wallet.json"); discovery=load("guard-discovery.json"); intel=load("guard-intelligence.json"); caps=load("guard-capabilities.json")
     violations=[]
+    # Normalize serialization only; policy remains fail-closed unless exactly PROPOSE_ONLY.
+    policy=str(caps.get("selfModificationPolicy","")).strip().upper()
+    if policy!="PROPOSE_ONLY": violations.append("T06")
     if nonempty_sensitive_values(wallet): violations.append("T05")
-    if caps.get("selfModificationPolicy")!="PROPOSE_ONLY": violations.append("T06")
     for row in discovery.get("items",[]):
         if row.get("action")!="never-auto-claim" or row.get("executionGate")!="OWNER_APPROVAL_REQUIRED": violations.append("T07")
     for row in intel.get("trackedLeads",[]):
         if row.get("ownerApprovalRequired") is not True or row.get("automaticAction") is not False: violations.append("T04")
         if row.get("claimExecuted") is True: violations.append("T07")
-    report={"engine":"Immortal Core Threat Engine","version":"1.2","status":"PASS" if not violations else "FAIL","rules":RULES,"violations":sorted(set(violations)),"boundaryHash":hashlib.sha256("\n".join(f"{a}:{b}" for a,b,_ in RULES).encode()).hexdigest(),"policy":"Internal adversarial validation only; untrusted content is never treated as authority."}
+    violations=sorted(set(violations))
+    report={"engine":"Immortal Core Threat Engine","version":"1.3","status":"PASS" if not violations else "FAIL","rules":RULES,"violations":violations,"observedPolicy":policy,"boundaryHash":hashlib.sha256("\n".join(f"{a}:{b}" for a,b,_ in RULES).encode()).hexdigest(),"policy":"Internal adversarial validation only; untrusted content is never treated as authority."}
     (ROOT/"guard-threat-report.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     print("IMMORTAL_CORE_THREAT="+report["status"])
-    if violations: print("IMMORTAL_CORE_VIOLATIONS="+",".join(sorted(set(violations))))
+    if violations: print("IMMORTAL_CORE_VIOLATIONS="+",".join(violations))
     if violations: raise SystemExit(1)
 if __name__=="__main__": main()
