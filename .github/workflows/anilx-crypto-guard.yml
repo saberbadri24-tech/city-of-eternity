@@ -66,13 +66,13 @@ jobs:
       - name: Audit modular engine and state health
         run: |
           python3 scripts/guard_module_engine.py
-          python3 scripts/guard_modular_core.py scripts/guard_final_preflight.py
+          python3 scripts/guard_modular_core.py
           python3 scripts/guard_final_preflight.py
 
       - name: Validate Guard state
         run: |
           python3 -m json.tool guard-discovery.json >/dev/null
-          python3 -m py_compile scripts/global_opportunity_discovery.py scripts/guard_source_health.py scripts/verify_global_discovery.py scripts/airdrop_guard.py scripts/free_real_token_engine.py scripts/guard_ton_receipts.py scripts/opportunity_intelligence.py scripts/high_value_opportunity_engine.py scripts/test_high_value_opportunity_engine.py scripts/test_free_real_token_engine.py scripts/test_opportunity_intelligence.py scripts/guard_resilience_lab.py scripts/guard_module_engine.py scripts/guard_modular_core.py
+          python3 -m py_compile scripts/global_opportunity_discovery.py scripts/guard_source_health.py scripts/verify_global_discovery.py scripts/airdrop_guard.py scripts/free_real_token_engine.py scripts/guard_ton_receipts.py scripts/opportunity_intelligence.py scripts/high_value_opportunity_engine.py scripts/test_high_value_opportunity_engine.py scripts/test_free_real_token_engine.py scripts/test_opportunity_intelligence.py scripts/guard_resilience_lab.py scripts/guard_module_engine.py scripts/guard_modular_core.py scripts/guard_final_preflight.py
           python3 -m json.tool guard-source-health.json >/dev/null
           python3 -m json.tool guard-wallet.json >/dev/null
           python3 -m json.tool guard-status.json >/dev/null
