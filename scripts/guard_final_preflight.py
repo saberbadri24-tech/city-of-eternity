@@ -9,7 +9,7 @@ REQUIRED_JSON=[
 "guard-learning.json","guard-receipts.json","guard-approvals.json","guard-wallet.json",
 "guard-capabilities.json","guard-horizon.json","guard-future-signals.json","guard-threat-report.json",
 "guard-agent-contract.json","guard-agent-contract-report.json","guard-evidence-ledger.json",
-"guard-anomaly-report.json","guard-replay-report.json"]
+"guard-anomaly-report.json","guard-replay-report.json","guard-workflow-security.json"]
 REQUIRED_SCRIPTS=[
 "airdrop_guard.py","free_real_token_engine.py","global_opportunity_discovery.py","guard_final_preflight.py",
 "guard_modular_core.py","guard_module_engine.py","guard_resilience_lab.py","guard_source_health.py",
