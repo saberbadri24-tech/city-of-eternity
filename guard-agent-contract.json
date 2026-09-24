@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "policy": "FAIL_CLOSED",
+  "agents": [
+    {"id":"discovery","trust":"UNTRUSTED","canAct":false,"capabilities":["READ_PUBLIC_SOURCES"],"deniedCapabilities":["SIGN_WALLET","TRANSFER_ASSETS","BYPASS_KYC","BYPASS_CAPTCHA","AUTO_CLAIM","CHANGE_POLICY","EXPORT_SECRETS"]},
+    {"id":"verification","trust":"VERIFIED_READONLY","canAct":false,"capabilities":["READ_PUBLIC_SOURCES","VERIFY_PROVENANCE"],"deniedCapabilities":["SIGN_WALLET","TRANSFER_ASSETS","BYPASS_KYC","BYPASS_CAPTCHA","AUTO_CLAIM","CHANGE_POLICY","EXPORT_SECRETS"]},
+    {"id":"intelligence","trust":"VERIFIED_READONLY","canAct":false,"capabilities":["SCORE_EVIDENCE","READ_STATE"],"deniedCapabilities":["SIGN_WALLET","TRANSFER_ASSETS","BYPASS_KYC","BYPASS_CAPTCHA","AUTO_CLAIM","CHANGE_POLICY","EXPORT_SECRETS"]},
+    {"id":"owner-gate","trust":"OWNER_APPROVED","canAct":false,"capabilities":["QUEUE_APPROVAL"],"deniedCapabilities":["SIGN_WALLET","TRANSFER_ASSETS","BYPASS_KYC","BYPASS_CAPTCHA","AUTO_CLAIM","CHANGE_POLICY","EXPORT_SECRETS"]}
+  ]
+}
