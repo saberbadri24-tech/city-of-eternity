@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-09-24T17:22:56.055413+00:00",
+  "updatedAt": "2026-09-24T20:39:35.245870+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -21,11 +21,11 @@
     "airdrop-discovery": 1
   },
   "discoveryCandidateCount": 500,
-  "uniqueNewsPublishers": 240,
+  "uniqueNewsPublishers": 242,
   "topPublishers": [
     {
       "publisher": "x.com",
-      "count": 47
+      "count": 49
     },
     {
       "publisher": "BitDegree",
@@ -36,23 +36,23 @@
       "count": 24
     },
     {
-      "publisher": "YouTube",
-      "count": 17
+      "publisher": "Binance",
+      "count": 18
     },
     {
-      "publisher": "Binance",
-      "count": 17
+      "publisher": "YouTube",
+      "count": 15
     },
     {
       "publisher": "CCN.com",
-      "count": 16
+      "count": 15
+    },
+    {
+      "publisher": "Reddit",
+      "count": 11
     },
     {
       "publisher": "AirdropAlert",
-      "count": 10
-    },
-    {
-      "publisher": "instagram.com",
       "count": 9
     },
     {
@@ -60,7 +60,7 @@
       "count": 9
     },
     {
-      "publisher": "Reddit",
+      "publisher": "instagram.com",
       "count": 8
     },
     {
@@ -72,35 +72,35 @@
       "count": 7
     },
     {
-      "publisher": "Medium",
-      "count": 7
-    },
-    {
-      "publisher": "Quora",
-      "count": 7
-    },
-    {
       "publisher": "Blockchair",
       "count": 7
+    },
+    {
+      "publisher": "medium.com",
+      "count": 6
     },
     {
       "publisher": "Zipmex",
       "count": 6
     },
     {
-      "publisher": "LinkedIn",
+      "publisher": "Quora",
       "count": 6
-    },
-    {
-      "publisher": "arXiv",
-      "count": 5
     },
     {
       "publisher": "ACM Digital Library",
       "count": 5
     },
     {
+      "publisher": "Bybit",
+      "count": 5
+    },
+    {
       "publisher": "Coin Gabbar",
+      "count": 5
+    },
+    {
+      "publisher": "karate.com",
       "count": 5
     }
   ],
