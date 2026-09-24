@@ -49,6 +49,13 @@ def reward_type(item):
         return "evidence_reward"
     return "unknown"
 
+def opportunity_identity(item):
+    for key in ("id","opportunityId","opportunity_id"):
+        v=str(item.get(key) or "").strip().lower()
+        if v: return "id:"+v
+    url=str(item.get("canonicalUrl") or item.get("url") or "").strip().lower()
+    return "url:"+url if url else project_identity(item)
+
 def project_identity(item):
     for key in ("projectId","project_id","opportunityId","opportunity_id","slug"):
         v=str(item.get(key) or "").strip().lower()
@@ -120,7 +127,7 @@ def main():
 
     candidates={}
     for row in items(intel)+items(discovery):
-        key=project_identity(row)
+        key=opportunity_identity(row)
         if key: candidates[key]={**candidates.get(key,{}),**row}
 
     ranked=[]
