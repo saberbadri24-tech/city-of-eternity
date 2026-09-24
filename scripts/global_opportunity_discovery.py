@@ -49,7 +49,8 @@ QUERIES=[
 "site:*.com \"contract address\" \"claim\" Polygon","site:*.com \"contract address\" \"claim\" Sui",
 "site:*.com \"contract address\" \"claim\" Aptos","crypto airdrop claim official token distribution when:3d",
 "web3 free token claim official no purchase when:3d","crypto token distribution live official when:3d",
-"TON free token distribution official when:3d"]
+"TON free token distribution official when:3d",
+"site:immunefi.com bug bounty $10000 crypto","site:hackerone.com crypto bug bounty $10000","site:code4rena.com contest prize pool crypto","site:sherlock.xyz contest prize pool crypto","web3 security bounty $50000 live official","smart contract bug bounty $100000 official","crypto grant $10000 application open web3","web3 grant $50000 application open","crypto hackathon $10000 prize pool 2026","web3 hackathon $50000 prize pool 2026","developer bounty $10000 blockchain open","retroactive rewards program web3 official 2026","protocol rewards claim official 2026","crypto ecosystem incentive program rewards official 2026","liquidity mining rewards official program 2026","testnet rewards official blockchain 2026","DeFi trading competition prize pool $10000 official","NFT creator grant $10000 web3 official"]
 
 def fetch(url,timeout=12):
     try:
