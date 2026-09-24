@@ -3,6 +3,12 @@
   "engine": "Horizon Engine",
   "version": "1.0",
   "baseYear": 2026,
-  "horizons": [],
+  "horizons": [
+    {
+      "year": 2050,
+      "theme": "Autonomous Opportunity OS",
+      "gate": "no private keys; no autonomous signing; no KYC/CAPTCHA bypass; no silent irreversible action"
+    }
+  ],
   "forecastDiscipline": "Scenario planning, not prediction."
 }
