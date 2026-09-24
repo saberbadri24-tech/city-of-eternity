@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 """Immortal Guard High-Value Opportunity Engine.
-
-Builds a transparent, multi-brain ranking layer for higher-value opportunities.
-It never claims, signs, bypasses KYC/CAPTCHA, or transfers assets.
+Evidence-first portfolio ranking with deterministic learning and safety gates.
 """
 from __future__ import annotations
 import datetime as dt
@@ -14,12 +12,11 @@ NOW = dt.datetime.now(dt.timezone.utc)
 MONTHLY_TARGET_USD = 10000
 HIGH_VALUE_FLOOR_USD = 2000
 REWARD_CAP_USD = 250000
+STALE_HOURS = 96
 
 def load(name):
-    try:
-        return json.loads((ROOT / name).read_text(encoding="utf-8"))
-    except (OSError, ValueError):
-        return {}
+    try: return json.loads((ROOT / name).read_text(encoding="utf-8"))
+    except (OSError, ValueError): return {}
 
 def items(value):
     if isinstance(value, list): return [x for x in value if isinstance(x, dict)]
@@ -32,63 +29,110 @@ def number(v):
     if isinstance(v, (int,float)): return float(v)
     m = re.search(r"(?<![A-Za-z])\$?\s*([0-9][0-9,]*(?:\.\d+)?)\s*(k|K|m|M)?", str(v or ""))
     if not m: return 0.0
-    n=float(m.group(1).replace(",","")); return n*(1000 if m.group(2) in ("k","K") else 1000000 if m.group(2) in ("m","M") else 1)
+    n=float(m.group(1).replace(",",""))
+    return n*(1000 if m.group(2) in ("k","K") else 1000000 if m.group(2) in ("m","M") else 1)
 
 def reward(item):
-    fields=("rewardUsd","maxRewardUsd","estimatedRewardUsd","potentialRewardUsd","reward","prize","bounty","grant")
-    vals=[number(item.get(k)) for k in fields]
+    vals=[number(item.get(k)) for k in ("rewardUsd","maxRewardUsd","estimatedRewardUsd","potentialRewardUsd","reward","prize","bounty","grant")]
     evidence=item.get("evidence",{})
-    if isinstance(evidence,dict):
-        vals += [number(x) for x in evidence.get("reward",[]) if isinstance(x,(str,int,float))]
+    if isinstance(evidence,dict): vals += [number(x) for x in evidence.get("reward",[]) if isinstance(x,(str,int,float))]
     vals += [number(x) for x in item.get("rewardEvidence",[]) if isinstance(x,(str,int,float))]
     return min(REWARD_CAP_USD, max(vals+[0]))
 
-def brain_scores(x):
+def age_hours(item):
+    for key in ("verifiedAt","updatedAt","discoveredAt","publishedAt","createdAt"):
+        raw=item.get(key)
+        if not raw: continue
+        try:
+            s=str(raw).replace("Z","+00:00")
+            d=dt.datetime.fromisoformat(s)
+            if d.tzinfo is None: d=d.replace(tzinfo=dt.timezone.utc)
+            return max(0,(NOW-d).total_seconds()/3600)
+        except ValueError: pass
+    return None
+
+def signal(item, words):
+    blob=json.dumps(item,ensure_ascii=False).lower()
+    return any(w in blob for w in words)
+
+def brain_scores(x, learning):
     r=x["estimatedRewardUsd"]
     verified=x.get("strictlyVerifiedFreeRealToken") or x.get("status")=="VERIFIED_FREE_REAL_TOKEN"
-    official=x.get("officialDomain") is True or x.get("sourceTrust")=="official"
-    fresh=x.get("freshness")=="FRESH_24H"
-    # Independent lenses: value, evidence, feasibility, freshness, risk.
+    official=x.get("officialDomain") is True or x.get("sourceTrust")=="official" or x.get("verification")=="resolved-official-source"
+    fresh=x["ageHours"] is not None and x["ageHours"] <= 24
+    stale=x["ageHours"] is not None and x["ageHours"] > STALE_HOURS
+    deposit=signal(x,("deposit required","pay to enter","buy to qualify","stake required","funding required"))
+    kyc=signal(x,("kyc","captcha","sybil"))
+    corroboration=int(x.get("corroborationCount",0))
+    # Learning is observational only: it adjusts evidence confidence, never invents reward probability.
+    history_bonus=min(5, int(learning.get("officialVerificationRate",0)*5)) if learning else 0
     value=min(40, 10 + 30*(r/HIGH_VALUE_FLOOR_USD)) if r else 0
     evidence=25 if verified else (15 if official else 5)
-    freshness=15 if fresh else 5
-    feasibility=10 if not any(k in str(x).lower() for k in ("kyc","captcha","deposit required","pay to enter")) else 0
+    evidence=min(25,evidence + min(5,corroboration) + history_bonus)
+    freshness=15 if fresh else (5 if not stale else 0)
+    feasibility=10 - (5 if deposit else 0) - (2 if kyc else 0)
     risk=10 if official and not x.get("rejectionReasons") else 2
-    if x.get("bountyOrGrantSignal"): evidence=min(25,evidence+5)
-    return {"valueBrain":round(min(40,value),2),"evidenceBrain":evidence,"freshnessBrain":freshness,"feasibilityBrain":feasibility,"riskBrain":risk}
+    if stale: risk=max(0,risk-5)
+    if x.get("bountyOrGrantSignal"): evidence=min(25,evidence+3)
+    return {"valueBrain":round(min(40,value),2),"evidenceBrain":max(0,evidence),
+            "freshnessBrain":freshness,"feasibilityBrain":max(0,feasibility),"riskBrain":max(0,risk)}
 
 def main():
-    intel=load("guard-intelligence.json")
-    discovery=load("guard-discovery.json")
+    intel=load("guard-intelligence.json"); discovery=load("guard-discovery.json")
+    learning=load("guard-learning.json")
+    outcomes=learning.get("outcomes",[]) if isinstance(learning,dict) else []
+    recent=[o for o in outcomes[-100:] if isinstance(o,dict) and o.get("type")=="discovery_verification"]
+    official_rate=(sum(o.get("officialSourceMatches",0) for o in recent)/max(1,sum(o.get("discovered",0) for o in recent)))
+    learning_model={"officialVerificationRate":round(official_rate,4),"sampleRuns":len(recent),
+                    "rule":"historical verification quality only; no fabricated success probability"}
+
     candidates={}
     for row in items(intel)+items(discovery):
         key=str(row.get("id") or row.get("opportunityId") or row.get("url") or row.get("source") or row.get("name") or "").strip().lower()
-        if not key: continue
-        candidates[key]={**candidates.get(key,{}),**row}
+        if key: candidates[key]={**candidates.get(key,{}),**row}
+
     ranked=[]
-    for x in candidates.values():
-        x=dict(x); x["estimatedRewardUsd"]=reward(x)
-        brains=brain_scores(x); x["brainScores"]=brains
+    for raw in candidates.values():
+        x=dict(raw); x["estimatedRewardUsd"]=reward(x); x["ageHours"]=age_hours(x)
+        x["corroborationCount"]=int(x.get("corroborationCount",0))
+        brains=brain_scores(x,learning_model); x["brainScores"]=brains
         x["highValueLane"]=x["estimatedRewardUsd"] >= HIGH_VALUE_FLOOR_USD
         x["monthlyTargetContributionUsd"]=round(min(x["estimatedRewardUsd"],MONTHLY_TARGET_USD),2)
         x["ownerApprovalRequired"]=True; x["automaticAction"]=False
-        total=sum(brains.values())
-        x["highValueScore"]=round(min(100,total),2)
-        x["priority"]="H1_HIGH_VALUE" if x["highValueLane"] else ("H2_STANDARD" if total>=35 else "H3_RESEARCH")
+        x["stale"]=x["ageHours"] is not None and x["ageHours"] > STALE_HOURS
+        total=sum(brains.values()); x["highValueScore"]=round(min(100,total),2)
+        x["priority"]="H1_HIGH_VALUE" if x["highValueLane"] and not x["stale"] else ("H2_STANDARD" if total>=35 else "H3_RESEARCH")
         ranked.append(x)
-    ranked.sort(key=lambda x:(x["priority"]!="H1_HIGH_VALUE",-x["estimatedRewardUsd"],-x["highValueScore"]))
+
+    ranked.sort(key=lambda x:(x["priority"]!="H1_HIGH_VALUE",-x["highValueScore"],-x["estimatedRewardUsd"]))
+    # Greedy portfolio: distinct sources first, until the planning target is covered by potential value.
+    portfolio=[]; used_sources=set(); total=0.0
+    for x in ranked:
+        source=str(x.get("source") or x.get("publisher") or x.get("resolvedDomain") or x.get("url") or "").lower()
+        if source and source in used_sources and total < MONTHLY_TARGET_USD: continue
+        if x["estimatedRewardUsd"] <= 0: continue
+        portfolio.append({"id":x.get("id") or x.get("opportunityId") or x.get("url"),
+                          "estimatedRewardUsd":x["estimatedRewardUsd"],"priority":x["priority"],
+                          "highValueScore":x["highValueScore"],"source":source})
+        total += x["estimatedRewardUsd"]
+        if source: used_sources.add(source)
+        if total >= MONTHLY_TARGET_USD: break
+
     report={
-      "guard":"ANIL X Immortal Guard","engine":"High-Value Opportunity Engine","version":"1.0",
+      "guard":"ANIL X Immortal Guard","engine":"High-Value Opportunity Engine","version":"2.0",
       "generatedAt":NOW.isoformat(),"monthlyIncomeTargetUsd":MONTHLY_TARGET_USD,
-      "highValueFloorUsd":HIGH_VALUE_FLOOR_USD,
-      "targetIsPlanningOnly":True,
+      "highValueFloorUsd":HIGH_VALUE_FLOOR_USD,"targetIsPlanningOnly":True,
+      "learning":learning_model,
+      "portfolioPlan":{"potentialValueUsd":round(total,2),"targetGapUsd":round(max(0,MONTHLY_TARGET_USD-total),2),
+                       "coveredByPotentialValue":total>=MONTHLY_TARGET_USD,"candidateCount":len(portfolio),"note":"Potential reward is not expected income or a guarantee."},
       "summary":{"tracked":len(ranked),"highValueCandidates":sum(x["highValueLane"] for x in ranked),
+                 "freshHighValueCandidates":sum(x["highValueLane"] and not x["stale"] for x in ranked),
                  "potentialValueUsd":round(sum(x["estimatedRewardUsd"] for x in ranked),2)},
-      "ranked":ranked[:250],
+      "portfolio":portfolio,"ranked":ranked[:250],
       "brains":["value","evidence","freshness","feasibility","risk"],
       "policy":"Potential rewards are not guaranteed income. No claim, signing, KYC/CAPTCHA bypass, wallet connection, or transfer is automatic; owner approval is mandatory."
     }
     (ROOT/"guard-high-value.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-    print(json.dumps({"status":"high_value_complete",**report["summary"]},ensure_ascii=False))
+    print(json.dumps({"status":"high_value_complete",**report["summary"],"portfolioPotentialUsd":round(total,2)},ensure_ascii=False))
 
 if __name__=="__main__": main()
