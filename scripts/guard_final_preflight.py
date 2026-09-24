@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_JSON = [
     "guard-discovery.json", "guard-intelligence.json", "guard-high-value.json",
     "guard-sources.json", "guard-learning.json", "guard-receipts.json",
-    "guard-approvals.json", "guard-wallet.json",
+    "guard-approvals.json", "guard-wallet.json", "guard-capabilities.json", "guard-horizon.json", "guard-future-signals.json",
 ]
 
 REQUIRED_SCRIPTS = [
@@ -19,7 +19,7 @@ REQUIRED_SCRIPTS = [
     "guard_resilience_lab.py", "guard_source_health.py", "guard_ton_receipts.py",
     "high_value_opportunity_engine.py", "opportunity_intelligence.py",
     "test_free_real_token_engine.py", "test_high_value_opportunity_engine.py",
-    "test_opportunity_intelligence.py", "verify_global_discovery.py",
+    "test_opportunity_intelligence.py", "test_guard_evolution.py", "verify_global_discovery.py", "guard_evolution_engine.py", "guard_horizon_engine.py", "future_opportunity_scout.py",
 ]
 
 def load(name):
@@ -69,6 +69,17 @@ def main():
 
     discovery = load("guard-discovery.json")
     for row in discovery.get("items", []):
+        assert row.get("action") == "never-auto-claim"
+        assert row.get("executionGate") == "OWNER_APPROVAL_REQUIRED"
+
+    horizon = load("guard-horizon.json")
+    assert horizon.get("baseYear") == 2026
+    assert any(x.get("year") == 2050 for x in horizon.get("horizons", []))
+    capabilities = load("guard-capabilities.json")
+    assert capabilities.get("selfModificationPolicy") == "PROPOSE_ONLY"
+
+    future = load("guard-future-signals.json")
+    for row in future.get("items", []):
         assert row.get("action") == "never-auto-claim"
         assert row.get("executionGate") == "OWNER_APPROVAL_REQUIRED"
 

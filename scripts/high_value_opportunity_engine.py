@@ -119,7 +119,7 @@ def brain_scores(x, learning):
             "freshnessBrain":freshness,"feasibilityBrain":max(0,feasibility),"riskBrain":max(0,risk)}
 
 def main():
-    intel=load("guard-intelligence.json"); discovery=load("guard-discovery.json")
+    intel=load("guard-intelligence.json"); discovery=load("guard-discovery.json"); future=load("guard-future-signals.json")
     learning=load("guard-learning.json")
     outcomes=learning.get("outcomes",[]) if isinstance(learning,dict) else []
     recent=[o for o in outcomes[-100:] if isinstance(o,dict) and o.get("type")=="discovery_verification"]
@@ -128,7 +128,7 @@ def main():
                     "rule":"historical verification quality only; no fabricated success probability"}
 
     candidates={}
-    for row in items(intel)+items(discovery):
+    for row in items(intel)+items(discovery)+items(future):
         key=opportunity_identity(row)
         if key: candidates[key]={**candidates.get(key,{}),**row}
 
