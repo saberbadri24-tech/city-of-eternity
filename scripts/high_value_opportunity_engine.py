@@ -56,7 +56,6 @@ def project_identity(item):
     name=str(item.get("project") or item.get("projectName") or item.get("name") or "").strip().lower()
     domain=str(item.get("resolvedDomain") or item.get("officialDomainName") or "").strip().lower()
     if name and domain: return "project:"+re.sub(r"[^a-z0-9]+","-",domain+"-"+name).strip("-")
-    if name: return "name:"+re.sub(r"[^a-z0-9]+","-",name).strip("-")
     url=str(item.get("canonicalUrl") or item.get("url") or "").strip().lower()
     return "url:"+url if url else ""
 
