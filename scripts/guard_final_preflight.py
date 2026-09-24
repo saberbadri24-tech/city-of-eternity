@@ -52,8 +52,14 @@ def main():
         assert row.get("ownerApprovalRequired") is True
         assert row.get("automaticAction") is False
         assert row.get("estimatedRewardUsd", 0) >= 0
+        if row.get("expired"):
+            assert row.get("highValueLane") is False
         if row.get("highValueLane"):
             assert row.get("estimatedRewardUsd", 0) >= 2000
+    for row in high.get("portfolio", []):
+        assert row.get("estimatedRewardUsd", 0) > 0
+        assert row.get("projectIdentity")
+
 
     intel = load("guard-intelligence.json")
     for row in intel.get("trackedLeads", []):
