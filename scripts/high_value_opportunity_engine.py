@@ -39,6 +39,29 @@ def reward(item):
     vals += [number(x) for x in item.get("rewardEvidence",[]) if isinstance(x,(str,int,float))]
     return min(REWARD_CAP_USD, max(vals+[0]))
 
+def project_identity(item):
+    for key in ("projectId","project_id","opportunityId","opportunity_id","slug"):
+        v=str(item.get(key) or "").strip().lower()
+        if v: return "id:"+v
+    name=str(item.get("project") or item.get("projectName") or item.get("name") or "").strip().lower()
+    domain=str(item.get("resolvedDomain") or item.get("officialDomainName") or "").strip().lower()
+    if name and domain: return "project:"+re.sub(r"[^a-z0-9]+","-",domain+"-"+name).strip("-")
+    if name: return "name:"+re.sub(r"[^a-z0-9]+","-",name).strip("-")
+    url=str(item.get("canonicalUrl") or item.get("url") or "").strip().lower()
+    return "url:"+url if url else ""
+
+def deadline(item):
+    for key in ("deadlineAt","deadline","endDate","expiresAt","expiry","expires"):
+        raw=item.get(key)
+        if not raw: continue
+        try:
+            s=str(raw).replace("Z","+00:00")
+            d=dt.datetime.fromisoformat(s)
+            if d.tzinfo is None: d=d.replace(tzinfo=dt.timezone.utc)
+            return d
+        except ValueError: pass
+    return None
+
 def age_hours(item):
     for key in ("verifiedAt","updatedAt","discoveredAt","publishedAt","createdAt"):
         raw=item.get(key)
@@ -88,34 +111,40 @@ def main():
 
     candidates={}
     for row in items(intel)+items(discovery):
-        key=str(row.get("id") or row.get("opportunityId") or row.get("url") or row.get("source") or row.get("name") or "").strip().lower()
+        key=project_identity(row)
         if key: candidates[key]={**candidates.get(key,{}),**row}
 
     ranked=[]
     for raw in candidates.values():
-        x=dict(raw); x["estimatedRewardUsd"]=reward(x); x["ageHours"]=age_hours(x)
+        x=dict(raw); x["estimatedRewardUsd"]=reward(x); x["rewardType"]=reward_type(x)
+        x["ageHours"]=age_hours(x); d=deadline(x)
+        x["deadlineAt"]=d.isoformat() if d else None
+        x["expired"]=bool(d and d <= NOW)
+        x["projectIdentity"]=project_identity(x)
         x["corroborationCount"]=int(x.get("corroborationCount",0))
+        if x["expired"]: x["estimatedRewardUsd"]=0.0
         brains=brain_scores(x,learning_model); x["brainScores"]=brains
-        x["highValueLane"]=x["estimatedRewardUsd"] >= HIGH_VALUE_FLOOR_USD
+        x["highValueLane"]=x["estimatedRewardUsd"] >= HIGH_VALUE_FLOOR_USD and not x["expired"]
         x["monthlyTargetContributionUsd"]=round(min(x["estimatedRewardUsd"],MONTHLY_TARGET_USD),2)
         x["ownerApprovalRequired"]=True; x["automaticAction"]=False
         x["stale"]=x["ageHours"] is not None and x["ageHours"] > STALE_HOURS
         total=sum(brains.values()); x["highValueScore"]=round(min(100,total),2)
-        x["priority"]="H1_HIGH_VALUE" if x["highValueLane"] and not x["stale"] else ("H2_STANDARD" if total>=35 else "H3_RESEARCH")
+        x["priority"]="H1_HIGH_VALUE" if x["highValueLane"] and not x["stale"] else ("H2_STANDARD" if total>=35 and not x["expired"] else "H3_RESEARCH")
         ranked.append(x)
 
     ranked.sort(key=lambda x:(x["priority"]!="H1_HIGH_VALUE",-x["highValueScore"],-x["estimatedRewardUsd"]))
     # Greedy portfolio: distinct sources first, until the planning target is covered by potential value.
-    portfolio=[]; used_sources=set(); total=0.0
+    portfolio=[]; used_projects=set(); total=0.0
     for x in ranked:
-        source=str(x.get("source") or x.get("publisher") or x.get("resolvedDomain") or x.get("url") or "").lower()
-        if source and source in used_sources and total < MONTHLY_TARGET_USD: continue
-        if x["estimatedRewardUsd"] <= 0: continue
+        project=x.get("projectIdentity") or project_identity(x)
+        if project and project in used_projects: continue
+        if x.get("rewardType")=="prize_pool": continue
+        if x["estimatedRewardUsd"] <= 0 or x.get("expired"): continue
         portfolio.append({"id":x.get("id") or x.get("opportunityId") or x.get("url"),
                           "estimatedRewardUsd":x["estimatedRewardUsd"],"priority":x["priority"],
-                          "highValueScore":x["highValueScore"],"source":source})
+                          "highValueScore":x["highValueScore"],"projectIdentity":project})
         total += x["estimatedRewardUsd"]
-        if source: used_sources.add(source)
+        if project: used_projects.add(project)
         if total >= MONTHLY_TARGET_USD: break
 
     report={
