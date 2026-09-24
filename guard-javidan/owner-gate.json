@@ -1,0 +1,11 @@
+{
+  "name": "Javidan Owner Gate",
+  "authentication": "existing ANIL X server-side admin password login",
+  "sessionRequiredForGuardApproval": true,
+  "walletApproval": "TON Connect",
+  "privateKeyStorage": false,
+  "seedStorage": false,
+  "automaticSigning": false,
+  "automaticTransfer": false,
+  "note": "The password value is never stored in this repository; the existing server-side admin authentication remains authoritative."
+}
