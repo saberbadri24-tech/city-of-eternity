@@ -1,0 +1,31 @@
+{
+  "guard": "ANIL X Immortal Guard",
+  "engine": "High-Value Opportunity Engine",
+  "version": "2.0-bootstrap",
+  "generatedAt": null,
+  "monthlyIncomeTargetUsd": 10000,
+  "highValueFloorUsd": 2000,
+  "targetIsPlanningOnly": true,
+  "learning": {
+    "officialVerificationRate": 0,
+    "sampleRuns": 0,
+    "rule": "historical verification quality only; no fabricated success probability"
+  },
+  "portfolioPlan": {
+    "potentialValueUsd": 0,
+    "targetGapUsd": 10000,
+    "coveredByPotentialValue": false,
+    "candidateCount": 0,
+    "note": "Bootstrap state. Potential rewards are not income or a guarantee."
+  },
+  "summary": {
+    "tracked": 0,
+    "highValueCandidates": 0,
+    "freshHighValueCandidates": 0,
+    "potentialValueUsd": 0
+  },
+  "portfolio": [],
+  "ranked": [],
+  "brains": ["value","evidence","freshness","feasibility","risk"],
+  "policy": "Bootstrap state only. No claim, signing, KYC/CAPTCHA bypass, wallet connection, or transfer is automatic; owner approval is mandatory."
+}
