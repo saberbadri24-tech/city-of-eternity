@@ -48,7 +48,7 @@ def main():
         final_domain = domain(final_url)
         canon = canonical(body)
         text = strip_text(body)[:100000].lower()
-        claim_signal = any(x in text for x in (
+        reward_matches = re.findall(r"(?:\\$|usd\\s*)[0-9][0-9,]*(?:\\.[0-9]+)?\\s*(?:k|m)?", text, re.I)\n        bounty_signal = any(x in text for x in ("bug bounty", "bounty program", "prize pool", "grant", "hackathon"))\n        claim_signal = any(x in text for x in (
             "claim now", "claim is live", "claim is open", "claim available",
             "redeem now", "airdrop claim", "token claim", "withdraw now"
         ))
@@ -67,7 +67,7 @@ def main():
             "resolvedDomain": final_domain or None,
             "httpStatus": status,
             "verification": verification,
-            "claimSignal": claim_signal,
+            "claimSignal": claim_signal,\n            "bountyOrGrantSignal": bounty_signal,\n            "rewardEvidence": reward_matches[:20],
             "eligibilitySignal": eligibility_signal,
             "action": "never-auto-claim",
             "executionGate": "OWNER_APPROVAL_REQUIRED"
