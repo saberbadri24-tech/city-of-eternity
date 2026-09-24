@@ -30,6 +30,7 @@ jobs:
           python3 scripts/guard_evolution_engine.py
           python3 scripts/guard_horizon_engine.py
           python3 scripts/future_opportunity_scout.py
+          python3 scripts/guard_threat_engine.py
 
       - name: Global opportunity discovery
         run: python3 scripts/global_opportunity_discovery.py
@@ -68,6 +69,7 @@ jobs:
           python3 -m unittest scripts/test_opportunity_intelligence.py -v
           python3 -m unittest scripts/test_high_value_opportunity_engine.py -v
           python3 -m unittest scripts/test_guard_evolution.py -v
+          python3 -m unittest scripts/test_guard_threat_engine.py -v
           python3 scripts/guard_resilience_lab.py > guard-resilience-report.json
 
       - name: Audit modular engine and state health
@@ -100,11 +102,12 @@ jobs:
           python3 -m json.tool guard-capabilities.json >/dev/null
           python3 -m json.tool guard-horizon.json >/dev/null
           python3 -m json.tool guard-future-signals.json >/dev/null
+          python3 -m json.tool guard-threat-report.json >/dev/null
 
       - name: Commit Guard state
         run: |
           git config user.name 'ANIL X Immortal Guard'
           git config user.email 'actions@users.noreply.github.com'
-          git add rewards.json guard-status.json guard-approvals.json guard-opportunities.json guard-learning.json guard-sources.json guard-wallet.json guard-opportunity-history.json guard-receipts.json guard-discovery.json guard-claim-adapters.json guard-free-real-tokens.json guard-source-health.json guard-intelligence.json guard-high-value.json guard-resilience-report.json guard-module-health.json guard-modular-core.json guard-capabilities.json guard-horizon.json guard-future-signals.json
+          git add rewards.json guard-status.json guard-approvals.json guard-opportunities.json guard-learning.json guard-sources.json guard-wallet.json guard-opportunity-history.json guard-receipts.json guard-discovery.json guard-claim-adapters.json guard-free-real-tokens.json guard-source-health.json guard-intelligence.json guard-high-value.json guard-resilience-report.json guard-module-health.json guard-modular-core.json guard-capabilities.json guard-horizon.json guard-future-signals.json guard-threat-report.json
           git diff --cached --quiet || git commit -m 'chore: refresh airdrop guard scan'
           git push
