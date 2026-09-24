@@ -33,10 +33,12 @@ def number(v):
     return n*(1000 if m.group(2) in ("k","K") else 1000000 if m.group(2) in ("m","M") else 1)
 
 def reward(item):
-    vals=[number(item.get(k)) for k in ("rewardUsd","maxRewardUsd","estimatedRewardUsd","potentialRewardUsd","reward","prize","bounty","grant")]
+    direct=("rewardUsd","maxRewardUsd","estimatedRewardUsd","potentialRewardUsd","reward","bounty","grant")
+    vals=[number(item.get(k)) for k in direct]
     evidence=item.get("evidence",{})
     if isinstance(evidence,dict): vals += [number(x) for x in evidence.get("reward",[]) if isinstance(x,(str,int,float))]
     vals += [number(x) for x in item.get("rewardEvidence",[]) if isinstance(x,(str,int,float))]
+    # A contest prize pool is not an individual's reward.
     return min(REWARD_CAP_USD, max(vals+[0]))
 
 def reward_type(item):
@@ -132,7 +134,8 @@ def main():
 
     ranked=[]
     for raw in candidates.values():
-        x=dict(raw); x["estimatedRewardUsd"]=reward(x); x["rewardType"]=reward_type(x)
+        x=dict(raw); x["prizePoolUsd"]=number(x.get("prize"))
+        x["estimatedRewardUsd"]=reward(x); x["rewardType"]=reward_type(x)
         x["ageHours"]=age_hours(x); d=deadline(x)
         x["deadlineAt"]=d.isoformat() if d else None
         x["expired"]=bool(d and d <= NOW)
