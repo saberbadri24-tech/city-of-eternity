@@ -48,7 +48,9 @@ def main():
         final_domain = domain(final_url)
         canon = canonical(body)
         text = strip_text(body)[:100000].lower()
-        reward_matches = re.findall(r"(?:\\$|usd\\s*)[0-9][0-9,]*(?:\\.[0-9]+)?\\s*(?:k|m)?", text, re.I)\n        bounty_signal = any(x in text for x in ("bug bounty", "bounty program", "prize pool", "grant", "hackathon"))\n        claim_signal = any(x in text for x in (
+        reward_matches = re.findall(r"(?:\\$|usd\\s*)[0-9][0-9,]*(?:\\.[0-9]+)?\\s*(?:k|m)?", text, re.I)
+        bounty_signal = any(x in text for x in ("bug bounty", "bounty program", "prize pool", "grant", "hackathon"))
+        claim_signal = any(x in text for x in (
             "claim now", "claim is live", "claim is open", "claim available",
             "redeem now", "airdrop claim", "token claim", "withdraw now"
         ))
@@ -67,7 +69,9 @@ def main():
             "resolvedDomain": final_domain or None,
             "httpStatus": status,
             "verification": verification,
-            "claimSignal": claim_signal,\n            "bountyOrGrantSignal": bounty_signal,\n            "rewardEvidence": reward_matches[:20],
+            "claimSignal": claim_signal,
+            "bountyOrGrantSignal": bounty_signal,
+            "rewardEvidence": reward_matches[:20],
             "eligibilitySignal": eligibility_signal,
             "action": "never-auto-claim",
             "executionGate": "OWNER_APPROVAL_REQUIRED"
@@ -84,7 +88,8 @@ def main():
         "eligibilitySignals": sum(bool(x.get("eligibilitySignal")) for x in verified),
         "rule": "A publisher/news page is discovery evidence only. It is never treated as a project claim page unless the resolved domain is in the trusted source registry."
     }
-    DISCOVERY.write_text(json.dumps(discovery, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
+    DISCOVERY.write_text(json.dumps(discovery, ensure_ascii=False, indent=2)+"
+", encoding="utf-8")
 
     outcomes = learning.setdefault("outcomes", [])
     outcomes.append({
@@ -100,7 +105,8 @@ def main():
     learning["verificationEngine"] = "resolve -> canonical -> trusted-domain check -> claim/eligibility signal extraction"
     learning["safetyGate"] = "No discovery item can auto-claim. Owner approval remains mandatory for opportunity-specific actions."
     learning["outcomes"] = outcomes[-200:]
-    LEARNING.write_text(json.dumps(learning, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
+    LEARNING.write_text(json.dumps(learning, ensure_ascii=False, indent=2)+"
+", encoding="utf-8")
     print(json.dumps({"status":"verification_complete", **discovery["verification"]}, ensure_ascii=False))
 
 if __name__ == "__main__":
