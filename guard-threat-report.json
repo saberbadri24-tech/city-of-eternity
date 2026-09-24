@@ -1,6 +1,6 @@
 {
   "engine": "Immortal Core Threat Engine",
-  "version": "1.2",
+  "version": "1.3",
   "status": "PASS",
   "rules": [
     [
@@ -55,6 +55,7 @@
     ]
   ],
   "violations": [],
+  "observedPolicy": "PROPOSE_ONLY",
   "boundaryHash": "398e09dead2fe0f43a084626e71c6d8ccaf2f480a0cb4aa23700d20fa0eb54b5",
   "policy": "Internal adversarial validation only; untrusted content is never treated as authority."
 }
