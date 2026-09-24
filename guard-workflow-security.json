@@ -1,1 +1,10 @@
-{"status":"PASS","actions":["actions/checkout@11d5960a326750d5838078e36cf38b85af677262"],"violations":[]}
+{
+  "engine": "Guard Workflow Security Gate",
+  "version": "1.1",
+  "status": "PASS",
+  "actions": [
+    "actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+  ],
+  "violations": [],
+  "policy": "Pinned actions, explicit token scope, no remote shell piping, no shell tracing, no secret echo."
+}

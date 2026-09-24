@@ -2,14 +2,162 @@
   "guard": "ANIL X Immortal Guard",
   "engine": "Evolution Engine",
   "version": "1.0-2050-ready",
-  "generatedAt": "bootstrap",
+  "generatedAt": "2026-09-24T12:15:39.393019+00:00",
   "maturityModel": {
-    "implemented": 0,
+    "implemented": 14,
     "missing": 0,
-    "modelAssistedLive": false
+    "modelAssistedLive": false,
+    "note": "Maturity is an engineering status, not a performance guarantee."
   },
-  "capabilities": [],
-  "providerAvailability": {},
-  "upgradeQueue": [],
-  "selfModificationPolicy": "PROPOSE_ONLY"
+  "capabilities": [
+    {
+      "id": "discovery",
+      "name": "Global discovery fabric",
+      "purpose": "Automated multilingual discovery",
+      "path": "scripts/global_opportunity_discovery.py",
+      "implementation": "IMPLEMENTED"
+    },
+    {
+      "id": "verification",
+      "name": "Evidence-first verification",
+      "purpose": "Resolved-source and evidence checks",
+      "path": "scripts/verify_global_discovery.py",
+      "implementation": "IMPLEMENTED"
+    },
+    {
+      "id": "free_token",
+      "name": "Strict free-real-token lane",
+      "purpose": "Rejects unsupported free-token claims",
+      "path": "scripts/free_real_token_engine.py",
+      "implementation": "IMPLEMENTED"
+    },
+    {
+      "id": "airdrop_plus",
+      "name": "Airdrop+ advisory lane",
+      "purpose": "Advisory scan with optional model providers",
+      "path": "scripts/airdrop_guard.py",
+      "implementation": "IMPLEMENTED"
+    },
+    {
+      "id": "intelligence",
+      "name": "Opportunity intelligence",
+      "purpose": "Ranking, lifecycle and history",
+      "path": "scripts/opportunity_intelligence.py",
+      "implementation": "IMPLEMENTED"
+    },
+    {
+      "id": "high_value",
+      "name": "High-value portfolio brain",
+      "purpose": "Five deterministic scoring brains",
+      "path": "scripts/high_value_opportunity_engine.py",
+      "implementation": "IMPLEMENTED"
+    },
+    {
+      "id": "receipts",
+      "name": "Read-only TON receipt monitor",
+      "purpose": "Receipt observation without signing",
+      "path": "scripts/guard_ton_receipts.py",
+      "implementation": "IMPLEMENTED"
+    },
+    {
+      "id": "approval",
+      "name": "Owner approval boundary",
+      "purpose": "Consequential actions remain gated",
+      "path": "javidan-approval-queue-ui.js",
+      "implementation": "IMPLEMENTED"
+    },
+    {
+      "id": "resilience",
+      "name": "Adversarial resilience lab",
+      "purpose": "Malformed/untrusted input tests",
+      "path": "scripts/guard_resilience_lab.py",
+      "implementation": "IMPLEMENTED"
+    },
+    {
+      "id": "modular",
+      "name": "Modular core",
+      "purpose": "Dependency-light degraded operation",
+      "path": "scripts/guard_modular_core.py",
+      "implementation": "IMPLEMENTED"
+    },
+    {
+      "id": "preflight",
+      "name": "Fail-closed preflight",
+      "purpose": "Integrity and policy gate",
+      "path": "scripts/guard_final_preflight.py",
+      "implementation": "IMPLEMENTED"
+    },
+    {
+      "id": "learning",
+      "name": "Evidence learning",
+      "purpose": "Observational feedback only",
+      "path": "guard-learning.json",
+      "implementation": "IMPLEMENTED"
+    },
+    {
+      "id": "future",
+      "name": "Evolution auditor",
+      "purpose": "Bounded gap detection and upgrade proposals",
+      "path": "scripts/guard_evolution_engine.py",
+      "implementation": "IMPLEMENTED"
+    },
+    {
+      "id": "horizon",
+      "name": "2050 horizon planner",
+      "purpose": "Scenario-based future capability map",
+      "path": "scripts/guard_horizon_engine.py",
+      "implementation": "IMPLEMENTED"
+    }
+  ],
+  "providerAvailability": {
+    "geminiConfigured": false,
+    "anthropicConfigured": false,
+    "openaiConfigured": false,
+    "toncenterConfigured": false
+  },
+  "observedState": {
+    "trackedIntelligence": 1267,
+    "highValueCandidates": 0
+  },
+  "upgradeQueue": [
+    {
+      "priority": "P0",
+      "id": "model_provider_health",
+      "reason": "Model-assisted verification is optional and must never be mistaken for live multi-model operation.",
+      "action": "Expose provider availability in every run report; keep deterministic fallback active."
+    },
+    {
+      "priority": "P0",
+      "id": "source_gap_feedback",
+      "reason": "Configured feeds are not the whole internet.",
+      "action": "Record uncovered categories, failed domains, stale feeds and candidate source suggestions; quarantine new sources until verified."
+    },
+    {
+      "priority": "P1",
+      "id": "evidence_graph",
+      "reason": "A flat row is weaker than claim-level provenance.",
+      "action": "Preserve claim, source, retrieval time, hash and conflict relationships."
+    },
+    {
+      "priority": "P1",
+      "id": "anomaly_guard",
+      "reason": "Sudden zero-result or volume spikes can indicate upstream failure.",
+      "action": "Compare current counts with recent history and mark anomalies instead of silently accepting them."
+    },
+    {
+      "priority": "P1",
+      "id": "effort_reward_frontier",
+      "reason": "Maximum reward alone can waste owner time.",
+      "action": "Model estimated effort, requirements, fees, deadline pressure and reversibility separately."
+    },
+    {
+      "priority": "P2",
+      "id": "future-opportunity-lanes",
+      "reason": "Opportunity surfaces are expanding beyond classic airdrops.",
+      "action": "Add AI safety, open-source, research, security, grants, hackathons and creator/maintainer programs as separate lanes."
+    }
+  ],
+  "selfModificationPolicy": "PROPOSE_ONLY",
+  "selfModificationPolicyDescription": "Generated plans never rewrite production code or trust policy.",
+  "nextCycle": "Observe -> detect gap -> propose -> test -> review -> deploy -> measure -> rollback if degraded"
 }
