@@ -28,7 +28,8 @@ def main():
   for row in load(name).get("items",[]): assert row.get("action")=="never-auto-claim" and row.get("executionGate")=="OWNER_APPROVAL_REQUIRED"
  assert load("guard-horizon.json").get("baseYear")==2026 and any(x.get("year")==2050 for x in load("guard-horizon.json").get("horizons",[]))
  assert load("guard-capabilities.json").get("selfModificationPolicy")=="PROPOSE_ONLY"
- if os.getenv("GUARD_RUNTIME_FINAL") == "1":\n  assert load("guard-threat-report.json").get("status")=="PASS" and load("guard-threat-report.json").get("violations")==[]
+ if os.getenv("GUARD_RUNTIME_FINAL") == "1":
+  assert load("guard-threat-report.json").get("status")=="PASS" and load("guard-threat-report.json").get("violations")==[]
  assert load("guard-agent-contract.json").get("policy")=="FAIL_CLOSED"
  assert load("guard-agent-contract-report.json").get("status")=="PASS"
  assert load("guard-replay-report.json").get("status")=="PASS"
