@@ -40,6 +40,7 @@ def reward(item):
     evidence=item.get("evidence",{})
     if isinstance(evidence,dict):
         vals += [number(x) for x in evidence.get("reward",[]) if isinstance(x,(str,int,float))]
+    vals += [number(x) for x in item.get("rewardEvidence",[]) if isinstance(x,(str,int,float))]
     return min(REWARD_CAP_USD, max(vals+[0]))
 
 def brain_scores(x):
@@ -53,6 +54,7 @@ def brain_scores(x):
     freshness=15 if fresh else 5
     feasibility=10 if not any(k in str(x).lower() for k in ("kyc","captcha","deposit required","pay to enter")) else 0
     risk=10 if official and not x.get("rejectionReasons") else 2
+    if x.get("bountyOrGrantSignal"): evidence=min(25,evidence+5)
     return {"valueBrain":round(min(40,value),2),"evidenceBrain":evidence,"freshnessBrain":freshness,"feasibilityBrain":feasibility,"riskBrain":risk}
 
 def main():
