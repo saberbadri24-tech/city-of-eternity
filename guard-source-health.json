@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-09-23T23:11:59.061328+00:00",
+  "updatedAt": "2026-09-24T01:28:15.954595+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -21,15 +21,15 @@
     "airdrop-discovery": 1
   },
   "discoveryCandidateCount": 500,
-  "uniqueNewsPublishers": 238,
+  "uniqueNewsPublishers": 237,
   "topPublishers": [
     {
       "publisher": "x.com",
-      "count": 47
+      "count": 45
     },
     {
       "publisher": "facebook.com",
-      "count": 30
+      "count": 29
     },
     {
       "publisher": "BitDegree",
@@ -45,7 +45,11 @@
     },
     {
       "publisher": "CCN.com",
-      "count": 14
+      "count": 15
+    },
+    {
+      "publisher": "AirdropAlert",
+      "count": 10
     },
     {
       "publisher": "instagram.com",
@@ -56,8 +60,8 @@
       "count": 9
     },
     {
-      "publisher": "AirdropAlert",
-      "count": 9
+      "publisher": "Bitget",
+      "count": 8
     },
     {
       "publisher": "Uniswap",
@@ -80,10 +84,6 @@
       "count": 7
     },
     {
-      "publisher": "Bitget",
-      "count": 7
-    },
-    {
       "publisher": "Zipmex",
       "count": 6
     },
@@ -96,11 +96,11 @@
       "count": 5
     },
     {
-      "publisher": "DropsTab",
+      "publisher": "Bybit",
       "count": 5
     },
     {
-      "publisher": "Coin Gabbar",
+      "publisher": "DropsTab",
       "count": 5
     }
   ],
