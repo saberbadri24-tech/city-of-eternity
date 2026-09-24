@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-09-24T20:39:35.245870+00:00",
+  "updatedAt": "2026-09-24T23:29:42.735689+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -21,7 +21,7 @@
     "airdrop-discovery": 1
   },
   "discoveryCandidateCount": 500,
-  "uniqueNewsPublishers": 242,
+  "uniqueNewsPublishers": 239,
   "topPublishers": [
     {
       "publisher": "x.com",
@@ -33,15 +33,15 @@
     },
     {
       "publisher": "facebook.com",
-      "count": 24
+      "count": 23
     },
     {
       "publisher": "Binance",
-      "count": 18
+      "count": 17
     },
     {
       "publisher": "YouTube",
-      "count": 15
+      "count": 16
     },
     {
       "publisher": "CCN.com",
@@ -53,7 +53,7 @@
     },
     {
       "publisher": "AirdropAlert",
-      "count": 9
+      "count": 10
     },
     {
       "publisher": "Bitget",
@@ -72,6 +72,10 @@
       "count": 7
     },
     {
+      "publisher": "Quora",
+      "count": 7
+    },
+    {
       "publisher": "Blockchair",
       "count": 7
     },
@@ -84,7 +88,7 @@
       "count": 6
     },
     {
-      "publisher": "Quora",
+      "publisher": "LinkedIn",
       "count": 6
     },
     {
@@ -97,10 +101,6 @@
     },
     {
       "publisher": "Coin Gabbar",
-      "count": 5
-    },
-    {
-      "publisher": "karate.com",
       "count": 5
     }
   ],
