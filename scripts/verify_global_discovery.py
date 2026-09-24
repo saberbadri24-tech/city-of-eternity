@@ -5,6 +5,7 @@ import re
 import urllib.parse
 import urllib.request
 from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 ROOT = Path(__file__).resolve().parents[1]
 DISCOVERY = ROOT / "guard-discovery.json"
@@ -19,7 +20,7 @@ def fetch(url):
             url,
             headers={"User-Agent": UA, "Accept": "text/html,application/xhtml+xml,*/*;q=0.8"},
         )
-        with urllib.request.urlopen(req, timeout=18) as r:
+        with urllib.request.urlopen(req, timeout=8) as r:
             body = r.read(350_000).decode("utf-8", "ignore")
             return r.geturl(), body, r.status
     except Exception:
@@ -45,60 +46,45 @@ def main():
 
     official_domains = {domain(x.get("url", "")) for x in registry.get("sources", []) if x.get("url")}
     official_domains.discard("")
+    items = discovery.get("items", [])
     verified = []
 
-    for item in discovery.get("items", []):
+    def verify_one(item):
+        item = dict(item)
         final_url, body, status = fetch(item.get("url", ""))
         final_domain = domain(final_url)
         canon = canonical(body)
         text = strip_text(body)[:100_000].lower()
-
-        reward_matches = re.findall(
-            r"(?:\$|usd\s*)[0-9][0-9,]*(?:\.[0-9]+)?\s*(?:k|m)?",
-            text,
-            re.I,
-        )
-        bounty_signal = any(
-            x in text for x in ("bug bounty", "bounty program", "prize pool", "grant", "hackathon")
-        )
-        claim_signal = any(
-            x in text
-            for x in (
-                "claim now", "claim is live", "claim is open", "claim available",
-                "redeem now", "airdrop claim", "token claim", "withdraw now",
-            )
-        )
-        eligibility_signal = any(
-            x in text for x in ("eligibility", "eligible", "snapshot", "points", "requirements", "deadline")
-        )
-
+        reward_matches = re.findall(r"(?:\$|usd\s*)[0-9][0-9,]*(?:\.[0-9]+)?\s*(?:k|m)?", text, re.I)
+        bounty_signal = any(x in text for x in ("bug bounty", "bounty program", "prize pool", "grant", "hackathon"))
+        claim_signal = any(x in text for x in ("claim now", "claim is live", "claim is open", "claim available", "redeem now", "airdrop claim", "token claim", "withdraw now"))
+        eligibility_signal = any(x in text for x in ("eligibility", "eligible", "snapshot", "points", "requirements", "deadline"))
         official_source_match = final_domain in official_domains if final_domain else False
-        if status and 200 <= status < 400:
-            verification = (
-                "resolved-official-source"
-                if official_source_match
-                else "resolved-third-party-or-publisher"
-            )
-        else:
-            verification = "unresolved"
+        verification = ("resolved-official-source" if status and 200 <= status < 400 and official_source_match
+                        else "resolved-third-party-or-publisher" if status and 200 <= status < 400
+                        else "unresolved")
+        item.update({"verifiedAt": NOW, "resolvedUrl": final_url or None, "canonicalUrl": canon or None,
+            "resolvedDomain": final_domain or None, "httpStatus": status, "verification": verification,
+            "claimSignal": claim_signal, "bountyOrGrantSignal": bounty_signal, "rewardEvidence": reward_matches[:20],
+            "eligibilitySignal": eligibility_signal, "action": "never-auto-claim",
+            "executionGate": "OWNER_APPROVAL_REQUIRED"})
+        return item
 
-        item.update(
-            {
-                "verifiedAt": NOW,
-                "resolvedUrl": final_url or None,
-                "canonicalUrl": canon or None,
-                "resolvedDomain": final_domain or None,
-                "httpStatus": status,
-                "verification": verification,
-                "claimSignal": claim_signal,
-                "bountyOrGrantSignal": bounty_signal,
-                "rewardEvidence": reward_matches[:20],
-                "eligibilitySignal": eligibility_signal,
-                "action": "never-auto-claim",
-                "executionGate": "OWNER_APPROVAL_REQUIRED",
-            }
-        )
-        verified.append(item)
+    workers = min(24, max(4, len(items)))
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        futures = {pool.submit(verify_one, item): i for i, item in enumerate(items)}
+        results = {}
+        for future in as_completed(futures):
+            i = futures[future]
+            try:
+                results[i] = future.result()
+            except Exception as exc:
+                results[i] = {**items[i], "verifiedAt": NOW, "verification": "unresolved",
+                              "httpStatus": None, "verificationError": type(exc).__name__,
+                              "action": "never-auto-claim", "executionGate": "OWNER_APPROVAL_REQUIRED"}
+    verified = [results[i] for i in range(len(items))]
+
+    # Verification is now bounded and parallel.
 
     discovery["items"] = verified
     discovery["updatedAt"] = NOW
