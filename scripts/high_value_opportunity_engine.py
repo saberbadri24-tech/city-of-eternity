@@ -39,6 +39,16 @@ def reward(item):
     vals += [number(x) for x in item.get("rewardEvidence",[]) if isinstance(x,(str,int,float))]
     return min(REWARD_CAP_USD, max(vals+[0]))
 
+def reward_type(item):
+    if any(number(item.get(k)) > 0 for k in ("rewardUsd","maxRewardUsd","estimatedRewardUsd","potentialRewardUsd","bounty","grant")):
+        return "individual_reward"
+    if number(item.get("prize")) > 0:
+        return "prize_pool"
+    evidence=item.get("evidence",{})
+    if isinstance(evidence,dict) and any(number(x)>0 for x in evidence.get("reward",[]) if isinstance(x,(str,int,float))):
+        return "evidence_reward"
+    return "unknown"
+
 def project_identity(item):
     for key in ("projectId","project_id","opportunityId","opportunity_id","slug"):
         v=str(item.get(key) or "").strip().lower()
@@ -133,7 +143,7 @@ def main():
         ranked.append(x)
 
     ranked.sort(key=lambda x:(x["priority"]!="H1_HIGH_VALUE",-x["highValueScore"],-x["estimatedRewardUsd"]))
-    # Greedy portfolio: distinct sources first, until the planning target is covered by potential value.
+    # Greedy portfolio: distinct projects only, until the planning target is covered by conservative potential value.
     portfolio=[]; used_projects=set(); total=0.0
     for x in ranked:
         project=x.get("projectIdentity") or project_identity(x)
