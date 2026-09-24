@@ -33,7 +33,7 @@ def main():
             if not h or h in seen: continue
             msg=tx.get("in_msg") or {}
             dest=msg.get("destination") or ""
-            incoming = (dest == address) or bool(msg.get("source"))
+            incoming = (dest == address)
             if not incoming: continue
             old.setdefault("items",[]).append({
                 "hash":h,"lt":tx.get("lt"),"utime":tx.get("utime"),
