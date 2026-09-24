@@ -1,0 +1,6 @@
+{
+  "astra": {"role":"deterministic local risk/eligibility triage","canSign":false,"canTransfer":false},
+  "claude": {"role":"advisory evidence review when GitHub secret is configured","canSign":false,"canTransfer":false},
+  "gemini": {"role":"advisory evidence review when GitHub secret is configured","canSign":false,"canTransfer":false},
+  "immortalGuard": {"role":"final fail-closed policy gate","canSign":false,"canTransfer":false}
+}
