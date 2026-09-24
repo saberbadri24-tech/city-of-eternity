@@ -22,6 +22,9 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
 
+      - name: Workflow supply-chain security gate
+        run: python3 scripts/guard_workflow_security.py
+
       - name: Final Guard preflight contract
         run: python3 scripts/guard_final_preflight.py
 
