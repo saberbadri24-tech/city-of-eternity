@@ -164,7 +164,7 @@ def main():
         if total >= MONTHLY_TARGET_USD: break
 
     report={
-      "guard":"ANIL X Immortal Guard","engine":"High-Value Opportunity Engine","version":"2.0",
+      "guard":"ANIL X Immortal Guard","engine":"High-Value Opportunity Engine","version":"2.1",
       "generatedAt":NOW.isoformat(),"monthlyIncomeTargetUsd":MONTHLY_TARGET_USD,
       "highValueFloorUsd":HIGH_VALUE_FLOOR_USD,"targetIsPlanningOnly":True,
       "learning":learning_model,
