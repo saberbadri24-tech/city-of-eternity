@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
-"""Immortal Core Threat Engine: adversarial, fail-closed security contract.
-Untrusted text is data, never authority; keyword mentions alone are not secret leakage.
-"""
+"""Immortal Core Threat Engine: adversarial, fail-closed security contract."""
 from __future__ import annotations
-import hashlib,json,re
+import hashlib,json
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 RULES=[
@@ -19,24 +17,33 @@ RULES=[
 ("T10","replayable-state","Security decisions should be reproducible from recorded state."),
 ]
 def load(name): return json.loads((ROOT/name).read_text(encoding="utf-8"))
+def nonempty_sensitive_values(obj):
+    keys={"privatekey","private_key","seedphrase","seed_phrase","mnemonic","secret"}
+    found=[]
+    def walk(v,path=""):
+        if isinstance(v,dict):
+            for k,val in v.items():
+                nk=str(k).replace("-","_").lower()
+                if nk in keys and val not in (None,"",False,[],{}): found.append(path+"/"+str(k))
+                walk(val,path+"/"+str(k))
+        elif isinstance(v,list):
+            for i,val in enumerate(v): walk(val,f"{path}[{i}]")
+    walk(obj)
+    return found
 def main():
- wallet=load("guard-wallet.json"); discovery=load("guard-discovery.json"); intel=load("guard-intelligence.json"); caps=load("guard-capabilities.json")
- violations=[]
- secret_fields=("privateKey","private_key","seedPhrase","seed_phrase","mnemonic","secret")
- if any(wallet.get(k) not in (None,"",False) for k in secret_fields): violations.append("T05")
- if caps.get("selfModificationPolicy")!="PROPOSE_ONLY": violations.append("T06")
- for row in discovery.get("items",[]):
-  if row.get("action")!="never-auto-claim" or row.get("executionGate")!="OWNER_APPROVAL_REQUIRED": violations.append("T07")
- for row in intel.get("trackedLeads",[]):
-  if row.get("ownerApprovalRequired") is not True or row.get("automaticAction") is not False: violations.append("T04")
-  if row.get("claimExecuted") is True: violations.append("T07")
- raw=(ROOT/"scripts/guard_evolution_engine.py").read_text(encoding="utf-8")
- if "PROPOSE_ONLY" not in raw: violations.append("T06")
- report={"engine":"Immortal Core Threat Engine","version":"1.1","status":"PASS" if not violations else "FAIL",
- "rules":RULES,"violations":sorted(set(violations)),
- "boundaryHash":hashlib.sha256("\n".join(f"{a}:{b}" for a,b,_ in RULES).encode()).hexdigest(),
- "policy":"Internal adversarial validation only; untrusted content is never treated as authority."}
- (ROOT/"guard-threat-report.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
- print("IMMORTAL_CORE_THREAT="+report["status"])
- if violations: raise SystemExit(1)
+    wallet=load("guard-wallet.json"); discovery=load("guard-discovery.json"); intel=load("guard-intelligence.json"); caps=load("guard-capabilities.json")
+    violations=[]
+    if nonempty_sensitive_values(wallet): violations.append("T05")
+    if caps.get("selfModificationPolicy")!="PROPOSE_ONLY": violations.append("T06")
+    for row in discovery.get("items",[]):
+        if row.get("action")!="never-auto-claim" or row.get("executionGate")!="OWNER_APPROVAL_REQUIRED": violations.append("T07")
+    for row in intel.get("trackedLeads",[]):
+        if row.get("ownerApprovalRequired") is not True or row.get("automaticAction") is not False: violations.append("T04")
+        if row.get("claimExecuted") is True: violations.append("T07")
+    raw=(ROOT/"scripts/guard_evolution_engine.py").read_text(encoding="utf-8")
+    if "PROPOSE_ONLY" not in raw: violations.append("T06")
+    report={"engine":"Immortal Core Threat Engine","version":"1.2","status":"PASS" if not violations else "FAIL","rules":RULES,"violations":sorted(set(violations)),"boundaryHash":hashlib.sha256("\n".join(f"{a}:{b}" for a,b,_ in RULES).encode()).hexdigest(),"policy":"Internal adversarial validation only; untrusted content is never treated as authority."}
+    (ROOT/"guard-threat-report.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    print("IMMORTAL_CORE_THREAT="+report["status"])
+    if violations: raise SystemExit(1)
 if __name__=="__main__": main()
