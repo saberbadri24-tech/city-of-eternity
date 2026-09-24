@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-09-24T01:28:15.954595+00:00",
+  "updatedAt": "2026-09-24T06:41:20.751544+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -21,11 +21,11 @@
     "airdrop-discovery": 1
   },
   "discoveryCandidateCount": 500,
-  "uniqueNewsPublishers": 237,
+  "uniqueNewsPublishers": 238,
   "topPublishers": [
     {
       "publisher": "x.com",
-      "count": 45
+      "count": 47
     },
     {
       "publisher": "facebook.com",
@@ -36,28 +36,32 @@
       "count": 24
     },
     {
+      "publisher": "YouTube",
+      "count": 17
+    },
+    {
       "publisher": "Binance",
       "count": 17
     },
     {
-      "publisher": "YouTube",
-      "count": 15
-    },
-    {
       "publisher": "CCN.com",
-      "count": 15
-    },
-    {
-      "publisher": "AirdropAlert",
-      "count": 10
-    },
-    {
-      "publisher": "instagram.com",
-      "count": 10
+      "count": 14
     },
     {
       "publisher": "Reddit",
+      "count": 11
+    },
+    {
+      "publisher": "AirdropAlert",
       "count": 9
+    },
+    {
+      "publisher": "instagram.com",
+      "count": 9
+    },
+    {
+      "publisher": "Medium",
+      "count": 8
     },
     {
       "publisher": "Bitget",
@@ -68,20 +72,16 @@
       "count": 7
     },
     {
-      "publisher": "World - The real human network",
-      "count": 7
-    },
-    {
       "publisher": "Quora",
-      "count": 7
-    },
-    {
-      "publisher": "Medium",
       "count": 7
     },
     {
       "publisher": "Blockchair",
       "count": 7
+    },
+    {
+      "publisher": "world.org",
+      "count": 6
     },
     {
       "publisher": "Zipmex",
