@@ -22,6 +22,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Final Guard preflight contract
+        run: python3 scripts/guard_final_preflight.py
+
       - name: Global opportunity discovery
         run: python3 scripts/global_opportunity_discovery.py
 
@@ -63,7 +66,8 @@ jobs:
       - name: Audit modular engine and state health
         run: |
           python3 scripts/guard_module_engine.py
-          python3 scripts/guard_modular_core.py
+          python3 scripts/guard_modular_core.py scripts/guard_final_preflight.py
+          python3 scripts/guard_final_preflight.py
 
       - name: Validate Guard state
         run: |
