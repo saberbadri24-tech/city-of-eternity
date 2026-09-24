@@ -39,7 +39,6 @@ jobs:
           python3 scripts/guard_evolution_engine.py
           python3 scripts/guard_horizon_engine.py
           python3 scripts/future_opportunity_scout.py
-          python3 scripts/guard_threat_engine.py
 
       - name: Global opportunity discovery
         run: python3 scripts/global_opportunity_discovery.py
@@ -69,6 +68,9 @@ jobs:
       - name: Build ranked opportunity intelligence report
         run: python3 scripts/opportunity_intelligence.py
 
+      - name: Immortal Core threat gate
+        run: python3 scripts/guard_threat_engine.py
+
       - name: Build high-value multi-brain opportunity report
         run: python3 scripts/high_value_opportunity_engine.py
 
@@ -94,7 +96,7 @@ jobs:
 
       - name: Validate Guard state
         run: |
-          for f in guard-discovery.json guard-source-health.json guard-wallet.json guard-status.json guard-opportunities.json guard-approvals.json guard-learning.json guard-sources.json rewards.json guard-opportunity-history.json guard-receipts.json guard-claim-adapters.json guard-free-real-tokens.json guard-intelligence.json guard-high-value.json guard-resilience-report.json guard-module-health.json guard-modular-core.json guard-capabilities.json guard-horizon.json guard-future-signals.json guard-threat-report.json guard-agent-contract.json guard-agent-contract-report.json guard-evidence-ledger.json guard-anomaly-report.json guard-replay-report.json; do python3 -m json.tool "$f" >/dev/null; done
+          for f in guard-discovery.json guard-source-health.json guard-wallet.json guard-status.json guard-opportunities.json guard-approvals.json guard-learning.json guard-sources.json rewards.json guard-opportunity-history.json guard-receipts.json guard-claim-adapters.json guard-free-real-tokens.json guard-intelligence.json guard-high-value.json guard-resilience-report.json guard-module-health.json guard-modular-core.json guard-capabilities.json guard-horizon.json guard-future-signals.json guard-threat-report.json guard-agent-contract.json guard-agent-contract-report.json guard-evidence-ledger.json guard-anomaly-report.json guard-replay-report.json guard-workflow-security.json; do python3 -m json.tool "$f" >/dev/null; done
           python3 -m py_compile scripts/*.py
 
       - name: Commit Guard state
