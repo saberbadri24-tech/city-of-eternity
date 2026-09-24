@@ -79,7 +79,8 @@ def main():
             "highValueCandidates":high.get("summary",{}).get("highValueCandidates",0) if isinstance(high,dict) else 0,
         },
         "upgradeQueue":recommendations,
-        "selfModificationPolicy":"PROPOSE_ONLY: generated plans never rewrite production code or trust policy.",
+        "selfModificationPolicy":"PROPOSE_ONLY",
+        "selfModificationPolicyDescription":"Generated plans never rewrite production code or trust policy.",
         "nextCycle":"Observe -> detect gap -> propose -> test -> review -> deploy -> measure -> rollback if degraded",
     }
     (ROOT/"guard-capabilities.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
