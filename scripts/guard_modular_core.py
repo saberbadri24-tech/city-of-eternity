@@ -127,8 +127,40 @@ def build_report(root: Path = ROOT) -> dict[str, Any]:
     return state
 
 
+def run_leverage_engines(root: Path = ROOT) -> dict[str, Any]:
+    """Run the independent leverage layer immediately before the modular report.
+    Fail closed: a missing/failed optional engine is recorded, never treated as success.
+    """
+    import subprocess, sys
+    engines = (
+        ("opportunity_graph", "guard_opportunity_graph.py"),
+        ("novelty", "guard_novelty_engine.py"),
+        ("action_planner", "guard_action_planner.py"),
+        ("unlock_value", "guard_unlock_value_engine.py"),
+    )
+    results = {}
+    for name, filename in engines:
+        script = root / "scripts" / filename
+        if not script.exists():
+            results[name] = {"state": "missing"}
+            continue
+        try:
+            p = subprocess.run([sys.executable, str(script)], cwd=str(root),
+                               capture_output=True, text=True, timeout=120)
+            results[name] = {
+                "state": "healthy" if p.returncode == 0 else "failed",
+                "returncode": p.returncode,
+                "stdout": p.stdout[-2000:],
+                "stderr": p.stderr[-2000:],
+            }
+        except Exception as exc:
+            results[name] = {"state": "failed", "error": type(exc).__name__}
+    return results
+
 def main() -> int:
+    leverage = run_leverage_engines()
     report = build_report()
+    report["leverageEngines"] = leverage
     target = ROOT / "guard-modular-core.json"
     target.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"overall": report["overall"], "modules": report["modules"],
