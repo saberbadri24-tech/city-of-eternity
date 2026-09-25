@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-09-25T01:51:46.419207+00:00",
+  "updatedAt": "2026-09-25T07:03:28.898647+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -21,31 +21,31 @@
     "airdrop-discovery": 1
   },
   "discoveryCandidateCount": 500,
-  "uniqueNewsPublishers": 240,
+  "uniqueNewsPublishers": 239,
   "topPublishers": [
     {
       "publisher": "x.com",
-      "count": 49
+      "count": 51
     },
     {
       "publisher": "BitDegree",
-      "count": 24
+      "count": 25
     },
     {
       "publisher": "facebook.com",
-      "count": 21
+      "count": 24
+    },
+    {
+      "publisher": "CCN.com",
+      "count": 18
     },
     {
       "publisher": "Binance",
       "count": 17
     },
     {
-      "publisher": "CCN.com",
-      "count": 17
-    },
-    {
       "publisher": "YouTube",
-      "count": 16
+      "count": 15
     },
     {
       "publisher": "Reddit",
@@ -56,19 +56,15 @@
       "count": 10
     },
     {
-      "publisher": "instagram.com",
-      "count": 9
-    },
-    {
       "publisher": "Bitget",
       "count": 9
     },
     {
-      "publisher": "Uniswap",
-      "count": 7
+      "publisher": "instagram.com",
+      "count": 8
     },
     {
-      "publisher": "Medium",
+      "publisher": "Uniswap",
       "count": 7
     },
     {
@@ -84,7 +80,7 @@
       "count": 6
     },
     {
-      "publisher": "Zipmex",
+      "publisher": "Medium",
       "count": 6
     },
     {
@@ -92,15 +88,19 @@
       "count": 6
     },
     {
-      "publisher": "arXiv",
+      "publisher": "dl.acm.org",
       "count": 5
     },
     {
-      "publisher": "ACM Digital Library",
+      "publisher": "Coin Gabbar",
       "count": 5
     },
     {
-      "publisher": "Bybit",
+      "publisher": "karate.com",
+      "count": 5
+    },
+    {
+      "publisher": "zipmex.com",
       "count": 5
     }
   ],
