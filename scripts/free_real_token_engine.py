@@ -105,7 +105,7 @@ def main():
     try:wallet=json.loads(WALLET.read_text(encoding="utf-8"))
     except Exception:wallet={}
     temp=wallet.get("temporaryWalletAddress")
-    items=discovery.get("items",[])[:500]
+    items=discovery.get("items",[])[:5000]
     with concurrent.futures.ThreadPoolExecutor(max_workers=WORKERS) as ex:
         results=list(ex.map(lambda x:evaluate(x,trusted),items))
     accepted=[];rejected=[];seen=set()
@@ -133,5 +133,5 @@ def main():
       "temporaryWalletAddress":temp or None,"automaticClaim":False,"automaticSigning":False,"automaticTransfer":False,
       "privateKeys":"never-collected","ownerGate":"Required for any opportunity-specific action.","receiptMode":"Passive on-chain monitoring only."
     },ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-    print(json.dumps({"status":"free_real_token_hunter_complete","verifiedFreeRealTokens":len(accepted),"rejected":len(rejected),"scanned":len(results)},ensure_ascii=False))
+    print(json.dumps({"status":"free_real_token_hunter_complete","verifiedFreeRealTokens":len(accepted),"rejected":len(rejected),"scanned":len(results),"capacity":5000,"coverageMode":"dynamic-discovery"},ensure_ascii=False))
 if __name__=="__main__":main()
