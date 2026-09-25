@@ -75,7 +75,7 @@ def news_candidates():
     for x in out:
         key=x["url"].split("#",1)[0]
         if key not in seen:seen.add(key);unique.append(x)
-    return unique[:500]
+    return unique[:5000]
 
 def main():
     registry=json.loads(SOURCES.read_text(encoding="utf-8")) if SOURCES.exists() else {"sources":[]}
@@ -83,7 +83,7 @@ def main():
     for name,url,typ in FIXED:existing.setdefault(url,{"name":name,"url":url,"type":typ,"status":"pending-scan"})
     news=news_candidates()
     DISCOVERY.write_text(json.dumps({"guard":"ANIL X Immortal Guard","engine":"Airdrop+ X Global Discovery",
-        "version":"15.0-multilingual-multifeed","updatedAt":NOW,"queries":QUERIES,"count":len(news),"items":news,
+        "version":"15.0-multilingual-multifeed","updatedAt":NOW,"queries":QUERIES,"count":len(news),"items":news,"capacity":5000,"coverageMode":"dynamic-multifeed; not limited to fixed registry",
         "policy":"Discovery only. No claim, signing, wallet connection, KYC/CAPTCHA bypass, or transfer."},
         ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     registry["sources"]=list(existing.values());registry["lastDiscovery"]=NOW;registry["discoveryCount"]=len(news)
