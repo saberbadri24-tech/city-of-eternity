@@ -26,6 +26,7 @@ MODULES = {
     "receipts": "guard-receipts.json",
     "approvals": "guard-approvals.json",
     "learning": "guard-learning.json",
+    "unlock_value": "guard-unlock-value.json",
 }
 
 
