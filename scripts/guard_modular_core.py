@@ -27,6 +27,7 @@ MODULES = {
     "approvals": "guard-approvals.json",
     "learning": "guard-learning.json",
     "unlock_value": "guard-unlock-value.json",
+    "auto_claim": "guard-auto-claim.json",
 }
 
 
