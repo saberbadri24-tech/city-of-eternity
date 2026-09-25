@@ -49,6 +49,9 @@ jobs:
       - name: Airdrop+ intelligence scan
         run: python scripts/airdrop_guard.py
 
+      - name: Safe no-signature claim lane
+        run: python scripts/guard_safe_claim_engine.py
+
       - name: Source health
         run: python scripts/guard_source_health.py
 
@@ -101,4 +104,11 @@ jobs:
             exit 0
           fi
           git commit -m "chore: refresh immortal guard state"
-          git push
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main && git push origin HEAD:main && exit 0
+            git rebase --abort || true
+            sleep $((attempt * 3))
+          done
+          echo "Guard state push failed after 3 rebase attempts."
+          exit 1
