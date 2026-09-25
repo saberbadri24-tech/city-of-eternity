@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-09-25T11:07:13.608806+00:00",
+  "updatedAt": "2026-09-25T11:12:21.163554+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -33,7 +33,7 @@
     },
     {
       "publisher": "facebook.com",
-      "count": 25
+      "count": 24
     },
     {
       "publisher": "Binance",
@@ -48,7 +48,7 @@
       "count": 16
     },
     {
-      "publisher": "Reddit",
+      "publisher": "reddit.com",
       "count": 9
     },
     {
@@ -76,6 +76,10 @@
       "count": 7
     },
     {
+      "publisher": "LinkedIn",
+      "count": 7
+    },
+    {
       "publisher": "Blockchair",
       "count": 7
     },
@@ -84,11 +88,7 @@
       "count": 6
     },
     {
-      "publisher": "LinkedIn",
-      "count": 6
-    },
-    {
-      "publisher": "ACM Digital Library",
+      "publisher": "dl.acm.org",
       "count": 5
     },
     {
