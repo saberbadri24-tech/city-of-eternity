@@ -34,7 +34,11 @@ def main():
  assert load("guard-agent-contract-report.json").get("status")=="PASS"
  assert load("guard-replay-report.json").get("status")=="PASS"
  assert load("guard-workflow-security.json").get("status")=="PASS" and load("guard-workflow-security.json").get("violations")==[]
- wallet=load("guard-wallet.json")
+ auto_claim=load("guard-auto-claim.json")
+ assert auto_claim.get("automaticSigning") is False and auto_claim.get("automaticTransfer") is False
+ assert auto_claim.get("privateKeys")=="never-collected"
+ assert all(x.get("status")!="SUBMITTED_NO_SIGNATURE" or x.get("httpStatus",0) >= 200 for x in auto_claim.get("submitted",[]))
+wallet=load("guard-wallet.json")
  assert wallet.get("privateKey") in (None,"",False) and wallet.get("seedPhrase") in (None,"",False) and wallet.get("mnemonic") in (None,"",False)
  print("FINAL_GUARD_PREFLIGHT=PASS")
 if __name__=="__main__": main()
