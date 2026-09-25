@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 NOW = dt.datetime.now(dt.timezone.utc)
-MONTHLY_TARGET_USD = 10000
+MONTHLY_TARGET_USD = 2000
 HIGH_VALUE_FLOOR_USD = 2000
 REWARD_CAP_USD = 250000
 STALE_HOURS = 96
