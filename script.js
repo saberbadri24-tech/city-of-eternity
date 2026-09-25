@@ -1,7 +1,7 @@
 (()=>{'use strict';
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
 const input=$('#requestInput'),form=$('#requestForm'),count=$('#charCount'),chat=$('#chat');
-const AI_URL=(window.ANILX_API_URL||'https://anil-x-4j4fxx.v2.appdeploy.ai/api/plan');
+const AI_URL=(window.ANILX_API_URL||'/api/plan');
 const routes=[
 {id:'website',keys:['سایت','وب سایت','وب‌سایت','وبسایت','فروشگاه','لندینگ','website','store'],title:'ساخت و راه‌اندازی سایت',moves:['نتیجه مطلوب','نمونه قابل دیدن','اجرا و تست']},
 {id:'video',keys:['تیزر','ویدیو','فیلم','کلیپ','محتوا','video','teaser'],title:'تولید محتوای ویدیویی',moves:['هدف','سناریو','پیش‌نمایش']},
