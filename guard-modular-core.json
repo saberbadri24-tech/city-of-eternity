@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-25T11:12:22+00:00",
+  "generatedAt": "2026-09-25T11:14:10+00:00",
   "engine": "Immortal Guard Modular Core",
   "overall": "healthy",
   "modules": {
@@ -37,6 +37,10 @@
       "rootType": "dict"
     },
     "learning": {
+      "state": "readable",
+      "rootType": "dict"
+    },
+    "unlock_value": {
       "state": "readable",
       "rootType": "dict"
     }
@@ -97,7 +101,6 @@
     "159ad3d0affcc810db5d",
     "1604692237ca4c905592",
     "16a65d3fb3a553699041",
-    "16c48f9ddb397b053a5f",
     "17070faf3420bb523be3",
     "172015feaebffaf42e99",
     "17a6e3e4309ccb1ec8f9",
@@ -141,6 +144,7 @@
     "2cd4ec5ca0c0cedc578a",
     "2ce137e92b84f827c5f1",
     "2d365a3dbfbfe0099aa5",
+    "2d7ac74af1ad6a502a98",
     "2d92d930b5b95d538587",
     "2df537e67607c9883901",
     "2dfde8e89085f4acb379",
@@ -161,13 +165,13 @@
     "34b32bfacc99f6d424a5",
     "35bdee34e65875604a4e",
     "35d6ca8a25eb79baabd6",
+    "3743fb214d43f25c2e55",
     "3745425c89bd0970f1fa",
     "3829176a50f383f893f1",
     "383e96e68768a8942938",
     "38f9733911df9ea895fc",
     "398d1e7a989361940375",
     "3a47fb1aa80f58558c2c",
-    "3ba434f839144465614e",
     "3c1ee5cded12b1d78adb",
     "3ca59f6634a4952eb731",
     "3cbb5b433e7db3f3ce7a",
@@ -298,7 +302,6 @@
     "7bbe88f0f995391ee439",
     "7c1e0559a2a43714ea68",
     "7d2db3dcccb313a1ea80",
-    "7d8ef43efdbd3bfb0e28",
     "7ea73fb914ad79707e66",
     "7eec274ac0e75e714a1d",
     "801c9ff54e6ee5550c36",
@@ -428,6 +431,7 @@
     "be94df47f6d60d13df44",
     "bf6dfdcd460b5488b020",
     "bfa648bc01ec39603fbe",
+    "bfac82ff6601151293ca",
     "bfd4cf690b567a7a7c68",
     "binance-airdrop-portal",
     "binance-alpha",
@@ -444,7 +448,6 @@
     "c31648eac0d03017e628",
     "c39ed87766b79b960721",
     "c3b6a028b82fb1cfa7f1",
-    "c400daf01352a069f271",
     "c434c75ed46450d42856",
     "c5b755692ac4c1892661",
     "c657f4a76a9b4569aad2",
@@ -457,7 +460,6 @@
     "ca38954f868b7ef9a955",
     "ca6cdf9c408f2e31b1d1",
     "ca779dd251bb63965eca",
-    "ca8676249227154d7e3f",
     "cac7d85e48f865de0d96",
     "cardano",
     "cb5791feafdc4eb59b2a",
@@ -495,8 +497,8 @@
     "db4f8b664166e21eddb0",
     "dc3f0e395c3689a439b9",
     "dd3e3b10092fe5839cee",
-    "dd817f5c868bb2f9bfab",
     "dd993df926a30d1620df",
+    "def2a766f380dfe14133",
     "def8df4f94743d5e9ebf",
     "e056fba782995eeb2f02",
     "e0941747e4bc220976b9",
@@ -514,6 +516,7 @@
     "e6295bdcf5219e902533",
     "e6de11b30e8edc5241bc",
     "e779d5b69eea30561dcf",
+    "e8947319418e27dff1ce",
     "e8c7b86cc2628ae89703",
     "e916122148e9a2b338e0",
     "e99f42f4cf67c2d55cfb",
@@ -537,6 +540,7 @@
     "efb0ad3babc8f418a537",
     "efb306fa7b7830d36c55",
     "eff407466697938a288a",
+    "f1019ab3604fce16cb91",
     "f28bec5c4cec749e81a7",
     "f4934eb388ff694a9285",
     "f4a5ed9e89a3a96e161c",
@@ -1641,5 +1645,31 @@
     "Readable JSON is not proof of fresh data or a successful upstream scan.",
     "Discovery coverage depends on configured sources and network/API access.",
     "No automated claim, signature, KYC/CAPTCHA, or asset transfer is performed."
-  ]
+  ],
+  "leverageEngines": {
+    "opportunity_graph": {
+      "state": "healthy",
+      "returncode": 0,
+      "stdout": "{\"nodes\": 1035, \"edges\": 500, \"convergence\": 0, \"blindSpots\": 530}\n",
+      "stderr": ""
+    },
+    "novelty": {
+      "state": "healthy",
+      "returncode": 0,
+      "stdout": "{\"new\": 501, \"changed\": 0}\n",
+      "stderr": ""
+    },
+    "action_planner": {
+      "state": "healthy",
+      "returncode": 0,
+      "stdout": "{\"plans\": 540}\n",
+      "stderr": ""
+    },
+    "unlock_value": {
+      "state": "healthy",
+      "returncode": 0,
+      "stdout": "{\"recordsObserved\": 541, \"checksGenerated\": 2713, \"top\": {\"checkId\": \"0722a038fb6b639d9de9\", \"opportunityId\": \"b1edccd56b86dfc3bef0\", \"title\": \"cPen INK Distribution LIVE! 🖋️ How to Add INK to Wallet & PancakeSwap Live Trades 2026 - YouTube\", \"missingDimension\": \"contract\", \"unlockScore\": 123.0, \"affectedObservedRecords\": 541, \"observedSignalCount\": 6, \"sourceDomain\": \"news.google.com\", \"verificationAction\": \"verify the official contract address from project documentation\", \"reason\": \"prioritize a missing fact whose verification can reduce uncertainty across multiple observed records\", \"costClass\": \"MEDIUM\", \"hypothesisOnly\": true, \"noInventedClaim\": true, \"ownerApprovalRequired\": true}}\n",
+      "stderr": ""
+    }
+  }
 }

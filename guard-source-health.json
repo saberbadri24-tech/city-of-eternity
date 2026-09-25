@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-09-25T11:12:21.163554+00:00",
+  "updatedAt": "2026-09-25T11:13:27.283237+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -21,7 +21,7 @@
     "airdrop-discovery": 1
   },
   "discoveryCandidateCount": 500,
-  "uniqueNewsPublishers": 235,
+  "uniqueNewsPublishers": 234,
   "topPublishers": [
     {
       "publisher": "x.com",
@@ -33,7 +33,7 @@
     },
     {
       "publisher": "facebook.com",
-      "count": 24
+      "count": 25
     },
     {
       "publisher": "Binance",
@@ -48,20 +48,16 @@
       "count": 16
     },
     {
-      "publisher": "reddit.com",
-      "count": 9
+      "publisher": "AirdropAlert",
+      "count": 10
     },
     {
-      "publisher": "AirdropAlert",
+      "publisher": "Reddit",
       "count": 9
     },
     {
       "publisher": "Bitget",
       "count": 9
-    },
-    {
-      "publisher": "instagram.com",
-      "count": 8
     },
     {
       "publisher": "Uniswap",
@@ -72,11 +68,11 @@
       "count": 7
     },
     {
-      "publisher": "Quora",
+      "publisher": "Medium",
       "count": 7
     },
     {
-      "publisher": "LinkedIn",
+      "publisher": "Quora",
       "count": 7
     },
     {
@@ -84,11 +80,15 @@
       "count": 7
     },
     {
-      "publisher": "Medium",
+      "publisher": "instagram.com",
+      "count": 7
+    },
+    {
+      "publisher": "LinkedIn",
       "count": 6
     },
     {
-      "publisher": "dl.acm.org",
+      "publisher": "ACM Digital Library",
       "count": 5
     },
     {
