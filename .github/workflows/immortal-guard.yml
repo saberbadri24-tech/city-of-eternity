@@ -1,0 +1,104 @@
+name: Immortal Guard — Continuous Radar
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "7/5 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: immortal-guard-radar
+  cancel-in-progress: true
+
+jobs:
+  guard:
+    if: github.event_name != 'push' || github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      TONCENTER_API_KEY: ${{ secrets.TONCENTER_API_KEY }}
+      GUARD_RUNTIME_FINAL: "1"
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Discovery
+        run: python scripts/global_opportunity_discovery.py
+
+      - name: Discovery verification
+        run: python scripts/verify_global_discovery.py
+
+      - name: Strict free-real-token hunter
+        run: python scripts/free_real_token_engine.py
+
+      - name: Airdrop+ intelligence scan
+        run: python scripts/airdrop_guard.py
+
+      - name: Source health
+        run: python scripts/guard_source_health.py
+
+      - name: Opportunity intelligence
+        run: python scripts/opportunity_intelligence.py
+
+      - name: High-value opportunity engine
+        run: python scripts/high_value_opportunity_engine.py
+
+      - name: TON receipt monitor
+        run: python scripts/guard_ton_receipts.py
+
+      - name: Threat engine
+        run: python scripts/guard_threat_engine.py
+
+      - name: Evidence ledger
+        run: python scripts/guard_evidence_ledger.py
+
+      - name: Anomaly engine
+        run: python scripts/guard_anomaly_engine.py
+
+      - name: Replay engine
+        run: python scripts/guard_replay_engine.py
+
+      - name: Workflow security
+        run: python scripts/guard_workflow_security.py
+
+      - name: Agent contract
+        run: python scripts/guard_agent_contract.py
+
+      - name: Evolution engine
+        run: python scripts/guard_evolution_engine.py
+
+      - name: Horizon engine
+        run: python scripts/guard_horizon_engine.py
+
+      - name: Modular core
+        run: python scripts/guard_modular_core.py
+
+      - name: Final fail-closed preflight
+        run: python scripts/guard_final_preflight.py
+
+      - name: Commit fresh Guard state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add guard-*.json rewards.json
+          if git diff --cached --quiet; then
+            echo "No Guard state changes."
+            exit 0
+          fi
+          git commit -m "chore: refresh immortal guard state"
+          git push
