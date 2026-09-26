@@ -1,5 +1,6 @@
 const BUILTIN_ADMIN_PASSWORD='Sm*114411';
 import {state,now,clean,id,json as runtimeJson} from './functions/api/runtime-state.mjs';
+import autopilot from './functions/api/autopilot.mjs';
 import {handlePlan} from './functions/api/plan.mjs';
 import analyze from './netlify/functions/analyze.mjs';
 import vision from './functions/api/vision.mjs';
@@ -8,6 +9,7 @@ const json=(d,s=200,h={})=>new Response(JSON.stringify(d),{status:s,headers:{'co
 const rjson=(d,s=200,h={})=>runtimeJson(d,s,h);
 async function runtimeRoutes(req,env,u){
   const p=u.pathname;
+  if(p==='/api/autopilot')return autopilot(req,env);
   if(p==='/api/account'){
     if(!['GET','POST'].includes(req.method))return rjson({ok:false,error:'method_not_allowed'},405);
     const b=req.method==='POST'?await req.json().catch(()=>({})): {};
