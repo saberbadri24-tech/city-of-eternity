@@ -86,7 +86,7 @@ async function runtimeRoutes(req,env,u){
     if(req.method!=='POST')return rjson({error:'POST required'},405);
     const b=await req.json().catch(()=>({})),name=clean(b.name,80),email=clean(b.email,160),country=clean(b.country,80),request=clean(b.request,2000);
     if(!name||!email||!country||!request||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))return rjson({error:'Please complete all fields with a valid email.'},400);
-    const rec={id:id(),name,email,country,request,status:'pending',createdAt:now(),decidedAt:null,decidedBy:null};state.freeRequests.set(rec.id,rec);return rjson({ok:true,id:rec.id,status:rec.status},201);
+    const rec={id:id(),name,email,country,request,status:'pending',createdAt:now(),decidedAt:null,decidedBy:null};state.freeRequests.set(rec.id,rec);state.revenueLeads.set(rec.id,{id:rec.id,name,email,company:'',request,source:'free-request',status:'new',score:0,createdAt:rec.createdAt,updatedAt:rec.createdAt});return rjson({ok:true,id:rec.id,status:rec.status},201);
   }
   if(p==='/api/free-admin'){
     if(!(await adminAuth(req,env)))return rjson({error:'Admin authentication required.'},401);
