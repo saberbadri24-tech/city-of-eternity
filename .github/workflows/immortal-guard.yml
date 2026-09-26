@@ -40,6 +40,9 @@ jobs:
       - name: Discovery
         run: python scripts/global_opportunity_discovery.py
 
+      - name: Official-source discovery
+        run: python scripts/official_discovery.py
+
       - name: Discovery verification
         run: python scripts/verify_global_discovery.py
 
