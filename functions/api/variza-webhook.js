@@ -1,3 +1,4 @@
+import {state,now} from './runtime-state.mjs';
 const json = (data, status = 200) => new Response(JSON.stringify(data), {
   status,
   headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" }
@@ -44,7 +45,7 @@ export async function onRequestPost({ request, env }) {
       return json({ ok: true, ignored: true });
     }
 
-    if (!env.PAYMENTS) return json({ ok: true, status: "received_no_storage" });
+    if (!env.PAYMENTS) { const local=payload.slug ? [...state.orders.values()].find(x=>x.slug===payload.slug) : null; if(local){local.status='paid';local.paidAt=now();local.attemptCode=payload.attempt_code||null;state.orders.set(local.id,local);return json({ok:true,orderId:local.id,status:'paid'});} return json({ ok: true, status: 'received_no_storage' }); }
 
     const deliveryId =
       request.headers.get("x-delivery-id") ||
@@ -72,7 +73,7 @@ export async function onRequestPost({ request, env }) {
       const updated = {
         ...order,
         status: paid ? "paid" : "amount_mismatch",
-        paidAt: new Date().toISOString(),
+        paidAt: now(),
         attemptCode: payload.attempt_code || null,
         deliveryId,
         webhook: payload
@@ -92,7 +93,7 @@ export async function onRequestPost({ request, env }) {
       JSON.stringify({
         orderId: null,
         slug: payload.slug || null,
-        receivedAt: new Date().toISOString(),
+        receivedAt: now(),
         orphan: true
       })
     );
