@@ -1,5 +1,5 @@
 // ANIL X Autonomous Revenue Orchestrator
-import {state,now,clean,id,json as runtimeJson} from './functions/api/runtime-state.mjs';
+import {state,now,clean,id,json as runtimeJson} from './runtime-state.mjs';
 
 const serviceMap={
   website:{name:'AI Website Build',price:149,keywords:['website','site','سایت','web']},
