@@ -79,7 +79,7 @@ export async function onRequestPost({ request, env }) {
         webhook: payload
       };
 
-      await env.PAYMENTS.put(`orders/${orderId}`, JSON.stringify(updated));
+      await env.PAYMENTS.put(`orders/${orderId}`, JSON.stringify(updated)); state.orders.set(orderId,updated);
       await env.PAYMENTS.put(
         deliveryKey,
         JSON.stringify({ orderId, receivedAt: new Date().toISOString() })
