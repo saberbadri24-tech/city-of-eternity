@@ -16,7 +16,19 @@ async function api(kind,address){
  const txs=Array.isArray(j.transactions)?j.transactions:[];
  return {ok:true,transactions:txs.map(t=>({hash:t.hash||'',utime:t.utime||0,amount:Number(t.amount||0)}))};
 }
-async function loadAccount(){if(!addr())return;try{const d=await api('account',addr());const b=Number(d.balance||0)/1e9;$('#tempBalance').textContent=b.toFixed(4);$('#mainBalance').textContent=b.toFixed(4);$('#tempAddress').textContent=addr();$('#mainAddress').textContent=addr();$('#lastCheck').textContent='آخرین بررسی: '+new Date().toLocaleTimeString('fa-IR');renderWalletDetail(d)}catch(e){$('#lastCheck').textContent='خطا در خواندن موجودی: '+e.message}}
+async function loadAccount(){
+ const m=mainWallet(),a=addr();
+ try{
+  const [temp,main]=await Promise.all([
+   temporaryWalletAddress?api('account',temporaryWalletAddress):Promise.resolve({balance:'0'}),
+   m?api('account',m):Promise.resolve({balance:'0'})
+  ]);
+  $('#tempBalance').textContent=(Number(temp.balance||0)/1e9).toFixed(4);
+  $('#mainBalance').textContent=(Number(main.balance||0)/1e9).toFixed(4);
+  $('#lastCheck').textContent='آخرین بررسی: '+new Date().toLocaleTimeString('fa-IR');
+  renderWalletDetail(a?await api('account',a):null);
+ }catch(e){$('#lastCheck').textContent='خطا در خواندن موجودی: '+e.message}
+}
 function renderWallet(){const a=addr(),m=mainWallet();$('#tempAddress').textContent=temporaryWalletAddress||'کیف دریافت تنظیم نشده';$('#mainAddress').textContent=m||'کیف اصلی هنوز ثبت نشده';$$('#connectBtn,#connectBtn2').forEach(b=>b.textContent=a?'قطع/اتصال مجدد کیف':'اتصال کیف پول');if(a)loadAccount();else{$('#tempBalance').textContent='0.00';$('#mainBalance').textContent='0.00';$('#txRows').innerHTML='<div class="muted">کیف متصل نیست.</div>'}}
 function renderWalletDetail(d){if(!$('#walletDetail'))return;const a=addr();$('#walletDetail').innerHTML=a?'<div class="wallet" style="margin-top:14px"><b>آدرس عمومی متصل</b><div class="address">'+esc(a)+'</div><div class="balance">'+(Number(d?.balance||0)/1e9).toFixed(4)+' TON</div><p class="muted">خواندن فقط‌خواندنی؛ کلید خصوصی در ANIL X وجود ندارد.</p></div>':'<p class="muted">هنوز کیف متصل نشده است.</p>'}
 async function loadTx(){const box=$('#txRows');if(!box||!addr()){if(box)box.innerHTML='<div class="muted">ابتدا کیف را متصل کن.</div>';return}box.innerHTML='<div class="muted">در حال خواندن زنجیره…</div>';try{const d=await api('transactions',addr());const rows=Array.isArray(d.transactions)?d.transactions:[];const html=rows.slice(0,12).map(x=>{const ts=x.utime?new Date(x.utime*1000).toLocaleString('fa-IR'):'—';const amount=Number(x.amount||0)/1e9;return '<div class="row"><span>'+esc(ts)+'<br><small>'+esc(x.hash||'')+'</small></span><b class="'+(amount>=0?'ok':'warn')+'">'+(amount>=0?'+':'')+amount.toFixed(4)+' TON</b></div>'}).join('');box.innerHTML=html||'<div class="muted">تراکنشی پیدا نشد.</div>';$('#receiptRows').innerHTML=box.innerHTML}catch(e){box.innerHTML='<div class="err">خواندن تراکنش‌ها ناموفق بود: '+esc(e.message)+'</div>'}}
