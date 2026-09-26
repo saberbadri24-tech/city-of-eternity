@@ -39,6 +39,9 @@ async function runtimeRoutes(req,env,u){
     if(!Number.isFinite(rate)||rate<=0)return rjson({ok:false,error:'usd_irr_rate_not_configured',currency:'USD',target:'IRR',source:'environment'});
     return rjson({ok:true,from:'USD',to:'IRR',rate,source:'environment',tomanRate:rate/10});
   }
+  if(p==='/api/payment-config'){
+    return rjson({ok:true,ton:{enabled:!!env.TON_RECEIVING_ADDRESS,address:env.TON_RECEIVING_ADDRESS||null},fiat:{provider:'variza',enabled:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY)}});
+  }
   if(p==='/api/revenue/catalog'){
     return rjson({ok:true,merchant:'ANIL X STUDIO',currency:'USD',services:[
       {id:'website',name:'AI Website Build',price:149},{id:'teaser',name:'Marketing Teaser',price:49},
