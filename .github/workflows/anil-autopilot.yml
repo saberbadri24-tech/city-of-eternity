@@ -11,13 +11,9 @@ jobs:
     steps:
       - name: Run autonomous revenue cycle
         env:
-          ANIL_API_URL: ${{ secrets.ANIL_API_URL }}
-          ANIL_WORKER_KEY: ${{ secrets.ANIL_WORKER_KEY }}
+          ANIL_API_URL: https://city-of-eternity.onrender.com
         run: |
-          test -n "$ANIL_API_URL"
-          test -n "$ANIL_WORKER_KEY"
           curl --fail --silent --show-error \
             -X POST "$ANIL_API_URL/api/autopilot" \
-            -H "x-anil-worker-key: $ANIL_WORKER_KEY" \
             -H "content-type: application/json" \
             -d '{}'
