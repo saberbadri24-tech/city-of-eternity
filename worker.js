@@ -39,6 +39,43 @@ async function runtimeRoutes(req,env,u){
     if(!Number.isFinite(rate)||rate<=0)return rjson({ok:false,error:'usd_irr_rate_not_configured',currency:'USD',target:'IRR',source:'environment'});
     return rjson({ok:true,from:'USD',to:'IRR',rate,source:'environment',tomanRate:rate/10});
   }
+  if(p==='/api/revenue/catalog'){
+    return rjson({ok:true,merchant:'ANIL X STUDIO',currency:'USD',services:[
+      {id:'website',name:'AI Website Build',price:149},{id:'teaser',name:'Marketing Teaser',price:49},
+      {id:'fix',name:'Website Fix',price:39},{id:'growth',name:'Growth & SEO',price:79},
+      {id:'automation',name:'Business Automation',price:99},{id:'ai-agent',name:'AI Agent Integration',price:129}
+    ]});
+  }
+  if(p==='/api/revenue/lead'){
+    if(req.method!=='POST')return rjson({ok:false,error:'method_not_allowed'},405);
+    const b=await req.json().catch(()=>({})),email=clean(b.email,160),request=clean(b.request||b.need,2000);
+    if(!request)return rjson({ok:false,error:'request_required'},400);
+    if(email&&!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(email))return rjson({ok:false,error:'invalid_email'},400);
+    const lead={id:id(),name:clean(b.name,100),email,company:clean(b.company,160),request,source:clean(b.source||'website',60),status:'new',score:0,createdAt:now(),updatedAt:now()};
+    state.revenueLeads.set(lead.id,lead);return rjson({ok:true,lead},201);
+  }
+  if(p==='/api/revenue/summary'){
+    const leads=[...state.revenueLeads.values()],orders=[...state.orders.values()],paid=orders.filter(x=>x.status==='paid');
+    return rjson({ok:true,counts:{leads:leads.length,orders:orders.length,paid:paid.length},revenue:paid.reduce((s,x)=>s+Number(x.amount||0),0),currency:'USD',updatedAt:now()});
+  }
+  if(p==='/api/revenue/leads'){
+    if(!(await adminAuth(req,env)))return rjson({ok:false,error:'admin_auth_required'},401);
+    return rjson({ok:true,leads:[...state.revenueLeads.values()].slice(-500)});
+  }
+  if(p==='/api/revenue/run'){
+    if(!(await adminAuth(req,env)))return rjson({ok:false,error:'admin_auth_required'},401);
+    if(req.method!=='POST')return rjson({ok:false,error:'method_not_allowed'},405);
+    let promoted=0;const nowIso=now();
+    for(const x of state.freeRequests.values()){
+      if([...state.revenueLeads.values()].some(l=>l.id===x.id))continue;
+      state.revenueLeads.set(x.id,{id:x.id,name:x.name,email:x.email,company:'',request:x.request,source:'free-request',status:'new',score:0,createdAt:x.createdAt||nowIso,updatedAt:nowIso});promoted++;
+    }
+    for(const l of state.revenueLeads.values()){
+      const t=String(l.request||'').toLowerCase(),score=Math.min(100,30+(t.length>80?20:0)+(l.email?15:0)+(/site|website|seo|sales|growth|automation|teaser|video|سایت|سئو|فروش|رشد|خودکار|تیزر|ویدیو/.test(t)?35:0));
+      state.revenueLeads.set(l.id,{...l,score,status:score>=70?'qualified':'new',updatedAt:nowIso});
+    }
+    return rjson({ok:true,action:'revenue_cycle',promoted,qualified:[...state.revenueLeads.values()].filter(x=>x.status==='qualified').length});
+  }
   if(p==='/api/discovery'){
     const q=clean(u.searchParams.get('q'),120).toLowerCase();
     const items=[['site','ساخت سایت',['site','website','فروشگاه','سایت']],['teaser','ساخت تیزر',['video','teaser','تیزر','ویدیو']],['fix','رفع مشکل',['fix','bug','error','خطا','ارور']],['growth','رشد کسب‌وکار',['growth','seo','فروش','مشتری','رشد']],['preview','پیش‌نمایش',['preview','prototype','پیش‌نمایش']],['global','Anil World',['global','world','بین‌المللی']]];
