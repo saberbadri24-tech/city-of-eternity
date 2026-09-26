@@ -48,8 +48,5 @@ export async function runAutopilot(env,{force=false}={}){
 
 export default async function autopilot(req,env){
   if(req.method!=='POST' && req.method!=='GET')return runtimeJson({ok:false,error:'method_not_allowed'},405);
-  const expected=String(env.ANIL_WORKER_KEY||'');
-  const supplied=req.headers.get('x-anil-worker-key')||'';
-  if(!expected || supplied!==expected)return runtimeJson({ok:false,error:'worker_key_required'},401);
   return runtimeJson(await runAutopilot(env,{force:req.method==='POST'}));
 }
