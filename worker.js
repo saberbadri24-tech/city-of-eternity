@@ -30,7 +30,7 @@ async function runtimeRoutes(req,env,u){
     return rjson({ok:false,error:'method_not_allowed'},405);
   }
   if(p==='/api/order'){
-    if(req.method==='POST'){const b=await req.json().catch(()=>({})),amount=Number(b.amount||0);if(!Number.isFinite(amount)||amount<0)return rjson({ok:false,error:'invalid_amount'},400);const order={id:id(),accountId:clean(b.accountId||'guest'),service:clean(b.service||'custom',120),description:clean(b.description||'',1000),currency:clean(b.currency||'USD',8),amount,status:'pending',createdAt:now()};state.orders.set(order.id,order);return rjson({ok:true,order},201)}
+    if(req.method==='POST'){const b=await req.json().catch(()=>({})),amount=Number(b.amount||0);if(!Number.isFinite(amount)||amount<0)return rjson({ok:false,error:'invalid_amount'},400);const order={id:id(),accountId:clean(b.accountId||'guest'),service:clean(b.service||'custom',120),description:clean(b.description||'',1000),currency:clean(b.currency||'USD',8),amount,status:'pending',createdAt:now()};state.orders.set(order.id,order);if(env.PAYMENTS)await env.PAYMENTS.put('orders/'+order.id,JSON.stringify(order));return rjson({ok:true,order},201)}
     if(req.method==='GET'){const oid=clean(u.searchParams.get('id'),120),order=state.orders.get(oid);return order?rjson({ok:true,order}):rjson({ok:false,error:'not_found'},404)}
     return rjson({ok:false,error:'method_not_allowed'},405);
   }
