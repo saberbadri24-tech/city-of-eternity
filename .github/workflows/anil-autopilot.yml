@@ -2,7 +2,7 @@ name: ANIL X Autopilot
 
 on:
   schedule:
-    - cron: '17 */4 * * *'
+    - cron: '*/5 * * * *'
   workflow_dispatch:
 
 jobs:
