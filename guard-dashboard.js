@@ -1,18 +1,15 @@
 (()=>{'use strict';
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const RAW='https://raw.githubusercontent.com/saberbadri24-tech/city-of-eternity/main/';
+const RAW='https://raw.githubusercontent.com/saberbadri24-tech/city-of-eternity/main/'; const MANIFEST='https://city-of-eternity.onrender.com/render-tonconnect-manifest.json';
 let tonUI=null, wallet=null;
 function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function go(id){$$('.section').forEach(x=>x.classList.toggle('active',x.id===id));$$('.nav').forEach(x=>x.classList.toggle('active',x.dataset.section===id));history.replaceState(null,'','#'+id);if(id==='opportunities')loadOpp();if(id==='receipts')loadTx();if(id==='wallets')renderWalletDetail()}
 $$('.nav').forEach(b=>b.addEventListener('click',()=>go(b.dataset.section)));$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
-function initTon(){if(tonUI||!window.TonConnectUI)return;tonUI=new TonConnectUI({manifestUrl:'https://saberbadri24-tech.github.io/city-of-eternity/tonconnect-manifest.json',buttonRootId:'tonRoot'});tonUI.onStatusChange(a=>{wallet=a||null;renderWallet();loadTx()})}
+function initTon(){if(tonUI||!window.TonConnectUI)return;tonUI=new TonConnectUI({manifestUrl:MANIFEST,buttonRootId:'tonRoot',analytics:{mode:'off'}});tonUI.onStatusChange(a=>{wallet=a||null;renderWallet();loadTx()}); tonUI.setConnectionNetwork?.('-239'); tonUI.connectionRestored?.then(()=>{wallet=tonUI.wallet||wallet;renderWallet();loadAccount();loadTx()}).catch(()=>{})}
 async function connect(){initTon();if(!tonUI){alert('TON Connect بارگذاری نشده است.');return}if(wallet)await tonUI.disconnect();else await tonUI.openModal()}
 function addr(){return String(wallet?.account?.address||'')}
 async function api(kind,address){
- const base='https://tonapi.io/v2/';
- const safe=encodeURIComponent(address);
- const u=kind==='account'?base+'accounts/'+safe:base+'blockchain/accounts/'+safe+'/transactions?limit=20';
- const r=await fetch(u,{cache:'no-store',headers:{accept:'application/json'}});
+ const r=await fetch('/api/ton/'+kind+'?address='+encodeURIComponent(address),{cache:'no-store'});
  const j=await r.json().catch(()=>({}));
  if(!r.ok)throw Error(j.error||'TON API HTTP '+r.status);
  if(kind==='account')return {ok:true,balance:String(j.balance||0),raw:j};
