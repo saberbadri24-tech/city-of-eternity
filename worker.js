@@ -68,6 +68,22 @@ async function runtimeRoutes(req,env,u){
     if(req.method==='POST'){const b=await req.json().catch(()=>({})),task={id:id(),type:clean(b.type||'internal',40),payload:b.payload&&typeof b.payload==='object'?b.payload:{},status:'queued',attempts:0,createdAt:now(),updatedAt:now()};state.queue.set(task.id,task);return rjson({ok:true,task})}
     return rjson({ok:false,error:'method_not_allowed'},405);
   }
+  if(p==='/api/guard/state'){
+    const readAsset=async name=>{try{const resp=await env.ASSETS.fetch(new Request(new URL('/'+name,req.url)));return await resp.json()}catch{return null}};
+    const official=await readAsset('guard-official-discovery.json'), high=await readAsset('guard-high-value.json'), receipts=await readAsset('guard-receipts.json');
+    const approvals=[...state.queue.values()].filter(x=>x.type==='guard_approval').slice(-50);
+    return rjson({ok:true,updatedAt:now(),pipeline:['DISCOVERED','OFFICIAL_VERIFIED','ELIGIBILITY_CHECKED','ACTIONABLE','OWNER_APPROVAL','CLAIM_SUBMITTED','RECEIPT_VERIFIED','SETTLED'],official:official||{items:[]},highValue:high||{items:[]},receipts:receipts||{},approvals,safety:{autoSign:false,privateKeys:false,seedPhrases:false,kycBypass:false,captchaBypass:false}});
+  }
+  if(p==='/api/guard/approval'){
+    if(!(await adminAuth(req,env)))return rjson({ok:false,error:'owner_auth_required'},401);
+    if(req.method!=='POST')return rjson({ok:false,error:'method_not_allowed'},405);
+    const b=await req.json().catch(()=>({}));const task={id:id(),type:'guard_approval',opportunityId:clean(b.opportunityId,120),action:clean(b.action||'VERIFY_AND_REVIEW',80),url:clean(b.url,1000),status:'OWNER_APPROVAL',createdAt:now(),updatedAt:now(),attempts:0};
+    state.queue.set(task.id,task);return rjson({ok:true,task});
+  }
+  if(p==='/api/guard/report'){
+    const approvals=[...state.queue.values()].filter(x=>x.type==='guard_approval');
+    return rjson({ok:true,generatedAt:now(),counts:{approvals:approvals.length,queued:[...state.queue.values()].filter(x=>x.status==='queued').length},safety:{autoSign:false,autoTransfer:false,ownerApprovalRequired:true}});
+  }
   return null;
 }
 async function sign(v,secret){const k=await crypto.subtle.importKey('raw',new TextEncoder().encode(secret),{name:'HMAC',hash:'SHA-256'},false,['sign']);const b=await crypto.subtle.sign('HMAC',k,new TextEncoder().encode(v));return btoa(String.fromCharCode(...new Uint8Array(b))).replace(/=+$/,'').replace(/\+/g,'-').replace(/\//g,'_')}
