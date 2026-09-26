@@ -104,7 +104,7 @@ async function secretary(req,env){
     const u=new URL(req.url);u.pathname='/api/order';const rr=await runtimeRoutes(new Request(u,{method:'GET',headers:{cookie:req.headers.get('cookie')||''}}),env,u);
     if(rr){const d=await rr.json();return json({ok:true,changed:false,action:'orders',text:'سفارش جاری:\n'+JSON.stringify(d,null,2),data:d});}
   }
-  if(!env.OPENAI_API_KEY)return json({ok:true,text:'دستور دریافت شد؛ برای اجرای هوشمند عمیق، کلید OpenAI مدیر باید در Runtime تنظیم باشد.',action:'بررسی'});
+  const councilReq=new Request(new URL('/api/plan',req.url),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({prompt:command,profile:{role:'admin'},turns:b.messages||[]})});try{const rr=await handlePlan(councilReq,env);const cd=await rr.json();if(cd.ok)return json({ok:true,text:cd.reply||'بررسی شورای مدیر انجام شد.',action:'admin_council',council:cd});}catch(e){}
   const r=await fetch('https://api.openai.com/v1/chat/completions',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+env.OPENAI_API_KEY},body:JSON.stringify({model:env.ASTRA_MODEL||'gpt-5-mini',messages:[{role:'system',content:'تو بدرخان، دستیار اجرایی خصوصی ANIL X هستی. فارسی پاسخ بده. هرگز اجرای واقعی را بدون نتیجه ابزار ادعا نکن. برای گارد جاویدان هرگز seed/private key نخواه و برای امضای تراکنش تأیید مالک لازم است. اگر ابزار مستقیم در دسترس نیست، فقط برنامه اقدام و وضعیت قابل اثبات را گزارش کن.'},{role:'user',content:command}],temperature:.15})});if(!r.ok)return json({ok:false,error:'assistant_provider_'+r.status},502);
   const d=await r.json();return json({ok:true,text:d?.choices?.[0]?.message?.content||'بررسی انجام شد.',action:'گزارش'});
 }
