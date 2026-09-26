@@ -8,7 +8,16 @@ $$('.nav').forEach(b=>b.addEventListener('click',()=>go(b.dataset.section)));$$(
 function initTon(){if(tonUI||!window.TonConnectUI)return;tonUI=new TonConnectUI({manifestUrl:'https://saberbadri24-tech.github.io/city-of-eternity/tonconnect-manifest.json',buttonRootId:'tonRoot'});tonUI.onStatusChange(a=>{wallet=a||null;renderWallet();loadTx()})}
 async function connect(){initTon();if(!tonUI){alert('TON Connect بارگذاری نشده است.');return}if(wallet)await tonUI.disconnect();else await tonUI.openModal()}
 function addr(){return String(wallet?.account?.address||'')}
-async function api(path){const r=await fetch(path,{cache:'no-store'});const j=await r.json().catch(()=>({}));if(!r.ok)throw Error(j.error||'HTTP '+r.status);return j}
+async function api(path){
+ const base='https://tonapi.io/v2/';
+ const u=new URL(base+path.replace('/api/ton/',''));
+ const r=await fetch(u.toString(),{cache:'no-store',headers:{accept:'application/json'}});
+ const j=await r.json().catch(()=>({}));
+ if(!r.ok)throw Error(j.error||'TON API HTTP '+r.status);
+ if(path.includes('/account?'))return {ok:true,balance:String(j.balance||0),raw:j};
+ const txs=Array.isArray(j.transactions)?j.transactions:[];
+ return {ok:true,transactions:txs.map(t=>{const inn=Number(t.in_msg?.value||0),out=Array.isArray(t.out_msgs)?t.out_msgs.reduce((s,m)=>s+Number(m?.value||0),0):0;return {hash:t.hash||'',utime:t.utime||0,amount:inn-out}})};
+}
 async function loadAccount(){if(!addr())return;try{const d=await api('/api/ton/account?address='+encodeURIComponent(addr()));const b=Number(d.balance||0)/1e9;$('#tempBalance').textContent=b.toFixed(4);$('#mainBalance').textContent=b.toFixed(4);$('#tempAddress').textContent=addr();$('#mainAddress').textContent=addr();$('#lastCheck').textContent='آخرین بررسی: '+new Date().toLocaleTimeString('fa-IR');renderWalletDetail(d)}catch(e){$('#lastCheck').textContent='خطا در خواندن موجودی: '+e.message}}
 function renderWallet(){const a=addr();$('#tempAddress').textContent=a||'کیف متصل نیست';$('#mainAddress').textContent=a||'کیف متصل نیست';$$('#connectBtn,#connectBtn2').forEach(b=>b.textContent=a?'قطع/اتصال مجدد کیف':'اتصال کیف پول');if(a)loadAccount();else{$('#tempBalance').textContent='0.00';$('#mainBalance').textContent='0.00';$('#txRows').innerHTML='<div class="muted">کیف متصل نیست.</div>'}}
 function renderWalletDetail(d){if(!$('#walletDetail'))return;const a=addr();$('#walletDetail').innerHTML=a?'<div class="wallet" style="margin-top:14px"><b>آدرس عمومی متصل</b><div class="address">'+esc(a)+'</div><div class="balance">'+(Number(d?.balance||0)/1e9).toFixed(4)+' TON</div><p class="muted">خواندن فقط‌خواندنی؛ کلید خصوصی در ANIL X وجود ندارد.</p></div>':'<p class="muted">هنوز کیف متصل نشده است.</p>'}
