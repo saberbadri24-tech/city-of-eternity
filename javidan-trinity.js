@@ -4,7 +4,7 @@
  */
 (()=>{"use strict";
 async function review(opportunity){
- const r=await fetch("/api/javidan/trinity",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({opportunity})});
+ const r=await fetch((window.ANILX_API_URL||"https://city-of-eternity.onrender.com")+"/api/javidan/trinity",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({opportunity})});
  const d=await r.json();if(!r.ok||!d.ok)throw Error(d.message||d.error||"trinity_failed");return d;
 }
 window.JavidanTrinity=Object.freeze({review});
