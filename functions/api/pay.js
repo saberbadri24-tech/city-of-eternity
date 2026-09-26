@@ -1,3 +1,4 @@
+import {state,now} from './runtime-state.mjs';
 const json = (data, status = 200) => new Response(JSON.stringify(data), {
   status,
   headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" }
@@ -69,9 +70,11 @@ export async function onRequestPost({ request, env }) {
       status: "pending",
       payUrl: result.pay_url,
       slug: result.slug || null,
-      createdAt: new Date().toISOString(),
+      createdAt: now(),
       provider: "variza"
     };
+
+    state.orders.set(orderId,record);
 
     if (env.PAYMENTS) {
       await env.PAYMENTS.put(`orders/${orderId}`, JSON.stringify(record));
