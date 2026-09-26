@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ANIL X — Immortal Guard</title>
+<style>
+:root{--bg:#020a16;--panel:#061526;--line:#174a73;--blue:#18c5ff;--gold:#e9bc4c;--green:#17e59a;--muted:#91a9c3;--danger:#ff806e}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -10%,#123c65 0,#041226 34%,#010610 78%);color:#f5f8ff;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}button,input{font:inherit}.wrap{min-height:100vh;display:grid;grid-template-columns:220px 1fr;grid-template-rows:88px 1fr}.top{grid-column:1/-1;border-bottom:1px solid #123453;background:#030d1b;padding:12px 22px;display:flex;justify-content:space-between;align-items:center}.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border:1px solid var(--gold);border-radius:15px;display:grid;place-items:center;color:var(--gold);font-size:25px}.brand b{font-size:22px}.brand small{display:block;color:var(--gold);margin-top:3px}.owner{border:1px solid #164568;border-radius:16px;padding:9px 14px;text-align:right}.owner span{color:var(--green);font-size:12px}.side{border-left:1px solid #123453;background:#020b17;padding:16px 10px}.nav{width:100%;border:1px solid transparent;background:transparent;color:#a9c2db;padding:13px;border-radius:13px;text-align:right;margin:4px 0;cursor:pointer}.nav:hover,.nav.active{background:#082b49;border-color:#1689cf;color:#fff}.main{padding:22px;min-width:0}.grid{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:14px}.panel{background:rgba(5,18,34,.9);border:1px solid var(--line);border-radius:22px;padding:18px;margin-bottom:14px}.title{display:flex;justify-content:space-between;align-items:center;gap:10px}.title h1,.title h2{margin:0}.muted{color:var(--muted);line-height:1.8}.badge{border:1px solid #0c9369;color:var(--green);border-radius:99px;padding:8px 13px;font-size:12px}.wallets{display:grid;grid-template-columns:1fr 1fr;gap:12px}.wallet{border:1px solid #2364b0;border-radius:20px;padding:16px;background:linear-gradient(145deg,#061c36,#04101f)}.wallet.mainw{border-color:var(--gold);box-shadow:0 0 28px #d9aa2418}.tag{display:inline-block;padding:5px 10px;border-radius:99px;background:#e5b83d;color:#17120a;font-size:11px;font-weight:800}.address{direction:ltr;text-align:left;word-break:break-all;border:1px solid #173e63;border-radius:12px;padding:10px;margin:12px 0;color:#cfe2f5}.balance{font-size:26px;font-weight:800}.actions{display:grid;gap:9px}.btn{border:1px solid #1888ca;background:#082e4e;color:#fff;border-radius:12px;padding:11px 13px;cursor:pointer;font-weight:800}.btn.gold{background:#5d4714;border-color:var(--gold)}.btn:disabled{opacity:.45;cursor:not-allowed}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.step{border:1px solid #164568;border-radius:15px;padding:14px;text-align:center}.step b{display:block}.step small{color:var(--muted)}.rows{display:grid;gap:8px}.row{border-top:1px solid #14334f;padding:11px 0;display:grid;grid-template-columns:1fr auto;gap:8px}.status{color:var(--green);font-size:12px}.sidebox{border:1px solid #164568;border-radius:17px;padding:14px;margin-bottom:12px;background:#041122}.sidebox h3{margin:0 0 10px}.notice{color:var(--muted);font-size:12px;line-height:1.8}.hidden{display:none!important}.section{display:none}.section.active{display:block}.modal{position:fixed;inset:0;background:#000b;display:grid;place-items:center;padding:20px;z-index:10}.modal>div{width:min(460px,100%);background:#071426;border:1px solid #1d628f;border-radius:20px;padding:20px}.input{width:100%;padding:12px;border:1px solid #285273;border-radius:10px;background:#020b16;color:#fff;direction:ltr}.ok{color:var(--green)}.warn{color:#f0c06b}.err{color:var(--danger)}
+@media(max-width:900px){.wrap{display:block}.top{position:sticky;top:0;z-index:5}.side{display:flex;overflow:auto;border-left:0;border-bottom:1px solid #123453}.nav{min-width:max-content}.grid{grid-template-columns:1fr}.wallets{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.main{padding:12px}}
+</style>
+<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+<div class="brand"><div class="logo">♛</div><div><b>ANIL X</b><small>IMMORTAL GUARD · شکار فرصت‌ها</small></div></div>
+<div class="owner">صابر بدری · مدیر<br><span>● گارد فعال · کنترل مالک</span></div>
+</header>
+<aside class="side">
+<button class="nav active" data-section="dashboard">⌂ داشبورد</button>
+<button class="nav" data-section="wallets">👛 کیف‌ها</button>
+<button class="nav" data-section="opportunities">★ فرصت‌ها</button>
+<button class="nav" data-section="receipts">▣ دریافت‌ها</button>
+<button class="nav" data-section="transfer">⇄ انتقال به اصلی</button>
+<button class="nav" data-section="security">♢ امنیت</button>
+<button class="nav" data-section="reports">▥ گزارش‌ها</button>
+<button class="nav" data-section="settings">⚙ تنظیمات</button>
+</aside>
+<main class="main">
+<section id="dashboard" class="section active">
+<div class="grid">
+<div>
+<div class="panel"><div class="title"><div><h1>داشبورد گارد</h1><div class="muted">کشف → بررسی → تأیید مالک → دریافت/انتقال</div></div><span class="badge">🛡️ امن و تحت کنترل شما</span></div></div>
+<div class="panel"><div class="title"><h2>کیف‌های گارد</h2><button class="btn" id="connectBtn">اتصال کیف پول</button></div><div class="wallets" style="margin-top:12px">
+<article class="wallet"><span class="tag">موقت</span><h2>کیف دریافت</h2><div class="muted">دریافت پاداش‌ها در این آدرس</div><div id="tempAddress" class="address">کیف متصل نیست</div><div class="balance"><span id="tempBalance">0.00</span> TON</div><div class="muted" id="tempUsd">موجودی واقعی پس از اتصال خوانده می‌شود.</div></article>
+<article class="wallet mainw"><span class="tag">اصلی</span><h2>کیف اصلی</h2><div class="muted">مقصد نهایی پاداش‌ها</div><div id="mainAddress" class="address">برای جلوگیری از نمایش آدرس جعلی، از کیف متصل خوانده می‌شود.</div><div class="balance"><span id="mainBalance">0.00</span> TON</div><div class="muted">انتقال فقط با تأیید و امضای کیف پول.</div></article>
+</div></div>
+<div class="panel"><h2>چطور کار می‌کند؟</h2><div class="steps"><div class="step">🔎<b>کشف فرصت‌ها</b><small>منابع واقعی بررسی می‌شوند.</small></div><div class="step">⇩<b>دریافت</b><small>بدون کلید خصوصی.</small></div><div class="step">🛡️<b>بررسی</b><small>ریسک و منبع کنترل می‌شود.</small></div><div class="step">→<b>انتقال</b><small>فقط با تأیید مالک.</small></div></div></div>
+<div class="panel"><div class="title"><h2>آخرین تراکنش‌ها</h2><button class="btn" id="historyBtn">به‌روزرسانی</button></div><div id="txRows" class="rows"><div class="muted">ابتدا کیف را متصل کن.</div></div></div>
+</div>
+<div><div class="sidebox"><h3>⚡ عملیات سریع</h3><div class="actions"><button class="btn" data-go="wallets">مشاهده موجودی‌ها</button><button class="btn" data-go="transfer">درخواست انتقال</button><button class="btn" data-go="receipts">تاریخچه تراکنش‌ها</button></div></div>
+<div class="sidebox"><h3>پشتیبانی ارزها</h3><div>🔷 TON</div><div style="margin-top:9px">🟢 USDT · در صورت وجود روی کیف</div><div style="margin-top:9px">＋ سایر توکن‌های شبکه TON</div></div>
+<div class="sidebox"><h3>وضعیت سیستم</h3><div class="status">● TON Connect آماده</div><div class="status">● مانیتور فرصت‌ها فعال</div><div class="status">● دریافت خودکار: فقط‌خواندنی</div><div class="status">● امنیت و محافظت فعال</div><p class="notice" id="lastCheck">آخرین بررسی: —</p></div></div>
+</div>
+</section>
+<section id="wallets" class="section"><div class="panel"><div class="title"><h1>👛 کیف‌های گارد</h1><button class="btn" id="connectBtn2">اتصال کیف پول</button></div><p class="muted">آدرس و موجودی از کیف متصل خوانده می‌شود؛ هیچ آدرس یا موجودی ساختگی در رابط نمایش داده نمی‌شود.</p><div id="walletDetail"></div></div></section>
+<section id="opportunities" class="section"><div class="panel"><div class="title"><h1>★ فرصت‌ها</h1><button class="btn" id="scanBtn">شکار و به‌روزرسانی</button></div><p class="muted">خروجی آخرین موتور Guard از منبع داده ذخیره‌شده. اجرای حساس همچنان نیازمند تأیید مالک است.</p><div id="opportunityRows" class="rows"><div class="muted">در حال خواندن داده Guard…</div></div></div></section>
+<section id="receipts" class="section"><div class="panel"><div class="title"><h1>▣ دریافت‌ها</h1><button class="btn" id="historyBtn2">به‌روزرسانی</button></div><div id="receiptRows" class="rows"><div class="muted">کیف را متصل کن تا داده زنجیره بررسی شود.</div></div></div></section>
+<section id="transfer" class="section"><div class="panel"><h1>⇄ انتقال به کیف اصلی</h1><p class="muted">این بخش هیچ انتقال خودکاری انجام نمی‌دهد. پس از وارد کردن مقصد و مقدار، TON Connect کیف پول را برای امضا باز می‌کند.</p><input id="toInput" class="input" placeholder="آدرس TON مقصد"><input id="amountInput" class="input" style="margin-top:9px" inputmode="decimal" placeholder="مقدار TON"><button class="btn gold" id="transferBtn" style="margin-top:10px">ارسال درخواست با تأیید کیف پول</button><div id="transferNotice" class="notice" style="margin-top:12px"></div></div></section>
+<section id="security" class="section"><div class="panel"><h1>♢ امنیت</h1><div class="rows"><div class="row"><span>Seed Phrase</span><b class="ok">هرگز دریافت نمی‌شود</b></div><div class="row"><span>Private Key</span><b class="ok">هرگز دریافت نمی‌شود</b></div><div class="row"><span>امضای تراکنش</span><b class="ok">فقط کیف پول مالک</b></div><div class="row"><span>تأیید فرصت</span><b class="ok">قبل از اقدام حساس</b></div></div></div></section>
+<section id="reports" class="section"><div class="panel"><h1>▥ گزارش‌ها</h1><div id="reportBox" class="muted">داده‌های Guard و وضعیت کیف پس از اتصال در اینجا جمع‌بندی می‌شود.</div></div></section>
+<section id="settings" class="section"><div class="panel"><h1>⚙ تنظیمات</h1><p class="muted">حالت فعلی: کنترل مالک · بدون امضای خودکار · دریافت فقط‌خواندنی.</p><button class="btn" id="clearLocal">پاک کردن وضعیت محلی رابط</button></div></section>
+</main></div>
+<div id="tonRoot" style="position:absolute;left:-9999px;top:-9999px"></div>
+<script src="guard-dashboard.js?v=20260926-1" defer></script>
+</body></html>
