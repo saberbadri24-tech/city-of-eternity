@@ -18,6 +18,7 @@ SCHEMA_VERSION = 1
 # A missing module is reported, never silently treated as healthy.
 MODULES = {
     "discovery": "guard-discovery.json",
+    "official_discovery": "guard-official-discovery.json",
     "source_health": "guard-source-health.json",
     "opportunities": "guard-opportunities.json",
     "history": "guard-opportunity-history.json",
