@@ -1,0 +1,23 @@
+name: ANIL X Autopilot
+
+on:
+  schedule:
+    - cron: '17 */4 * * *'
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run autonomous revenue cycle
+        env:
+          ANIL_API_URL: ${{ secrets.ANIL_API_URL }}
+          ANIL_WORKER_KEY: ${{ secrets.ANIL_WORKER_KEY }}
+        run: |
+          test -n "$ANIL_API_URL"
+          test -n "$ANIL_WORKER_KEY"
+          curl --fail --silent --show-error \
+            -X POST "$ANIL_API_URL/api/autopilot" \
+            -H "x-anil-worker-key: $ANIL_WORKER_KEY" \
+            -H "content-type: application/json" \
+            -d '{}'
