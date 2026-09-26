@@ -14,7 +14,7 @@ async function api(kind,address){
  if(!r.ok)throw Error(j.error||'TON API HTTP '+r.status);
  if(kind==='account')return {ok:true,balance:String(j.balance||0),raw:j};
  const txs=Array.isArray(j.transactions)?j.transactions:[];
- return {ok:true,transactions:txs.map(t=>{const inn=Number(t.in_msg?.value||0),out=Array.isArray(t.out_msgs)?t.out_msgs.reduce((s,m)=>s+Number(m?.value||0),0):0;return {hash:t.hash||'',utime:t.utime||0,amount:inn-out}})};
+ return {ok:true,transactions:txs.map(t=>({hash:t.hash||'',utime:t.utime||0,amount:Number(t.amount||0)}))};
 }
 async function loadAccount(){if(!addr())return;try{const d=await api('account',addr());const b=Number(d.balance||0)/1e9;$('#tempBalance').textContent=b.toFixed(4);$('#mainBalance').textContent=b.toFixed(4);$('#tempAddress').textContent=addr();$('#mainAddress').textContent=addr();$('#lastCheck').textContent='آخرین بررسی: '+new Date().toLocaleTimeString('fa-IR');renderWalletDetail(d)}catch(e){$('#lastCheck').textContent='خطا در خواندن موجودی: '+e.message}}
 function renderWallet(){const a=addr();$('#tempAddress').textContent=a||'کیف متصل نیست';$('#mainAddress').textContent=a||'کیف متصل نیست';$$('#connectBtn,#connectBtn2').forEach(b=>b.textContent=a?'قطع/اتصال مجدد کیف':'اتصال کیف پول');if(a)loadAccount();else{$('#tempBalance').textContent='0.00';$('#mainBalance').textContent='0.00';$('#txRows').innerHTML='<div class="muted">کیف متصل نیست.</div>'}}
