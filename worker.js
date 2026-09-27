@@ -11,6 +11,33 @@ async function kvPut(env,key,value){if(env.PAYMENTS)await env.PAYMENTS.put(key,J
 async function kvList(env,prefix,limit=100){if(!env.PAYMENTS)return[];try{const x=await env.PAYMENTS.list({prefix});const keys=(x?.keys||[]).slice(-limit);return (await Promise.all(keys.map(k=>env.PAYMENTS.get(k.name,'json').catch(()=>null)))).filter(Boolean)}catch{return[]}}
 async function runAutopilotSafe(env){return await autopilot(new Request('https://internal/api/autopilot',{method:'POST'}),env).then(async r=>await r.json()).catch(e=>({ok:false,error:String(e?.message||e)}))}
 const V90_DEFAULTS={pricesUsd:{FIX:9,START:29,BUILD:79,GROW:149},permissions:{autoReports:true,autoMessaging:true,autoSeo:true,autoPaymentDiagnostics:true,autoBenchmark:true,autoLeadReview:true}};
+const REVENUE_FLEET=[
+{id:'ai-automation-agency',name:'AI Automation Agency',mode:'service',status:'ACTIVE',monetization:'project+retainer',prereq:'ANIL-X lead/order/payment'},
+{id:'ai-integration-agents',name:'AI Integration & Agents',mode:'service',status:'ACTIVE',monetization:'project+maintenance',prereq:'ANIL-X lead/order/payment'},
+{id:'ai-ugc-video-studio',name:'AI UGC / Video Studio',mode:'service',status:'ACTIVE',monetization:'per-project+retainer',prereq:'ANIL-X lead/order/payment'},
+{id:'short-video-production',name:'Short-form Video Production',mode:'service',status:'ACTIVE',monetization:'per-project+retainer',prereq:'ANIL-X lead/order/payment'},
+{id:'data-pdf-excel',name:'Data / PDF / Excel Automation',mode:'service',status:'ACTIVE',monetization:'per-project',prereq:'ANIL-X lead/order/payment'},
+{id:'shopify-build',name:'Shopify Build & Optimization',mode:'service',status:'ACCOUNT_REQUIRED',monetization:'project+partner',prereq:'Shopify partner/account'},
+{id:'seo-growth-retainer',name:'SEO / Growth Retainers',mode:'recurring',status:'ACTIVE',monetization:'monthly-retainer',prereq:'ANIL-X lead/order/payment'},
+{id:'lead-generation',name:'B2B Lead Generation',mode:'service',status:'ACTIVE',monetization:'per-lead+retainer',prereq:'compliant prospecting channels'},
+{id:'digital-products',name:'Digital Products / Templates',mode:'product',status:'PRODUCT_REQUIRED',monetization:'per-sale',prereq:'real product assets + storefront'},
+{id:'micro-saas-api',name:'Micro-SaaS / API',mode:'recurring',status:'PRODUCT_REQUIRED',monetization:'subscription+usage',prereq:'deployed product + billing'},
+{id:'paid-research',name:'Paid Research / Reports',mode:'service',status:'ACTIVE',monetization:'per-report+retainer',prereq:'ANIL-X lead/order/payment'},
+{id:'ai-support-desk',name:'AI Customer Support Desk',mode:'recurring',status:'ACTIVE',monetization:'monthly-retainer',prereq:'ANIL-X lead/order/payment'},
+{id:'website-build-fixes',name:'Website Build / Fix / Conversion',mode:'service',status:'ACTIVE',monetization:'project+maintenance',prereq:'ANIL-X lead/order/payment'},
+{id:'agent-commerce',name:'Agent Commerce',mode:'agent',status:'ACTIVE',monetization:'paid-api/order',prereq:'ANIL-X catalog+payment'},
+{id:'affiliate-engine',name:'Affiliate / Referral Engine',mode:'affiliate',status:'PARTNER_REQUIRED',monetization:'commission',prereq:'approved partner programs'},
+{id:'creator-media',name:'Creator / YouTube Media',mode:'media',status:'ACCOUNT_REQUIRED',monetization:'ads+partners',prereq:'channel+platform eligibility'},
+{id:'newsletter-community',name:'Paid Newsletter / Community',mode:'subscription',status:'PRODUCT_REQUIRED',monetization:'subscription',prereq:'audience+paid product'},
+{id:'licensing-assets',name:'Digital Asset / API Licensing',mode:'license',status:'PRODUCT_REQUIRED',monetization:'license+subscription',prereq:'licensable asset'},
+{id:'marketplace-services',name:'Marketplace Service Acquisition',mode:'acquisition',status:'ACCOUNT_REQUIRED',monetization:'client projects',prereq:'approved marketplace account'},
+{id:'bug-bounty',name:'Legitimate Bug Bounty',mode:'bounty',status:'ACCOUNT_REQUIRED',monetization:'accepted bounty',prereq:'authorized scope+platform account'},
+{id:'guard-opportunities',name:'Immortal Guard',mode:'opportunity',status:'OWNER_GATED',monetization:'verified opportunity',prereq:'official verification+owner approval for sensitive actions'}
+];
+async function revenueFleetStatus(env){
+ const configured={ton:!!env.TON_RECEIVING_ADDRESS,variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY),ai:!!(env.OPENAI_API_KEY||env.GEMINI_API_KEY||env.ANTHROPIC_API_KEY)};
+ return {ok:true,treasury:{tonConfigured:configured.ton,varizaConfigured:configured.variza},engines:REVENUE_FLEET.map(x=>({...x,collectsToTreasury:configured.ton&&(['ACTIVE','OWNER_GATED'].includes(x.status)),paymentReady:configured.variza||x.mode==='opportunity'})),policy:'هر موتور مستقل است؛ درآمد فقط پس از پرداخت/تسویه واقعی ثبت می‌شود. دسترسی حساب، احراز هویت، تأیید پلتفرم و اقدامات حساس خودکار فرض نمی‌شوند.'};
+}
 const REVENUE_PROGRAMS=[
 {id:'ai-service-studio',name:'AI Service Studio',type:'service',status:'LIVE',description:'فروش ساخت سایت، رفع مشکل، رشد، اتوماسیون و اتصال AI Agent با سفارش و پرداخت واقعی.',engine:'sales-conversion'},
 {id:'ai-automation',name:'AI Automation & Agents',type:'service',status:'LIVE',description:'پیاده‌سازی اتوماسیون، workflow و AI agent برای کسب‌وکارها.',engine:'business-automation'},
@@ -101,6 +128,12 @@ async function runtimeRoutes(req,env,u){
     const rate=Number(env.USD_IRR_RATE||0);
     if(!Number.isFinite(rate)||rate<=0)return rjson({ok:false,error:'usd_irr_rate_not_configured',currency:'USD',target:'IRR',source:'environment'});
     return rjson({ok:true,from:'USD',to:'IRR',rate,source:'environment',tomanRate:rate/10});
+  }
+  if(p==='/api/revenue/fleet'&&req.method==='GET')return rjson(await revenueFleetStatus(env));
+  if(p==='/api/revenue/fleet/run'&&req.method==='POST'){
+    const fleet=await revenueFleetStatus(env);
+    const cycle=await runAutopilotSafe(env);
+    return rjson({ok:true,startedAt:now(),fleet,cycle});
   }
   if(p==='/api/revenue/programs'&&req.method==='GET'){
     const configured={variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY),ton:!!env.TON_RECEIVING_ADDRESS,ai:!!(env.OPENAI_API_KEY||env.GEMINI_API_KEY||env.ANTHROPIC_API_KEY),gsc:!!(env.GSC_ACCESS_TOKEN||env.GSC_SERVICE_ACCOUNT_JSON)};
