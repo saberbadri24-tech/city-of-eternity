@@ -22,7 +22,7 @@ const legacyPatterns=[
 const errors=[];
 for(const file of sourceFiles){
   const c=await fs.readFile(file,'utf8');
-  for(const x of legacyPatterns)if(x.re.test(c))errors.push(path.relative(root,file)+': '+x.name);
+  for(const x of legacyPatterns)if(file.endsWith('scripts/predeploy-static-check.mjs'))continue; else if(x.re.test(c))errors.push(path.relative(root,file)+': '+x.name);
 }
 
 for(const file of files.filter(p=>/\.(js|mjs)$/.test(p))){
