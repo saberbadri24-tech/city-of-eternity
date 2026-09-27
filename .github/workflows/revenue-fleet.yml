@@ -1,0 +1,11 @@
+name: ANIL X 5 minute cycle
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+jobs:
+  cycle:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run ANIL X cycle
+        run: node -e "fetch('https://city-of-eternity.onrender.com/api/revenue/fleet/run',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({source:'github-actions',scheduled:true})}).then(async r=>{const t=await r.text();if(!r.ok)throw new Error(r.status+' '+t);console.log(t)})"
