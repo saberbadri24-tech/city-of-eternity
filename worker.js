@@ -9,6 +9,7 @@ const rjson=(d,s=200,h={})=>runtimeJson(d,s,h);
 async function kvGet(env,key,fallback=null){if(!env.PAYMENTS)return fallback;try{const v=await env.PAYMENTS.get(key,'json');return v??fallback}catch{return fallback}}
 async function kvPut(env,key,value){if(env.PAYMENTS)await env.PAYMENTS.put(key,JSON.stringify(value))}
 async function kvList(env,prefix,limit=100){if(!env.PAYMENTS)return[];try{const x=await env.PAYMENTS.list({prefix});const keys=(x?.keys||[]).slice(-limit);return (await Promise.all(keys.map(k=>env.PAYMENTS.get(k.name,'json').catch(()=>null)))).filter(Boolean)}catch{return[]}}
+async function runAutopilotSafe(env){return await autopilot(new Request('https://internal/api/autopilot',{method:'POST'}),env).then(async r=>await r.json()).catch(e=>({ok:false,error:String(e?.message||e)}))}
 const V90_DEFAULTS={pricesUsd:{FIX:9,START:29,BUILD:79,GROW:149},permissions:{autoReports:true,autoMessaging:true,autoSeo:true,autoPaymentDiagnostics:true,autoBenchmark:true,autoLeadReview:true}};
 async function getV90Config(env){const x=await kvGet(env,'admin/config',null);return {pricesUsd:{...V90_DEFAULTS.pricesUsd,...(x?.pricesUsd||{})},permissions:{...V90_DEFAULTS.permissions,...(x?.permissions||{})},updatedAt:x?.updatedAt||new Date(0).toISOString()}}
 async function saveV90Config(env,next){const x={pricesUsd:next.pricesUsd,permissions:next.permissions,updatedAt:new Date().toISOString()};await kvPut(env,'admin/config',x);return x}
@@ -85,7 +86,84 @@ async function runtimeRoutes(req,env,u){
     if(!Number.isFinite(rate)||rate<=0)return rjson({ok:false,error:'usd_irr_rate_not_configured',currency:'USD',target:'IRR',source:'environment'});
     return rjson({ok:true,from:'USD',to:'IRR',rate,source:'environment',tomanRate:rate/10});
   }
-  if(p==='/api/payment-config'){
+  if(p==='/api  if(p==='/api/revenue/engines'&&req.method==='GET'){
+    const configured={variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY),ton:!!env.TON_RECEIVING_ADDRESS,gsc:!!(env.GSC_ACCESS_TOKEN||env.GSC_SERVICE_ACCOUNT_JSON),ai:!!(env.OPENAI_API_KEY||env.GEMINI_API_KEY||env.ANTHROPIC_API_KEY)};
+    return rjson({ok:true,engines:[
+      {id:'revenue-hunter',name:'Revenue Hunter',active:true,mode:'rule+lead-data'},
+      {id:'offer-engine',name:'Offer Engine',active:true,mode:'catalog+scoring'},
+      {id:'sales-conversion',name:'Sales / Conversion',active:true,mode:'lead→offer→order→payment'},
+      {id:'customer-service',name:'AI Customer Service',active:true,mode:configured.ai?'ai-configured':'deterministic-fallback'},
+      {id:'business-automation',name:'Business Automation',active:true,mode:'workflow-storage'},
+      {id:'growth-seo',name:'Growth & SEO',active:true,mode:configured.gsc?'gsc-configured':'on-demand-audit'},
+      {id:'content-engine',name:'Content Engine',active:true,mode:configured.ai?'ai-configured':'draft-template'},
+      {id:'analytics',name:'Analytics Engine',active:true,mode:'persistent-ledger'},
+      {id:'retention',name:'Retention Engine',active:true,mode:'customer-history'},
+      {id:'agent-commerce',name:'Agent Commerce',active:true,mode:'draft-order-api'},
+      {id:'immortal-guard',name:'Immortal Guard',active:true,mode:'owner-gated'},
+      {id:'evolution',name:'Evolution Engine',active:true,mode:'scheduled-autopilot'},
+    ],integrations:configured,truth:{revenueOnlyWhenPaid:true,noGuaranteedIncome:true}}
+    );
+  }
+  if(p==='/api/revenue/hunt'&&req.method==='POST'){
+    const b=await req.json().catch(()=>({})),request=clean(b.request||b.need,3000),email=clean(b.email,160),country=clean(b.country||'International',80),market=clean(b.market||country,100);
+    if(!request)return rjson({ok:false,error:'request_required'},400);
+    const c=(()=>{const t=request.toLowerCase();const map=[['website',['website','site','سایت'],149],['teaser',['teaser','video','تیزر','ویدیو'],49],['fix',['fix','bug','error','خطا','ارور'],39],['growth',['seo','growth','سئو','رشد','traffic','فروش'],79],['automation',['automation','workflow','اتوماسیون','خودکار'],99],['ai-agent',['agent','ایجنت','هوش مصنوعی'],129]];let best=map[0],score=0;for(const x of map){const s=x[1].reduce((n,k)=>n+(t.includes(k)?20:0),0);if(s>score){score=s;best=x}}const leadScore=Math.min(100,30+(email?15:0)+(request.length>80?20:0)+score);return {service:best[0],price:best[2],score:leadScore}})();
+    const lead={id:id(),email,country,market,request,source:clean(b.source||'revenue-hunter',60),status:c.score>=70?'qualified':'new',score:c.score,recommendedService:c.service,recommendedPrice:c.price,createdAt:now(),updatedAt:now()};
+    state.revenueLeads.set(lead.id,lead);await kvPut(env,'lead/'+lead.id,lead);await kvPut(env,'revenue-leads/'+lead.id,lead);
+    return rjson({ok:true,lead,engine:'revenue-hunter'},201);
+  }
+  if(p==='/api/revenue/offer'&&req.method==='POST'){
+    const b=await req.json().catch(()=>({})),leadId=clean(b.leadId,120),request=clean(b.request||'',3000);
+    let lead=leadId?await kvGet(env,'revenue-leads/'+leadId,null):null;
+    if(!lead&&leadId)lead=state.revenueLeads.get(leadId)||null;
+    const textReq=lead?.request||request;if(!textReq)return rjson({ok:false,error:'lead_or_request_required'},400);
+    const t=textReq.toLowerCase(),items=[['website',149,['website','site','سایت']],['teaser',49,['teaser','video','تیزر','ویدیو']],['fix',39,['fix','bug','error','خطا','ارور']],['growth',79,['seo','growth','سئو','رشد','traffic','فروش']],['automation',99,['automation','workflow','اتوماسیون','خودکار']],['ai-agent',129,['agent','ایجنت','هوش مصنوعی']]];
+    let best=items[0],hits=0;for(const x of items){const n=x[2].reduce((s,k)=>s+(t.includes(k)?1:0),0);if(n>hits){hits=n;best=x}}
+    const offer={id:id(),leadId:lead?.id||null,service:best[0],priceUsd:best[1],pricingPolicy:'ANIL-X-target-price; market benchmark not asserted',upsell:best[0]==='website'?['growth','automation']:best[0]==='growth'?['automation']:['growth'],createdAt:now(),status:'draft'};
+    await kvPut(env,'offers/'+offer.id,offer);return rjson({ok:true,offer,engine:'offer-engine'},201);
+  }
+  if(p==='/api/customer-service'&&req.method==='POST'){
+    const b=await req.json().catch(()=>({})),message=clean(b.message||b.request,3000);if(!message)return rjson({ok:false,error:'message_required'},400);
+    const t=message.toLowerCase(),category=/payment|پرداخت|پول|واریز/.test(t)?'payment':/error|bug|خطا|ارور/.test(t)?'technical':/price|قیمت|هزینه/.test(t)?'sales':'general';
+    const sensitive=/password|رمز|private key|seed|کارت بانکی|card number|identity|هویت/.test(t);
+    const reply=sensitive?'این مورد به دلیل حساسیت باید توسط مدیر بررسی شود. لطفاً اطلاعات محرمانه مثل Seed، Private Key یا رمز را ارسال نکن.':category==='payment'?'درخواست پرداخت ثبت شد؛ وضعیت سفارش و پرداخت باید از مسیر رسمی ANIL X بررسی شود.':category==='technical'?'مشکل فنی دسته‌بندی شد و برای بررسی دقیق آماده است.':'درخواستت دریافت شد؛ سرویس مناسب و قدم بعدی را بررسی می‌کنیم.';
+    const rec={id:id(),category,sensitive,reply,message,createdAt:now()};await kvPut(env,'support/'+rec.id,rec);return rjson({ok:true,ticket:rec,engine:'customer-service'});
+  }
+  if(p==='/api/automation/workflow'&&req.method==='POST'){
+    const b=await req.json().catch(()=>({})),name=clean(b.name||'workflow',120),steps=Array.isArray(b.steps)?b.steps.slice(0,30):[];
+    if(!steps.length)return rjson({ok:false,error:'steps_required'},400);
+    const w={id:id(),name,steps,active:b.active!==false,createdAt:now(),requiresOwnerApproval:steps.some(s=>s?.sensitive||s?.payment||s?.externalWrite)};await kvPut(env,'automation/'+w.id,w);return rjson({ok:true,workflow:w,engine:'business-automation'},201);
+  }
+  if(p==='/api/growth/audit'&&req.method==='POST'){
+    const b=await req.json().catch(()=>({})),pages=Array.isArray(b.pages)?b.pages.slice(0,100):[];if(!pages.length)return rjson({ok:false,error:'pages_required'},400);
+    const findings=pages.map(x=>{const title=String(x.title||''),description=String(x.description||''),h1=String(x.h1||'');return {url:clean(x.url||'',500),issues:[!title&&'missing_title',!description&&'missing_meta_description',!h1&&'missing_h1',title.length>60&&'title_too_long'].filter(Boolean)}});return rjson({ok:true,findings,source:b.source||'provided_page_data',searchConsoleConfigured:!!env.GSC_ACCESS_TOKEN,engine:'growth-seo'});
+  }
+  if(p==='/api/content/draft'&&req.method==='POST'){
+    const b=await req.json().catch(()=>({})),topic=clean(b.topic||b.request,500),market=clean(b.market||'International',100),format=clean(b.format||'landing-page',60);if(!topic)return rjson({ok:false,error:'topic_required'},400);
+    const draft={id:id(),topic,market,format,title:topic,outline:['Problem','Solution','Proof / evidence','Offer','Call to action'],body:'Draft prepared for human/AI quality review before publication.',status:'draft',createdAt:now()};await kvPut(env,'content/'+draft.id,draft);return rjson({ok:true,draft,engine:'content-engine',aiConfigured:!!(env.OPENAI_API_KEY||env.GEMINI_API_KEY||env.ANTHROPIC_API_KEY)},201);
+  }
+  if(p==='/api/analytics'&&req.method==='GET'){
+    const leads=await kvList(env,'revenue-leads/',1000),orders=await kvList(env,'orders/',1000),paid=orders.filter(x=>x?.status==='paid');return rjson({ok:true,metrics:{leads:leads.length,orders:orders.length,paid:paid.length,revenueUsd:paid.reduce((s,x)=>s+Number(x.orderAmount??(x.currency==='USD'?x.amount:0)||0),0),settlementIrr:paid.reduce((s,x)=>s+Number(x.providerAmount??(x.currency==='IRR'?x.amount:0)||0),0)},engine:'analytics'});
+  }
+  if(p==='/api/retention'&&req.method==='GET'){
+    const orders=await kvList(env,'orders/',1000),byCustomer={};for(const o of orders.filter(x=>x?.status==='paid')){const k=clean(o.client||o.email||o.accountId||'unknown',160);(byCustomer[k]??=[]).push(o)}
+    const items=Object.entries(byCustomer).map(([customer,os])=>({customer,orders:os.length,lastPaidAt:os.map(x=>x.paidAt||x.createdAt).sort().pop(),nextService:os.some(x=>x.service==='website')?'growth':os.some(x=>x.service==='growth')?'automation':'growth',upsellAllowed:true}));return rjson({ok:true,customers:items,engine:'retention'});
+  }
+  if(p==='/api/agent/catalog'&&req.method==='GET'){
+    return rjson({ok:true,protocol:'ANIL-X-Agent-Commerce-v1',services:[
+      {id:'website',name:'AI Website Build',priceUsd:149,currency:'USD'},{id:'teaser',name:'Marketing Teaser',priceUsd:49,currency:'USD'},{id:'fix',name:'Website Fix',priceUsd:39,currency:'USD'},{id:'growth',name:'Growth & SEO',priceUsd:79,currency:'USD'},{id:'automation',name:'Business Automation',priceUsd:99,currency:'USD'},{id:'ai-agent',name:'AI Agent Integration',priceUsd:129,currency:'USD'}],payment:{provider:'Variza',requiresCheckout:true},safety:{draftOrderOnly:true,no_secret_access:true}});
+  }
+  if(p==='/api/agent/orders'&&req.method==='POST'){
+    const b=await req.json().catch(()=>({})),service=clean(b.service,80),cat={website:149,teaser:49,fix:39,growth:79,automation:99,'ai-agent':129};if(!cat[service])return rjson({ok:false,error:'service_not_found'},404);
+    const order={id:id(),agentId:clean(b.agentId||'external-agent',120),service,amount:cat[service],currency:'USD',description:clean(b.description||'',1000),status:'draft',paymentRequired:true,createdAt:now(),source:'agent-commerce'};await kvPut(env,'orders/'+order.id,order);return rjson({ok:true,order},201);
+  }
+  if(p==='/api/agent/orders'&&req.method==='GET'){
+    const oid=clean(u.searchParams.get('id'),120),o=await kvGet(env,'orders/'+oid,null);return o?rjson({ok:true,order:o}):rjson({ok:false,error:'not_found'},404);
+  }
+  if(p==='/api/evolution'&&req.method==='POST'){
+    const report=await runAutopilotSafe(env);return rjson({ok:true,cycle:report,steps:['Discover','Analyze','Build','Sell','Get Paid','Measure','Learn','Improve']});
+  }
+/payment-config'){
     return rjson({ok:true,ton:{enabled:!!env.TON_RECEIVING_ADDRESS,address:env.TON_RECEIVING_ADDRESS||null},fiat:{provider:'variza',enabled:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY)}});
   }
   if(p==='/api/revenue/catalog'){
