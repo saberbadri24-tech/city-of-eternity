@@ -179,7 +179,7 @@ async function runtimeRoutes(req,env,u){
     if(!request)return rjson({ok:false,error:'request_required'},400);
     if(email&&!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(email))return rjson({ok:false,error:'invalid_email'},400);
     const lead={id:id(),name:clean(b.name,100),email,company:clean(b.company,160),request,source:clean(b.source||'website',60),status:'new',score:0,createdAt:now(),updatedAt:now()};
-    state.revenueLeads.set(lead.id,lead);return rjson({ok:true,lead},201);
+    state.revenueLeads.set(lead.id,lead);await kvPut(env,'lead/'+lead.id,lead);await kvPut(env,'revenue-leads/'+lead.id,lead);return rjson({ok:true,lead},201);
   }
   if(p==='/api/revenue/summary'){
     const leads=[...state.revenueLeads.values()];
@@ -225,7 +225,7 @@ async function runtimeRoutes(req,env,u){
     if(req.method!=='POST')return rjson({error:'POST required'},405);
     const b=await req.json().catch(()=>({})),name=clean(b.name,80),email=clean(b.email,160),country=clean(b.country,80),request=clean(b.request,2000);
     if(!name||!email||!country||!request||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))return rjson({error:'Please complete all fields with a valid email.'},400);
-    const rec={id:id(),name,email,country,request,status:'pending',createdAt:now(),decidedAt:null,decidedBy:null};state.freeRequests.set(rec.id,rec);state.revenueLeads.set(rec.id,{id:rec.id,name,email,company:'',request,source:'free-request',status:'new',score:0,createdAt:rec.createdAt,updatedAt:rec.createdAt});return rjson({ok:true,id:rec.id,status:rec.status},201);
+    const rec={id:id(),name,email,country,request,status:'pending',createdAt:now(),decidedAt:null,decidedBy:null};state.freeRequests.set(rec.id,rec);state.revenueLeads.set(rec.id,{id:rec.id,name,email,company:'',request,source:'free-request',status:'new',score:0,createdAt:rec.createdAt,updatedAt:rec.createdAt});await kvPut(env,'lead/'+rec.id,{...rec,source:'free-request'});await kvPut(env,'revenue-leads/'+rec.id,state.revenueLeads.get(rec.id));return rjson({ok:true,id:rec.id,status:rec.status},201);
   }
   if(p==='/api/free-admin'){
     if(!(await adminAuth(req,env)))return rjson({error:'Admin authentication required.'},401);
