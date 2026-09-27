@@ -1,4 +1,4 @@
-name: ANIL X 5 minute cycle
+name: ANIL X 5 minute revenue cycle
 on:
   schedule:
     - cron: "*/5 * * * *"
@@ -12,15 +12,26 @@ jobs:
   cycle:
     runs-on: ubuntu-latest
     steps:
-      - name: Run ANIL X cycle
+      - name: Warm and verify Render
         run: |
           set -euo pipefail
-          TOKEN=$(curl -fsSL \
-            -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
-            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x" \
-            | python -c "import sys,json; print(json.load(sys.stdin)['value'])")
-          curl -fsSL -X POST \
-            -H "content-type: application/json" \
-            -H "Authorization: Bearer $TOKEN" \
-            --data '{"source":"github-actions","scheduled":true}' \
-            https://city-of-eternity.onrender.com/api/revenue/fleet/run
+          curl -fsSL --max-time 20 https://city-of-eternity.onrender.com/api/health >/dev/null
+          curl -fsSL --max-time 20 https://city-of-eternity.onrender.com/api/revenue/fleet >/tmp/fleet.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/fleet.json'))
+          assert d.get('ok') is True
+          print("fleet truth:", json.dumps(d.get("truth",{}), ensure_ascii=False))
+          PY
+
+      - name: Run ANIL X revenue flywheel
+        run: |
+          set -euo pipefail
+          TOKEN=$(curl -fsSL             -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN"             "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x"             | python -c "import sys,json; print(json.load(sys.stdin)['value'])")
+          curl -fsSL -X POST             -H "content-type: application/json"             -H "Authorization: Bearer $TOKEN"             --data '{"source":"github-actions","scheduled":true}'             https://city-of-eternity.onrender.com/api/revenue/fleet/run             >/tmp/cycle.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/cycle.json'))
+          assert d.get('ok') is True
+          print("cycle:", json.dumps(d.get("accounting",{}), ensure_ascii=False))
+          PY
