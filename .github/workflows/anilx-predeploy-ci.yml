@@ -26,3 +26,5 @@ jobs:
           done
       - name: Run Javidan deterministic self-test
         run: node scripts/javidan-node-selftest.mjs
+      - name: Run static link and legacy-reference audit
+        run: node scripts/predeploy-static-check.mjs
