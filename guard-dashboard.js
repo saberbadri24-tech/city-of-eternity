@@ -1,6 +1,6 @@
 (()=>{'use strict';
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const MANIFEST=location.hostname.endsWith('onrender.com')?location.origin+'/render-tonconnect-manifest.json':'https://saberbadri24-tech.github.io/city-of-eternity/tonconnect-manifest.json';
+const MANIFEST=location.hostname.endsWith('onrender.com')?location.origin+'/render-tonconnect-manifest.json':'https://saberbadri24-tech.github.io/city-of-eternity/tonconnect-manifest.json';const API_BASE=location.hostname.endsWith('onrender.com')?'': 'https://city-of-eternity.onrender.com';
 let tonUI=null,wallet=null,temporaryWalletAddress='',guardStatus={},opportunities=[],displayLimit=100;
 
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -33,7 +33,7 @@ async function loadGuardWalletConfig(){
  try{const d=await loadJson('guard-wallet.json');temporaryWalletAddress=String(d.temporaryWalletAddress||'');renderWallet();updateTransferState()}catch(_){}
 }
 async function api(kind,address){
- const r=await fetch('/api/ton/'+kind+'?address='+encodeURIComponent(address),{cache:'no-store'});
+ const r=await fetch(API_BASE+'/api/ton/'+kind+'?address='+encodeURIComponent(address),{cache:'no-store'});
  const j=await r.json().catch(()=>({}));
  if(!r.ok)throw Error(j.error||'TON API HTTP '+r.status);
  if(kind==='account')return {ok:true,balance:String(j.balance||0),raw:j};
@@ -116,12 +116,12 @@ function renderOpp(){
  if($('#oppCount'))$('#oppCount').textContent=fa(rows.length)+' مورد';
 }
 async function loadReport(){
- try{const r=await fetch('/api/guard/report',{cache:'no-store'});const d=await r.json();if(d.ok&&$('#reportBox'))$('#reportBox').textContent='صف بررسی مالک: '+d.counts.approvals+' · صف فعال: '+d.counts.queued+' · امضای خودکار: خاموش · انتقال خودکار: خاموش';}
+ try{const r=await fetch(API_BASE+'/api/guard/report',{cache:'no-store'});const d=await r.json();if(d.ok&&$('#reportBox'))$('#reportBox').textContent='صف بررسی مالک: '+d.counts.approvals+' · صف فعال: '+d.counts.queued+' · امضای خودکار: خاموش · انتقال خودکار: خاموش';}
  catch(_){if($('#reportBox'))$('#reportBox').textContent='گزارش زنده API در دسترس نیست؛ وضعیت فایل Guard نمایش داده می‌شود.'}
 }
 async function queueApproval(oid,url){
  try{
-  const r=await fetch('/api/guard/approval',{method:'POST',credentials:'same-origin',headers:{'content-type':'application/json'},body:JSON.stringify({opportunityId:oid,url,action:'VERIFY_AND_REVIEW'})});
+  const r=await fetch(API_BASE+'/api/guard/approval',{method:'POST',credentials:'same-origin',headers:{'content-type':'application/json'},body:JSON.stringify({opportunityId:oid,url,action:'VERIFY_AND_REVIEW'})});
   const d=await r.json().catch(()=>({}));
   if(r.status===401){localStorage.setItem('anilx.pendingGuardApproval',JSON.stringify({opportunityId:oid,url}));location.href='admin.html#approvalGrid';return}
   if(!r.ok)throw Error(d.error||'ثبت بررسی ناموفق بود');
