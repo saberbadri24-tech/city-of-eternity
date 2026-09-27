@@ -35,6 +35,69 @@ const REVENUE_FLEET=[
 {id:'guard-opportunities',name:'Immortal Guard',mode:'opportunity',status:'OWNER_GATED',monetization:'verified opportunity',prereq:'official verification+owner approval for sensitive actions'}
 ];
 async function revenueFleetStatus(env){
+ const configured={
+   ton:!!env.TON_RECEIVING_ADDRESS,
+   variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY),
+   ai:!!(env.OPENAI_API_KEY||env.GEMINI_API_KEY||env.ANTHROPIC_API_KEY),
+   persistence:!!env.PAYMENTS
+ };
+ return {
+   ok:true,
+   truth:{
+     paymentReady:configured.variza,
+     persistentAccounting:configured.persistence,
+     aiReady:configured.ai,
+     tonReady:configured.ton
+   },
+   engines:REVENUE_FLEET.map(x=>({
+     ...x,
+     state:x.status==='OWNER_GATED'
+       ? (configured.ton?'READY_OWNER_APPROVAL':'BLOCKED_MISSING_TON')
+       : x.status==='ACTIVE'
+         ? (configured.variza&&configured.persistence?'LIVE_REVENUE_PATH':configured.variza?'PAYMENT_READY_NO_DURABLE_STORAGE':'BLOCKED_PAYMENT')
+         : 'DEPENDENCY_REQUIRED',
+     collectsToTreasury:configured.ton&&configured.variza,
+     countsAsRevenueOnlyWhenPaid:true
+   })),
+   policy:'فقط پرداخت تسویه‌شده درآمد واقعی است؛ وجود موتور، لید یا پیشنهاد فروش درآمد محسوب نمی‌شود.'
+ };
+}mport {state,now,clean,id,json as runtimeJson} from './functions/api/runtime-state.mjs';
+import autopilot from './functions/api/autopilot.mjs';
+import {handlePlan} from './functions/api/plan.mjs';
+import analyze from './netlify/functions/analyze.mjs';
+import vision from './functions/api/vision.mjs';
+import voice from './functions/api/voice.mjs';import tonApi from './functions/api/ton.mjs';import {handleJavidan} from './functions/api/javidan-trinity.mjs';import {onRequestPost as pay} from './functions/api/pay.js';import {onRequestPost as webhook} from './functions/api/variza-webhook.js';
+const json=(d,s=200,h={})=>new Response(JSON.stringify(d),{status:s,headers:{'content-type':'application/json','cache-control':'no-store',...h}});
+const rjson=(d,s=200,h={})=>runtimeJson(d,s,h);
+async function kvGet(env,key,fallback=null){if(!env.PAYMENTS)return fallback;try{const v=await env.PAYMENTS.get(key,'json');return v??fallback}catch{return fallback}}
+async function kvPut(env,key,value){if(env.PAYMENTS)await env.PAYMENTS.put(key,JSON.stringify(value))}
+async function kvList(env,prefix,limit=100){if(!env.PAYMENTS)return[];try{const x=await env.PAYMENTS.list({prefix});const keys=(x?.keys||[]).slice(-limit);return (await Promise.all(keys.map(k=>env.PAYMENTS.get(k.name,'json').catch(()=>null)))).filter(Boolean)}catch{return[]}}
+async function runAutopilotSafe(env){return await autopilot(new Request('https://internal/api/autopilot',{method:'POST'}),env).then(async r=>await r.json()).catch(e=>({ok:false,error:String(e?.message||e)}))}
+const V90_DEFAULTS={pricesUsd:{FIX:9,START:29,BUILD:79,GROW:149},permissions:{autoReports:true,autoMessaging:true,autoSeo:true,autoPaymentDiagnostics:true,autoBenchmark:true,autoLeadReview:true}};
+const REVENUE_FLEET=[
+{id:'ai-automation-agency',name:'AI Automation Agency',mode:'service',status:'ACTIVE',monetization:'project+retainer',prereq:'ANIL-X lead/order/payment'},
+{id:'ai-integration-agents',name:'AI Integration & Agents',mode:'service',status:'ACTIVE',monetization:'project+maintenance',prereq:'ANIL-X lead/order/payment'},
+{id:'ai-ugc-video-studio',name:'AI UGC / Video Studio',mode:'service',status:'ACTIVE',monetization:'per-project+retainer',prereq:'ANIL-X lead/order/payment'},
+{id:'short-video-production',name:'Short-form Video Production',mode:'service',status:'ACTIVE',monetization:'per-project+retainer',prereq:'ANIL-X lead/order/payment'},
+{id:'data-pdf-excel',name:'Data / PDF / Excel Automation',mode:'service',status:'ACTIVE',monetization:'per-project',prereq:'ANIL-X lead/order/payment'},
+{id:'shopify-build',name:'Shopify Build & Optimization',mode:'service',status:'ACCOUNT_REQUIRED',monetization:'project+partner',prereq:'Shopify partner/account'},
+{id:'seo-growth-retainer',name:'SEO / Growth Retainers',mode:'recurring',status:'ACTIVE',monetization:'monthly-retainer',prereq:'ANIL-X lead/order/payment'},
+{id:'lead-generation',name:'B2B Lead Generation',mode:'service',status:'ACTIVE',monetization:'per-lead+retainer',prereq:'compliant prospecting channels'},
+{id:'digital-products',name:'Digital Products / Templates',mode:'product',status:'PRODUCT_REQUIRED',monetization:'per-sale',prereq:'real product assets + storefront'},
+{id:'micro-saas-api',name:'Micro-SaaS / API',mode:'recurring',status:'PRODUCT_REQUIRED',monetization:'subscription+usage',prereq:'deployed product + billing'},
+{id:'paid-research',name:'Paid Research / Reports',mode:'service',status:'ACTIVE',monetization:'per-report+retainer',prereq:'ANIL-X lead/order/payment'},
+{id:'ai-support-desk',name:'AI Customer Support Desk',mode:'recurring',status:'ACTIVE',monetization:'monthly-retainer',prereq:'ANIL-X lead/order/payment'},
+{id:'website-build-fixes',name:'Website Build / Fix / Conversion',mode:'service',status:'ACTIVE',monetization:'project+maintenance',prereq:'ANIL-X lead/order/payment'},
+{id:'agent-commerce',name:'Agent Commerce',mode:'agent',status:'ACTIVE',monetization:'paid-api/order',prereq:'ANIL-X catalog+payment'},
+{id:'affiliate-engine',name:'Affiliate / Referral Engine',mode:'affiliate',status:'PARTNER_REQUIRED',monetization:'commission',prereq:'approved partner programs'},
+{id:'creator-media',name:'Creator / YouTube Media',mode:'media',status:'ACCOUNT_REQUIRED',monetization:'ads+partners',prereq:'channel+platform eligibility'},
+{id:'newsletter-community',name:'Paid Newsletter / Community',mode:'subscription',status:'PRODUCT_REQUIRED',monetization:'subscription',prereq:'audience+paid product'},
+{id:'licensing-assets',name:'Digital Asset / API Licensing',mode:'license',status:'PRODUCT_REQUIRED',monetization:'license+subscription',prereq:'licensable asset'},
+{id:'marketplace-services',name:'Marketplace Service Acquisition',mode:'acquisition',status:'ACCOUNT_REQUIRED',monetization:'client projects',prereq:'approved marketplace account'},
+{id:'bug-bounty',name:'Legitimate Bug Bounty',mode:'bounty',status:'ACCOUNT_REQUIRED',monetization:'accepted bounty',prereq:'authorized scope+platform account'},
+{id:'guard-opportunities',name:'Immortal Guard',mode:'opportunity',status:'OWNER_GATED',monetization:'verified opportunity',prereq:'official verification+owner approval for sensitive actions'}
+];
+async function revenueFleetStatus(env){
  const configured={ton:!!env.TON_RECEIVING_ADDRESS,variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY),ai:!!(env.OPENAI_API_KEY||env.GEMINI_API_KEY||env.ANTHROPIC_API_KEY)};
  return {ok:true,treasury:{tonConfigured:configured.ton,varizaConfigured:configured.variza},engines:REVENUE_FLEET.map(x=>({...x,collectsToTreasury:configured.ton&&configured.variza&&(['ACTIVE','OWNER_GATED'].includes(x.status)),paymentReady:configured.variza||x.mode==='opportunity'})),policy:'هر موتور مستقل است؛ درآمد فقط پس از پرداخت/تسویه واقعی ثبت می‌شود. دسترسی حساب، احراز هویت، تأیید پلتفرم و اقدامات حساس خودکار فرض نمی‌شوند.'};
 }
