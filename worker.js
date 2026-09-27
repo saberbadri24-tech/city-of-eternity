@@ -11,6 +11,22 @@ async function kvPut(env,key,value){if(env.PAYMENTS)await env.PAYMENTS.put(key,J
 async function kvList(env,prefix,limit=100){if(!env.PAYMENTS)return[];try{const x=await env.PAYMENTS.list({prefix});const keys=(x?.keys||[]).slice(-limit);return (await Promise.all(keys.map(k=>env.PAYMENTS.get(k.name,'json').catch(()=>null)))).filter(Boolean)}catch{return[]}}
 async function runAutopilotSafe(env){return await autopilot(new Request('https://internal/api/autopilot',{method:'POST'}),env).then(async r=>await r.json()).catch(e=>({ok:false,error:String(e?.message||e)}))}
 const V90_DEFAULTS={pricesUsd:{FIX:9,START:29,BUILD:79,GROW:149},permissions:{autoReports:true,autoMessaging:true,autoSeo:true,autoPaymentDiagnostics:true,autoBenchmark:true,autoLeadReview:true}};
+const REVENUE_PROGRAMS=[
+{id:'ai-service-studio',name:'AI Service Studio',type:'service',status:'LIVE',description:'فروش ساخت سایت، رفع مشکل، رشد، اتوماسیون و اتصال AI Agent با سفارش و پرداخت واقعی.',engine:'sales-conversion'},
+{id:'ai-automation',name:'AI Automation & Agents',type:'service',status:'LIVE',description:'پیاده‌سازی اتوماسیون، workflow و AI agent برای کسب‌وکارها.',engine:'business-automation'},
+{id:'seo-growth-retainer',name:'SEO + Growth Retainer',type:'recurring',status:'LIVE',description:'ممیزی، بهبود و نگهداری رشد با پیشنهادهای دوره‌ای و فروش مجدد.',engine:'growth-seo'},
+{id:'content-video',name:'AI Content & Video',type:'service',status:'LIVE',description:'تولید محتوای ویدیویی، کوتاه و تبلیغاتی با کنترل کیفیت انسانی/هوش مصنوعی.',engine:'content-engine'},
+{id:'data-automation',name:'Data / PDF / Excel Automation',type:'service',status:'READY',description:'پاک‌سازی داده، تبدیل PDF به Excel و اتوماسیون کارهای تکراری؛ تحویل پس از سفارش.',engine:'business-automation'},
+{id:'ecommerce-build',name:'E-commerce / Shopify Build',type:'service',status:'READY_ACCOUNT',description:'ساخت و بهینه‌سازی فروشگاه و اجرای پروژه؛ اتصال حساب پلتفرم مشتری لازم است.',engine:'sales-conversion'},
+{id:'digital-products',name:'Digital Products & Templates',type:'product',status:'READY_ASSET',description:'فروش فایل، قالب، گزارش و ابزار دیجیتال؛ نیازمند محصول واقعی قبل از فروش.',engine:'sales-conversion'},
+{id:'paid-research',name:'Paid Research & Reports',type:'service',status:'READY',description:'گزارش تحقیق بازار، رقبا و فرصت‌ها با خروجی قابل تحویل.',engine:'content-engine'},
+{id:'micro-saas',name:'Micro-SaaS / API Access',type:'recurring',status:'READY_PRODUCT',description:'فروش دسترسی به ابزار یا API تخصصی؛ نیازمند endpoint و quota واقعی محصول.',engine:'agent-commerce'},
+{id:'agent-commerce',name:'Agent Commerce',type:'agent',status:'LIVE',description:'کاتالوگ قابل کشف برای AI Agentها و سفارش API؛ پرداخت قبل از اجرای خدمت.',engine:'agent-commerce'},
+{id:'creator-content',name:'Creator / YouTube Content',type:'media',status:'READY_ACCOUNT',description:'تولید و بسته‌بندی محتوای کانال؛ درآمد پلتفرم فقط بعد از احراز شرایط و تأیید خود پلتفرم.',engine:'content-engine'},
+{id:'affiliate-referrals',name:'Affiliate / Referral',type:'affiliate',status:'READY_PARTNER',description:'سیستم ثبت و اندازه‌گیری referral؛ فقط با برنامه رسمی و لینک اختصاصی شریک.',engine:'growth-seo'},
+{id:'guard-opportunities',name:'Immortal Guard Opportunities',type:'opportunity',status:'OWNER_GATED',description:'کشف و راستی‌آزمایی فرصت‌های قانونی؛ عملیات حساس و انتقال نهایی با تأیید مالک.',engine:'immortal-guard'},
+{id:'recurring-maintenance',name:'Maintenance & Support Retainer',type:'recurring',status:'LIVE',description:'قرارداد نگهداری، مانیتورینگ و رفع مشکل دوره‌ای پس از سفارش.',engine:'retention'}
+];
 async function getV90Config(env){const x=await kvGet(env,'admin/config',null);return {pricesUsd:{...V90_DEFAULTS.pricesUsd,...(x?.pricesUsd||{})},permissions:{...V90_DEFAULTS.permissions,...(x?.permissions||{})},updatedAt:x?.updatedAt||new Date(0).toISOString()}}
 async function saveV90Config(env,next){const x={pricesUsd:next.pricesUsd,permissions:next.permissions,updatedAt:new Date().toISOString()};await kvPut(env,'admin/config',x);return x}
 async function v90Approval(env,title,category,details){const rec={id:id(),title:String(title).slice(0,180),category:String(category).slice(0,80),details:String(details||'').slice(0,1500),status:'pending',createdAt:now()};await kvPut(env,'admin/approval/'+rec.id,rec);return rec}
@@ -85,6 +101,21 @@ async function runtimeRoutes(req,env,u){
     const rate=Number(env.USD_IRR_RATE||0);
     if(!Number.isFinite(rate)||rate<=0)return rjson({ok:false,error:'usd_irr_rate_not_configured',currency:'USD',target:'IRR',source:'environment'});
     return rjson({ok:true,from:'USD',to:'IRR',rate,source:'environment',tomanRate:rate/10});
+  }
+  if(p==='/api/revenue/programs'&&req.method==='GET'){
+    const configured={variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY),ton:!!env.TON_RECEIVING_ADDRESS,ai:!!(env.OPENAI_API_KEY||env.GEMINI_API_KEY||env.ANTHROPIC_API_KEY),gsc:!!(env.GSC_ACCESS_TOKEN||env.GSC_SERVICE_ACCOUNT_JSON)};
+    return rjson({ok:true,programs:REVENUE_PROGRAMS.map(x=>({...x,operational:x.status==='LIVE',paymentRoute:configured.variza?'VARIZA':'CONFIG_REQUIRED'})),walletRouting:{tonConfigured:configured.ton,varizaConfigured:configured.variza,truth:'فقط پرداخت واقعی تسویه‌شده درآمد محسوب می‌شود.'},trendSource:'2026 demand signals are informational, not income guarantees'});
+  }
+  if(p==='/api/revenue/programs/lead'&&req.method==='POST'){
+    const b=await req.json().catch(()=>({})),programId=clean(b.programId,80),program=REVENUE_PROGRAMS.find(x=>x.id===programId),email=clean(b.email,160),request=clean(b.request||program?.name||'',3000);
+    if(!program)return rjson({ok:false,error:'program_not_found'},404);
+    if(!request)return rjson({ok:false,error:'request_required'},400);
+    const lead={id:id(),email,country:clean(b.country||'International',80),market:clean(b.market||'International',100),request,programId:program.id,program:program.name,source:'revenue-program',status:'new',score:30+(email?15:0),createdAt:now(),updatedAt:now()};
+    state.revenueLeads.set(lead.id,lead);await kvPut(env,'lead/'+lead.id,lead);await kvPut(env,'revenue-leads/'+lead.id,lead);
+    return rjson({ok:true,lead,program},201);
+  }
+  if(p==='/api/revenue/settlement'&&req.method==='GET'){
+    return rjson({ok:true,providers:{variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY),ton:!!env.TON_RECEIVING_ADDRESS},policy:{paidOnly:true,noSecretKeys:true,ownerApprovalForIrreversible:true}});
   }
   if(p==='/api/revenue/engines'&&req.method==='GET'){
     const configured={variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY),ton:!!env.TON_RECEIVING_ADDRESS,gsc:!!(env.GSC_ACCESS_TOKEN||env.GSC_SERVICE_ACCOUNT_JSON),ai:!!(env.OPENAI_API_KEY||env.GEMINI_API_KEY||env.ANTHROPIC_API_KEY)};
