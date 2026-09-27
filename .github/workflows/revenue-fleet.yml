@@ -3,9 +3,20 @@ on:
   schedule:
     - cron: "*/5 * * * *"
   workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   cycle:
     runs-on: ubuntu-latest
     steps:
       - name: Run ANIL X cycle
-        run: node -e "fetch('https://city-of-eternity.onrender.com/api/revenue/fleet/run',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({source:'github-actions',scheduled:true})}).then(async r=>{const t=await r.text();if(!r.ok)throw new Error(r.status+' '+t);console.log(t)})"
+        env:
+          OIDC_URL: ${{ env.ACTIONS_ID_TOKEN_REQUEST_URL }}
+          OIDC_TOKEN: ${{ env.ACTIONS_ID_TOKEN_REQUEST_TOKEN }}
+        run: |
+          set -e
+          TOKEN=$(curl -fsSL -H "Authorization: bearer $OIDC_TOKEN" "$OIDC_URL&audience=anil-x" | python -c "import sys,json; print(json.load(sys.stdin)['value'])")
+          curl -fsSL -X POST             -H "content-type: application/json"             -H "Authorization: Bearer $TOKEN"             --data '{"source":"github-actions","scheduled":true}'             https://city-of-eternity.onrender.com/api/revenue/fleet/run
