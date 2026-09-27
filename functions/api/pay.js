@@ -41,7 +41,8 @@ export async function onRequestPost({ request, env }) {
         amount,
         return_url: returnUrl,
         title: description,
-        expires_in: "1h"
+        expires_in: "1h",
+        ...(env.VARIZA_SETTLEMENT_TO_WALLET === "true" ? { card_last_4: "variza" } : {})
       })
     });
 
