@@ -7,7 +7,7 @@ const json = (data, status = 200) => new Response(JSON.stringify(data), {
 const id = () => crypto.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
 export async function onRequestPost({ request, env }) {
-  const apiKey = env.VARIZA_API_KEY || env.VARIA_API_KEY;
+  const apiKey = env.VARIZA_API_KEY || env.VARIA_API_KEY || env.VARIZA_TOKEN || env.VARIZA_KEY;
   if (!apiKey) return json({ ok: false, error: "payment_not_configured" }, 503);
 
   try {
