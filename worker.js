@@ -86,7 +86,7 @@ async function runtimeRoutes(req,env,u){
     if(!Number.isFinite(rate)||rate<=0)return rjson({ok:false,error:'usd_irr_rate_not_configured',currency:'USD',target:'IRR',source:'environment'});
     return rjson({ok:true,from:'USD',to:'IRR',rate,source:'environment',tomanRate:rate/10});
   }
-  if(p==='/api  if(p==='/api/revenue/engines'&&req.method==='GET'){
+  if(p==='/api/revenue/engines'&&req.method==='GET'){
     const configured={variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY),ton:!!env.TON_RECEIVING_ADDRESS,gsc:!!(env.GSC_ACCESS_TOKEN||env.GSC_SERVICE_ACCOUNT_JSON),ai:!!(env.OPENAI_API_KEY||env.GEMINI_API_KEY||env.ANTHROPIC_API_KEY)};
     return rjson({ok:true,engines:[
       {id:'revenue-hunter',name:'Revenue Hunter',active:true,mode:'rule+lead-data'},
