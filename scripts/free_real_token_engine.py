@@ -12,7 +12,7 @@ NOW=dt.datetime.now(dt.timezone.utc).isoformat()
 DISCOVERY=ROOT/"guard-discovery.json"; SOURCES=ROOT/"guard-sources.json"; WALLET=ROOT/"guard-wallet.json"
 OUT=ROOT/"guard-free-real-tokens.json"; HISTORY=ROOT/"guard-opportunity-history.json"
 UA="ANIL-X-Immortal-Guard/14.0-Free-Real-Token-Hunter"
-TIMEOUT=10; MAX_BODY=650_000; WORKERS=16
+TIMEOUT=4; MAX_BODY=450_000; WORKERS=32
 
 LIVE=("claim now","claim is live","claim is open","claim available","redeem now","withdraw now",
       "distribution is live","distribution is now live","tokens are being distributed",
