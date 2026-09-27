@@ -59,8 +59,20 @@ async function runtimeRoutes(req,env,u){
     state.revenueLeads.set(lead.id,lead);return rjson({ok:true,lead},201);
   }
   if(p==='/api/revenue/summary'){
-    const leads=[...state.revenueLeads.values()],orders=[...state.orders.values()],paid=orders.filter(x=>x.status==='paid');
-    return rjson({ok:true,counts:{leads:leads.length,orders:orders.length,paid:paid.length},revenue:paid.reduce((s,x)=>s+Number(x.amount||0),0),currency:'USD',updatedAt:now()});
+    const leads=[...state.revenueLeads.values()];
+    let orders=[...state.orders.values()];
+    if(env.PAYMENTS){
+      try{
+        const keys=await env.PAYMENTS.list({prefix:'orders/'});
+        const persisted=await Promise.all((keys?.keys||[]).map(async k=>env.PAYMENTS.get(k.name,'json').catch(()=>null)));
+        const map=new Map(orders.map(x=>[x.orderId||x.id,x]));
+        for(const x of persisted.filter(Boolean))map.set(x.orderId||x.id,x);
+        orders=[...map.values()];
+      }catch{}
+    }
+    const paid=orders.filter(x=>x.status==='paid');
+    const revenue=paid.reduce((s,x)=>s+Number(x.orderAmount??(x.currency==='USD'?x.amount:0)||0),0);
+    return rjson({ok:true,counts:{leads:leads.length,orders:orders.length,paid:paid.length},revenue,currency:'USD',settlement:paid.reduce((s,x)=>s+Number(x.providerAmount??(x.currency==='IRR'?x.amount:0)||0),0),settlementCurrency:'IRR',updatedAt:now()});
   }
   if(p==='/api/revenue/leads'){
     if(!(await adminAuth(req,env)))return rjson({ok:false,error:'admin_auth_required'},401);
