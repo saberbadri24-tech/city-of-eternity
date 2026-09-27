@@ -68,12 +68,14 @@ export async function onRequestPost({ request, env }) {
     if (order) {
       const paid =
         Number.isFinite(Number(payload.amount)) &&
-        Number(payload.amount) >= Number(order.amount);
+        Number(payload.amount) >= Number(order.providerAmount ?? order.amount);
 
       const updated = {
         ...order,
         status: paid ? "paid" : "amount_mismatch",
         paidAt: now(),
+        providerAmount: Number(payload.amount),
+        providerCurrency: "IRR",
         attemptCode: payload.attempt_code || null,
         deliveryId,
         webhook: payload
