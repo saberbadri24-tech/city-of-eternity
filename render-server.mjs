@@ -20,7 +20,7 @@ async function assetsFetch(request){
   }
   try{
     const data=await fs.readFile(file);
-    const headers={'content-type':mime[path.extname(file).toLowerCase()]||'application/octet-stream'};
+    const ext=path.extname(file).toLowerCase(); const headers={'content-type':mime[ext]||'application/octet-stream','cache-control':ext==='.html'||ext==='.xml'?'public, max-age=60, stale-while-revalidate=300':'public, max-age=86400, stale-while-revalidate=604800'};
     return new Response(data,{status:200,headers});
   }catch{
     return new Response('Not Found',{status:404});
@@ -37,6 +37,17 @@ const server=http.createServer(async(req,res)=>{
   try{
     const host=req.headers.host||'localhost';
     const origin='http://'+host;
+    if(req.method==='GET'||req.method==='HEAD'){
+      const u=new URL(origin+(req.url||'/'));
+      if(!u.pathname.startsWith('/api/')){
+        const response=await worker.fetch(new Request(u,{method:req.method,headers:req.headers}),env,{});
+        res.statusCode=response.status;
+        response.headers.forEach((v,k)=>res.setHeader(k,v));
+        if(req.method==='HEAD'){res.end();return;}
+        res.end(Buffer.from(await response.arrayBuffer()));
+        return;
+      }
+    }
     const chunks=[];
     for await(const chunk of req) chunks.push(chunk);
     const body=chunks.length?Buffer.concat(chunks):undefined;
