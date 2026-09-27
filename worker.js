@@ -143,7 +143,7 @@ async function runtimeRoutes(req,env,u){
     const draft={id:id(),topic,market,format,title:topic,outline:['Problem','Solution','Proof / evidence','Offer','Call to action'],body:'Draft prepared for human/AI quality review before publication.',status:'draft',createdAt:now()};await kvPut(env,'content/'+draft.id,draft);return rjson({ok:true,draft,engine:'content-engine',aiConfigured:!!(env.OPENAI_API_KEY||env.GEMINI_API_KEY||env.ANTHROPIC_API_KEY)},201);
   }
   if(p==='/api/analytics'&&req.method==='GET'){
-    const leads=await kvList(env,'revenue-leads/',1000),orders=await kvList(env,'orders/',1000),paid=orders.filter(x=>x?.status==='paid');return rjson({ok:true,metrics:{leads:leads.length,orders:orders.length,paid:paid.length,revenueUsd:paid.reduce((s,x)=>s+Number(x.orderAmount??(x.currency==='USD'?x.amount:0)||0),0),settlementIrr:paid.reduce((s,x)=>s+Number(x.providerAmount??(x.currency==='IRR'?x.amount:0)||0),0)},engine:'analytics'});
+    const leads=await kvList(env,'revenue-leads/',1000),orders=await kvList(env,'orders/',1000),paid=orders.filter(x=>x?.status==='paid');return rjson({ok:true,metrics:{leads:leads.length,orders:orders.length,paid:paid.length,revenueUsd:paid.reduce((s,x)=>s+Number((x.orderAmount??(x.currency==='USD'?x.amount:0))||0),0),settlementIrr:paid.reduce((s,x)=>s+Number((x.providerAmount??(x.currency==='IRR'?x.amount:0))||0),0)},engine:'analytics'});
   }
   if(p==='/api/retention'&&req.method==='GET'){
     const orders=await kvList(env,'orders/',1000),byCustomer={};for(const o of orders.filter(x=>x?.status==='paid')){const k=clean(o.client||o.email||o.accountId||'unknown',160);(byCustomer[k]??=[]).push(o)}
