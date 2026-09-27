@@ -200,6 +200,38 @@ async function runtimeRoutes(req,env,u){
     state.revenueLeads.set(lead.id,lead);await kvPut(env,'lead/'+lead.id,lead);await kvPut(env,'revenue-leads/'+lead.id,lead);
     return rjson({ok:true,lead,program},201);
   }
+  if(p==='/api/revenue/checkout'&&req.method==='POST'){
+    const b=await req.json().catch(()=>({}));
+    const leadId=clean(b.leadId,120),email=clean(b.email,160),service=clean(b.service||'custom',80);
+    if(!/^\\S+@\\S+\\.\\S+$/.test(email))return rjson({ok:false,error:'valid_email_required'},400);
+    const catalog={
+      website:{name:'AI Website Build',price:149},
+      teaser:{name:'Marketing Teaser',price:49},
+      fix:{name:'Website Fix',price:39},
+      growth:{name:'Growth & SEO',price:79},
+      automation:{name:'Business Automation',price:99},
+      'ai-agent':{name:'AI Agent Integration',price:129}
+    };
+    let lead=leadId?await kvGet(env,'revenue-leads/'+leadId,null):null;
+    if(!lead&&leadId)lead=state.revenueLeads.get(leadId)||null;
+    const selected=catalog[service]||catalog[String(lead?.recommendedService||'')];
+    if(!selected)return rjson({ok:false,error:'service_not_available'},400);
+    const amountUsd=Number(selected.price);
+    const rate=Number(env.USD_IRR_RATE||0);
+    const paymentConfigured=!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY);
+    const order={id:id(),accountId:clean(lead?.id||'guest'),client:email,email,service:service||lead?.recommendedService||'custom',description:clean(b.description||lead?.request||selected.name,1000),currency:'USD',amount:amountUsd,orderAmount:amountUsd,status:'pending',leadId:lead?.id||null,createdAt:now()};
+    state.orders.set(order.id,order);
+    if(env.PAYMENTS)await env.PAYMENTS.put('orders/'+order.id,JSON.stringify(order));
+    if(!paymentConfigured)return rjson({ok:true,order,payment:{ready:false,error:'payment_not_configured'},next:'configure_variza'},201);
+    if(!Number.isFinite(rate)||rate<=0)return rjson({ok:true,order,payment:{ready:false,error:'fx_unavailable'},next:'configure_usd_irr_rate'},201);
+    const providerAmount=Math.max(1000,Math.round(amountUsd*rate));
+    const paymentReq=new Request(new URL('/api/pay',req.url),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({amount:providerAmount,orderId:order.id,client:email,description:order.description,returnUrl:new URL('/payment.html?order='+encodeURIComponent(order.id)+'&amount='+providerAmount,req.url).toString()})});
+    const paymentResp=await pay({request:paymentReq,env});
+    const payment=await paymentResp.json().catch(()=>({ok:false,error:'payment_response_invalid'}));
+    if(!payment?.ok)return rjson({ok:true,order,payment:{ready:false,error:payment?.error||'payment_create_failed',providerStatus:payment?.providerStatus||paymentResp.status},next:'payment_retry'},201);
+    const saved=await kvGet(env,'orders/'+order.id,order);
+    return rjson({ok:true,order:saved||{...order,providerAmount},payment:{ready:true,payUrl:payment.payUrl,orderId:order.id,providerAmount},next:'pay'},201);
+  }
   if(p==='/api/revenue/settlement'&&req.method==='GET'){
     return rjson({ok:true,providers:{variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY),ton:!!env.TON_RECEIVING_ADDRESS},policy:{paidOnly:true,noSecretKeys:true,ownerApprovalForIrreversible:true}});
   }
