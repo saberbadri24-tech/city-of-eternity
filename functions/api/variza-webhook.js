@@ -25,7 +25,7 @@ const hmac = async (secret, body) => {
 };
 
 export async function onRequestPost({ request, env }) {
-  const secret = env.VARIZA_WEBHOOK_SECRET || env.VARIA_WEBHOOK_SECRET;
+  const secret = env.VARIZA_WEBHOOK_SECRET || env.VARIA_WEBHOOK_SECRET || env.VARIZA_WEBHOOK_TOKEN || env.VARIZA_WEBHOOK_KEY;
   if (!secret) return json({ ok: false, error: "webhook_not_configured" }, 503);
 
   try {
