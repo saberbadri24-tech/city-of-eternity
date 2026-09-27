@@ -32,7 +32,7 @@ async function startOrder(service){
   if(!lead.ok)throw Error(lead.error||'lead_error');
   const order=await get('/api/order',{method:'POST',body:JSON.stringify({accountId:'web-'+lead.id,service:s.id,description:description+' | Lead: '+lead.id,currency:'USD',amount:s.price})});
   if(!order.ok)throw Error(order.error||'order_error');
-  location.href='payment.html?order='+encodeURIComponent(order.order.id)+'&amount='+encodeURIComponent(Math.round(s.price*1000))+'&ton=0';
+  try{const fx=await get('/api/fx');const toman=Math.max(1000,Math.round(s.price*Number(fx.tomanRate||fx.rate/10)));location.href='payment.html?order='+encodeURIComponent(order.order.id)+'&amount='+encodeURIComponent(toman)+'&ton=0'}catch{throw Error('نرخ USD/تومان برای پرداخت واقعی تنظیم نشده است')}
  }catch(e){$('#status').textContent='سفارش ثبت نشد: '+e.message}
 }
 $('#run').onclick=async()=>{const b=$('#run');b.disabled=true;$('#status').textContent='در حال پردازش سرنخ‌ها و سفارش‌های واقعی…';try{const d=await get('/api/free-admin');const rows=d.requests||[];const qualified=rows.filter(x=>x.status==='approved');$('#status').textContent='پردازش انجام شد. سرنخ واقعی: '+rows.length+' · تأییدشده: '+qualified.length+'. ارسال خودکار تبلیغاتی انجام نمی‌شود.';await load()}catch(e){$('#status').textContent='نیاز به ورود مدیر: '+e.message}finally{b.disabled=false}};
