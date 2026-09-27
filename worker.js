@@ -71,8 +71,8 @@ async function runtimeRoutes(req,env,u){
       }catch{}
     }
     const paid=orders.filter(x=>x.status==='paid');
-    const revenue=paid.reduce((s,x)=>s+Number(x.orderAmount??(x.currency==='USD'?x.amount:0)||0),0);
-    return rjson({ok:true,counts:{leads:leads.length,orders:orders.length,paid:paid.length},revenue,currency:'USD',settlement:paid.reduce((s,x)=>s+Number(x.providerAmount??(x.currency==='IRR'?x.amount:0)||0),0),settlementCurrency:'IRR',updatedAt:now()});
+    const revenue=paid.reduce((s,x)=>s+Number((x.orderAmount??(x.currency==='USD'?x.amount:0))||0),0);
+    return rjson({ok:true,counts:{leads:leads.length,orders:orders.length,paid:paid.length},revenue,currency:'USD',settlement:paid.reduce((s,x)=>s+Number((x.providerAmount??(x.currency==='IRR'?x.amount:0))||0),0),settlementCurrency:'IRR',updatedAt:now()});
   }
   if(p==='/api/revenue/leads'){
     if(!(await adminAuth(req,env)))return rjson({ok:false,error:'admin_auth_required'},401);
