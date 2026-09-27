@@ -113,7 +113,7 @@ export async function runAutopilot(env,{force=false}={}){
   for(const [customer,orders] of paidCustomers){
     if(orders.length<1||customer==='unknown')continue;
     const last=orders.map(x=>x.paidAt||x.createdAt).sort().pop();
-    const key='retention/'+Buffer.from(customer).toString('base64url');
+    const key='retention/'+btoa(unescape(encodeURIComponent(customer))).replace(/[^A-Za-z0-9_-]/g,'_').slice(0,120);
     const existing=env.PAYMENTS?await env.PAYMENTS.get(key,'json').catch(()=>null):null;
     const rec={customer,orders:orders.length,lastPaidAt:last,nextOffer:orders.length>=2?'growth_retainer':'maintenance_retainer',status:'ready',updatedAt:started};
     if(!existing)retention++;
