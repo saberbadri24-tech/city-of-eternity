@@ -1,0 +1,32 @@
+name: ANIL X Autonomous Revenue Fleet
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: revenue-fleet
+  cancel-in-progress: true
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Run revenue fleet
+        env:
+          ANIL_X_REVENUE_URL: https://city-of-eternity.onrender.com/api/revenue/fleet/run
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --max-time 45             -X POST "$ANIL_X_REVENUE_URL"             -H 'content-type: application/json'             -d '{}' > fleet.json
+          python - <<'PY'
+          import json
+          d=json.load(open("fleet.json"))
+          assert d.get("ok") is True, d
+          print("fleet ok:", len(d.get("engines", [])), "engines")
+          print("paid orders:", d.get("accounting", {}).get("paidOrders", 0))
+          PY
