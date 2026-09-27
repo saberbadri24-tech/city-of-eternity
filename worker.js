@@ -38,6 +38,38 @@ async function revenueFleetStatus(env){
  const configured={ton:!!env.TON_RECEIVING_ADDRESS,variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY),ai:!!(env.OPENAI_API_KEY||env.GEMINI_API_KEY||env.ANTHROPIC_API_KEY)};
  return {ok:true,treasury:{tonConfigured:configured.ton,varizaConfigured:configured.variza},engines:REVENUE_FLEET.map(x=>({...x,collectsToTreasury:configured.ton&&(['ACTIVE','OWNER_GATED'].includes(x.status)),paymentReady:configured.variza||x.mode==='opportunity'})),policy:'هر موتور مستقل است؛ درآمد فقط پس از پرداخت/تسویه واقعی ثبت می‌شود. دسترسی حساب، احراز هویت، تأیید پلتفرم و اقدامات حساس خودکار فرض نمی‌شوند.'};
 }
+
+async function runRevenueFleet(env){
+  const started=now();
+  const autopilotCycle=await runAutopilotSafe(env);
+  const persistedLeads=await kvList(env,'lead/',500);
+  const revenueLeads=await kvList(env,'revenue-leads/',500);
+  const leadCount=new Set([...persistedLeads,...revenueLeads].map(x=>x?.id).filter(Boolean)).size;
+  const paidOrders=(await kvList(env,'orders/',500)).filter(x=>x?.status==='paid');
+  const configured={ton:!!env.TON_RECEIVING_ADDRESS,variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY),ai:!!(env.OPENAI_API_KEY||env.GEMINI_API_KEY||env.ANTHROPIC_API_KEY)};
+  const states=[];
+  for(const engine of REVENUE_FLEET){
+    let operational=engine.status==='ACTIVE'||engine.status==='OWNER_GATED';
+    let nextAction='monitor';
+    if(engine.status==='ACTIVE'&&!configured.variza) nextAction='configure_payment_gateway';
+    if(engine.id==='lead-generation') nextAction=leadCount?'qualify_and_route_leads':'await_compliant_inbound_or_authorized_prospecting';
+    if(engine.id==='micro-saas-api'||engine.id==='digital-products'||engine.id==='newsletter-community'||engine.id==='licensing-assets') nextAction='build_or_attach_real_product_before_sales';
+    if(engine.status==='ACCOUNT_REQUIRED') nextAction='connect_required_platform_account';
+    if(engine.status==='PARTNER_REQUIRED') nextAction='connect_approved_partner_program';
+    if(engine.status==='PRODUCT_REQUIRED') nextAction='attach_verified_product_asset';
+    if(engine.status==='OWNER_GATED') nextAction='verify_then_queue_owner_approval';
+    states.push({id:engine.id,status:engine.status,operational,prereq:engine.prereq,nextAction,lastRun:started,kpi:{leads:leadCount,paidOrders:paidOrders.length}});
+    await kvPut(env,'revenue-engine/'+engine.id,{id:engine.id,status:engine.status,operational,nextAction,lastRun:started,kpi:{leads:leadCount,paidOrders:paidOrders.length}});
+  }
+  const report={ok:true,startedAt:started,finishedAt:now(),cycle:autopilotCycle,engines:states,treasury:{tonConfigured:configured.ton,varizaConfigured:configured.variza},accounting:{paidOrders:paidOrders.length,rule:'only settled/paid orders count as revenue'},safety:{no_bulk_spam:true,no_credentials_or_seeds:true,no_captcha_or_kyc_bypass:true,no_sensitive_actions:true,owner_approval_for_irreversible:true}};
+  await kvPut(env,'revenue-fleet/latest',report);
+  return report;
+}
+async function revenueFleetState(env){
+  const latest=await kvGet(env,'revenue-fleet/latest',null);
+  return {ok:true,latest,engines:await Promise.all(REVENUE_FLEET.map(async e=>await kvGet(env,'revenue-engine/'+e.id,{id:e.id,status:e.status,operational:e.status==='ACTIVE'||e.status==='OWNER_GATED'})))};
+}
+
 const REVENUE_PROGRAMS=[
 {id:'ai-service-studio',name:'AI Service Studio',type:'service',status:'LIVE',description:'فروش ساخت سایت، رفع مشکل، رشد، اتوماسیون و اتصال AI Agent با سفارش و پرداخت واقعی.',engine:'sales-conversion'},
 {id:'ai-automation',name:'AI Automation & Agents',type:'service',status:'LIVE',description:'پیاده‌سازی اتوماسیون، workflow و AI agent برای کسب‌وکارها.',engine:'business-automation'},
@@ -129,11 +161,10 @@ async function runtimeRoutes(req,env,u){
     if(!Number.isFinite(rate)||rate<=0)return rjson({ok:false,error:'usd_irr_rate_not_configured',currency:'USD',target:'IRR',source:'environment'});
     return rjson({ok:true,from:'USD',to:'IRR',rate,source:'environment',tomanRate:rate/10});
   }
-  if(p==='/api/revenue/fleet'&&req.method==='GET')return rjson(await revenueFleetStatus(env));
+  if(p==='/api/revenue/fleet'&&req.method==='GET')return rjson({...await revenueFleetStatus(env),state:await revenueFleetState(env)});
   if(p==='/api/revenue/fleet/run'&&req.method==='POST'){
-    const fleet=await revenueFleetStatus(env);
-    const cycle=await runAutopilotSafe(env);
-    return rjson({ok:true,startedAt:now(),fleet,cycle});
+    const result=await runRevenueFleet(env);
+    return rjson(result);
   }
   if(p==='/api/revenue/programs'&&req.method==='GET'){
     const configured={variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY),ton:!!env.TON_RECEIVING_ADDRESS,ai:!!(env.OPENAI_API_KEY||env.GEMINI_API_KEY||env.ANTHROPIC_API_KEY),gsc:!!(env.GSC_ACCESS_TOKEN||env.GSC_SERVICE_ACCOUNT_JSON)};
