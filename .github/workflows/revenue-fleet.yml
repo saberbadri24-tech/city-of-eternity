@@ -35,3 +35,21 @@ jobs:
           assert d.get('ok') is True
           print("cycle:", json.dumps(d.get("accounting",{}), ensure_ascii=False))
           PY
+
+  healthcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Public uptime and revenue-path check
+        run: |
+          set -euo pipefail
+          curl -fsSL --max-time 20 https://city-of-eternity.onrender.com/api/health >/tmp/health.json
+          curl -fsSL --max-time 20 https://city-of-eternity.onrender.com/api/revenue/customer-ready >/tmp/customer.json
+          python - <<'PY'
+          import json
+          h=json.load(open('/tmp/health.json')); c=json.load(open('/tmp/customer.json'))
+          assert h.get('ok') is True
+          assert c.get('ok') is True
+          print("ANIL X public health: OK")
+          print("Customer path:", json.dumps(c.get("customerPath",{}), ensure_ascii=False))
+          print("External blockers:", c.get("blockers",[]))
+          PY
