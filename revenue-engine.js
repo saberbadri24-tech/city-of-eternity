@@ -12,14 +12,18 @@ const $=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"']/g,m=
 const money=n=>'$'+Number(n||0).toLocaleString('en-US',{maximumFractionDigits:2});
 async function get(path,opts={}){const r=await fetch(API+path,{...opts,headers:{'content-type':'application/json',...(opts.headers||{})},credentials:'include'});const d=await r.json().catch(()=>({}));if(!r.ok)throw Error(d.error||('HTTP '+r.status));return d}
 async function load(){
+ try{
+  const e=await get('/api/revenue/engines');$('#engines').innerHTML=(e.engines||[]).map(x=>'<div class="service"><div><b>'+esc(x.name)+'</b><p>'+esc(x.mode||'')+'</p></div><span>'+((x.active)?'🟢 فعال':'⚪ متوقف')+'</span></div>').join('');
+ }catch(e){$('#engines').innerHTML='<div class="status">وضعیت موتورهای زنده فعلاً قابل دریافت نیست.</div>'}
  $('#services').innerHTML=services.map(x=>'<div class="service"><div><b>'+esc(x.name)+' · '+money(x.price)+'</b><p>'+esc(x.description)+'</p></div><button class="btn" data-service="'+x.id+'">سفارش</button></div>').join('');
  document.querySelectorAll('[data-service]').forEach(b=>b.onclick=()=>startOrder(b.dataset.service));
  try{
-  const d=await get('/api/free-admin'); const rows=d.requests||[];
+  const d=await get('/api/revenue/summary'); const rows=[];
   $('#leads').textContent=rows.length;
-  const approved=rows.filter(x=>x.status==='approved').length;
-  $('#orders').textContent=approved;
-  $('#status').textContent='سرنخ‌های واقعی ورودی: '+rows.length+' · تأییدشده: '+approved;
+  $('#orders').textContent=d.counts?.orders||0;
+  $('#paid').textContent=d.counts?.paid||0;
+  $('#revenue').textContent=money(d.revenue||0);
+  $('#status').textContent='سرنخ: '+(d.counts?.leads||0)+' · سفارش: '+(d.counts?.orders||0)+' · پرداخت واقعی: '+(d.counts?.paid||0);
  }catch(e){$('#status').textContent='برای آمار کامل، ورود مدیر لازم است.'}
 }
 async function startOrder(service){
