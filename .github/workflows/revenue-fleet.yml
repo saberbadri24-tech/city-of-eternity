@@ -13,10 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run ANIL X cycle
-        env:
-          OIDC_URL: ${{ env.ACTIONS_ID_TOKEN_REQUEST_URL }}
-          OIDC_TOKEN: ${{ env.ACTIONS_ID_TOKEN_REQUEST_TOKEN }}
         run: |
-          set -e
-          TOKEN=$(curl -fsSL -H "Authorization: bearer $OIDC_TOKEN" "$OIDC_URL&audience=anil-x" | python -c "import sys,json; print(json.load(sys.stdin)['value'])")
-          curl -fsSL -X POST             -H "content-type: application/json"             -H "Authorization: Bearer $TOKEN"             --data '{"source":"github-actions","scheduled":true}'             https://city-of-eternity.onrender.com/api/revenue/fleet/run
+          set -euo pipefail
+          TOKEN=$(curl -fsSL \
+            -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x" \
+            | python -c "import sys,json; print(json.load(sys.stdin)['value'])")
+          curl -fsSL -X POST \
+            -H "content-type: application/json" \
+            -H "Authorization: Bearer $TOKEN" \
+            --data '{"source":"github-actions","scheduled":true}' \
+            https://city-of-eternity.onrender.com/api/revenue/fleet/run
