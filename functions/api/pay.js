@@ -62,11 +62,19 @@ export async function onRequestPost({ request, env }) {
       }, 502);
     }
 
+    const sourceOrder = orderId
+      ? ((env.PAYMENTS && await env.PAYMENTS.get(`orders/${orderId}`, "json").catch(() => null)) || state.orders.get(orderId) || null)
+      : null;
     const record = {
       orderId,
       client,
       description,
       amount,
+      providerAmount: amount,
+      providerCurrency: "IRR",
+      orderAmount: Number(sourceOrder?.amount || 0),
+      orderCurrency: String(sourceOrder?.currency || "USD"),
+      service: String(sourceOrder?.service || ""),
       status: "pending",
       payUrl: result.pay_url,
       slug: result.slug || null,
