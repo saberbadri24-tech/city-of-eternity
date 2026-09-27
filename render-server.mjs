@@ -27,6 +27,11 @@ async function assetsFetch(request){
   }
 }
 
+const ADMIN_SECRET=String(process.env.ANIL_ADMIN_PASSWORD||'');
+if(ADMIN_SECRET.length<8){
+  console.error('FATAL: ANIL_ADMIN_PASSWORD is missing or too short; refusing to start.');
+  process.exit(1);
+}
 const env={...process.env,ASSETS:{fetch:assetsFetch}};
 const server=http.createServer(async(req,res)=>{
   try{
