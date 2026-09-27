@@ -1,8 +1,16 @@
 (()=>{'use strict';
 const $=s=>document.querySelector(s);
-async function j(p){const r=await fetch(p+'?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error(p);return r.json()}
+const LIVE='https://saberbadri24-tech.github.io/immortal-guard/data/opportunities.json';
 const fa=n=>String(n??0).replace(/\d/g,x=>'۰۱۲۳۴۵۶۷۸۹'[x]);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-async function load(){const root=$('#axGuardCenter');if(!root)return;try{const[s,o]=await Promise.all([j('guard-status.json'),j('guard-opportunities.json')]);const c=s.counts||{},a=s.automation||{},rows=(o.items||o.ranked||[]).slice().sort((x,y)=>Number(y.score||0)-Number(x.score||0)).slice(0,6);$('#axGuardMetrics').innerHTML=[['کاندید رادار',c.opportunities||0],['بررسی‌شده',c.verificationChecked||0],['هم‌راستا',c.verificationReachableAligned||0],['صف مالک',c.queue||0]].map(x=>'<div><b>'+fa(x[1])+'</b><small>'+x[0]+'</small></div>').join('');$('#axGuardAI').innerHTML='<span class="'+(a.liveExternalAstra?'ok':'warn')+'">Astra '+(a.liveExternalAstra?'LIVE':'Fallback')+'</span> · <span class="'+(a.liveExternalClaude?'ok':'warn')+'">Claude '+(a.liveExternalClaude?'LIVE':'Fallback')+'</span> · <span class="'+(a.liveExternalGemini?'ok':'warn')+'">Gemini '+(a.liveExternalGemini?'LIVE':'Fallback')+'</span>';$('#axGuardOpps').innerHTML=rows.map((x,i)=>'<article><b>'+fa(i+1)+'. '+esc(x.title||x.name||'فرصت')+'</b><small>امتیاز '+fa(x.score||0)+' · '+esc(x.domain||x.publisher||x.source||'منبع رسمی')+'</small><a href="'+esc(x.officialUrl||x.resolvedUrl||x.url||'#')+'" target="_blank" rel="noopener noreferrer">منبع رسمی ↗</a></article>').join('')||'<p>فعلاً فرصت قابل‌نمایش ثبت نشده است.</p>';const blockers=s.blockers||[];$('#axGuardState').textContent=blockers.length?'نیازمند توجه: '+blockers.map(x=>typeof x==='string'?x:x.source).join(' · '):'گارد در وضعیت عادی است.'}catch(e){$('#axGuardState').textContent='وضعیت زنده Guard فعلاً در دسترس نیست؛ پنل عملیاتی را باز کن.'}}
+async function j(url){const r=await fetch(url+'?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error(url);return r.json()}
+async function load(){const root=$('#axGuardCenter');if(!root)return;try{
+ const o=await j(LIVE),items=Array.isArray(o.items)?o.items:[],eligible=items.filter(x=>['ALLOW','READY','VERIFIED'].includes(String(x.action||x.status||'').toUpperCase())||Number(x.score||0)>=70);
+ const rows=items.slice().sort((a,b)=>Number(b.score||0)-Number(a.score||0)).slice(0,6);
+ $('#axGuardMetrics').innerHTML=[['کاندید رادار',o.count??items.length],['بررسی‌شده',items.filter(x=>x.evidence||x.securityGate).length],['هم‌راستا',eligible.length],['صف مالک',items.filter(x=>String(x.action||'').toUpperCase()==='REVIEW').length]].map(x=>'<div><b>'+fa(x[1])+'</b><small>'+x[0]+'</small></div>').join('');
+ $('#axGuardAI').innerHTML='<span class="ok">Guard Radar LIVE</span> · <span class="warn">داده زنده از Immortal Guard X</span>';
+ $('#axGuardOpps').innerHTML=rows.map((x,i)=>'<article><b>'+fa(i+1)+'. '+esc(x.title||x.name||'فرصت')+'</b><small>امتیاز '+fa(x.score||0)+' · '+esc(x.domain||x.publisher||'منبع')+' · '+esc(x.action||x.status||'REVIEW')+'</small><a href="'+esc(x.officialUrl||x.resolvedUrl||x.url||'#')+'" target="_blank" rel="noopener noreferrer">منبع ↗</a></article>').join('')||'<p>فعلاً فرصت قابل‌نمایش ثبت نشده است.</p>';
+ $('#axGuardState').textContent='آخرین داده Guard: '+String(o.updatedAt||'نامشخص')+' · بدون claim، امضا یا انتقال خودکار.';
+}catch(e){$('#axGuardState').textContent='فید زنده Guard فعلاً در دسترس نیست؛ داشبورد مستقل Guard را باز کن.'}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',load,{once:true});else load();setInterval(load,60000);
 })();
