@@ -163,7 +163,7 @@ async function runtimeRoutes(req,env,u){
   if(p==='/api/evolution'&&req.method==='POST'){
     const report=await runAutopilotSafe(env);return rjson({ok:true,cycle:report,steps:['Discover','Analyze','Build','Sell','Get Paid','Measure','Learn','Improve']});
   }
-/payment-config'){
+if(p==='/api/payment-config'){
     return rjson({ok:true,ton:{enabled:!!env.TON_RECEIVING_ADDRESS,address:env.TON_RECEIVING_ADDRESS||null},fiat:{provider:'variza',enabled:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY)}});
   }
   if(p==='/api/revenue/catalog'){
