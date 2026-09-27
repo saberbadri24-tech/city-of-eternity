@@ -6,9 +6,54 @@ import vision from './functions/api/vision.mjs';
 import voice from './functions/api/voice.mjs';import tonApi from './functions/api/ton.mjs';import {handleJavidan} from './functions/api/javidan-trinity.mjs';import {onRequestPost as pay} from './functions/api/pay.js';import {onRequestPost as webhook} from './functions/api/variza-webhook.js';
 const json=(d,s=200,h={})=>new Response(JSON.stringify(d),{status:s,headers:{'content-type':'application/json','cache-control':'no-store',...h}});
 const rjson=(d,s=200,h={})=>runtimeJson(d,s,h);
+async function kvGet(env,key,fallback=null){if(!env.PAYMENTS)return fallback;try{const v=await env.PAYMENTS.get(key,'json');return v??fallback}catch{return fallback}}
+async function kvPut(env,key,value){if(env.PAYMENTS)await env.PAYMENTS.put(key,JSON.stringify(value))}
+async function kvList(env,prefix,limit=100){if(!env.PAYMENTS)return[];try{const x=await env.PAYMENTS.list({prefix});const keys=(x?.keys||[]).slice(-limit);return (await Promise.all(keys.map(k=>env.PAYMENTS.get(k.name,'json').catch(()=>null)))).filter(Boolean)}catch{return[]}}
+const V90_DEFAULTS={pricesUsd:{FIX:9,START:29,BUILD:79,GROW:149},permissions:{autoReports:true,autoMessaging:true,autoSeo:true,autoPaymentDiagnostics:true,autoBenchmark:true,autoLeadReview:true}};
+async function getV90Config(env){const x=await kvGet(env,'admin/config',null);return {pricesUsd:{...V90_DEFAULTS.pricesUsd,...(x?.pricesUsd||{})},permissions:{...V90_DEFAULTS.permissions,...(x?.permissions||{})},updatedAt:x?.updatedAt||new Date(0).toISOString()}}
+async function saveV90Config(env,next){const x={pricesUsd:next.pricesUsd,permissions:next.permissions,updatedAt:new Date().toISOString()};await kvPut(env,'admin/config',x);return x}
+async function v90Approval(env,title,category,details){const rec={id:id(),title:String(title).slice(0,180),category:String(category).slice(0,80),details:String(details||'').slice(0,1500),status:'pending',createdAt:now()};await kvPut(env,'admin/approval/'+rec.id,rec);return rec}
+async function v90Audit(env,action,success,details=''){await kvPut(env,'admin/action/'+id(),{action,success,details:String(details).slice(0,1000),createdAt:now()})}
+async function v90SiteConfig(env){return await kvGet(env,'site/config',{headlineEn:'Tell us what you need.\\nWe turn it into a real result.',headlineFa:'بگو چه می‌خواهی.\\nما آن را به نتیجه واقعی تبدیل می‌کنیم.',leadEn:'One place for websites, creative production, digital fixes and business growth.',leadFa:'یک مسیر برای ساخت سایت، تولید خلاقانه، رفع مشکلات دیجیتال و رشد کسب‌وکار.',ctaEn:'Start a project',ctaFa:'شروع پروژه',trustEn:'One brief. One clear route. A real next step.',trustFa:'یک درخواست. یک مسیر روشن. یک قدم واقعی.',updatedAt:new Date(0).toISOString()})}
+async function v90AdminRoutes(req,env,u){
+  const p=u.pathname;
+  if(p==='/api/site-config'&&req.method==='GET')return rjson({...await v90SiteConfig(env),pricesUsd:(await getV90Config(env)).pricesUsd});
+  if(p==='/api/admin/overview'&&req.method==='POST'){
+    if(!(await adminAuth(req,env)))return rjson({ok:false,error:'admin_login_required'},401);
+    const [leads,orders,approvals,actions,business]=await Promise.all([kvList(env,'lead/',500),kvList(env,'orders/',500),kvList(env,'admin/approval/',100),kvList(env,'admin/action/',30),getV90Config(env)]);
+    const paid=orders.filter(x=>x?.status==='paid'),pending=orders.filter(x=>x?.status==='pending'),failed=orders.filter(x=>x?.status==='failed');
+    return rjson({owner:{name:'مدیر صابر بدری'},counts:{leads:leads.length,orders:orders.length,paidOrders:paid.length,pendingOrders:pending.length},revenue:{toman:paid.reduce((s,x)=>s+Number(x.providerAmount??(x.currency==='IRR'?x.amount:0)||0),0),sourceUsd:paid.reduce((s,x)=>s+Number(x.orderAmount??(x.currency==='USD'?x.amount:0)||0),0)},payment:{variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY),international:!!env.STRIPE_SECRET_KEY},security:{passwordOnly:true,session:'signed-httpOnly-cookie'},business,approvals:approvals.filter(x=>x.status==='pending').slice(-20),recentActions:actions.slice(-10)});
+  }
+  if((p==='/api/admin/controls'||p==='/api/admin/controls/')&&req.method==='GET'){
+    if(!(await adminAuth(req,env)))return rjson({ok:false,error:'admin_login_required'},401);
+    const approvals=(await kvList(env,'admin/approval/',100)).filter(x=>x.status==='pending').slice(-20);return rjson({ok:true,business:await getV90Config(env),approvals});
+  }
+  if(p==='/api/admin/controls'&&req.method==='POST'){
+    if(!(await adminAuth(req,env)))return rjson({ok:false,error:'admin_login_required'},401);
+    const b=await req.json().catch(()=>({})),cur=await getV90Config(env),prices={...cur.pricesUsd},permissions={...cur.permissions,...(b.permissions||{})};
+    for(const k of ['FIX','START','BUILD','GROW'])if(b.pricesUsd?.[k]!==undefined){const n=Number(b.pricesUsd[k]);if(!Number.isFinite(n)||n<1||n>100000)return rjson({ok:false,error:'invalid_price'},400);prices[k]=Math.round(n*100)/100}
+    if(JSON.stringify(prices)!==JSON.stringify(cur.pricesUsd)){const a=await v90Approval(env,'تغییر قیمت‌های ANIL X','pricing',JSON.stringify(prices));return rjson({ok:true,success:true,approvalRequired:true,approvalId:a.id,business:cur})}
+    const next=await saveV90Config(env,{pricesUsd:prices,permissions,updatedAt:now()});await v90Audit(env,'update_permissions',true,permissions);return rjson({ok:true,success:true,approvalRequired:false,business:next});
+  }
+  if(p==='/api/admin/approval'&&req.method==='POST'){
+    if(!(await adminAuth(req,env)))return rjson({ok:false,error:'admin_login_required'},401);
+    const b=await req.json().catch(()=>({})),idv=clean(b.approvalId,120),decision=b.decision==='approved'?'approved':b.decision==='rejected'?'rejected':'';
+    if(!idv||!decision)return rjson({ok:false,error:'approval_required'},400);
+    const a=await kvGet(env,'admin/approval/'+idv,null);if(!a)return rjson({ok:false,error:'approval_not_found'},404);
+    if(decision==='approved'&&a.category==='pricing'){let parsed={};try{parsed=JSON.parse(a.details||'{}')}catch{return rjson({ok:false,error:'invalid_approval_details'},400)}const cur=await getV90Config(env);const prices={FIX:Number(parsed.FIX),START:Number(parsed.START),BUILD:Number(parsed.BUILD),GROW:Number(parsed.GROW)};if(!Object.values(prices).every(n=>Number.isFinite(n)&&n>=1&&n<=100000))return rjson({ok:false,error:'invalid_price'},400);await saveV90Config(env,{...cur,pricesUsd:prices});a.status='approved';a.executed=true;a.decidedAt=now();await kvPut(env,'admin/approval/'+idv,a);await v90Audit(env,'approved_price_change',true,prices);return rjson({ok:true,success:true,status:'approved',executed:true,pricesUsd:prices})}
+    a.status=decision;a.executed=false;a.decidedAt=now();await kvPut(env,'admin/approval/'+idv,a);await v90Audit(env,'approval_'+decision,true,idv);return rjson({ok:true,success:true,status:decision,executed:false});
+  }
+  if(p==='/api/currency/rates'&&req.method==='GET'){const rate=Number(env.USD_IRR_RATE||0);if(!Number.isFinite(rate)||rate<=0)return rjson({ok:false,error:'fx_unavailable'},503);return rjson({base:'USD',currencies:{USD:1,IRR:rate},tomanPerUsd:Math.round(rate/10),supported:['USD','EUR','GBP','CAD','AUD','AED','TRY','CNY','JPY']})}
+  if(p==='/api/me'&&req.method==='GET'){return rjson({ok:true,mode:'guest',userId:null,name:'',email:'',orders:0,requests:0})}
+  if((p==='/api/chat/memory'||p==='/api/memory')&&['GET','POST'].includes(req.method)){const sid=clean(u.searchParams.get('sessionId'),100).replace(/[^a-zA-Z0-9_-]/g,'');if(!sid)return rjson({ok:false,error:'session_required'},400);const key='chat/'+sid;if(req.method==='POST'){const b=await req.json().catch(()=>({}));const rec={sessionId:sid,turns:Array.isArray(b.turns)?b.turns.slice(-30):[],profile:b.profile&&typeof b.profile==='object'?b.profile:{},updatedAt:now()};await kvPut(env,key,rec);return rjson({ok:true,sessionId:sid,count:rec.turns.length})}const rec=await kvGet(env,key,{sessionId:sid,turns:[],profile:{}});return rjson({ok:true,...rec})}
+  if(p==='/api/leads'&&req.method==='POST'){const b=await req.json().catch(()=>({})),email=clean(b.email,160),request=clean(b.request,4000);if(!/^\\S+@\\S+\\.\\S+$/.test(email)||!request)return rjson({ok:false,error:'invalid_request'},400);const lead={id:id(),email,request,language:b.language==='fa'?'fa':'en',recommendedPlan:['FIX','START','BUILD','GROW'].includes(b.recommendedPlan)?b.recommendedPlan:null,createdAt:now()};await kvPut(env,'lead/'+lead.id,lead);return rjson({ok:true,saved:true,leadId:lead.id})}
+  if(p==='/api/payment/status'&&req.method==='GET'){const oid=clean(u.searchParams.get('order'),120);if(!oid)return rjson({ok:false,error:'order_required'},400);const order=await kvGet(env,'orders/'+oid,null);if(!order)return rjson({ok:false,error:'order_not_found'},404);return rjson({ok:true,orderId:oid,plan:order.plan||null,status:order.status,amount:order.amount,currency:order.currency||order.providerCurrency||'IRR'})}
+  return null;
+}
 async function runtimeRoutes(req,env,u){
   const p=u.pathname;
   if(p==='/api/autopilot')return autopilot(req,env);
+  const v90=await v90AdminRoutes(req,env,u);if(v90)return v90;
   if(p==='/api/account'){
     if(!['GET','POST'].includes(req.method))return rjson({ok:false,error:'method_not_allowed'},405);
     const b=req.method==='POST'?await req.json().catch(()=>({})): {};
@@ -140,7 +185,7 @@ async function runtimeRoutes(req,env,u){
   return null;
 }
 async function sign(v,secret){const k=await crypto.subtle.importKey('raw',new TextEncoder().encode(secret),{name:'HMAC',hash:'SHA-256'},false,['sign']);const b=await crypto.subtle.sign('HMAC',k,new TextEncoder().encode(v));return btoa(String.fromCharCode(...new Uint8Array(b))).replace(/=+$/,'').replace(/\+/g,'-').replace(/\//g,'_')}
-async function adminLogin(req,env){if(req.method!=='POST')return json({ok:false,error:'method_not_allowed'},405);const secret=String(env.ANIL_ADMIN_PASSWORD||'');const b=await req.json().catch(()=>({})),pass=String(b.password||'');if(pass!==secret)return json({ok:false,error:'invalid_credentials'},401);const body=btoa(JSON.stringify({sub:'admin',exp:Date.now()+43200000})).replace(/=+$/,'').replace(/\+/g,'-').replace(/\//g,'_');const sig=await sign(body,secret);return json({ok:true},200,{ 'set-cookie':`session=${body+'.'+sig}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=43200` })}
+async function adminLogin(req,env){if(req.method!=='POST')return json({ok:false,error:'method_not_allowed'},405);const secret=String(env.ANIL_ADMIN_PASSWORD||'');if(secret.length<8)return json({ok:false,error:'admin_password_not_configured'},503);const b=await req.json().catch(()=>({})),pass=String(b.password||'');const ip=req.headers.get('x-forwarded-for')||'unknown',key='admin/login/'+btoa(ip).replace(/=+$/,'');const gate=await kvGet(env,key,{count:0,blockedUntil:0});if(Number(gate.blockedUntil)>Date.now())return json({ok:false,error:'too_many_attempts'},429);if(pass!==secret){const count=Number(gate.count||0)+1;await kvPut(env,key,{count,blockedUntil:count>=5?Date.now()+900000:0});return json({ok:false,error:'invalid_credentials'},401)}await kvPut(env,key,{count:0,blockedUntil:0});const body=btoa(JSON.stringify({sub:'admin',exp:Date.now()+43200000})).replace(/=+$/,'').replace(/\+/g,'-').replace(/\//g,'_');const sig=await sign(body,secret);return json({ok:true,expiresAt:Date.now()+43200000},200,{ 'set-cookie':`session=${body+'.'+sig}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=43200` })}
 async function adminAuth(req,env){const secret=String(env.ANIL_ADMIN_PASSWORD||'');if(!secret)return false;const m=(req.headers.get('cookie')||'').match(/(?:^|; )session=([^;]+)/);if(!m)return false;const [body,sig]=m[1].split('.');if(!body||!sig||sig!==(await sign(body,secret)))return false;try{return JSON.parse(atob(body.replace(/-/g,'+').replace(/_/g,'/'))).exp>Date.now()}catch{return false}}
 async function secretary(req,env){
   if(!(await adminAuth(req,env)))return json({ok:false,error:'unauthorized'},401);
