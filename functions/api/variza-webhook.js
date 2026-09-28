@@ -92,7 +92,7 @@ export async function onRequestPost({ request, env }) {
       const updated = {
         ...order,
         status: paid ? "paid" : "amount_mismatch",
-        paidAt: now(),
+        ...(paid ? { paidAt: now() } : {}),
         providerAmount: Number(payload.amount),
         providerCurrency: "IRR",
         attemptCode: payload.attempt_code || null,
