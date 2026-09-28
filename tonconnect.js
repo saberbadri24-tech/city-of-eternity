@@ -19,5 +19,6 @@ function start(){
  }catch(e){console.error('ANIL X TON Connect',e);return false}
 }
 function load(){if(start())return;const s=document.createElement('script');s.src=CDN;s.async=true;s.onload=()=>{if(!start())console.error('TON Connect UI failed to initialize')};s.onerror=()=>console.error('TON Connect UI CDN failed');document.head.appendChild(s)}
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',load,{once:true});else load();
+const schedule=window.requestIdleCallback?cb=>window.requestIdleCallback(cb,{timeout:3000}):cb=>setTimeout(cb,2500);
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>schedule(load),{once:true});else schedule(load);
 })();
