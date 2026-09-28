@@ -4,5 +4,9 @@
   "type": "module",
   "dependencies": {
     "@netlify/blobs": "^10.0.0"
+  },
+  "scripts": {
+    "verify:syntax": "node scripts/verify-syntax.mjs",
+    "postinstall": "node scripts/verify-syntax.mjs"
   }
 }
