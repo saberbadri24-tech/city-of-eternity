@@ -1,7 +1,7 @@
-const CACHE='anilx-v10-fast';
+const CACHE='anilx-v11-fast';
 const ASSETS=['./','./index.html','./en.html','./fa.html','./services.html','./revenue-engine.html','./payment.html','./guard.html','./admin.html','./style.css','./script.js','./anilx-enhance.js','./experience-dna.js','./adaptive-shell.js','./webmcp.js','./tonconnect.js','./sw.js','./manifest.webmanifest','./icon.png','./robots.txt','./sitemap.xml','./render-tonconnect-manifest.json'];
 
-self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS.map(x=>new Request(x,{cache:'reload'}))).catch(()=>{})).then(()=>self.skipWaiting()))});
+self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(async cache=>{await Promise.allSettled(ASSETS.map(async x=>{try{const r=await fetch(new Request(x,{cache:'reload'}));if(r.ok)await cache.put(x,r.clone())}catch{}}))}).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',event=>{
  const request=event.request,url=new URL(request.url);
