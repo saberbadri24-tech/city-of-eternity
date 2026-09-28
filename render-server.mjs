@@ -5,6 +5,7 @@ import {fileURLToPath} from 'node:url';
 import worker from './worker.js';
 
 const root=path.dirname(fileURLToPath(import.meta.url));
+const assetCache=new Map();
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.svg':'image/svg+xml','.webmanifest':'application/manifest+json','.ico':'image/x-icon','.txt':'text/plain; charset=utf-8','.xml':'application/xml; charset=utf-8','.webp':'image/webp','.mp3':'audio/mpeg'};
 
 async function assetsFetch(request){
@@ -19,7 +20,8 @@ async function assetsFetch(request){
     if(!path.extname(file)) file=path.join(root,'index.html');
   }
   try{
-    const data=await fs.readFile(file);
+    let data=assetCache.get(file);
+    if(!data){ data=await fs.readFile(file); assetCache.set(file,data); }
     const ext=path.extname(file).toLowerCase(); const headers={'content-type':mime[ext]||'application/octet-stream','cache-control':ext==='.html'||ext==='.xml'?'public, max-age=60, stale-while-revalidate=300':'public, max-age=86400, stale-while-revalidate=604800'};
     return new Response(data,{status:200,headers});
   }catch{
@@ -34,6 +36,7 @@ if(ADMIN_SECRET.length<8){
 }
 const env={...process.env,ASSETS:{fetch:assetsFetch}};
 const server=http.createServer(async(req,res)=>{
+  // Keep the hot process path cheap: static assets are cached in memory after first read.
   try{
     const host=req.headers.host||'localhost';
     const origin='http://'+host;
