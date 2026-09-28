@@ -45,7 +45,26 @@ export async function onRequestPost({ request, env }) {
       return json({ ok: true, ignored: true });
     }
 
-    if (!env.PAYMENTS) { const local=payload.slug ? [...state.orders.values()].find(x=>x.slug===payload.slug) : null; if(local){local.status='paid';local.paidAt=now();local.attemptCode=payload.attempt_code||null;state.orders.set(local.id,local);return json({ok:true,orderId:local.id,status:'paid'});} return json({ ok: true, status: 'received_no_storage' }); }
+    if (!env.PAYMENTS) {
+      const local = payload.slug ? [...state.orders.values()].find(x => x.slug === payload.slug) : null;
+      if (!local) return json({ ok: true, status: 'received_unmatched' });
+      const paidAmount = Number(payload.amount);
+      const expectedAmount = Number(local.providerAmount ?? local.amount);
+      if (!Number.isFinite(paidAmount) || !Number.isFinite(expectedAmount) || paidAmount < expectedAmount) {
+        local.status = 'amount_mismatch';
+        local.updatedAt = now();
+        local.providerAmount = Number.isFinite(paidAmount) ? paidAmount : null;
+        state.orders.set(local.id, local);
+        return json({ ok: true, orderId: local.id, status: 'amount_mismatch' }, 200);
+      }
+      local.status = 'paid';
+      local.paidAt = now();
+      local.attemptCode = payload.attempt_code || null;
+      local.providerAmount = paidAmount;
+      local.updatedAt = now();
+      state.orders.set(local.id, local);
+      return json({ ok: true, orderId: local.id, status: 'paid' });
+    }
 
     const deliveryId =
       request.headers.get("x-delivery-id") ||
