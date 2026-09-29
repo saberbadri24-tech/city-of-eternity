@@ -4,7 +4,8 @@ import {handlePlan} from './functions/api/plan.mjs';
 import analyze from './netlify/functions/analyze.mjs';
 import vision from './functions/api/vision.mjs';
 import voice from './functions/api/voice.mjs';import tonApi from './functions/api/ton.mjs';import {handleJavidan} from './functions/api/javidan-trinity.mjs';
-import {handleAnilCapabilities} from './functions/api/anil-capabilities.mjs';import {onRequestPost as pay} from './functions/api/pay.js';import {onRequestPost as webhook} from './functions/api/variza-webhook.js';
+import {handleAnilCapabilities} from './functions/api/anil-capabilities.mjs';
+import {anilTool} from './functions/api/anil-tools.mjs';import {onRequestPost as pay} from './functions/api/pay.js';import {onRequestPost as webhook} from './functions/api/variza-webhook.js';
 const json=(d,s=200,h={})=>new Response(JSON.stringify(d),{status:s,headers:{'content-type':'application/json','cache-control':'no-store',...h}});
 const rjson=(d,s=200,h={})=>runtimeJson(d,s,h);
 async function kvGet(env,key,fallback=null){if(!env.PAYMENTS)return fallback;try{const v=await env.PAYMENTS.get(key,'json');return v??fallback}catch{return fallback}}
@@ -180,6 +181,7 @@ async function runtimeRoutes(req,env,u){
   const p=u.pathname;
   if(p==='/api/autopilot')return autopilot(req,env);
   if(p==='/api/anil/capabilities')return handleAnilCapabilities(req,env);
+  if(p==='/api/anil/tools')return anilTool(req,env);
   if(p==='/api/anil/automation/queue')return anilChangeRequest(req,env);
   const v90=await v90AdminRoutes(req,env,u);if(v90)return v90;
   if(p==='/api/account'){
