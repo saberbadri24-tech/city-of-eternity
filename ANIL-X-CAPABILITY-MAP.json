@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "purpose": "Exact capability contract for the ANIL X site assistant.",
+  "requested": {
+    "github_write": "controlled_branch_or_pull_request",
+    "gitlab_write": "environment_credential_required",
+    "deployment_cicd": "github_actions_and_render_autodeploy",
+    "headless_browser": "playwright_smoke_and_optional_remote_provider",
+    "production_database": "database_url_required",
+    "stripe": "stripe_secret_required",
+    "paypal": "paypal_client_credentials_required",
+    "variza": "variza_credentials_required"
+  },
+  "truthRule": "A capability is live only when its real connector/credential is present and a test proves it.",
+  "safety": {
+    "direct_production_mutation": false,
+    "owner_approval_for_irreversible": true,
+    "secret_storage": "environment_only",
+    "payment_execution": "provider_webhook_and_settled_order",
+    "credential_bypass": false
+  }
+}
