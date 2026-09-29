@@ -52,7 +52,7 @@ async function directAdminLogin(req){
   loginAttempts.delete(ip);
   const payload=b64u(JSON.stringify({sub:'admin',exp:now+43200000}));
   const sig=signNode(payload,secret);
-  return jsonNode({ok:true,expiresAt:now+43200000},200,{'set-cookie':\`session=${payload}.${sig}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=43200\`});
+  return jsonNode({ok:true,expiresAt:now+43200000},200,{'set-cookie':`session=${payload}.${sig}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=43200`});
 }
 
 const server=http.createServer(async(req,res)=>{
