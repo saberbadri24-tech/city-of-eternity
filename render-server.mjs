@@ -4,6 +4,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {gzip} from 'node:zlib';
 import {promisify} from 'node:util';
+import {createHmac} from 'node:crypto';
 
 const gzipAsync=promisify(gzip);
 const root=path.dirname(fileURLToPath(import.meta.url));
@@ -34,6 +35,25 @@ const ADMIN_SECRET=String(process.env.ANIL_ADMIN_PASSWORD||'');
 if(ADMIN_SECRET.length<8){console.error('FATAL: ANIL_ADMIN_PASSWORD is missing or too short; refusing to start.');process.exit(1)}
 
 const env={...process.env,ASSETS:{fetch:assetsFetch}};
+const loginAttempts=new Map();
+const b64u=s=>Buffer.from(s).toString('base64').replace(/=+$/,'').replace(/\\+/g,'-').replace(/\\//g,'_');
+const signNode=(v,secret)=>b64u(createHmac('sha256',secret).update(v).digest());
+const jsonNode=(obj,status=200,extra={})=>new Response(JSON.stringify(obj),{status,headers:{'content-type':'application/json; charset=utf-8',...extra}});
+async function directAdminLogin(req){
+  if(req.method!=='POST')return jsonNode({ok:false,error:'method_not_allowed'},405);
+  const secret=String(process.env.ANIL_ADMIN_PASSWORD||'').normalize('NFKC').trim();
+  if(secret.length<8)return jsonNode({ok:false,error:'admin_password_not_configured'},503);
+  const ip=String(req.headers['x-forwarded-for']||'unknown').split(',')[0].trim();
+  const now=Date.now(),gate=loginAttempts.get(ip)||{count:0,until:0};
+  if(gate.until>now)return jsonNode({ok:false,error:'too_many_attempts'},429);
+  let body={};try{body=JSON.parse(await new Promise((resolve,reject)=>{let s='';req.on('data',c=>s+=c);req.on('end',()=>{try{resolve(s)}catch(e){reject(e)}});req.on('error',reject)}))||{}}catch{return jsonNode({ok:false,error:'invalid_json'},400)}
+  const pass=String(body.password||'').normalize('NFKC').trim();
+  if(pass!==secret){const count=gate.count+1;loginAttempts.set(ip,{count,until:count>=5?now+900000:0});return jsonNode({ok:false,error:'invalid_credentials'},401)}
+  loginAttempts.delete(ip);
+  const payload=b64u(JSON.stringify({sub:'admin',exp:now+43200000}));
+  const sig=signNode(payload,secret);
+  return jsonNode({ok:true,expiresAt:now+43200000},200,{'set-cookie':\`session=${payload}.${sig}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=43200\`});
+}
 
 const server=http.createServer(async(req,res)=>{
   try{
@@ -41,6 +61,12 @@ const server=http.createServer(async(req,res)=>{
     const origin='http://'+host;
     const u=new URL(origin+(req.url||'/'));
 
+    if(u.pathname==='/api/health'&&req.method==='GET'){
+      return res.end(await (async()=>{const out={ok:true,ready:true,service:'ANIL X',runtime:'render-static-gateway',configured:{admin:Boolean(process.env.ANIL_ADMIN_PASSWORD),openai:Boolean(process.env.OPENAI_API_KEY),anthropic:Boolean(process.env.ANTHROPIC_API_KEY),gemini:Boolean(process.env.GEMINI_API_KEY),variza:Boolean(process.env.VARIZA_API_KEY||process.env.VARIA_API_KEY||process.env.VARIZA_TOKEN||process.env.VARIZA_KEY),payments:Boolean(process.env.PAYMENTS),assets:true},revenue:{persistence:Boolean(process.env.PAYMENTS),variza:Boolean(process.env.VARIZA_API_KEY||process.env.VARIA_API_KEY||process.env.VARIZA_TOKEN||process.env.VARIZA_KEY),ton:Boolean(process.env.TON_RECEIVING_ADDRESS)}};res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');return JSON.stringify(out)})());
+    }
+    if(u.pathname==='/api/admin/password/login'&&req.method==='POST'){
+      const rr=await directAdminLogin(req);res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
+    }
     if((req.method==='GET'||req.method==='HEAD')&&!u.pathname.startsWith('/api/')){
       const response=await assetsFetch(new Request(u,{method:req.method,headers:req.headers}));
       res.statusCode=response.status;
