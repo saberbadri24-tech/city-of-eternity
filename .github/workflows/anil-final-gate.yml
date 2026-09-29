@@ -1,0 +1,36 @@
+name: ANIL X — Final Contract Gate
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17/15 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: anil-final-gate
+  cancel-in-progress: true
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm install
+      - name: JavaScript syntax gate
+        shell: bash
+        run: |
+          set -e
+          find . -type f \( -name "*.js" -o -name "*.mjs" -o -name "*.cjs" \) -not -path "./node_modules/*" -print0 | while IFS= read -r -d '' f; do
+            node --check "$f"
+          done
+      - name: Production API contract smoke
+        env:
+          ANIL_BASE_URL: https://city-of-eternity.onrender.com
+        run: node scripts/anil-final-contract-smoke.mjs
+      - name: Dependency audit
+        run: npm audit --omit=dev --audit-level=high
