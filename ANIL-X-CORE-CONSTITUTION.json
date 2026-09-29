@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "mission": "Convert a natural-language ANIL X goal into a verified, useful, maintainable result with truthful live-state reporting.",
+  "execution_model": {
+    "loop": ["sense","understand","plan","delegate","execute","verify","criticize","repair","test","security","release","observe","learn"],
+    "high_impact": "minimum_two_independent_checks",
+    "change_scope": "one_bounded_change_per_autonomous_cycle",
+    "promotion": "controlled_pull_request_then_verified_deploy",
+    "rollback": "previous_known_good_deploy_or_commit"
+  },
+  "access": {
+    "repository": "GitHub Actions OIDC or tightly scoped repository credential; never require a raw personal token in chat",
+    "runtime": "Render production Node runtime",
+    "database": "application API/KV/database binding only; never expose raw connection strings to the model",
+    "secrets": "environment_secret_store_only",
+    "credential_lifetime": "short_lived_or_scoped_when_provider_supports_it"
+  },
+  "verification": {
+    "syntax": true,
+    "tests": true,
+    "dependency_audit": true,
+    "browser_smoke": true,
+    "api_contract_smoke": true,
+    "security_boundary": true,
+    "live_truth": true,
+    "no_claim_without_evidence": true
+  },
+  "self_improvement": {
+    "enabled": true,
+    "cadence": "hourly",
+    "bounded_change": true,
+    "skip_without_safe_meaningful_improvement": true,
+    "cannot_weaken_security": true
+  },
+  "irreversible_actions": {
+    "wallet_signing": "owner_approval",
+    "fund_transfer": "owner_approval",
+    "payment_execution": "owner_approval_or_verified_provider_flow",
+    "security_boundary_change": "owner_approval"
+  },
+  "prohibitions": [
+    "seed_or_private_key_storage",
+    "credential_exfiltration",
+    "captcha_or_kyc_bypass",
+    "spam",
+    "fake_success",
+    "fake_live_status",
+    "fake_revenue"
+  ],
+  "revenue_truth": "Only a settled and verified payment is revenue."
+}
