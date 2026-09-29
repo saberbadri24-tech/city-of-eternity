@@ -1,0 +1,5 @@
+const base=(process.env.ANIL_BASE_URL||'https://city-of-eternity.onrender.com').replace(/\/$/,'');
+const checks=[['/api/health','health'],['/api/anil/capabilities','capabilities'],['/api/site-config','site-config'],['/api/discovery?q=website','discovery'],['/api/guard/state','guard-state'],['/api/payment-config','payment-config']];
+const out=[]; let failed=0;
+for(const [path,name] of checks){try{const r=await fetch(base+path,{headers:{accept:'application/json'},redirect:'manual'});const t=await r.text();let b=null;try{b=JSON.parse(t)}catch{}const ok=r.status>=200&&r.status<400&&b&&b.ok!==false;out.push({name,path,status:r.status,ok});if(!ok)failed++;}catch(e){out.push({name,path,ok:false,error:String(e?.message||e)});failed++;}}
+console.log(JSON.stringify({ok:failed===0,base,checks:out,summary:{failed,total:out.length},policy:{no_seed_or_private_key:true,owner_approval_for_irreversible:true}},null,2));process.exit(failed?1:0);
