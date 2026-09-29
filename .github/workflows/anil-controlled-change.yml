@@ -14,30 +14,58 @@ jobs:
   process:
     runs-on: ubuntu-latest
     steps:
-      - name: Request controlled changes from ANIL X
+      - name: Fetch one owner-approved change request
         id: request
         env:
           ANIL_API_URL: https://city-of-eternity.onrender.com
         run: |
-          TOKEN="$(curl -fsSL -H 'Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN'             "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x" | python -c 'import sys,json; print(json.load(sys.stdin)["value"])')"
+          TOKEN="$(curl -fsSL -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN"             "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x" | python -c 'import sys,json; print(json.load(sys.stdin)["value"])')"
           curl --fail --silent --show-error             -H "Authorization: Bearer $TOKEN"             "$ANIL_API_URL/api/anil/automation/queue" > /tmp/request.json
-          cat /tmp/request.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/request.json'))
+          r=d.get('request')
+          if not r:
+              open('/tmp/no-request','w').write('1')
+              print('No queued change request.')
+          else:
+              open('/tmp/request-env','w').write(
+                  f"ANIL_REQUEST_ID={r['id']}\nANIL_REQUEST_PATH={r['path']}\n"
+                  f"ANIL_REQUEST_MESSAGE={r['message']}\n"
+              )
+              open('/tmp/change-content','w').write(r['content'])
+          PY
+          if test -f /tmp/request-env; then cat /tmp/request-env >> "$GITHUB_ENV"; fi
 
       - uses: actions/checkout@v4
-        if: steps.request.outputs.skip != 'true'
+        if: env.ANIL_REQUEST_ID != ''
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
+      - name: Create controlled branch and PR
+        if: env.ANIL_REQUEST_ID != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          branch="anil/$ANIL_REQUEST_ID"
+          git fetch origin main
+          git checkout -b "$branch" origin/main
+          mkdir -p "$(dirname "$ANIL_REQUEST_PATH")"
+          cp /tmp/change-content "$ANIL_REQUEST_PATH"
+          git config user.name "ANIL X Automation"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- "$ANIL_REQUEST_PATH"
+          git diff --cached --quiet && exit 0
+          git commit -m "$ANIL_REQUEST_MESSAGE"
+          git push --set-upstream origin "$branch"
+          gh pr create --base main --head "$branch"             --title "ANIL X: $ANIL_REQUEST_MESSAGE"             --body "Owner-approved ANIL X change request $ANIL_REQUEST_ID. Automated checks are required before merge."
 
-      - name: Install
-        run: npm install
+      - name: Install and test
+        if: env.ANIL_REQUEST_ID != ''
+        run: |
+          npm install
+          npm test --if-present
 
-      - name: Run repository checks
-        run: npm test --if-present
-
-      - name: Browser smoke
+      - name: Production browser smoke
+        if: env.ANIL_REQUEST_ID != ''
         env:
           ANIL_BASE_URL: https://city-of-eternity.onrender.com
         run: |
