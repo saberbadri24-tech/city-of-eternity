@@ -1,0 +1,149 @@
+name: ANIL X Self Improvement Radar
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 * * * *"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: anil-self-improvement
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    if: ${{ secrets.OPENAI_API_KEY != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 1
+
+      - name: Check for existing ANIL improvement PR
+        id: gate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          n=$(gh pr list --state open --search "head:anil/self-improve-" --json number --jq 'length')
+          echo "count=$n" >> "$GITHUB_OUTPUT"
+          if [ "$n" -gt 0 ]; then echo "An improvement PR is already open; stopping."; fi
+
+      - name: Ask Astra for one bounded improvement
+        if: steps.gate.outputs.count == '0'
+        id: plan
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request
+          files=[]
+          for root in ("src","functions","scripts","public"):
+            if os.path.isdir(root):
+              for dp,_,ns in os.walk(root):
+                for n in ns:
+                  p=os.path.join(dp,n)
+                  if os.path.getsize(p) <= 120000:
+                    files.append(p)
+          files=files[:250]
+          prompt={
+            "task":"Audit ANIL X for exactly ONE concrete, safe improvement that increases reliability, usefulness, UX, automation, observability, research, or Guard integration.",
+            "allowed_roots":["src/","functions/","scripts/","public/"],
+            "forbidden":["secrets","credentials","private keys","seed phrases","wallet signing","fund transfers","payment execution","KYC/CAPTCHA bypass","spam","mass messaging","security weakening","workflow modification"],
+            "rule":"If no meaningful safe improvement exists, return path:null.",
+            "files":files
+          }
+          body=json.dumps({
+            "model":"gpt-5-mini",
+            "messages":[
+              {"role":"system","content":"You are Astra, an engineering improvement auditor. Return JSON only: {path,goal,reason}. Choose exactly one existing safe file or null. Never invent test results."},
+              {"role":"user","content":json.dumps(prompt,ensure_ascii=False)}
+            ],
+            "temperature":0.1
+          }).encode()
+          req=urllib.request.Request("https://api.openai.com/v1/chat/completions",data=body,headers={"Authorization":"Bearer "+os.environ["OPENAI_API_KEY"],"Content-Type":"application/json"})
+          d=json.load(urllib.request.urlopen(req,timeout=60))
+          t=d["choices"][0]["message"]["content"]
+          try: x=json.loads(t)
+          except Exception:
+            import re
+            x=json.loads(re.search(r"\{.*\}",t,re.S).group(0))
+          open("/tmp/plan.json","w").write(json.dumps(x))
+          print(json.dumps(x))
+          PY
+
+      - name: Generate bounded patch
+        if: steps.gate.outputs.count == '0'
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request, re
+          plan=json.load(open("/tmp/plan.json"))
+          path=plan.get("path")
+          allowed=("src/","functions/","scripts/","public/")
+          if not path or not path.startswith(allowed) or ".." in path:
+            open("/tmp/skip","w").write("1"); raise SystemExit
+          low=path.lower()
+          if any(x in low for x in (".env","secret","credential","private-key","seed")):
+            open("/tmp/skip","w").write("1"); raise SystemExit
+          current=open(path,encoding="utf-8").read()
+          prompt={
+            "path":path,"goal":plan.get("goal"),"reason":plan.get("reason"),
+            "current":current[:190000],
+            "requirements":"Return JSON {content,message}. Complete replacement file. Minimal scoped change. Preserve compatibility. No secrets, credentials, signing, transfer, payment execution, bypasses, or workflow edits."
+          }
+          body=json.dumps({"model":"gpt-5-mini","messages":[
+            {"role":"system","content":"You are Astra. Produce one bounded production code improvement. JSON only. Never claim tests passed."},
+            {"role":"user","content":json.dumps(prompt,ensure_ascii=False)}
+          ],"temperature":0.1}).encode()
+          req=urllib.request.Request("https://api.openai.com/v1/chat/completions",data=body,headers={"Authorization":"Bearer "+os.environ["OPENAI_API_KEY"],"Content-Type":"application/json"})
+          d=json.load(urllib.request.urlopen(req,timeout=120))
+          t=d["choices"][0]["message"]["content"]
+          try: x=json.loads(t)
+          except Exception: x=json.loads(re.search(r"\{.*\}",t,re.S).group(0))
+          content=x.get("content","")
+          if not content or len(content)>200000: raise SystemExit("invalid generated content")
+          if re.search(r"BEGIN (RSA|OPENSSH|EC|PRIVATE) KEY|seed phrase|recovery phrase|private key\s*[:=]",content,re.I):
+            raise SystemExit("sensitive content rejected")
+          open(path,"w",encoding="utf-8").write(content)
+          open("/tmp/change.json","w").write(json.dumps({"path":path,"message":x.get("message","ANIL X self-improvement")}))
+          PY
+
+      - name: Test and browser verify
+        if: steps.gate.outputs.count == '0' && !failure() && hashFiles('/tmp/skip') == ''
+        env:
+          ANIL_BASE_URL: https://city-of-eternity.onrender.com
+        run: |
+          npm install
+          npm test --if-present
+          npm audit --omit=dev --audit-level=high
+          node --check worker.js
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+          node scripts/production-browser-smoke.mjs
+
+      - name: Open review PR
+        if: steps.gate.outputs.count == '0' && !failure() && hashFiles('/tmp/skip') == ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          source <(python - <<'PY'
+          import json
+          x=json.load(open("/tmp/change.json"))
+          print("PATH="+repr(x["path"]))
+          print("MSG="+repr(x["message"]))
+          PY
+          )
+          branch="anil/self-improve-$(date +%s)"
+          git checkout -b "$branch"
+          git add -- "$PATH"
+          git diff --cached --quiet && exit 0
+          git config user.name "ANIL X Self Improvement"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "$MSG"
+          git push -u origin "$branch"
+          gh pr create --base main --head "$branch" --title "ANIL X self-improvement: $MSG" --body "Generated by the bounded ANIL X self-improvement radar. Tests, audit and browser smoke passed in this workflow. Owner review is required before production merge."
