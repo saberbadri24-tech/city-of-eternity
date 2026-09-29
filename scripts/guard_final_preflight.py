@@ -44,7 +44,7 @@ def main():
  assert auto_claim.get("automaticSigning") is False and auto_claim.get("automaticTransfer") is False
  assert auto_claim.get("privateKeys")=="never-collected"
  assert all(x.get("status")!="SUBMITTED_NO_SIGNATURE" or x.get("httpStatus",0) >= 200 for x in auto_claim.get("submitted",[]))
-wallet=load("guard-wallet.json")
+ wallet=load("guard-wallet.json")
  assert wallet.get("privateKey") in (None,"",False) and wallet.get("seedPhrase") in (None,"",False) and wallet.get("mnemonic") in (None,"",False)
  print("FINAL_GUARD_PREFLIGHT=PASS")
 if __name__=="__main__": main()
