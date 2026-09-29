@@ -21,7 +21,7 @@ async function toolFetchUrl(env,url){
     const ct=r.headers.get('content-type')||'';
     const raw=(await r.text()).slice(0,30000);
     const body=ct.includes('html')?raw.replace(/<script[\s\S]*?<\/script>/gi,' ').replace(/<style[\s\S]*?<\/style>/gi,' ').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,10000):raw.slice(0,10000);
-    return {ok:r.ok,status:r.status,url:r.url,title:(raw.match(/<title[^>]*>([\s\S]*?)<\\/title>/i)?.[1]||'').trim().slice(0,200),body};
+    return {ok:r.ok,status:r.status,url:r.url,title:(raw.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]||'').trim().slice(0,200),body};
   }catch(e){return {ok:false,error:String(e?.message||e)}}
 }
 const extract=raw=>{try{return JSON.parse(raw)}catch{const m=String(raw||'').match(/\\{[\s\S]*\\}/);try{return m?JSON.parse(m[0]):null}catch{return null}}};
