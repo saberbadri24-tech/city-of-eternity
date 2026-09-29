@@ -19,7 +19,7 @@ async function executePlannedTool(env,call){
   try{
     if(tool==='web_search')return await toolWebSearch(env,a.query);
     if(tool==='fetch_url')return await toolFetchUrl(env,a.url);
-    if(tool==='calculate')return {ok:true,value:Function('"use strict";return ('+String(a.expression||'')+')')()};
+    if(tool==='calculate'){const x=String(a.expression||'').slice(0,200);if(!x||!Array.from(x).every(ch=>'0123456789+-*/().% \\t'.includes(ch)))return {ok:false,error:'expression_not_allowed'};try{const value=Function('"use strict";return ('+x+')')();return Number.isFinite(value)?{ok:true,value}:{ok:false,error:'non_finite'}}catch{return {ok:false,error:'invalid_expression'}}}
     if(tool==='github'){
       if(!env.GITHUB_TOKEN)return {ok:false,error:'github_token_not_configured'};
       const path=String(a.path||'').replace(/^\//,'');
