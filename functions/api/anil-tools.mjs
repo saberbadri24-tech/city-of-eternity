@@ -19,7 +19,7 @@ async function webSearch(env,query){
 }
 function calculate(expr){
   const x=clean(expr,200);
-  if(!/^[0-9+\\-*/().%\\s]+$/.test(x))return {ok:false,error:'expression_not_allowed'};
+  if(!x||!Array.from(x).every(ch=>'0123456789+-*/().% \\t'.includes(ch)))return {ok:false,error:'expression_not_allowed'};
   try{
     const value=Function('"use strict";return ('+x+')')();
     return Number.isFinite(value)?{ok:true,value}:{ok:false,error:'non_finite'};
