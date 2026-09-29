@@ -480,6 +480,32 @@ async function githubActionsAuth(req,env){
 }
 async function adminLogin(req,env){if(req.method!=='POST')return json({ok:false,error:'method_not_allowed'},405);const secret=String(env.ANIL_ADMIN_PASSWORD??'').normalize('NFKC').trim();if(secret.length<8)return json({ok:false,error:'admin_password_not_configured'},503);const b=await req.json().catch(()=>({})),pass=String(b.password??'').normalize('NFKC').trim();const ip=req.headers.get('x-forwarded-for')||'unknown',key='admin/login/'+btoa(ip).replace(/=+$/,'');const gate=await kvGet(env,key,{count:0,blockedUntil:0});if(Number(gate.blockedUntil)>Date.now())return json({ok:false,error:'too_many_attempts'},429);if(pass!==secret){const count=Number(gate.count||0)+1;await kvPut(env,key,{count,blockedUntil:count>=5?Date.now()+900000:0});return json({ok:false,error:'invalid_credentials'},401)}await kvPut(env,key,{count:0,blockedUntil:0});const body=btoa(JSON.stringify({sub:'admin',exp:Date.now()+43200000})).replace(/=+$/,'').replace(/\+/g,'-').replace(/\//g,'_');const sig=await sign(body,secret);return json({ok:true,expiresAt:Date.now()+43200000},200,{ 'set-cookie':`session=${body+'.'+sig}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=43200` })}
 async function adminAuth(req,env){const secret=String(env.ANIL_ADMIN_PASSWORD??'').normalize('NFKC').trim();if(!secret)return false;const m=(req.headers.get('cookie')||'').match(/(?:^|; )session=([^;]+)/);if(!m)return false;const [body,sig]=m[1].split('.');if(!body||!sig||sig!==(await sign(body,secret)))return false;try{return JSON.parse(atob(body.replace(/-/g,'+').replace(/_/g,'/'))).exp>Date.now()}catch{return false}}
+async function anilOperatorChange(req,env,command){
+  const rawBase='https://raw.githubusercontent.com/saberbadri24-tech/city-of-eternity/main/';
+  const safeRoots=['src/','functions/','scripts/','public/'];
+  const blocked=['.env','secret','private-key','seed','credentials'];
+  const ask=async(prompt)=>{
+    if(!env.OPENAI_API_KEY)throw Error('openai_not_configured');
+    const r=await fetch('https://api.openai.com/v1/chat/completions',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+env.OPENAI_API_KEY},body:JSON.stringify({model:env.ASTRA_MODEL||'gpt-5-mini',messages:[{role:'system',content:'You are Astra, the ANIL X engineering operator. Return JSON only. You may propose ONE safe repository file change at a time. Never create or modify secrets, credentials, seed/private-key material, payment execution, wallet signing, or security bypasses. For code changes, preserve existing behavior unless the requested change requires otherwise. Do not claim tests passed; only propose them.'},{role:'user',content:prompt}],temperature:.1})});
+    if(!r.ok)throw Error('astra_'+r.status);
+    const d=await r.json();const t=d?.choices?.[0]?.message?.content||'';try{return JSON.parse(t)}catch{const m=String(t).match(/\{[\s\S]*\}/);return m?JSON.parse(m[0]):null}
+  };
+  const intent=await ask(JSON.stringify({request:command,allowedRepositories:['saberbadri24-tech/city-of-eternity'],allowedRoots:safeRoots,task:'Choose the single most relevant editable file and state the exact goal. Return {path,goal,message}. If no safe code change is justified return {path:null,goal:null,message:null}. Do not write code yet.'}));
+  const path=String(intent?.path||'').replace(/^\/+/, '');
+  const lower=path.toLowerCase();
+  if(!path||!safeRoots.some(x=>path.startsWith(x))||blocked.some(x=>lower.includes(x))||path.includes('..')||!/^[A-Za-z0-9_./-]+$/.test(path))return {ok:false,error:'no_safe_change_target',intent};
+  const rr=await fetch(rawBase+encodeURI(path),{headers:{'user-agent':'ANIL-X-Operator/1.0'}});
+  if(!rr.ok)throw Error('source_fetch_'+rr.status);
+  const current=(await rr.text()).slice(0,190000);
+  const change=await ask(JSON.stringify({request:command,path,goal:intent?.goal||'',message:intent?.message||'ANIL X controlled improvement',currentFile:current,task:'Return {path,content,message,verification}. content must be the COMPLETE replacement file, not a diff. Keep changes narrowly scoped to the request. Never add secrets or credential values. verification is an array of deterministic checks to run.'}));
+  const outPath=String(change?.path||path).replace(/^\/+/,''),content=typeof change?.content==='string'?change.content:null;
+  const outLower=outPath.toLowerCase();
+  if(outPath!==path||!content||!safeRoots.some(x=>outPath.startsWith(x))||blocked.some(x=>outLower.includes(x))||outPath.includes('..')||content.length>200000)return {ok:false,error:'generated_change_rejected'};
+  if(/-----BEGIN (RSA|OPENSSH|EC|PRIVATE) KEY-----|(?:seed phrase|recovery phrase|private key)\s*[:=]/i.test(content))return {ok:false,error:'sensitive_content_rejected'};
+  const body=new Request(new URL('/api/anil/automation/queue',req.url),{method:'POST',headers:{'content-type':'application/json',cookie:req.headers.get('cookie')||''},body:JSON.stringify({path:outPath,content,message:String(change?.message||intent?.message||'ANIL X controlled improvement').slice(0,160)})});
+  const queued=await anilChangeRequest(body,env);const qd=await queued.json();
+  return {...qd,operator:true,verification:Array.isArray(change?.verification)?change.verification.slice(0,8):[]};
+}
 async function secretary(req,env){
   if(!(await adminAuth(req,env)))return json({ok:false,error:'unauthorized'},401);
   const b=await req.json().catch(()=>({})),command=String(b.command||'').slice(0,12000),q=command.toLowerCase();
@@ -490,6 +516,13 @@ async function secretary(req,env){
   if(/گزارش گارد|guard report/.test(q)){
     const u=new URL(req.url);u.pathname='/api/guard/report';const rr=await runtimeRoutes(new Request(u,{method:'GET',headers:{cookie:req.headers.get('cookie')||''}}),env,u);
     if(rr){const d=await rr.json();return json({ok:true,changed:false,action:'guard_report',text:'گزارش زنده Guard:\n'+JSON.stringify(d,null,2),data:d});}
+  }
+  if(/(?:درست|اصلاح|تغییر|بهبود|آپدیت|update|fix|improve|change|repair)/.test(q)&&/(?:سایت|کد|دکمه|صفحه|گارد|guard|جاویدان|anil|site|code)/.test(q)){
+    try{
+      const op=await anilOperatorChange(req,env,command);
+      if(op?.ok)return json({ok:true,changed:false,action:'controlled_change_queued',text:'تغییر کنترل‌شده ساخته و برای اجرای خودکار وارد صف شد. ابتدا تست و امنیت اجرا می‌شود و فقط در صورت عبور، انتشار انجام می‌شود.',data:op});
+      return json({ok:true,changed:false,action:'change_not_queued',text:'تغییر به دلیل کنترل ایمنی وارد صف نشد.',data:op});
+    }catch(e){return json({ok:false,error:'operator_change_failed',message:String(e?.message||e)},502)}
   }
   if(/سفارش|order/.test(q)){
     const u=new URL(req.url);u.pathname='/api/order';const rr=await runtimeRoutes(new Request(u,{method:'GET',headers:{cookie:req.headers.get('cookie')||''}}),env,u);
