@@ -159,8 +159,14 @@ async function anilChangeRequest(req,env){
     const content=typeof b.content==='string'?b.content:null;
     const message=clean(b.message||'ANIL X controlled change',160);
     if(!path||!content)return rjson({ok:false,error:'path_and_content_required'},400);
-    if(!/^[A-Za-z0-9_./-]+$/.test(path)||path.startsWith('.git/')||path.includes('..'))return rjson({ok:false,error:'invalid_path'},400);
-    const request={id:id(),path,content,message,status:'queued',createdAt:now(),updatedAt:now()};
+    const normalized=path.replace(/^\\/+/, '');
+    const lower=normalized.toLowerCase();
+    const allowed=ANIL_CHANGE_SCHEMA.allowedRoots.some(root=>normalized.startsWith(root));
+    const blocked=ANIL_CHANGE_SCHEMA.blockedFragments.some(fragment=>lower.includes(fragment.toLowerCase()));
+    const workflowAllowed=normalized.startsWith('.github/workflows/anil-');
+    if(!/^[A-Za-z0-9_./-]+$/.test(normalized)||normalized.startsWith('.git/')||normalized.includes('..')||!allowed||blocked||normalized.endsWith('/')||(!workflowAllowed&&normalized.startsWith('.github/workflows/')))return rjson({ok:false,error:'path_not_allowed'},400);
+    if(content.length>200000)return rjson({ok:false,error:'content_too_large'},413);
+    const request={id:id(),path:normalized,content,message,status:'queued',ownerApproved:true,createdAt:now(),updatedAt:now()};
     await kvPut(env,'anil/change/'+request.id,request);
     return rjson({ok:true,request});
   }
