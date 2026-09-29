@@ -1,17 +1,57 @@
 {
-  "version":2,
-  "purpose":"Exact capability contract for the ANIL X site assistant.",
-  "tools":{
-    "url_fetch":{"live":true,"scope":"public URLs only","private_network":false},
-    "github":{"live_when":"GITHUB_TOKEN configured","scope":"environment credential"},
-    "browser":{"live":"Playwright smoke via GitHub Actions","interactive_browser":"credential required"},
-    "memory":{"live":true,"scope":"session working memory"},
-    "vision":{"live_when":"client TensorFlow model loads"},
-    "voice":{"live_when":"browser speech APIs available"},
-    "render":{"live_when":"RENDER_API_KEY configured"},
-    "payments":{"live_when":"real provider credentials configured"}
+  "version": 3,
+  "purpose": "Exact live capability contract for the ANIL X assistant and autonomous engineering system.",
+  "tools": {
+    "url_fetch": {
+      "live": true,
+      "scope": "public URLs only",
+      "private_network": false
+    },
+    "web_search": {
+      "live_when": "TAVILY_API_KEY or BRAVE_SEARCH_API_KEY"
+    },
+    "github": {
+      "live_when": "GITHUB_TOKEN or GitHub Actions/OIDC controlled workflow",
+      "write_scope": "controlled branches/PRs"
+    },
+    "browser": {
+      "smoke_live": true,
+      "interactive_live_when": "browser automation credential configured"
+    },
+    "memory": {
+      "session": true,
+      "durable_when": "production database configured"
+    },
+    "vision": {
+      "live_when": "client/provider runtime succeeds"
+    },
+    "voice": {
+      "live_when": "browser/provider runtime succeeds"
+    },
+    "mcp": {
+      "live_when": "MCP server configured"
+    },
+    "ai_council": {
+      "live_when": "at least one model provider succeeds; strongest when independent reviewers succeed"
+    },
+    "render": {
+      "live_when": "RENDER_API_KEY configured"
+    },
+    "payments": {
+      "live_when": "real provider credentials plus webhook verification configured"
+    }
   },
-  "automation":"discover -> reason -> tool -> verify -> propose/change -> test -> deploy -> observe",
-  "truthRule":"Never report a capability as live without a successful real check.",
-  "safety":{"secrets":"environment_only","irreversible":"owner_approval","credential_bypass":false,"seed_or_private_key":false,"spam":false}
+  "automation": "discover -> reason -> route -> delegate -> tool -> verify -> criticize -> repair -> test -> security -> browser -> review -> controlled deploy -> observe -> learn",
+  "routing": "capability-first, provider-neutral, health-aware, evidence-first",
+  "agent_model": "planner with bounded specialist subagents, independent verification, contradiction detection, synthesis, and approval gates",
+  "truthRule": "Never report a capability as live without a successful real runtime check.",
+  "acceptance": "Configuration flags are not proof; runtime success is proof.",
+  "safety": {
+    "secrets": "environment_only",
+    "irreversible": "owner_approval",
+    "credential_bypass": false,
+    "seed_or_private_key": false,
+    "automatic_fund_transfer": false,
+    "spam": false
+  }
 }
