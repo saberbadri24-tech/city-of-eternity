@@ -4,7 +4,8 @@ const base = process.env.ANIL_BASE_URL || "https://city-of-eternity.onrender.com
 const blocked = /pay|payment|wallet|connect|ton|claim|transfer|admin|login|checkout|buy|خرید|پرداخت|کیف|برداشت|ادمین|ورود/i;
 
 const browser = await chromium.launch({headless:true});
-const page = await browser.newPage({viewport:{width:390,height:844}});
+const context = await browser.newContext({serviceWorkers:"block"});
+const page = await context.newPage({viewport:{width:390,height:844}});
 const failures = [];
 page.on("console", m => { if (m.type() === "error") failures.push({type:"console", text:m.text()}); });
 page.on("pageerror", e => failures.push({type:"pageerror", text:String(e?.message||e)}));
@@ -31,10 +32,11 @@ for(const b of safe){
     const afterText=(await page.locator("body").innerText()).slice(0,3000);
     tested.push({text:b.text,urlChanged:afterUrl!==beforeUrl,stateChanged:afterText!==beforeText,afterUrl});
     if(afterUrl!==base) await page.goto(base,{waitUntil:"domcontentloaded",timeout:15000}).catch(()=>{});
-  }catch(e){ tested.push({text:b.text,error:String(e?.message||e)}); }
+  }catch(e){ failures.push({type:"button",text:b.text,error:String(e?.message||e)}); tested.push({text:b.text,error:String(e?.message||e)}); }
 }
 
 const links = await page.locator("a[href]").evaluateAll(as=>as.map(a=>({text:(a.innerText||"").trim().slice(0,100),href:a.href})).filter(x=>x.text).slice(0,30));
 console.log(JSON.stringify({ok:failures.length===0,title,base,buttonCount:buttons.length,safeTested:safe.length,tested,links,errors:failures},null,2));
+await context.close();
 await browser.close();
 if(failures.length) process.exitCode=1;
