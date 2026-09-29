@@ -12,12 +12,26 @@
     "dns_changes": false
   },
   "promotion": {
-    "required": ["tests_pass", "performance_not_regressed", "security_check", "rollback_available"],
+    "required": [
+      "tests_pass",
+      "performance_not_regressed",
+      "security_check",
+      "rollback_available"
+    ],
     "consequential_changes_require_owner_approval": true
   },
   "telemetry": {
     "store_raw_prompts": false,
     "store_sensitive_traits": false,
     "prefer_derived_signals": true
+  },
+  "execution": {
+    "code_changes": "controlled_branch_or_pull_request",
+    "production_promotion": "tests_security_rollback_then_owner_approval",
+    "browser_verification": true,
+    "scheduler": "github_actions",
+    "secret_storage": "environment_variables_only",
+    "payment_truth": "provider_webhook_and_settled_order_only",
+    "irreversible_actions": "owner_approval_required"
   }
 }
