@@ -2,9 +2,9 @@
   "guard": "ANIL X Immortal Guard",
   "engine": "Airdrop+ X",
   "version": "7.0-safe-advisory",
-  "lastScan": "2026-09-29T19:45:46.373387+00:00",
+  "lastScan": "2026-09-29T20:01:46.821132+00:00",
   "sourcesScanned": 51,
-  "sourcesReachable": 38,
+  "sourcesReachable": 39,
   "claimPathsDetected": 0,
   "waitingOwner": 12,
   "mode": "discover -> inspect -> triage -> queue; no claim execution",
@@ -60,10 +60,6 @@
     {
       "source": "Aptos Ecosystem",
       "httpStatus": 429
-    },
-    {
-      "source": "Code4rena",
-      "httpStatus": 502
     },
     {
       "source": "QuestN",
