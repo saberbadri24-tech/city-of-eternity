@@ -1,9 +1,11 @@
 {
   "engine": "Guard Workflow Security Gate",
-  "version": "1.1",
+  "version": "1.2",
   "status": "PASS",
+  "workflow": ".github/workflows/immortal-guard.yml",
   "actions": [
-    "actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+    "actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+    "actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38"
   ],
   "violations": [],
   "policy": "Pinned actions, explicit token scope, no remote shell piping, no shell tracing, no secret echo."

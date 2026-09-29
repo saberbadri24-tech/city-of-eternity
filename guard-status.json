@@ -2,9 +2,9 @@
   "guard": "ANIL X Immortal Guard",
   "engine": "Airdrop+ X",
   "version": "7.0-safe-advisory",
-  "lastScan": "2026-09-25T12:44:44.501301+00:00",
+  "lastScan": "2026-09-29T11:21:03.402052+00:00",
   "sourcesScanned": 51,
-  "sourcesReachable": 40,
+  "sourcesReachable": 39,
   "claimPathsDetected": 0,
   "waitingOwner": 13,
   "mode": "discover -> inspect -> triage -> queue; no claim execution",
@@ -31,7 +31,7 @@
     },
     {
       "source": "QuestN",
-      "httpStatus": 403
+      "httpStatus": null
     },
     {
       "source": "TON Ecosystem",
@@ -60,6 +60,10 @@
     {
       "source": "Aptos Ecosystem",
       "httpStatus": 429
+    },
+    {
+      "source": "QuestN",
+      "httpStatus": null
     },
     {
       "source": "Berachain",

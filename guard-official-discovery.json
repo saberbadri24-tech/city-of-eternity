@@ -1,0 +1,618 @@
+{
+  "guard": "ANIL X Immortal Guard",
+  "engine": "Official Source Discovery",
+  "version": "16.0",
+  "updatedAt": "2026-09-29T11:18:16.474236+00:00",
+  "count": 33,
+  "items": [
+    {
+      "title": "Galxe",
+      "url": "https://www.galxe.com/",
+      "publisher": "Galxe",
+      "resolvedUrl": "https://www.galxe.com/",
+      "resolvedDomain": "galxe.com",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "quest"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:05.249796+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Zealy",
+      "url": "https://zealy.io/",
+      "publisher": "Zealy",
+      "resolvedUrl": "https://zealy.io/",
+      "resolvedDomain": "zealy.io",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "airdrop",
+        "claim",
+        "reward",
+        "grant",
+        "incentive",
+        "distribution",
+        "quest",
+        "learn",
+        "earn"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:05.423383+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "XDAO TON Airdrop Docs",
+      "url": "https://docs.xdao.app/ton/airdrop/",
+      "publisher": "XDAO TON Airdrop Docs",
+      "resolvedUrl": "https://docs.xdao.app/ton/airdrop/",
+      "resolvedDomain": "docs.xdao.app",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "airdrop",
+        "claim",
+        "distribution",
+        "quest"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:06.032756+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Solana Ecosystem",
+      "url": "https://solana.com/ecosystem",
+      "publisher": "Solana Ecosystem",
+      "resolvedUrl": "https://solana.com/ecosystem",
+      "resolvedDomain": "solana.com",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "claim",
+        "reward",
+        "bounty",
+        "grant",
+        "incentive",
+        "distribution",
+        "quest",
+        "learn",
+        "earn",
+        "bug bounty"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:07.640021+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Base Ecosystem",
+      "url": "https://www.base.org/ecosystem",
+      "publisher": "Base Ecosystem",
+      "resolvedUrl": "https://www.base.org/ecosystem",
+      "resolvedDomain": "base.org",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "bounty",
+        "quest",
+        "learn",
+        "earn",
+        "bug bounty"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:07.695970+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Polygon Ecosystem",
+      "url": "https://polygon.technology/ecosystem",
+      "publisher": "Polygon Ecosystem",
+      "resolvedUrl": "https://polygon.technology/ecosystem",
+      "resolvedDomain": "polygon.technology",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "airdrop",
+        "learn",
+        "earn"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:08.164035+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Avalanche Ecosystem",
+      "url": "https://www.avalanche.com/",
+      "publisher": "Avalanche Ecosystem",
+      "resolvedUrl": "https://www.avalanche.com/",
+      "resolvedDomain": "avalanche.com",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "claim",
+        "grant",
+        "learn",
+        "earn"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:08.461730+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Starknet Ecosystem",
+      "url": "https://www.starknet.io/",
+      "publisher": "Starknet Ecosystem",
+      "resolvedUrl": "https://www.starknet.io/",
+      "resolvedDomain": "starknet.io",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "grant",
+        "quest",
+        "learn",
+        "earn"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:08.912619+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "zkSync Ecosystem",
+      "url": "https://www.zksync.io/ecosystem",
+      "publisher": "zkSync Ecosystem",
+      "resolvedUrl": "https://www.zksync.io/ecosystem",
+      "resolvedDomain": "zksync.io",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "quest",
+        "earn"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:09.644381+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Celestia Ecosystem",
+      "url": "https://celestia.org/ecosystem/",
+      "publisher": "Celestia Ecosystem",
+      "resolvedUrl": "https://celestia.org/ecosystem/",
+      "resolvedDomain": "celestia.org",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "quest",
+        "learn",
+        "earn"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:10.343960+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Cosmos Ecosystem",
+      "url": "https://cosmos.network/ecosystem",
+      "publisher": "Cosmos Ecosystem",
+      "resolvedUrl": "https://cosmos.network/ecosystem",
+      "resolvedDomain": "cosmos.network",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "quest"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:10.506373+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "NEAR Ecosystem",
+      "url": "https://www.near.org/ecosystem",
+      "publisher": "NEAR Ecosystem",
+      "resolvedUrl": "https://www.near.org/ecosystem",
+      "resolvedDomain": "near.org",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "reward",
+        "quest",
+        "learn",
+        "earn"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:11.012568+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Sui Ecosystem",
+      "url": "https://www.sui.io/ecosystem",
+      "publisher": "Sui Ecosystem",
+      "resolvedUrl": "https://www.sui.io/ecosystem",
+      "resolvedDomain": "sui.io",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "bounty",
+        "quest",
+        "learn",
+        "earn",
+        "bug bounty"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:11.288548+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Polkadot Ecosystem",
+      "url": "https://polkadot.com/ecosystem",
+      "publisher": "Polkadot Ecosystem",
+      "resolvedUrl": "https://polkadot.com/ecosystem",
+      "resolvedDomain": "polkadot.com",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "quest"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:11.550215+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Chainlink Ecosystem",
+      "url": "https://chain.link/ecosystem",
+      "publisher": "Chainlink Ecosystem",
+      "resolvedUrl": "https://chain.link/ecosystem",
+      "resolvedDomain": "chain.link",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "quest",
+        "learn",
+        "earn"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:11.607504+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Gitcoin",
+      "url": "https://gitcoin.co/",
+      "publisher": "Gitcoin",
+      "resolvedUrl": "https://gitcoin.co/",
+      "resolvedDomain": "gitcoin.co",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "grant",
+        "incentive",
+        "distribution",
+        "quest",
+        "learn",
+        "earn"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:11.890852+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "HackerOne",
+      "url": "https://www.hackerone.com/",
+      "publisher": "HackerOne",
+      "resolvedUrl": "https://www.hackerone.com/",
+      "resolvedDomain": "hackerone.com",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "bounty",
+        "quest",
+        "learn",
+        "earn"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:12.035828+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Immunefi",
+      "url": "https://immunefi.com/",
+      "publisher": "Immunefi",
+      "resolvedUrl": "https://immunefi.com/",
+      "resolvedDomain": "immunefi.com",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "reward",
+        "bounty",
+        "grant",
+        "quest",
+        "learn",
+        "earn",
+        "bug bounty"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:12.245394+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Code4rena",
+      "url": "https://code4rena.com/",
+      "publisher": "Code4rena",
+      "resolvedUrl": "https://code4rena.com/",
+      "resolvedDomain": "code4rena.com",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "reward",
+        "incentive",
+        "distribution",
+        "earn"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:12.386885+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Sherlock",
+      "url": "https://sherlock.xyz/",
+      "publisher": "Sherlock",
+      "resolvedUrl": "https://sherlock.xyz/",
+      "resolvedDomain": "sherlock.xyz",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "bounty",
+        "incentive",
+        "quest",
+        "learn",
+        "earn",
+        "bug bounty"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:12.557111+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Coinbase Learn",
+      "url": "https://www.coinbase.com/learn",
+      "publisher": "Coinbase Learn",
+      "resolvedUrl": "https://www.coinbase.com/learn",
+      "resolvedDomain": "coinbase.com",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "claim",
+        "reward",
+        "bounty",
+        "grant",
+        "incentive",
+        "quest",
+        "learn",
+        "earn"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:12.642631+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "CoinMarketCap Airdrops",
+      "url": "https://coinmarketcap.com/airdrop/",
+      "publisher": "CoinMarketCap Airdrops",
+      "resolvedUrl": "https://coinmarketcap.com/airdrop/",
+      "resolvedDomain": "coinmarketcap.com",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "airdrop",
+        "claim",
+        "reward",
+        "distribution",
+        "quest",
+        "learn",
+        "earn"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:12.805536+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Monad",
+      "url": "https://monad.xyz/",
+      "publisher": "Monad",
+      "resolvedUrl": "https://monad.xyz/",
+      "resolvedDomain": "monad.xyz",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "reward"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:13.782071+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Sei",
+      "url": "https://www.sei.io/",
+      "publisher": "Sei",
+      "resolvedUrl": "https://www.sei.io/",
+      "resolvedDomain": "sei.io",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "grant",
+        "quest",
+        "learn",
+        "earn"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:13.978921+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Injective",
+      "url": "https://injective.com/",
+      "publisher": "Injective",
+      "resolvedUrl": "https://injective.com/",
+      "resolvedDomain": "injective.com",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "bounty",
+        "distribution",
+        "learn",
+        "earn",
+        "bug bounty"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:14.161010+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Mantle",
+      "url": "https://www.mantle.xyz/",
+      "publisher": "Mantle",
+      "resolvedUrl": "https://www.mantle.xyz/",
+      "resolvedDomain": "mantle.xyz",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "claim",
+        "reward",
+        "bounty",
+        "incentive",
+        "distribution",
+        "learn",
+        "earn"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:14.239598+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Hyperliquid",
+      "url": "https://hyperliquid.xyz/",
+      "publisher": "Hyperliquid",
+      "resolvedUrl": "https://hyperliquid.xyz/",
+      "resolvedDomain": "hyperliquid.xyz",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "quest"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:14.818484+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Mina",
+      "url": "https://minaprotocol.com/",
+      "publisher": "Mina",
+      "resolvedUrl": "https://minaprotocol.com/",
+      "resolvedDomain": "minaprotocol.com",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "grant",
+        "incentive",
+        "quest",
+        "learn",
+        "earn"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:15.116527+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Internet Computer",
+      "url": "https://internetcomputer.org/",
+      "publisher": "Internet Computer",
+      "resolvedUrl": "https://internetcomputer.org/",
+      "resolvedDomain": "internetcomputer.org",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "claim",
+        "grant",
+        "quest",
+        "learn",
+        "earn"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:15.675017+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Hedera",
+      "url": "https://hedera.com/",
+      "publisher": "Hedera",
+      "resolvedUrl": "https://hedera.com/",
+      "resolvedDomain": "hedera.com",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "bounty",
+        "quest",
+        "learn",
+        "earn",
+        "bug bounty"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:15.830732+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Algorand",
+      "url": "https://algorand.co/",
+      "publisher": "Algorand",
+      "resolvedUrl": "https://algorand.co/",
+      "resolvedDomain": "algorand.co",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "claim",
+        "reward",
+        "distribution",
+        "quest",
+        "learn",
+        "earn"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:15.884054+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Cardano",
+      "url": "https://cardano.org/",
+      "publisher": "Cardano",
+      "resolvedUrl": "https://cardano.org/",
+      "resolvedDomain": "cardano.org",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "grant",
+        "learn",
+        "earn"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:16.131734+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Tezos",
+      "url": "https://tezos.com/",
+      "publisher": "Tezos",
+      "resolvedUrl": "https://tezos.com/",
+      "resolvedDomain": "tezos.com",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "reward",
+        "learn",
+        "earn"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-09-29T11:18:16.270277+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    }
+  ],
+  "policy": "Official-source discovery only; no automatic signing, KYC/CAPTCHA bypass or transfer."
+}

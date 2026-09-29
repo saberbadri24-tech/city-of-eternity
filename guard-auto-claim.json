@@ -1,0 +1,13 @@
+{
+  "guard": "ANIL X Immortal Guard",
+  "engine": "Safe No-Signature Claim Lane",
+  "updatedAt": "2026-09-29T11:21:12.088821+00:00",
+  "submitted": [],
+  "queued": [],
+  "blocked": [],
+  "automaticClaim": false,
+  "automaticSigning": false,
+  "automaticTransfer": false,
+  "privateKeys": "never-collected",
+  "policy": "Only exact, pre-verified, idempotent, official no-signature direct-receipt adapters may submit."
+}
