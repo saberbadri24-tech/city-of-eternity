@@ -1,5 +1,7 @@
 name: ANIL X Execution Fabric Gate
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
   schedule:
     - cron: "*/15 * * * *"
