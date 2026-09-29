@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fail-closed integrity gate for Immortal Guard before and after every run."""
 from __future__ import annotations
-import json, py_compile, os
+import json, py_compile, os, subprocess, sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 REQUIRED_JSON=["guard-javidan/flow.json","guard-javidan/owner-gate.json","guard-javidan/brains.json","guard-discovery.json","guard-official-discovery.json","guard-intelligence.json","guard-high-value.json","guard-sources.json","guard-learning.json","guard-receipts.json","guard-approvals.json","guard-wallet.json","guard-capabilities.json","guard-horizon.json","guard-future-signals.json","guard-threat-report.json","guard-agent-contract.json","guard-agent-contract-report.json","guard-evidence-ledger.json","guard-anomaly-report.json","guard-replay-report.json","guard-workflow-security.json","guard-auto-claim.json"]
@@ -13,6 +13,12 @@ def load(name):
  if not isinstance(v,(dict,list)): raise AssertionError(f"invalid JSON root: {name}")
  return v
 def main():
+ # Rebuild the canonical high-value artifact immediately before validating it.
+ # This prevents stale committed state from masking the current engine contract.
+ engine=ROOT/"scripts"/"high_value_opportunity_engine.py"
+ p=subprocess.run([sys.executable,str(engine)],cwd=str(ROOT),capture_output=True,text=True,timeout=180)
+ if p.returncode!=0:
+  raise AssertionError("high_value_engine_failed:"+p.stderr[-1200:])
  for n in REQUIRED_SCRIPTS: py_compile.compile(str(ROOT/"scripts"/n),doraise=True)
  for n in REQUIRED_JSON: load(n)
  high=load("guard-high-value.json")
