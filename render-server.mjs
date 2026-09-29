@@ -36,7 +36,7 @@ if(ADMIN_SECRET.length<8){console.error('FATAL: ANIL_ADMIN_PASSWORD is missing o
 
 const env={...process.env,ASSETS:{fetch:assetsFetch}};
 const loginAttempts=new Map();
-const b64u=s=>Buffer.from(s).toString('base64').replace(/=+$/,'').replace(/\\+/g,'-').replace(/\\//g,'_');
+const b64u=s=>Buffer.from(s).toString('base64').replace(/=+$/,'').replace(/\+/g,'-').replace(/\//g,'_');
 const signNode=(v,secret)=>b64u(createHmac('sha256',secret).update(v).digest());
 const jsonNode=(obj,status=200,extra={})=>new Response(JSON.stringify(obj),{status,headers:{'content-type':'application/json; charset=utf-8',...extra}});
 async function directAdminLogin(req){
