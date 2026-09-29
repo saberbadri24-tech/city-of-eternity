@@ -2,11 +2,11 @@
   "guard": "ANIL X Immortal Guard",
   "engine": "Airdrop+ X",
   "version": "7.0-safe-advisory",
-  "lastScan": "2026-09-29T15:13:16.227158+00:00",
+  "lastScan": "2026-09-29T19:45:46.373387+00:00",
   "sourcesScanned": 51,
-  "sourcesReachable": 39,
+  "sourcesReachable": 38,
   "claimPathsDetected": 0,
-  "waitingOwner": 13,
+  "waitingOwner": 12,
   "mode": "discover -> inspect -> triage -> queue; no claim execution",
   "financialActions": "no automated claim/transfer; owner approval required for wallet signatures and transfers",
   "temporaryWallet": "configured",
@@ -60,6 +60,10 @@
     {
       "source": "Aptos Ecosystem",
       "httpStatus": 429
+    },
+    {
+      "source": "Code4rena",
+      "httpStatus": 502
     },
     {
       "source": "QuestN",
