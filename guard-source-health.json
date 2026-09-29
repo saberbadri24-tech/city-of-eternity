@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-09-29T12:55:10.168423+00:00",
+  "updatedAt": "2026-09-29T13:14:09.210830+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,7 +20,7 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1914,
+  "discoveryCandidateCount": 1916,
   "uniqueNewsPublishers": 537,
   "topPublishers": [
     {
@@ -65,7 +65,7 @@
     },
     {
       "publisher": "polygonscan.com",
-      "count": 33
+      "count": 32
     },
     {
       "publisher": "facebook.com",
@@ -80,6 +80,10 @@
       "count": 28
     },
     {
+      "publisher": "LinkedIn",
+      "count": 27
+    },
+    {
       "publisher": "Bybit",
       "count": 25
     },
@@ -89,7 +93,7 @@
     },
     {
       "publisher": "Bitget",
-      "count": 19
+      "count": 20
     },
     {
       "publisher": "Kabul University",
@@ -97,10 +101,6 @@
     },
     {
       "publisher": "Medium",
-      "count": 18
-    },
-    {
-      "publisher": "linkedin.com",
       "count": 18
     }
   ],
