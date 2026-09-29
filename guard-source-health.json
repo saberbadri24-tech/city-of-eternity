@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-09-29T13:41:12.122959+00:00",
+  "updatedAt": "2026-09-29T15:13:48.091362+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,20 +20,20 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1916,
-  "uniqueNewsPublishers": 539,
+  "discoveryCandidateCount": 1917,
+  "uniqueNewsPublishers": 538,
   "topPublishers": [
     {
       "publisher": "Binance",
       "count": 119
     },
     {
-      "publisher": "Immunefi",
+      "publisher": "immunefi.com",
       "count": 92
     },
     {
       "publisher": "CoinMarketCap",
-      "count": 79
+      "count": 81
     },
     {
       "publisher": "HackerOne",
@@ -45,31 +45,27 @@
     },
     {
       "publisher": "Coin Gabbar",
-      "count": 55
-    },
-    {
-      "publisher": "Reddit",
-      "count": 53
+      "count": 54
     },
     {
       "publisher": "Yelp",
       "count": 52
     },
     {
-      "publisher": "GitHub",
-      "count": 50
+      "publisher": "Reddit",
+      "count": 51
     },
     {
-      "publisher": "rootdata.com",
-      "count": 38
+      "publisher": "GitHub",
+      "count": 51
+    },
+    {
+      "publisher": "RootData",
+      "count": 40
     },
     {
       "publisher": "polygonscan.com",
       "count": 33
-    },
-    {
-      "publisher": "Phemex",
-      "count": 29
     },
     {
       "publisher": "facebook.com",
@@ -80,28 +76,32 @@
       "count": 28
     },
     {
-      "publisher": "LinkedIn",
-      "count": 27
+      "publisher": "Phemex",
+      "count": 28
     },
     {
-      "publisher": "Bybit",
-      "count": 25
+      "publisher": "LinkedIn",
+      "count": 26
     },
     {
       "publisher": "BitDegree",
       "count": 24
     },
     {
+      "publisher": "Bybit",
+      "count": 24
+    },
+    {
       "publisher": "Bitget",
-      "count": 19
+      "count": 20
     },
     {
       "publisher": "Kabul University",
       "count": 19
     },
     {
-      "publisher": "Medium",
-      "count": 17
+      "publisher": "TradingView",
+      "count": 18
     }
   ],
   "invalidSources": [],
