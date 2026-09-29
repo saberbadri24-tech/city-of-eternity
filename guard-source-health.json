@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-09-29T22:56:27.929031+00:00",
+  "updatedAt": "2026-09-29T23:51:43.074352+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,12 +20,12 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1918,
-  "uniqueNewsPublishers": 538,
+  "discoveryCandidateCount": 1923,
+  "uniqueNewsPublishers": 536,
   "topPublishers": [
     {
       "publisher": "Binance",
-      "count": 120
+      "count": 121
     },
     {
       "publisher": "Immunefi",
@@ -33,7 +33,7 @@
     },
     {
       "publisher": "CoinMarketCap",
-      "count": 77
+      "count": 80
     },
     {
       "publisher": "HackerOne",
@@ -41,10 +41,10 @@
     },
     {
       "publisher": "x.com",
-      "count": 65
+      "count": 66
     },
     {
-      "publisher": "yelp.com",
+      "publisher": "Yelp",
       "count": 53
     },
     {
@@ -61,7 +61,7 @@
     },
     {
       "publisher": "rootdata.com",
-      "count": 39
+      "count": 40
     },
     {
       "publisher": "polygonscan.com",
@@ -69,15 +69,15 @@
     },
     {
       "publisher": "phemex.com",
-      "count": 30
+      "count": 31
     },
     {
       "publisher": "facebook.com",
-      "count": 28
+      "count": 29
     },
     {
       "publisher": "LinkedIn",
-      "count": 27
+      "count": 28
     },
     {
       "publisher": "CCN.com",
@@ -85,7 +85,7 @@
     },
     {
       "publisher": "BitDegree",
-      "count": 24
+      "count": 25
     },
     {
       "publisher": "Bybit",
@@ -100,8 +100,8 @@
       "count": 19
     },
     {
-      "publisher": "bscscan.com",
-      "count": 18
+      "publisher": "Medium",
+      "count": 17
     }
   ],
   "invalidSources": [],
