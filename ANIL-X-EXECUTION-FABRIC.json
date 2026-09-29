@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "name": "ANIL X Execution Fabric",
+  "purpose": "Give ANIL X a secure execution substrate without requiring raw credentials in the assistant conversation.",
+  "surfaces": {
+    "repository": {
+      "provider": "GitHub",
+      "mode": "Actions_OIDC_plus_controlled_PR",
+      "write_boundary": ["approved_branch","pull_request","approved_paths"]
+    },
+    "runtime": {
+      "provider": "Render",
+      "service": "city-of-eternity",
+      "mode": "Node_web_service",
+      "auto_deploy": true
+    },
+    "database": {
+      "mode": "application_binding",
+      "raw_connection_string_exposed": false,
+      "durable_state_when_binding_exists": true
+    },
+    "browser": {
+      "mode": "Playwright_smoke_in_CI",
+      "production_interactive_mode": "credential_gated"
+    }
+  },
+  "control_plane": {
+    "discover": true,
+    "plan": true,
+    "delegate": true,
+    "execute": true,
+    "verify": true,
+    "repair": true,
+    "audit": true,
+    "rollback": true
+  },
+  "credential_policy": {
+    "raw_PAT_in_chat": false,
+    "database_URL_in_chat": false,
+    "secrets_in_repository": false,
+    "prefer_oidc": true,
+    "prefer_environment_secrets": true
+  },
+  "acceptance": {
+    "configuration_is_not_proof": true,
+    "runtime_success_is_proof": true,
+    "deploy_live_is_not_equal_to_all_providers_live": true
+  }
+}
