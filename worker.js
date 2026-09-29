@@ -149,6 +149,7 @@ async function v90AdminRoutes(req,env,u){
   if((p==='/api/payment/status'||p==='/api/payment-status')&&req.method==='GET'){const oid=clean(u.searchParams.get('order')||u.searchParams.get('orderId'),120);if(!oid)return rjson({ok:false,error:'order_required'},400);const order=await kvGet(env,'orders/'+oid,null)||state.orders.get(oid);if(!order)return rjson({ok:false,error:'order_not_found'},404);return rjson({ok:true,orderId:oid,plan:order.plan||null,status:order.status,amount:order.amount,providerAmount:order.providerAmount,currency:order.currency||order.providerCurrency||'IRR',paidAt:order.paidAt||null})}
   return null;
 }
+const ANIL_CHANGE_SCHEMA={allowedRoots:['src/','functions/','scripts/','.github/workflows/','public/'],blockedFragments:['.env','secret','private-key','seed','credentials']};
 async function anilChangeRequest(req,env){
   if(req.method==='POST'){
     if(!(await adminAuth(req,env)))return rjson({ok:false,error:'owner_auth_required'},401);
