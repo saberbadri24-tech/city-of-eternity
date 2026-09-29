@@ -13,6 +13,23 @@ async function toolWebSearch(env,query){
     return {ok:r.ok,provider:'brave',data:await r.json().catch(()=>null)};
   }catch(e){return {ok:false,error:String(e?.message||e)}}
 }
+async function executePlannedTool(env,call){
+  const tool=String(call?.tool||'');
+  const a=call?.args||{};
+  try{
+    if(tool==='web_search')return await toolWebSearch(env,a.query);
+    if(tool==='fetch_url')return await toolFetchUrl(env,a.url);
+    if(tool==='calculate')return {ok:true,value:Function('"use strict";return ('+String(a.expression||'')+')')()};
+    if(tool==='github'){
+      if(!env.GITHUB_TOKEN)return {ok:false,error:'github_token_not_configured'};
+      const path=String(a.path||'').replace(/^\//,'');
+      if(!/^(repos|search|user|rate_limit)\\b/.test(path))return {ok:false,error:'github_path_not_allowed'};
+      const rr=await fetch('https://api.github.com/'+path,{headers:{accept:'application/vnd.github+json',authorization:'Bearer '+env.GITHUB_TOKEN,'user-agent':'ANIL-X-Agent/1.0'}});
+      return {ok:rr.ok,status:rr.status,data:await rr.json().catch(()=>null)};
+    }
+    return {ok:false,error:'tool_not_allowed'};
+  }catch(e){return {ok:false,error:String(e?.message||e)}}
+}
 async function toolFetchUrl(env,url){
   try{
     const u=new URL(url);
@@ -25,11 +42,21 @@ async function toolFetchUrl(env,url){
   }catch(e){return {ok:false,error:String(e?.message||e)}}
 }
 const extract=raw=>{try{return JSON.parse(raw)}catch{const m=String(raw||'').match(/\\{[\s\S]*\\}/);try{return m?JSON.parse(m[0]):null}catch{return null}}};
-async function openai(env,prompt){if(!env.OPENAI_API_KEY)return null;const r=await fetch('https://api.openai.com/v1/chat/completions',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+env.OPENAI_API_KEY},body:JSON.stringify({model:env.ASTRA_MODEL||'gpt-5-mini',messages:[{role:'system',content:'You are Astra, central ANIL X orchestrator. Return JSON only: title,desc,moves,reply,confidence,specialist. Never claim execution without evidence.'},{role:'user',content:prompt}],temperature:.2})});if(!r.ok)throw Error('openai_'+r.status);const d=await r.json();return extract(d?.choices?.[0]?.message?.content)}
+async function openai(env,prompt){if(!env.OPENAI_API_KEY)return null;const r=await fetch('https://api.openai.com/v1/chat/completions',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+env.OPENAI_API_KEY},body:JSON.stringify({model:env.ASTRA_MODEL||'gpt-5-mini',messages:[{role:'system',content:'You are Astra, central ANIL X orchestrator. Return JSON only: title,desc,moves,reply,confidence,specialist,toolCalls. toolCalls is an array of at most 5 objects {tool,args}; allowed tools: web_search(query), fetch_url(url), calculate(expression), github(path). Use tools only when they materially help. Never claim a tool ran unless execution results are supplied. Never claim execution without evidence.'},{role:'user',content:prompt}],temperature:.2})});if(!r.ok)throw Error('openai_'+r.status);const d=await r.json();return extract(d?.choices?.[0]?.message?.content)}
 async function claude(env,prompt){if(!env.ANTHROPIC_API_KEY)return null;const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'content-type':'application/json','x-api-key':env.ANTHROPIC_API_KEY,'anthropic-version':'2023-06-01'},body:JSON.stringify({model:env.CLAUDE_MODEL||'claude-sonnet-4-5',max_tokens:700,system:'You are Claude, ANIL X engineering reviewer. Return JSON only with ok,corrections,confidence.',messages:[{role:'user',content:prompt}]})});if(!r.ok)throw Error('claude_'+r.status);const d=await r.json();return extract(d?.content?.map(x=>x.text||'').join(''))}
 async function gemini(env,prompt){if(!env.GEMINI_API_KEY)return null;const model=env.GEMINI_MODEL||'gemini-2.5-flash';const r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+encodeURIComponent(model)+':generateContent?key='+encodeURIComponent(env.GEMINI_API_KEY),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:'You are Gemini, ANIL X research verifier. Return JSON only with ok,corrections,confidence. '+prompt}]}]})});if(!r.ok)throw Error('gemini_'+r.status);const d=await r.json();return extract(d?.candidates?.[0]?.content?.parts?.map(x=>x.text||'').join(''))}
 export async function handlePlan(request,env){if(request.method==='OPTIONS')return new Response(null,{status:204,headers:H});if(request.method!=='POST')return json({ok:false,error:'method_not_allowed'},405);try{const body=await request.json();const requestText=text(body?.text||body?.request||body?.prompt);if(!requestText)return json({ok:false,error:'missing_request'},400);const fallback=localPlan(requestText);const urls=requestText.split(/\\s+/).map(x=>x.replace(/[),.;]+$/,'')).filter(x=>x.startsWith('http://')||x.startsWith('https://')).slice(0,3);
 const searchIntent=/(latest|today|news|current|price|research|search|تحقیق|جستجو|جدیدترین|امروز|قیمت|اخبار|بررسی)/i.test(requestText);
 const searchResults=searchIntent?await toolWebSearch(env,requestText):null;
 const toolResults=urls.length?await Promise.all(urls.map(u=>toolFetchUrl(env,u))):[];
-const prompt=JSON.stringify({request:requestText,profile:body?.profile||{},conversation:body?.turns||[],fallback,toolResults,searchResults});let astra=null,claude=null,gemini=null,errors=[];try{astra=await openai(env,prompt)}catch(e){errors.push(String(e.message))}const reviewPrompt=JSON.stringify({request:requestText,plan:astra||fallback,context:body?.profile||{}});const reviews=await Promise.allSettled([claude(env,reviewPrompt),gemini(env,reviewPrompt)]); if(reviews[0].status==='fulfilled')claude=reviews[0].value;else errors.push(String(reviews[0].reason?.message||reviews[0].reason||'claude_error')); if(reviews[1].status==='fulfilled')gemini=reviews[1].value;else errors.push(String(reviews[1].reason?.message||reviews[1].reason||'gemini_error')); const reply=astra?.reply||('گرفتم: '+(astra?.title||fallback.title)); const text=reply;return json({ok:true,source:astra?'ai-council':'local-fallback',orchestrator:astra?'astra':'local',reviewer:claude?'claude':'local',research:gemini?'gemini':'local',specialists:{astra:{live:!!astra,provider:'openai'},claude:{live:!!claude,provider:'anthropic'},gemini:{live:!!gemini,provider:'google'},vision:{live:false,endpoint:'/api/vision'},voice:{live:false,endpoint:'/api/voice'}},router:{selected:astra?.specialist||fallback.title,providerErrors:errors.slice(0,4),tools:{urls:toolResults.length,used:toolResults.some(x=>x?.ok),webSearch:Boolean(searchResults?.ok),searchProvider:searchResults?.provider||null}},plan:{title:astra?.title||fallback.title,desc:astra?.desc||fallback.desc,moves:Array.isArray(astra?.moves)&&astra.moves.length?astra.moves.slice(0,6):fallback.moves},reply,text,answer:reply,confidence:Number(astra?.confidence)||.55})}catch(e){return json({ok:false,error:'engine_failure',message:String(e?.message||e)},502)}}
+const prompt=JSON.stringify({request:requestText,profile:body?.profile||{},conversation:body?.turns||[],fallback,toolResults,searchResults});let astra=null,claude=null,gemini=null,errors=[];try{astra=await openai(env,prompt)}catch(e){errors.push(String(e.message))}const reviewPrompt=JSON.stringify({request:requestText,plan:astra||fallback,context:body?.profile||{}});const reviews=await Promise.allSettled([claude(env,reviewPrompt),gemini(env,reviewPrompt)]); if(reviews[0].status==='fulfilled')claude=reviews[0].value;else errors.push(String(reviews[0].reason?.message||reviews[0].reason||'claude_error')); if(reviews[1].status==='fulfilled')gemini=reviews[1].value;else errors.push(String(reviews[1].reason?.message||reviews[1].reason||'gemini_error')); let toolExecutions=[];
+const calls=Array.isArray(astra?.toolCalls)?astra.toolCalls.slice(0,5):[];
+for(const call of calls){toolExecutions.push({tool:call?.tool,result:await executePlannedTool(env,call)});}
+if(toolExecutions.length&&astra){
+  try{
+    const finalPrompt=JSON.stringify({request:requestText,initialPlan:astra,toolExecutions,context:body?.profile||{}});
+    const finalAstra=await openai(env,finalPrompt);
+    if(finalAstra)astra={...astra,...finalAstra,toolCalls:toolExecutions.map(x=>({tool:x.tool,executed:true}))};
+  }catch(e){errors.push(String(e?.message||e))}
+}
+const reply=astra?.reply||('گرفتم: '+(astra?.title||fallback.title)); const text=reply;return json({ok:true,source:astra?'ai-council':'local-fallback',orchestrator:astra?'astra':'local',reviewer:claude?'claude':'local',research:gemini?'gemini':'local',specialists:{astra:{live:!!astra,provider:'openai'},claude:{live:!!claude,provider:'anthropic'},gemini:{live:!!gemini,provider:'google'},vision:{live:false,endpoint:'/api/vision'},voice:{live:false,endpoint:'/api/voice'}},router:{selected:astra?.specialist||fallback.title,providerErrors:errors.slice(0,4),tools:{urls:toolResults.length,used:toolResults.some(x=>x?.ok),webSearch:Boolean(searchResults?.ok),searchProvider:searchResults?.provider||null,planned:toolExecutions.map(x=>({tool:x.tool,ok:!!x.result?.ok}))}},plan:{title:astra?.title||fallback.title,desc:astra?.desc||fallback.desc,moves:Array.isArray(astra?.moves)&&astra.moves.length?astra.moves.slice(0,6):fallback.moves},reply,text,answer:reply,confidence:Number(astra?.confidence)||.55})}catch(e){return json({ok:false,error:'engine_failure',message:String(e?.message||e)},502)}}
