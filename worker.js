@@ -3,7 +3,8 @@ import autopilot from './functions/api/autopilot.mjs';
 import {handlePlan} from './functions/api/plan.mjs';
 import analyze from './netlify/functions/analyze.mjs';
 import vision from './functions/api/vision.mjs';
-import voice from './functions/api/voice.mjs';import tonApi from './functions/api/ton.mjs';import {handleJavidan} from './functions/api/javidan-trinity.mjs';import {onRequestPost as pay} from './functions/api/pay.js';import {onRequestPost as webhook} from './functions/api/variza-webhook.js';
+import voice from './functions/api/voice.mjs';import tonApi from './functions/api/ton.mjs';import {handleJavidan} from './functions/api/javidan-trinity.mjs';
+import {handleAnilCapabilities} from './functions/api/anil-capabilities.mjs';import {onRequestPost as pay} from './functions/api/pay.js';import {onRequestPost as webhook} from './functions/api/variza-webhook.js';
 const json=(d,s=200,h={})=>new Response(JSON.stringify(d),{status:s,headers:{'content-type':'application/json','cache-control':'no-store',...h}});
 const rjson=(d,s=200,h={})=>runtimeJson(d,s,h);
 async function kvGet(env,key,fallback=null){if(!env.PAYMENTS)return fallback;try{const v=await env.PAYMENTS.get(key,'json');return v??fallback}catch{return fallback}}
@@ -148,9 +149,37 @@ async function v90AdminRoutes(req,env,u){
   if((p==='/api/payment/status'||p==='/api/payment-status')&&req.method==='GET'){const oid=clean(u.searchParams.get('order')||u.searchParams.get('orderId'),120);if(!oid)return rjson({ok:false,error:'order_required'},400);const order=await kvGet(env,'orders/'+oid,null)||state.orders.get(oid);if(!order)return rjson({ok:false,error:'order_not_found'},404);return rjson({ok:true,orderId:oid,plan:order.plan||null,status:order.status,amount:order.amount,providerAmount:order.providerAmount,currency:order.currency||order.providerCurrency||'IRR',paidAt:order.paidAt||null})}
   return null;
 }
+async function anilChangeRequest(req,env){
+  if(req.method==='POST'){
+    if(!(await adminAuth(req,env)))return rjson({ok:false,error:'owner_auth_required'},401);
+    const b=await req.json().catch(()=>({}));
+    const path=clean(b.path,240);
+    const content=typeof b.content==='string'?b.content:null;
+    const message=clean(b.message||'ANIL X controlled change',160);
+    if(!path||!content)return rjson({ok:false,error:'path_and_content_required'},400);
+    if(!/^[A-Za-z0-9_./-]+$/.test(path)||path.startsWith('.git/')||path.includes('..'))return rjson({ok:false,error:'invalid_path'},400);
+    const request={id:id(),path,content,message,status:'queued',createdAt:now(),updatedAt:now()};
+    await kvPut(env,'anil/change/'+request.id,request);
+    return rjson({ok:true,request});
+  }
+  if(req.method==='GET'){
+    if(!(await githubActionsAuth(req,env)))return rjson({ok:false,error:'github_actions_auth_required'},401);
+    if(!env.PAYMENTS)return rjson({ok:true,request:null,reason:'persistence_not_configured'});
+    const q=await env.PAYMENTS.list({prefix:'anil/change/'});
+    for(const k of (q?.keys||[])){
+      const item=await env.PAYMENTS.get(k.name,'json').catch(()=>null);
+      if(item?.status==='queued')return rjson({ok:true,request:item});
+    }
+    return rjson({ok:true,request:null});
+  }
+  return rjson({ok:false,error:'method_not_allowed'},405);
+}
+
 async function runtimeRoutes(req,env,u){
   const p=u.pathname;
   if(p==='/api/autopilot')return autopilot(req,env);
+  if(p==='/api/anil/capabilities')return handleAnilCapabilities(req,env);
+  if(p==='/api/anil/automation/queue')return anilChangeRequest(req,env);
   const v90=await v90AdminRoutes(req,env,u);if(v90)return v90;
   if(p==='/api/account'){
     if(!['GET','POST'].includes(req.method))return rjson({ok:false,error:'method_not_allowed'},405);
