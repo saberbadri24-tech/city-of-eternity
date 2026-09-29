@@ -37,7 +37,7 @@ jobs:
           PY
           if test -f /tmp/request-env; then cat /tmp/request-env >> "$GITHUB_ENV"; fi
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         if: env.ANIL_REQUEST_ID != ''
 
       - name: Create controlled branch and PR
@@ -72,3 +72,18 @@ jobs:
           npm install --no-save playwright@1.55.0
           npx playwright install --with-deps chromium
           node scripts/production-browser-smoke.mjs
+
+      - name: Security and dependency gate
+        if: env.ANIL_REQUEST_ID != ''
+        run: |
+          npm audit --omit=dev --audit-level=high
+          node --check worker.js
+          node --check functions/api/plan.mjs
+          node --check functions/api/anil-tools.mjs
+
+      - name: Merge verified owner-approved change
+        if: env.ANIL_REQUEST_ID != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh pr merge "anil/$ANIL_REQUEST_ID" --squash --delete-branch --repo "$GITHUB_REPOSITORY"
