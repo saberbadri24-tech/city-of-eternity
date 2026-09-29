@@ -159,7 +159,7 @@ async function anilChangeRequest(req,env){
     const content=typeof b.content==='string'?b.content:null;
     const message=clean(b.message||'ANIL X controlled change',160);
     if(!path||!content)return rjson({ok:false,error:'path_and_content_required'},400);
-    const normalized=path.replace(/^\\/+/, '');
+    const normalized=path.replace(/^\/+/, '');
     const lower=normalized.toLowerCase();
     const allowed=ANIL_CHANGE_SCHEMA.allowedRoots.some(root=>normalized.startsWith(root));
     const blocked=ANIL_CHANGE_SCHEMA.blockedFragments.some(fragment=>lower.includes(fragment.toLowerCase()));
