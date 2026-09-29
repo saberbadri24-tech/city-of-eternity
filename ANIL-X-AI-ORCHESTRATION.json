@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "purpose": "ANIL X multi-model AI orchestration layer",
+  "strategy": "provider-neutral, evidence-first, capability-routed",
+  "providers": {
+    "openai": {
+      "enabled_when": "OPENAI_API_KEY",
+      "roles": ["general_reasoning", "coding", "agent", "vision", "tool_use", "synthesis"],
+      "preferred_surface": "Responses API / Codex-compatible agent workflow"
+    },
+    "anthropic": {
+      "enabled_when": "ANTHROPIC_API_KEY",
+      "roles": ["deep_code_review", "long_context", "agent", "reasoning", "vision"]
+    },
+    "google_gemini": {
+      "enabled_when": "GEMINI_API_KEY",
+      "roles": ["research", "verification", "multimodal", "long_context", "comparison"]
+    },
+    "github_copilot": {
+      "enabled_when": "GITHUB_ACTIONS_OR_OIDC",
+      "roles": ["repository_agent", "issue_to_pr", "code_review", "ci_cd"],
+      "execution": "GitHub controlled workflow"
+    },
+    "cursor": {
+      "enabled_when": "external_agent_bridge_configured",
+      "roles": ["ide_agent", "codebase_navigation", "review"],
+      "execution": "external bridge only; never pretend live without successful check"
+    },
+    "mcp": {
+      "enabled_when": "MCP_SERVER_CONFIGURED",
+      "roles": ["specialist_tools", "browser", "databases", "external_services"]
+    }
+  },
+  "routing": {
+    "research": ["gemini", "openai", "anthropic"],
+    "hard_reasoning": ["openai", "anthropic", "gemini"],
+    "coding": ["openai", "anthropic", "github_copilot"],
+    "code_review": ["anthropic", "openai", "github_copilot"],
+    "verification": ["gemini", "anthropic", "openai"],
+    "multimodal": ["openai", "gemini", "anthropic"],
+    "browser": ["mcp", "github_copilot"],
+    "final_synthesis": ["openai", "anthropic"]
+  },
+  "council": {
+    "mode": "parallel_when_useful",
+    "pattern": "planner -> specialist agents -> independent verification -> conflict detection -> synthesis",
+    "minimum_independent_checks_for_high_impact_change": 2,
+    "no_consensus_claim_without_evidence": true
+  },
+  "coding_pipeline": {
+    "discover": true,
+    "plan": true,
+    "edit": true,
+    "test": true,
+    "security_scan": true,
+    "browser_verify": true,
+    "review": true,
+    "rollback": true,
+    "production_merge": "controlled PR/review path"
+  },
+  "continuous_improvement": {
+    "enabled": true,
+    "site_radar": "hourly",
+    "guard_radar": "hourly",
+    "one_bounded_change_per_cycle": true,
+    "skip_if_no_meaningful_safe_change": true
+  },
+  "truth_policy": {
+    "provider_is_live_only_after_successful_runtime_check": true,
+    "never_claim_unconfigured_provider": true,
+    "never_claim_tests_without_running_them": true
+  },
+  "safety": {
+    "secret_storage": false,
+    "seed_or_private_key": false,
+    "wallet_signing": false,
+    "automatic_fund_transfer": false,
+    "payment_execution": false,
+    "kyc_or_captcha_bypass": false,
+    "security_controls_may_not_be_weakened": true
+  }
+}
