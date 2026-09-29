@@ -1,0 +1,28 @@
+name: ANIL X Execution Fabric Gate
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22
+      - run: npm install
+      - run: npm audit --omit=dev --audit-level=high
+      - run: node scripts/verify-syntax.mjs
+      - run: node --check worker.js
+      - run: node scripts/anil-final-contract-smoke.mjs
+        env:
+          BASE_URL: https://city-of-eternity.onrender.com
+      - run: npx playwright install --with-deps chromium
+      - run: node scripts/production-browser-smoke.mjs
+        env:
+          BASE_URL: https://city-of-eternity.onrender.com
