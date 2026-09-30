@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-09-30T08:56:54.089001+00:00",
+  "updatedAt": "2026-09-30T13:40:02.643077+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,8 +20,8 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1914,
-  "uniqueNewsPublishers": 538,
+  "discoveryCandidateCount": 1925,
+  "uniqueNewsPublishers": 544,
   "topPublishers": [
     {
       "publisher": "Binance",
@@ -32,32 +32,32 @@
       "count": 92
     },
     {
+      "publisher": "CoinMarketCap",
+      "count": 81
+    },
+    {
       "publisher": "HackerOne",
       "count": 74
     },
     {
-      "publisher": "CoinMarketCap",
+      "publisher": "x.com",
       "count": 73
     },
     {
-      "publisher": "x.com",
-      "count": 71
-    },
-    {
-      "publisher": "Coin Gabbar",
-      "count": 51
-    },
-    {
       "publisher": "Yelp",
-      "count": 51
-    },
-    {
-      "publisher": "GitHub",
       "count": 50
     },
     {
+      "publisher": "Coin Gabbar",
+      "count": 49
+    },
+    {
+      "publisher": "GitHub",
+      "count": 49
+    },
+    {
       "publisher": "Reddit",
-      "count": 47
+      "count": 45
     },
     {
       "publisher": "RootData",
@@ -65,23 +65,23 @@
     },
     {
       "publisher": "polygonscan.com",
-      "count": 32
-    },
-    {
-      "publisher": "facebook.com",
-      "count": 29
+      "count": 33
     },
     {
       "publisher": "CCN.com",
       "count": 29
     },
     {
-      "publisher": "LinkedIn",
+      "publisher": "facebook.com",
       "count": 28
     },
     {
+      "publisher": "LinkedIn",
+      "count": 27
+    },
+    {
       "publisher": "Phemex",
-      "count": 28
+      "count": 27
     },
     {
       "publisher": "BitDegree",
@@ -96,11 +96,11 @@
       "count": 20
     },
     {
-      "publisher": "bscscan.com",
+      "publisher": "Medium",
       "count": 18
     },
     {
-      "publisher": "Medium",
+      "publisher": "bscscan.com",
       "count": 17
     }
   ],
