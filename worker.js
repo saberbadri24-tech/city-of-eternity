@@ -416,6 +416,18 @@ if(p==='/api/payment-config'){
     const results=items.map(([id,title,tags])=>({id,title,tags,action:title})).filter(x=>!q||x.title.toLowerCase().includes(q)||x.tags.some(t=>q.includes(t)||t.includes(q)));
     return rjson({ok:true,source:'anil-x-unified-discovery',results});
   }
+  if(p==='/api/feedback'){
+    if(req.method!=='POST')return rjson({ok:false,error:'method_not_allowed'},405);
+    const b=await req.json().catch(()=>({}));
+    const kind=['suggestion','criticism','idea','bug'].includes(b.kind)?b.kind:'suggestion';
+    const message=clean(b.message,4000);
+    const email=clean(b.email,160);
+    const page=clean(b.page,300);
+    if(!message)return rjson({ok:false,error:'message_required'},400);
+    const rec={id:id(),kind,message,email,page,createdAt:now(),status:'new'};
+    await kvPut(env,'feedback/'+rec.id,rec);
+    return rjson({ok:true,id:rec.id,status:'received',stored:!!env.PAYMENTS},201);
+  }
   if(p==='/api/free-request'){
     if(req.method!=='POST')return rjson({error:'POST required'},405);
     const b=await req.json().catch(()=>({})),name=clean(b.name,80),email=clean(b.email,160),country=clean(b.country,80),request=clean(b.request,2000);
