@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-29T23:51:45+00:00",
+  "generatedAt": "2026-09-30T01:01:48+00:00",
   "engine": "Immortal Guard Action Planner",
-  "planCount": 1962,
+  "planCount": 1959,
   "plans": [
     {
       "id": "binance-airdrop-portal",
@@ -478,6 +478,17 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
+      "id": "https://news.google.com/rss/articles/CBMiM0FVX3lxTE1OUjFnbkgtdDkyb2M4czFYbjA0UGpPcmNfQm1EdEZSb1JkVFI4THh4TGY5OA?oc=5",
+      "title": "x402 - x402",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiM0FVX3lxTE1OUjFnbkgtdDkyb2M4czFYbjA0UGpPcmNfQm1EdEZSb1JkVFI4THh4TGY5OA?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
       "id": "https://news.google.com/rss/articles/CBMiMkFVX3lxTE5BR0ZOU1ZMMEpaMUZJUVpWQUVGcS1DVms2a2IyMEctNWRiWUk4Z0otd3lB?oc=5",
       "title": "TON — The Leading L1 Blockchain - ton.org",
       "status": "OWNER_REVIEW",
@@ -490,7 +501,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiN0FVX3lxTE4wdzhmcWw1bURIVzduMVQ2RkdWbWhJRTZkYVV4OE5VaVJHTHRQZU5YbHZXbzNsRFk?oc=5",
-      "title": "Stellar | Blockchain Network for DeFi, Payments & Asset Tokenization - Stellar",
+      "title": "Stellar | Blockchain Network for DeFi, Payments & Asset Tokenization - stellar.org",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -507,17 +518,6 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMiO0FVX3lxTE80bDhGLUc1ZElla3hOTkp3R25oMkMtU3lwc2s4TVpFZmxES0JadEI3djVMb1Y4di1BcUdV?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
-      "id": "https://news.google.com/rss/articles/CBMiM0FVX3lxTE1OUjFnbkgtdDkyb2M4czFYbjA0UGpPcmNfQm1EdEZSb1JkVFI4THh4TGY5OA?oc=5",
-      "title": "x402 - x402",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMiM0FVX3lxTE1OUjFnbkgtdDkyb2M4czFYbjA0UGpPcmNfQm1EdEZSb1JkVFI4THh4TGY5OA?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -1315,23 +1315,12 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFAwUWhMeURmMlhSeGVXQ1NuOG1wSEhlcVhFaWt1YmFlSkJfTWFWLXhEZEJ5NkY1ckg4eFYzNGQ2dllIUVZ1UzBBaWpMWURMM2hyTlFyY2dBTHI2NE1ibHdlYw?oc=5",
-      "title": "Re: CoinTracking - Profit/Loss Portfolio and Tax Reporting for Digital Currencies - Bitcoin Forum",
+      "title": "Re: CoinTracking - Profit/Loss Portfolio and Tax Reporting for Digital Currencies - bitcointalk.org",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFAwUWhMeURmMlhSeGVXQ1NuOG1wSEhlcVhFaWt1YmFlSkJfTWFWLXhEZEJ5NkY1ckg4eFYzNGQ2dllIUVZ1UzBBaWpMWURMM2hyTlFyY2dBTHI2NE1ibHdlYw?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
-      "id": "https://news.google.com/rss/articles/CBMiPkFVX3lxTE1sVlZwYjd1eU5ZUWJMcUNIaXA1S1ZqckpTTFAxT1RrQmV0dlAybGl4WXRlU0l6RzA1bmR2M3Z3?oc=5",
-      "title": "Unichain - Unichain",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMiPkFVX3lxTE1sVlZwYjd1eU5ZUWJMcUNIaXA1S1ZqckpTTFAxT1RrQmV0dlAybGl4WXRlU0l6RzA1bmR2M3Z3?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -1381,7 +1370,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5fMXFDeFNYSVVDYmE4N2d1SDRJUURGejlBWTZnQ2dmZDBpbEhob0kzX0s4N2s0S2VISUEySi1QR0ZNX25LU2ZlVWtxZnhSU1dQamJUOQ?oc=5",
-      "title": "Explore CyberPeace Blogs on Cybersecurity | CyberPeace - cyberpeace.org",
+      "title": "Explore CyberPeace Blogs on Cybersecurity | CyberPeace - CyberPeace Foundation",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -1425,7 +1414,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFB4eXo0ZE9aa21BTzRkX3VGV294LW5pYW03MlgyWlRCU09QUnpZaDBHaDZaUGtoVVI2LUZmYnJRT3B2TWduaHlLUXdDUm1YMGNvN1hkdmlrSnFmcGM?oc=5",
-      "title": "Headlines for August 08, 2025 - Democracy Now!",
+      "title": "Headlines for August 08, 2025 - democracynow.org",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -1480,7 +1469,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9TNnhCUFFBTUxZM0N4bUhlVGplMmRYS3hQLVRzdVhURkNSWWV3RVh0a0R5akhiZm1rcUtSNzd5RXN1SVJJN1htZVdNcXpzOUViV1ZkVExPYzJEZjYzWWRTMTR1Z0prSV9qd3Z6dm00MmdOUldrczhmbVFKVFlGQQ?oc=5",
-      "title": "Shaking the Heavens and Splitting the Earth: Chinese Air Force Employment Concepts in the 21st Century - rand.org",
+      "title": "Shaking the Heavens and Splitting the Earth: Chinese Air Force Employment Concepts in the 21st Century - RAND.org",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -1530,6 +1519,17 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPai1rQmFza05FcmJ6elUtU1NuenJGYV82LUVuN0xLUnNoWUZCa0pCcUFVVVJNQzYwR24ybVp3cm1OTHprOHdPcnVkeDItTWxGTUJLcDMtUkNSVTExbmk1ZGctd3JFX1otN28yaEVabWV5cU8xQzQwcFNrLXJ0bHlWTHhwSlg5YTg2S3FrSDlB?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
+      "id": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOOWxmOUMtV0o4MHBaY1BoMERHRUU5ZXhUR0pDMWMybzJWeGEtTXlvczJTTEVQeXVXWGJRNkhPdGdwSFhpSmFRQjhaalR1OVZRWnlWUnBIeUpPNDk3WElWQVp6SldlVlc0UWhmTmtfTWdyMzMtN0p3eGlCaHA2cDA1cW9ya1I3eFpLSUxIZ2Y0LUlnODY0S1pNM2lmaFRENjlHQmc?oc=5",
+      "title": "December 2008 - richfaces-svn-commits - JBoss.org",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOOWxmOUMtV0o4MHBaY1BoMERHRUU5ZXhUR0pDMWMybzJWeGEtTXlvczJTTEVQeXVXWGJRNkhPdGdwSFhpSmFRQjhaalR1OVZRWnlWUnBIeUpPNDk3WElWQVp6SldlVlc0UWhmTmtfTWdyMzMtN0p3eGlCaHA2cDA1cW9ya1I3eFpLSUxIZ2Y0LUlnODY0S1pNM2lmaFRENjlHQmc?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -1710,8 +1710,19 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
+      "id": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNT2lxWWhIcVp0b2YxdlYwV1FsVlJyR19MdXBIMURFeG9UYnBOVVpfMGpUQ2F1eEhKUDhsMmFRNy1hYlJhV3lLU2tCUFZzMXFIam5wLURSU1BReHdORnVmWFhxcHpNOGV2WDc3MlFiV0xXTDcwczQ1c3NVWjRSSTlIaUtVcXpvMFVWaEFEeVVfbG8tNGhRamJMQVJKVHR3UUtZQ1VnSA?oc=5",
+      "title": "A YouTuber says Meta's Muse gave his address to a Facebook Marketplace buyer: 'A guy just showed up at my door' - Reddit",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNT2lxWWhIcVp0b2YxdlYwV1FsVlJyR19MdXBIMURFeG9UYnBOVVpfMGpUQ2F1eEhKUDhsMmFRNy1hYlJhV3lLU2tCUFZzMXFIam5wLURSU1BReHdORnVmWFhxcHpNOGV2WDc3MlFiV0xXTDcwczQ1c3NVWjRSSTlIaUtVcXpvMFVWaEFEeVVfbG8tNGhRamJMQVJKVHR3UUtZQ1VnSA?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
       "id": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxOZ1R6WlFQNF9YNDZrUS1jVldCWkxaaHFCME1Xb3BKZXFnS3NrMVk2SUVkVkRGblVhaWVneHBqT3hfc3BkZThxNzFrM2trcWd0S2FwLW1QUi1tOWxPajgyRVplbVJKR1FucEk1eHBFbWhGbzlZQndrRVZBUnBRTG1BUFhLNGRGX0MwN3lrWDBOVWJZalJnYmo1WXhkQ0V6NV9NZXJqQUdEOXFscGJrU2l0cTFYUlRyMHhBS1MzcVVxanBCUDdmRU1RUF8tRzBOT1VNcDZCeEw4bmZwWUN2cDRpX1g3YzYwU0V5dDVr?oc=5",
-      "title": "The Morning Risk Report: Senate Investigation Finds Rampant Use of Tether’s Stablecoin by Iranian Regime - WSJ",
+      "title": "The Morning Risk Report: Senate Investigation Finds Rampant Use of Tether’s Stablecoin by Iranian Regime - wsj.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -1937,6 +1948,17 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQNnRFUTZhaUcwYV9ua01RdWhMdHdoT2RYSWY1MjE0a1JDa2tGbENSNm5aUHFHdHBXSTEyRm9nWDNOZzZsLVFFdVFQeUlxZk0xaEdsTVpHRktFd0U2RlJFeEVQVzhMUzRteVp4VFJDc2ZIZ21zNWc1OHFVVWRJdkE4czdOSi1tczZTRWtoZlZwT0JnaUxiN1Flag?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
+      "id": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQR3V5SjE0c1ppV0lCWkNyc1p0WVNwdmQzME1HS0F2dklOYmVlM3FGRktWUDBBek5tRkZyM2ZDWjNZYTVDRWpRY0ZxZGdPaDFkV2FTNTFsUjVhMndYRFBfVnBjbi03dlVNQXlqbVNGN1NMVV9xSG1rY3NIUEs5UHAyS2lYRDREMlpSczlLUHJnaGc?oc=5",
+      "title": "Meta's Muse AI Rally Is About To Disappoint You (NASDAQ:META) - Seeking Alpha",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQR3V5SjE0c1ppV0lCWkNyc1p0WVNwdmQzME1HS0F2dklOYmVlM3FGRktWUDBBek5tRkZyM2ZDWjNZYTVDRWpRY0ZxZGdPaDFkV2FTNTFsUjVhMndYRFBfVnBjbi03dlVNQXlqbVNGN1NMVV9xSG1rY3NIUEs5UHAyS2lYRDREMlpSczlLUHJnaGc?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -2217,7 +2239,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFB3U0NDVmlibVBCRjltLVZ2LWpEbFpONUVDU3BORHAyVzRGdWZmY3I1S0tHZjFPSGRKQjhaOGIzaVRRTVNfaVQtTlUzZkpTQnpzTHlEcHFTbzZ5OTRzRTh6Nmh0Q3V1LThU?oc=5",
-      "title": "Legal online sports betting - sportsbook.fanduel.com",
+      "title": "Legal online sports betting - FanDuel Sportsbook",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -2338,7 +2360,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQMTNGWk9Za2ZGUkZGT0gzZmx2TGFyck95SmttSkExSUdCZlJsQ3RoUzI3RFlUV2NVR0NHbkhSNTJmaElGNDhIOHlUQkx4ODgxWFE2SW1OcU1ZcHF2a044NmRUWVZPYkNKZ1BUNTJFX3FaNnR3S2otR0d0b0FKSFRxR1hITUU?oc=5",
-      "title": "Redeem Promotional Codes and Courtesy Credits - Amazon.com",
+      "title": "Redeem Promotional Codes and Courtesy Credits - amazon.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -2382,7 +2404,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiPkFVX3lxTE1MUFRiZldURF90Ul96Vlg2LXRaOE16YVVRVDJTYnpNNXNsNDl3c0VYeDJnMmlIR0FaTVhQV3R3?oc=5",
-      "title": "Staracle - Name a star - A gift from your heart - Staracle",
+      "title": "Staracle - Name a star - A gift from your heart - Name a Star for free!",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -2612,28 +2634,6 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
-      "id": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQcG1BR2dTRTZCenVSSmVRSm82Y3E3TGxwdUxWaXRpeEwwcHRSbEhoTHI4WUpEdnVRbE5TMVVTc0I3ejJQRWNtSDh5QU1hYm0zd2hnYXB2cFJ0aXhtbjF4ZUdiY0UyMm03OVVkMnpGYmktc1ZjNFRjY09HckFLUWlndUJ1cmhtQ3JKWEZxdGM0OVZJOTdSWVlNd0MxMjlISlBQZ2hjNzc5SFhRQVU2?oc=5",
-      "title": "Best Rams Sportsbook Promos: Claim Over $1,000 for Rams Odds - RotoWire",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQcG1BR2dTRTZCenVSSmVRSm82Y3E3TGxwdUxWaXRpeEwwcHRSbEhoTHI4WUpEdnVRbE5TMVVTc0I3ejJQRWNtSDh5QU1hYm0zd2hnYXB2cFJ0aXhtbjF4ZUdiY0UyMm03OVVkMnpGYmktc1ZjNFRjY09HckFLUWlndUJ1cmhtQ3JKWEZxdGM0OVZJOTdSWVlNd0MxMjlISlBQZ2hjNzc5SFhRQVU2?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
-      "id": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNS3RnSEhINlBOQTJjbmg2Z3hnZ1JhbGcyZW1FZEVpaVVXWUN2akhsN0VlTTVleVljbXpRNGtQSjhyeERjOHFyV09TWDFpWXZiajJKUVoycTBJeHo1dWQwTVZpWmc5cnU2MUhmSU9tX2pCSEJkRnRIT19qMVlISXhRVDlBVGsyMF8zR3c5aHNVakR1Z1Ywcjd5cXB2cnBsLUJJd1lXWF9YTDVfUk1qUGhPbFJyWEhOV3ZwMWN5TzN5eEdrX1ZUd2Nlc2RnR2o4RkM1SGNoTTJVVk1tbnZNaE5TOA?oc=5",
-      "title": "Hello again DPG Members, We're aware that the Stat Boost Reset Tokens are currently unavailable in the Savage Pass. Our team is currently assessing the issue, and the Tokens should be added to the Pass by 5:00 PM ET today. Please note that ",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNS3RnSEhINlBOQTJjbmg2Z3hnZ1JhbGcyZW1FZEVpaVVXWUN2akhsN0VlTTVleVljbXpRNGtQSjhyeERjOHFyV09TWDFpWXZiajJKUVoycTBJeHo1dWQwTVZpWmc5cnU2MUhmSU9tX2pCSEJkRnRIT19qMVlISXhRVDlBVGsyMF8zR3c5aHNVakR1Z1Ywcjd5cXB2cnBsLUJJd1lXWF9YTDVfUk1qUGhPbFJyWEhOV3ZwMWN5TzN5eEdrX1ZUd2Nlc2RnR2o4RkM1SGNoTTJVVk1tbnZNaE5TOA?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
       "id": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOWDNFWHZnM19LLTVlOXpLVEhrSWxSY0Y5Zi1UZmQ2V21iWGg0dGJIS0NJZXdJYjZGeU9LaWRNQUJqaGJDTng0MmU5UmthNUVvSGM4clNZWkFFNHJuQjJaVzgtOVo1R3VZS201UzFuUnZfeTlaQzdmMmlHM3hocDhoTjQtWFNFMy1YbFdrM1Fyek1rd05RZkg5bi1fZEd6NVJ6R2NqVTRFejhaQ0wtRHhEbVdPOEJsRXFmanc?oc=5",
       "title": "Worldcoin updates: Community grants, World ID interest and new agreements with trading firms - World - The real human network",
       "status": "OWNER_REVIEW",
@@ -2788,17 +2788,6 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
-      "id": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPdS1zTkhIdXZkZ2luVlplTkxXYUpkbW82ZVpWSUEzbE90UjNibjdfNTNLSEJEQXRTNzRmU3VXZ1FxbFg0bmlVNS10UV9yanBfNzBtWDA3Q1BKNnpvTldrdHFBWl9aX2dDMklwR2hmblNPU2lueFV6cVRXWHhwYklEa3YwSThVTUVvckt2NQ?oc=5",
-      "title": "Midnight Claiming Portal is Live - Reddit",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPdS1zTkhIdXZkZ2luVlplTkxXYUpkbW82ZVpWSUEzbE90UjNibjdfNTNLSEJEQXRTNzRmU3VXZ1FxbFg0bmlVNS10UV9yanBfNzBtWDA3Q1BKNnpvTldrdHFBWl9aX2dDMklwR2hmblNPU2lueFV6cVRXWHhwYklEa3YwSThVTUVvckt2NQ?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
       "id": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE9qLTFacVZ0Q1V1YVJiWXZ1aTJWclFJTFJNQWN5alppSjRWOEZkYXRXRFh6TnR5d3BJWnFHYVFndkIzT1pLUlNGSHI3aEhHdmtWTHBEN2pXc1E2aEdGNVkwcTVWOG4?oc=5",
       "title": "Crypto News Roundup: PENGU Burn, Tariffs, Airdrop Updates, and New Developments - AirdropAlert",
       "status": "OWNER_REVIEW",
@@ -2806,6 +2795,17 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE9qLTFacVZ0Q1V1YVJiWXZ1aTJWclFJTFJNQWN5alppSjRWOEZkYXRXRFh6TnR5d3BJWnFHYVFndkIzT1pLUlNGSHI3aEhHdmtWTHBEN2pXc1E2aEdGNVkwcTVWOG4?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
+      "id": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPdS1zTkhIdXZkZ2luVlplTkxXYUpkbW82ZVpWSUEzbE90UjNibjdfNTNLSEJEQXRTNzRmU3VXZ1FxbFg0bmlVNS10UV9yanBfNzBtWDA3Q1BKNnpvTldrdHFBWl9aX2dDMklwR2hmblNPU2lueFV6cVRXWHhwYklEa3YwSThVTUVvckt2NQ?oc=5",
+      "title": "Midnight Claiming Portal is Live - Reddit",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPdS1zTkhIdXZkZ2luVlplTkxXYUpkbW82ZVpWSUEzbE90UjNibjdfNTNLSEJEQXRTNzRmU3VXZ1FxbFg0bmlVNS10UV9yanBfNzBtWDA3Q1BKNnpvTldrdHFBWl9aX2dDMklwR2hmblNPU2lueFV6cVRXWHhwYklEa3YwSThVTUVvckt2NQ?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -3272,17 +3272,6 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
-      "id": "https://news.google.com/rss/articles/CBMiQ0FVX3lxTFBtTVkwR1NGR0lJQzZ4a3l6alJBWHpwZl9QUTlTSjF4MnFrNXFic3ItWWh6ODJYVTVmN3BrMUxKbTFXMXc?oc=5",
-      "title": "Shadat Official | Airdrop (@shadatofficial1) - x.com",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMiQ0FVX3lxTFBtTVkwR1NGR0lJQzZ4a3l6alJBWHpwZl9QUTlTSjF4MnFrNXFic3ItWWh6ODJYVTVmN3BrMUxKbTFXMXc?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
       "id": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQOWgxTE9zTW5PdTlpWkpsSDFQT25FYzZRYlpuWHhiNTBySWhjVVdtZkpyVzFyR3lfNVdFSTNVdW5UUHlHTEZUYTdKMGFoTlptN3hpV0w0NlpCcldoWHZtSERDT2tQaDFyRXV1VnlRUDZTOHhybFk3Sy04WW1lWkVWTjN5YnFoT0psWkg4OTYzX3BKVTg?oc=5",
       "title": "Einstein Airdrop Round 1: Get Ready to Claim - satoshiappxyz.medium.com",
       "status": "OWNER_REVIEW",
@@ -3360,6 +3349,17 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
+      "id": "https://news.google.com/rss/articles/CBMiQEFVX3lxTE9ucUF5YXdhVVZYT1dTYzd6Y1Z4c01rRmlVMy11MG9TckRmM25fLWw4OTdnTDFNVkhQYUtIbXc2c1A?oc=5",
+      "title": "Satoshi App - x.com",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiQEFVX3lxTE9ucUF5YXdhVVZYT1dTYzd6Y1Z4c01rRmlVMy11MG9TckRmM25fLWw4OTdnTDFNVkhQYUtIbXc2c1A?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
       "id": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOVG9pODFFcVR6Xzk3U1VqV2hYNUFIMlVNYlpPekx6WUMxMi1EN2RBT0FRakQxQVJzM2c2QmZ3dkFMcllvcC1hSjFEZTRRR1dMc2pzZTROMUhON0JCWU9QdVBBRU95TkVka0g4V0JkdFVhNE5iakFQazJyaXlBQXlXZDRNYjlhY2cxQmhGWUF1RkVhUVVMMlY4?oc=5",
       "title": "Next Crypto King Orbition Network Listing Date Revealed! 80% OBN Claim - Coin Gabbar",
       "status": "OWNER_REVIEW",
@@ -3400,17 +3400,6 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMiO0FVX3lxTE9CZ1BiUWNOdmZpNFowVDR4Ung4YnZkZm10Z3BOM0pZSU92YTQ2NVdMY09VaTcxVmJGbC1Z?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
-      "id": "https://news.google.com/rss/articles/CBMiQEFVX3lxTE9ucUF5YXdhVVZYT1dTYzd6Y1Z4c01rRmlVMy11MG9TckRmM25fLWw4OTdnTDFNVkhQYUtIbXc2c1A?oc=5",
-      "title": "Satoshi App - x.com",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMiQEFVX3lxTE9ucUF5YXdhVVZYT1dTYzd6Y1Z4c01rRmlVMy11MG9TckRmM25fLWw4OTdnTDFNVkhQYUtIbXc2c1A?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -3466,6 +3455,17 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE50RVozWjJjSzRhcFpOUjhEZWtHWWZfOFBLLW00TkZ3VTNlaV9VTXBjZExLZnRyblJKLUhTcUtZU2pVeUQwcXlNQjduM1BLbXZOOWsyYmd6YW9HZFVJRy1jRjV3?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
+      "id": "https://news.google.com/rss/articles/CBMiQ0FVX3lxTFBtTVkwR1NGR0lJQzZ4a3l6alJBWHpwZl9QUTlTSjF4MnFrNXFic3ItWWh6ODJYVTVmN3BrMUxKbTFXMXc?oc=5",
+      "title": "Shadat Official | Airdrop (@shadatofficial1) - x.com",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiQ0FVX3lxTFBtTVkwR1NGR0lJQzZ4a3l6alJBWHpwZl9QUTlTSjF4MnFrNXFic3ItWWh6ODJYVTVmN3BrMUxKbTFXMXc?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -4186,7 +4186,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFAtRF84LWpzajg3N1B2Z2ZKYmZ6Nko1Sk8ydDJCRGxaWl8zS08zbUNzYVdLZ2x4R1prV1hQOFF4akw5SXAtTEJMcGVRWjI4WEhiVi1zQzhaZnA?oc=5",
-      "title": "Blockreel Film Festival - FilmFreeway",
+      "title": "Blockreel Film Festival - filmfreeway.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -4604,7 +4604,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBPbzR1WHZQT0I4TDV0SFlnSDRDbHJXVEE0eks5Zkdvc2pVVXFkUGhxaEpveFdDVWRsT0d1dHRwQUpueVBEY2pXV01uR21WMU1pUnpB?oc=5",
-      "title": "Условия | Блокчейн - Blockchain",
+      "title": "Условия | Блокчейн - Blockchain.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -4654,17 +4654,6 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPZExGX21QVGVTQTVtbDN6VmlXdk1OdG9oR1FtNHl2UGlxMlNVbGJqa2tUVDM1ZlRLNkNPZldUbWo0MzNkSHNEbUt0NUdLY2d2SkNQU05IY3A0TmE4SE9ub1puM2FQSmNzU245NGhEdUhZOVVDbmw1VnVjallxajVqNGg2T0l0bnZMWXE0ZDRkSGkzTUI3MWRRZ3FDbUM1bGMxekZCQm5sei12QlgyN1pN?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
-      "id": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQcW1FczV1LVgtZmh1ZXJxQUI4cGM5UXBENDNIaWRURXhxOU5UTnVsTWFXaDkyMFRkWi1GWlR5clNTaFNvUTl4S1BxUEFBV05BZmVmUm13dWZvVnI5WHRabU5iRTNOR3kzMkEyU3J4VzJaMEJSMmxwOFp6bzliXy1DRm5WdG4welNtOVBzZXRqSFhFS3NRN3Z2N3hsY3lBNGRXY0NObFZGTFRJZFd6ajZyMk1pNExSYzlqUHRB?oc=5",
-      "title": "Circle Launches Arc Mainnet, Makes USDC the Native Gas Token — Криптонавигация новостей (RUS) - Blockchair",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQcW1FczV1LVgtZmh1ZXJxQUI4cGM5UXBENDNIaWRURXhxOU5UTnVsTWFXaDkyMFRkWi1GWlR5clNTaFNvUTl4S1BxUEFBV05BZmVmUm13dWZvVnI5WHRabU5iRTNOR3kzMkEyU3J4VzJaMEJSMmxwOFp6bzliXy1DRm5WdG4welNtOVBzZXRqSFhFS3NRN3Z2N3hsY3lBNGRXY0NObFZGTFRJZFd6ajZyMk1pNExSYzlqUHRB?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -4890,7 +4879,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1MSmRmLVNIUU90VFR6NmxkMXZZOEZFbUZLRGg5MzJsMml4SWVzTWtnZFp6ZVJrU0FGUmtuM3JlMXc0T0FsRU4yaGJqeVZ6ZEpkcS1ucnMxbzlIc0RzNHFuekVBVkttSXRMQy1jamRSd3o?oc=5",
-      "title": "Billonarie-Biker (Eng) - scribd.com",
+      "title": "Billonarie-Biker (Eng) - Scribd",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -4901,7 +4890,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE4zdkt5eTZRblFXNWF0WWNTRzM0bmY0ZnpOVHBGekNyZnlfUmZXeTRqYUR4Vl9HZVdIVUtrNWl4azl5Qm9jWEQxNHRiUmFFMk1tRmlFUGtZZUNKMUZNNEtBUy0zRkY?oc=5",
-      "title": "BTA312X-800C Triac Datasheet | PDF | Contractual Term | Electrical Engineering - scribd.com",
+      "title": "BTA312X-800C Triac Datasheet | PDF | Contractual Term | Electrical Engineering - Scribd",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -5099,7 +5088,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiR0FVX3lxTE1ubXlUeWgxZnVJQmllakZYcjdRQjJuMzdjTFFmZHpEbEM0Z0tETk1EX2JEZzRfVW5rNTg4YXpsUzhwd1dpY1E0?oc=5",
-      "title": "Blockchain.com User Agreement - Blockchain",
+      "title": "Blockchain.com User Agreement - Blockchain.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -5171,6 +5160,17 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFBkV0QtMVlfYVliVGRtT2pWRDdQZ0dGQnVUeXZvQ3VTckFtS2k5dHBpUlZQYjk3aFhveWhXVEVYRHdyLUhUTUJIdmJaMWRldmhKbDdZQThUdzVyaWhVVlJaMTdZV1ZlM2VT?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
+      "id": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQQ0xVSDJhQTlzXzlJbkJCdzJNUmtjeGJmcW5Kb3N4dm1zWWtxcHNnSFdrdV8zQi1LSEVudG9tcnVQMFdZU21JcnVjSnIxZGtHcXNEc2ZRUVphUXVfcC1XcGN3Z0FMNGFyeHpjc0NBSHVUN2dfUk9RT0w1SjFiQ0RrbHlVZHRNSDRKaGlOUnZBYTNKMWxvcnVNYjNFdF9EcE9lWDY4bjNoT3U3UUFQV1JNckhRNmJoNHcwOXdCWDVZZw?oc=5",
+      "title": "It’s Been One Year Since XRP’s $3.65 High—Is Another All Time High Within Reach? — Агрегатор криптоновин (UKR) - Blockchair",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQQ0xVSDJhQTlzXzlJbkJCdzJNUmtjeGJmcW5Kb3N4dm1zWWtxcHNnSFdrdV8zQi1LSEVudG9tcnVQMFdZU21JcnVjSnIxZGtHcXNEc2ZRUVphUXVfcC1XcGN3Z0FMNGFyeHpjc0NBSHVUN2dfUk9RT0w1SjFiQ0RrbHlVZHRNSDRKaGlOUnZBYTNKMWxvcnVNYjNFdF9EcE9lWDY4bjNoT3U3UUFQV1JNckhRNmJoNHcwOXdCWDVZZw?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -5473,7 +5473,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNWWszd19QSFc5VlJoWW5EeEFQemxheGpxZS1FWGM4cDVDbHlwU2Z3YVphSFBZLWdVWkRrRm9YSTNzWnhYbGJuZ1hOUjA0N3lZdnVPbnUzeGlxc2hTZFEzY1ZHMzFYTExiamNXMEhDYmxyTl9ja0VPLUFwOVR6cDRtLTVzSlhlRlVMVVN3YUZ3?oc=5",
-      "title": "Finally. Gridex Protocol brings Order books on Ethereum - Yahoo Finance UK",
+      "title": "Finally. Gridex Protocol brings Order books on Ethereum - uk.finance.yahoo.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -6034,7 +6034,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE9ORE9SOXBNMjEzUXpzN1dZMEYxb2tpWDJGZHZnM1k3d1gzSGs4R2ZMU3NkcmdqOFozeUotUWRqMXlNU3ZuMzhkYWpIcUFkQXNfbWpuaG5wNA?oc=5",
-      "title": "BingX Exchange Review 2026: Trading, Security & Fees Explained - NFT Plazas",
+      "title": "BingX Exchange Review 2026: Trading, Security & Fees Explained - nftplazas.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -6056,7 +6056,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFB3Ry1TLW9mbnB4bkZGZkkwQmJnMXhXQk40QWZoR0htdFdwWFlMUmpYX21TRXRJMWgyT1Z4T0hnamtQQTFKbi1iRC1KM2o2Q2k0VXI1TzB4d2Nyajc3dV9z?oc=5",
-      "title": "Top 7 Best Tether (USDT) Wallets to Consider in 2026 - CryptoPotato",
+      "title": "Top 7 Best Tether (USDT) Wallets to Consider in 2026 - cryptopotato.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -6100,7 +6100,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBqbnFwUVFHWTZmdTdSWWtSYWR5TmE2eDV1d3pIZEtZLVdpWXZaODg5ZDd4QnJsTmdyTWIzV1RvTFBiT2l4VVR3cGg5R3M5VzVpMGhsY1BSdw?oc=5",
-      "title": "Ethereum Revenue Rankings - Fees Retained by Protocols - defillama.com",
+      "title": "Ethereum Revenue Rankings - Fees Retained by Protocols - DefiLlama",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -6144,7 +6144,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9VcGhlUHd6dzB4bVNvVkxSUjlHLTBza3RfOF8tVEdQaGFmWjhGZjB3cDdoeHo2UXZ0VUNOTHVGTjZVTDBpLUpNanljNXdETmFaVEFWTEszWUo?oc=5",
-      "title": "Avalanche Revenue Rankings - Fees Retained by Protocols - defillama.com",
+      "title": "Avalanche Revenue Rankings - Fees Retained by Protocols - DefiLlama",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -6407,6 +6407,17 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
+      "id": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFBJajFhektXTV93cVVTbGhqT3dUZU5UVkpNcjhWZTNabnB3QV9RbUgzWVZOWUhIUE4tdzgxdHE3VXNZUUlBbW1GaFdRdkFyaHBpR3l0OVFiTWRWMUdZ?oc=5",
+      "title": "Blur price today, BLUR to USD live price, marketcap and chart - CoinMarketCap",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFBJajFhektXTV93cVVTbGhqT3dUZU5UVkpNcjhWZTNabnB3QV9RbUgzWVZOWUhIUE4tdzgxdHE3VXNZUUlBbW1GaFdRdkFyaHBpR3l0OVFiTWRWMUdZ?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
       "id": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5ldWVYTUM0TGRzWEN4b3d2c2FxSVJTYWdfemxZYzdIdGp6aTJETWhnenl6TnloRHhMOUJEaXB0UGd6RVpIOC16RW9TSnM1aUF0QU9sYWRyRHhBNEFXSGV2LWEzZw?oc=5",
       "title": "Web3小仙女露娜(@tiantian1823)'s insights - Binance",
       "status": "OWNER_REVIEW",
@@ -6606,7 +6617,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMibEFVX3lxTE50OWlyeUJMQUI0YmxwQVRYYWFRTzZZUVkxSHpPc0htRl9WWHlYUnJSUkx5QS1ibktlWVpSMmpGUUpHWjFWbnBvc2hfeXEwbEtPZjUyYWdETTY0Vno2eHFkcTl5NmJmMFVicFRFMg?oc=5",
-      "title": "15 Best No KYC Crypto Exchanges in September 2026 - NFT Plazas",
+      "title": "15 Best No KYC Crypto Exchanges in September 2026 - nftplazas.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -6815,7 +6826,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBZTlBkSTFkUUxac3drVktDRmh5VFdZajB3RUMyd0lWRV9CZHBfdzZleHJ1UVJoRUM4RXF2bWpzWUc2aTVLeWFobmJuYV8tcGFqRlpzWm5heWFPU0Z6b0Y2cXpSY1BYUQ?oc=5",
-      "title": "Learn All Crypto Topics | Phemex Blog - phemex.com",
+      "title": "Learn All Crypto Topics | Phemex Blog - Phemex",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -7024,7 +7035,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQaEJWLWlxQUtvUzFqTjNVTGNuY0lwTXVVVXhJaDMtX2JrRDNITks1dHgtanI1eGs1eG1pOHNhS2F3R002a1RCOFJYSFZtODZ5dTRvTm40ZTk1V2pEWTUyRFlKUG1UTWFIMl9KdllxQVZfMklhZ1ZZV1NkRWdlNmM3X0k1WkZOSlNtSTN4R1BlNm54Qk55dkVkYnRsM255ekg3RnVraG1wWnYtVVlLLWlCRUZBMWVmbkZuXzZr?oc=5",
-      "title": "PURPOSE/PFP White paper official.md at main · Purpose-for-Profit/PURPOSE - LinkedIn",
+      "title": "PURPOSE/PFP White paper official.md at main · Purpose-for-Profit/PURPOSE - linkedin.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -7222,7 +7233,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPbzZIazRJS05vZV8xa3I3ZEwwZjNWNG5rMmxrTG1MclpsamQtbTJkYjVYTnEyT1NKbDR3aW96REpuN09pYVJYSmNRSElGNnp0UnRwT3NmaG56LXNiVjdIVHBCRzZYbUYxTlR1eUFjSnpCbWVibHVXamFaWk5ka0hzWEFRQkJPaWxSRDJKX0tHNW9lYkJpRWxsNExrVlctNUF2WE85Wk1oX2lqNHZEUUdsRldZMGxwa0oz?oc=5",
-      "title": "Lily Liu on Solana’s Vision: Building the Future of Digital Finance - LinkedIn",
+      "title": "Lily Liu on Solana’s Vision: Building the Future of Digital Finance - linkedin.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -7342,17 +7353,6 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
-      "id": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPQklpMk1MMi13c0tRUEN5dDNWQmlyQXdsT1JSSnluR0RYeUotNXp5a0ZGNEtSRExENHV1Ty1TU04xbTZKYVA0MTJUWXVNaVRaZlFKT3NBNy1OakNScG5wVWVFaUVGUktGZDRnUFNWbzh0LVpwNF9xajF0QzV4Q1MtZnR6NGtkam1ldFk1OUU2TDJrZVU3cE9ybldHVEg2ckcxdldadUFDSG15LW1zWmFhR2xJTlNfMXVrbXk5QWdwdGVWLW9nYmpRUU1HTGZpM00?oc=5",
-      "title": "The Prediction Market Playbook: Uncovering Alpha, Top Players, Core Risks, and the Infrastructure Landscape - KuCoin",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPQklpMk1MMi13c0tRUEN5dDNWQmlyQXdsT1JSSnluR0RYeUotNXp5a0ZGNEtSRExENHV1Ty1TU04xbTZKYVA0MTJUWXVNaVRaZlFKT3NBNy1OakNScG5wVWVFaUVGUktGZDRnUFNWbzh0LVpwNF9xajF0QzV4Q1MtZnR6NGtkam1ldFk1OUU2TDJrZVU3cE9ybldHVEg2ckcxdldadUFDSG15LW1zWmFhR2xJTlNfMXVrbXk5QWdwdGVWLW9nYmpRUU1HTGZpM00?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
       "id": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQUjc2XzhHU2lzZU9oeFlQRjhDWU5JTDJaajFOZnFDemRiUVVBLU1mZ3FwcTBSdTgtak9YVkJPeVlQZllaVXYwdV9lQ0szc1VHSDVLRHhRb0NoTVNXekFUTGJvUXE4ZFIyR3E4SE9aWWNrdG5CSC1idzFOZDBZVGdEUVlMWUx5VlBSaHByR0FJUWZaaEk?oc=5",
       "title": "Bsc Transaction Hash: 0x04df4fe4e9... - bscscan.com",
       "status": "OWNER_REVIEW",
@@ -7387,7 +7387,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQX00wYmVzbV9oMGhwckNzY29lV254OF9NeFQwWUNnaGZOdVBBY0lCenJ0MFlyRXZ1YW8wMktFQlhDaWszNUp4emc0blM2NDZVMy05OVpMVEgxcFlnaDQ1U2JCT0hFQ2Q1LVBpOHFWLVNCRlJBWnVRNDdHcXNFZ1ZwYVdieHl1T3FVV01jYndaX1dCMmlWemhtSTRB?oc=5",
-      "title": "🌈 Unraveling the Rainbow Airdrop: A Comprehensive Guide - LinkedIn",
+      "title": "🌈 Unraveling the Rainbow Airdrop: A Comprehensive Guide - linkedin.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -7442,7 +7442,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOa1JEY0JKbUkweTZDSmx4UWtNaWE2ODRVaDZnMTJGRnRWQkViTVJjVFpZVF9WdnJyLVZkM1dLcGptWFBobFdSX21ub2pkdDhBT2xZejQzN3NiYjBtQkRLWDNtak5ldFNEaWNWWG40TjJUdnpJNFRXRUlsV0VrUVRoNXZHVlNfNVAzSlE?oc=5",
-      "title": "Export Copytrading Records 1734155804616 - scribd.com",
+      "title": "Export Copytrading Records 1734155804616 - Scribd",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -7739,7 +7739,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9DaU9Cd3VLeWNQM3MwSlR2R0N2V0pxMGdFTzE1bTVuN0twTWgtNUpaUzlQVHIwNng4dWFnaFR6Yks4M3pEMkRrRlR3U0E0UmFKX0xib3pZak5OUEI0?oc=5",
-      "title": "Donate to JoDee needs help across the finish line!, organized by Lonna Weems - GoFundMe",
+      "title": "Donate to JoDee needs help across the finish line!, organized by Lonna Weems - gofundme.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -7837,6 +7837,17 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
+      "id": "https://news.google.com/rss/articles/CBMifkFVX3lxTE8yR2xKbThHMEptQ1NRQmludUkwRnhCRXJ0WS05ek9UWFVySUFiRWQwcVp2d3dCZTdYM2M0S25CX2NOYVFYdHFJQlhmZHQ3am1rQXhWZVBoVWl5RWlfTHVYNEJRTm0tYWEwMG9SeDlieDFkaDFiT1JOZmp0U3FYZw?oc=5",
+      "title": "TOP 10 BEST Picnic Areas in Concord, NC - (2026 Guide) - Yelp",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE8yR2xKbThHMEptQ1NRQmludUkwRnhCRXJ0WS05ek9UWFVySUFiRWQwcVp2d3dCZTdYM2M0S25CX2NOYVFYdHFJQlhmZHQ3am1rQXhWZVBoVWl5RWlfTHVYNEJRTm0tYWEwMG9SeDlieDFkaDFiT1JOZmp0U3FYZw?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
       "id": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE4yRWdYTGxZdHJEbDBUbzA0TG9pYjVKb2NxMXFYWU5maDN3VGpzWjg4YXFZSkNINTFhSVoxVWJSajc2VlpxUVFFcHB3dl9nUGxoVmJSWEJpTTk?oc=5",
       "title": "Supported Coins & Tokens - Cryptocurrency Alerting",
       "status": "OWNER_REVIEW",
@@ -7925,17 +7936,6 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
-      "id": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFA5VVQ4Mjh5d0Q3cnM2MjZPVnJobWd3MWhfc210OUZXM1pCMV83VVNFZkxfQ3pfQnpseVVaODJlVGZyZU5GN09IcEM2VFp4Vm1QZ3I5aVhTb1JpNWNVRFE?oc=5",
-      "title": "LIBERTY PARK - Updated September 2026 - 18 Photos - 225 E Iredell Ave, Mooresville, North Carolina - Parks - Yelp",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFA5VVQ4Mjh5d0Q3cnM2MjZPVnJobWd3MWhfc210OUZXM1pCMV83VVNFZkxfQ3pfQnpseVVaODJlVGZyZU5GN09IcEM2VFp4Vm1QZ3I5aVhTb1JpNWNVRFE?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
       "id": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNbXlBMWU2UGpfM3pURjlhdzVCRUo3c3N4Y0dvd0F0MWZvUUJKSHF4aW83dmJMWUNuMmpqQVBTZ0RlM0Z6QW5TWnJ6Z2hvbWQ2Vm16TTdkV212akZhOWROQ1oxSWRfcTlCTEpBSHhSVjVPRWdmWlBUUTZrMl9sd3ptWkdCeV9WMnY5eTN6QjNnZw?oc=5",
       "title": "TOP 10 BEST Waterfront Dining near Cornelius, NC 28031 - (2026 Guide) - Quality & Affordability - Yelp",
       "status": "OWNER_REVIEW",
@@ -8014,7 +8014,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9qUGJkeV9qZ0hrX1F0SHAtOW1PUXRiTnZDNXdlazFURmszTVltZGh6ZnVSZ0VCWm1ROVItdGRadm04SEl0UUx1dXFvUG1lZldIQ0UtTHk5UUwzbWk2?oc=5",
-      "title": "Ethan Clime - Head of Developer Relations @STON.fi DEX - LinkedIn",
+      "title": "Ethan Clime - Head of Developer Relations @STON.fi DEX - linkedin.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8079,6 +8079,17 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
+      "id": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPcklGSWhJempKRjZxcUFQMDF0VU1jS0Z5YVhzNlZxM252OHgxc2drdnJvaGx6MEdRYWJnMnY1Ymh4Tkk2TUJLazZiamNkSW1SSGNpVzZjd2J3WnZvb0kxRGxYTllHWnE1N0hITWg3U21TMlNoUnBGNXNFc3NjYU5UNXBVS2I4T2V6SUFjNXV3?oc=5",
+      "title": "TOP 10 BEST Charcuterie Board near Davidson, NC 28036 - (2026 Guide) - Yelp",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPcklGSWhJempKRjZxcUFQMDF0VU1jS0Z5YVhzNlZxM252OHgxc2drdnJvaGx6MEdRYWJnMnY1Ymh4Tkk2TUJLazZiamNkSW1SSGNpVzZjd2J3WnZvb0kxRGxYTllHWnE1N0hITWg3U21TMlNoUnBGNXNFc3NjYU5UNXBVS2I4T2V6SUFjNXV3?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
       "id": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5YNWszVmNmb3U2Sy1raEtVSjZNYmZuWTkwOGpjeUVMbG1GMGRXVlh0RDk0djZKdHc1dlRGbzQ2TVppQXhYZnlsdzd1M25SSHBUb3QteU5qZDdxYklRUkluUjdHQWlvc1czbGEwNw?oc=5",
       "title": "764 OCTOBER TERM, 1992 Syllabus - HARTFORD FIRE INSURANCE CO. et al. v. CALIFORNIA et al. certiorari to the united states court of appeals for the ninth circuit - Justia U.S. Supreme Court Center",
       "status": "OWNER_REVIEW",
@@ -8119,17 +8130,6 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPTmVvNWl1bzItWnBSOHVBOUxEU1dVZW96cWtkZmE3dkMxNXBkcV9SVzFBU1U4WEJ4YVBQcEptdTV6VElPWTFCdVAwT3RDcVY0T2pQdHdZeG11V3AxZ1NabDQybHZCLXV6XzJxaVFLN1dSMXpPajl3WkVzZUNRSnVvbk9zY1gxYXBrcnpzY1lIUkR0cEE?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
-      "id": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOcE10bkJjdDlWSC1tTkhqbVJEMUY3Q3drbEJtekNxbjRhMDVnam9QRDZBZzBBcEpONXpTOEkyU3E4LWhEN2xVcG1xdDh4S05oNnkxSmNNQ0laSTZaeHNKMVdwZVdRZUdtUFVLaklrejUyVGdQZWV3UjdfQ2hmVVZRQ3JLdl9jV0h5MDZjMzlHWmtvUQ?oc=5",
-      "title": "The Best 10 Restaurants near Lake Norman of Catawba, NC 28682 - Yelp",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOcE10bkJjdDlWSC1tTkhqbVJEMUY3Q3drbEJtekNxbjRhMDVnam9QRDZBZzBBcEpONXpTOEkyU3E4LWhEN2xVcG1xdDh4S05oNnkxSmNNQ0laSTZaeHNKMVdwZVdRZUdtUFVLaklrejUyVGdQZWV3UjdfQ2hmVVZRQ3JLdl9jV0h5MDZjMzlHWmtvUQ?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -8212,7 +8212,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE1RRVcwejhtRmRRZ0tzaDJOTHA2a3hHTFBIRlhMcWNCMUljOXpuWXhtdmxYU0lQNlNOR1ZDTE5MVjhRVUpmYVltZmhSb3dKSVZDYlNMZkVCTQ?oc=5",
-      "title": "Austin Muchow - Mental Health Therapist (LMFT) at Nice Healthcare - LinkedIn",
+      "title": "Austin Muchow - Mental Health Therapist (LMFT) at Nice Healthcare - linkedin.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8256,7 +8256,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE11akd4bS1kMlZqS09ReGt2bzZveTJTc2FFdkdITVlQRzhoUHNtbTFhTzh5X1FidjBKM0FnYW9QYWQwaFdGS0ZuYWl5bXlqUFRldlZPT0ZqMA?oc=5",
-      "title": "For journalists and public relations - muckrack.com",
+      "title": "For journalists and public relations - Muck Rack",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8596,17 +8596,6 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
-      "id": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPNGlMbVdWRG1OdXRieEZMOFQ1X3B3NTRvbU0xVzczaEVOeFVET0lfRWE3WnZVRVhodjB5Z2s4dm0taEd4X2xuSUYxelhsMTRUVnI5RXdhcVdUMVhFWjJjWGl6Z1BUWlhYZEx2cHFZVi1KenhtVG9DUVlEaVRyanJGa09vaE9ROTQ?oc=5",
-      "title": "No Kill Shelter Los Angeles, CA - Last Updated September 2026 - Yelp",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPNGlMbVdWRG1OdXRieEZMOFQ1X3B3NTRvbU0xVzczaEVOeFVET0lfRWE3WnZVRVhodjB5Z2s4dm0taEd4X2xuSUYxelhsMTRUVnI5RXdhcVdUMVhFWjJjWGl6Z1BUWlhYZEx2cHFZVi1KenhtVG9DUVlEaVRyanJGa09vaE9ROTQ?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
       "id": "https://news.google.com/rss/articles/CBMieEFVX3lxTE9FR1pSelpEOUxCcDdsWGhJT0IweE1BYzNWZUpZNG9OekFELWlTWDZpQ3pMM1hhLWVtdjU1T0tvbGZxR25wMU9FSlE2cDJNa3p2aHpYcVhrbUJLRnJPdmtkdGdCMWw5QnQ3LTBQTDlRV1o4NkpQb2J1WQ?oc=5",
       "title": "THE BEST 10 Beaches near CONCORD, NC 28027 - Updated 2026 - Hours - Yelp",
       "status": "OWNER_REVIEW",
@@ -8614,6 +8603,17 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE9FR1pSelpEOUxCcDdsWGhJT0IweE1BYzNWZUpZNG9OekFELWlTWDZpQ3pMM1hhLWVtdjU1T0tvbGZxR25wMU9FSlE2cDJNa3p2aHpYcVhrbUJLRnJPdmtkdGdCMWw5QnQ3LTBQTDlRV1o4NkpQb2J1WQ?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
+      "id": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFA5VVQ4Mjh5d0Q3cnM2MjZPVnJobWd3MWhfc210OUZXM1pCMV83VVNFZkxfQ3pfQnpseVVaODJlVGZyZU5GN09IcEM2VFp4Vm1QZ3I5aVhTb1JpNWNVRFE?oc=5",
+      "title": "LIBERTY PARK - Updated September 2026 - 18 Photos - 225 E Iredell Ave, Mooresville, North Carolina - Parks - Yelp",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFA5VVQ4Mjh5d0Q3cnM2MjZPVnJobWd3MWhfc210OUZXM1pCMV83VVNFZkxfQ3pfQnpseVVaODJlVGZyZU5GN09IcEM2VFp4Vm1QZ3I5aVhTb1JpNWNVRFE?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -8663,7 +8663,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1nRVVhLVdxejE0UUNqSlBJejg4N3UzaEUxQ3BGbnJPZ3NmbnUtM1V1MEVROFhZeGQ0ODV0OTlpWGpXSGtEQ0hnN20zck5idEYx?oc=5",
-      "title": "Bryan Koo - Principal Data Engineer, MLOps @ Autodesk | Ex-Netflix, Ex-Disney+ - LinkedIn",
+      "title": "Bryan Koo - Principal Data Engineer, MLOps @ Autodesk | Ex-Netflix, Ex-Disney+ - linkedin.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8817,7 +8817,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiR0FVX3lxTE1NbUwxb3lNTnR0WlFzcGpwME5FUV9xX3VlaVY5bmI1QXp3WWlnUjJLaVBnbktRV2V1V2JwQTczNnRScy1qMFBV?oc=5",
-      "title": "Blog - sol-incinerator.com",
+      "title": "Blog - Sol Incinerator",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8828,7 +8828,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMingFBVV95cUxQVG0yTVFMRzBMUm9PNFdDR256YlAwaW5YYTZJRU1mOEpWdy1adXB6eU5Pa2xpUDBTclFSUl8wTmQyQi10bHRzb1ZKRzhfWUZNSHBER3lrVFdQTC1VcXFnM29IQTRDZmo2Rl91WkxTclVnWEM1XzlKVl8wWFhKMGpMMUMxQlBEemdoZEN5S0VwaTZTYnRWdnU4QmtlUFQ0UQ?oc=5",
-      "title": "pda - Is it possible to close an SPL token Mint account? - solana.stackexchange.com",
+      "title": "pda - Is it possible to close an SPL token Mint account? - Solana Stack Exchange",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8839,7 +8839,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBIUkI5R0pVV0dyRTNKXzlNX0VzOC1ZSTZteUxKcFVmUGtJRXpMajBnenU5TnI5ZzM2SXZjVUJsejdfZko2WkRYZGJKOXNCZ2UwQzREMTRwbm5DQnF0MHc?oc=5",
-      "title": "Launch a Token on Solana — Genesis Fair Launch Guide - metaplex.com",
+      "title": "Launch a Token on Solana — Genesis Fair Launch Guide - Metaplex",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8850,7 +8850,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1icHdPaUUwN1VFV1BYcXRmS3NoQkI2THBKbk5mZ1JGQXZwVkJLczA1MF8tMHdmX2VYcU11ZExKY3dOQmMwbWY5c005Q2Y1aFV3Mmh3dHRXcVRQa0VmUjVTemZZZmY2YzZZdXBxMDh3REYtV252bWc?oc=5",
-      "title": "Dive into Solana: Discover the Power of Water-Themed Crypto! - phemex.com",
+      "title": "Dive into Solana: Discover the Power of Water-Themed Crypto! - Phemex",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8861,7 +8861,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQa0cxTDBJQkJIOVJ6NWd5RDdJRTNMdHFybFJSX3JXanhxaXlMWjRMakhpRzJaa2ZiR29YTmVQZ01jWmE3bURJdGsySWhYQ2REU1B5M1B0alYxREk4ZkFBc3BQNkdlQi1zRTBJeXhsOFRDQlhFbHF6ZnVlM051X2xwdFdUOFJuY2ttdDlhN01ZTVA?oc=5",
-      "title": "How to use Solana Token Extensions to Collect Transfer Fees - quicknode.com",
+      "title": "How to use Solana Token Extensions to Collect Transfer Fees - Quicknode",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8872,7 +8872,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNYWlweW44bTVpQVVVQnU1cHl3Snd2UkpxMVFQTFVHTi00Z2dzNlY3LXdNRW5ubTVzTlBCTjJodXZvb0FZeTBac0RqMVRhaGZfMkozSjBNXzJpVF9oSjhRMkdhZ1dVOTdZaUtrMzNhSl90SHR0dW1IRmJORElYYmtEMWRXdFFoN0dOY3hfVzd6d3R3cjFpa2Z3U0o0WXU3WEotUzlV?oc=5",
-      "title": "How to Add Metadata to a Solana Token - metaplex.com",
+      "title": "How to Add Metadata to a Solana Token - Metaplex",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8916,7 +8916,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9fX3BxQmVwWlE3dXlySzF4NjlyaGFPa2tDQV8tb2NaUDViS2gtSlFZaEsyS1k1ZFIzY3BuUTZjMmVmZzVkcFVhZzREM0pETHZCZTlVV284dnhyVnoyVVE3Yg?oc=5",
-      "title": "What Is a Solana Token? SPL Tokens, Token-2022 & Creation - comfygen.com",
+      "title": "What Is a Solana Token? SPL Tokens, Token-2022 & Creation - Comfygen Technologies",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8949,7 +8949,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFBELTlNdV83ZTdOalU2TG1ScHBIMWRiTlA3V0RGcWxVb3c2dXdsM1RIeXZ0VHpTc0hySXA1aWNVdjc2dVRvZVlJdHBueVFqZVphMnNBbw?oc=5",
-      "title": "Everything You Need to Know About Solana's Metaplex - alchemy.com",
+      "title": "Everything You Need to Know About Solana's Metaplex - Alchemy",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8960,7 +8960,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMifEFVX3lxTE4yRlM4Sm9xVWxyMmY1cFgydHRhYlpQdERkQ1ZWcG9SY0tZVExZS1U4YklxWVhiVHJvczR0dUN5WE5Ud0pKNXJwZmZoY2l3eTJqWU9YRFhQT3lxamg1LXpxZFU3WGU3ek5ZeTZMdFU0M3RqNjNYVFRldTZPeXg?oc=5",
-      "title": "How to Create and Mint Fungible SPL Tokens Using Anchor - quicknode.com",
+      "title": "How to Create and Mint Fungible SPL Tokens Using Anchor - Quicknode",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8971,7 +8971,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQaTZEY3dqTUl3TnlPemRPMl9fU1lSaWFSeFhES0hRLXFHOFRncEFhalNjZ3hnOExqdHlrZlgweFNabENxZUlVNHQ5NElJbnNJU3ptTkhIMG1fU3BfazlOQlI4TWVnMDRMOEdNRWtUNm5SallPVEtXM3pvRWxLODl6VDU2enBZZ2Zoa1I4Ty1hLWRQaVY1REJV?oc=5",
-      "title": "Compliance and Verification Data for Digital Assets - bluprynt.com",
+      "title": "Compliance and Verification Data for Digital Assets - Bluprynt",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9004,7 +9004,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQYWNITmtDakZMNTRjS3VjajhIRFgzMnpQdEdNVlA4Wk1fYy1PMkNiZldkeWtYOThpbWlUUXBLQ2JyQ2NuZTN2VG5tQ2NBUExDX2J6RW5MTGREV0pIdmdxRDBNc2RNa1pqQnhpVjktbFVIMmxoXzlFX1JxZlg2VjMxWjJaME9ib2xIeTNSbE9hdW1RUQ?oc=5",
-      "title": "Solana Token-2022 Guide (SPL Token Extensions) - quillaudits.com",
+      "title": "Solana Token-2022 Guide (SPL Token Extensions) - QuillAudits",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9026,7 +9026,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPOERNdDBKYjZLVW50TlNBNG0xaGdiMkhQMFpkaUtab1A0WXZ6MklFck9Ddm1QNzlKb0Y3bTVoM1RkMEM4UUFsWjY2OFpKNlZuamJOTjVvUTYtSVc4enM1VEJaaVNRQ3hieEFnaWZaTVNmbG1GSWg5VVNQQmlFcnRGZXRzYk1MN1RsRFd5eFFrZ3lQa0FydHJ4OEk1YjlOLWVqai0tUEZwV1YzVW9nTzdFdW82TURzbzY5ZmxrV29tMlNqS1NkS2c?oc=5",
-      "title": "What is the difference between Transfer and TransferChecked instruction from the SPL Token Program? - solana.stackexchange.com",
+      "title": "What is the difference between Transfer and TransferChecked instruction from the SPL Token Program? - Solana Stack Exchange",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9059,7 +9059,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMid0FVX3lxTE0xdERhcWlzODdlU0lqZ2tqRWd6d1U2aFlabzVZN0pHTFJHNld0N2lveVAxVFV0cWdWajNMd3BQYkFjS1pQbWJ2dlVETUN2cHVoaTVUWTFobnVTV1Vjdk5ySFZYc2NUT3d5UDczMUIzWXc3V3JMVWU0?oc=5",
-      "title": "JavaScript SDK | Genesis - metaplex.com",
+      "title": "JavaScript SDK | Genesis - Metaplex",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9070,7 +9070,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOZHNJTjZoaGJ6Rk0wN1d4WVFueGp0RzZWbVhkWWx5MXJxM0JoTklDbnlqSFRhR2JyVXRRZ2p5T1p3Q0k3cWNLTG9aMkwyR3dyQkFJWlY4QlZvd0VzdzBGeExubk5fUjNRQks1OE5BNHdxUFJJa25jOGY0WldnaC00RjF0cW9QQ1l0NUQ0eDdWNU1rbVljYUFYd2ExQQ?oc=5",
-      "title": "Solana RWA Token Program Explained - quillaudits.com",
+      "title": "Solana RWA Token Program Explained - QuillAudits",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9081,7 +9081,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBuckdCTGt1SWZMZDBiUnMtbFpfdU50eDhSMGVwVjE5aWtMc192Q1FYWUVWdWFMM1NWczdWejAtWnhIZ1hkZDJJY2lXSUlYTXFyUDY5N0E3YzhiYlF2bjQ5TTlMR1FKM1RRb0V2X1FmZEozclNX?oc=5",
-      "title": "Token Distribution Guide - zkcompression.com",
+      "title": "Token Distribution Guide - ZK Compression",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9113,8 +9113,19 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
+      "id": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE50cWZicjdwQVFOS0JuLUVfLVk5aENVNDBzcTByZ014SjB2RnZXOWYySHRkY2ZKSmRQVFNBV0tLcGVnRWk3SDhUQg?oc=5",
+      "title": "Metaplex API - Metaplex",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE50cWZicjdwQVFOS0JuLUVfLVk5aENVNDBzcTByZ014SjB2RnZXOWYySHRkY2ZKSmRQVFNBV0tLcGVnRWk3SDhUQg?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
       "id": "https://news.google.com/rss/articles/CBMivgNBVV95cUxOZHZQVGpudDdFVFlUbXctSzhwR2hJTUc3ZHU0UDlmbHlRUFpja1JQYmNveHdlelBUWEdTcFJ5M3dRN01oeEpLMVJ2dHdGVlZVMFV6RnNIcFJEcDZSYzJPSEhvZXU5QW82THVPREdoTUJHTFpqZF9QWXM0X3E1SWZxR2FnRTRkT2xfU0VQbzF1SWVSQThaTm82ZTFwb2FGMEdGUWNRWW1uNHExVzdHekNySVVrdnprNXUtSHcwQW9mb2dSOW40bVBQanVEMGJGYUk4ZTB2bXZiRUN6YzI0NmxSWTZ3bDNhRF9fVUJBSVpvX21QaXdUczY4cEdzdExHQ1ZIbWdkbk5tWXRhMmdVUVFNaEdVdnBWVVFTTGNEd184OVpheVlOTWJYYXR4WGtEWXZvb1dGeEhIQ2NYUDJkSENmeEljbnkzc2lPYnA2ZF9IS3IwXzZsRW9kaWExS2V2ajBjSEdXb2ltcmpiS1lGRWpRd1dNYWtlaXA0alhiRU5XR003TmhVQnMwS2NONllYZmFVb2s1MzliaW5OcEpmdS1wMGhIcjk1MVVjT1NIRzNLRGMwVlhLVjAtUGV6VFR2UQ?oc=5",
-      "title": "𝗧𝗵𝗶𝘀 𝗜𝘀 𝗔 𝗕𝗿𝗲𝗮𝗸𝗧𝗵𝗿𝗼𝗎𝗴𝗵: 𝗕𝗎𝗶𝗹𝗱𝗶𝗻𝗴 𝗦𝗼𝗹𝗮𝗻𝗮 𝗡𝗙𝗧𝘀 𝗪𝗶𝘁𝗵 𝗧𝗼𝗸𝗲𝗻 𝗘𝘅𝘁𝗲𝗻𝘀𝗶𝗼𝗻𝘀 I used to think you need Metaplex to mint an NFT on Solana. But you can do it with just the Token Extensions program and 50 lines of Node.js. Here's what I buil - LinkedIn",
+      "title": "𝗧𝗵𝗶𝘀 𝗜𝘀 𝗔 𝗕𝗿𝗲𝗮𝗸𝗧𝗵𝗿𝗼𝗎𝗴𝗵: 𝗕𝗎𝗶𝗹𝗱𝗶𝗻𝗴 𝗦𝗼𝗹𝗮𝗻𝗮 𝗡𝗙𝗧𝘀 𝗪𝗶𝘁𝗵 𝗧𝗼𝗸𝗲𝗻 𝗘𝘅𝘁𝗲𝗻𝘀𝗶𝗼𝗻𝘀 I used to think you need Metaplex to mint an NFT on Solana. But you can do it with just the Token Extensions program and 50 lines of Node.js. Here's what I buil - linkedin.c",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9125,7 +9136,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPN0RUeGJnVnFTQUhPUHNUdTlEUjhzcXVJb2w2NG5XX3RraGw3OUdqWlplTm1qeUJLOW10WkNlcGNJNThtR2haTDdXZWVHcDFJRUZZMU9SdklqUmoxeGNvdUJfY0J2Q2tPRzNidXc0NTVpUDktVkVkaUd1OVRJMUN2Umt2VGF2YkRqOElRdHkyNFJvazdLaDZNMm5HcEpMd2MwZFBFVm52YXZNMGlZUF9OWmZn?oc=5",
-      "title": "Anchor Error, Account Not Initialized While Running Deposit Test - solana.stackexchange.com",
+      "title": "Anchor Error, Account Not Initialized While Running Deposit Test - Solana Stack Exchange",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9147,7 +9158,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiekFVX3lxTE9CakFTZGIwWlFrRTZDc3ZoNG5UdDdPcGEzRFZYVS16Um1KZTd4Q3g4U2pRbEkzRWV0aWlXTjFTSm1VV2ttd05hdEs2X1NsZ0FQX1UxaDl0RndtRGg0Ykt4eUFUNC1lU2thMmNscTVhRmQtVVA1aWFSU0hn?oc=5",
-      "title": "Genesis - Integration APIs | Launch Data - metaplex.com",
+      "title": "Genesis - Integration APIs | Launch Data - Metaplex",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9191,7 +9202,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQcWtKLUs1eGlYNE83Z3QtVE1TODloeUJDc1E2VlNYVFBxd1RoT1FUNkxRdm84MVkzWGx2c3BIN2pWaHNDQjVFeFdZMl9makZTWllNcF9rOGFmOV8yUGJlcGVJWVFBeTd0UzlDdWpKN2k2TVdRdHpNUmdjTWN4T1lVcmQ1ZXA3VlZmT3hvemRFbzY?oc=5",
-      "title": "Active delegates on a SPL token account - solana.stackexchange.com",
+      "title": "Active delegates on a SPL token account - Solana Stack Exchange",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9201,8 +9212,19 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
+      "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1DdmJFSExMclY0WkxTRjVqOUdTTTJDejRxYTZHQWhLUzZPcVN1cXNYMjBiem5HLWczSUJvZ081MGNDdWFzVEpaQTZKYmxFcjhGX2Q4b0VR?oc=5",
+      "title": "Get Agent - Metaplex",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1DdmJFSExMclY0WkxTRjVqOUdTTTJDejRxYTZHQWhLUzZPcVN1cXNYMjBiem5HLWczSUJvZ081MGNDdWFzVEpaQTZKYmxFcjhGX2Q4b0VR?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
       "id": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPczdDcjVvTk9zaXFVeGE5cGZvZ0NKbjFzYk82ZlZSeS1IZ2JzSHJ5NlQyRFppTGxRYkE3OTRiUlg5cUlPemVuVEZPY2JpMi1HbjdUNk1yZDNYelJsZ2NHRjNsWnV2RXRRNTRheFgyUWIzdmRhWTRHd1NJYVFwb0dnSzRfWDROMUprYUY5ZEI2NU1hcndLcVM0aHZOZ053RVl1cjRhY3Jn?oc=5",
-      "title": "A public company tokenized its own NYSE stock on Solana — on day one - solanacompass.com",
+      "title": "A public company tokenized its own NYSE stock on Solana — on day one - Solana Compass",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9213,7 +9235,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9jSEVIZl9IT00zWkdHZ2VNYmN1eHBVS0VRbkNPNWV2RWVGRFZKWUtyX0VGNDhGNWJ3aU5ySU5iV3Z6eTd3dko0MGItRzliaElVak9LTlRCQm5Jb1BOSWx5XzlVaVMzem90ZWc?oc=5",
-      "title": "Flash Loans - kamino.com",
+      "title": "Flash Loans - Kamino Finance",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9224,7 +9246,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPQTAxRVdBdlAzZlNzRDdTRTRITllGa1gwWWdZM1IzcU1wWVhNRDJOZGNNRUlJckQwRGZDX3dpUEZRR2UzeXdCNk1leWxCWWZ3Z081UXBpdkVtNEdfY0JWb0Q0UlA5XzVaUjFqTVhpeXk3RlZhTXRycWNTU29ycXpGak5EalNaeUZUR0Nmd0VsN1ZZTDdUTGVtMVRB?oc=5",
-      "title": "Solana False Top-Up Attack: How It Works & How to Prevent It - liminalcustody.com",
+      "title": "Solana False Top-Up Attack: How It Works & How to Prevent It - Liminal Custody",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9235,7 +9257,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE50YkgzRFRsVDFXTWhCX3NBRDFfRTNzOUk0QkNPSjVySG9haWkzOFVrZDlNQlEwTE5SQ045S1JQSnRObnJnTjlvZUJRMkZOLXZRY1NQbFhrOHJoeEJNMnJDeEJ6NlpjUQ?oc=5",
-      "title": "Create an Agent Token - metaplex.com",
+      "title": "Create an Agent Token - Metaplex",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9257,7 +9279,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5DUE44dGdPVFd1UGFIZGFtRE5tdXVXQWlwTVo0SzF1ellrMlRjNlNqYlJDb2lCb0tyb0ZUdWVKZ245SjRnSU5FX3c0UkJza3NDRlhoTGxqV29FQ1d0UWdnVXBMejRhQ3o4dnVVSVdHejNEVHlYaV96eU9rXzBGX2M?oc=5",
-      "title": "Launch a Bonding Curve Token via the Metaplex API | Genesis - metaplex.com",
+      "title": "Launch a Bonding Curve Token via the Metaplex API | Genesis - Metaplex",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9268,7 +9290,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1XbU5Gb3N6TjVIYVhlbTFweVJVc2lqNVVUcnVkbTBoU3d1MEtyYXpQdk1XNlZwWm9zTFFwckNTWG9NY3I0WEJvcU91bUl1SWtKQ2o5b3MyODYzWE44UV9aM2t1VVk1VUo0eHBr?oc=5",
-      "title": "Best Wallets for Solana in 2026 - foxwallet.com",
+      "title": "Best Wallets for Solana in 2026 - FoxWallet",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9322,8 +9344,19 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
+      "id": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE1FLTRyQ0hVbmwyUUhEY0k1LWhLaF80RHhWV1BhZ1FXTF9yYjZteDNXRC1Lc3V1Y3h1QVJ1WXVIazhiR1dwVTV5NFk4TDllWHlnYk5sdHM5OA?oc=5",
+      "title": "Get Launch - Metaplex",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE1FLTRyQ0hVbmwyUUhEY0k1LWhLaF80RHhWV1BhZ1FXTF9yYjZteDNXRC1Lc3V1Y3h1QVJ1WXVIazhiR1dwVTV5NFk4TDllWHlnYk5sdHM5OA?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
       "id": "https://news.google.com/rss/articles/CBMieEFVX3lxTFBYSjJzRms5VkFVUkxPLVc4WVBLcHNYaWZNd2hxa0NCTDNJcGY1YXNaZnhNZ2t2QTNJeVdXbTY4RC1RSzV5cGQtYVVWSDhIS25iOHpUenZBcHI1c3A3dDE3eGoyQnBTWW12TXptLWpQdjRlV0NhQzBPQg?oc=5",
-      "title": "Sol Cleaner: How to Clean Your Solana Wallet and Reclaim SOL - sol-incinerator.com",
+      "title": "Sol Cleaner: How to Clean Your Solana Wallet and Reclaim SOL - Sol Incinerator",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9345,7 +9378,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1iUGhGbEhjbTlZZjY0d1VfRlVTcUdUQ2tfc1RoeHNMcFZDM2dfNy1vY1FRd1BQZV9WdnVodGE5QXhReDRzRGJkU0Zpd3dyeGp1UWNKdHFrZUtSUQ?oc=5",
-      "title": "Total value locked - tokenterminal.com",
+      "title": "Total value locked - Token Terminal",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9356,7 +9389,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNeHhjTUxjSkpueHNVVW53WWoxU3FxZ01yYlZLYUZWc1JfODdqVExwMnlXLW5LV0EwVk9PeDM5V05vSTJ4MDBsRkpPWnVkNk5DQXlYWlhvcnpZSHFtMXlNOHVCcFBWYTJjS2lqZGNRQmc4bi1zcDh0VUcxdDFhUXI5MlFkZ0ROejlz?oc=5",
-      "title": "Genesis - Get Launch | REST API - metaplex.com",
+      "title": "Genesis - Get Launch | REST API - Metaplex",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9378,7 +9411,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5naFRNa3pRRWRNWWh0V0Y1eHFFWDZVUW9GTC1LdGpUTElaOEc5OW5kYTY0TEJmUjFHQkFZa3piS1NZdUk4TTBVNk9jdXJSQQ?oc=5",
-      "title": "Optimism Faucet - Free Testnet Tokens - faucet.quicknode.com",
+      "title": "Optimism Faucet - Free Testnet Tokens - Quicknode Faucet",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9422,7 +9455,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE56Q1pJdGJUb091Q1JiWnNpZ3pSVTBMYmVmMTc4eWtRQzNrdXk1dDV4cDlrb2VoTUhtSVd2cG9WWlFwUzJzeExReS1fQWF1dTJRVVRJSmJrUmQ?oc=5",
-      "title": "Optimism Sepolia Faucet - faucet.quicknode.com",
+      "title": "Optimism Sepolia Faucet - Quicknode Faucet",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9455,7 +9488,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5ucFF5R2N3bS0yWExLd2xSNFZLTUg2UmJrMjJnMXNyQjBsVFVNYTdBWllrTHp2UDVPaGtYNEZlYzRkRkpBZXRpamdBd1NjLVZiSTd3eDRxVkY2b2VxLWRadmdfaXJ5UkRIWXVNU0RObURpTUlJYkE?oc=5",
-      "title": "Crypto Prediction Markets Explained: On-Chain Guide - newyorkcityservers.com",
+      "title": "Crypto Prediction Markets Explained: On-Chain Guide - NYCServers",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9477,7 +9510,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMibkFVX3lxTE55V0FPemlILXNRc2J4ODVCZ2taLTBxSGtXZklvc1ZGdVN4cUo0cUV2TW54amVqcHZoWHRGMzQxUDBxemZYc29kZHg4OFhLWjQ3SWY5R0tNVEFZTGVpLUJjRGtVc3pRemp3UjBsRW9R?oc=5",
-      "title": "Create a Vault - kamino.com",
+      "title": "Create a Vault - Kamino Finance",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9488,7 +9521,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE8wOWJxT2VRbk8xT2RXSS1nbzhKcm0wSDhPMWhQUXRjWXNKNDYtZ2F5VzJqbjJPQlhRcU5MMV9UcnY4eldINFhob3MxVDhaZw?oc=5",
-      "title": "AI Cookbook: 10 Web3 AI Agent Prompts - quicknode.com",
+      "title": "AI Cookbook: 10 Web3 AI Agent Prompts - Quicknode",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9532,7 +9565,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE16WHlpem9FRzJxUGhQOWN4TVgzcGVrYV9VVW9mdjhIX0JMZml0dWZ5NHZkSTZfOFdEM3dleF9sMWdOMl82d0xQWDVUNXVmamRMUV9qd2pyQVlVVmRVSXJqcw?oc=5",
-      "title": "Policy language - docs.turnkey.com",
+      "title": "Policy language - Turnkey",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9542,8 +9575,19 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
+      "id": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5Xa3lnYTlndE1OQUlUMUdrT2NlX3FlZ0l6UVRPcHNtSHVEV3pMSFZpN1lCS2xYUXQ5TV9fekFOMnNxNjltdVd1NllsQ0xYQ3VSMWQyaHhkbi1sYXVBcnZjamhR?oc=5",
+      "title": "Planet Sandbox price today, PSB to USD live price, marketcap and chart - CoinMarketCap",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5Xa3lnYTlndE1OQUlUMUdrT2NlX3FlZ0l6UVRPcHNtSHVEV3pMSFZpN1lCS2xYUXQ5TV9fekFOMnNxNjltdVd1NllsQ0xYQ3VSMWQyaHhkbi1sYXVBcnZjamhR?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
       "id": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFBmelBhTlkxLXd2LV9JamNCSnZvaXJBRmFyNFRDRTdKRlFoQ0FwOEs5NllrVndTVVZzRFR4V0p6V0tYQUE3NDltV01XZWgySUxXdXJjSWo0b21iQzdhb3hfSg?oc=5",
-      "title": "Expenses - tokenterminal.com",
+      "title": "Expenses - Token Terminal",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9609,7 +9653,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiSkFVX3lxTFBDY2E4UEdyYWdTQ2ZCQlF1dGJWTzJjNEItNl9GVHVXM1M5czRCeDloSFNlNzA4ZUJSbkpxUThJS2V2dDlHbGxqcnNR?oc=5",
-      "title": "Rajat Gahlot - Co-founder @QuillAudits | 8y+ securing Web3 | 1,500+ protocol audits | Building QuillShield: AI security for Web3 & onchain finance - LinkedIn",
+      "title": "Rajat Gahlot - Co-founder @QuillAudits | 8y+ securing Web3 | 1,500+ protocol audits | Building QuillShield: AI security for Web3 & onchain finance - linkedin.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9631,7 +9675,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9RRE91a1dKOXJreUhnWkZsb2dsZkZGdWpmVThPdElJN2hNZVlWMURiTXZxTnFrc00tNVR5WDlBSmltV1Jpbk1wVjRiUUxRdTBNZUFQOGk0MnBHOXJFSjNJ?oc=5",
-      "title": "Solanaprofits is rated \"Average\" with 2.9 / 5 on Trustpilot - trustpilot.com",
+      "title": "Solanaprofits is rated \"Average\" with 2.9 / 5 on Trustpilot - Trustpilot",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9697,7 +9741,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOcGl1R0QzOFkyRXpsZDVPWHpZVV8wZmNYR18xamx6MGVKc2NWR25WbXhVbmItM0g3V2RWUDZKeTk1UjBUNXJOMU9aT0k2enZPQlFCM1dYM3FOX0N4NjJyejVuVG5kVmNBNDBOQjh3cXNMcWJycTF3LTM1NW1ocEhSX01JUXBwSEo3RXBz?oc=5",
-      "title": "Crypto Volatility Index - rootdata.com",
+      "title": "Crypto Volatility Index - RootData",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9796,7 +9840,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5mblBkNHI1NFhDa0FHdWxsQWpPOHR0OG5EODJPaVVocXVWRW9QdXB5WngtVXNaLVZMZFpKUktJYTcwNk9MZjJrXzRWVnNWMkdvTzE2eGl5RFpPVk01UnA4?oc=5",
-      "title": "Swap Quotes - spectrumnodes.com",
+      "title": "Swap Quotes - Spectrum Nodes",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9850,50 +9894,6 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
-      "id": "https://news.google.com/rss/articles/CBMiR0FVX3lxTFBvZlVleVA4Q0hvQnFTeGpmZ3dqcW1IX2sxZ00xSXNtcmczZFFIU1Q5QzZxV3BGbWdySTl0eXBlY2hJYzhycTBn?oc=5",
-      "title": "Solana Scam Reports - chainabuse.com",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMiR0FVX3lxTFBvZlVleVA4Q0hvQnFTeGpmZ3dqcW1IX2sxZ00xSXNtcmczZFFIU1Q5QzZxV3BGbWdySTl0eXBlY2hJYzhycTBn?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
-      "id": "https://news.google.com/rss/articles/CBMickFVX3lxTE1QLXJ5MTY4YzI4LXJXVjYtZUNJU0VLS0JoUDFaMlEzbFVja3VRVHFxbEFlMm1pN3BxNm1PYVF0YlRSZlA3M05EOUFsaURvTFpWdmFxOWJaLW9hODYxUlhfRU9nRTdoOGkyOTFOTHd2NDJnZw?oc=5",
-      "title": "Pump.fun Review 2026 — Fees, Safety, U.S. Access - CryptoSlate",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE1QLXJ5MTY4YzI4LXJXVjYtZUNJU0VLS0JoUDFaMlEzbFVja3VRVHFxbEFlMm1pN3BxNm1PYVF0YlRSZlA3M05EOUFsaURvTFpWdmFxOWJaLW9hODYxUlhfRU9nRTdoOGkyOTFOTHd2NDJnZw?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
-      "id": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPblNUa1ZTbGs3M2dXeHA0VXJtWm5uVkFhUERoeWpGT0U4SGkxLU5hRDdCM3BBakk2SmctcDZxUFlXQlNnZXRlQVdLcWN4SVlQa1h6SzJ3YWF5UUIxcTlLaFFlMWwtclJ4a2pNaWZONHhHYm10eTJRV1FkQjZ0eXdiNjNxOXZPZTlxYkJKajFuTC1qdXdSTFo2cg?oc=5",
-      "title": "Liquidity Pool: What happens when two of your assets (50:50) go up in price? - Reddit",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPblNUa1ZTbGs3M2dXeHA0VXJtWm5uVkFhUERoeWpGT0U4SGkxLU5hRDdCM3BBakk2SmctcDZxUFlXQlNnZXRlQVdLcWN4SVlQa1h6SzJ3YWF5UUIxcTlLaFFlMWwtclJ4a2pNaWZONHhHYm10eTJRV1FkQjZ0eXdiNjNxOXZPZTlxYkJKajFuTC1qdXdSTFo2cg?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
-      "id": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9Dc25Yb1EwZnNEUkt5TFZHSkFmRFJSeExWTVpNcWdPT3ZtcE5LU21WQnMyQzVqeTQtWUdvc3BPSTRBQ24xUEhtd2N6b2hlYndQOEdkLVhSMmZBUFFBZ1FXeWRjaDZlSXhqckRlendn?oc=5",
-      "title": "The Free-Agent Playbook: Why a DeFi Protocol’s \"Zero-Cost\" Developer Acquisition Conceals a Five-Year Incentive Trap - singamlotterys.net",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9Dc25Yb1EwZnNEUkt5TFZHSkFmRFJSeExWTVpNcWdPT3ZtcE5LU21WQnMyQzVqeTQtWUdvc3BPSTRBQ24xUEhtd2N6b2hlYndQOEdkLVhSMmZBUFFBZ1FXeWRjaDZlSXhqckRlendn?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
       "id": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE11NlpJaEhNSFI5UVpUMURZR0JDR3hqbTh0SWpRNDdJbUt0ZU9HZXpMUEYwbFVSUDJaS3Z4S0pRd0Q4TTlleXpfaUc4QW92akZNZ0ZYTg?oc=5",
       "title": "Gala price today, GALA to USD live price, marketcap and chart - CoinMarketCap",
       "status": "OWNER_REVIEW",
@@ -9928,7 +9928,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNR0lsaTZjZk5VR19EZlBKVTFvNmpTal9nZFcxT2IwaGp1OEVLckpWSUhfUGNySDJ0VUo4RzhGOWE4MG5YUm1xQ19NVDhwZkVXNmtRX0pmZzZiQ0M0eEQwc0FHZ1FMaG1ibTBFWmQ5c05abUdTVi1HMEVrMmxhWW1MbDVENmNPTkFsN2tCeg?oc=5",
-      "title": "Base Launches its First Builder Quest & Brings New Developers Onchain - thirdweb blog",
+      "title": "Base Launches its First Builder Quest & Brings New Developers Onchain - blog.thirdweb.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9950,7 +9950,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1IRXBFcVBFY2E2TWM2V2Jzclo0UlJ2b2gtb1JIeDRDX0RnSFBJNzZqbFlwMlh4d2xYaF9ha19YclhuMDAtVi1maG9LSVE1dkd2S1R5Y2U1U1VUaEp5aUpyVHZMX3VULW1iSGxVYW1Hdw?oc=5",
-      "title": "Real World Asset (RWA) Token - OpenZeppelin Docs",
+      "title": "Real World Asset (RWA) Token - docs.openzeppelin.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9961,7 +9961,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5Dc0xVVkI1VkliRlpvNnpOelcyV2FQMUxoSXNFQTJ6eGZSUGxveUs5TWpQQVh5QlRuaVUtSEdDTjlWZEg2ZkJZbERWeXpHMzBuMTMtM1hiODhYMzM3b09WSEFFOERnWFBkUkpoa0haVFZIS1Q0cVUwanotUQ?oc=5",
-      "title": "Multichain SuperRare FAQ - SuperRare",
+      "title": "Multichain SuperRare FAQ - help.superrare.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9994,7 +9994,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOdko4LW5RT3VHZ0w5MGZFSUNNOFNjbDFzMzVrYUlxdDY1aXNRX194YVo2VTZLaDc1d3FtMFNwLUNyVXN6SnNWUmIxemtHUGIyYWZUYlNsbi0wRDhYTmdNOFJudG9yWGs5YUF4bTFFVE8zVFo0Q25CMWFsZUgtajZMVEhoYXBMTFdVUEk5dTJSTzA?oc=5",
-      "title": "How To Create An ERC20 Staking Smart Contract & Web App - thirdweb blog",
+      "title": "How To Create An ERC20 Staking Smart Contract & Web App - blog.thirdweb.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10005,7 +10005,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1ZRFlxZ2N6RlJJYWFVNEtxNXFZcFd6dWt0N1EzNDN0c0VMX2xLaFQtc1lMZi1xVFljT3RYYU9KSUpZZklDNTR1VW1UX0NlV0dZSzhlS1lxam1JLUtXYUhCVWt3c3RJTU4yYTlZUkJ1SWtEVjBMdUxUWGY3cVFMdw?oc=5",
-      "title": "TRUF Token Migration: Portal Walkthrough & Migration Guide - Truflation",
+      "title": "TRUF Token Migration: Portal Walkthrough & Migration Guide - truflation.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10104,7 +10104,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPLWJ5Qlo3QmpEWXRkV1liVmZXcHlydE03dFA5VGxJQ0FmZnJzNE55Vm1iWm9veVFwQWJRWm9QNmFRbktPcVBhRVQyWTVoWkJNcGs0MndCVE04clN5X0ppSDJXTWxlU2FyMW40WmhRcEM2QVJyMkRHRk5uN1psRmFXemFPR1h6S2cxTGN5RlhxenFqX1N0OUdmZg?oc=5",
-      "title": "Zora Airdrop Guide: All You Need to Know About the $Zora Airdrop - quicknode.com",
+      "title": "Zora Airdrop Guide: All You Need to Know About the $Zora Airdrop - Quicknode",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10126,7 +10126,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE12QU5ZeUFqLWhkcXVWaUZEc1Nuc2V6RDZwRUt5bUhqVWZtNUVZaFB3X0FFSWVDSnUwLUhUX1ZzaUxESlo4TTNRLUNYY0syQkE?oc=5",
-      "title": "Fluidkey Score - Fluidkey",
+      "title": "Fluidkey Score - docs.fluidkey.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10181,7 +10181,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiakFVX3lxTE41dzQ4Q2FpX2R3TGlvNXFidFBwVjBBektXb0tZdUdHanlnS1N1RTdZSGw4RnZOV181Rk52TG5fNDNoRldTQlE3bjZDNXBLVlRBV2hNQnZLdC0yVXhyVmlFVkRXM3BVQlhtOVE?oc=5",
-      "title": "TON CTF Writeup - Medium",
+      "title": "TON CTF Writeup - ambergroup.medium.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10192,7 +10192,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFBzVDRCTnNSVFRrSjFEQkFvSVJtd0dybTNmN0xKMFdqRlBpVkhsWVR3V1UzbzJtQjhTLTN5U0h6QThlek93dGo5Z0pBS3FNSFJtenNURkNMSkRGZXhHNmdWSDA4UDE?oc=5",
-      "title": "UniswapV3Router - OpenZeppelin Forum",
+      "title": "UniswapV3Router - forum.openzeppelin.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10225,7 +10225,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxPdGw0N3dKRlJrcWJxN2ZYNDEwTFE0czZUbERfOVBPZXY2SV9sNEFzNllwQ3RiV3RneHlhSUxsUTVYazlJX3JOaXhwOWZRWXZMMHhobTZtUm10UFozVkJoRG5TdUM3ZkZVZzAyc0xZNW5HQ0c2Q2lGRGZtck5EbWpacGNNdXRlWVJYQmU3VDdjTFRwZnJPMzNNeE1aNHU0SG9qLXp1SHdfeFdCRjdobWk3NmQyelE2Y3J3ZW4xdG00bXYwUVlmSG1uTkk1czdxWnAxVk83NTRLWmpjM0pxZHp3WUw5d1Zndw?oc=5",
-      "title": "[Legacy Topics] Bridging RNDR ERC-20 Polygon Tokens to Upgrade - Render Network",
+      "title": "[Legacy Topics] Bridging RNDR ERC-20 Polygon Tokens to Upgrade - know.rendernetwork.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10302,7 +10302,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBRRUtCVHk5RVAtQUE5Q1k0aTNkVFJURmhXdzlmeXZ3cUhva0k5RzlKQXVqUlFfSjZ4M1FvNFV5cmxLT21TRW5aTXdqSHByd2hSREpuLUZ0WjNKMGo5Nmh2ZFZ3bWJheU1kSlFLeG12NmR1WlRCM2c?oc=5",
-      "title": "Smart contract based digital evidence management framework over blockchain for vehicle accident investigation in IoV era - ScienceDirect.com",
+      "title": "Smart contract based digital evidence management framework over blockchain for vehicle accident investigation in IoV era - sciencedirect.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10324,7 +10324,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNN0ppLTA5eHo4UVl5UDJVZUVxYUZyTlh6RzRSblN3X0hqWkNOWnpDOVpRYlJjVzFoNnBKMnV5TzhYMVZFbmNSQllPNmE5dXNHbnVEYjNxdlV1SHRuV0xHeFRmSFBoU3o3elIzSkZJUHRxbHNWWEprMU03cGtSQ3h0TlI5aEYwbjZMSllycXEyVTVTWkpTMUpDZWJsaldUQmliTlV6Zll6WUwyQ2lYVmZUOGRpdlFmZm9Id3JaLVZqMElEM2ZhLWkzTQ?oc=5",
-      "title": "How to Revoke Token Approvals and Protect Your Crypto Wallet from Appr - DCENT Shop",
+      "title": "How to Revoke Token Approvals and Protect Your Crypto Wallet from Appr - store.dcentwallet.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10346,7 +10346,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMifkFVX3lxTE56cll4VElCclpuenNHZzdqOTN5Q2swLXVTQnhwM1dfMDZZeWdmTDhidV9CbFZjVV9JZ3VYNTRmeEZyMk54d1plbUZndHBNdW56Z2JndmEzbnFrTmh6YVllREJ2SGZJVnhtV29ibjdUUXJWTjVSazVSZTktZTFxUQ?oc=5",
-      "title": "DoS Attacks in Smart Contracts: Beginner Guide - Kryptonim",
+      "title": "DoS Attacks in Smart Contracts: Beginner Guide - kryptonim.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10357,7 +10357,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE4yUUtnZy1HVm5aa3JhRUV2MWUtTEMtX0RJbVBFdDRMcGpTZ0tROHdqaFppVG9UbWhjRUpVR0dqWlJkUm1BMDBRQVItU1FJdkF2enFSLUtiVWp6QQ?oc=5",
-      "title": "BUSD Token - Berachain",
+      "title": "BUSD Token - docs.berachain.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10379,7 +10379,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiQ0FVX3lxTE10Ni1wYW9sYzlYRnZmQnQtUk42UHVnOUhJZ1dEbzY2aUl2Y3dXZnE4T2NteWNydXRvV2YzQXRRNTR2Nk0?oc=5",
-      "title": "MyEtherWallet Knowledge Base - MyEtherWallet",
+      "title": "MyEtherWallet Knowledge Base - kb.myetherwallet.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10390,7 +10390,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1GcEk0NktTWnR0TWVoTkk1Rm13MmRtYTFMZjEzdUk1V1VNY3VDZlpTSWhSLVlFeTlkRUxCdVpQZzRYemNZb20zX2h4dDVYcmlhOGEydFRfSXRtOHVYRW1oTW9LY0NoVWxzMmg0?oc=5",
-      "title": "Claim Parallel Assets - Flux | Decentralized Cloud Computing",
+      "title": "Claim Parallel Assets - docs.runonflux.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10423,7 +10423,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiREFVX3lxTE8ybjFKUm11MTBPSUx2T01hcy1oekpfMjd2cUJwTndYOFFPZ2F3SFJ3Y0dyNGJvYzBqMkJWMGdHamUzSjU1?oc=5",
-      "title": "Decubate — Wind-Down Notice - Decubate",
+      "title": "Decubate — Wind-Down Notice - platform.decubate.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10445,7 +10445,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQcWhCakt6X09kSXRIOGpaWVJJUVlRV180SFpZRkVjV1ZaVHFZY2lVQWlqOWNmelk5cklyTFBLRFQ0dTl3cV9Eb2M1VGhleXcxOHo0bFVLSEZpYVJsWG9FdDlMbmdVNXcxNGwtSzF3LUlZTTlqNlhqWDFtdzE1VzRSdG0xTXpxYmQwZ1k1STNqWWpScXEzM0NfYUYtd3RfdndST19PTnloNnJXbmRkbzRLYzVGck5JVjVDamVDbHhjSWs3WjBLX1NJaDF0NEE?oc=5",
-      "title": "etherscan - Invalid basescan api key when attempting to verify NFT smart contract via foundry - Ethereum Stack Exchange",
+      "title": "etherscan - Invalid basescan api key when attempting to verify NFT smart contract via foundry - ethereum.stackexchange.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10478,7 +10478,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5zYzQxLU9kNjNPNXJQOGRYTmVrZ1pYT2huNnVqaHloWjRYbkxsQlhWVTFxX1ZRUXdDR1gzTHg0YU1LVTgwTDVVaWNVZDFQVEFWQm1Sbk9oVUdDZndXX3RNanItemF2ZzV1V0dWOGFMVVE?oc=5",
-      "title": "How To Create an ERC20 Token: Step-by-Step - Cherry Servers",
+      "title": "How To Create an ERC20 Token: Step-by-Step - cherryservers.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10500,7 +10500,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5nMkVUeURISHVyVm9ncDhRZnBOa3hKSWs2Y3UtNk5ZYm9XT0ZlT3FzT1FDN184c2Q4NTNXWkowcTYtaGZiX29wWjViZU5yTS12QXhRall0UlZ2TjJ2VzBQTzVjUlpZTmdyR1pqOW5JRFk2bnpNaGc0?oc=5",
-      "title": "Bypassing Smart Contract Timelocks - OpenZeppelin",
+      "title": "Bypassing Smart Contract Timelocks - openzeppelin.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10544,7 +10544,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNN2VHdEhzSzNJWlZkQk56Wll4eFZJeEJlMGR0Y2t1dmYzeVUybS00YlJ5S1NxWHFmU3BRcE9rWmdiNGtYMVZSTjM4YVV4T0JLQk8zalhFTFpNcVBBUjBjX1RCX1FEWWVCeW00QU0yMnlMXzhMdHdkQmZhMnpmTHROejAwdnU?oc=5",
-      "title": "How to Airdrop NFTs - quicknode.com",
+      "title": "How to Airdrop NFTs - Quicknode",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10621,7 +10621,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1GUEFlM1hELXlTd3ctbF9XY19udHFZSG5Da0ZlSnYteThZMzRPM1VuOUpMOGlFQVBNdWl6MkUybmJkSldObGY0eGx1Y2g3ZG5pLXZnN2ZoWERaT2Y5bjU0d2FvaHQ0UThWcXFFM25qWlZHSjlMb0E?oc=5",
-      "title": "Design and implementation of a New Blockchain-based digital health passport: A Moroccan case study - ScienceDirect.com",
+      "title": "Design and implementation of a New Blockchain-based digital health passport: A Moroccan case study - sciencedirect.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10643,7 +10643,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBDbGRKLWlUT1lEOHlDeXB0ZFRyZEJrZHZGNE9KZEl3QUM2STlSbUdCa3hpWkEyNEp1ZGFZOHhlU3ZETlVXb05NaFp5UGZYU2liSHE2THpBODVBOGJCazJxOTNYQUhvUUp1SDhJNVFnZnJSOVBNN2c?oc=5",
-      "title": "Tokenized stocks for trading and capital raising - ScienceDirect.com",
+      "title": "Tokenized stocks for trading and capital raising - sciencedirect.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10654,7 +10654,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9VREZvMDFzbmw0cXNzWGdLRjBKX0VlalZ1THZ1eG96N1g0RkVhMnE4eHhFYVhteXpYYnhXdFRWRDFBaUVYZnp2VUlCME51MDVtSFc1TERSdk8yY1YwbFU0S1FSOWp5NHB1ZmJwMkJnWnAxSy1ENkE?oc=5",
-      "title": "Security checklists for Ethereum smart contract development: Patterns and best practices - ScienceDirect.com",
+      "title": "Security checklists for Ethereum smart contract development: Patterns and best practices - sciencedirect.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10676,7 +10676,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9RcW9HcUFlanVUbnZkekxnUkxXZXUwdUdXTlZrbWZLcGxrRVZWelJ3TTNSNVFQTVFHdXpyN0NkU2huYVR5TVRwYlFSOG5YbXUtY1F1SXZlVUdPYTc5djFkUkRuRkYzT0FCRVE?oc=5",
-      "title": "Better Home & Finance Holding Co aStock overview - tokenterminal.com",
+      "title": "Better Home & Finance Holding Co aStock overview - Token Terminal",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10698,7 +10698,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNbXV4YXJrNTVnaTlLUlZNbW8xTWZQSnlHZC1EOTQxbmxqWjN1ZGE0ZE9VR0JNSEZ0ZlBQMEx6emhGVUpGZE5hUDVjV1ZaLU9FLVAxSVhibzJ1R2p4ZGRFaXU3MWdzbWdHUldMa09tLUluR3VfbU5GQl9oR0doaldFWW0wM3hWTnJOSDF2N2lSaF9ncWM?oc=5",
-      "title": "How can I unstake tokens on Etherscan? - Ethereum Stack Exchange",
+      "title": "How can I unstake tokens on Etherscan? - ethereum.stackexchange.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10709,7 +10709,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiakFVX3lxTFA0OUJKVmhnSzB1b0pEUTc2WUZBOGlEaFF1a2VVbGUwUE9zRms5alE2WTJTX2xGZWVLSVR1Q0V6U3VRaVo3cmc0Wkl6ZTlLZFhGbDNMX2w3MEpLMmNFcWRGajFKUXRjTGZ0TFE?oc=5",
-      "title": "How To Build A Web3 Game - thirdweb blog",
+      "title": "How To Build A Web3 Game - blog.thirdweb.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10786,7 +10786,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQak9TaGx6QkJRVUF4UWhIMl83NERsMHVYVlJ1SjlBQ1FpcGJ1eGVkVUJib0s0Y2s5bWxFb0dZUTlJdjdudjhoX3hOWjBlZzZwSE05NEU1dktFSUx3VWFWanJiaG9fYmdhenQzMFRDRDIxMDV4cjV5a2k2R0tISG05RzJn?oc=5",
-      "title": "Introduction - Galxe Docs",
+      "title": "Introduction - docs.galxe.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10863,7 +10863,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPMFU0VGxVa19MNk03RUdvUERfTjVOSGoxRnE2eEF5Z29mWHFoZVEyM0FlYVJSSW1Fd1ozM0xJWUI5WGRSVF9uUHRzVFE2T01iNFZOZTQtVkk5d3kwMi1mNVVjTWxxVGx0WG1tRVpqUnRyRHBvc292ZjkyRktybW96NkNuNm1UbVlQQXZ6Wk9nLXRxWTY5cW1OcjZ1c3ZlRUU?oc=5",
-      "title": "Pay-If-Paid Clauses Do Not Prevent a Subcontractor's Right to Make a Claim Against the Surety on a Payment Bond - LinkedIn",
+      "title": "Pay-If-Paid Clauses Do Not Prevent a Subcontractor's Right to Make a Claim Against the Surety on a Payment Bond - linkedin.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10874,7 +10874,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5jWHZGWHIwZ1FZUkxHRk82al8tUDBfYnkwLThZbWJreUNYd2N3Z1lob2VEemxWWi12ZWVDaGtWdG1aYWxvb293RXhPeGM2ZTlvNUEwUHQxVUlHUkJKUXlrX3BzS1dGM1lKNmdCYkJqeXdxUFh1RmlsMGg5QQ?oc=5",
-      "title": "Blockchain-Based Data Storage for Internet of Things Networks - ScienceDirect.com",
+      "title": "Blockchain-Based Data Storage for Internet of Things Networks - sciencedirect.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10907,7 +10907,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMidEFVX3lxTFB2dTgwbTk5aFRUOFhQaU9nT3J3YVphM2xpcG5OLWQtNE9SYllTM2Z0Q1VRekVRczZqUkdlRUhHa3Zoa1JtRVZPcW14dlNjc2FQVllJU0JrWU1zNTI3UUtfajdNbTdiU2hRb085UEw1RVpnbVl6?oc=5",
-      "title": "Legacy Wallet - Google Play",
+      "title": "Legacy Wallet - play.google.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
