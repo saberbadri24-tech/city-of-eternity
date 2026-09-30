@@ -8,6 +8,27 @@ import {handleAnilCapabilities} from './functions/api/anil-capabilities.mjs';
 import {handleExecutionReadiness} from './functions/api/execution-readiness.mjs';import {handleGuardLive} from './functions/api/guard-live.mjs';
 import {anilTool} from './functions/api/anil-tools.mjs';import {onRequestPost as pay} from './functions/api/pay.js';import {onRequestPost as webhook} from './functions/api/variza-webhook.js';
 const json=(d,s=200,h={})=>new Response(JSON.stringify(d),{status:s,headers:{'content-type':'application/json','cache-control':'no-store',...h}});
+const translateCache=new Map();
+async function translateOnline(req){
+  if(req.method!=='GET'&&req.method!=='POST')return json({ok:false,error:'method_not_allowed'},405);
+  let textValue='',target='en';
+  if(req.method==='POST'){const b=await req.json().catch(()=>({}));textValue=String(b.text||'').slice(0,2500);target=String(b.target||'en').slice(0,12)}
+  else {const u=new URL(req.url);textValue=String(u.searchParams.get('text')||'').slice(0,2500);target=String(u.searchParams.get('target')||'en').slice(0,12)}
+  if(!textValue)return json({ok:true,text:''});
+  if(!/^[a-zA-Z-]{2,12}$/.test(target))return json({ok:false,error:'invalid_language'},400);
+  if(target==='en')return json({ok:true,text:textValue,source:'identity'});
+  const key=target+'|'+textValue;const cached=translateCache.get(key);if(cached)return json({ok:true,text:cached,source:'cache'});
+  try{
+    const u=new URL('https://translate.googleapis.com/translate_a/single');
+    u.searchParams.set('client','gtx');u.searchParams.set('sl','auto');u.searchParams.set('tl',target);u.searchParams.set('dt','t');u.searchParams.set('q',textValue);
+    const r=await fetch(u,{headers:{'accept':'application/json','user-agent':'ANIL-X/1.0'}});
+    if(!r.ok)throw Error('translate_'+r.status);
+    const d=await r.json();const translated=Array.isArray(d?.[0])?d[0].map(x=>x?.[0]||'').join(''):textValue;
+    translateCache.set(key,translated);if(translateCache.size>500)translateCache.delete(translateCache.keys().next().value);
+    return json({ok:true,text:translated,source:'online'});
+  }catch{return json({ok:true,text:textValue,source:'fallback'})}
+}
+
 const rjson=(d,s=200,h={})=>runtimeJson(d,s,h);
 async function kvGet(env,key,fallback=null){if(!env.PAYMENTS)return fallback;try{const v=await env.PAYMENTS.get(key,'json');return v??fallback}catch{return fallback}}
 async function kvPut(env,key,value){if(env.PAYMENTS)await env.PAYMENTS.put(key,JSON.stringify(value))}
@@ -186,6 +207,7 @@ async function anilChangeRequest(req,env){
 
 async function runtimeRoutes(req,env,u){
   const p=u.pathname;
+  if(p==='/api/translate')return translateOnline(req);
   if(p==='/api/autopilot')return autopilot(req,env);
   if(p==='/api/anil/capabilities')return handleAnilCapabilities(req,env);
   if(p==='/api/anil/tools')return anilTool(req,env);
