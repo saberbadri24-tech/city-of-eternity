@@ -47,9 +47,20 @@ async function claude(env,prompt){if(!env.ANTHROPIC_API_KEY)return null;const r=
 async function gemini(env,prompt){if(!env.GEMINI_API_KEY)return null;const model=env.GEMINI_MODEL||'gemini-2.5-flash';const r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+encodeURIComponent(model)+':generateContent?key='+encodeURIComponent(env.GEMINI_API_KEY),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:'You are Gemini, ANIL X research verifier. Return JSON only with ok,corrections,confidence. '+prompt}]}]})});if(!r.ok)throw Error('gemini_'+r.status);const d=await r.json();return extract(d?.candidates?.[0]?.content?.parts?.map(x=>x.text||'').join(''))}
 export async function handlePlan(request,env){if(request.method==='OPTIONS')return new Response(null,{status:204,headers:H});if(request.method!=='POST')return json({ok:false,error:'method_not_allowed'},405);try{const body=await request.json();const requestText=text(body?.text||body?.request||body?.prompt);if(!requestText)return json({ok:false,error:'missing_request'},400);const fallback=localPlan(requestText);const urls=requestText.split(/\\s+/).map(x=>x.replace(/[),.;]+$/,'')).filter(x=>x.startsWith('http://')||x.startsWith('https://')).slice(0,3);
 const searchIntent=/(latest|today|news|current|price|research|search|تحقیق|جستجو|جدیدترین|امروز|قیمت|اخبار|بررسی)/i.test(requestText);
-const searchResults=searchIntent?await toolWebSearch(env,requestText):null;
-const toolResults=urls.length?await Promise.all(urls.map(u=>toolFetchUrl(env,u))):[];
-const prompt=JSON.stringify({request:requestText,profile:body?.profile||{},conversation:body?.turns||[],fallback,toolResults,searchResults});let astra=null,claude=null,gemini=null,errors=[];try{astra=await openai(env,prompt)}catch(e){errors.push(String(e.message))}const reviewPrompt=JSON.stringify({request:requestText,plan:astra||fallback,context:body?.profile||{}});const reviews=await Promise.allSettled([claude(env,reviewPrompt),gemini(env,reviewPrompt)]); if(reviews[0].status==='fulfilled')claude=reviews[0].value;else errors.push(String(reviews[0].reason?.message||reviews[0].reason||'claude_error')); if(reviews[1].status==='fulfilled')gemini=reviews[1].value;else errors.push(String(reviews[1].reason?.message||reviews[1].reason||'gemini_error')); let toolExecutions=[];
+const searchPromise=searchIntent?toolWebSearch(env,requestText):Promise.resolve(null);
+const toolPromise=urls.length?Promise.all(urls.map(u=>toolFetchUrl(env,u))):Promise.resolve([]);
+const promptBase={request:requestText,profile:body?.profile||{},conversation:body?.turns||[],fallback};
+const [searchResults,toolResults]=await Promise.all([searchPromise,toolPromise]);
+const prompt=JSON.stringify({...promptBase,toolResults,searchResults});
+const reviewPrompt=JSON.stringify({...promptBase,context:body?.profile||{}});
+let astra=null,claude=null,gemini=null,errors=[];
+const providerResults=await Promise.allSettled([openai(env,prompt),claude(env,reviewPrompt),gemini(env,reviewPrompt)]);
+if(providerResults[0].status==='fulfilled')astra=providerResults[0].value;else if(providerResults[0].reason)errors.push(String(providerResults[0].reason?.message||providerResults[0].reason||'astra_error'));
+if(providerResults[1].status==='fulfilled')claude=providerResults[1].value;else if(providerResults[1].reason)errors.push(String(providerResults[1].reason?.message||providerResults[1].reason||'claude_error'));
+if(providerResults[2].status==='fulfilled')gemini=providerResults[2].value;else if(providerResults[2].reason)errors.push(String(providerResults[2].reason?.message||providerResults[2].reason||'gemini_error'));
+if(!astra&&claude){astra={title:fallback.title,desc:claude.corrections||fallback.desc,moves:fallback.moves,reply:claude.reply||('گرفتم؛ '+fallback.title),confidence:Number(claude.confidence)||.45,specialist:'Claude'};}
+if(!astra&&gemini){astra={title:fallback.title,desc:gemini.corrections||fallback.desc,moves:fallback.moves,reply:gemini.reply||('گرفتم؛ '+fallback.title),confidence:Number(gemini.confidence)||.45,specialist:'Gemini'};}
+let toolExecutions=[];
 const calls=Array.isArray(astra?.toolCalls)?astra.toolCalls.slice(0,5):[];
 for(const call of calls){toolExecutions.push({tool:call?.tool,result:await executePlannedTool(env,call)});}
 if(toolExecutions.length&&astra){
