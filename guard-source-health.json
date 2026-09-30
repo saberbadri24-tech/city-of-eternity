@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-09-30T02:28:50.653301+00:00",
+  "updatedAt": "2026-09-30T07:15:06.943172+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,48 +20,48 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1912,
-  "uniqueNewsPublishers": 542,
+  "discoveryCandidateCount": 1914,
+  "uniqueNewsPublishers": 538,
   "topPublishers": [
     {
       "publisher": "Binance",
-      "count": 119
+      "count": 120
     },
     {
       "publisher": "Immunefi",
       "count": 92
     },
     {
-      "publisher": "CoinMarketCap",
-      "count": 74
-    },
-    {
       "publisher": "HackerOne",
       "count": 74
     },
     {
-      "publisher": "x.com",
-      "count": 68
+      "publisher": "CoinMarketCap",
+      "count": 72
     },
     {
-      "publisher": "Yelp",
-      "count": 52
+      "publisher": "x.com",
+      "count": 72
     },
     {
       "publisher": "Coin Gabbar",
-      "count": 50
+      "count": 51
+    },
+    {
+      "publisher": "Yelp",
+      "count": 51
     },
     {
       "publisher": "GitHub",
       "count": 50
     },
     {
-      "publisher": "reddit.com",
-      "count": 46
+      "publisher": "Reddit",
+      "count": 48
     },
     {
       "publisher": "RootData",
-      "count": 41
+      "count": 40
     },
     {
       "publisher": "polygonscan.com",
@@ -69,23 +69,19 @@
     },
     {
       "publisher": "facebook.com",
-      "count": 30
-    },
-    {
-      "publisher": "Phemex",
-      "count": 30
-    },
-    {
-      "publisher": "LinkedIn",
-      "count": 28
+      "count": 29
     },
     {
       "publisher": "CCN.com",
-      "count": 27
+      "count": 29
+    },
+    {
+      "publisher": "phemex.com",
+      "count": 29
     },
     {
       "publisher": "BitDegree",
-      "count": 25
+      "count": 26
     },
     {
       "publisher": "Bybit",
@@ -93,14 +89,18 @@
     },
     {
       "publisher": "Bitget",
-      "count": 21
+      "count": 20
     },
     {
-      "publisher": "TradingView",
-      "count": 17
+      "publisher": "linkedin.com",
+      "count": 19
     },
     {
-      "publisher": "Kabul University",
+      "publisher": "Medium",
+      "count": 18
+    },
+    {
+      "publisher": "bscscan.com",
       "count": 17
     }
   ],
