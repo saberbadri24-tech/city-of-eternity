@@ -13,6 +13,8 @@ let workerPromise=null;
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.svg':'image/svg+xml','.webmanifest':'application/manifest+json','.ico':'image/x-icon','.txt':'text/plain; charset=utf-8','.xml':'application/xml; charset=utf-8','.webp':'image/webp','.mp3':'audio/mpeg'};
 
 const getWorker=()=>workerPromise||(workerPromise=import('./worker.js').then(m=>m.default));
+const HOT_ASSETS=['index.html','style.css','script.js','completion-layer.js','anilx-enhance.js','experience-dna.js','adaptive-shell.js','site-guard-center.js','webmcp.js','tonconnect.js'];
+void Promise.all(HOT_ASSETS.map(async name=>{try{const file=path.join(root,name);assetCache.set(file,await fs.readFile(file))}catch{}}));
 
 async function assetsFetch(request){
   const u=new URL(request.url);
