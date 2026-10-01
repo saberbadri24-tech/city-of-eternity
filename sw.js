@@ -1,4 +1,4 @@
-const CACHE='anilx-v12-fast';
+const CACHE='anilx-v13-fast';
 const ASSETS=['./','./index.html','./en.html','./fa.html','./services.html','./revenue-engine.html','./payment.html','./guard.html','./admin.html','./style.css','./script.js','./anilx-enhance.js','./experience-dna.js','./adaptive-shell.js','./unified-i18n-v3.js','./webmcp.js','./tonconnect.js','./sw.js','./manifest.webmanifest','./icon.png','./robots.txt','./sitemap.xml','./render-tonconnect-manifest.json','./fun.html','./prizes.html','./feedback.html','./account.html'];
 
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(async cache=>{await Promise.allSettled(ASSETS.map(async x=>{try{const r=await fetch(new Request(x,{cache:'reload'}));if(r.ok)await cache.put(x,r.clone())}catch{}}))}).then(()=>self.skipWaiting()))});
