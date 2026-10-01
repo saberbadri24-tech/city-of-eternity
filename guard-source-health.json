@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-10-01T17:40:49.872608+00:00",
+  "updatedAt": "2026-10-01T22:02:05.869132+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,63 +20,59 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1910,
-  "uniqueNewsPublishers": 554,
+  "discoveryCandidateCount": 1905,
+  "uniqueNewsPublishers": 551,
   "topPublishers": [
     {
       "publisher": "Binance",
       "count": 114
     },
     {
-      "publisher": "immunefi.com",
+      "publisher": "Immunefi",
       "count": 89
     },
     {
       "publisher": "CoinMarketCap",
-      "count": 74
+      "count": 73
     },
     {
       "publisher": "HackerOne",
-      "count": 68
+      "count": 69
     },
     {
       "publisher": "x.com",
       "count": 64
     },
     {
-      "publisher": "Coin Gabbar",
-      "count": 51
+      "publisher": "GitHub",
+      "count": 52
     },
     {
-      "publisher": "GitHub",
+      "publisher": "Yelp",
+      "count": 50
+    },
+    {
+      "publisher": "Coin Gabbar",
       "count": 49
     },
     {
-      "publisher": "yelp.com",
-      "count": 48
-    },
-    {
-      "publisher": "Reddit",
-      "count": 45
-    },
-    {
       "publisher": "RootData",
+      "count": 43
+    },
+    {
+      "publisher": "reddit.com",
       "count": 42
     },
     {
-      "publisher": "CCN.com",
+      "publisher": "facebook.com",
       "count": 32
     },
     {
       "publisher": "polygonscan.com",
-      "count": 32
+      "count": 30
     },
     {
-      "publisher": "facebook.com",
-      "count": 29
-    },
-    {
-      "publisher": "LinkedIn",
+      "publisher": "ccn.com",
       "count": 28
     },
     {
@@ -89,11 +85,15 @@
     },
     {
       "publisher": "Bybit",
+      "count": 23
+    },
+    {
+      "publisher": "LinkedIn",
       "count": 22
     },
     {
       "publisher": "Bitget",
-      "count": 22
+      "count": 21
     },
     {
       "publisher": "Medium",
