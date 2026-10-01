@@ -2,13 +2,13 @@ name: ANIL X Render Keep Warm
 
 on:
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 jobs:
   warm:
     runs-on: ubuntu-latest
     steps:
-      - name: Warm ANIL X
+      - name: Warm ANIL X worker path
         run: |
-          curl --fail --silent --show-error --max-time 20 https://city-of-eternity.onrender.com/api/health
+          curl --fail --silent --show-error --max-time 20 https://city-of-eternity.onrender.com/api/payment-config
