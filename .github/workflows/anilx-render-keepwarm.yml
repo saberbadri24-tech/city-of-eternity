@@ -1,0 +1,14 @@
+name: ANIL X Render Keep Warm
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  warm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Warm ANIL X
+        run: |
+          curl --fail --silent --show-error --max-time 20 https://city-of-eternity.onrender.com/api/health
