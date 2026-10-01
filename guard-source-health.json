@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-10-01T09:44:33.713724+00:00",
+  "updatedAt": "2026-10-01T11:53:59.222300+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,48 +20,52 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1909,
-  "uniqueNewsPublishers": 540,
+  "discoveryCandidateCount": 1911,
+  "uniqueNewsPublishers": 551,
   "topPublishers": [
     {
       "publisher": "Binance",
-      "count": 120
+      "count": 116
     },
     {
       "publisher": "Immunefi",
-      "count": 92
+      "count": 90
     },
     {
       "publisher": "CoinMarketCap",
-      "count": 76
+      "count": 74
     },
     {
-      "publisher": "hackerone.com",
-      "count": 70
+      "publisher": "HackerOne",
+      "count": 69
     },
     {
       "publisher": "x.com",
-      "count": 67
+      "count": 64
     },
     {
       "publisher": "Reddit",
-      "count": 51
+      "count": 50
     },
     {
-      "publisher": "Yelp",
+      "publisher": "yelp.com",
       "count": 50
     },
     {
       "publisher": "Coin Gabbar",
-      "count": 47
+      "count": 48
     },
     {
       "publisher": "GitHub",
       "count": 47
     },
     {
-      "publisher": "RootData",
-      "count": 40
+      "publisher": "rootdata.com",
+      "count": 43
+    },
+    {
+      "publisher": "CCN.com",
+      "count": 32
     },
     {
       "publisher": "polygonscan.com",
@@ -69,27 +73,23 @@
     },
     {
       "publisher": "facebook.com",
-      "count": 29
+      "count": 30
     },
     {
       "publisher": "Phemex",
-      "count": 29
-    },
-    {
-      "publisher": "CCN.com",
       "count": 28
     },
     {
       "publisher": "LinkedIn",
-      "count": 27
+      "count": 26
     },
     {
-      "publisher": "BitDegree",
+      "publisher": "bitdegree.org",
       "count": 24
     },
     {
       "publisher": "Bybit",
-      "count": 24
+      "count": 23
     },
     {
       "publisher": "Bitget",
@@ -101,7 +101,7 @@
     },
     {
       "publisher": "TradingView",
-      "count": 18
+      "count": 17
     }
   ],
   "invalidSources": [],
