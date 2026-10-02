@@ -22,8 +22,7 @@ async function assetsFetch(request){
   let rel=decodeURIComponent(u.pathname).replace(/^\/+/, '')||'index.html';
   if(rel.includes('..'))return new Response('Not Found',{status:404});
   let file=path.join(root,rel);
-  try{const st=await fs.stat(file);if(st.isDirectory())file=path.join(file,'index.html')}
-  catch{if(!path.extname(file))file=path.join(root,'index.html')}
+  if(!path.extname(file))file=path.join(root,'index.html');
   try{
     let data=assetCache.get(file);
     if(!data){data=await fs.readFile(file);assetCache.set(file,data)}
