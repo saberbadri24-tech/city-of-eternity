@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-10-02T07:38:37.665143+00:00",
+  "updatedAt": "2026-10-02T11:29:09.551849+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -21,19 +21,19 @@
     "airdrop-discovery": 1
   },
   "discoveryCandidateCount": 1903,
-  "uniqueNewsPublishers": 558,
+  "uniqueNewsPublishers": 552,
   "topPublishers": [
     {
       "publisher": "Binance",
       "count": 115
     },
     {
-      "publisher": "immunefi.com",
+      "publisher": "Immunefi",
       "count": 89
     },
     {
       "publisher": "CoinMarketCap",
-      "count": 75
+      "count": 76
     },
     {
       "publisher": "HackerOne",
@@ -41,38 +41,38 @@
     },
     {
       "publisher": "x.com",
-      "count": 60
-    },
-    {
-      "publisher": "Coin Gabbar",
-      "count": 55
+      "count": 59
     },
     {
       "publisher": "GitHub",
-      "count": 51
+      "count": 53
     },
     {
-      "publisher": "Yelp",
-      "count": 51
+      "publisher": "yelp.com",
+      "count": 50
+    },
+    {
+      "publisher": "Coin Gabbar",
+      "count": 48
     },
     {
       "publisher": "RootData",
-      "count": 42
+      "count": 43
     },
     {
-      "publisher": "reddit.com",
-      "count": 37
+      "publisher": "Reddit",
+      "count": 41
     },
     {
       "publisher": "facebook.com",
       "count": 30
     },
     {
-      "publisher": "BitDegree",
-      "count": 28
+      "publisher": "Phemex",
+      "count": 29
     },
     {
-      "publisher": "Phemex",
+      "publisher": "CCN.com",
       "count": 28
     },
     {
@@ -80,15 +80,15 @@
       "count": 28
     },
     {
-      "publisher": "CCN.com",
+      "publisher": "BitDegree",
       "count": 27
     },
     {
       "publisher": "Bybit",
-      "count": 23
+      "count": 22
     },
     {
-      "publisher": "bitget.com",
+      "publisher": "LinkedIn",
       "count": 21
     },
     {
@@ -96,12 +96,12 @@
       "count": 20
     },
     {
-      "publisher": "LinkedIn",
-      "count": 18
+      "publisher": "bitget.com",
+      "count": 17
     },
     {
-      "publisher": "TradingView",
-      "count": 18
+      "publisher": "YouTube",
+      "count": 16
     }
   ],
   "invalidSources": [],
