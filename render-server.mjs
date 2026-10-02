@@ -34,7 +34,7 @@ async function assetsFetch(request){
   }catch{return new Response('Not Found',{status:404})}
 }
 
-const ADMIN_SECRET=String(process.env.ADMIN_PASSWORD||process.env.ANIL_ADMIN_PASSWORD||'');
+const ADMIN_SECRET=String(process.env.ANIL_ADMIN_PASSWORD||process.env.ADMIN_PASSWORD||'');
 if(ADMIN_SECRET.length<8){console.error('FATAL: ANIL_ADMIN_PASSWORD is missing or too short; refusing to start.');process.exit(1)}
 
 const env={...process.env,ASSETS:{fetch:assetsFetch}};
