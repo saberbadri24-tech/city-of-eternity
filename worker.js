@@ -16,7 +16,7 @@ async function translateOnline(req){
   else {const u=new URL(req.url);textValue=String(u.searchParams.get('text')||'').slice(0,2500);target=String(u.searchParams.get('target')||'en').slice(0,12)}
   if(!textValue)return json({ok:true,text:''});
   if(!/^[a-zA-Z-]{2,12}$/.test(target))return json({ok:false,error:'invalid_language'},400);
-  if(target==='en')return json({ok:true,text:textValue,source:'identity'});
+  if(target==='en'&&!/[\u0600-\u06ff]/.test(textValue))return json({ok:true,text:textValue,source:'identity'});
   const key=target+'|'+textValue;const cached=translateCache.get(key);if(cached)return json({ok:true,text:cached,source:'cache'});
   try{
     const u=new URL('https://translate.googleapis.com/translate_a/single');
