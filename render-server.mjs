@@ -33,7 +33,7 @@ async function assetsFetch(request){
   }catch{return new Response('Not Found',{status:404})}
 }
 
-const ADMIN_SECRET=String(process.env.ANIL_ADMIN_PASSWORD||'');
+const ADMIN_SECRET=String(process.env.ADMIN_PASSWORD||process.env.ANIL_ADMIN_PASSWORD||'');
 if(ADMIN_SECRET.length<8){console.error('FATAL: ANIL_ADMIN_PASSWORD is missing or too short; refusing to start.');process.exit(1)}
 
 const env={...process.env,ASSETS:{fetch:assetsFetch}};
@@ -43,7 +43,7 @@ const signNode=(v,secret)=>b64u(createHmac('sha256',secret).update(v).digest());
 const jsonNode=(obj,status=200,extra={})=>new Response(JSON.stringify(obj),{status,headers:{'content-type':'application/json; charset=utf-8',...extra}});
 async function directAdminLogin(req){
   if(req.method!=='POST')return jsonNode({ok:false,error:'method_not_allowed'},405);
-  const secret=String(process.env.ANIL_ADMIN_PASSWORD||'').normalize('NFKC').trim();
+  const secret=String(process.env.ADMIN_PASSWORD||process.env.ANIL_ADMIN_PASSWORD||'').normalize('NFKC').trim();
   if(secret.length<8)return jsonNode({ok:false,error:'admin_password_not_configured'},503);
   const ip=String(req.headers['x-forwarded-for']||'unknown').split(',')[0].trim();
   const now=Date.now(),gate=loginAttempts.get(ip)||{count:0,until:0};
