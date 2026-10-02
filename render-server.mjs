@@ -11,8 +11,6 @@ const root=path.dirname(fileURLToPath(import.meta.url));
 const assetCache=new Map();
 const gzipCache=new Map();
 let workerPromise=null;
-// Warm the unified worker in the background so the first interactive API call does not pay the import cost.
-const warmWorker=()=>{void getWorker().catch(()=>{})};
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.svg':'image/svg+xml','.webmanifest':'application/manifest+json','.ico':'image/x-icon','.txt':'text/plain; charset=utf-8','.xml':'application/xml; charset=utf-8','.webp':'image/webp','.mp3':'audio/mpeg'};
 
 const getWorker=()=>workerPromise||(workerPromise=import('./worker.js').then(m=>m.default));
@@ -113,6 +111,5 @@ const server=http.createServer(async(req,res)=>{
 
 const port=Number(process.env.PORT||10000);
 server.listen(port,'0.0.0.0',()=>{ 
-  warmWorker();
   console.log('ANIL X Render runtime listening on '+port);
 });
