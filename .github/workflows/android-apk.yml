@@ -1,4 +1,5 @@
 name: Build and publish ANIL X APK
+# Rebuild latest live ANIL X shell on every final release pass.
 on:
   push:
     branches: [main]
