@@ -36,10 +36,9 @@ async function apply(target){
  remember();
  for(const n of nodes())n.nodeValue=original.get(n)||n.nodeValue;
  document.querySelectorAll('input[placeholder],textarea[placeholder]').forEach(n=>n.setAttribute('placeholder',original.get(n)||n.getAttribute('placeholder')||''));
- if(target==='en'){document.documentElement.lang='en';document.documentElement.dir='ltr';window.ANILX_LANGUAGE='en';return}
- const ns=nodes(),items=ns.map(n=>(original.get(n)||n.nodeValue).trim()).filter(Boolean);
- const unique=[...new Set(items)],translated={};
- for(let i=0;i<unique.length;){let part=[],size=0;while(i<unique.length&&part.length<24&&size+unique[i].length<3300){part.push(unique[i]);size+=unique[i].length+8;i++;}const key=target+'|'+part.join('\n');if(cache[key]){part.forEach((x,j)=>translated[x]=cache[key].split('\n')[j]||x);continue}
+  const ns=nodes(),items=ns.map(n=>(original.get(n)||n.nodeValue).trim()).filter(Boolean);
+ const unique=[...new Set(items)],translated={};unique.filter(t=>!/[\u0600-\u06ff]/.test(t)).forEach(t=>{translated[t]=t});
+ for(let i=0;i<unique.length;){let part=[],size=0;while(i<unique.length&&part.length<24&&size+unique[i].length<3300){part.push(unique[i]);size+=unique[i].length+8;i++;}part=part.filter(t=>translated[t]===undefined);if(!part.length)continue;const key=target+'|'+part.join('\n');if(cache[key]){part.forEach((x,j)=>translated[x]=cache[key].split('\n')[j]||x);continue}
   try{const got=await translateBatch(part,target);got.forEach((x,j)=>translated[part[j]]=x);cache[key]=got.join('\n');localStorage.setItem(CACHE,JSON.stringify(cache));}catch{part.forEach(x=>translated[x]=x)}
  }
  ns.forEach(n=>{const t=(original.get(n)||n.nodeValue).trim();if(translated[t])n.nodeValue=n.nodeValue.replace(t,translated[t])});
@@ -47,6 +46,6 @@ async function apply(target){
  document.documentElement.lang=target;document.documentElement.dir=LANGS[target][1];window.ANILX_LANGUAGE=target;
 }
 async function switchLang(next){if(!LANGS[next])return;lang=next;localStorage.setItem(KEY,next);setup();await apply(next);window.dispatchEvent(new CustomEvent('anilx:language',{detail:{language:next}}))}
-function boot(){setup();if(lang!=='en')apply(lang);else{remember();document.documentElement.lang='en';document.documentElement.dir='ltr'}window.ANILX_LANGUAGE=lang}
+function boot(){setup();apply(lang).catch(()=>{});window.ANILX_LANGUAGE=lang}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
