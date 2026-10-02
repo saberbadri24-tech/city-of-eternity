@@ -22,6 +22,6 @@ async function apply(target){remember();for(const n of nodes())n.nodeValue=origi
  const placeholders=[...document.querySelectorAll('input[placeholder],textarea[placeholder]')].map(n=>({n,t:original.get(n)||''})).filter(x=>x.t);if(placeholders.length){try{const got=await translateBatch(placeholders.map(x=>x.t),target);placeholders.forEach((x,i)=>x.n.setAttribute('placeholder',got[i]||x.t))}catch{}}
  document.documentElement.lang=target;document.documentElement.dir=LANGS[target][1];window.ANILX_LANGUAGE=target}
 async function switchLang(next){if(!LANGS[next])return;lang=next;localStorage.setItem(KEY,next);const u=new URL(location.href);u.searchParams.set('lang',next);history.replaceState({},'',u);setup();await apply(next);window.dispatchEvent(new CustomEvent('anilx:language',{detail:{language:next}}))}
-function boot(){setup();window.ANILX_LANGUAGE=lang;if(lang==='en')return;const idle=window.requestIdleCallback||((f)=>setTimeout(f,80));idle(()=>setTimeout(()=>apply(lang).catch(()=>{}),350),{timeout:1800})}
+function boot(){setup();window.ANILX_LANGUAGE=lang;const hasSourceFa=/[\u0600-\u06ff]/.test(document.body?.innerText||'');if(lang==='fa'&&hasSourceFa)return;if(lang==='en'&&!hasSourceFa)return;const idle=window.requestIdleCallback||((f)=>setTimeout(f,80));idle(()=>setTimeout(()=>apply(lang).catch(()=>{}),350),{timeout:1800})}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
