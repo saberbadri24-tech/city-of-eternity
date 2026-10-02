@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-10-01T22:02:05.869132+00:00",
+  "updatedAt": "2026-10-02T01:41:31.659955+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,32 +20,32 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1905,
+  "discoveryCandidateCount": 1899,
   "uniqueNewsPublishers": 551,
   "topPublishers": [
     {
       "publisher": "Binance",
-      "count": 114
+      "count": 112
     },
     {
       "publisher": "Immunefi",
       "count": 89
     },
     {
-      "publisher": "CoinMarketCap",
-      "count": 73
-    },
-    {
       "publisher": "HackerOne",
       "count": 69
     },
     {
+      "publisher": "CoinMarketCap",
+      "count": 68
+    },
+    {
       "publisher": "x.com",
-      "count": 64
+      "count": 62
     },
     {
       "publisher": "GitHub",
-      "count": 52
+      "count": 51
     },
     {
       "publisher": "Yelp",
@@ -56,39 +56,39 @@
       "count": 49
     },
     {
-      "publisher": "RootData",
-      "count": 43
+      "publisher": "Reddit",
+      "count": 40
     },
     {
-      "publisher": "reddit.com",
-      "count": 42
+      "publisher": "polygonscan.com",
+      "count": 36
     },
     {
       "publisher": "facebook.com",
       "count": 32
     },
     {
-      "publisher": "polygonscan.com",
-      "count": 30
-    },
-    {
-      "publisher": "ccn.com",
-      "count": 28
-    },
-    {
-      "publisher": "Phemex",
-      "count": 28
+      "publisher": "RootData",
+      "count": 29
     },
     {
       "publisher": "BitDegree",
-      "count": 27
+      "count": 28
     },
     {
-      "publisher": "Bybit",
+      "publisher": "CCN.com",
+      "count": 28
+    },
+    {
+      "publisher": "phemex.com",
+      "count": 26
+    },
+    {
+      "publisher": "singamlotterys.net",
       "count": 23
     },
     {
-      "publisher": "LinkedIn",
+      "publisher": "Bybit",
       "count": 22
     },
     {
@@ -101,7 +101,7 @@
     },
     {
       "publisher": "TradingView",
-      "count": 18
+      "count": 19
     }
   ],
   "invalidSources": [],
