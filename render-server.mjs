@@ -108,7 +108,6 @@ const server=http.createServer(async(req,res)=>{
 });
 
 const port=Number(process.env.PORT||10000);
-server.listen(port,'0.0.0.0',()=>{
-  void getWorker().catch(err=>console.error('ANIL X worker preload failed:',err));
+server.listen(port,'0.0.0.0',()=>{ 
   console.log('ANIL X Render runtime listening on '+port);
 });
