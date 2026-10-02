@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-10-02T11:39:56.986428+00:00",
+  "updatedAt": "2026-10-02T14:11:18.317683+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,8 +20,8 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1903,
-  "uniqueNewsPublishers": 548,
+  "discoveryCandidateCount": 1902,
+  "uniqueNewsPublishers": 545,
   "topPublishers": [
     {
       "publisher": "Binance",
@@ -33,7 +33,7 @@
     },
     {
       "publisher": "CoinMarketCap",
-      "count": 75
+      "count": 77
     },
     {
       "publisher": "HackerOne",
@@ -41,14 +41,14 @@
     },
     {
       "publisher": "x.com",
-      "count": 59
+      "count": 60
     },
     {
       "publisher": "GitHub",
       "count": 53
     },
     {
-      "publisher": "yelp.com",
+      "publisher": "Yelp",
       "count": 50
     },
     {
@@ -57,18 +57,18 @@
     },
     {
       "publisher": "RootData",
-      "count": 44
+      "count": 42
     },
     {
       "publisher": "Reddit",
-      "count": 41
+      "count": 40
     },
     {
       "publisher": "facebook.com",
       "count": 30
     },
     {
-      "publisher": "Phemex",
+      "publisher": "polygonscan.com",
       "count": 29
     },
     {
@@ -76,7 +76,7 @@
       "count": 28
     },
     {
-      "publisher": "polygonscan.com",
+      "publisher": "Phemex",
       "count": 28
     },
     {
@@ -84,24 +84,24 @@
       "count": 27
     },
     {
-      "publisher": "Bybit",
+      "publisher": "LinkedIn",
+      "count": 23
+    },
+    {
+      "publisher": "bybit.com",
       "count": 22
     },
     {
-      "publisher": "LinkedIn",
+      "publisher": "Bitget",
       "count": 21
     },
     {
-      "publisher": "bitget.com",
-      "count": 21
+      "publisher": "TradingView",
+      "count": 18
     },
     {
-      "publisher": "Medium",
-      "count": 20
-    },
-    {
-      "publisher": "tradingview.com",
-      "count": 19
+      "publisher": "YouTube",
+      "count": 16
     }
   ],
   "invalidSources": [],
