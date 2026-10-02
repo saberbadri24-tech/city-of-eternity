@@ -9,6 +9,7 @@ import {createHmac} from 'node:crypto';
 const gzipAsync=promisify(gzip);
 const root=path.dirname(fileURLToPath(import.meta.url));
 const assetCache=new Map();
+const gzipCache=new Map();
 let workerPromise=null;
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.svg':'image/svg+xml','.webmanifest':'application/manifest+json','.ico':'image/x-icon','.txt':'text/plain; charset=utf-8','.xml':'application/xml; charset=utf-8','.webp':'image/webp','.mp3':'audio/mpeg'};
 
@@ -78,7 +79,8 @@ const server=http.createServer(async(req,res)=>{
       const ae=String(req.headers['accept-encoding']||'');
       const type=response.headers.get('content-type')||'';
       if(buf.length>1024&&/gzip/i.test(ae)&&/(text|javascript|json|svg|xml)/i.test(type)){
-        buf=await gzipAsync(buf,{level:6});
+        const cachedGzip=gzipCache.get(String(u.pathname));
+        if(cachedGzip)buf=cachedGzip;else{buf=await gzipAsync(buf,{level:4});gzipCache.set(String(u.pathname),buf);}
         res.setHeader('content-encoding','gzip');
         res.setHeader('vary','Accept-Encoding');
       }
