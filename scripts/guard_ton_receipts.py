@@ -16,7 +16,7 @@ def main():
     address = (wallet.get("temporaryWalletAddress") or "").strip()
     old = load(OUT, {"version":"1.0","address":address,"items":[]})
     if not address:
-        old.update({"updatedAt":NOW,"status":"WAITING_FOR_TEMP_WALLET"})
+        old={"version":"1.0","address":"","updatedAt":NOW,"status":"WAITING_FOR_TEMP_WALLET","items":[],"provider":"TON Center v3"}
         OUT.write_text(json.dumps(old,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
         return
     params = urllib.parse.urlencode({"account":address,"limit":50,"sort":"desc"})
