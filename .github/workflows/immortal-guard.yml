@@ -97,6 +97,11 @@ jobs:
       - name: Action planner
         run: python scripts/guard_action_planner.py
 
+      - name: Super Radar regression
+        run: |
+          python -m py_compile scripts/guard_super_radar.py scripts/test_guard_super_radar.py
+          python scripts/test_guard_super_radar.py
+
       - name: Super Airdrop / Immortal Guard fusion
         run: python scripts/guard_super_radar.py
 
