@@ -25,7 +25,7 @@ const hmac = async (secret, body) => {
 };
 
 export async function onRequestPost({ request, env }) {
-  const secret = env.VARIZA_WEBHOOK_SECRET || env.VARIA_WEBHOOK_SECRET || env.VARIZA_WEBHOOK_TOKEN || env.VARIZA_WEBHOOK_KEY;
+  const secret = env.VARIZA_WEBHOOK_SECRET || env.VARIA_WEBHOOK_SECRET || env.VARIZA_WEBHOOK_TOKEN || env.VARIZA_WEBHOOK_KEY || env.VARIZA_SECRET;
   if (!secret) return json({ ok: false, error: "webhook_not_configured" }, 503);
 
   try {
@@ -95,6 +95,7 @@ export async function onRequestPost({ request, env }) {
         ...(paid ? { paidAt: now() } : {}),
         providerAmount: Number(payload.amount),
         providerCurrency: "IRR",
+        providerAmountUnit: "toman",
         attemptCode: payload.attempt_code || null,
         deliveryId,
         webhook: payload
