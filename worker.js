@@ -74,14 +74,14 @@ async function revenueFleetStatus(env){
    truth:{
      paymentReady:configured.variza,
      persistentAccounting:configured.durableAccounting,
-storageConfigured:configured.storage,
+storageConfigured:configured.persistence,
      aiReady:configured.ai,
      tonReady:configured.ton
    },
    engines:REVENUE_FLEET.map(x=>({
      ...x,
      state:x.status==='OWNER_GATED'
-       ? (configured.ton?'READY_OWNER_APPROVAL':'BLOCKED_MISSING_TON')
+       ? (configured.guardTempTon?'READY_OWNER_APPROVAL':'BLOCKED_MISSING_TEMP_TON')
        : x.status==='ACTIVE'
          ? (configured.variza&&configured.persistence?'LIVE_REVENUE_PATH':configured.variza?'PAYMENT_READY_NO_DURABLE_STORAGE':'BLOCKED_PAYMENT')
          : 'DEPENDENCY_REQUIRED',
