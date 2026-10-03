@@ -27,6 +27,11 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
+      - name: Production contract smoke
+        env:
+          ANIL_BASE_URL: https://city-of-eternity.onrender.com
+        run: node scripts/production-contract-smoke.mjs
+
       - name: Full production browser QA
         env:
           ANIL_BASE_URL: https://city-of-eternity.onrender.com
