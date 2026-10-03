@@ -23,7 +23,7 @@ jobs:
           set -euo pipefail
           ID_TOKEN=$(curl -fsSL -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x" | jq -r '.value')
           test -n "$ID_TOKEN" && test "$ID_TOKEN" != "null"
-          curl --fail --silent --show-error --max-time 45             -X POST "$ANIL_X_REVENUE_URL"             -H 'content-type: application/json'             -d '{}' > fleet.json
+          curl --fail --silent --show-error --max-time 45             -X POST "$ANIL_X_REVENUE_URL"             -H 'content-type: application/json'             -H "Authorization: Bearer $ID_TOKEN"             -d '{}' > fleet.json
           python - <<'PY'
           import json
           d=json.load(open("fleet.json"))
