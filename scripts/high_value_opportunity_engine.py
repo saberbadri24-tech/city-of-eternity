@@ -119,7 +119,7 @@ def brain_scores(x, learning):
             "freshnessBrain":freshness,"feasibilityBrain":max(0,feasibility),"riskBrain":max(0,risk)}
 
 def main():
-    intel=load("guard-intelligence.json"); discovery=load("guard-discovery.json"); future=load("guard-future-signals.json")
+    intel=load("guard-intelligence.json"); discovery=load("guard-discovery.json"); future=load("guard-future-signals.json"); official=load("guard-official-discovery.json")
     learning=load("guard-learning.json")
     outcomes=learning.get("outcomes",[]) if isinstance(learning,dict) else []
     recent=[o for o in outcomes[-100:] if isinstance(o,dict) and o.get("type")=="discovery_verification"]
@@ -128,6 +128,12 @@ def main():
                     "rule":"historical verification quality only; no fabricated success probability"}
 
     candidates={}
+    # Official paid/reward opportunities get their own evidence lane. Google News and other aggregators remain discovery-only.
+    official_rows=items(official)
+    for row in official_rows:
+        row=dict(row); row["sourceTrust"]="official"; row["officialDomain"]=True
+        key=opportunity_identity(row)
+        if key: candidates[key]={**candidates.get(key,{}),**row}
     for row in items(intel)+items(discovery)+items(future):
         key=opportunity_identity(row)
         if key: candidates[key]={**candidates.get(key,{}),**row}
@@ -135,6 +141,14 @@ def main():
     ranked=[]
     for raw in candidates.values():
         x=dict(raw); x["prizePoolUsd"]=number(x.get("prize"))
+        # Never promote aggregator-only records into the paid opportunity lane.
+        resolved_domain=str(x.get("resolvedDomain") or "").lower()
+        source_url=str(x.get("resolvedUrl") or x.get("canonicalUrl") or x.get("url") or "").lower()
+        if resolved_domain == "news.google.com" or "news.google.com/" in source_url:
+            x["sourceTrust"]="aggregator"
+            x["officialDomain"]=False
+        is_official=bool(x.get("officialDomain") is True or x.get("sourceTrust")=="official" or x.get("verification")=="resolved-official-source")
+        x["officialEligible"]=is_official
         x["estimatedRewardUsd"]=reward(x); x["rewardType"]=reward_type(x)
         x["ageHours"]=age_hours(x); d=deadline(x)
         x["deadlineAt"]=d.isoformat() if d else None
@@ -143,7 +157,7 @@ def main():
         x["corroborationCount"]=int(x.get("corroborationCount",0))
         if x["expired"]: x["estimatedRewardUsd"]=0.0
         brains=brain_scores(x,learning_model); x["brainScores"]=brains
-        x["highValueLane"]=x["estimatedRewardUsd"] >= HIGH_VALUE_FLOOR_USD and not x["expired"]
+        x["highValueLane"]=x["estimatedRewardUsd"] >= HIGH_VALUE_FLOOR_USD and not x["expired"] and x["officialEligible"]
         x["monthlyTargetContributionUsd"]=round(min(x["estimatedRewardUsd"],MONTHLY_TARGET_USD),2)
         x["ownerApprovalRequired"]=True; x["automaticAction"]=False
         x["stale"]=x["ageHours"] is not None and x["ageHours"] > STALE_HOURS
