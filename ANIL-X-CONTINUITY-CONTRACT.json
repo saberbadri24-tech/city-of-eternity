@@ -6,7 +6,11 @@
     "guard": "Immortal Guard",
     "guardRole": "Super Airdrop",
     "guardIsSeparateProduct": false,
-    "guardAliases": ["Immortal Guard", "Guard جاویدان", "جاویدان"],
+    "guardAliases": [
+      "Immortal Guard",
+      "Guard جاویدان",
+      "جاویدان"
+    ],
     "canonicalRuntimeName": "Immortal Guard"
   },
   "architecture": {
@@ -25,7 +29,15 @@
   "frontier_engine_rule": {
     "discover": "official/current sources only",
     "verify": "runtime smoke test before production routing",
-    "score": ["capability","latency","reliability","failureRate","cost","context","multimodal"],
+    "score": [
+      "capability",
+      "latency",
+      "reliability",
+      "failureRate",
+      "cost",
+      "context",
+      "multimodal"
+    ],
     "route": "task-fit and health, not a hard-coded permanent winner",
     "learn": "record measured outcomes without exposing secrets",
     "improve": "safe incremental changes; never silently weaken security, payment, wallet or owner approval"
@@ -39,7 +51,10 @@
     "adminPasswordSource": "Render environment secret ANIL_ADMIN_PASSWORD",
     "adminPasswordRequiredPattern": "^.{9}$",
     "walletSource": "Render environment secret TON_MAIN_WALLET",
-    "walletMustBeValidatedAtRuntime": true
+    "walletMustBeValidatedAtRuntime": true,
+    "temporaryGuardWalletSource": "GitHub Actions secret TON_GUARD_TEMP_WALLET",
+    "temporaryGuardWalletMustBeDistinctFromMain": true,
+    "guardPublicStateMustNeverContainMainWallet": true
   },
   "ownerRuntimeRequirements": {
     "TON_MAIN_WALLET": "SET_IN_RENDER_SECRET",
