@@ -35,8 +35,13 @@ async function kvPut(env,key,value){if(env.PAYMENTS)await env.PAYMENTS.put(key,J
 async function kvList(env,prefix,limit=100){if(!env.PAYMENTS)return[];try{const x=await env.PAYMENTS.list({prefix});const keys=(x?.keys||[]).slice(-limit);return (await Promise.all(keys.map(k=>env.PAYMENTS.get(k.name,'json').catch(()=>null)))).filter(Boolean)}catch{return[]}}
 async function runAutopilotSafe(env){return await autopilot(new Request('https://internal/api/autopilot',{method:'POST'}),env).then(async r=>await r.json()).catch(e=>({ok:false,error:String(e?.message||e)}))}
 const V90_DEFAULTS={pricesUsd:{FIX:19,START:29,BUILD:79,GROW:199},permissions:{autoReports:true,autoMessaging:true,autoSeo:true,autoPaymentDiagnostics:true,autoBenchmark:true,autoLeadReview:true}};
-const getMainTonAddress=env=>String(env.TON_MAIN_WALLET_ADDRESS||env.TON_PERMANENT_WALLET_ADDRESS||'').trim();
-const getTempTonAddress=env=>String(env.TON_TEMP_WALLET_ADDRESS||env.GUARD_TEMP_WALLET_ADDRESS||env.TON_RECEIVING_ADDRESS||'').trim();
+const firstEnv=(env,keys)=>keys.map(k=>env[k]).find(v=>typeof v==='string'&&v.trim())||'';
+const getMainTonAddress=env=>firstEnv(env,['TON_MAIN_WALLET_ADDRESS','TON_PERMANENT_WALLET_ADDRESS','TON_MAIN_ADDRESS','TON_WALLET_ADDRESS','MAIN_TON_WALLET','MAIN_WALLET_ADDRESS','PERMANENT_WALLET_ADDRESS']);
+const getTempTonAddress=env=>firstEnv(env,['TON_TEMP_WALLET_ADDRESS','GUARD_TEMP_WALLET_ADDRESS','TON_TEMP_ADDRESS','TEMP_TON_WALLET','TEMP_WALLET_ADDRESS','TON_RECEIVING_ADDRESS']);
+const getVarizaApiKey=env=>firstEnv(env,['VARIZA_API_KEY','VARIA_API_KEY','VARIZA_TOKEN','VARIZA_KEY','VARIZA_API_TOKEN','VARIZA_SECRET']);
+const getVarizaWebhookSecret=env=>firstEnv(env,['VARIZA_WEBHOOK_SECRET','VARIA_WEBHOOK_SECRET','VARIZA_WEBHOOK_TOKEN','VARIZA_WEBHOOK_KEY','VARIZA_SECRET']);
+const getAiConfig=env=>({openai:firstEnv(env,['OPENAI_API_KEY','OPENAI_KEY']),anthropic:firstEnv(env,['ANTHROPIC_API_KEY','ANTHROPIC_KEY']),gemini:firstEnv(env,['GEMINI_API_KEY','GOOGLE_GEMINI_API_KEY','GOOGLE_API_KEY'])});
+const getUsdTomanRate=env=>Number(firstEnv(env,['USD_TOMAN_RATE','USD_TO_TOMAN','USD_TOMAN','USD_IRR_RATE'])||0);
 const REVENUE_FLEET=[
 {id:'ai-automation-agency',name:'AI Automation Agency',mode:'service',status:'ACTIVE',monetization:'project+retainer',prereq:'ANIL-X lead/order/payment'},
 {id:'ai-integration-agents',name:'AI Integration & Agents',mode:'service',status:'ACTIVE',monetization:'project+maintenance',prereq:'ANIL-X lead/order/payment'},
@@ -64,8 +69,8 @@ async function revenueFleetStatus(env){
  const configured={
    ton:!!getMainTonAddress(env),
    guardTempTon:!!getTempTonAddress(env),
-   variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY),
-   ai:!!(env.OPENAI_API_KEY||env.GEMINI_API_KEY||env.ANTHROPIC_API_KEY),
+   variza:!!getVarizaApiKey(env),
+   ai:!!(getAiConfig(env).openai||getAiConfig(env).gemini||getAiConfig(env).anthropic),
    persistence:!!env.PAYMENTS,
    durableAccounting:String(env.PAYMENTS_DURABLE||'false').toLowerCase()==='true'
  };
@@ -97,7 +102,7 @@ storageConfigured:configured.persistence,
   const revenueLeads=await kvList(env,'revenue-leads/',500);
   const leadCount=new Set([...persistedLeads,...revenueLeads].map(x=>x?.id).filter(Boolean)).size;
   const paidOrders=(await kvList(env,'orders/',500)).filter(x=>x?.status==='paid');
-  const configured={ton:!!getMainTonAddress(env),guardTempTon:!!getTempTonAddress(env),variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY),ai:!!(env.OPENAI_API_KEY||env.GEMINI_API_KEY||env.ANTHROPIC_API_KEY)};
+  const configured={ton:!!getMainTonAddress(env),guardTempTon:!!getTempTonAddress(env),variza:!!getVarizaApiKey(env),ai:!!(getAiConfig(env).openai||getAiConfig(env).gemini||getAiConfig(env).anthropic)};
   const states=[];
   for(const engine of REVENUE_FLEET){
     let operational=(engine.status==='OWNER_GATED'&&configured.ton)||(engine.status==='ACTIVE'&&configured.variza);
@@ -118,7 +123,7 @@ storageConfigured:configured.persistence,
 }
 async function revenueFleetState(env){
   const latest=await kvGet(env,'revenue-fleet/latest',null);
-  return {ok:true,latest,storageConfigured:!!env.PAYMENTS,durableAccounting:String(env.PAYMENTS_DURABLE||'false').toLowerCase()==='true',engines:await Promise.all(REVENUE_FLEET.map(async e=>await kvGet(env,'revenue-engine/'+e.id,{id:e.id,status:e.status,operational:(e.status==='OWNER_GATED'&&!!env.TON_RECEIVING_ADDRESS)||(e.status==='ACTIVE'&&!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY))})))};
+  return {ok:true,latest,storageConfigured:!!env.PAYMENTS,durableAccounting:String(env.PAYMENTS_DURABLE||'false').toLowerCase()==='true',engines:await Promise.all(REVENUE_FLEET.map(async e=>await kvGet(env,'revenue-engine/'+e.id,{id:e.id,status:e.status,operational:(e.status==='OWNER_GATED'&&!!env.TON_RECEIVING_ADDRESS)||(e.status==='ACTIVE'&&!!getVarizaApiKey(env))})))};
 }
 
 const REVENUE_PROGRAMS=[
@@ -149,7 +154,7 @@ async function v90AdminRoutes(req,env,u){
     if(!(await adminAuth(req,env)))return rjson({ok:false,error:'admin_login_required'},401);
     const [leads,orders,approvals,actions,business]=await Promise.all([kvList(env,'lead/',500),kvList(env,'orders/',500),kvList(env,'admin/approval/',100),kvList(env,'admin/action/',30),getV90Config(env)]);
     const paid=orders.filter(x=>x?.status==='paid'),pending=orders.filter(x=>x?.status==='pending'),failed=orders.filter(x=>x?.status==='failed');
-    return rjson({owner:{name:'مدیر صابر بدری'},counts:{leads:leads.length,orders:orders.length,paidOrders:paid.length,pendingOrders:pending.length},revenue:{toman:paid.reduce((s,x)=>s+Number(x.providerAmount ?? (x.currency==='IRR' ? x.amount : 0) ?? 0),0),sourceUsd:paid.reduce((s,x)=>s+Number(x.orderAmount ?? (x.currency==='USD' ? x.amount : 0) ?? 0),0)},payment:{variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY),international:!!env.STRIPE_SECRET_KEY},security:{passwordOnly:true,session:'signed-httpOnly-cookie'},business,approvals:approvals.filter(x=>x.status==='pending').slice(-20),recentActions:actions.slice(-10)});
+    return rjson({owner:{name:'مدیر صابر بدری'},counts:{leads:leads.length,orders:orders.length,paidOrders:paid.length,pendingOrders:pending.length},revenue:{toman:paid.reduce((s,x)=>s+Number(x.providerAmount ?? (x.currency==='IRR' ? x.amount : 0) ?? 0),0),sourceUsd:paid.reduce((s,x)=>s+Number(x.orderAmount ?? (x.currency==='USD' ? x.amount : 0) ?? 0),0)},payment:{variza:!!getVarizaApiKey(env),international:!!env.STRIPE_SECRET_KEY},security:{passwordOnly:true,session:'signed-httpOnly-cookie'},business,approvals:approvals.filter(x=>x.status==='pending').slice(-20),recentActions:actions.slice(-10)});
   }
   if((p==='/api/admin/controls'||p==='/api/admin/controls/')&&req.method==='GET'){
     if(!(await adminAuth(req,env)))return rjson({ok:false,error:'admin_login_required'},401);
@@ -170,7 +175,7 @@ async function v90AdminRoutes(req,env,u){
     if(decision==='approved'&&a.category==='pricing'){let parsed={};try{parsed=JSON.parse(a.details||'{}')}catch{return rjson({ok:false,error:'invalid_approval_details'},400)}const cur=await getV90Config(env);const prices={FIX:Number(parsed.FIX),START:Number(parsed.START),BUILD:Number(parsed.BUILD),GROW:Number(parsed.GROW)};if(!Object.values(prices).every(n=>Number.isFinite(n)&&n>=1&&n<=100000))return rjson({ok:false,error:'invalid_price'},400);await saveV90Config(env,{...cur,pricesUsd:prices});a.status='approved';a.executed=true;a.decidedAt=now();await kvPut(env,'admin/approval/'+idv,a);await v90Audit(env,'approved_price_change',true,prices);return rjson({ok:true,success:true,status:'approved',executed:true,pricesUsd:prices})}
     a.status=decision;a.executed=false;a.decidedAt=now();await kvPut(env,'admin/approval/'+idv,a);await v90Audit(env,'approval_'+decision,true,idv);return rjson({ok:true,success:true,status:decision,executed:false});
   }
-  if(p==='/api/currency/rates'&&req.method==='GET'){const rate=Number(env.USD_IRR_RATE||0);if(!Number.isFinite(rate)||rate<=0)return rjson({ok:false,error:'fx_unavailable'},503);return rjson({base:'USD',currencies:{USD:1,IRR:rate},tomanPerUsd:Math.round(rate/10),supported:['USD','EUR','GBP','CAD','AUD','AED','TRY','CNY','JPY']})}
+  if(p==='/api/currency/rates'&&req.method==='GET'){const rate=getUsdTomanRate(env);if(!Number.isFinite(rate)||rate<=0)return rjson({ok:false,error:'fx_unavailable'},503);return rjson({base:'USD',currencies:{USD:1,IRR:rate},tomanPerUsd:Math.round(rate/10),supported:['USD','EUR','GBP','CAD','AUD','AED','TRY','CNY','JPY']})}
   if(p==='/api/me'&&req.method==='GET'){return rjson({ok:true,mode:'guest',userId:null,name:'',email:'',orders:0,requests:0})}
   if((p==='/api/chat/memory'||p==='/api/memory')&&['GET','POST'].includes(req.method)){const sid=clean(u.searchParams.get('sessionId'),100).replace(/[^a-zA-Z0-9_-]/g,'');if(!sid)return rjson({ok:false,error:'session_required'},400);const key='chat/'+sid;if(req.method==='POST'){const b=await req.json().catch(()=>({}));const rec={sessionId:sid,turns:Array.isArray(b.turns)?b.turns.slice(-30):[],profile:b.profile&&typeof b.profile==='object'?b.profile:{},updatedAt:now()};await kvPut(env,key,rec);return rjson({ok:true,sessionId:sid,count:rec.turns.length})}const rec=await kvGet(env,key,{sessionId:sid,turns:[],profile:{}});return rjson({ok:true,...rec})}
   if(p==='/api/leads'&&req.method==='POST'){const b=await req.json().catch(()=>({})),email=clean(b.email,160),request=clean(b.request,4000);if(!/^\\S+@\\S+\\.\\S+$/.test(email)||!request)return rjson({ok:false,error:'invalid_request'},400);const lead={id:id(),email,request,language:b.language==='fa'?'fa':'en',recommendedPlan:['FIX','START','BUILD','GROW'].includes(b.recommendedPlan)?b.recommendedPlan:null,createdAt:now()};await kvPut(env,'lead/'+lead.id,lead);return rjson({ok:true,saved:true,leadId:lead.id})}
@@ -246,7 +251,7 @@ async function runtimeRoutes(req,env,u){
     return rjson({ok:false,error:'method_not_allowed'},405);
   }
   if(p==='/api/fx'){
-    const rate=Number(env.USD_IRR_RATE||0);
+    const rate=getUsdTomanRate(env);
     if(!Number.isFinite(rate)||rate<=0)return rjson({ok:false,error:'usd_irr_rate_not_configured',currency:'USD',target:'IRR',source:'environment'});
     return rjson({ok:true,from:'USD',to:'IRR',rate,source:'environment',tomanRate:rate/10});
   }
@@ -256,15 +261,15 @@ async function runtimeRoutes(req,env,u){
     return rjson(result);
   }
   if(p==='/api/revenue/customer-ready'&&req.method==='GET'){
-    const payment=!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY);
-    const fx=Number(env.USD_IRR_RATE||0)>0;
-    const ai=!!(env.OPENAI_API_KEY||env.GEMINI_API_KEY||env.ANTHROPIC_API_KEY);
+    const payment=!!getVarizaApiKey(env);
+    const fx=getUsdTomanRate(env)>0;
+    const ai=!!(getAiConfig(env).openai||getAiConfig(env).gemini||getAiConfig(env).anthropic);
     const storageConfigured=!!env.PAYMENTS;
     const persistence=storageConfigured&&String(env.PAYMENTS_DURABLE||'false').toLowerCase()==='true';
     return rjson({ok:true,customerPath:{brief:true,leadCapture:true,qualification:true,offer:true,order:true,checkout:payment&&fx,paymentGateway:payment,fxConfigured:fx,persistentAccounting:persistence,storageConfigured,aiReady:ai},blockers:[...(!payment?['VARIZA_API_KEY']:[]),...(!fx?['USD_IRR_RATE']:[])],truth:'customer arrival is external; everything inside this path is explicit and testable'});
   }
   if(p==='/api/revenue/programs'&&req.method==='GET'){
-    const configured={variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY),ton:!!env.TON_RECEIVING_ADDRESS,ai:!!(env.OPENAI_API_KEY||env.GEMINI_API_KEY||env.ANTHROPIC_API_KEY),gsc:!!(env.GSC_ACCESS_TOKEN||env.GSC_SERVICE_ACCOUNT_JSON)};
+    const configured={variza:!!getVarizaApiKey(env),ton:!!env.TON_RECEIVING_ADDRESS,ai:!!(getAiConfig(env).openai||getAiConfig(env).gemini||getAiConfig(env).anthropic),gsc:!!(env.GSC_ACCESS_TOKEN||env.GSC_SERVICE_ACCOUNT_JSON)};
     return rjson({ok:true,programs:REVENUE_PROGRAMS.map(x=>({...x,operational:x.status==='LIVE',paymentRoute:configured.variza?'VARIZA':'CONFIG_REQUIRED'})),walletRouting:{tonConfigured:configured.ton,varizaConfigured:configured.variza,truth:'فقط پرداخت واقعی تسویه‌شده درآمد محسوب می‌شود.'},trendSource:'2026 demand signals are informational, not income guarantees'});
   }
   if(p==='/api/revenue/programs/lead'&&req.method==='POST'){
@@ -292,8 +297,8 @@ async function runtimeRoutes(req,env,u){
     const selected=catalog[service]||catalog[String(lead?.recommendedService||'')];
     if(!selected)return rjson({ok:false,error:'service_not_available'},400);
     const amountUsd=Number(selected.price);
-    const rate=Number(env.USD_IRR_RATE||0);
-    const paymentConfigured=!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY);
+    const rate=getUsdTomanRate(env);
+    const paymentConfigured=!!getVarizaApiKey(env);
     const order={id:id(),accountId:clean(lead?.id||'guest'),client:email,email,service:service||lead?.recommendedService||'custom',description:clean(b.description||lead?.request||selected.name,1000),currency:'USD',amount:amountUsd,orderAmount:amountUsd,status:'pending',leadId:lead?.id||null,createdAt:now()};
     state.orders.set(order.id,order);
     if(env.PAYMENTS)await env.PAYMENTS.put('orders/'+order.id,JSON.stringify(order));
@@ -308,10 +313,10 @@ async function runtimeRoutes(req,env,u){
     return rjson({ok:true,order:saved||{...order,providerAmount},payment:{ready:true,payUrl:payment.payUrl,orderId:order.id,providerAmount},next:'pay'},201);
   }
   if(p==='/api/revenue/settlement'&&req.method==='GET'){
-    return rjson({ok:true,providers:{variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY),ton:!!env.TON_RECEIVING_ADDRESS},policy:{paidOnly:true,noSecretKeys:true,ownerApprovalForIrreversible:true}});
+    return rjson({ok:true,providers:{variza:!!getVarizaApiKey(env),ton:!!env.TON_RECEIVING_ADDRESS},policy:{paidOnly:true,noSecretKeys:true,ownerApprovalForIrreversible:true}});
   }
   if(p==='/api/revenue/engines'&&req.method==='GET'){
-    const configured={variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY),ton:!!env.TON_RECEIVING_ADDRESS,gsc:!!(env.GSC_ACCESS_TOKEN||env.GSC_SERVICE_ACCOUNT_JSON),ai:!!(env.OPENAI_API_KEY||env.GEMINI_API_KEY||env.ANTHROPIC_API_KEY)};
+    const configured={variza:!!getVarizaApiKey(env),ton:!!env.TON_RECEIVING_ADDRESS,gsc:!!(env.GSC_ACCESS_TOKEN||env.GSC_SERVICE_ACCOUNT_JSON),ai:!!(getAiConfig(env).openai||getAiConfig(env).gemini||getAiConfig(env).anthropic)};
     return rjson({ok:true,engines:[
       {id:'revenue-hunter',name:'Revenue Hunter',active:true,mode:'rule+lead-data'},
       {id:'offer-engine',name:'Offer Engine',active:true,mode:'catalog+scoring'},
@@ -364,7 +369,7 @@ async function runtimeRoutes(req,env,u){
   }
   if(p==='/api/content/draft'&&req.method==='POST'){
     const b=await req.json().catch(()=>({})),topic=clean(b.topic||b.request,500),market=clean(b.market||'International',100),format=clean(b.format||'landing-page',60);if(!topic)return rjson({ok:false,error:'topic_required'},400);
-    const draft={id:id(),topic,market,format,title:topic,outline:['Problem','Solution','Proof / evidence','Offer','Call to action'],body:'Draft prepared for human/AI quality review before publication.',status:'draft',createdAt:now()};await kvPut(env,'content/'+draft.id,draft);return rjson({ok:true,draft,engine:'content-engine',aiConfigured:!!(env.OPENAI_API_KEY||env.GEMINI_API_KEY||env.ANTHROPIC_API_KEY)},201);
+    const draft={id:id(),topic,market,format,title:topic,outline:['Problem','Solution','Proof / evidence','Offer','Call to action'],body:'Draft prepared for human/AI quality review before publication.',status:'draft',createdAt:now()};await kvPut(env,'content/'+draft.id,draft);return rjson({ok:true,draft,engine:'content-engine',aiConfigured:!!(getAiConfig(env).openai||getAiConfig(env).gemini||getAiConfig(env).anthropic)},201);
   }
   if(p==='/api/analytics'&&req.method==='GET'){
     const leads=await kvList(env,'revenue-leads/',1000),orders=await kvList(env,'orders/',1000),paid=orders.filter(x=>x?.status==='paid');return rjson({ok:true,metrics:{leads:leads.length,orders:orders.length,paid:paid.length,revenueUsd:paid.reduce((s,x)=>s+Number((x.orderAmount??(x.currency==='USD'?x.amount:0))||0),0),settlementIrr:paid.reduce((s,x)=>s+Number((x.providerAmount??(x.currency==='IRR'?x.amount:0))||0),0)},engine:'analytics'});
@@ -389,7 +394,7 @@ async function runtimeRoutes(req,env,u){
   }
 if(p==='/api/payment-config'){
     const mainTon=getMainTonAddress(env),tempTon=getTempTonAddress(env);
-    return rjson({ok:true,ton:{enabled:Boolean(mainTon),address:mainTon||null,mainConfigured:Boolean(mainTon)},guard:{temporaryWalletConfigured:Boolean(tempTon),temporaryAddress:tempTon||null},fiat:{provider:'variza',enabled:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY)}});
+    return rjson({ok:true,ton:{enabled:Boolean(mainTon),address:mainTon||null,mainConfigured:Boolean(mainTon)},guard:{temporaryWalletConfigured:Boolean(tempTon),temporaryAddress:tempTon||null},fiat:{provider:'variza',enabled:!!getVarizaApiKey(env)}});
   }
   if(p==='/api/revenue/catalog'){
     return rjson({ok:true,merchant:'ANIL X STUDIO',currency:'USD',services:[
@@ -575,4 +580,4 @@ async function secretary(req,env){
   const r=await fetch('https://api.openai.com/v1/chat/completions',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+env.OPENAI_API_KEY},body:JSON.stringify({model:env.ASTRA_MODEL||'gpt-5-mini',messages:[{role:'system',content:'تو بدرخان، دستیار اجرایی خصوصی ANIL X هستی. فارسی پاسخ بده. هرگز اجرای واقعی را بدون نتیجه ابزار ادعا نکن. برای گارد جاویدان هرگز seed/private key نخواه و برای امضای تراکنش تأیید مالک لازم است. اگر ابزار مستقیم در دسترس نیست، فقط برنامه اقدام و وضعیت قابل اثبات را گزارش کن.'},{role:'user',content:command}],temperature:.15})});if(!r.ok)return json({ok:false,error:'assistant_provider_'+r.status},502);
   const d=await r.json();return json({ok:true,text:d?.choices?.[0]?.message?.content||'بررسی انجام شد.',action:'گزارش'});
 }
-export default{async fetch(req,env,ctx){const u=new URL(req.url);if(u.pathname==='/api/guard/live'&&req.method==='GET')return handleGuardLive(req,env);if(u.pathname==='/api/health'||u.pathname==='/api/_healthcheck'){const adminConfigured=String(env.ANIL_ADMIN_PASSWORD||'').length>=8;return json({ok:true,ready:adminConfigured,service:'ANIL X',runtime:'unified-worker',configured:{admin:adminConfigured,openai:!!env.OPENAI_API_KEY,anthropic:!!env.ANTHROPIC_API_KEY,gemini:!!env.GEMINI_API_KEY,variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY),payments:!!env.PAYMENTS,assets:!!env.ASSETS},routes:['/api/plan','/api/analyze','/api/vision','/api/voice','/api/ton/account','/api/ton/transactions','/api/javidan/trinity','/api/account','/api/memory','/api/order','/api/fx','/api/discovery','/api/free-request','/api/free-admin','/api/payment-status','/api/worker','/api/pay','/api/variza-webhook','/api/revenue/fleet','/api/revenue/fleet/run','/api/revenue/programs','/api/guard/live'],revenue:{persistence:!!env.PAYMENTS,variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY),ton:!!getMainTonAddress(env),guardTemporaryTon:!!getTempTonAddress(env)}},200);}const runtime=await runtimeRoutes(req,env,u);if(runtime)return runtime;if(u.pathname==='/api/analyze')return analyze(req,env);if(u.pathname==='/api/vision')return vision(req,env);if(u.pathname==='/api/voice')return voice(req,env);if(u.pathname==='/api/ton/account'||u.pathname==='/api/ton/transactions')return tonApi(req);if(u.pathname==='/api/anil/execution-readiness')return handleExecutionReadiness(req,env);if(u.pathname==='/api/plan')return handlePlan(req,env);if(u.pathname==='/api/javidan/trinity')return handleJavidan(req,env);if(u.pathname==='/api/admin/password/login')return adminLogin(req,env);if(u.pathname==='/api/admin/secretary')return secretary(req,env);if(u.pathname==='/api/pay')return pay({request:req,env});if(u.pathname==='/api/variza-webhook')return webhook({request:req,env});if(u.pathname.startsWith('/api/'))return json({ok:false,error:'not_found'},404);return env.ASSETS.fetch(req)}};
+export default{async fetch(req,env,ctx){const u=new URL(req.url);if(u.pathname==='/api/guard/live'&&req.method==='GET')return handleGuardLive(req,env);if(u.pathname==='/api/health'||u.pathname==='/api/_healthcheck'){const adminConfigured=String(env.ANIL_ADMIN_PASSWORD||'').length>=8;return json({ok:true,ready:adminConfigured,service:'ANIL X',runtime:'unified-worker',configured:{admin:adminConfigured,openai:!!env.OPENAI_API_KEY,anthropic:!!env.ANTHROPIC_API_KEY,gemini:!!env.GEMINI_API_KEY,variza:!!getVarizaApiKey(env),payments:!!env.PAYMENTS,assets:!!env.ASSETS},routes:['/api/plan','/api/analyze','/api/vision','/api/voice','/api/ton/account','/api/ton/transactions','/api/javidan/trinity','/api/account','/api/memory','/api/order','/api/fx','/api/discovery','/api/free-request','/api/free-admin','/api/payment-status','/api/worker','/api/pay','/api/variza-webhook','/api/revenue/fleet','/api/revenue/fleet/run','/api/revenue/programs','/api/guard/live'],revenue:{persistence:!!env.PAYMENTS,variza:!!getVarizaApiKey(env),ton:!!getMainTonAddress(env),guardTemporaryTon:!!getTempTonAddress(env)}},200);}const runtime=await runtimeRoutes(req,env,u);if(runtime)return runtime;if(u.pathname==='/api/analyze')return analyze(req,env);if(u.pathname==='/api/vision')return vision(req,env);if(u.pathname==='/api/voice')return voice(req,env);if(u.pathname==='/api/ton/account'||u.pathname==='/api/ton/transactions')return tonApi(req);if(u.pathname==='/api/anil/execution-readiness')return handleExecutionReadiness(req,env);if(u.pathname==='/api/plan')return handlePlan(req,env);if(u.pathname==='/api/javidan/trinity')return handleJavidan(req,env);if(u.pathname==='/api/admin/password/login')return adminLogin(req,env);if(u.pathname==='/api/admin/secretary')return secretary(req,env);if(u.pathname==='/api/pay')return pay({request:req,env});if(u.pathname==='/api/variza-webhook')return webhook({request:req,env});if(u.pathname.startsWith('/api/'))return json({ok:false,error:'not_found'},404);return env.ASSETS.fetch(req)}};
