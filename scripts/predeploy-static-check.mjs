@@ -18,6 +18,7 @@ const sourceFiles=files.filter(p=>/\.(html|js|mjs|mts|json|yml|yaml|toml)$/.test
 const legacyPatterns=[
   {name:'legacy AppDeploy',re:/appdeploy\.ai/i},
   {name:'legacy built-in admin password',re:/BUILTIN_ADMIN_PASSWORD|Sm\*114411/},
+  {name:'legacy GitHub Pages URL',re:/saberbadri24-tech\.github\.io\/city-of-eternity/i},
 ];
 const errors=[];
 for(const file of sourceFiles){
