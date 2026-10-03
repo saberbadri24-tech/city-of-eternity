@@ -73,16 +73,20 @@ jobs:
             check(await page.locator('#profileBtn').count()===1,'profile button exists');
             check(await page.locator('#voiceBtn').count()===1,'voice button exists');
             check(await page.locator('#imageInput').count()===1,'file/image input exists');
+            if(await page.locator('#profileModal').isVisible()){
+              await page.locator('[data-age="adult"]').click();
+              await page.locator('[data-goal="business"]').click();
+              await page.locator('#saveProfile').click();
+              await page.waitForTimeout(250);
+            }
+            check(await page.locator('#profileModal').isHidden(),'profile onboarding closes');
+            await page.locator('#profileBtn').click();
+            check(await page.locator('#profileModal').isVisible(),'profile button reopens modal');
+            await page.locator('#closeProfile').click();
+            check(await page.locator('#profileModal').isHidden(),'profile modal closes');
             const quick=page.locator('[data-request]');
             const quickCount=await quick.count();
             check(quickCount>=4,'quick action buttons discovered');
-            await quick.first().click();
-            check(await page.locator('#profileModal').isVisible(),'quick action opens required profile');
-            await page.locator('[data-age="adult"]').click();
-            await page.locator('[data-goal="business"]').click();
-            await page.locator('#saveProfile').click();
-            await page.waitForTimeout(250);
-            check(await page.locator('#profileModal').isHidden(),'profile modal closes after save');
             for(let i=0;i<quickCount;i++){
               await quick.nth(i).click();
               await page.waitForTimeout(350);
