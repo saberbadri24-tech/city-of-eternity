@@ -67,6 +67,7 @@ async function inventory(url) {
       buttons: [...document.querySelectorAll("button")].map((b, i) => ({
         i,
         text: (b.innerText || b.getAttribute("aria-label") || "").trim().replace(/\s+/g, " ").slice(0, 120),
+        request: b.getAttribute("data-request") || "",
         disabled: b.disabled,
         type: b.type || "button",
       })),
@@ -97,15 +98,21 @@ async function inventory(url) {
         }
         const before = await page.locator("body").innerText().catch(() => "");
         const beforeUrl = page.url();
+        let planResponse = null;
+        const planResponsePromise = b.request
+          ? page.waitForResponse(res => res.url().includes("/api/plan") && res.request().method() === "POST", { timeout: 12000 }).catch(() => null)
+          : null;
         await page.locator("button").nth(b.i).click({ timeout: 3000 });
-        await page.waitForTimeout(500);
+        if (planResponsePromise) planResponse = await planResponsePromise;
+        await page.waitForTimeout(1000);
         const after = await page.locator("body").innerText().catch(() => "");
         const afterUrl = page.url();
         const changed = before !== after || beforeUrl !== afterUrl;
+        const planOk = Boolean(planResponse && planResponse.ok());
         buttonResults.push({
           url,
           text: b.text,
-          pass: changed || /^(send|ارسال)/i.test(b.text),
+          pass: changed || planOk || /^(send|ارسال)/i.test(b.text),
           urlChanged: beforeUrl !== afterUrl,
           stateChanged: before !== after,
           afterUrl,
