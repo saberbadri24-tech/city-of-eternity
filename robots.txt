@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /admin.html
+Disallow: /guard.html
+Disallow: /revenue-engine.html
+Disallow: /account.html
 
 Sitemap: https://city-of-eternity.onrender.com/sitemap.xml
