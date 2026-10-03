@@ -2,7 +2,7 @@ const BASE='https://raw.githubusercontent.com/saberbadri24-tech/immortal-guard/m
 const API='https://api.github.com/repos/saberbadri24-tech/immortal-guard/contents/';
 const FILES=['guard_status.json','revenue_ledger.json','transfer_state.json','ai_reviews.json'];
 let cache={at:0,data:null};
-const json=(d,s=200)=>new Response(JSON.stringify(d),{status:s,headers:{'content-type':'application/json; charset=utf-8','cache-control':'public,max-age=60,stale-while-revalidate=300'}});
+const json=(d,s=200)=>new Response(JSON.stringify(d),{status:s,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-anilx-guard-cache':'server-60s'}});
 async function fromGithub(name){
   const r=await fetch(API+name+'?ref=main',{headers:{accept:'application/vnd.github+json','user-agent':'ANIL-X-Guard-Live'}});
   if(!r.ok)throw Error('github_'+r.status);
