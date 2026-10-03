@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-03T22:30:33+00:00",
+  "generatedAt": "2026-10-03T22:40:09+00:00",
   "engine": "Immortal Guard Action Planner",
-  "planCount": 1925,
+  "planCount": 1928,
   "plans": [
     {
       "id": "binance-airdrop-portal",
@@ -1699,6 +1699,17 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
+      "id": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE96UmJrVUI5Y1Vya2E5RVFXYjNTamlXNmV3c01xYlRTQzJoLTFHdkpuaDBOWkU3NGVUdkxockRTdG1vZno4c0ZRaEVYckx6dw?oc=5",
+      "title": "Klarna App | Pay flexibly, compare prices & earn cashback - Klarna",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE96UmJrVUI5Y1Vya2E5RVFXYjNTamlXNmV3c01xYlRTQzJoLTFHdkpuaDBOWkU3NGVUdkxockRTdG1vZno4c0ZRaEVYckx6dw?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
       "id": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBtaXpRc3RaM0xSUXBIcXZFYVU2UUgzb2hVbEc0ZWRmU25yT3k3eHlJb3NNTm5vZnJTRlJJalhibVlxQ0lkU044SFZabUlFMnJWd200MURzaEozdDd0UnZjWmVFRlpKcy04ZmF6RExDWVZHM1U?oc=5",
       "title": "Research|LLM: Gemini 4 Brings Google Back into Frontier Competition as Investment Accelerates - FUNDA | Substack",
       "status": "OWNER_REVIEW",
@@ -1717,17 +1728,6 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQNk5HTm5GWjlpcXZPXzRZX1d1aEpHVUp5Q0N0b2lvM19aNUM2bzFvWkIwajBTLW0xXzVhWk9DVU5ERExyMnAxQzNNQTI3UFRkcm9pbkVwYk8zVVN0bXR4eWJNZHREamlqRU5ZM2llempjMEkySDlCMzNLMDBhbkVqZ0wzWF9uNTNJbGNwbXM2Q3YzY2hDaERBbVMwRUlJZWVHMWp2Z3RfR2kwNlFxbFdrZmpQLVpiSklVSy0w?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
-      "id": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE96UmJrVUI5Y1Vya2E5RVFXYjNTamlXNmV3c01xYlRTQzJoLTFHdkpuaDBOWkU3NGVUdkxockRTdG1vZno4c0ZRaEVYckx6dw?oc=5",
-      "title": "Klarna App | Pay flexibly, compare prices & earn cashback - Klarna",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE96UmJrVUI5Y1Vya2E5RVFXYjNTamlXNmV3c01xYlRTQzJoLTFHdkpuaDBOWkU3NGVUdkxockRTdG1vZno4c0ZRaEVYckx6dw?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -1761,6 +1761,17 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOUVRKczRnMTBuR3g1Z3pHaU9YRGpEbmF5V0JENVhLV0d5MVBuMGliSlFUbUt0V0kxWlNPMlZDaEhKT3QtOVFtTl9RR3NTd1JOcWVCekw1UndvTVpVSVZSWElzdHkwSXFTcDJvcXpaQVlQSGwyTXpjSVhDdFFjZ0JFQXItOXI2UFA3YUNfdjlaMXFUSXRJLWpJMjVNR1d2dw?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
+      "id": "https://news.google.com/rss/articles/CBMiO0FVX3lxTE9FRFRoUkxjMlNlbUYxSk50LU9ueWRNVUJleDdaNjZJS2c2ZnliT1hkQ1pkYVlTcEIzVDZj?oc=5",
+      "title": "Crypto Exchange | Bitcoin Exchange | Bitcoin Trading | KuCoin - KuCoin",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiO0FVX3lxTE9FRFRoUkxjMlNlbUYxSk50LU9ueWRNVUJleDdaNjZJS2c2ZnliT1hkQ1pkYVlTcEIzVDZj?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -1992,17 +2003,6 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE92VWsyMGNoOFhEdUlwb1hVdTR6ZzcxSzlZZTNKWmx2Rk14ekxQWTg3NFNSTEE3Smh4d2NUaWRpR0dRRVBpdVlzQ2VWLWxnS2R3M3A0dg?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
-      "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5IN1hqc2dnM1FKNi1EOXA5a2lZQVAycWhwZFBOMDU4cVZ4WFAzY1BreHdzNHFTTmhBNXBVQlpxb2ItMGtndE80LVpZUVhNdmlwTWM0VVNR?oc=5",
-      "title": "Request Repair And Check Repair Status | Samsung Support US - samsung.com",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5IN1hqc2dnM1FKNi1EOXA5a2lZQVAycWhwZFBOMDU4cVZ4WFAzY1BreHdzNHFTTmhBNXBVQlpxb2ItMGtndE80LVpZUVhNdmlwTWM0VVNR?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -2371,7 +2371,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPcGJFNUZieGxhVk5rWFBoSFpTbFp6UUVXTDU5a2tfajNoNVNWZW5GQi1ET28tUFcwSTFEcjI2UktyNVV0NjlhcGxNUk5tZnpBSnNRYXdoQURkZHJaMHhtZlN0TmFZTXBwcVl5enRfay1EWHcwZ0syajdwZG1STXNNZDc3TUR0RDQ1MTlranZBS1FudDdCUjdHa0xTVmVhTkpRQ1l3T0tQcm0?oc=5",
-      "title": "Fliff Promo Code ROTOWIRE: Get Up To $250 in Free Play Today (October 2) - rotowire.com",
+      "title": "Fliff Promo Code ROTOWIRE: Get Up To $250 in Free Play Today (October 2) - RotoWire",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -2393,7 +2393,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1kWWdGdjhwSlA0WW01NVczVFlJN09nLU51bHJodlpUVVBOS0ZRT2tjS2JRU0F1TVNXUkg5aG1neTFYVnZvTV9pMEtac29vWEhYVWtwTkdB?oc=5",
-      "title": "Claim SECRET Black Ops 7 Season 5 Rewards ASAP… (Free Bundles, Camos, & Skins) - youtube.com",
+      "title": "Claim SECRET Black Ops 7 Season 5 Rewards ASAP… (Free Bundles, Camos, & Skins) - YouTube",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -2481,7 +2481,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNb3FCQWhZNWtuaDJHeDVJX0pNLVpLV25vanFQeTNJV0RRQl9PVjI5NkFCZmxkdDI2RVYzQW5Zc1NlcktSVnQ5cWxianRyRW9neWJnU0FuVkVxN3lnVFlJWWwxRG9CZjFOUDQwUVlTWlZUQkhrc1djSVN2eU4yTkNYX1p5OVpqRFVVNEIwbzZ4SkN3Xzk0MXZUWFVHNEszN21RYjR6eTlGa2s?oc=5",
-      "title": "Fliff Promo Code ROTOWIRE: Get Up To $250 in Free Play Today (October 1) - rotowire.com",
+      "title": "Fliff Promo Code ROTOWIRE: Get Up To $250 in Free Play Today (October 1) - RotoWire",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -2569,7 +2569,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQd0dxY2FCYnZlMy1wUW5Wdl8tSmNRRlRlRG1UemJlc3oxQWd0MWtVVFJCdmVMdkJWVDkxNmE3Vmp3Vi1zZFpDdE1zYnVQaV9sMTJWdnk5MjNjZnBneWVEV1dIM1RMY0xZbVh2MW9aaVNCNkJucUItaXlnRnRDSVB1M3NXN010OWduNzN1YkhPRjc0UW1kQ2tFd1ZJMFozRmJQaDh4STRQWkY?oc=5",
-      "title": "Betr Social Sportsbook Promo Code ROTOWIRE1: 200 BC No Sweat Token - rotowire.com",
+      "title": "Betr Social Sportsbook Promo Code ROTOWIRE1: 200 BC No Sweat Token - RotoWire",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -2701,7 +2701,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBNTDZHVHJnbmlpazFxVDRRTEg4NVV5YVhUU1RaWDBHNnp6YTd1dWRONTdBZ3hEVUE1eDI3YThka0gwVmREZzZiZ0tEeFJVbGRrdmpOVDln?oc=5",
-      "title": "🔥ያለምንም ክፍያ 4 አይነት Airdrop ተቀበሉ 🤑 | Free of Fee No Gas Fee Airdrops🤑They will be listed soon 🚀 - youtube.com",
+      "title": "🔥ያለምንም ክፍያ 4 አይነት Airdrop ተቀበሉ 🤑 | Free of Fee No Gas Fee Airdrops🤑They will be listed soon 🚀 - YouTube",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -3031,7 +3031,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1yVkNUMzB0WlhmdEVXT2pCUTFYNGdpUU50UTg4VW5JbmNNeEZYWHQxSTBHYk1Gb1UxTXdXQUZDTDFYQUUzYlZVSkFuTHVPSXJGa0hnS2tR?oc=5",
-      "title": "Claim Free Solana Coin on Claimshare || Claimshare Withdrawal Procedure - youtube.com",
+      "title": "Claim Free Solana Coin on Claimshare || Claimshare Withdrawal Procedure - YouTube",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -3097,7 +3097,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFA5elBvVXpKRlNCbnE5NGpOVEtadEhOSjB0STFUY3c2OXB3aVkyQjF3T292VUNqWUM0RldWSWl0RHhXRkEwdVU2S3poU214bFBIVktXTnB3?oc=5",
-      "title": "🔥 Claim These 5 Airdrops - Don't Miss Them - youtube.com",
+      "title": "🔥 Claim These 5 Airdrops - Don't Miss Them - YouTube",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -3251,7 +3251,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9vbnRGMzlZX3RSZ01SODJ0WGJqeHpmWjZ2OHI4U28zRzJhZ1NsdGtNaHdieXltWjhvZEk0c1I1a2lGQXNmTXRwZC1yazk0ZzVqYWZrQmdR?oc=5",
-      "title": "Arichain Airdrop Claim is Live | Ariwallet Task Proof Submission Step by Step | Verify EVM wallet - youtube.com",
+      "title": "Arichain Airdrop Claim is Live | Ariwallet Task Proof Submission Step by Step | Verify EVM wallet - YouTube",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -3328,7 +3328,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5PVkVlLXE0cWl5UG5MZzRGaTJnLTNRZ3M1aWNvVTQxTTlhcmpYamhIUTVkenhUOXJJNmF1ZEI0SlJHZTN2WDBtbjdTTUpLV1JKSm1yZ0V3?oc=5",
-      "title": "How To Claim And Withdraw Silencio Airdrop - youtube.com",
+      "title": "How To Claim And Withdraw Silencio Airdrop - YouTube",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -3361,7 +3361,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9jODY1OUNoazNSSUpHTnEyWHg1cmJfMnFnWWpFVU45MEM2REdSSkJfblhRdzB1RV9oeXc3ZWhuWF9RTUdiaE9hNEF4VjJWcGozeWkwaWV3?oc=5",
-      "title": "NovaEX airdrop claim is live | I Finally Unlocked My NovaEX AI Airdrop – Here's How - youtube.com",
+      "title": "NovaEX airdrop claim is live | I Finally Unlocked My NovaEX AI Airdrop – Here's How - YouTube",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -3724,7 +3724,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9DM3k4SW5razhuLXBueEV6VG9UZHRFR2dWMDdFYTk1UmVxcF9aZDdpVjQ3b21zT0ZBX0o4MmprNTFjMU5zaWZ6U1hpUnNrbkxITlVOaE13?oc=5",
-      "title": "Alphea Hub APT Claim Live | Get Your APT & Add to Trust Wallet | New Crypto Airdrop 2026 - youtube.com",
+      "title": "Alphea Hub APT Claim Live | Get Your APT & Add to Trust Wallet | New Crypto Airdrop 2026 - YouTube",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -3757,7 +3757,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBCbU5oTU5NT0s0aU1oSG5LemdiT0RvUTJoTVd6eWNiNzZkVzg0VTJhQXNrd1RFZnBkNjhBWkRCeW5jdnFSZGx6aWlaVHV1TlpwTk1tWkNB?oc=5",
-      "title": "Orbition Network Allocation CLaim 🎁✅ Ratio 1:1 $OBN Token!! 80% Withdraw Initial Round!! #Orbition - youtube.com",
+      "title": "Orbition Network Allocation CLaim 🎁✅ Ratio 1:1 $OBN Token!! 80% Withdraw Initial Round!! #Orbition - YouTube",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -3911,7 +3911,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1WRy1NS2hhbnE0Z3duMEFXN09kVDUxRjcwcnBNM3k1VTlnM2xuUGhMY19vTXROZXpzUG02Q0lobjRWRXRiMWdOMEFjRUp2OTBQblE?oc=5",
-      "title": "YouTube - youtube.com",
+      "title": "YouTube - YouTube",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -4021,7 +4021,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE8wQnhuV0JGZlQ0Z0JjU1dfWnBLSkNaZFdsU0R6NkU5djh3akx6aUtER1ROdDRibHg5Qmt1QjUxczl3TVhWV0ljeE9YRFozV0p4X3hBcg?oc=5",
-      "title": "YouTube - youtube.com",
+      "title": "YouTube - YouTube",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -4098,7 +4098,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBhaDJERUY1NnhYanJ0Y3lkOWZyTXF2Q25SOS1Nd0ZPcThFU05OYzh6VWpLdkJSd05OUHNUdkRBQzFfTW9CQlQwT3NNa0tqUkk5SHgyQWFB?oc=5",
-      "title": "cPen INK Distribution LIVE! 🖋️ How to Add INK to Wallet & PancakeSwap Live Trades 2026 - youtube.com",
+      "title": "cPen INK Distribution LIVE! 🖋️ How to Add INK to Wallet & PancakeSwap Live Trades 2026 - YouTube",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -6639,7 +6639,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5VdGZfb2Jubk5wenlVYi1tVEVQalIyQ1Q5VmRkOElQdzZsUWRXVlI3ZmJMVnowRlE3cnRnUWNjMXE5MHBISW1RNG1JOHQwWXFNZXB2Z3Nn?oc=5",
-      "title": "How Kenyans Got Free Crypto with $SAHARA – No Coding, No Trading! - youtube.com",
+      "title": "How Kenyans Got Free Crypto with $SAHARA – No Coding, No Trading! - YouTube",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10686,17 +10686,6 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
-      "id": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE11NlpJaEhNSFI5UVpUMURZR0JDR3hqbTh0SWpRNDdJbUt0ZU9HZXpMUEYwbFVSUDJaS3Z4S0pRd0Q4TTlleXpfaUc4QW92akZNZ0ZYTg?oc=5",
-      "title": "Gala price today, GALA to USD live price, marketcap and chart - CoinMarketCap",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE11NlpJaEhNSFI5UVpUMURZR0JDR3hqbTh0SWpRNDdJbUt0ZU9HZXpMUEYwbFVSUDJaS3Z4S0pRd0Q4TTlleXpfaUc4QW92akZNZ0ZYTg?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
       "id": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBqVko0LVEzREhFdXA3STF2M0JxeGRQOUxlSFdzd2xWbWF6WmdMTWI5b0FKVXVtWXdsanVyNTZWZTRVSG1LZHlQRWdJMnpGTmZJNkZv?oc=5",
       "title": "Cross-Chain Asset Transaction Method Based on Ring Signature for Identity Privacy Protection - MDPI",
       "status": "OWNER_REVIEW",
@@ -10924,6 +10913,17 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1PLWdDRlo1eWFUeUQwSlhncWtSR3BhTUd6RE84Q3NGendvNlNJYWVIbWdCbC12ei13RmN5LUtWSldienh1Q3NxVFhuREpGMmVIS0pZUTE4T1hfT2FoOGxoZ0ZsTnFCUk1oSjFPdVpENVUzYXI3QjJOdFBn?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
+      "id": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPb20yTU02LVdBVDEtLWdPVXVuMU43SU5aQXYwR2dKLUEtUm1EYnloVDZBUWFwSy1NWEthSjJkaE5fYXhPU3NmY0FoemZpb0RXa01yT0F5RTVBckpGV2g1RFFfcGdwT3pMLXdGTzlOS0hLdVdOeXZ3VG5oZ205eWZRemgzLW1fcDA2VTNUUXZCbmtUMjFEd2tYUUNaZw?oc=5",
+      "title": "Should You Arbitrate or Litigate During a Construction Dispute? - FR Law Group PLLC",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPb20yTU02LVdBVDEtLWdPVXVuMU43SU5aQXYwR2dKLUEtUm1EYnloVDZBUWFwSy1NWEthSjJkaE5fYXhPU3NmY0FoemZpb0RXa01yT0F5RTVBckpGV2g1RFFfcGdwT3pMLXdGTzlOS0hLdVdOeXZ3VG5oZ205eWZRemgzLW1fcDA2VTNUUXZCbmtUMjFEd2tYUUNaZw?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-03T22:30:32+00:00",
+  "generatedAt": "2026-10-03T22:40:09+00:00",
   "engine": "Immortal Guard Modular Core",
   "overall": "healthy",
   "modules": {
@@ -59,7 +59,7 @@
     "autoTransfer": false,
     "ownerApprovalRequired": true
   },
-  "opportunityCount": 9079,
+  "opportunityCount": 9082,
   "opportunityIds": [
     "003f7c77dac44f452619",
     "004c2693b6fd2c8b3902",
@@ -99,6 +99,7 @@
     "043744cf830961ec3e71",
     "043c8ad89c54f043de79",
     "04562056b49089ddb3ce",
+    "0463cf580753a72cea9f",
     "046f5c8d859fdd6ac2df",
     "0477b53f56e6ea250fbd",
     "04c897ee217fc204bfab",
@@ -1279,6 +1280,7 @@
     "a37275aa2be26495f0f7",
     "a38d5e375aadd345326a",
     "a39579fe158e52fc87cb",
+    "a3a11cb19b50e0a216d2",
     "a3b50d0d08faf2341d4d",
     "a3de3ef9667998b18a7d",
     "a3ecce770ffdae42e97e",
@@ -1587,6 +1589,7 @@
     "cc3e99a261b540867645",
     "cc40715cf1b020fa94df",
     "cc5751cf1bddb9dedf5c",
+    "cc85e1301bb556ccee03",
     "cc8b3cb071c5974bcf52",
     "ccab2599ebcd56d7101b",
     "ccabb974ba135c9142f8",
@@ -1698,6 +1701,7 @@
     "dbc8c31df682a7c4f23a",
     "dc68623b6aeae3383f61",
     "dc7a1e9ec15b030910b0",
+    "dc92b9854d7bdced4c17",
     "dcb6f8adaeeb83087499",
     "dcee24e63620ac7fcaa3",
     "dd2b1e659f0b340cf932",
@@ -1816,7 +1820,6 @@
     "ebd06c80188c7e5ec49c",
     "ec16552785fa19cf997d",
     "ec2202b5b0536dcb2d53",
-    "ec42de72aaf7265d987c",
     "ecc942e5fa61f159255c",
     "ecd3afdb7c4bf7fa45d2",
     "ece94f3b01dd68ca2caa",
@@ -9151,25 +9154,25 @@
     "opportunity_graph": {
       "state": "healthy",
       "returncode": 0,
-      "stdout": "{\"nodes\": 3783, \"edges\": 1886, \"convergence\": 4, \"blindSpots\": 1877}\n",
+      "stdout": "{\"nodes\": 3789, \"edges\": 1889, \"convergence\": 4, \"blindSpots\": 1880}\n",
       "stderr": ""
     },
     "novelty": {
       "state": "healthy",
       "returncode": 0,
-      "stdout": "{\"new\": 210, \"changed\": 0}\n",
+      "stdout": "{\"new\": 30, \"changed\": 0}\n",
       "stderr": ""
     },
     "action_planner": {
       "state": "healthy",
       "returncode": 0,
-      "stdout": "{\"plans\": 1925}\n",
+      "stdout": "{\"plans\": 1928}\n",
       "stderr": ""
     },
     "unlock_value": {
       "state": "healthy",
       "returncode": 0,
-      "stdout": "{\"recordsObserved\": 1926, \"checksGenerated\": 9535, \"top\": {\"checkId\": \"00eb10094610894a9f02\", \"opportunityId\": \"f4e5e97364f7811efcea\", \"title\": \"Smart Contract Bug Bounties Statistics 2026: Hidden Risks Now - CoinLaw\", \"missingDimension\": \"contract\", \"unlockScore\": 123.0, \"affectedObservedRecords\": 1926, \"observedSignalCount\": 6, \"sourceDomain\": \"news.google.com\", \"verificationAction\": \"verify the official contract address from project documentation\", \"reason\": \"prioritize a missing fact whose verification can reduce uncertainty across multiple observed records\", \"costClass\": \"MEDIUM\", \"hypothesisOnly\": true, \"noInventedClaim\": true, \"ownerApprovalRequired\": true}}\n",
+      "stdout": "{\"recordsObserved\": 1929, \"checksGenerated\": 9550, \"top\": {\"checkId\": \"28c6af02434061832133\", \"opportunityId\": \"96c45b26f4393e2de93a\", \"title\": \"Straight Talk: How to Get Gala Airdrop and Avoid Scams - BitDegree\", \"missingDimension\": \"chain\", \"unlockScore\": 136.5, \"affectedObservedRecords\": 1929, \"observedSignalCount\": 6, \"sourceDomain\": \"news.google.com\", \"verificationAction\": \"verify the network/chain from official documentation\", \"reason\": \"prioritize a missing fact whose verification can reduce uncertainty across multiple observed records\", \"costClass\": \"MEDIUM\", \"hypothesisOnly\": true, \"noInventedClaim\": true, \"ownerApprovalRequired\": true}}\n",
       "stderr": ""
     }
   }
