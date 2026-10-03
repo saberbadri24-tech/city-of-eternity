@@ -6,5 +6,5 @@
   "privateKeysCollected": false,
   "automaticSigning": false,
   "automaticTransfer": false,
-  "notes": "Guard temporary wallet must come only from dedicated TON_GUARD_TEMP_WALLET runtime secret. Permanent/main wallet is never copied into Guard state."
+  "notes": "Temporary Guard receiving address is runtime-secret supplied; permanent/main wallet is never copied into Guard state."
 }
