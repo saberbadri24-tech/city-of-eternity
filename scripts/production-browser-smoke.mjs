@@ -45,6 +45,20 @@ async function waitStable() {
   await page.waitForTimeout(500);
 }
 
+async function gotoWithRetry(url, attempts=6) {
+  let last = null;
+  for (let i=1; i<=attempts; i++) {
+    try {
+      const r = await page.goto(url, {waitUntil:"domcontentloaded", timeout:30000});
+      await waitStable();
+      if (r?.ok()) return r;
+      last = Error(`HTTP ${r?.status() || "NO_RESPONSE"} ${url}`);
+    } catch (e) { last = e; }
+    await page.waitForTimeout(Math.min(2500*i,10000));
+  }
+  throw last || Error(`NO_RESPONSE ${url}`);
+}
+
 async function inventory(url) {
   if (visited.has(url) || visited.size >= 25) return;
   visited.add(url);
