@@ -1,0 +1,10 @@
+{
+  "name":"anil-x-mobile",
+  "private":true,
+  "version":"1.0.0",
+  "type":"module",
+  "engines":{"node":">=24.21.0 <25"},
+  "scripts":{"stage":"node stage-web.mjs","sync":"npx cap sync","add:android":"npx cap add android","add:ios":"npx cap add ios --packagemanager SPM"},
+  "dependencies":{"@capacitor/core":"^9.0.0","@capacitor/app":"^9.0.0","@capacitor/haptics":"^9.0.0","@capacitor/share":"^9.0.0","@capacitor/preferences":"^9.0.0"},
+  "devDependencies":{"@capacitor/cli":"^9.0.0","@capacitor/android":"^9.0.0","@capacitor/ios":"^9.0.0"}
+}
