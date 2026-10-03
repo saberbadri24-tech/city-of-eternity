@@ -6,7 +6,7 @@ import vision from './functions/api/vision.mjs';
 import voice from './functions/api/voice.mjs';import tonApi from './functions/api/ton.mjs';import {handleJavidan} from './functions/api/javidan-trinity.mjs';
 import {handleAnilCapabilities} from './functions/api/anil-capabilities.mjs';
 import {handleExecutionReadiness} from './functions/api/execution-readiness.mjs';import {handleGuardLive} from './functions/api/guard-live.mjs';
-import {anilTool} from './functions/api/anil-tools.mjs';import {handleSuperTeam} from './functions/api/anil-super-team.mjs';import {adminLogin,adminAuth,adminConfigured} from './functions/api/admin-auth.mjs';import {onRequestPost as pay} from './functions/api/pay.js';import {onRequestPost as webhook} from './functions/api/variza-webhook.js';
+import {anilTool} from './functions/api/anil-tools.mjs';import {handleSuperTeam} from './functions/api/anil-super-team.mjs';import {adminLogin,adminAuth,adminConfigured,adminSelfTest} from './functions/api/admin-auth.mjs';import {onRequestPost as pay} from './functions/api/pay.js';import {onRequestPost as webhook} from './functions/api/variza-webhook.js';
 const json=(d,s=200,h={})=>new Response(JSON.stringify(d),{status:s,headers:{'content-type':'application/json','cache-control':'no-store',...h}});
 const translateCache=new Map();
 async function translateOnline(req){
@@ -563,12 +563,6 @@ async function secretary(req,env){
 export default{async fetch(req,env,ctx){const u=new URL(req.url);if(u.pathname==='/api/guard/live'&&req.method==='GET')return handleGuardLive(req,env);if(u.pathname==='/api/health'||u.pathname==='/api/_healthcheck'){const adminReady=adminConfigured(env);return json({ok:true,ready:adminReady,service:'ANIL X',runtime:'unified-worker',configured:{admin:adminReady,openai:!!(getAiConfig(env).openai),anthropic:!!(getAiConfig(env).anthropic),gemini:!!(getAiConfig(env).gemini),variza:!!getVarizaApiKey(env),payments:!!env.PAYMENTS,assets:!!env.ASSETS},routes:['/api/plan','/api/analyze','/api/vision','/api/voice','/api/ton/account','/api/ton/transactions','/api/javidan/trinity','/api/account','/api/memory','/api/order','/api/fx','/api/discovery','/api/free-request','/api/free-admin','/api/payment-status','/api/worker','/api/pay','/api/variza-webhook','/api/revenue/fleet','/api/revenue/fleet/run','/api/revenue/programs','/api/guard/live'],revenue:{persistence:!!env.PAYMENTS,variza:!!getVarizaApiKey(env),ton:!!getMainTonAddress(env),guardTemporaryTon:!!getTempTonAddress(env)}},200);}const runtime=await runtimeRoutes(req,env,u);if(runtime)return runtime;if(u.pathname==='/api/analyze')return analyze(req,env);if(u.pathname==='/api/vision')return vision(req,env);if(u.pathname==='/api/voice')return voice(req,env);if(u.pathname==='/api/ton/account'||u.pathname==='/api/ton/transactions')return tonApi(req);if(u.pathname==='/api/anil/execution-readiness')return handleExecutionReadiness(req,env);if(u.pathname==='/api/plan')return handlePlan(req,env);if(u.pathname==='/api/anil/super-team')return handleSuperTeam(req,env,{guardHandler:handleGuardLive});if(u.pathname==='/api/javidan/trinity')return handleJavidan(req,env);if(u.pathname==='/api/admin/password/login')return adminLogin(req,env);
   if(u.pathname==='/api/admin/auth-self-test'&&req.method==='GET'){
     if(!(await githubActionsAuth(req,env)))return json({ok:false,error:'github_actions_auth_required'},401);
-    if(!adminConfigured(env))return json({ok:false,configured:false,loginStatus:503,sessionValid:false},503);
-    const secret=env.ANIL_ADMIN_PASSWORD;
-    const loginReq=new Request(new URL('/api/admin/password/login',req.url),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({password:secret})});
-    const loginRes=await adminLogin(loginReq,env);
-    const cookie=loginRes.headers.get('set-cookie')||'';
-    const sessionReq=new Request(new URL('/api/admin/secretary',req.url),{method:'POST',headers:{cookie}});
-    const sessionValid=loginRes.status===200&&await adminAuth(sessionReq,env);
-    return json({ok:sessionValid,configured:true,loginStatus:loginRes.status,sessionValid,secretExposed:false});
-  }if(u.pathname==='/api/admin/secretary')return secretary(req,env);if(u.pathname==='/api/pay')return pay({request:req,env});if(u.pathname==='/api/variza-webhook')return webhook({request:req,env});if(u.pathname.startsWith('/api/'))return json({ok:false,error:'not_found'},404);return env.ASSETS.fetch(req)}};
+    return json(await adminSelfTest(env));
+  }
+  if(u.pathname==='/api/admin/secretary')return secretary(req,env);if(u.pathname==='/api/pay')return pay({request:req,env});if(u.pathname==='/api/variza-webhook')return webhook({request:req,env});if(u.pathname.startsWith('/api/'))return json({ok:false,error:'not_found'},404);return env.ASSETS.fetch(req)}};
