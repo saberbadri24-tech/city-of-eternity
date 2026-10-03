@@ -28,6 +28,10 @@ async function readRemote(name){
     return await r.json();
   }catch{return null}
 }
+async function readCatchQueue(env){
+  if(!env?.PAYMENTS)return [];
+  try{const q=await env.PAYMENTS.list({prefix:'guard/catch/'});const keys=(q?.keys||[]).slice(-100);return (await Promise.all(keys.map(k=>env.PAYMENTS.get(k.name,'json').catch(()=>null)))).filter(Boolean)}catch{return []}
+}
 async function read(env,key,req){
   const local=await readLocal(env,LOCAL[key],req);
   if(local)return {data:local,source:'anilx-local'};
@@ -50,6 +54,7 @@ export async function handleGuardLive(req,env){
   const ai=data.ai.data||{};
   const radar=data.radar.data||{};
   const sourceHealth=data.sourceHealth.data||{};
+  const catchItems=await readCatchQueue(env);
   const ageMinutes=outdatedMinutes(status.updatedAt||status.lastScan||opportunities.updatedAt||null,now);
   const oppItems=Array.isArray(opportunities.items)?opportunities.items:Array.isArray(opportunities.opportunities)?opportunities.opportunities:[];
   const highItems=Array.isArray(value.items)?value.items:Array.isArray(value.opportunities)?value.opportunities:[];
@@ -71,7 +76,7 @@ export async function handleGuardLive(req,env){
     opportunities:{count:Number(status.discoveryCount||status.counts?.opportunities||oppItems.length||0),items:oppItems.slice(0,5).map(compact)},
     valueHunter:{count:Number(status.highValueCandidates||status.counts?.incomePriority||highItems.length||0),items:highItems.slice(0,5).map(compact)},
     revenue:{confirmedIncome:Number(ledger.confirmedIncome||ledger.totalReceived||0),status:String(ledger.status||'UNCONFIRMED').slice(0,30)},
-    transfer:{status:String(transfer.status||'OWNER_APPROVAL_REQUIRED').slice(0,40),temporaryConfigured:Boolean(status.temporaryWallet==='configured'),permanentConfigured:Boolean(status.permanentWallet||status.permanentAddress),pendingApprovals:Number(status.waitingOwner||status.counts?.waitingOwner||0)},
+    transfer:{status:catchItems.some(x=>x.status==='PENDING_OWNER')?'OWNER_APPROVAL_REQUIRED':String(transfer.status||'OWNER_APPROVAL_REQUIRED').slice(0,40),temporaryConfigured:false,temporaryWalletUsed:false,catchQueueConfigured:Boolean(env?.PAYMENTS),catchQueuePending:catchItems.filter(x=>x.status==='PENDING_OWNER').length,permanentConfigured:Boolean(status.permanentWallet||status.permanentAddress),pendingApprovals:catchItems.filter(x=>x.status==='PENDING_OWNER').length},
     ai:{
       live:Boolean(ai.live||ai.healthy||ai.overall==='healthy'),
       configured:Boolean(ai.configured||ai.providers||Object.values(ai.providerAvailability||{}).some(Boolean)),
