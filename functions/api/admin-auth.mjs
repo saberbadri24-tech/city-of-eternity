@@ -40,7 +40,7 @@ export async function adminLogin(req,env){
 
 export async function adminAuth(req,env){
   const secret=secretOf(env);
-  if(secret.length<12)return false;
+  if(secret.length<9)return false;
   const raw=req.headers.get('cookie')||'';
   const m=raw.match(/(?:^|; )session=([^;]+)/);
   if(!m)return false;
