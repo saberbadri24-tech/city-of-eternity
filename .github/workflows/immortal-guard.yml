@@ -26,7 +26,7 @@ jobs:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TONCENTER_API_KEY: ${{ secrets.TONCENTER_API_KEY }}
-      TON_GUARD_TEMP_WALLET: ${{ secrets.TON_GUARD_TEMP_WALLET }}
+      TON_MAIN_WALLET: ${{ secrets.TON_MAIN_WALLET }}
       GUARD_RUNTIME_FINAL: "1"
 
     steps:
@@ -39,9 +39,6 @@ jobs:
         uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
         with:
           python-version: "3.12"
-
-      - name: Materialize isolated Guard receiving wallet
-        run: python scripts/guard_wallet_runtime.py
 
       - name: Discovery
         run: python scripts/global_opportunity_discovery.py
