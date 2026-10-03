@@ -61,7 +61,8 @@ jobs:
       - name: Generate bounded patch
         id: patch
         if: steps.keygate.outputs.enabled == 'true' && steps.gate.outputs.count == '0'
-        env: {OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           python - <<'PY'
           import json,os,urllib.request,re
@@ -96,7 +97,8 @@ jobs:
           node scripts/production-browser-smoke.mjs
       - name: Open review PR
         if: steps.keygate.outputs.enabled == 'true' && steps.gate.outputs.count == '0' && steps.patch.outputs.skip != 'true'
-        env: {GH_TOKEN: ${{ github.token }}}
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           PATHV=$(python -c 'import json;print(json.load(open("/tmp/change.json"))["path"])')
           MSG=$(python -c 'import json;print(json.load(open("/tmp/change.json"))["message"])')
