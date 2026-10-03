@@ -508,6 +508,26 @@ if(p==='/api/payment-config'){
   }
   return null;
 }
+async function githubActionsAuth(req,env){
+  const auth=req.headers.get('authorization')||'';
+  if(!auth.startsWith('Bearer '))return false;
+  const token=auth.slice(7).trim(),parts=token.split('.');
+  if(parts.length!==3)return false;
+  const b64u=s=>s.replace(/-/g,'+').replace(/_/g,'/')+'='.repeat((4-s.length%4)%4);
+  try{
+    const header=JSON.parse(atob(b64u(parts[0]))),payload=JSON.parse(atob(b64u(parts[1])));
+    if(header.alg!=='RS256'||payload.iss!=='https://token.actions.githubusercontent.com'||payload.aud!=='anil-x')return false;
+    if(payload.exp&&Number(payload.exp)*1000<Date.now())return false;
+    if(payload.repository!=='saberbadri24-tech/city-of-eternity'||payload.ref!=='refs/heads/main')return false;
+    const jwks=globalThis.__ANILX_GH_JWKS||(globalThis.__ANILX_GH_JWKS=await fetch('https://token.actions.githubusercontent.com/.well-known/jwks').then(r=>r.json()).catch(()=>null));
+    const jwk=jwks?.keys?.find(k=>k.kid===header.kid);
+    if(!jwk)return false;
+    const key=await crypto.subtle.importKey('jwk',jwk,{name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'},false,['verify']);
+    const data=new TextEncoder().encode(parts[0]+'.'+parts[1]);
+    const sig=Uint8Array.from(atob(b64u(parts[2])),ch=>ch.charCodeAt(0));
+    return await crypto.subtle.verify({name:'RSASSA-PKCS1-v1_5'},key,sig,data);
+  }catch{return false}
+}
 async function anilOperatorChange(req,env,command){
   const rawBase='https://raw.githubusercontent.com/saberbadri24-tech/city-of-eternity/main/';
   const safeRoots=['src/','functions/','scripts/','public/','admin.html','guard.html','guard-dashboard.js','anilx-enhance.js','index.html','services.html','revenue-engine.html'];
