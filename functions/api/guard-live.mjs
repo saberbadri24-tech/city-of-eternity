@@ -49,15 +49,24 @@ export async function handleGuardLive(req,env){
   const highItems=Array.isArray(value.items)?value.items:Array.isArray(value.opportunities)?value.opportunities:[];
   const receiptItems=Array.isArray(receipts.items)?receipts.items:[];
   const approvalItems=Array.isArray(transfer.approvals)?transfer.approvals:Array.isArray(transfer.items)?transfer.items:[];
+  const compact=(x)=>({id:x?.id||x?.opportunityId||null,title:String(x?.title||x?.name||'فرصت').slice(0,100),source:String(x?.source||x?.resolvedDomain||'').slice(0,80),status:String(x?.status||x?.verification||'').slice(0,40),value:Number(x?.value||x?.rewardUsd||x?.estimatedValueUsd||0)||0});
   const out={
     ok:true,source:'ANIL-X-local-guard-state',
     updatedAt:status.updatedAt||status.lastScan||opportunities.updatedAt||null,
-    guard:status,
-    opportunities:{count:Number(status.discoveryCount||status.counts?.opportunities||oppItems.length||0),items:oppItems.slice(0,12),source:data.opportunities.source},
-    valueHunter:{count:Number(status.highValueCandidates||status.counts?.incomePriority||highItems.length||0),items:highItems.slice(0,12),source:data.value.source},
-    revenue:{ledger,confirmedIncome:Number(ledger.confirmedIncome||ledger.totalReceived||0),source:data.ledger.source},
-    transfer:{status:transfer.status||'OWNER_APPROVAL_REQUIRED',temporaryConfigured:Boolean(status.temporaryWallet==='configured'),permanentConfigured:Boolean(status.permanentWallet||status.permanentAddress),pendingApprovals:approvalItems.length,receipts:receiptItems.slice(0,12)},
-    ai:{live:Boolean(ai.live||ai.healthy||ai.overall==='healthy'),configured:Boolean(ai.configured||ai.providers),successfulCalls:Number(ai.successfulCalls||0),missingProviders:ai.missingProviders||[]},
+    guard:{
+      status:String(status.status||status.mode||'NORMAL').slice(0,40),
+      discoveryCount:Number(status.discoveryCount||status.counts?.opportunities||oppItems.length||0),
+      sourcesScanned:Number(status.sourcesScanned||0),
+      sourcesReachable:Number(status.sourcesReachable||0),
+      waitingOwner:Number(status.waitingOwner||0),
+      highValueCandidates:Number(status.highValueCandidates||status.counts?.incomePriority||highItems.length||0)
+    },
+    opportunities:{count:Number(status.discoveryCount||status.counts?.opportunities||oppItems.length||0),items:oppItems.slice(0,5).map(compact)},
+    valueHunter:{count:Number(status.highValueCandidates||status.counts?.incomePriority||highItems.length||0),items:highItems.slice(0,5).map(compact)},
+    revenue:{confirmedIncome:Number(ledger.confirmedIncome||ledger.totalReceived||0),status:String(ledger.status||'UNCONFIRMED').slice(0,30)},
+    transfer:{status:String(transfer.status||'OWNER_APPROVAL_REQUIRED').slice(0,40),temporaryConfigured:Boolean(status.temporaryWallet==='configured'),permanentConfigured:Boolean(status.permanentWallet||status.permanentAddress),pendingApprovals:approvalItems.length},
+    ai:{live:Boolean(ai.live||ai.healthy||ai.overall==='healthy'),configured:Boolean(ai.configured||ai.providers),successfulCalls:Number(ai.successfulCalls||0)},
+    sources:Object.fromEntries(entries.map(([key,x])=>[key,x.source])),
     safety:{autoClaim:false,autoSigning:false,autoTransfer:false,secretStorage:false,bypassControls:false,ownerApprovalRequired:true}
   };
   cache={at:now,data:out};
