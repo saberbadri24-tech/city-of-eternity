@@ -220,7 +220,7 @@ async function anilChangeRequest(req,env){
 async function runtimeRoutes(req,env,u){
   const p=u.pathname;
   if(p==='/api/translate')return translateOnline(req);
-  if(p==='/api/autopilot')return autopilot(req,env);
+  if(p==='/api/autopilot'){if(req.method==='POST'&&!(await githubActionsAuth(req,env)))return rjson({ok:false,error:'github_actions_auth_required'},401);return autopilot(req,env)}
   if(p==='/api/anil/capabilities')return handleAnilCapabilities(req,env);
   if(p==='/api/anil/tools')return anilTool(req,env);
   if(p==='/api/anil/automation/queue')return anilChangeRequest(req,env);
@@ -259,6 +259,7 @@ async function runtimeRoutes(req,env,u){
   }
   if(p==='/api/revenue/fleet'&&req.method==='GET')return rjson({...await revenueFleetStatus(env),state:await revenueFleetState(env)});
   if(p==='/api/revenue/fleet/run'&&req.method==='POST'){
+    if(!(await githubActionsAuth(req,env)))return rjson({ok:false,error:'github_actions_auth_required'},401);
     const result=await runRevenueFleet(env);
     return rjson(result);
   }
