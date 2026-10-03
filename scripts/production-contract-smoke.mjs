@@ -32,4 +32,15 @@ for (const path of paths) {
   }
 }
 
-console.log(JSON.stringify({ ok: true, base: base.origin, checked: results.length, results }, null, 2));
+const planRes = await fetch(new URL("/api/plan", base), {
+  method: "POST",
+  headers: { "content-type": "application/json" },
+  body: JSON.stringify({ request: "Smoke-test ANIL X with a harmless status request", language: "en", ageProfile: "adult" })
+});
+const planText = await planRes.text();
+assert.ok(planRes.ok, "/api/plan returned HTTP " + planRes.status + ": " + planText.slice(0,300));
+assert.match(planRes.headers.get("content-type") || "", /json/i, "/api/plan is not JSON");
+const planData = JSON.parse(planText);
+assert.equal(planData.ok, true, "/api/plan did not report ok=true: " + planText.slice(0,300));
+
+console.log(JSON.stringify({ ok: true, base: base.origin, checked: results.length + 1, results, plan: { status: planRes.status, source: planData.source, orchestrator: planData.orchestrator } }, null, 2));
