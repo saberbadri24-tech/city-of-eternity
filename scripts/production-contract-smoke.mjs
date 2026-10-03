@@ -32,5 +32,4 @@ for (const path of paths) {
   }
 }
 
-const health = JSON.parse((await fetch(new URL("/api/health", base))).headers.get("x-anilx-health") || "null").catch?.(() => null);
 console.log(JSON.stringify({ ok: true, base: base.origin, checked: results.length, results }, null, 2));
