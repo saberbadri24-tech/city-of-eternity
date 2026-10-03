@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "cadenceMinutes": 5,
+  "public": [
+    {
+      "id": "ai-automation",
+      "kind": "service",
+      "model": "project+retainer"
+    },
+    {
+      "id": "lead-generation",
+      "kind": "service",
+      "model": "lead+retainer"
+    },
+    {
+      "id": "ai-support",
+      "kind": "recurring",
+      "model": "subscription"
+    },
+    {
+      "id": "seo-growth",
+      "kind": "recurring",
+      "model": "retainer"
+    },
+    {
+      "id": "agent-commerce",
+      "kind": "api",
+      "model": "usage"
+    },
+    {
+      "id": "digital-products",
+      "kind": "product",
+      "model": "sale"
+    },
+    {
+      "id": "paid-research",
+      "kind": "research",
+      "model": "report+subscription"
+    }
+  ],
+  "ownerOnly": [
+    {
+      "id": "immortal-guard",
+      "kind": "opportunity",
+      "model": "verified-reward",
+      "priority": "highest"
+    },
+    {
+      "id": "bug-bounty-radar",
+      "kind": "opportunity",
+      "model": "accepted-bounty"
+    },
+    {
+      "id": "grant-hackathon-radar",
+      "kind": "opportunity",
+      "model": "grant-or-prize"
+    },
+    {
+      "id": "affiliate-opportunity-radar",
+      "kind": "opportunity",
+      "model": "commission"
+    },
+    {
+      "id": "b2b-lead-hunter",
+      "kind": "opportunity",
+      "model": "qualified-lead"
+    },
+    {
+      "id": "deal-intelligence-engine",
+      "kind": "opportunity",
+      "model": "verified-referral-or-service-margin"
+    },
+    {
+      "id": "micro-saas-factory",
+      "kind": "product",
+      "model": "subscription+usage"
+    },
+    {
+      "id": "digital-asset-licensing",
+      "kind": "product",
+      "model": "license+royalty"
+    },
+    {
+      "id": "research-data-products",
+      "kind": "product",
+      "model": "report+subscription"
+    }
+  ],
+  "control": {
+    "discovery": "automatic",
+    "verification": "automatic",
+    "scoring": "automatic",
+    "packaging": "automatic",
+    "testing": "automatic",
+    "irreversibleActions": "owner_approval",
+    "moneyMovement": "owner_approval",
+    "secretStorage": false,
+    "credentialBypass": false,
+    "captchaBypass": false,
+    "kycBypass": false,
+    "revenueRule": "settled receipts only"
+  }
+}
