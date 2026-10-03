@@ -2,6 +2,7 @@ import { chromium } from "playwright";
 import fs from "node:fs";
 
 const base = process.env.ANIL_BASE_URL || "https://city-of-eternity.onrender.com";
+const oidcToken = process.env.ANIL_OIDC_TOKEN || "";
 const origin = new URL(base).origin;
 const pagesToCheck = ["/", "/?lang=en", "/?lang=fa", "/services.html", "/revenue-engine.html", "/guard.html", "/admin.html"];
 const risk = /pay|payment|wallet|connect|ton|claim|transfer|approve|approval|admin|login|logout|checkout|buy|purchase|delete|remove|reset|secret|credential|password|پرداخت|کیف|اتصال|برداشت|انتقال|تأیید|ادمین|ورود|حذف|رمز/i;
@@ -9,6 +10,12 @@ const browser = await chromium.launch({ headless: true });
 const context = await browser.newContext({ serviceWorkers: "block", viewport: { width: 390, height: 844 } });
 const page = await context.newPage();
 const errors = [], controls = [], links = [], visited = new Set();
+if (oidcToken) {
+  await page.route("**/api/revenue/fleet/run", async route => {
+    const headers = { ...route.request().headers(), authorization: `Bearer ${oidcToken}` };
+    await route.continue({ headers });
+  });
+}
 
 page.on("console", m => { if (m.type() === "error") errors.push({ type: "console", text: m.text(), url: page.url() }); });
 page.on("pageerror", e => errors.push({ type: "pageerror", text: String(e?.message || e), url: page.url() }));
