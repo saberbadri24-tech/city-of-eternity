@@ -16,8 +16,9 @@ jobs:
           set -euo pipefail
           ! grep -RInE 'ADMIN_TOKEN|ADMIN_SECRET|anil-x-admin-challenge|id="p2"|const p2' worker.js render-server.mjs functions/api/admin-auth.mjs admin.js admin.html
           ! grep -RInP '(?<!ANIL_)ADMIN_PASSWORD' worker.js render-server.mjs functions/api/admin-auth.mjs admin.js admin.html
-          grep -RIn "ANIL_ADMIN_PASSWORD" worker.js render-server.mjs functions/api/admin-auth.mjs
-          test "$(grep -RIl "ANIL_ADMIN_PASSWORD" worker.js render-server.mjs functions/api/admin-auth.mjs | wc -l)" -eq 3
+          grep -n "ANIL_ADMIN_PASSWORD" functions/api/admin-auth.mjs
+          ! grep -n "ANIL_ADMIN_PASSWORD" worker.js render-server.mjs admin.js admin.html
+          test "$(grep -RIl "ANIL_ADMIN_PASSWORD" worker.js render-server.mjs functions/api/admin-auth.mjs admin.js admin.html | wc -l)" -eq 1
       - name: Install Playwright
         run: |
           npm init -y >/dev/null 2>&1
