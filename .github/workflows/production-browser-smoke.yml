@@ -13,7 +13,7 @@ permissions:
 jobs:
   browser-qa:
     runs-on: ubuntu-latest
-    timeout-minutes: 13
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
@@ -31,6 +31,11 @@ jobs:
         env:
           ANIL_BASE_URL: https://city-of-eternity.onrender.com
         run: node scripts/production-contract-smoke.mjs
+
+      - name: Deep production interaction QA
+        env:
+          ANIL_BASE_URL: https://city-of-eternity.onrender.com
+        run: node scripts/production-deep-interaction-qa.mjs
 
       - name: Full production browser QA
         env:
