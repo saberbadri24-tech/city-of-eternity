@@ -272,8 +272,9 @@ async function runtimeRoutes(req,env,u){
     return rjson({ok:true,customerPath:{brief:true,leadCapture:true,qualification:true,offer:true,order:true,checkout:payment&&fx,paymentGateway:payment,fxConfigured:fx,persistentAccounting:persistence,storageConfigured,aiReady:ai},blockers:[...(!payment?['VARIZA_API_KEY']:[]),...(!fx?['USD_IRR_RATE']:[])],truth:'customer arrival is external; everything inside this path is explicit and testable'});
   }
   if(p==='/api/revenue/programs'&&req.method==='GET'){
-    const configured={variza:!!getVarizaApiKey(env),ton:!!env.TON_RECEIVING_ADDRESS,ai:!!(getAiConfig(env).openai||getAiConfig(env).gemini||getAiConfig(env).anthropic),gsc:!!(env.GSC_ACCESS_TOKEN||env.GSC_SERVICE_ACCOUNT_JSON)};
-    return rjson({ok:true,programs:REVENUE_PROGRAMS.map(x=>({...x,operational:x.status==='LIVE',paymentRoute:configured.variza?'VARIZA':'CONFIG_REQUIRED'})),walletRouting:{tonConfigured:configured.ton,varizaConfigured:configured.variza,truth:'فقط پرداخت واقعی تسویه‌شده درآمد محسوب می‌شود.'},trendSource:'2026 demand signals are informational, not income guarantees'});
+    const configured={variza:!!getVarizaApiKey(env),ton:validTonAddress(getMainTonAddress(env)),ai:!!(getAiConfig(env).openai||getAiConfig(env).gemini||getAiConfig(env).anthropic),gsc:!!(env.GSC_ACCESS_TOKEN||env.GSC_SERVICE_ACCOUNT_JSON),storage:!!env.PAYMENTS};
+    const operational=x=>x.status==='LIVE'&&configured.variza&&configured.storage;
+    return rjson({ok:true,programs:REVENUE_PROGRAMS.map(x=>({...x,operational:operational(x),paymentRoute:configured.variza?'VARIZA':'CONFIG_REQUIRED'})),walletRouting:{tonConfigured:configured.ton,varizaConfigured:configured.variza,truth:'فقط پرداخت واقعی تسویه‌شده درآمد محسوب می‌شود.'},trendSource:'2026 demand signals are informational, not income guarantees'});
   }
   if(p==='/api/revenue/programs/lead'&&req.method==='POST'){
     const b=await req.json().catch(()=>({})),programId=clean(b.programId,80),program=REVENUE_PROGRAMS.find(x=>x.id===programId),email=clean(b.email,160),request=clean(b.request||program?.name||'',3000);
@@ -318,10 +319,10 @@ async function runtimeRoutes(req,env,u){
     return rjson({ok:true,order:saved||{...order,providerAmount},payment:{ready:true,payUrl:payment.payUrl,orderId:order.id,providerAmount},next:'pay'},201);
   }
   if(p==='/api/revenue/settlement'&&req.method==='GET'){
-    return rjson({ok:true,providers:{variza:!!getVarizaApiKey(env),ton:!!env.TON_RECEIVING_ADDRESS},policy:{paidOnly:true,noSecretKeys:true,ownerApprovalForIrreversible:true}});
+    return rjson({ok:true,providers:{variza:!!getVarizaApiKey(env),ton:validTonAddress(getMainTonAddress(env))},policy:{paidOnly:true,noSecretKeys:true,ownerApprovalForIrreversible:true}});
   }
   if(p==='/api/revenue/engines'&&req.method==='GET'){
-    const configured={variza:!!getVarizaApiKey(env),ton:!!env.TON_RECEIVING_ADDRESS,gsc:!!(env.GSC_ACCESS_TOKEN||env.GSC_SERVICE_ACCOUNT_JSON),ai:!!(getAiConfig(env).openai||getAiConfig(env).gemini||getAiConfig(env).anthropic)};
+    const configured={variza:!!getVarizaApiKey(env),ton:validTonAddress(getMainTonAddress(env)),gsc:!!(env.GSC_ACCESS_TOKEN||env.GSC_SERVICE_ACCOUNT_JSON),ai:!!(getAiConfig(env).openai||getAiConfig(env).gemini||getAiConfig(env).anthropic)};
     return rjson({ok:true,engines:[
       {id:'revenue-hunter',name:'Revenue Hunter',active:true,mode:'rule+lead-data'},
       {id:'offer-engine',name:'Offer Engine',active:true,mode:'catalog+scoring'},
