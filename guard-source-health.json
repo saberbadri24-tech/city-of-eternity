@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-10-03T01:32:46.128322+00:00",
+  "updatedAt": "2026-10-03T02:01:17.014685+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,20 +20,20 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1877,
-  "uniqueNewsPublishers": 548,
+  "discoveryCandidateCount": 1878,
+  "uniqueNewsPublishers": 547,
   "topPublishers": [
     {
       "publisher": "Binance",
-      "count": 111
+      "count": 109
     },
     {
-      "publisher": "immunefi.com",
+      "publisher": "Immunefi",
       "count": 89
     },
     {
       "publisher": "CoinMarketCap",
-      "count": 75
+      "count": 73
     },
     {
       "publisher": "HackerOne",
@@ -41,42 +41,42 @@
     },
     {
       "publisher": "x.com",
-      "count": 61
+      "count": 64
     },
     {
       "publisher": "Yelp",
       "count": 51
     },
     {
+      "publisher": "github.com",
+      "count": 50
+    },
+    {
       "publisher": "Coin Gabbar",
-      "count": 50
-    },
-    {
-      "publisher": "GitHub",
-      "count": 50
-    },
-    {
-      "publisher": "Reddit",
-      "count": 43
+      "count": 49
     },
     {
       "publisher": "RootData",
       "count": 43
     },
     {
-      "publisher": "BitDegree",
+      "publisher": "reddit.com",
+      "count": 42
+    },
+    {
+      "publisher": "facebook.com",
       "count": 30
     },
     {
-      "publisher": "phemex.com",
-      "count": 30
+      "publisher": "BitDegree",
+      "count": 29
     },
     {
       "publisher": "polygonscan.com",
       "count": 28
     },
     {
-      "publisher": "facebook.com",
+      "publisher": "Phemex",
       "count": 27
     },
     {
@@ -84,23 +84,23 @@
       "count": 26
     },
     {
-      "publisher": "LinkedIn",
-      "count": 23
-    },
-    {
-      "publisher": "Bitget",
-      "count": 22
-    },
-    {
       "publisher": "Bybit",
       "count": 21
     },
     {
-      "publisher": "TradingView",
-      "count": 20
+      "publisher": "Bitget",
+      "count": 21
     },
     {
-      "publisher": "AirdropAlert",
+      "publisher": "Medium",
+      "count": 18
+    },
+    {
+      "publisher": "TradingView",
+      "count": 18
+    },
+    {
+      "publisher": "airdropalert.com",
       "count": 16
     }
   ],
