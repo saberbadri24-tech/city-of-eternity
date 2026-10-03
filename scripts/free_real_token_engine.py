@@ -12,7 +12,7 @@ NOW=dt.datetime.now(dt.timezone.utc).isoformat()
 DISCOVERY=ROOT/"guard-discovery.json"; SOURCES=ROOT/"guard-sources.json"; WALLET=ROOT/"guard-wallet.json"
 OUT=ROOT/"guard-free-real-tokens.json"; HISTORY=ROOT/"guard-opportunity-history.json"
 UA="ANIL-X-Immortal-Guard/14.0-Free-Real-Token-Hunter"
-TIMEOUT=4; MAX_BODY=450_000; WORKERS=32
+TIMEOUT=2; MAX_BODY=300_000; WORKERS=64; MAX_ITEMS=1500
 
 LIVE=("claim now","claim is live","claim is open","claim available","redeem now","withdraw now",
       "distribution is live","distribution is now live","tokens are being distributed",
@@ -33,7 +33,7 @@ SPEC=("points program","testnet points","potential airdrop","future airdrop","ai
       "maybe eligible","coming soon","waitlist","points only","points can be redeemed later")
 
 def fetch(url):
-    for attempt in range(2):
+    for attempt in range(1):
         try:
             if not url.startswith("https://"): return "","",None
             req=urllib.request.Request(url,headers={"User-Agent":UA,"Accept":"text/html,application/xhtml+xml,*/*;q=0.8"})
@@ -105,7 +105,8 @@ def main():
     try:wallet=json.loads(WALLET.read_text(encoding="utf-8"))
     except Exception:wallet={}
     temp=wallet.get("temporaryWalletAddress")
-    items=discovery.get("items",[])[:5000]
+    raw=discovery.get("items",[])
+    items=sorted(raw,key=lambda x:(x.get("verification")=="resolved-official-source",x.get("priority") in ("critical","mega","ultra","high")),reverse=True)[:MAX_ITEMS]
     with concurrent.futures.ThreadPoolExecutor(max_workers=WORKERS) as ex:
         results=list(ex.map(lambda x:evaluate(x,trusted),items))
     accepted=[];rejected=[];seen=set()
@@ -133,5 +134,5 @@ def main():
       "temporaryWalletAddress":temp or None,"automaticClaim":False,"automaticSigning":False,"automaticTransfer":False,
       "privateKeys":"never-collected","ownerGate":"Required for any opportunity-specific action.","receiptMode":"Passive on-chain monitoring only."
     },ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-    print(json.dumps({"status":"free_real_token_hunter_complete","verifiedFreeRealTokens":len(accepted),"rejected":len(rejected),"scanned":len(results),"capacity":5000,"coverageMode":"dynamic-discovery"},ensure_ascii=False))
+    print(json.dumps({"status":"free_real_token_hunter_complete","verifiedFreeRealTokens":len(accepted),"rejected":len(rejected),"scanned":len(results),"capacity":MAX_ITEMS,"coverageMode":"dynamic-discovery"},ensure_ascii=False))
 if __name__=="__main__":main()
