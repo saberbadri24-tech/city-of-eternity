@@ -69,6 +69,8 @@ def main():
                 if score(item)>score(existing):
                     existing.update(item)
                     existing["_lanes"]=sorted(set(existing.get("_lanes",[]))|set(existing.get("_lanes",[])))
+    if not any(counts.values()):
+        raise RuntimeError("super_radar_no_input_lanes")
     ranked=sorted(merged.values(),key=lambda x:(x["_official"],x["_score"]),reverse=True)
     plans=load("guard-action-plans.json")
     status=load("guard-status.json")
