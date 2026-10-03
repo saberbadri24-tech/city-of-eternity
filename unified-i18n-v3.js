@@ -13,9 +13,11 @@ function visible(n){const el=n?.nodeType===1?n:n?.parentElement;if(!el||typeof e
 function restore(){for(const n of nodes()){const t=original.get(n);if(t&&n.nodeValue.trim()!==t.trim())n.nodeValue=t}document.querySelectorAll('input[placeholder],textarea[placeholder]').forEach(n=>{const t=original.get(n);if(t!==undefined)n.setAttribute('placeholder',t)})}
 function applyLocalFa(){remember();restore();document.documentElement.lang='fa';document.documentElement.dir='rtl';window.ANILX_LANGUAGE='fa';for(const n of nodes()){const t=(original.get(n)||n.nodeValue).trim();const v=FA_MAP[t];if(v)n.nodeValue=n.nodeValue.replace(t,v)}document.querySelectorAll('input[placeholder],textarea[placeholder]').forEach(n=>{const t=original.get(n)||'';if(FA_MAP[t])n.setAttribute('placeholder',FA_MAP[t])})}
 async function translateBatch(items,target){if(!items.length)return;const fresh=[];for(const x of items){const k=target+'|'+x;if(translated.has(k))continue;if(cache[k]!==undefined){translated.set(k,cache[k]);continue}fresh.push(x)}if(!fresh.length)return;const joined=fresh.map((x,i)=>'[[AX'+i+']] '+x).join('\n');const r=await fetch('/api/translate',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({text:joined,target}),cache:'no-store'});if(!r.ok)throw Error('translate_'+r.status);const d=await r.json();if(!d.ok)throw Error('translate_failed');const lines=String(d.text||'').split('\n');for(let i=0;i<fresh.length;i++){const marker='[[AX'+i+']]';const line=lines.find(x=>x.includes(marker));const value=line?line.slice(line.indexOf(marker)+marker.length).trim():fresh[i];const k=target+'|'+fresh[i];translated.set(k,value);cache[k]=value}try{localStorage.setItem(CACHE,JSON.stringify(cache))}catch{}}
-async function apply(target){remember();restore();document.documentElement.lang=target;document.documentElement.dir=LANGS[target][1];window.ANILX_LANGUAGE=target;if(target==='en')return;if(target==='fa'){applyLocalFa();return;
- const ns=nodes(),seen=new Set(),items=[],refs=[];
- const max=innerWidth<700?10:14;
+async function apply(target){
+ remember();restore();document.documentElement.lang=target;document.documentElement.dir=LANGS[target][1];window.ANILX_LANGUAGE=target;
+ if(target==='en')return;
+ if(target==='fa'){applyLocalFa();return;}
+ const ns=nodes(),seen=new Set(),items=[],refs=[];const max=innerWidth<700?10:14;
  for(const n of ns){if(items.length>=max)break;const t=(original.get(n)||n.nodeValue).trim();if(!t||seen.has(t)||!visible(n))continue;seen.add(t);items.push(t);refs.push(n)}
  const ph=[...document.querySelectorAll('input[placeholder],textarea[placeholder]')].map(n=>({n,t:original.get(n)||''})).filter(x=>x.t&&!seen.has(x.t)).slice(0,2);
  for(const x of ph){if(items.length>=max)break;seen.add(x.t);items.push(x.t);refs.push(x.n)}
