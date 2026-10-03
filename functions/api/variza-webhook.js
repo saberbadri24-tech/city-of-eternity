@@ -50,7 +50,7 @@ export async function onRequestPost({ request, env }) {
       if (!local) return json({ ok: true, status: 'received_unmatched' });
       const paidAmount = Number(payload.amount);
       const expectedAmount = Number(local.providerAmount ?? local.amount);
-      if (!Number.isFinite(paidAmount) || !Number.isFinite(expectedAmount) || paidAmount < expectedAmount) {
+      if (!Number.isFinite(paidAmount) || !Number.isFinite(expectedAmount) || paidAmount !== expectedAmount) {
         local.status = 'amount_mismatch';
         local.updatedAt = now();
         local.providerAmount = Number.isFinite(paidAmount) ? paidAmount : null;
@@ -61,6 +61,7 @@ export async function onRequestPost({ request, env }) {
       local.paidAt = now();
       local.attemptCode = payload.attempt_code || null;
       local.providerAmount = paidAmount;
+        local.providerAmountUnit = 'toman';
       local.updatedAt = now();
       state.orders.set(local.orderId, local);
       return json({ ok: true, orderId: local.orderId, status: 'paid' });
