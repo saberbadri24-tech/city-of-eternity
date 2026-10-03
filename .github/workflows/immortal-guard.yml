@@ -94,6 +94,12 @@ jobs:
       - name: Modular core
         run: python scripts/guard_modular_core.py
 
+      - name: Action planner
+        run: python scripts/guard_action_planner.py
+
+      - name: Super Airdrop / Immortal Guard fusion
+        run: python scripts/guard_super_radar.py
+
       - name: Final fail-closed preflight
         run: python scripts/guard_final_preflight.py
 
