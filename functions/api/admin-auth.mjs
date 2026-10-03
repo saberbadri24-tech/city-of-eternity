@@ -62,8 +62,9 @@ export async function adminSelfTest(env){
   const secret=secretOf(env);
   const loginReq=new Request('https://internal/api/admin/password/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({password:secret})});
   const loginRes=await adminLogin(loginReq,env);
-  const cookie=loginRes.headers.get('set-cookie')||'';
-  const sessionReq=new Request('https://internal/api/admin/secretary',{method:'POST',headers:{cookie}});
-  const sessionValid=loginRes.status===200&&await adminAuth(sessionReq,env);
+  const setCookies=typeof loginRes.headers.getSetCookie==='function'?loginRes.headers.getSetCookie():[];
+  const cookie=String(setCookies[0]||loginRes.headers.get('set-cookie')||'').split(';')[0];
+  const sessionReq=new Request('https://internal/api/admin/secretary',{method:'POST',headers:cookie?{cookie}:{}});
+  const sessionValid=loginRes.status===200&&Boolean(cookie)&&await adminAuth(sessionReq,env);
   return {ok:sessionValid,configured:true,loginStatus:loginRes.status,sessionValid,secretExposed:false};
 }
