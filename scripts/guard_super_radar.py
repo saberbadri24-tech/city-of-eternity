@@ -22,14 +22,14 @@ def rows(data):
     return []
 
 def ident(x, lane):
-    raw=str(x.get("id") or x.get("opportunityId") or x.get("url") or x.get("officialUrl") or x.get("project") or x.get("title") or x.get("name") or "")
-    return hashlib.sha256((lane+"|"+raw.strip().lower()).encode()).hexdigest()[:20]
+    raw=str(x.get("opportunityId") or x.get("id") or x.get("officialUrl") or x.get("url") or x.get("contractAddress") or x.get("project") or x.get("name") or x.get("title") or "")
+    return hashlib.sha256(raw.strip().lower().encode()).hexdigest()[:20]
 
 def official(x):
     if x.get("officialVerified") is True or x.get("officialEligible") is True:
         return True
     gate=str(x.get("executionGate") or "").upper()
-    return "OFFICIAL" in gate
+    return "UNOFFICIAL" not in gate and gate == "OFFICIAL"
 
 def score(x):
     for k in ("score","priorityScore","opportunityScore","finalScore"):
@@ -59,8 +59,16 @@ def main():
             item["_official"]=official(x)
             item["_score"]=score(x)
             # Prefer explicit provenance and URLs; never manufacture them.
-            merged.setdefault(key,item)
-            if score(item)<score(x): merged[key]=item
+            existing=merged.get(key)
+            if existing is None:
+                merged[key]=item
+            else:
+                # Merge provenance without allowing a weaker lane to erase stronger evidence.
+                existing["_lanes"]=sorted(set(existing.get("_lanes",[existing.get("_lane")]))|{lane})
+                existing["_official"]=bool(existing.get("_official")) or item["_official"]
+                if score(item)>score(existing):
+                    existing.update(item)
+                    existing["_lanes"]=sorted(set(existing.get("_lanes",[]))|set(existing.get("_lanes",[])))
     ranked=sorted(merged.values(),key=lambda x:(x["_official"],x["_score"]),reverse=True)
     plans=load("guard-action-plans.json")
     status=load("guard-status.json")
@@ -76,6 +84,7 @@ def main():
       "summary":{
         "totalCandidates":len(ranked),
         "officialCandidates":sum(1 for x in ranked if x["_official"]),
+        "actionableOfficial":sum(1 for x in ranked if x["_official"] and x["_score"]>=70),
         "highPriority":sum(1 for x in ranked if x["_score"]>=70),
         "actionPlans":int(plans.get("planCount",0)) if isinstance(plans,dict) else 0,
         "evidenceRecords":len(rows(evidence)),
