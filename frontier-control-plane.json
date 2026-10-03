@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "name": "ANIL X Frontier Control Plane",
+  "purpose": "Keep model/tool routing capability-first, health-aware, evidence-first and automatically refreshed from authoritative provider metadata.",
+  "principles": [
+    "Never hard-code a permanent winner.",
+    "Prefer live runtime evidence over labels or benchmark claims.",
+    "Route by task, capability, latency, reliability and cost when measurable.",
+    "Fail over without exposing secrets.",
+    "A new model is not production-ready until a runtime smoke test passes.",
+    "Do not silently weaken security, payment or wallet approval boundaries."
+  ],
+  "providerCatalog": {
+    "openai": {
+      "modelsEndpoint": "https://api.openai.com/v1/models",
+      "keyEnv": "OPENAI_API_KEY"
+    },
+    "anthropic": {
+      "modelsEndpoint": "https://api.anthropic.com/v1/models",
+      "keyEnv": "ANTHROPIC_API_KEY"
+    },
+    "google_gemini": {
+      "modelsEndpoint": "https://generativelanguage.googleapis.com/v1beta/models",
+      "keyEnv": "GEMINI_API_KEY"
+    }
+  },
+  "refresh": {
+    "cadence": "daily",
+    "source": "official provider model APIs when credentials are available",
+    "store": "frontier-model-catalog.json",
+    "commitSecrets": false
+  },
+  "selection": {
+    "dimensions": [
+      "task_capability",
+      "runtime_health",
+      "latency",
+      "failure_rate",
+      "cost_when_available",
+      "context_capacity_when_available",
+      "multimodal_support_when_required"
+    ],
+    "minimumEvidence": "successful runtime smoke test",
+    "tieBreak": "lowest observed failure/latency cost after capability requirements are satisfied"
+  },
+  "safeFallback": {
+    "deterministicTools": true,
+    "singleProviderModeAllowed": true,
+    "unconfiguredProvidersExcluded": true,
+    "noFakeCapability": true
+  }
+}
