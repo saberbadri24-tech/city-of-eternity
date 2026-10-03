@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-10-03T13:37:17.043649+00:00",
+  "updatedAt": "2026-10-03T14:50:31.041525+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,15 +20,15 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1873,
-  "uniqueNewsPublishers": 542,
+  "discoveryCandidateCount": 1874,
+  "uniqueNewsPublishers": 538,
   "topPublishers": [
     {
       "publisher": "Binance",
-      "count": 111
+      "count": 109
     },
     {
-      "publisher": "immunefi.com",
+      "publisher": "Immunefi",
       "count": 89
     },
     {
@@ -37,47 +37,47 @@
     },
     {
       "publisher": "HackerOne",
-      "count": 70
+      "count": 71
     },
     {
       "publisher": "x.com",
-      "count": 61
+      "count": 62
     },
     {
       "publisher": "Yelp",
-      "count": 52
+      "count": 53
     },
     {
       "publisher": "GitHub",
       "count": 50
     },
     {
-      "publisher": "Reddit",
-      "count": 48
+      "publisher": "Coin Gabbar",
+      "count": 47
     },
     {
-      "publisher": "Coin Gabbar",
-      "count": 45
+      "publisher": "Reddit",
+      "count": 46
     },
     {
       "publisher": "RootData",
       "count": 43
     },
     {
-      "publisher": "polygonscan.com",
-      "count": 29
+      "publisher": "BitDegree",
+      "count": 28
     },
     {
       "publisher": "CCN.com",
-      "count": 27
+      "count": 28
+    },
+    {
+      "publisher": "polygonscan.com",
+      "count": 28
     },
     {
       "publisher": "Phemex",
       "count": 27
-    },
-    {
-      "publisher": "BitDegree",
-      "count": 26
     },
     {
       "publisher": "facebook.com",
@@ -88,10 +88,6 @@
       "count": 21
     },
     {
-      "publisher": "LinkedIn",
-      "count": 20
-    },
-    {
       "publisher": "Bybit",
       "count": 20
     },
@@ -100,8 +96,12 @@
       "count": 19
     },
     {
+      "publisher": "LinkedIn",
+      "count": 19
+    },
+    {
       "publisher": "Medium",
-      "count": 17
+      "count": 18
     }
   ],
   "invalidSources": [],
