@@ -37,13 +37,13 @@
     "automaticIrreversibleMoneyMovement": false,
     "ownerApprovalForIrreversibleActions": true,
     "adminPasswordSource": "Render environment secret ANIL_ADMIN_PASSWORD",
-    "adminPasswordRequiredPattern": "^[0-9]{9}$",
+    "adminPasswordRequiredPattern": "^.{9}$",
     "walletSource": "Render environment secret TON_MAIN_WALLET",
     "walletMustBeValidatedAtRuntime": true
   },
   "ownerRuntimeRequirements": {
     "TON_MAIN_WALLET": "SET_IN_RENDER_SECRET",
-    "ANIL_ADMIN_PASSWORD": "SET_IN_RENDER_SECRET_AS_9_DIGITS",
+    "ANIL_ADMIN_PASSWORD": "SET_IN_RENDER_SECRET_AS_EXACT_OWNER_9_CHARACTERS",
     "neverCommitSecretValues": true
   },
   "completionStandard": {
