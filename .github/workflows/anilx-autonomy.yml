@@ -7,17 +7,30 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 jobs:
   revenue-flywheel:
     runs-on: ubuntu-latest
     steps:
+      - name: Mint GitHub OIDC token
+        id: oidc
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const token = await core.getIDToken('anil-x');
+            core.setOutput('token', token);
+
       - name: Run ANIL X autonomous cycle
+        env:
+          ANIL_OIDC_TOKEN: ${{ steps.oidc.outputs.token }}
         run: |
-          set -e
+          set -euo pipefail
           curl --fail --silent --show-error --max-time 45 -X POST \
             "https://city-of-eternity.onrender.com/api/revenue/fleet/run" \
             -H "content-type: application/json" \
+            -H "authorization: Bearer ${ANIL_OIDC_TOKEN}" \
             -d '{}' \
             -o /tmp/anilx.json
           cat /tmp/anilx.json
+          grep -q '"ok":true' /tmp/anilx.json
