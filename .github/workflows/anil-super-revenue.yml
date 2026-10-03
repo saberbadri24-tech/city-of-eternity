@@ -23,7 +23,7 @@ jobs:
           assert q["noSeedOrPrivateKeyHandling"]
           assert q["noCaptchaBypass"] and q["noKycBypass"]
           assert q["noAutomaticWalletSigning"] and q["noUnapprovedFundTransfer"]
-          assert x["treasury"]["ownerOpportunity"].startswith("TEMP_WALLET")
+          assert x["treasury"]["ownerOpportunity"].startswith("OWNER_CATCH_QUEUE")
           print("ANIL X SUPER REVENUE CONTRACT: PASS")
           PY
       - name: Validate engine separation
