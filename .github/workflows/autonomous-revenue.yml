@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 concurrency:
   group: revenue-fleet
@@ -22,6 +23,8 @@ jobs:
           ANIL_X_REVENUE_URL: https://city-of-eternity.onrender.com/api/revenue/fleet/run
         run: |
           set -euo pipefail
+          ID_TOKEN=$(curl -fsSL -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x" | jq -r '.value')
+          test -n "$ID_TOKEN" && test "$ID_TOKEN" != "null"
           curl --fail --silent --show-error --max-time 45             -X POST "$ANIL_X_REVENUE_URL"             -H 'content-type: application/json'             -d '{}' > fleet.json
           python - <<'PY'
           import json
