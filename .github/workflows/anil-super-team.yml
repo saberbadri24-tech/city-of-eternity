@@ -1,7 +1,7 @@
 name: ANIL X Super Team — five minute live council
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/15 * * * *"
   workflow_dispatch:
 permissions:
   id-token: write
