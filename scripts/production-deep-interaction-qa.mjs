@@ -84,6 +84,13 @@ async function clickSafe(selector, label, expected, waitMs = 900) {
 }
 
 async function authenticateOwner() {
+  if (oidcToken) {
+    const r = await fetch(`${base}/api/admin/auth-self-test`, { headers: { authorization: `Bearer ${oidcToken}` } });
+    const d = await r.json().catch(() => ({}));
+    const pass = r.ok && d?.ok === true && d?.secretExposed === false;
+    controls.push({ label: "Owner authentication self-test", pass, status: r.status, sessionValid: d?.sessionValid === true, url: base });
+    return false;
+  }
   const secret = process.env.ANIL_ADMIN_PASSWORD || "";
   if (!secret) {
     controls.push({ label: "Owner authentication", pass: true, skipped: true, reason: "CI admin secret not configured" });
