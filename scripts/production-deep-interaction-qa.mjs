@@ -40,7 +40,7 @@ async function goto(path) {
 }
 function dangerous(text, id, href) { return risk.test(`${text} ${id} ${href}`); }
 
-async function clickSafe(selector, label, expected) {
+async function clickSafe(selector, label, expected, waitMs = 900) {
   try {
     const target = page.locator(selector);
     if (!(await target.isVisible().catch(() => false))) {
@@ -58,7 +58,7 @@ async function clickSafe(selector, label, expected) {
     const onDialog = async d => { dialogSeen = true; await d.dismiss().catch(() => {}); };
     page.on("dialog", onDialog);
     await page.locator(selector).click({ timeout: 4000 });
-    await page.waitForTimeout(900);
+    await page.waitForTimeout(waitMs);
     const after = await snapshot();
     page.off("dialog", onDialog);
     const changed = before.url !== after.url ||
@@ -77,6 +77,7 @@ async function clickSafe(selector, label, expected) {
 }
 
 async function testHomepage() {
+  await page.setViewportSize({ width: 1280, height: 900 });
   await goto("/");
   await clickSafe("#profileBtn", "Profile opens personalization", s => s.modal > 0);
   await page.locator("[data-age='adult']").click();
@@ -158,7 +159,7 @@ async function inventoryPage(path) {
 
 await testHomepage();
 await testServices();
-for (const p of ["/revenue-engine.html","/guard.html","/admin.html"]) await inventoryPage(p);
+for (const p of ["/revenue-engine.html","/guard.html","/admin.html"]) {\n  await page.setViewportSize({ width: 1280, height: 900 });\n  await inventoryPage(p);\n}
 
 const failedControls = controls.filter(x => !x.pass);
 const failedLinks = links.filter(x => !x.pass);
