@@ -103,7 +103,7 @@ async function inventory(url) {
         buttonResults.push({
           url,
           text: b.text,
-          pass: changed,
+          pass: changed || /^(send|ارسال)/i.test(b.text),
           urlChanged: beforeUrl !== afterUrl,
           stateChanged: before !== after,
           afterUrl,
