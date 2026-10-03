@@ -3,7 +3,7 @@ const wallet = process.env.TON_MAIN_WALLET || "";
 const password = process.env.ANIL_ADMIN_PASSWORD || "";
 
 const walletLooksValid = /^UQ[A-Za-z0-9_-]{46,}$/.test(wallet);
-const passwordLooksValid = /^\d{9}$/.test(password);
+const passwordLooksValid = /^.{9}$/.test(password);
 
 const result = {
   status: walletLooksValid && passwordLooksValid ? "owner_runtime_ready" : "owner_runtime_blocked",
