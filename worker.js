@@ -123,7 +123,21 @@ storageConfigured:configured.persistence,
 }
 async function revenueFleetState(env){
   const latest=await kvGet(env,'revenue-fleet/latest',null);
-  return {ok:true,latest,storageConfigured:!!env.PAYMENTS,durableAccounting:String(env.PAYMENTS_DURABLE||'false').toLowerCase()==='true',engines:await Promise.all(REVENUE_FLEET.map(async e=>await kvGet(env,'revenue-engine/'+e.id,{id:e.id,status:e.status,operational:(e.status==='OWNER_GATED'&&!!env.TON_RECEIVING_ADDRESS)||(e.status==='ACTIVE'&&!!getVarizaApiKey(env))})))};
+  const ton=validTonAddress(getMainTonAddress(env));
+  const temp=!!getTempTonAddress(env);
+  const variza=!!getVarizaApiKey(env);
+  const persistence=!!env.PAYMENTS;
+  const durable=String(env.PAYMENTS_DURABLE||'false').toLowerCase()==='true';
+  const engines=REVENUE_FLEET.map(e=>{
+    const operational=e.status==='OWNER_GATED'?ton&&temp:e.status==='ACTIVE'?variza&&persistence:false;
+    const state=e.status==='OWNER_GATED'
+      ? (ton&&temp?'READY_OWNER_APPROVAL':'BLOCKED_MISSING_TEMP_TON')
+      : e.status==='ACTIVE'
+        ? (variza&&persistence?'LIVE_REVENUE_PATH':variza?'PAYMENT_READY_NO_DURABLE_STORAGE':'BLOCKED_PAYMENT')
+        : 'DEPENDENCY_REQUIRED';
+    return {...e,operational,state};
+  });
+  return {ok:true,latest,storageConfigured:persistence,durableAccounting:durable,engines};
 }
 
 const REVENUE_PROGRAMS=[
