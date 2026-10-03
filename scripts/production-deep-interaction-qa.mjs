@@ -137,7 +137,7 @@ async function inventoryPage(path) {
   }
   for (const b of data.buttons) {
     if (!b.text || b.disabled || dangerous(b.text,b.id,"")) continue;
-    const selector = b.id ? `#${CSS.escape(b.id)}` : `button:nth-of-type(${b.i+1})`;
+    const selector = b.id ? `#${String(b.id).replace(/[^a-zA-Z0-9_-]/g, "\\const selector = b.id ? `#${CSS.escape(b.id)}` : `button:nth-of-type(${b.i+1})`;")}` : `button:nth-of-type(${b.i+1})`;
     await clickSafe(selector, `Button: ${b.text}`);
   }
 }
