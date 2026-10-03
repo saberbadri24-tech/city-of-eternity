@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-10-03T01:24:35.483698+00:00",
+  "updatedAt": "2026-10-03T01:32:46.128322+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,20 +20,20 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1880,
-  "uniqueNewsPublishers": 544,
+  "discoveryCandidateCount": 1877,
+  "uniqueNewsPublishers": 548,
   "topPublishers": [
     {
       "publisher": "Binance",
-      "count": 110
+      "count": 111
     },
     {
-      "publisher": "Immunefi",
+      "publisher": "immunefi.com",
       "count": 89
     },
     {
       "publisher": "CoinMarketCap",
-      "count": 74
+      "count": 75
     },
     {
       "publisher": "HackerOne",
@@ -41,11 +41,7 @@
     },
     {
       "publisher": "x.com",
-      "count": 64
-    },
-    {
-      "publisher": "GitHub",
-      "count": 51
+      "count": 61
     },
     {
       "publisher": "Yelp",
@@ -53,35 +49,43 @@
     },
     {
       "publisher": "Coin Gabbar",
-      "count": 49
+      "count": 50
+    },
+    {
+      "publisher": "GitHub",
+      "count": 50
+    },
+    {
+      "publisher": "Reddit",
+      "count": 43
     },
     {
       "publisher": "RootData",
-      "count": 45
-    },
-    {
-      "publisher": "reddit.com",
-      "count": 42
-    },
-    {
-      "publisher": "facebook.com",
-      "count": 30
+      "count": 43
     },
     {
       "publisher": "BitDegree",
-      "count": 29
+      "count": 30
     },
     {
-      "publisher": "Phemex",
-      "count": 29
+      "publisher": "phemex.com",
+      "count": 30
     },
     {
       "publisher": "polygonscan.com",
       "count": 28
     },
     {
+      "publisher": "facebook.com",
+      "count": 27
+    },
+    {
       "publisher": "CCN.com",
       "count": 26
+    },
+    {
+      "publisher": "LinkedIn",
+      "count": 23
     },
     {
       "publisher": "Bitget",
@@ -93,14 +97,10 @@
     },
     {
       "publisher": "TradingView",
-      "count": 18
+      "count": 20
     },
     {
-      "publisher": "Medium",
-      "count": 17
-    },
-    {
-      "publisher": "airdropalert.com",
+      "publisher": "AirdropAlert",
       "count": 16
     }
   ],
