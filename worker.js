@@ -37,7 +37,6 @@ async function runAutopilotSafe(env){return await autopilot(new Request('https:/
 const V90_DEFAULTS={pricesUsd:{FIX:19,START:29,BUILD:79,GROW:199},permissions:{autoReports:true,autoMessaging:true,autoSeo:true,autoPaymentDiagnostics:true,autoBenchmark:true,autoLeadReview:true}};
 const firstEnv=(env,keys)=>keys.map(k=>env[k]).find(v=>typeof v==='string'&&v.trim())||'';const validTonAddress=a=>/^(?:EQ|UQ)[A-Za-z0-9_-]{46}$/.test(String(a||''));
 const getMainTonAddress=env=>firstEnv(env,['TON_MAIN_WALLET_ADDRESS','TON_PERMANENT_WALLET_ADDRESS','TON_MAIN_ADDRESS','TON_WALLET_ADDRESS','MAIN_TON_WALLET','MAIN_WALLET_ADDRESS','PERMANENT_WALLET_ADDRESS']);
-const getTempTonAddress=env=>firstEnv(env,['TON_TEMP_WALLET_ADDRESS','GUARD_TEMP_WALLET_ADDRESS','TON_TEMP_ADDRESS','TEMP_TON_WALLET','TEMP_WALLET_ADDRESS','TON_RECEIVING_ADDRESS']);
 const getVarizaApiKey=env=>firstEnv(env,['VARIZA_API_KEY','VARIA_API_KEY','VARIZA_TOKEN','VARIZA_KEY','VARIZA_API_TOKEN','VARIZA_SECRET']);
 const getVarizaWebhookSecret=env=>firstEnv(env,['VARIZA_WEBHOOK_SECRET','VARIA_WEBHOOK_SECRET','VARIZA_WEBHOOK_TOKEN','VARIZA_WEBHOOK_KEY','VARIZA_SECRET']);
 const getAiConfig=env=>({openai:firstEnv(env,['OPENAI_API_KEY','OPENAI_KEY']),anthropic:firstEnv(env,['ANTHROPIC_API_KEY','ANTHROPIC_KEY']),gemini:firstEnv(env,['GEMINI_API_KEY','GOOGLE_GEMINI_API_KEY','GOOGLE_API_KEY'])});
@@ -123,7 +122,6 @@ storageConfigured:configured.persistence,
 async function revenueFleetState(env){
   const latest=await kvGet(env,'revenue-fleet/latest',null);
   const ton=validTonAddress(getMainTonAddress(env));
-  const temp=!!getTempTonAddress(env);
   const variza=!!getVarizaApiKey(env);
   const persistence=!!env.PAYMENTS;
   const durable=String(env.PAYMENTS_DURABLE||'false').toLowerCase()==='true';
@@ -412,7 +410,7 @@ async function runtimeRoutes(req,env,u){
     const report=await runAutopilotSafe(env);return rjson({ok:true,cycle:report,steps:['Discover','Analyze','Build','Sell','Get Paid','Measure','Learn','Improve']});
   }
 if(p==='/api/payment-config'){
-    const mainTon=getMainTonAddress(env),tempTon=getTempTonAddress(env);
+    const mainTon=getMainTonAddress(env);
     return rjson({ok:true,ton:{enabled:Boolean(mainTon),address:mainTon||null,mainConfigured:Boolean(mainTon)},guard:{catchQueueConfigured:Boolean(env.PAYMENTS),temporaryWalletUsed:false},fiat:{provider:'variza',enabled:!!getVarizaApiKey(env)}});
   }
   if(p==='/api/revenue/catalog'){
