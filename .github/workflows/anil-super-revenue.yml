@@ -1,0 +1,41 @@
+name: ANIL X Super Revenue Contract
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate super revenue contract
+        run: |
+          python - <<'PY'
+          import json
+          x=json.load(open("revenue-super-os.json"))
+          assert x["cadenceMinutes"] == 5
+          assert len(x["engines"]) >= 10
+          assert x["lifecycle"][0] == "DISCOVER"
+          assert x["lifecycle"][-1] == "IMPROVE"
+          q=x["quality"]
+          assert q["noFakeRevenue"] and q["revenueRequiresSettledReceipt"]
+          assert q["secretStorage"] == "environment-only"
+          assert q["noSeedOrPrivateKeyHandling"]
+          assert q["noCaptchaBypass"] and q["noKycBypass"]
+          assert q["noAutomaticWalletSigning"] and q["noUnapprovedFundTransfer"]
+          assert x["treasury"]["ownerOpportunity"].startswith("TEMP_WALLET")
+          print("ANIL X SUPER REVENUE CONTRACT: PASS")
+          PY
+      - name: Validate engine separation
+        run: |
+          python - <<'PY'
+          import json
+          x=json.load(open("revenue-super-os.json"))
+          ids={e["id"] for e in x["engines"]}
+          required={"immortal-guard","bounty-radar","grant-hunter","affiliate-radar","b2b-lead-hunter","market-gap-hunter","micro-saas-factory","agent-commerce"}
+          missing=required-ids
+          assert not missing, missing
+          assert any(e["id"]=="immortal-guard" and e["visibility"]=="owner" for e in x["engines"])
+          assert any(e["id"]=="agent-commerce" and e["visibility"]=="public" for e in x["engines"])
+          print("ENGINE SEPARATION: PASS")
+          PY
