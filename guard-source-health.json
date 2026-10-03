@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-10-03T10:12:52.460103+00:00",
+  "updatedAt": "2026-10-03T11:07:27.836375+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,8 +20,8 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1870,
-  "uniqueNewsPublishers": 548,
+  "discoveryCandidateCount": 1872,
+  "uniqueNewsPublishers": 543,
   "topPublishers": [
     {
       "publisher": "Binance",
@@ -32,11 +32,11 @@
       "count": 89
     },
     {
-      "publisher": "CoinMarketCap",
-      "count": 72
+      "publisher": "HackerOne",
+      "count": 71
     },
     {
-      "publisher": "HackerOne",
+      "publisher": "CoinMarketCap",
       "count": 70
     },
     {
@@ -52,7 +52,7 @@
       "count": 50
     },
     {
-      "publisher": "Coin Gabbar",
+      "publisher": "coingabbar.com",
       "count": 47
     },
     {
@@ -61,22 +61,22 @@
     },
     {
       "publisher": "Reddit",
-      "count": 41
+      "count": 42
     },
     {
-      "publisher": "bitdegree.org",
+      "publisher": "Phemex",
       "count": 29
     },
     {
-      "publisher": "phemex.com",
-      "count": 29
+      "publisher": "BitDegree",
+      "count": 28
     },
     {
       "publisher": "polygonscan.com",
-      "count": 29
+      "count": 28
     },
     {
-      "publisher": "CCN.com",
+      "publisher": "ccn.com",
       "count": 27
     },
     {
@@ -88,19 +88,19 @@
       "count": 21
     },
     {
-      "publisher": "LinkedIn",
-      "count": 20
-    },
-    {
       "publisher": "Bybit",
       "count": 20
     },
     {
-      "publisher": "AirdropAlert",
-      "count": 18
+      "publisher": "Medium",
+      "count": 19
     },
     {
       "publisher": "TradingView",
+      "count": 19
+    },
+    {
+      "publisher": "AirdropAlert",
       "count": 18
     }
   ],
