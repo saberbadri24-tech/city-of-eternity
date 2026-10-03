@@ -26,10 +26,38 @@ def ident(x, lane):
     return hashlib.sha256(raw.strip().lower().encode()).hexdigest()[:20]
 
 def official(x):
-    if x.get("officialVerified") is True or x.get("officialEligible") is True:
+    # Never infer official provenance from a label alone.
+    if x.get("officialVerified") is True:
         return True
-    gate=str(x.get("executionGate") or "").upper()
-    return "UNOFFICIAL" not in gate and gate == "OFFICIAL"
+    if x.get("verification") == "resolved-official-source" and str(x.get("resolvedUrl") or x.get("url") or "").startswith("https://"):
+        return True
+    return False
+
+def radar_score(x):
+    base=score(x)
+    reward=0.0
+    for k in ("rewardUsd","estimatedRewardUsd","maxRewardUsd","potentialRewardUsd","bounty","grant"):
+        try: reward=max(reward,float(x.get(k) or 0))
+        except Exception: pass
+    reward_points=min(25.0,reward/1000.0) if reward else 0.0
+    evidence_points=min(20.0,float(x.get("corroborationCount") or 0)*4)
+    fresh_points=0.0
+    for k in ("verifiedAt","updatedAt","discoveredAt"):
+        if x.get(k):
+            try:
+                from datetime import datetime,timezone
+                d=datetime.fromisoformat(str(x[k]).replace("Z","+00:00"))
+                if d.tzinfo is None:d=d.replace(tzinfo=timezone.utc)
+                age=max(0,(NOW-d).total_seconds()/3600)
+                fresh_points=20.0 if age<=6 else 14.0 if age<=24 else 7.0 if age<=72 else 0.0
+                break
+            except Exception: pass
+    eligibility=15.0 if x.get("eligibility") or x.get("eligibilitySignals") else 5.0
+    friction=10.0
+    blob=json.dumps(x,ensure_ascii=False).lower()
+    if any(k in blob for k in ("deposit required","pay to enter","buy to qualify")): friction-=7.0
+    if any(k in blob for k in ("kyc","captcha")): friction-=4.0
+    return round(min(100.0,max(base,reward_points+evidence_points+fresh_points+eligibility+friction)),2)
 
 def score(x):
     for k in ("score","priorityScore","opportunityScore","finalScore"):
@@ -57,7 +85,7 @@ def main():
             item["_lane"]=lane
             item["_fusionId"]=key
             item["_official"]=official(x)
-            item["_score"]=score(x)
+            item["_score"]=radar_score(x)
             # Prefer explicit provenance and URLs; never manufacture them.
             existing=merged.get(key)
             if existing is None:
@@ -71,7 +99,7 @@ def main():
                     existing["_lanes"]=sorted(set(existing.get("_lanes",[]))|set(existing.get("_lanes",[])))
     if not any(counts.values()):
         raise RuntimeError("super_radar_no_input_lanes")
-    ranked=sorted(merged.values(),key=lambda x:(x["_official"],x["_score"]),reverse=True)
+    ranked=sorted(merged.values(),key=lambda x:(x["_official"],x["_score"],str(x.get("title") or x.get("name") or "")),reverse=True)
     plans=load("guard-action-plans.json")
     status=load("guard-status.json")
     evidence=load("guard-evidence-ledger.json")
@@ -86,7 +114,7 @@ def main():
       "summary":{
         "totalCandidates":len(ranked),
         "officialCandidates":sum(1 for x in ranked if x["_official"]),
-        "actionableOfficial":sum(1 for x in ranked if x["_official"] and x["_score"]>=70),
+        "actionableOfficial":sum(1 for x in ranked if x["_official"] and x["_score"]>=70 and x.get("actionStage") not in ("WATCH","UNSUPPORTED_NO_VERIFIED_CLAIM_METHOD")),
         "highPriority":sum(1 for x in ranked if x["_score"]>=70),
         "actionPlans":int(plans.get("planCount",0)) if isinstance(plans,dict) else 0,
         "evidenceRecords":len(rows(evidence)),
