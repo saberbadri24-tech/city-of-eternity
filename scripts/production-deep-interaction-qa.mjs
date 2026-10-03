@@ -159,7 +159,10 @@ async function inventoryPage(path) {
 
 await testHomepage();
 await testServices();
-for (const p of ["/revenue-engine.html","/guard.html","/admin.html"]) {\n  await page.setViewportSize({ width: 1280, height: 900 });\n  await inventoryPage(p);\n}
+for (const p of ["/revenue-engine.html","/guard.html","/admin.html"]) {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await inventoryPage(p);
+}
 
 const failedControls = controls.filter(x => !x.pass);
 const failedLinks = links.filter(x => !x.pass);
