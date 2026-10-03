@@ -217,9 +217,31 @@ async function anilChangeRequest(req,env){
   return rjson({ok:false,error:'method_not_allowed'},405);
 }
 
+async function treasuryFiatWithdrawal(req,env){
+  if(!(await adminAuth(req,env)))return rjson({ok:false,error:'admin_login_required'},401);
+  if(req.method==='GET'){
+    const items=await kvList(env,'treasury/fiat-withdrawal/',50);
+    return rjson({ok:true,items,provider:'required_for_actual_bank_transfer',execution:false,truth:'ثبت درخواست به معنی انتقال وجه نیست.'});
+  }
+  if(req.method!=='POST')return rjson({ok:false,error:'method_not_allowed'},405);
+  const b=await req.json().catch(()=>({}));
+  const amount=Number(b.amountToman);
+  const destinationType=['card','iban','account'].includes(String(b.destinationType))?String(b.destinationType):'';
+  const raw=String(b.destination||'').replace(/\\s+/g,'');
+  if(!Number.isFinite(amount)||amount<1000)return rjson({ok:false,error:'invalid_amount'},400);
+  if(!destinationType||raw.length<8)return rjson({ok:false,error:'invalid_destination'},400);
+  const valid=(destinationType==='card'&&/^\\d{16}$/.test(raw))
+    ||(destinationType==='iban'&&/^IR\\d{24}$/.test(raw))
+    ||(destinationType==='account'&&/^\\d{8,30}$/.test(raw));
+  if(!valid)return rjson({ok:false,error:'invalid_destination_format'},400);
+  const request={id:id(),currency:'IRR',amountToman:Math.round(amount),destinationType,last4:raw.slice(-4),status:'pending_provider',ownerApprovalRequired:true,providerRequired:true,createdAt:now(),updatedAt:now()};
+  await kvPut(env,'treasury/fiat-withdrawal/'+request.id,request);
+  await v90Audit(env,'fiat_withdrawal_request',true,{id:request.id,amountToman:request.amountToman,destinationType});
+  return rjson({ok:true,request,next:'connect_licensed_fiat_payout_provider',execution:false,secretDataStored:false},201);
+}
 async function runtimeRoutes(req,env,u){
   const p=u.pathname;
-  if(p==='/api/translate')return translateOnline(req);
+  if(p==='/api/treasury/fiat-withdrawal')return treasuryFiatWithdrawal(req,env);\n  if(p==='/api/translate')return translateOnline(req);
   if(p==='/api/autopilot'){if(req.method==='POST'&&!(await githubActionsAuth(req,env)))return rjson({ok:false,error:'github_actions_auth_required'},401);return autopilot(req,env)}
   if(p==='/api/anil/capabilities')return handleAnilCapabilities(req,env);
   if(p==='/api/anil/tools')return anilTool(req,env);
