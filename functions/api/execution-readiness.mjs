@@ -9,7 +9,7 @@ export async function handleExecutionReadiness(req,env){
   const gemini=first(env,['GEMINI_API_KEY','GOOGLE_GEMINI_API_KEY','GOOGLE_API_KEY']);
   const variza=first(env,['VARIZA_API_KEY','VARIA_API_KEY','VARIZA_TOKEN','VARIZA_KEY','VARIZA_API_TOKEN','VARIZA_SECRET']);
   const webhook=first(env,['VARIZA_WEBHOOK_SECRET','VARIA_WEBHOOK_SECRET','VARIZA_WEBHOOK_TOKEN','VARIZA_WEBHOOK_KEY','VARIZA_SECRET']);
-  const mainTon=first(env,['TON_MAIN_WALLET_ADDRESS','TON_PERMANENT_WALLET_ADDRESS','TON_MAIN_ADDRESS','TON_WALLET_ADDRESS','MAIN_TON_WALLET','MAIN_WALLET_ADDRESS','PERMANENT_WALLET_ADDRESS']);
+  const mainTon=first(env,['TON_MAIN_WALLET','TON_MAIN_WALLET_ADDRESS','TON_PERMANENT_WALLET_ADDRESS','TON_MAIN_ADDRESS','TON_WALLET_ADDRESS','MAIN_TON_WALLET','MAIN_WALLET_ADDRESS','PERMANENT_WALLET_ADDRESS']);
   const fx=Number(first(env,['USD_TOMAN_RATE','USD_TO_TOMAN','USD_TOMAN','USD_IRR_RATE'])||0);
   const providers={
     openai:Boolean(openai),
@@ -38,7 +38,7 @@ export async function handleExecutionReadiness(req,env){
     providers,
     wallet:{
       publicTonPaymentsEnabled:providers.tonMain,
-      guardStagingEnabled:false,
+      guardStagingEnabled:true,
       guardCatchQueueEnabled:providers.guardCatchQueue,
       ownerApprovalRequired:true
     },
