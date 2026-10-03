@@ -32,6 +32,7 @@ async function read(env,key,req){
   const remote=await readRemote(LOCAL[key]);
   return {data:remote,source:remote?'anilx-github':'unavailable'};
 }
+function outdatedMinutes(value,now){const t=Date.parse(String(value||''));return Number.isFinite(t)?Math.max(0,Math.round((now-t)/60000)):null}
 export async function handleGuardLive(req,env){
   const now=Date.now();
   if(cache.data&&now-cache.at<60000)return json(cache.data);
@@ -45,6 +46,9 @@ export async function handleGuardLive(req,env){
   const transfer=data.transfer.data||{};
   const receipts=data.receipts.data||{};
   const ai=data.ai.data||{};
+  const radar=data.radar.data||{};
+  const sourceHealth=data.sourceHealth.data||{};
+  const ageMinutes=outdatedMinutes(status.updatedAt||status.lastScan||opportunities.updatedAt||null,now);
   const oppItems=Array.isArray(opportunities.items)?opportunities.items:Array.isArray(opportunities.opportunities)?opportunities.opportunities:[];
   const highItems=Array.isArray(value.items)?value.items:Array.isArray(value.opportunities)?value.opportunities:[];
   const receiptItems=Array.isArray(receipts.items)?receipts.items:[];
@@ -53,6 +57,7 @@ export async function handleGuardLive(req,env){
   const out={
     ok:true,source:'ANIL-X-local-guard-state',
     updatedAt:status.updatedAt||status.lastScan||opportunities.updatedAt||null,
+    freshness:{minutesSinceUpdate:ageMinutes,stale:ageMinutes===null||ageMinutes>15,requiredMaxMinutes:15},
     guard:{
       status:String(status.status||status.mode||'NORMAL').slice(0,40),
       discoveryCount:Number(status.discoveryCount||status.counts?.opportunities||oppItems.length||0),
@@ -65,7 +70,20 @@ export async function handleGuardLive(req,env){
     valueHunter:{count:Number(status.highValueCandidates||status.counts?.incomePriority||highItems.length||0),items:highItems.slice(0,5).map(compact)},
     revenue:{confirmedIncome:Number(ledger.confirmedIncome||ledger.totalReceived||0),status:String(ledger.status||'UNCONFIRMED').slice(0,30)},
     transfer:{status:String(transfer.status||'OWNER_APPROVAL_REQUIRED').slice(0,40),temporaryConfigured:Boolean(status.temporaryWallet==='configured'),permanentConfigured:Boolean(status.permanentWallet||status.permanentAddress),pendingApprovals:Number(status.waitingOwner||status.counts?.waitingOwner||0)},
-    ai:{live:Boolean(ai.live||ai.healthy||ai.overall==='healthy'),configured:Boolean(ai.configured||ai.providers),successfulCalls:Number(ai.successfulCalls||0)},
+    ai:{
+      live:Boolean(ai.live||ai.healthy||ai.overall==='healthy'),
+      configured:Boolean(ai.configured||ai.providers||Object.values(ai.providerAvailability||{}).some(Boolean)),
+      successfulCalls:Number(ai.successfulCalls||0),
+      providers:ai.providerAvailability||{},
+    },
+    radar:{
+      candidates:Number(radar?.summary?.totalCandidates||0),
+      officialCandidates:Number(radar?.summary?.officialCandidates||0),
+      actionableOfficial:Number(radar?.summary?.actionableOfficial||0),
+      highPriority:Number(radar?.summary?.highPriority||0),
+      generatedAt:radar.generatedAt||null
+    },
+    sourceHealth:sourceHealth.summary||sourceHealth.counts||{},
     sources:Object.fromEntries(entries.map(([key,x])=>[key,x.source])),
     safety:{autoClaim:false,autoSigning:false,autoTransfer:false,secretStorage:false,bypassControls:false,ownerApprovalRequired:true}
   };
