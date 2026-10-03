@@ -29,6 +29,7 @@ jobs:
         if: steps.keygate.outputs.enabled == 'true'
         with: {fetch-depth: 1}
       - name: Check for existing improvement PR
+        if: steps.keygate.outputs.enabled == 'true'
         id: gate
         env: {GH_TOKEN: ${{ github.token }}}
         run: |
