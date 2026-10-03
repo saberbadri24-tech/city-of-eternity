@@ -8,13 +8,13 @@
       "id": "immortal-guard",
       "visibility": "owner",
       "revenue": "verified opportunity/reward",
-      "treasury": "temporary wallet -> owner approval -> main wallet"
+      "treasury": "owner catch queue -> owner approval -> official settlement/main wallet"
     },
     {
       "id": "bounty-radar",
       "visibility": "owner",
       "revenue": "accepted authorized bounty",
-      "treasury": "temporary wallet -> owner approval -> main wallet"
+      "treasury": "owner catch queue -> owner approval -> official settlement/main wallet"
     },
     {
       "id": "grant-hunter",
@@ -129,7 +129,7 @@
     "noUnapprovedFundTransfer": true
   },
   "treasury": {
-    "ownerOpportunity": "TEMP_WALLET -> OWNER_APPROVAL -> MAIN_WALLET",
+    "ownerOpportunity": "OWNER_CATCH_QUEUE -> OWNER_APPROVAL -> OFFICIAL_SETTLEMENT_OR_MAIN_WALLET",
     "ordinaryProviderSettlement": "PROVIDER_SETTLEMENT -> ACCOUNTING -> MAIN_WALLET_WHEN_PROVIDER_AND_RUNTIME_SUPPORT_IT",
     "directMainAllowedOnlyWhen": "provider settlement is real, main wallet is configured, and no owner approval is required by the specific payment rail"
   },
