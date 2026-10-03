@@ -98,17 +98,17 @@ async function inventory(url) {
         }
         const before = await page.locator("body").innerText().catch(() => "");
         const beforeUrl = page.url();
-        let planResponse = null;
-        const planResponsePromise = b.request
-          ? page.waitForResponse(res => res.url().includes("/api/plan") && res.request().method() === "POST", { timeout: 12000 }).catch(() => null)
+        let planRequestSeen = false;
+        const planRequestPromise = b.request
+          ? page.waitForRequest(req => req.url().includes("/api/plan") && req.method() === "POST", { timeout: 12000 }).catch(() => null)
           : null;
         await page.locator("button").nth(b.i).click({ timeout: 3000 });
-        if (planResponsePromise) planResponse = await planResponsePromise;
+        if (planRequestPromise) planRequestSeen = Boolean(await planRequestPromise);
         await page.waitForTimeout(1000);
         const after = await page.locator("body").innerText().catch(() => "");
         const afterUrl = page.url();
         const changed = before !== after || beforeUrl !== afterUrl;
-        const planOk = Boolean(planResponse && planResponse.ok());
+        const planOk = planRequestSeen && !networkErrors.some(x => x.url.includes("/api/plan") && x.status >= 400);
         buttonResults.push({
           url,
           text: b.text,
