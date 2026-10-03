@@ -70,8 +70,8 @@ jobs:
             check(readiness.ok(),'GET /api/execution-readiness');
             const gd=await page.request.get(base+'/api/guard/live?t='+Date.now());
             check(gd.ok(),'GET /api/guard/live');
-            const oidc=await page.request.get('https://api.github.com/repos/saberbadri24-tech/city-of-eternity/actions/oidc/token?audience=anil-x');
-            check(oidc.ok(),'GitHub OIDC token endpoint');
+            const oidc=await fetch(process.env.ACTIONS_ID_TOKEN_REQUEST_URL+'&audience=anil-x',{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN}});
+            check(oidc.ok,'GitHub OIDC token endpoint');
             const od=await oidc.json();
             const sd=await page.request.post(base+'/api/anil/super-team',{
               headers:{Authorization:'Bearer '+String(od?.value||'')},
