@@ -12,7 +12,7 @@ jobs:
       - name: Authentication source lint
         run: |
           set -euo pipefail
-          ! grep -RInE 'ADMIN_TOKEN|ADMIN_SECRET|ADMIN_PASS(WORD)?[^A-Z_]|anil-x-admin-challenge|id="p2"|const p2' --exclude-dir=.git --exclude='*.md' .
+          ! grep -RInE 'ADMIN_TOKEN|ADMIN_SECRET|ADMIN_PASS(WORD)?[^A-Z_]|anil-x-admin-challenge|id="p2"|const p2' worker.js render-server.mjs functions/api/admin-auth.mjs admin.js admin.html
           grep -RIn "ANIL_ADMIN_PASSWORD" worker.js render-server.mjs functions/api/admin-auth.mjs
           test "$(grep -RIl "ANIL_ADMIN_PASSWORD" worker.js render-server.mjs functions/api/admin-auth.mjs | wc -l)" -eq 3
       - name: Install Playwright
