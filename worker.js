@@ -518,6 +518,58 @@ if(p==='/api/payment-config'){
     const b=await req.json().catch(()=>({}));const task={id:id(),type:'guard_approval',opportunityId:clean(b.opportunityId,120),action:clean(b.action||'VERIFY_AND_REVIEW',80),url:clean(b.url,1000),status:'OWNER_APPROVAL',createdAt:now(),updatedAt:now(),attempts:0};
     state.queue.set(task.id,task);return rjson({ok:true,task});
   }
+  if(p==='/api/guard/catches'&&req.method==='GET'){
+    if(!(await adminAuth(req,env)))return rjson({ok:false,error:'owner_auth_required'},401);
+    const items=await kvList(env,'guard/catch/',200);
+    return rjson({ok:true,items:items.sort((a,b)=>String(b.createdAt||'').localeCompare(String(a.createdAt||''))),mainWalletConfigured:validTonAddress(getMainTonAddress(env)),temporaryWalletIsPanel:true,policy:'این صف «کیف موقت» نیست؛ محل نگهداری منطقی شکارها تا تأیید مالک است.'});
+  }
+  if(p==='/api/guard/catches'&&req.method==='POST'){
+    if(!(await adminAuth(req,env)))return rjson({ok:false,error:'owner_auth_required'},401);
+    const b=await req.json().catch(()=>({}));
+    const item={
+      id:id(),
+      opportunityId:clean(b.opportunityId,160),
+      title:clean(b.title||'شکار Guard',180),
+      source:clean(b.source||b.url||'',500),
+      url:clean(b.url||'',1000),
+      status:'PENDING_OWNER',
+      currency:clean(b.currency||'USD',12).toUpperCase(),
+      estimatedValue:Number.isFinite(Number(b.estimatedValue))?Number(b.estimatedValue):0,
+      verifiedValue:Number.isFinite(Number(b.verifiedValue))?Number(b.verifiedValue):0,
+      verified:Boolean(b.verified),
+      receiptId:clean(b.receiptId||'',160),
+      sourceAddress:clean(b.sourceAddress||'',80),
+      notes:clean(b.notes||'',1200),
+      createdAt:now(),
+      updatedAt:now()
+    };
+    await kvPut(env,'guard/catch/'+item.id,item);
+    return rjson({ok:true,item},201);
+  }
+  if(p==='/api/guard/catches/decision'&&req.method==='POST'){
+    if(!(await adminAuth(req,env)))return rjson({ok:false,error:'owner_auth_required'},401);
+    const b=await req.json().catch(()=>({})),cid=clean(b.id,160),decision=b.decision==='approved'?'approved':b.decision==='rejected'?'rejected':'';
+    if(!cid||!decision)return rjson({ok:false,error:'decision_required'},400);
+    const item=await kvGet(env,'guard/catch/'+cid,null);
+    if(!item)return rjson({ok:false,error:'catch_not_found'},404);
+    if(item.status!=='PENDING_OWNER')return rjson({ok:false,error:'catch_already_decided',status:item.status},409);
+    item.status=decision==='approved'?'APPROVED_FOR_TRANSFER':'REJECTED_BY_OWNER';
+    item.decidedAt=now();item.updatedAt=now();
+    item.transfer={ready:decision==='approved'&&item.currency==='TON'&&validTonAddress(item.sourceAddress)&&Number(item.verifiedValue)>0,mainWallet:getMainTonAddress(env)||null,requiresOwnerWalletSignature:true};
+    await kvPut(env,'guard/catch/'+cid,item);
+    return rjson({ok:true,item});
+  }
+  if(p==='/api/guard/catches/sent'&&req.method==='POST'){
+    if(!(await adminAuth(req,env)))return rjson({ok:false,error:'owner_auth_required'},401);
+    const b=await req.json().catch(()=>({})),cid=clean(b.id,160),txHash=clean(b.txHash||'',200);
+    if(!cid||!txHash)return rjson({ok:false,error:'catch_and_tx_required'},400);
+    const item=await kvGet(env,'guard/catch/'+cid,null);
+    if(!item)return rjson({ok:false,error:'catch_not_found'},404);
+    if(item.status!=='APPROVED_FOR_TRANSFER')return rjson({ok:false,error:'catch_not_approved'},409);
+    item.status='SENT_TO_MAIN_WALLET';item.txHash=txHash;item.sentAt=now();item.updatedAt=now();
+    await kvPut(env,'guard/catch/'+cid,item);
+    return rjson({ok:true,item});
+  }
   if(p==='/api/guard/report'){
     const approvals=[...state.queue.values()].filter(x=>x.type==='guard_approval');
     return rjson({ok:true,generatedAt:now(),counts:{approvals:approvals.length,queued:[...state.queue.values()].filter(x=>x.status==='queued').length},safety:{autoSign:false,autoTransfer:false,ownerApprovalRequired:true}});
