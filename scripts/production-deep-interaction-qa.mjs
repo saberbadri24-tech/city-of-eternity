@@ -41,9 +41,17 @@ async function snapshot() {
 }
 async function goto(path) {
   const u = new URL(path, base).href;
-  const r = await page.goto(u, { waitUntil: "domcontentloaded", timeout: 30000 });
-  await stable();
-  if (!r || !r.ok()) throw Error(`HTTP ${r?.status() || "NO_RESPONSE"} ${u}`);
+  let last = null;
+  for (let attempt = 1; attempt <= 6; attempt++) {
+    try {
+      const r = await page.goto(u, { waitUntil: "domcontentloaded", timeout: 30000 });
+      await stable();
+      if (r && r.ok()) return r;
+      last = Error(`HTTP ${r?.status() || "NO_RESPONSE"} ${u}`);
+    } catch (e) { last = e; }
+    await page.waitForTimeout(Math.min(2500 * attempt, 10000));
+  }
+  throw last || Error(`NO_RESPONSE ${u}`);
 }
 function dangerous(text, id, href) { return risk.test(`${text} ${id} ${href}`); }
 
