@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  id-token: write
 jobs:
   live-smoke:
     runs-on: ubuntu-latest
@@ -24,6 +25,15 @@ jobs:
           npm init -y >/dev/null 2>&1
           npm install --no-save playwright@1.55.0
           npx playwright install --with-deps chromium
+      - name: Verify live admin authentication without exposing the secret
+        env:
+          BASE_URL: https://city-of-eternity.onrender.com
+        run: |
+          set -euo pipefail
+          ID_TOKEN=$(curl -fsSL -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x" | jq -r '.value')
+          test -n "$ID_TOKEN" && test "$ID_TOKEN" != "null"
+          curl -fsSL -H "Authorization: Bearer $ID_TOKEN" "$BASE_URL/api/admin/auth-self-test" > /tmp/admin-auth.json
+          jq -e '.ok==true and .configured==true and .loginStatus==200 and .sessionValid==true and .secretExposed==false' /tmp/admin-auth.json
       - name: Run live site and API smoke
         env:
           BASE_URL: https://city-of-eternity.onrender.com
