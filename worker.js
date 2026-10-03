@@ -63,7 +63,8 @@ async function revenueFleetStatus(env){
    ton:!!env.TON_RECEIVING_ADDRESS,
    variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY),
    ai:!!(env.OPENAI_API_KEY||env.GEMINI_API_KEY||env.ANTHROPIC_API_KEY),
-   persistence:!!env.PAYMENTS
+   persistence:!!env.PAYMENTS,
+   durableAccounting:String(env.PAYMENTS_DURABLE||'false').toLowerCase()==='true'
  };
  return {
    ok:true,
@@ -219,20 +220,21 @@ async function runtimeRoutes(req,env,u){
     const b=req.method==='POST'?await req.json().catch(()=>({})): {};
     const accountId=clean(b.id||u.searchParams.get('id'),100).replace(/[^a-zA-Z0-9_-]/g,'');
     if(!accountId)return rjson({ok:false,error:'id_required'},400);
-    const old=state.accounts.get(accountId)||{};
+    const old=state.accounts.get(accountId)||(env.PAYMENTS?await kvGet(env,'accounts/'+accountId,null):null)||{};
     if(req.method==='POST'){
       const record={id:accountId,profile:{...(old.profile||{}),...(b.profile||{})},createdAt:old.createdAt||now(),updatedAt:now()};
       state.accounts.set(accountId,record);
-      return rjson({ok:true,account:record});
+      await kvPut(env,'accounts/'+accountId,record);
+      return rjson({ok:true,account:record,persistent:Boolean(env.PAYMENTS)});
     }
-    return rjson({ok:true,account:old||null});
+    return rjson({ok:true,account:old||null,persistent:Boolean(env.PAYMENTS)});
   }
   if(p==='/api/memory'){
     if(req.method==='OPTIONS')return rjson({},204);
     const sid=clean(u.searchParams.get('sessionId'),100).replace(/[^a-zA-Z0-9_-]/g,'');
     if(!sid)return rjson({ok:false,error:'session_required'},400);
-    if(req.method==='GET'){const x=state.sessions.get(sid)||{};return rjson({ok:true,sessionId:sid,turns:Array.isArray(x.turns)?x.turns.slice(-30):[],profile:x.profile||{}})}
-    if(req.method==='POST'){const b=await req.json().catch(()=>({})),old=state.sessions.get(sid)||{},turns=Array.isArray(b.turns)?b.turns.slice(-30):Array.isArray(old.turns)?old.turns.slice(-30):[],profile=b.profile||old.profile||{};state.sessions.set(sid,{turns,profile,updatedAt:now()});return rjson({ok:true,sessionId:sid,count:turns.length})}
+    if(req.method==='GET'){const x=state.sessions.get(sid)||(env.PAYMENTS?await kvGet(env,'sessions/'+sid,null):null)||{};return rjson({ok:true,sessionId:sid,turns:Array.isArray(x.turns)?x.turns.slice(-30):[],profile:x.profile||{},persistent:Boolean(env.PAYMENTS)})}
+    if(req.method==='POST'){const b=await req.json().catch(()=>({})),old=state.sessions.get(sid)||(env.PAYMENTS?await kvGet(env,'sessions/'+sid,null):null)||{},turns=Array.isArray(b.turns)?b.turns.slice(-30):Array.isArray(old.turns)?old.turns.slice(-30):[],profile=b.profile||old.profile||{};const record={turns,profile,updatedAt:now()};state.sessions.set(sid,record);await kvPut(env,'sessions/'+sid,record);return rjson({ok:true,sessionId:sid,count:turns.length,persistent:Boolean(env.PAYMENTS)})}
     return rjson({ok:false,error:'method_not_allowed'},405);
   }
   if(p==='/api/order'){
