@@ -2,11 +2,11 @@
   "guard": "ANIL X Immortal Guard",
   "engine": "Free Real Token Hunter X",
   "version": "14.0-strict-fast",
-  "updatedAt": "2026-10-03T09:46:46.428031+00:00",
+  "updatedAt": "2026-10-03T10:09:51.520066+00:00",
   "definition": "Live official token distribution + explicit no-cost evidence + token identity; gated/speculative/points opportunities excluded.",
   "verifiedCount": 0,
   "tokens": [],
-  "rejectedCount": 1873,
+  "rejectedCount": 1870,
   "rejected": [
     {
       "accepted": false,
@@ -34,7 +34,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -62,16 +62,16 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
       "id": "free-cc593d15226a9a5b5d37",
       "name": "Open USD Goes Live: Stripe, Visa, and Mastercard Deploy Business Stablecoin Infrastructure - Tech Times",
       "officialUrl": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQQWQyaGtwNHplanF6QlpISFE2M2ZkUmdtMDFOcXZRZ0I1d29CelBnT3VfeVRydk9ETFlrSFg5b2xZbXZ1dG1yRTZsclJ2X1IxeGhVbWpfSDVENXdTeGszbm9Hc0R0a25NaXU3VFY1WEVIQ3NzSW1Id2R4X0RsNUt2SlJEUnJ6aXUyUW93R3ZpNldRN01KbkE3d0JpNDdrT2pKTjY4Wl9DYU9KdGJxUnZOM2l6c2p2cHgzZ0pNV2xCcnhxcUhDc0FVTndfMTRsUGdselpIVQ?oc=5&hl=en-US&gl=US&ceid=US:en",
-      "canonicalUrl": null,
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQQWQyaGtwNHplanF6QlpISFE2M2ZkUmdtMDFOcXZRZ0I1d29CelBnT3VfeVRydk9ETFlrSFg5b2xZbXZ1dG1yRTZsclJ2X1IxeGhVbWpfSDVENXdTeGszbm9Hc0R0a25NaXU3VFY1WEVIQ3NzSW1Id2R4X0RsNUt2SlJEUnJ6aXUyUW93R3ZpNldRN01KbkE3d0JpNDdrT2pKTjY4Wl9DYU9KdGJxUnZOM2l6c2p2cHgzZ0pNV2xCcnhxcUhDc0FVTndfMTRsUGdselpIVQ",
       "officialDomain": "news.google.com",
-      "httpStatus": null,
+      "httpStatus": 200,
       "evidence": {
         "live": [],
         "free": [],
@@ -83,23 +83,22 @@
       },
       "rejectionReasons": [
         "official_source_not_proven",
-        "source_unavailable",
         "no_live_distribution_evidence",
         "no_explicit_no_cost_evidence",
         "token_identity_not_proven"
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
       "id": "free-948ecbaaa4d445afd305",
       "name": "What Comes After Bitcoin? Traders Are Turning to New Crypto Coin Presales - openPR.com",
       "officialUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOTHh1bThCSlhBYm5mUEZmbkVEak1wOHpGWkdWQW51ZFR6M3VtbEExYlJBYnlTTkdfWk5fU0xhYk1Fa1J6VHZuWnBmMVlpdkx4NG9Qc1JwbXFud1U0bVRkRHlRU1EweTVzZG9XV2lTd0hvMWJxNmc5eUVfRTdzbDdHWkZISzNMZ1E0cHpscGFUclVWOXc1UzhwbEVLOG9ERmFy?oc=5&hl=en-US&gl=US&ceid=US:en",
-      "canonicalUrl": null,
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOTHh1bThCSlhBYm5mUEZmbkVEak1wOHpGWkdWQW51ZFR6M3VtbEExYlJBYnlTTkdfWk5fU0xhYk1Fa1J6VHZuWnBmMVlpdkx4NG9Qc1JwbXFud1U0bVRkRHlRU1EweTVzZG9XV2lTd0hvMWJxNmc5eUVfRTdzbDdHWkZISzNMZ1E0cHpscGFUclVWOXc1UzhwbEVLOG9ERmFy",
       "officialDomain": "news.google.com",
-      "httpStatus": null,
+      "httpStatus": 200,
       "evidence": {
         "live": [],
         "free": [],
@@ -111,14 +110,13 @@
       },
       "rejectionReasons": [
         "official_source_not_proven",
-        "source_unavailable",
         "no_live_distribution_evidence",
         "no_explicit_no_cost_evidence",
         "token_identity_not_proven"
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -146,16 +144,16 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
       "id": "free-db7d50ea60c20f332b61",
       "name": "Floki's 7.18% Fall Has Traders Looking Beyond Usual Meme Coins: What's the Next Crypto Presale on the Radar? - openPR.com",
       "officialUrl": "https://news.google.com/rss/articles/CBMingFBVV95cUxQbWZFOEZyclZ5VDRNVWxRWDk2UnFHY25vZTdpVVl4YUJaWmhjd25GSk03U0JsTlpVeU4yeG5IMzNJMGl1Z3VfLWp5M1Y5aERGQmIxX1hJd2pmX0VwTzVLWHhiVmZ6UnRzeXlLSnVSNTRHdzR2amNoTGtvdFJkeFRlSXUwS0NOSlhuRExsLUZVejVZQjUxYWN1azlURTFrQQ?oc=5&hl=en-US&gl=US&ceid=US:en",
-      "canonicalUrl": null,
+      "canonicalUrl": "https://news.google.com/rss/articles/CBMingFBVV95cUxQbWZFOEZyclZ5VDRNVWxRWDk2UnFHY25vZTdpVVl4YUJaWmhjd25GSk03U0JsTlpVeU4yeG5IMzNJMGl1Z3VfLWp5M1Y5aERGQmIxX1hJd2pmX0VwTzVLWHhiVmZ6UnRzeXlLSnVSNTRHdzR2amNoTGtvdFJkeFRlSXUwS0NOSlhuRExsLUZVejVZQjUxYWN1azlURTFrQQ",
       "officialDomain": "news.google.com",
-      "httpStatus": null,
+      "httpStatus": 200,
       "evidence": {
         "live": [],
         "free": [],
@@ -167,14 +165,13 @@
       },
       "rejectionReasons": [
         "official_source_not_proven",
-        "source_unavailable",
         "no_live_distribution_evidence",
         "no_explicit_no_cost_evidence",
         "token_identity_not_proven"
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -202,7 +199,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -230,7 +227,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -258,7 +255,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -286,7 +283,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -314,7 +311,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -342,7 +339,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -370,7 +367,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -398,7 +395,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -426,7 +423,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -454,7 +451,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -482,7 +479,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -510,7 +507,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -538,7 +535,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -566,7 +563,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -594,7 +591,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -622,7 +619,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -650,7 +647,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -678,7 +675,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -706,7 +703,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -734,7 +731,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -762,7 +759,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -790,7 +787,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -818,7 +815,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -846,7 +843,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -874,7 +871,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -902,7 +899,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -930,7 +927,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -958,7 +955,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -986,7 +983,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1014,7 +1011,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1042,7 +1039,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1070,7 +1067,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1098,7 +1095,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1126,7 +1123,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1154,7 +1151,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1182,7 +1179,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1210,7 +1207,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1238,7 +1235,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1266,7 +1263,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1294,7 +1291,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1322,7 +1319,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1350,7 +1347,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1378,7 +1375,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1406,7 +1403,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1434,7 +1431,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1462,7 +1459,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1490,7 +1487,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1518,7 +1515,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1546,7 +1543,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1574,7 +1571,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1602,7 +1599,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1630,7 +1627,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1658,7 +1655,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1686,7 +1683,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1714,7 +1711,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1742,7 +1739,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1770,7 +1767,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1798,7 +1795,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1826,7 +1823,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1854,7 +1851,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1882,7 +1879,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1910,7 +1907,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1938,7 +1935,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1966,7 +1963,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -1994,7 +1991,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2022,7 +2019,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2050,7 +2047,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2078,7 +2075,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2106,7 +2103,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2134,7 +2131,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2162,7 +2159,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2190,7 +2187,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2218,7 +2215,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2246,7 +2243,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2274,7 +2271,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2302,7 +2299,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2330,7 +2327,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2358,7 +2355,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2386,7 +2383,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2414,7 +2411,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2442,7 +2439,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2470,7 +2467,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2498,7 +2495,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2526,7 +2523,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2554,7 +2551,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2582,7 +2579,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2610,7 +2607,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2638,7 +2635,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2666,7 +2663,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2694,7 +2691,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2722,7 +2719,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2750,7 +2747,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2778,7 +2775,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2806,7 +2803,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2834,7 +2831,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2862,7 +2859,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2890,7 +2887,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2918,7 +2915,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2946,7 +2943,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -2974,7 +2971,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3002,7 +2999,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3030,7 +3027,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3058,7 +3055,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3086,7 +3083,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3114,7 +3111,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3142,7 +3139,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3170,7 +3167,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3198,7 +3195,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3226,7 +3223,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3254,7 +3251,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3282,7 +3279,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3310,7 +3307,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3338,7 +3335,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3366,7 +3363,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3394,7 +3391,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3422,7 +3419,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3450,7 +3447,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3478,7 +3475,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3506,7 +3503,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3534,7 +3531,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3562,7 +3559,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3590,7 +3587,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3618,7 +3615,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3646,7 +3643,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3674,7 +3671,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3702,7 +3699,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3730,7 +3727,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3758,7 +3755,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3786,7 +3783,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3814,7 +3811,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3842,7 +3839,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3870,7 +3867,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3898,7 +3895,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3926,7 +3923,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3954,7 +3951,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -3982,7 +3979,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4010,7 +4007,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4038,7 +4035,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4066,7 +4063,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4094,7 +4091,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4122,7 +4119,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4150,7 +4147,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4178,7 +4175,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4206,7 +4203,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4234,7 +4231,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4262,7 +4259,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4290,7 +4287,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4318,7 +4315,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4346,7 +4343,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4374,7 +4371,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4402,7 +4399,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4430,7 +4427,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4458,7 +4455,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4486,7 +4483,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4514,7 +4511,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4542,7 +4539,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4570,7 +4567,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4598,7 +4595,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4626,7 +4623,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4654,7 +4651,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4682,7 +4679,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4710,7 +4707,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4738,7 +4735,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4766,7 +4763,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4794,7 +4791,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4822,7 +4819,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4850,7 +4847,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4878,7 +4875,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4906,7 +4903,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4934,7 +4931,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4962,7 +4959,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -4990,7 +4987,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5018,7 +5015,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5046,7 +5043,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5074,7 +5071,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5102,12 +5099,12 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
-      "id": "free-e0ba3349d05950cb57a2",
-      "name": "Shevchenko Gives NEAR Intents Attacker 48 Hours - thedefiant.io",
+      "id": "free-49ec73b49f1fa9eed7ab",
+      "name": "Shevchenko Gives NEAR Intents Attacker 48 Hours - The Defiant",
       "officialUrl": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOZEdYWndHX1NVVDBIN2pLYUdkNlNRWDh2SEt3U29vLVlpSVo2WUpqOWg3bkwxRTJ0MGxxT2ozNTJXV19POE1DWGUyWTFJcXVRR2Z1VmV2MGVsUGlyZ0JnUDdPMWdJZGJXam1FdVNtV2kzaTBWV0gtSVdTczhFLUh4dU95UmdxZG8?oc=5&hl=en-US&gl=US&ceid=US:en",
       "canonicalUrl": null,
       "officialDomain": "news.google.com",
@@ -5130,7 +5127,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5158,7 +5155,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5186,7 +5183,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5214,7 +5211,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5242,7 +5239,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5270,7 +5267,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5298,7 +5295,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5326,7 +5323,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5354,7 +5351,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5382,7 +5379,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5410,7 +5407,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5438,7 +5435,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5466,7 +5463,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5494,7 +5491,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5522,7 +5519,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5550,7 +5547,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5578,7 +5575,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5606,7 +5603,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5634,7 +5631,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5662,7 +5659,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5690,7 +5687,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5718,7 +5715,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5746,7 +5743,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5774,7 +5771,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5802,7 +5799,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5830,7 +5827,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5858,7 +5855,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5886,7 +5883,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5914,7 +5911,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5942,7 +5939,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5970,7 +5967,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -5998,7 +5995,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6026,7 +6023,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6054,7 +6051,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6082,7 +6079,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6110,7 +6107,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6138,12 +6135,12 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
-      "id": "free-ff795b7b0be560fd3796",
-      "name": "XRPL Hackathon Seoul 2025 - Crypto News",
+      "id": "free-e908c78189a174d42ca0",
+      "name": "XRPL Hackathon Seoul 2025 - crypto.news",
       "officialUrl": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9iV1lxUWVCV2ZfX244enNPVVZlbkFfellCV0lzaWFkVDNPc21ZRmM5R1pGcjhWZzJ0dEhIV0tMdkM5Zy1YVWpWYUVHM2lwUWJSejNkXzVCaXNxdEZRV0VRc1BR?oc=5&hl=en-US&gl=US&ceid=US:en",
       "canonicalUrl": null,
       "officialDomain": "news.google.com",
@@ -6166,7 +6163,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6194,7 +6191,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6222,7 +6219,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6250,7 +6247,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6278,7 +6275,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6306,7 +6303,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6334,7 +6331,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6362,7 +6359,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6390,7 +6387,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6418,12 +6415,12 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
-      "id": "free-d5829ab484cfc2377752",
-      "name": "Lisk partners with Indonesian Ministry to boost Web3 startup ecosystem - cryptobriefing.com",
+      "id": "free-297414748724270ed5fe",
+      "name": "Lisk partners with Indonesian Ministry to boost Web3 startup ecosystem - Crypto Briefing",
       "officialUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQQ0hRWlNrY0NwY0xSX3J2dGVSQ3JvM04zanNRcnZtNmhrU0k0VG9BVGE2N0FHV2xKakp1dGZxMVdJVTBRYUEtb25lSUF6T0VrZU81djNXVVI0ZU1LUUh0cmIwWEFTSDFER096c1liN1BiNVlEVFZlVjRSaHlGanE0ZURQbzVGVjJldTZZSFFQM1hiZHQ5S2JFQ002TjB4WlE?oc=5&hl=en-US&gl=US&ceid=US:en",
       "canonicalUrl": null,
       "officialDomain": "news.google.com",
@@ -6446,7 +6443,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6474,7 +6471,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6502,7 +6499,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6530,7 +6527,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6558,7 +6555,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6586,7 +6583,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6614,7 +6611,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6642,12 +6639,12 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
-      "id": "free-6fe7a6b1d4598db6f902",
-      "name": "DuckChain Announces $5 Million Funding from Dao5, Tandem by Offchain Labs, and Others, Launches Yellow Duck Mission Global Hackathon - The Manila Times",
+      "id": "free-038a7121663c5738c0f6",
+      "name": "DuckChain Announces $5 Million Funding from Dao5, Tandem by Offchain Labs, and Others, Launches Yellow Duck Mission Global Hackathon - manilatimes.net",
       "officialUrl": "https://news.google.com/rss/articles/CBMiqgJBVV95cUxQdDBIc3dQalpNbVBhNVo2NGRodkEyaC1FS2I3UGdPSlpGTXZORF9xNFo4UTlLS2MzYlc2T1ljSzRhdzFGU2lnQkwzczJvVUdfVGJsMDh6Z0FXOUh1M3JPQUN4TXhMVHg5WnBfalZXSEd6ZzIyNXlfOGJBSmI2b0lZOV9BUGdxVGhXSDFKemlwRDZ3Sk9VT2piYkhSZzFBTFpGeEV1RlB0cm96N0F1TWE4ZUVQeUZLVTNzeEtnOXlTNmJxU1VQSWpEZnJlaTEyeTl1c3hsT3BTZl8yWGFQVE43V2NPMU1pNnBMOHZGT3Yyb2JEWFE0SWl0TDhsSkppNlJLM0I1WkhWVG9wdmZGOGtISElzX2J3RjQ1M2VBQjd1ZERsVWF5OFBJZEF30gGvAkFVX3lxTFA2ZTN3T2ZGYjR6VmdUMmgtWjJOSGxvMkpCNTN2a0J1ZFA5S3UtYkRMUC12bUxGV25EMEpCaWdTV3F6ZVFIMUJVZWJrbS1nMWFJUmVsN0Y2MXlTUW5wc05tV0ZjSGY1Uk5VYzg2eUcyR2RHWkFmZi1HRlFQVUZ5WXJ3eDNlX3FkREZuYUZpR3BERUo2RGZ5amVaQkx6aWlxbFBvNUpWWldicGdpdXJMRmtjb0stc2hHWU9zLVkxMnBSUWlHdS1yb2JEMXRRWk5GdXQ4ZTJVWDJQSHY2QnNJeHc4SThCR2tVYWQtVUJyc21mRGxIRlc1eVlGX0s4VG1PdDhUR3VZRlVPQ0ZqMjI1WVJhM181YXcxcUhzMGxQWTd5T1lXa0tYSjBwcDFMZWhaMA?oc=5&hl=en-US&gl=US&ceid=US:en",
       "canonicalUrl": null,
       "officialDomain": "news.google.com",
@@ -6670,7 +6667,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6698,7 +6695,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6726,7 +6723,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6754,7 +6751,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6782,7 +6779,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6810,7 +6807,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6838,7 +6835,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6866,7 +6863,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6894,7 +6891,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6922,7 +6919,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6950,7 +6947,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -6978,7 +6975,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7006,7 +7003,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7034,7 +7031,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7062,7 +7059,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7090,7 +7087,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7118,7 +7115,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7146,7 +7143,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7174,12 +7171,12 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
-      "id": "free-fde243890892ac8d7810",
-      "name": "Join Fallout 76’s P.R.O.T.E.C.T. Protocol for rewards! - fallout.bethesda.net",
+      "id": "free-1e3a732cbe6b32e399f4",
+      "name": "Join Fallout 76’s P.R.O.T.E.C.T. Protocol for rewards! - Bethesda.net",
       "officialUrl": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPUVdnOXhYMnpsUWFTMVJET1ZaY1ozNEtfOHhXUE1WQUl2dEdZeUJRaUE5MURMWnVsdlltQTdmcFdkY1FXZkt2Uk9tT0lpTjJ6aHJwaUEwLVZjY3Bqcmh3dHF2MUNQQVByVjlvN3dhR2E2R0I2MTU1cmlNaDJnOGFJb1lkT0s0WFFIeUtKMnFMUU1vamUy?oc=5&hl=en-US&gl=US&ceid=US:en",
       "canonicalUrl": null,
       "officialDomain": "news.google.com",
@@ -7202,7 +7199,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7230,7 +7227,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7258,7 +7255,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7286,7 +7283,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7314,7 +7311,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7342,7 +7339,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7370,7 +7367,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7398,7 +7395,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7426,7 +7423,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7454,7 +7451,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7482,7 +7479,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7510,7 +7507,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7538,7 +7535,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7566,7 +7563,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7594,12 +7591,12 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
-      "id": "free-ef04e9b7136617aa4cf1",
-      "name": "Latest Blue Protocol codes - eurogamer.net",
+      "id": "free-98589fe7273c97bd947f",
+      "name": "Latest Blue Protocol codes - Eurogamer.net",
       "officialUrl": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE53cjJ0b0w1OTVvWjFRTVdNQ2NKQkNOazRXZHp6VWh1WUlmQl9Nd1ctZmZMUmRDdmxKQl8xcWdoUGVPMmI2Um55bWowRkctdU9CY2d2SmxyVTY?oc=5&hl=en-US&gl=US&ceid=US:en",
       "canonicalUrl": null,
       "officialDomain": "news.google.com",
@@ -7622,7 +7619,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7650,7 +7647,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7678,7 +7675,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7706,7 +7703,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7734,7 +7731,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7762,7 +7759,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7790,7 +7787,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7818,7 +7815,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7846,7 +7843,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7874,7 +7871,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7902,7 +7899,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7930,7 +7927,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7958,7 +7955,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -7986,7 +7983,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8014,7 +8011,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8042,7 +8039,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8070,7 +8067,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8098,7 +8095,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8126,7 +8123,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8154,7 +8151,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8182,7 +8179,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8210,7 +8207,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8238,7 +8235,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8266,7 +8263,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8294,7 +8291,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8322,7 +8319,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8350,7 +8347,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8378,7 +8375,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8406,12 +8403,12 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
-      "id": "free-2bad1f6229338d3baa86",
-      "name": "Blue Protocol: Star Resonance codes - pockettactics.com",
+      "id": "free-0b8bee0770603d0a6a74",
+      "name": "Blue Protocol: Star Resonance codes - Pocket Tactics",
       "officialUrl": "https://news.google.com/rss/articles/CBMickFVX3lxTE1XdGM2dUpGM1BOSnVvMlgzLUMtV3ZSbEpzZlZ5cUc0MWRfOVNsMG5IaTNBNkVDNHI1UG90bWppelVBbnN0UVVzT1pGS1NqVmxPWE5ub1oxR2pFRmpGdkkweUhNdTdWTFo4TVlrZUJ4bFhPUQ?oc=5&hl=en-US&gl=US&ceid=US:en",
       "canonicalUrl": null,
       "officialDomain": "news.google.com",
@@ -8434,7 +8431,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8462,7 +8459,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8490,7 +8487,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8518,7 +8515,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8546,7 +8543,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8574,7 +8571,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8602,7 +8599,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8630,7 +8627,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8658,7 +8655,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8686,7 +8683,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8714,7 +8711,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8742,7 +8739,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8770,7 +8767,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8798,7 +8795,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8826,7 +8823,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8854,7 +8851,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8882,7 +8879,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8910,7 +8907,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8938,7 +8935,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8966,7 +8963,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -8994,12 +8991,12 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
-      "id": "free-d6484293e347977f3989",
-      "name": "Allocation Update - Q2 2026 - ethereum.org",
+      "id": "free-1d4d4027a3ea2c11b404",
+      "name": "Allocation Update - Q2 2026 - blog.ethereum.org",
       "officialUrl": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1rcElnbGZuS3BDMlF3anVWZ1A2czdlcEIyckdDdUNfcVZ2U0JQcE1HZkdTVmdSVndwaEtIcTNCS3YzNWhtT2V0TjZhbFBJQ3ZWdTY1ZWZtSEhpZU9xaU93MmZJRQ?oc=5&hl=en-US&gl=US&ceid=US:en",
       "canonicalUrl": null,
       "officialDomain": "news.google.com",
@@ -9022,7 +9019,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9050,7 +9047,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9078,7 +9075,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9106,7 +9103,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9134,7 +9131,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9162,7 +9159,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9190,7 +9187,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9218,7 +9215,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9246,7 +9243,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9274,7 +9271,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9302,7 +9299,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9330,7 +9327,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9358,7 +9355,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9386,7 +9383,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9414,7 +9411,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9442,7 +9439,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9470,7 +9467,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9498,7 +9495,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9526,7 +9523,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9554,12 +9551,12 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
-      "id": "free-dc5c30197d473b2684b1",
-      "name": "Ethereum staking proposal could send rewards to developers - Crypto News",
+      "id": "free-fdab696bf5260b44877e",
+      "name": "Ethereum staking proposal could send rewards to developers - crypto.news",
       "officialUrl": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOeVB3NGMwamxzWnVENHhJUWpZN1BSc3ZZeXNFMkwtblppUnlYREJLOWdSQ0xYU1FtWWJGXzYwa1NPX2pFUWVlam9YQTM1dm5sNDZFZTY1QUszZXJFX2ZLMkExQ2xqbmxPZTVyZDlob05jMDM5TWN5NnpxdUNJN1llbVNtSzExQQ?oc=5&hl=en-US&gl=US&ceid=US:en",
       "canonicalUrl": null,
       "officialDomain": "news.google.com",
@@ -9582,7 +9579,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9610,7 +9607,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9638,7 +9635,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9666,7 +9663,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9694,7 +9691,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9722,7 +9719,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9750,7 +9747,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9778,7 +9775,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9806,12 +9803,12 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
-      "id": "free-5bd55d8b8a52ceb22e71",
-      "name": "Announcing the 2026 EF Internship - ethereum.org",
+      "id": "free-13c84658651c635c2ca8",
+      "name": "Announcing the 2026 EF Internship - blog.ethereum.org",
       "officialUrl": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBaV2VPT3N4V1diMUs5c0lvWEhLSkRYME4tQmFuQkhwVHN1X2w4aVVIbzNlVzVwMjJzS1VTSU1Rd2E3aXYxZ2ItRDBaY0NWTTlKTUMtcm5sSU1qMm9TYXJOU01R?oc=5&hl=en-US&gl=US&ceid=US:en",
       "canonicalUrl": null,
       "officialDomain": "news.google.com",
@@ -9834,7 +9831,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9862,7 +9859,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9890,7 +9887,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9918,7 +9915,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9946,7 +9943,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -9974,12 +9971,12 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
-      "id": "free-37ea8607fd1c900e952a",
-      "name": "SPX97K Token Presale: Top 10 Best Crypto Coins to Stake in 2026 - TechBullion",
+      "id": "free-19eaec7910a29e087f34",
+      "name": "SPX97K Token Presale: Top 10 Best Crypto Coins to Stake in 2026 - techbullion.com",
       "officialUrl": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPbFlJbmVjNGhHUF81ZHRCNWJXUERwS1ZhYjA1UjRWOVdTSzFRcGlHdVZjS1RsbkNoeW5HcUw2YTVrSEw3ZjJVVTRMX3djRWxqOVhGRHNzR2JZdDhNMVlROXVMWXRZdDRwMjVNeUVwVjRteVhPY0R5Mjl5N0dKSmI1Zkx4VnBFWmVOb2puR3VobDg?oc=5&hl=en-US&gl=US&ceid=US:en",
       "canonicalUrl": null,
       "officialDomain": "news.google.com",
@@ -10002,7 +9999,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10030,7 +10027,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10058,7 +10055,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10086,7 +10083,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10114,12 +10111,12 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
-      "id": "free-bf28fe9bb334724f4204",
-      "name": "DistributeX Unveils DX Coin Ecosystem Roadmap, Advancing Preparations for Its On-Chain Launch - The Manila Times",
+      "id": "free-42cd7bff0cc7364c0dfc",
+      "name": "DistributeX Unveils DX Coin Ecosystem Roadmap, Advancing Preparations for Its On-Chain Launch - manilatimes.net",
       "officialUrl": "https://news.google.com/rss/articles/CBMi9gFBVV95cUxNZ1NmV2duQW5XSm9PVXBid1QzRVl5Qk80Mlc0djhpVENkcG5SdVAtdWNRNi1OaUNBbmRtYWU1NnA1bUJRNFU0LUxEd0Z4d0MtVGlQdTY1LUFBVjJFb3lUNVIxaFVyNFhhQTMzczFTRUxqZDVPNklvV2JNRVJqNGNRZFBVM3RpTHBXUkFNd2phMDFfR1FMeF9ldE5LdHFCbVhraTd6cnBmZWNsZTVfY1k3NmV0MVhDZXNRTVQzUU9yVVdtV2JneHJudWRJYkVJNGVXREZNdnQ2dXlXLWxGM1Vwb2tMRjVEdEpxV0Z4NTlLM3ItXzhnMFHSAfsBQVVfeXFMTkxWVG9QOV9DWlRMMVhBRUhpVlZiakhxR0VwNEpsa1VYYzl1eHhVUDlJRmhDT1VHRDFkQWUwWXdkeEhxNGxNdGxtMlZDR2M3TGdTRlM1UVk1ZE5FSHpRR190a2hpQWpiVVFyVkRqcU9pck9LTzFDd2tBeU1kNHdtVVpXOWJGQzhNSGJYdnJudFhNb0JhWmJ5X1RFYk42VW5CM193ZTNSdnI0RTJsUEE1YW5wUWFOZHAtcV9XZEFaT0QzSDlrNkc4V3VKNjNFNi1xTjAwbnN3YzYweDNkbVlaVWxZQ1FDczYzRTlvWEVxM0xJcXFZVW9HVjlEQXM?oc=5&hl=en-US&gl=US&ceid=US:en",
       "canonicalUrl": null,
       "officialDomain": "news.google.com",
@@ -10142,7 +10139,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10170,7 +10167,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10198,7 +10195,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10226,7 +10223,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10254,7 +10251,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10282,12 +10279,12 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
-      "id": "free-71a8159691fdc3d2703b",
-      "name": "Linea Build ramps up Yield Boost allocation to 60% for ETH staking - cryptobriefing.com",
+      "id": "free-43ce8a1cd61899616424",
+      "name": "Linea Build ramps up Yield Boost allocation to 60% for ETH staking - Crypto Briefing",
       "officialUrl": "https://news.google.com/rss/articles/CBMid0FVX3lxTE02LUdDVnhVd0kyWWx5dTVGenp5WWpaemhocjNURUVMUkwxUEp5S0pZZ2NPMTdBdW5CVm55ZE5Kam1qSnNPX2g0dlZtXzZsQUFIZmxDVk55T3hPeE1OMXBiQVVNTFdKSlBIX2VucldwTFphejZDY3B3?oc=5&hl=en-US&gl=US&ceid=US:en",
       "canonicalUrl": null,
       "officialDomain": "news.google.com",
@@ -10310,7 +10307,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10338,7 +10335,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10366,12 +10363,12 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
-      "id": "free-bd8e18608924b19f079c",
-      "name": "Sky ecosystem becomes first DeFi protocol to receive an S&P credit rating - cryptobriefing.com",
+      "id": "free-d0d1e16f220012db11b4",
+      "name": "Sky ecosystem becomes first DeFi protocol to receive an S&P credit rating - Crypto Briefing",
       "officialUrl": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1xaGptUlpmWlM0dFRPM2w2eUlkTHo1Rk41azZpdkFCZFk5dWZXVU5XSVhfNmtJN0JfTmItdHpvaU9ITF9JMFRNZVBoTWlHQ2VYbEJBaUZSdTAyWllYWEZfZk82Y2RSbG9OTXV5V2lLY3JXZ18yQ3E1UA?oc=5&hl=en-US&gl=US&ceid=US:en",
       "canonicalUrl": null,
       "officialDomain": "news.google.com",
@@ -10394,7 +10391,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10422,7 +10419,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10450,7 +10447,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10478,7 +10475,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10506,7 +10503,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10534,7 +10531,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10562,12 +10559,12 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
-      "id": "free-c7935e2739a60883fb82",
-      "name": "LBank announces strategic brand partnership with Ponke, launching 40,000 USDT campaign - cryptobriefing.com",
+      "id": "free-b16007b1ec93d471f880",
+      "name": "LBank announces strategic brand partnership with Ponke, launching 40,000 USDT campaign - Crypto Briefing",
       "officialUrl": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPMkxtWGJyWjRpaExfTU93SEpHS0d2bHZGWl9GZzdzQ0JLblR5WFBuWjJwODhlLWZmVFJKeEZkWWduaFhoVFh3cHptblE5R2d6cklGZWJwRGJlVHJCYkk5Tmh1MUMybXloNGxOcXBNUXhzYlJLcDZxMnRiSk5QS3JVT2ZCQkZQVTFqaDFrU24wTnJIWkRkaFJCT2FXMFpiR3pSczlnOF9UdjZMc0hXanNjRm5n?oc=5&hl=en-US&gl=US&ceid=US:en",
       "canonicalUrl": null,
       "officialDomain": "news.google.com",
@@ -10590,7 +10587,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10618,7 +10615,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10646,7 +10643,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10674,7 +10671,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10702,7 +10699,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10730,7 +10727,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10758,7 +10755,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10786,7 +10783,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10814,7 +10811,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10842,7 +10839,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10870,7 +10867,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10898,7 +10895,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10926,7 +10923,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10954,7 +10951,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -10982,7 +10979,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11010,7 +11007,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11038,7 +11035,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11066,7 +11063,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11094,7 +11091,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11122,7 +11119,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11150,7 +11147,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11178,7 +11175,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11206,7 +11203,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11234,7 +11231,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11262,7 +11259,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11290,7 +11287,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11318,7 +11315,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11346,7 +11343,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11374,7 +11371,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11402,35 +11399,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
-    },
-    {
-      "accepted": false,
-      "id": "free-d7344644492608c2b8f1",
-      "name": "Algorand Staking: Best Sites to Stake ALGO in 2026 - 99Bitcoins",
-      "officialUrl": "https://news.google.com/rss/articles/CBMifkFVX3lxTFB6Mk41TDhKUHRzZFE2TThCc0hxZHVGYWRXSHE5LVpBWFRZOXJiN0pkTW5fSl9YVFZZUnREajNyQ1JfMHFVVGZMMHNFeHBjckZ0NlBxVGVBUFlsZ1VMSl9KdXRKd19ZQ3YwZzJiaXNpdkNaeVVfTUx3ekhhZmhNQQ?oc=5&hl=en-US&gl=US&ceid=US:en",
-      "canonicalUrl": null,
-      "officialDomain": "news.google.com",
-      "httpStatus": null,
-      "evidence": {
-        "live": [],
-        "free": [],
-        "tokenIdentity": [],
-        "requiredConditions": [],
-        "speculative": [],
-        "liveContext": [],
-        "freeContext": []
-      },
-      "rejectionReasons": [
-        "official_source_not_proven",
-        "source_unavailable",
-        "no_live_distribution_evidence",
-        "no_explicit_no_cost_evidence",
-        "token_identity_not_proven"
-      ],
-      "status": "REJECTED",
-      "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11458,7 +11427,35 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
+    },
+    {
+      "accepted": false,
+      "id": "free-d7344644492608c2b8f1",
+      "name": "Algorand Staking: Best Sites to Stake ALGO in 2026 - 99Bitcoins",
+      "officialUrl": "https://news.google.com/rss/articles/CBMifkFVX3lxTFB6Mk41TDhKUHRzZFE2TThCc0hxZHVGYWRXSHE5LVpBWFRZOXJiN0pkTW5fSl9YVFZZUnREajNyQ1JfMHFVVGZMMHNFeHBjckZ0NlBxVGVBUFlsZ1VMSl9KdXRKd19ZQ3YwZzJiaXNpdkNaeVVfTUx3ekhhZmhNQQ?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "canonicalUrl": null,
+      "officialDomain": "news.google.com",
+      "httpStatus": null,
+      "evidence": {
+        "live": [],
+        "free": [],
+        "tokenIdentity": [],
+        "requiredConditions": [],
+        "speculative": [],
+        "liveContext": [],
+        "freeContext": []
+      },
+      "rejectionReasons": [
+        "official_source_not_proven",
+        "source_unavailable",
+        "no_live_distribution_evidence",
+        "no_explicit_no_cost_evidence",
+        "token_identity_not_proven"
+      ],
+      "status": "REJECTED",
+      "executionMode": "NONE",
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11486,12 +11483,12 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
-      "id": "free-5ea8c9da31a64ffca290",
-      "name": "Best Cloud Mining Platforms For 2026 - coingape.com",
+      "id": "free-3e1cf1637f861fcd7700",
+      "name": "Best Cloud Mining Platforms For 2026 - CoinGape",
       "officialUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5iLVRxT3VrSVFNdXVNM3R1T2FfN2NLSk9iZDlSR054U1IzRDNFRW83VW53NnZrLTRjRFMtSTJEUC1PS0VzTnhWbEwwam9Va1NFd3dUOTMxNUxzVl9jZ0E?oc=5&hl=en-US&gl=US&ceid=US:en",
       "canonicalUrl": null,
       "officialDomain": "news.google.com",
@@ -11514,7 +11511,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11542,7 +11539,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11570,7 +11567,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11598,7 +11595,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11626,12 +11623,12 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
-      "id": "free-3e4ef79ae0d2e72c54d8",
-      "name": "Abracadabra proposes winding down MIM at four cents on the dollar - cryptobriefing.com",
+      "id": "free-1eeda48227f89eebf8b1",
+      "name": "Abracadabra proposes winding down MIM at four cents on the dollar - Crypto Briefing",
       "officialUrl": "https://news.google.com/rss/articles/CBMib0FVX3lxTE44UFRwdE5hd3hjVEVXZHNEcUpyUGNYbGppVnVOejhVdTA0cEh6anhYV002clJPQVRlWWRJSHN3R3l3bGdQcmZqa1c4ZkdVX2ktUkZzeHlDclpNN2NRbFB6UXpBUWl6OE16ZVFvbUdWUQ?oc=5&hl=en-US&gl=US&ceid=US:en",
       "canonicalUrl": null,
       "officialDomain": "news.google.com",
@@ -11654,7 +11651,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11682,7 +11679,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11710,7 +11707,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11738,7 +11735,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11766,7 +11763,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11794,7 +11791,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11822,7 +11819,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11850,7 +11847,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11878,7 +11875,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11906,7 +11903,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11934,7 +11931,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11962,7 +11959,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -11990,7 +11987,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12018,7 +12015,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12046,7 +12043,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12074,12 +12071,12 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
-      "id": "free-a983241ebe4719b97c58",
-      "name": "BTQ Technologies Deploys BIP 360 on Bitcoin Quantum Testnet v0.3.0 - quantumcomputingreport.com",
+      "id": "free-586d199c7af399f0ce4b",
+      "name": "BTQ Technologies Deploys BIP 360 on Bitcoin Quantum Testnet v0.3.0 - Quantum Computing Report",
       "officialUrl": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNNE9kRU1pRVJPMm1veFRHZ25qbXBwNWxidURYZ1IxRXZzazBfOXcxUjZHeEFmRkgyc0t5TGp0dTJvQ1JHd0ZnYWZZd2RXZUZCbUtEcGxsQURQQU5lODFiVnByRDZseWxaT0J2dWhyYnN6TjRpaVJfenBEYmxzVlU1TWVjQWdzekRwcWZfWVk4MkZ5Z0VMV3lSN09xYW5iSkRjX2dDeNIBqgFBVV95cUxQWnJsNFlJMkJaV09NbjJ0TS1ScXpWQUVGTEREZnZkaldfRWxiTGVLQk1lNW9UXzFoUl9scGlmVEl0ZXprZUh6MXJUNkhVZGV0SC1KVXpudjRzQjR0MDNKMzlVa2lWbkZXOGNDWERjNVY3aHA4dzhWZ1hTb2NndWF4aHRURm1RUjczOVA3akFESFIzRDVjTVhrWmxMX0JWNWZCWU40NGU0V0ZWZw?oc=5&hl=en-US&gl=US&ceid=US:en",
       "canonicalUrl": null,
       "officialDomain": "news.google.com",
@@ -12102,7 +12099,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12130,7 +12127,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12158,12 +12155,12 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
-      "id": "free-b34c0765b1e500ccef9c",
-      "name": "AFX launches high-performance Sovereign L1 testnet: A community-first revolution in on-chain derivatives - Crypto News",
+      "id": "free-8b6e455ea5c51b0afdb3",
+      "name": "AFX launches high-performance Sovereign L1 testnet: A community-first revolution in on-chain derivatives - crypto.news",
       "officialUrl": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOZWJON21zenJubG5zMjNCS1FyM1ltdDhDZXhaTUloclgyZTFfVTd4Vm9hQnVXbWEwZERTUFhXRG43N3RVSjJOZzByMnBSQVhZRTYxU0Y4WXRQNmdIdmx2MmkwVHg2SnpfZC1rd2I1WkdxWlBKaWEzb2VwNE80aTFpNFp6LTNzUlhJYXA2OWJoNjFJTjZlYWNwSWxOSTBob0s1TktPNWtWeVdpbVdCZGpTdTRmTkFMTjVnNU1qUFBDRkFWZw?oc=5&hl=en-US&gl=US&ceid=US:en",
       "canonicalUrl": null,
       "officialDomain": "news.google.com",
@@ -12186,7 +12183,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12214,12 +12211,12 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
-      "id": "free-5a7746593b4cc64ece21",
-      "name": "Postquant Labs Launches Quip.Network Testnet for Decentralized Quantum-Classical Optimization - quantumcomputingreport.com",
+      "id": "free-a29af6ab1a4805bb511a",
+      "name": "Postquant Labs Launches Quip.Network Testnet for Decentralized Quantum-Classical Optimization - Quantum Computing Report",
       "officialUrl": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOczFnbGM3UTdXcHNZWEV2TnB4dHFzSWpMMFE3eHllTHRoWG5YRS1EclBya3drd0NfVXJoaVI5VWNTYzNndDJyZURyNkFIenZ6V29KZVEtcFNRRlJNTEpxcE5WcDc4SjhZSUx3dzhxVndwZjN1LVQyNzhZUzlQYmE0TXRvY0RiU255Q2RLVEVkMGlCNDB4RHpieDdINGlxVW0xQzR3NTRmTTlhVC11QVpVSTBWX1JHRWtXSjBjRUktd0N5OEpHbFAwTNIBzgFBVV95cUxPNExORGRISU5rSVFwWjNlaFRRR2FjTEV6Q05qZlhQeXZFaXBVeHkzNFgySXQzNE9Vd09iYUdVb3RJTThVdER3SDlPMWJwaG1LTDJKNVpwN3M0QUlhRWtQZmM1RWplVmVqTTh3VEUwSG1TM3B5VllUMWJJczUtUnQ5NFBCVDJjdEZzY2RRVExQa043a0YyVTZKWUpWZnlMRUx2LVlPY3drR25RMzREbkVINGpmbWNEaloyeWhJWENUWVVVR1llX2pMazh3QzV0Zw?oc=5&hl=en-US&gl=US&ceid=US:en",
       "canonicalUrl": null,
       "officialDomain": "news.google.com",
@@ -12242,7 +12239,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12270,7 +12267,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12298,7 +12295,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12326,7 +12323,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12354,7 +12351,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12382,7 +12379,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12410,7 +12407,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12438,7 +12435,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12466,7 +12463,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12494,7 +12491,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12522,7 +12519,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12550,7 +12547,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12578,7 +12575,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12606,7 +12603,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12634,7 +12631,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12662,7 +12659,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12690,7 +12687,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12718,7 +12715,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12746,7 +12743,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12774,7 +12771,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12802,12 +12799,12 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
-      "id": "free-c2a192668d5d19faeb5a",
-      "name": "PoX-5 public testnet goes live with Bitcoin staking mechanism - cryptobriefing.com",
+      "id": "free-2f91891222d5c1829791",
+      "name": "PoX-5 public testnet goes live with Bitcoin staking mechanism - Crypto Briefing",
       "officialUrl": "https://news.google.com/rss/articles/CBMickFVX3lxTE1CMm91bkMxdEJZMFc5cHowQzA3dlFCNW9JOUVTZXlkR0RoTkxhZ3hLYUcxMUIyVkVkYU5JWk9tNk84Z0JvTDdJTFk1MHpmbGtjOFFvbmlsT0hDSHJVYzY4NC0zbnJEcnRPbDcybzE2U016QQ?oc=5&hl=en-US&gl=US&ceid=US:en",
       "canonicalUrl": null,
       "officialDomain": "news.google.com",
@@ -12830,7 +12827,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12858,7 +12855,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12886,7 +12883,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12914,7 +12911,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12942,7 +12939,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12970,7 +12967,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -12998,7 +12995,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13026,7 +13023,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13054,7 +13051,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13082,7 +13079,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13110,7 +13107,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13138,7 +13135,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13166,7 +13163,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13194,7 +13191,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13222,7 +13219,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13250,7 +13247,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13278,7 +13275,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13306,7 +13303,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13334,7 +13331,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13362,7 +13359,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13390,7 +13387,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13418,7 +13415,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13446,7 +13443,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13474,7 +13471,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13502,7 +13499,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13530,7 +13527,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13558,7 +13555,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13586,7 +13583,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13614,7 +13611,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13642,7 +13639,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13670,7 +13667,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13698,7 +13695,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13726,7 +13723,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13754,7 +13751,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13782,7 +13779,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13810,7 +13807,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13838,7 +13835,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13866,7 +13863,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13894,7 +13891,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13922,7 +13919,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13950,7 +13947,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -13978,7 +13975,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     },
     {
       "accepted": false,
@@ -14006,7 +14003,7 @@
       ],
       "status": "REJECTED",
       "executionMode": "NONE",
-      "verifiedAt": "2026-10-03T09:46:46.428031+00:00"
+      "verifiedAt": "2026-10-03T10:09:51.520066+00:00"
     }
   ],
   "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
