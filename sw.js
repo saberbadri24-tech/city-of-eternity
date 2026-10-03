@@ -1,5 +1,5 @@
-const CACHE='anilx-v15-fast';
-const ASSETS=['./','./index.html','./style.css','./script.js','./completion-layer.js','./unified-i18n-v3.js','./experience-dna.js','./adaptive-shell.js','./manifest.webmanifest','./icon.png','./robots.txt','./sitemap.xml','./sw.js'];
+const CACHE='anilx-v16-unified-lang';
+const ASSETS=['./','./index.html','./style.css','./script.js','./completion-layer.js','./unified-i18n-v3.js','./experience-dna.js','./adaptive-shell.js','./manifest.webmanifest','./icon.png','./robots.txt','./sitemap.xml','./sw.js','./settlement.html','./privacy.html','./terms.html','./support.html'];
 
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(async cache=>{await Promise.allSettled(ASSETS.map(async x=>{try{const r=await fetch(new Request(x,{cache:'reload'}));if(r.ok)await cache.put(x,r.clone())}catch{}}))}).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
