@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-10-03T22:56:59.537676+00:00",
+  "updatedAt": "2026-10-03T23:20:54.562323+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,15 +20,15 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1886,
-  "uniqueNewsPublishers": 544,
+  "discoveryCandidateCount": 1877,
+  "uniqueNewsPublishers": 545,
   "topPublishers": [
     {
       "publisher": "Binance",
-      "count": 110
+      "count": 109
     },
     {
-      "publisher": "immunefi.com",
+      "publisher": "Immunefi",
       "count": 88
     },
     {
@@ -36,59 +36,59 @@
       "count": 73
     },
     {
-      "publisher": "x.com",
-      "count": 64
+      "publisher": "CoinMarketCap",
+      "count": 71
     },
     {
-      "publisher": "CoinMarketCap",
-      "count": 58
+      "publisher": "x.com",
+      "count": 63
     },
     {
       "publisher": "Yelp",
       "count": 55
     },
     {
-      "publisher": "RootData",
-      "count": 53
-    },
-    {
       "publisher": "GitHub",
       "count": 49
     },
     {
-      "publisher": "Reddit",
-      "count": 48
+      "publisher": "Coin Gabbar",
+      "count": 46
     },
     {
-      "publisher": "Coin Gabbar",
+      "publisher": "Reddit",
       "count": 45
     },
     {
-      "publisher": "Phemex",
-      "count": 30
+      "publisher": "RootData",
+      "count": 43
     },
     {
       "publisher": "CCN.com",
       "count": 29
     },
     {
-      "publisher": "BitDegree",
-      "count": 28
+      "publisher": "Phemex",
+      "count": 29
     },
     {
       "publisher": "polygonscan.com",
+      "count": 28
+    },
+    {
+      "publisher": "bitdegree.org",
       "count": 27
     },
     {
       "publisher": "facebook.com",
-      "count": 26
-    },
-    {
-      "publisher": "LinkedIn",
-      "count": 21
+      "count": 23
     },
     {
       "publisher": "Bitget",
+      "count": 22
+    },
+    {
+      "publisher": "airdropalert.com",
       "count": 20
     },
     {
@@ -101,7 +101,7 @@
     },
     {
       "publisher": "Medium",
-      "count": 17
+      "count": 18
     }
   ],
   "invalidSources": [],
