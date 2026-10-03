@@ -39,7 +39,7 @@ async function writeGate(env,key,value){
 export async function adminLogin(req,env){
   if(req.method!=='POST')return json({ok:false,error:'method_not_allowed'},405);
   const secret=secretOf(env);
-  if(secret.length<9)return json({ok:false,error:'admin_password_not_configured'},503);
+  if(!/^\d{9}$/.test(secret))return json({ok:false,error:'admin_password_not_configured'},503);
   const ip=ipOf(req),key='admin/login/'+b64uJson(ip),now=Date.now(),gate=await readGate(env,key);
   if(Number(gate.blockedUntil)>now)return json({ok:false,error:'too_many_attempts'},429);
   const body=await req.json().catch(()=>null);
@@ -56,14 +56,14 @@ export async function adminLogin(req,env){
 
 export async function adminAuth(req,env){
   const secret=secretOf(env);
-  if(secret.length<9)return false;
+  if(!/^\d{9}$/.test(secret))return false;
   const raw=req.headers.get('cookie')||'';
   const m=raw.match(/(?:^|; )session=([^;]+)/);
   if(!m)return false;
   return verifySessionValue(m[1],secret);
 }
 
-export function adminConfigured(env){return secretOf(env).length>=9}
+export function adminConfigured(env){return /^\d{9}$/.test(secretOf(env))}
 
 export async function adminSelfTest(env){
   if(!adminConfigured(env))return {ok:false,configured:false,loginStatus:503,sessionValid:false,secretExposed:false};
