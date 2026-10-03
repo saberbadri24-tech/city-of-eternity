@@ -156,9 +156,39 @@ async function inventoryPage(path) {
     } catch (e) { links.push({ from:path, text:a.text, href:a.href, pass:false, error:String(e?.message||e) }); }
   }
   for (const b of data.buttons) {
-    if (!b.text || b.disabled || dangerous(b.text,b.id,"")) continue;
-    const selector = b.id ? `#${String(b.id).replace(/[^a-zA-Z0-9_-]/g, "\\const selector = b.id ? `#${CSS.escape(b.id)}` : `button:nth-of-type(${b.i+1})`;")}` : `button:nth-of-type(${b.i+1})`;
-    await clickSafe(b.id ? selector : `button`, `Button: ${b.text}`);
+    if (!b.text || b.disabled || dangerous(b.text, b.id, "")) continue;
+    const button = page.locator("button").nth(b.i);
+    if (!(await button.isVisible().catch(() => false))) {
+      controls.push({ label: `Button: ${b.text}`, pass: true, skipped: true, reason: "hidden responsive control", url: page.url() });
+      continue;
+    }
+    if (b.id === "run") {
+      try {
+        const responsePromise = page.waitForResponse(
+          res => res.url().includes("/api/revenue/fleet/run") && res.request().method() === "POST",
+          { timeout: 12000 }
+        );
+        await button.click();
+        const response = await responsePromise;
+        const body = await response.json().catch(() => ({}));
+        controls.push({
+          label: `Button: ${b.text}`,
+          pass: response.ok() && body?.ok !== false,
+          changed: true,
+          status: response.status(),
+          body: { ok: body?.ok, promoted: body?.promoted, qualified: body?.qualified, offers: body?.offers },
+          url: page.url()
+        });
+      } catch (e) {
+        controls.push({ label: `Button: ${b.text}`, pass: false, changed: false, error: String(e?.message || e), url: page.url() });
+      }
+      continue;
+    }
+    const selector = b.id
+      ? `#${String(b.id).replace(/[^a-zA-Z0-9_-]/g, "\\$&")}`
+      : `[data-qa-index="${b.i}"]`;
+    if (!b.id) await button.evaluate((el, i) => el.setAttribute("data-qa-index", String(i)), b.i);
+    await clickSafe(selector, `Button: ${b.text}`);
   }
 }
 
