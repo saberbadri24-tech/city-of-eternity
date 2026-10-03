@@ -517,7 +517,7 @@ async function adminLogin(req,env){if(req.method!=='POST')return json({ok:false,
 async function adminAuth(req,env){const secret=String(env.ANIL_ADMIN_PASSWORD??'').normalize('NFKC').trim();if(!secret)return false;const m=(req.headers.get('cookie')||'').match(/(?:^|; )session=([^;]+)/);if(!m)return false;const [body,sig]=m[1].split('.');if(!body||!sig||sig!==(await sign(body,secret)))return false;try{return JSON.parse(atob(body.replace(/-/g,'+').replace(/_/g,'/'))).exp>Date.now()}catch{return false}}
 async function anilOperatorChange(req,env,command){
   const rawBase='https://raw.githubusercontent.com/saberbadri24-tech/city-of-eternity/main/';
-  const safeRoots=['src/','functions/','scripts/','public/'];
+  const safeRoots=['src/','functions/','scripts/','public/','admin.html','guard.html','guard-dashboard.js','anilx-enhance.js','index.html','services.html','revenue-engine.html'];
   const blocked=['.env','secret','private-key','seed','credentials'];
   const ask=async(prompt)=>{
     if(!env.OPENAI_API_KEY)throw Error('openai_not_configured');
@@ -525,14 +525,14 @@ async function anilOperatorChange(req,env,command){
     if(!r.ok)throw Error('astra_'+r.status);
     const d=await r.json();const t=d?.choices?.[0]?.message?.content||'';try{return JSON.parse(t)}catch{const m=String(t).match(/\{[\s\S]*\}/);return m?JSON.parse(m[0]):null}
   };
-  const intent=await ask(JSON.stringify({request:command,allowedRepositories:['saberbadri24-tech/city-of-eternity'],allowedRoots:safeRoots,task:'Choose the single most relevant editable file and state the exact goal. Return {path,goal,message}. If no safe code change is justified return {path:null,goal:null,message:null}. Do not write code yet.'}));
+  const intent=await ask(JSON.stringify({request:command,allowedRepositories:['saberbadri24-tech/city-of-eternity'],allowedRoots:safeRoots,task:'Choose the single most relevant editable file and state the exact goal. You may work across the ANIL X owner console, Immortal Guard/Super Airdrop dashboard, assistant UI, Guard scripts, and site service UI when that is what the request requires. Return {path,goal,message}. If no safe code change is justified return {path:null,goal:null,message:null}. Do not write code yet.'}));
   const path=String(intent?.path||'').replace(/^\/+/, '');
   const lower=path.toLowerCase();
   if(!path||!safeRoots.some(x=>path.startsWith(x))||blocked.some(x=>lower.includes(x))||path.includes('..')||!/^[A-Za-z0-9_./-]+$/.test(path))return {ok:false,error:'no_safe_change_target',intent};
   const rr=await fetch(rawBase+encodeURI(path),{headers:{'user-agent':'ANIL-X-Operator/1.0'}});
   if(!rr.ok)throw Error('source_fetch_'+rr.status);
   const current=(await rr.text()).slice(0,190000);
-  const change=await ask(JSON.stringify({request:command,path,goal:intent?.goal||'',message:intent?.message||'ANIL X controlled improvement',currentFile:current,task:'Return {path,content,message,verification}. content must be the COMPLETE replacement file, not a diff. Keep changes narrowly scoped to the request. Never add secrets or credential values. verification is an array of deterministic checks to run.'}));
+  const change=await ask(JSON.stringify({request:command,path,goal:intent?.goal||'',message:intent?.message||'ANIL X controlled improvement',currentFile:current,task:'Return {path,content,message,verification}. content must be the COMPLETE replacement file, not a diff. Keep changes narrowly scoped to the request, but use related ANIL X/Guard UI and script files when they are the actual implementation surface. Never add secrets or credential values. verification is an array of deterministic checks to run.'}));
   const outPath=String(change?.path||path).replace(/^\/+/,''),content=typeof change?.content==='string'?change.content:null;
   const outLower=outPath.toLowerCase();
   if(outPath!==path||!content||!safeRoots.some(x=>outPath.startsWith(x))||blocked.some(x=>outLower.includes(x))||outPath.includes('..')||content.length>200000)return {ok:false,error:'generated_change_rejected'};
