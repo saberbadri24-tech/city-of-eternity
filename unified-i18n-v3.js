@@ -24,6 +24,6 @@ async function apply(target){
  try{await translateBatch(items,target);refs.forEach((n,i)=>{const t=items[i],v=translated.get(target+'|'+t);if(v){if(n.nodeType===3)n.nodeValue=n.nodeValue.replace(t,v);else n.setAttribute('placeholder',v)}})}catch{}
 }
 async function switchLang(next){if(!LANGS[next]||next===lang)return;lang=next;localStorage.setItem(KEY,next);const u=new URL(location.href);u.searchParams.set('lang',next);history.replaceState({},'',u);setup();await apply(next);window.dispatchEvent(new CustomEvent('anilx:language',{detail:{language:next}}))}
-function boot(){setup();remember();window.ANILX_LANGUAGE=lang;if(lang!=='en'){const idle=window.requestIdleCallback||((f)=>setTimeout(f,120));idle(()=>apply(lang).catch(()=>{}),{timeout:400})}}
+function boot(){setup();remember();window.ANILX_LANGUAGE=lang;if(lang==='fa'){apply('fa').catch(()=>{});return;}if(lang!=='en'){const idle=window.requestIdleCallback||((f)=>setTimeout(f,120));idle(()=>apply(lang).catch(()=>{}),{timeout:400})}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
