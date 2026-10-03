@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-10-03T06:36:46.145822+00:00",
+  "updatedAt": "2026-10-03T06:45:08.883808+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,20 +20,20 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1875,
-  "uniqueNewsPublishers": 545,
+  "discoveryCandidateCount": 1877,
+  "uniqueNewsPublishers": 543,
   "topPublishers": [
     {
       "publisher": "Binance",
-      "count": 109
+      "count": 110
     },
     {
-      "publisher": "Immunefi",
+      "publisher": "immunefi.com",
       "count": 89
     },
     {
       "publisher": "CoinMarketCap",
-      "count": 76
+      "count": 74
     },
     {
       "publisher": "HackerOne",
@@ -41,7 +41,7 @@
     },
     {
       "publisher": "x.com",
-      "count": 62
+      "count": 64
     },
     {
       "publisher": "Yelp",
@@ -53,23 +53,23 @@
     },
     {
       "publisher": "GitHub",
-      "count": 50
-    },
-    {
-      "publisher": "RootData",
-      "count": 44
+      "count": 49
     },
     {
       "publisher": "Reddit",
-      "count": 41
+      "count": 43
+    },
+    {
+      "publisher": "RootData",
+      "count": 43
     },
     {
       "publisher": "BitDegree",
       "count": 30
     },
     {
-      "publisher": "phemex.com",
-      "count": 29
+      "publisher": "Phemex",
+      "count": 28
     },
     {
       "publisher": "polygonscan.com",
@@ -81,27 +81,27 @@
     },
     {
       "publisher": "facebook.com",
-      "count": 24
+      "count": 26
     },
     {
       "publisher": "LinkedIn",
-      "count": 22
+      "count": 21
     },
     {
-      "publisher": "Bitget",
-      "count": 21
+      "publisher": "TradingView",
+      "count": 20
     },
     {
       "publisher": "Bybit",
       "count": 20
     },
     {
-      "publisher": "TradingView",
-      "count": 19
+      "publisher": "Bitget",
+      "count": 20
     },
     {
       "publisher": "Medium",
-      "count": 18
+      "count": 17
     }
   ],
   "invalidSources": [],
