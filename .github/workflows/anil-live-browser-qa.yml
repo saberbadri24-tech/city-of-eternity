@@ -49,7 +49,18 @@ jobs:
           const errors=[];
           page.on('pageerror',e=>errors.push(String(e)));
           page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});
+          async function waitForLive(path='/') {
+            let last=0;
+            for(let i=1;i<=6;i++){
+              const r=await page.request.get(base+path);
+              last=r.status();
+              if(r.ok()) return r;
+              await new Promise(x=>setTimeout(x,Math.min(2500*i,10000)));
+            }
+            throw new Error('Live endpoint did not recover; last HTTP '+last+' '+path);
+          }
           try{
+            await waitForLive('/');
             const health=await page.request.get(base+'/api/health');
             check(health.ok(),'GET /api/health');
             const hd=await health.json();
