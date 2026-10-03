@@ -66,18 +66,18 @@ jobs:
             const quick=page.locator('[data-request]');
             const quickCount=await quick.count();
             check(quickCount>=4,'quick action buttons discovered');
-            for(let i=0;i<quickCount;i++){
-              await quick.nth(i).click();
-              await page.waitForTimeout(350);
-              check(!(await page.locator('#requestInput').inputValue()).includes('<script'),'quick action safe input');
-            }
-            await page.locator('#profileBtn').click();
-            check(await page.locator('#profileModal').isVisible(),'profile modal opens');
+            await quick.first().click();
+            check(await page.locator('#profileModal').isVisible(),'quick action opens required profile');
             await page.locator('[data-age="adult"]').click();
             await page.locator('[data-goal="business"]').click();
             await page.locator('#saveProfile').click();
             await page.waitForTimeout(250);
             check(await page.locator('#profileModal').isHidden(),'profile modal closes after save');
+            for(let i=0;i<quickCount;i++){
+              await quick.nth(i).click();
+              await page.waitForTimeout(350);
+              check(!(await page.locator('#requestInput').inputValue()).includes('<script'),'quick action safe input');
+            }
             await page.locator('#voiceBtn').click().catch(()=>{});
             await page.waitForTimeout(250);
             check(errors.length===0,'no browser page errors during public smoke');
