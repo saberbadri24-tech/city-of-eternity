@@ -2,8 +2,8 @@
   "guard": "ANIL X Immortal Guard",
   "engine": "Official Source Discovery",
   "version": "16.0",
-  "updatedAt": "2026-10-03T06:14:57.643035+00:00",
-  "count": 32,
+  "updatedAt": "2026-10-03T06:35:42.471626+00:00",
+  "count": 33,
   "items": [
     {
       "title": "Galxe",
@@ -17,7 +17,7 @@
         "quest"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:39.274733+00:00",
+      "discoveredAt": "2026-10-03T06:35:26.969787+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -40,7 +40,7 @@
         "earn"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:39.596112+00:00",
+      "discoveredAt": "2026-10-03T06:35:27.367978+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -58,7 +58,7 @@
         "quest"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:40.172107+00:00",
+      "discoveredAt": "2026-10-03T06:35:27.957519+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -82,7 +82,7 @@
         "bug bounty"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:42.218893+00:00",
+      "discoveredAt": "2026-10-03T06:35:29.682810+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -101,7 +101,7 @@
         "bug bounty"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:42.513804+00:00",
+      "discoveredAt": "2026-10-03T06:35:29.827738+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -118,7 +118,7 @@
         "earn"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:43.745385+00:00",
+      "discoveredAt": "2026-10-03T06:35:30.755428+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -136,22 +136,25 @@
         "earn"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:44.580865+00:00",
+      "discoveredAt": "2026-10-03T06:35:31.358668+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
       "title": "Starknet Ecosystem",
-      "url": "https://www.starknet.io/ecosystem/",
+      "url": "https://www.starknet.io/",
       "publisher": "Starknet Ecosystem",
-      "resolvedUrl": "https://www.starknet.io/ecosystem/",
+      "resolvedUrl": "https://www.starknet.io/",
       "resolvedDomain": "starknet.io",
       "httpStatus": 200,
       "verification": "resolved-official-source",
       "signals": [
-        "quest"
+        "grant",
+        "quest",
+        "learn",
+        "earn"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:44.969633+00:00",
+      "discoveredAt": "2026-10-03T06:35:31.720712+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -167,7 +170,7 @@
         "earn"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:45.232520+00:00",
+      "discoveredAt": "2026-10-03T06:35:31.902158+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -184,7 +187,22 @@
         "earn"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:46.503579+00:00",
+      "discoveredAt": "2026-10-03T06:35:32.995081+00:00",
+      "executionGate": "OWNER_APPROVAL_REQUIRED"
+    },
+    {
+      "title": "Cosmos Ecosystem",
+      "url": "https://cosmos.network/ecosystem",
+      "publisher": "Cosmos Ecosystem",
+      "resolvedUrl": "https://cosmos.network/ecosystem",
+      "resolvedDomain": "cosmos.network",
+      "httpStatus": 200,
+      "verification": "resolved-official-source",
+      "signals": [
+        "quest"
+      ],
+      "action": "VERIFY_AND_REVIEW",
+      "discoveredAt": "2026-10-03T06:35:33.349054+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -202,7 +220,7 @@
         "earn"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:48.102701+00:00",
+      "discoveredAt": "2026-10-03T06:35:34.011773+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -221,7 +239,7 @@
         "bug bounty"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:48.768236+00:00",
+      "discoveredAt": "2026-10-03T06:35:34.298958+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -236,7 +254,7 @@
         "quest"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:49.197584+00:00",
+      "discoveredAt": "2026-10-03T06:35:34.709630+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -253,7 +271,7 @@
         "earn"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:49.371425+00:00",
+      "discoveredAt": "2026-10-03T06:35:34.839507+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -273,7 +291,7 @@
         "earn"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:49.949588+00:00",
+      "discoveredAt": "2026-10-03T06:35:35.183829+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -291,7 +309,7 @@
         "earn"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:50.264659+00:00",
+      "discoveredAt": "2026-10-03T06:35:35.503984+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -312,7 +330,7 @@
         "bug bounty"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:50.719055+00:00",
+      "discoveredAt": "2026-10-03T06:35:35.870701+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -330,7 +348,7 @@
         "earn"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:51.147568+00:00",
+      "discoveredAt": "2026-10-03T06:35:36.197161+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -350,7 +368,7 @@
         "bug bounty"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:51.848935+00:00",
+      "discoveredAt": "2026-10-03T06:35:36.661942+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -372,7 +390,7 @@
         "earn"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:52.032586+00:00",
+      "discoveredAt": "2026-10-03T06:35:36.822788+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -393,7 +411,7 @@
         "earn"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:52.391464+00:00",
+      "discoveredAt": "2026-10-03T06:35:37.251320+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -408,7 +426,7 @@
         "reward"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:53.529395+00:00",
+      "discoveredAt": "2026-10-03T06:35:38.798772+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -426,7 +444,7 @@
         "earn"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:53.793032+00:00",
+      "discoveredAt": "2026-10-03T06:35:39.130308+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -445,7 +463,7 @@
         "bug bounty"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:54.224104+00:00",
+      "discoveredAt": "2026-10-03T06:35:39.594643+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -466,7 +484,7 @@
         "earn"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:54.483290+00:00",
+      "discoveredAt": "2026-10-03T06:35:39.905783+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -481,7 +499,7 @@
         "quest"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:55.115027+00:00",
+      "discoveredAt": "2026-10-03T06:35:40.485690+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -500,7 +518,7 @@
         "earn"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:55.507326+00:00",
+      "discoveredAt": "2026-10-03T06:35:40.717227+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -519,7 +537,7 @@
         "earn"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:56.397886+00:00",
+      "discoveredAt": "2026-10-03T06:35:41.367054+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -538,7 +556,7 @@
         "bug bounty"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:56.589789+00:00",
+      "discoveredAt": "2026-10-03T06:35:41.469394+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -558,7 +576,7 @@
         "earn"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:56.773380+00:00",
+      "discoveredAt": "2026-10-03T06:35:41.629691+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -576,7 +594,7 @@
         "earn"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:57.041746+00:00",
+      "discoveredAt": "2026-10-03T06:35:41.993957+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     },
     {
@@ -593,7 +611,7 @@
         "earn"
       ],
       "action": "VERIFY_AND_REVIEW",
-      "discoveredAt": "2026-10-03T06:14:57.389604+00:00",
+      "discoveredAt": "2026-10-03T06:35:42.200222+00:00",
       "executionGate": "OWNER_APPROVAL_REQUIRED"
     }
   ],
