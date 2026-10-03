@@ -1,6 +1,6 @@
 import {json} from './runtime-state.mjs';
 
-const first=(env,keys)=>keys.map(k=>env?.[k]).find(v=>typeof v==='string'&&v.trim())||'';
+const first=(env,keys)=>keys.map(k=>env?.[k]).find(v=>typeof v==='string'&&v.trim())||'';const validTonAddress=a=>/^(?:EQ|UQ)[A-Za-z0-9_-]{46}$/.test(String(a||''));
 
 export async function handleExecutionReadiness(req,env){
   if(req.method!=='GET') return json({ok:false,error:'method_not_allowed'},405);
@@ -19,7 +19,7 @@ export async function handleExecutionReadiness(req,env){
     webSearch:Boolean(env?.TAVILY_API_KEY||env?.BRAVE_SEARCH_API_KEY),
     variza:Boolean(variza),
     varizaWebhook:Boolean(webhook),
-    tonMain:Boolean(mainTon),
+    tonMain:validTonAddress(mainTon),
     tonTemporary:Boolean(tempTon),
     fx:Boolean(Number.isFinite(fx)&&fx>0),
     durableStore:Boolean(env?.REDIS_URL)&&String(env?.PAYMENTS_DURABLE||'false').toLowerCase()==='true',
