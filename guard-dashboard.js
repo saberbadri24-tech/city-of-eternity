@@ -125,7 +125,9 @@ async function queueApproval(oid,url){
   const d=await r.json().catch(()=>({}));
   if(r.status===401){localStorage.setItem('anilx.pendingGuardApproval',JSON.stringify({opportunityId:oid,url}));location.href='admin.html#approvalGrid';return}
   if(!r.ok)throw Error(d.error||'ثبت بررسی ناموفق بود');
-  alert('فرصت در صف بررسی مالک ثبت شد.');await loadReport();
+  const source=(opportunities.find(x=>String(x.id||x.opportunityId||'')===String(oid))||{});
+  await fetch(API_BASE+'/api/guard/catches',{method:'POST',credentials:'same-origin',headers:{'content-type':'application/json'},body:JSON.stringify({opportunityId:oid,title:source.title||source.name||'شکار Guard',source:source.source||source.resolvedDomain||url,url,estimatedValue:Number(source.estimatedValueUsd||source.rewardUsd||source.value||0)||0,verifiedValue:Number(source.verifiedValueUsd||0)||0,verified:Boolean(source.officialVerified&&source.executionGate!=='OWNER_APPROVAL_REQUIRED'),notes:'شکار از صف Guard برای تأیید مالک ثبت شد.'})}).catch(()=>null);
+  alert('فرصت در صف بررسی مالک و صندوق شکار ثبت شد.');await loadReport();
  }catch(e){alert(e.message||'خطا')}
 }
 function updateTransferState(balance){
