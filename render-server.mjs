@@ -6,6 +6,7 @@ import {gzip} from 'node:zlib';
 import {promisify} from 'node:util';
 import {createHmac} from 'node:crypto';
 import {createPaymentsStore} from './functions/api/render-payments-store.mjs';
+import {handleExecutionReadiness} from './functions/api/execution-readiness.mjs';
 
 const gzipAsync=promisify(gzip);
 const root=path.dirname(fileURLToPath(import.meta.url));
@@ -66,6 +67,9 @@ const server=http.createServer(async(req,res)=>{
 
     if(u.pathname==='/api/health'&&req.method==='GET'){
       return res.end(await (async()=>{const out={ok:true,ready:true,service:'ANIL X',runtime:'render-static-gateway',configured:{admin:Boolean(process.env.ANIL_ADMIN_PASSWORD),openai:Boolean(process.env.OPENAI_API_KEY),anthropic:Boolean(process.env.ANTHROPIC_API_KEY),gemini:Boolean(process.env.GEMINI_API_KEY),variza:Boolean(process.env.VARIZA_API_KEY||process.env.VARIA_API_KEY||process.env.VARIZA_TOKEN||process.env.VARIZA_KEY),payments:Boolean(process.env.PAYMENTS||process.env.REDIS_URL),assets:true},revenue:{storageConfigured:Boolean(process.env.REDIS_URL),durableAccounting:String(process.env.PAYMENTS_DURABLE||'false').toLowerCase()==='true',variza:Boolean(process.env.VARIZA_API_KEY||process.env.VARIA_API_KEY||process.env.VARIZA_TOKEN||process.env.VARIZA_KEY),ton:Boolean(process.env.TON_MAIN_WALLET_ADDRESS||process.env.TON_PERMANENT_WALLET_ADDRESS),guardTemporaryTon:Boolean(process.env.TON_TEMP_WALLET_ADDRESS||process.env.GUARD_TEMP_WALLET_ADDRESS||process.env.TON_RECEIVING_ADDRESS)}};res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');return JSON.stringify(out)})());
+    }
+    if(u.pathname==='/api/execution-readiness'){
+      const rr=await handleExecutionReadiness(req,env);res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
     }
     if(u.pathname==='/api/admin/password/login'&&req.method==='POST'){
       const rr=await directAdminLogin(req);res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
