@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 2,
+  "name": "ANIL X Super Revenue Operating System",
+  "cadenceMinutes": 5,
+  "principle": "Every engine must discover, verify, execute within permissions, measure, and improve.",
+  "engines": [
+    {
+      "id": "immortal-guard",
+      "visibility": "owner",
+      "revenue": "verified opportunity/reward",
+      "treasury": "temporary wallet -> owner approval -> main wallet"
+    },
+    {
+      "id": "bounty-radar",
+      "visibility": "owner",
+      "revenue": "accepted authorized bounty",
+      "treasury": "temporary wallet -> owner approval -> main wallet"
+    },
+    {
+      "id": "grant-hunter",
+      "visibility": "owner",
+      "revenue": "grant/prize",
+      "treasury": "owner approval before submission or funds movement"
+    },
+    {
+      "id": "affiliate-radar",
+      "visibility": "owner",
+      "revenue": "commission",
+      "treasury": "provider settlement/account rules"
+    },
+    {
+      "id": "b2b-lead-hunter",
+      "visibility": "owner",
+      "revenue": "qualified lead/project",
+      "treasury": "compliant prospecting; owner-approved outreach"
+    },
+    {
+      "id": "market-gap-hunter",
+      "visibility": "owner",
+      "revenue": "new paid workflow/product",
+      "treasury": "build-test-offer cycle"
+    },
+    {
+      "id": "micro-saas-factory",
+      "visibility": "owner",
+      "revenue": "subscription/usage",
+      "treasury": "real product + billing"
+    },
+    {
+      "id": "research-data-engine",
+      "visibility": "owner",
+      "revenue": "reports/subscription",
+      "treasury": "original/authorized data"
+    },
+    {
+      "id": "digital-asset-licensing",
+      "visibility": "owner",
+      "revenue": "license/royalty",
+      "treasury": "owned/licensable assets"
+    },
+    {
+      "id": "agent-commerce",
+      "visibility": "public",
+      "revenue": "agent-readable discovery and paid workflows",
+      "treasury": "explicit authorization at transaction boundary"
+    },
+    {
+      "id": "ai-automation",
+      "visibility": "public",
+      "revenue": "project/retainer",
+      "treasury": "real order + settlement"
+    },
+    {
+      "id": "ai-support-desk",
+      "visibility": "public",
+      "revenue": "subscription/retainer",
+      "treasury": "real order + settlement"
+    },
+    {
+      "id": "lead-generation",
+      "visibility": "public",
+      "revenue": "lead/retainer",
+      "treasury": "compliant acquisition"
+    },
+    {
+      "id": "paid-research",
+      "visibility": "public",
+      "revenue": "report/subscription",
+      "treasury": "real deliverable"
+    },
+    {
+      "id": "digital-products",
+      "visibility": "public",
+      "revenue": "product sale",
+      "treasury": "owned deliverable"
+    },
+    {
+      "id": "website-build-fix",
+      "visibility": "public",
+      "revenue": "project/maintenance",
+      "treasury": "real order + settlement"
+    }
+  ],
+  "lifecycle": [
+    "DISCOVER",
+    "VERIFY",
+    "SCORE",
+    "QUALIFY",
+    "PACKAGE",
+    "OFFER",
+    "SETTLE",
+    "DELIVER",
+    "RETAIN",
+    "LEARN",
+    "IMPROVE"
+  ],
+  "quality": {
+    "noFakeRevenue": true,
+    "revenueRequiresSettledReceipt": true,
+    "everyEngineNeedsEvidence": true,
+    "everyMutationNeedsTest": true,
+    "rollbackRequired": true,
+    "secretStorage": "environment-only",
+    "noSeedOrPrivateKeyHandling": true,
+    "noCaptchaBypass": true,
+    "noKycBypass": true,
+    "noUnauthorizedMessaging": true,
+    "noAutomaticWalletSigning": true,
+    "noUnapprovedFundTransfer": true
+  },
+  "treasury": {
+    "ownerOpportunity": "TEMP_WALLET -> OWNER_APPROVAL -> MAIN_WALLET",
+    "ordinaryProviderSettlement": "PROVIDER_SETTLEMENT -> ACCOUNTING -> MAIN_WALLET_WHEN_PROVIDER_AND_RUNTIME_SUPPORT_IT",
+    "directMainAllowedOnlyWhen": "provider settlement is real, main wallet is configured, and no owner approval is required by the specific payment rail"
+  },
+  "adaptiveSite": {
+    "visibleChangeEveryVisit": true,
+    "changeTypes": [
+      "content",
+      "layout",
+      "recommendation",
+      "opportunity",
+      "performance",
+      "new capability"
+    ],
+    "rule": "changes must be evidence-backed, reversible, and regression-tested",
+    "noRandomRedesign": true
+  },
+  "flagship": {
+    "differentiator": "evidence-backed autonomous revenue opportunity operating system",
+    "loop": "market gap -> evidence -> smallest viable engine -> test -> offer -> settle -> learn -> improve",
+    "publicPromise": "capability and evidence, never guaranteed income"
+  }
+}
