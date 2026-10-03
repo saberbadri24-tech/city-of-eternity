@@ -1,0 +1,39 @@
+name: ANIL X Super Team — five minute live council
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  live-council:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify public health
+        run: |
+          set -euo pipefail
+          curl -fsSL --max-time 20 https://city-of-eternity.onrender.com/api/health >/tmp/health.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/health.json'))
+          assert d.get('ok') is True
+          print("health ok; admin configured:", d.get("configured",{}).get("admin"))
+          PY
+      - name: Run central ANIL super team
+        run: |
+          set -euo pipefail
+          curl -fsSL --max-time 60 -X POST             -H "content-type: application/json"             --data '{"task":"Run the ANIL X central council cycle: verify live state, consult specialists, protect revenue integrity, identify the highest-value reversible improvement, and stop on regression."}'             https://city-of-eternity.onrender.com/api/anil/super-team >/tmp/team.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/team.json'))
+          assert d.get("ok") is True
+          assert d.get("engine")=="ANIL-SUPER-TEAM"
+          assert d.get("safety",{}).get("finalCommand")=="ANIL"
+          assert d.get("safety",{}).get("autoSigning") is False
+          print("ANIL super team cycle:", json.dumps({
+            "liveProviders":d.get("evidence",{}).get("liveProviders",[]),
+            "guardFresh":d.get("evidence",{}).get("guardFresh"),
+            "commandSource":d.get("command",{}).get("source","local")
+          }, ensure_ascii=False))
+          PY
