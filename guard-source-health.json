@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-10-03T13:17:07.728628+00:00",
+  "updatedAt": "2026-10-03T13:27:21.391198+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,51 +20,55 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1872,
-  "uniqueNewsPublishers": 540,
+  "discoveryCandidateCount": 1868,
+  "uniqueNewsPublishers": 535,
   "topPublishers": [
     {
       "publisher": "Binance",
-      "count": 110
+      "count": 109
     },
     {
-      "publisher": "immunefi.com",
+      "publisher": "Immunefi",
       "count": 89
     },
     {
-      "publisher": "CoinMarketCap",
-      "count": 70
+      "publisher": "HackerOne",
+      "count": 71
     },
     {
-      "publisher": "HackerOne",
-      "count": 70
+      "publisher": "CoinMarketCap",
+      "count": 68
     },
     {
       "publisher": "x.com",
-      "count": 63
+      "count": 61
     },
     {
-      "publisher": "yelp.com",
-      "count": 54
+      "publisher": "Yelp",
+      "count": 53
     },
     {
-      "publisher": "GitHub",
-      "count": 49
-    },
-    {
-      "publisher": "reddit.com",
+      "publisher": "Reddit",
       "count": 47
     },
     {
-      "publisher": "Coin Gabbar",
+      "publisher": "GitHub",
+      "count": 46
+    },
+    {
+      "publisher": "coingabbar.com",
       "count": 46
     },
     {
       "publisher": "RootData",
-      "count": 41
+      "count": 36
     },
     {
       "publisher": "polygonscan.com",
+      "count": 31
+    },
+    {
+      "publisher": "BitDegree",
       "count": 28
     },
     {
@@ -76,12 +80,8 @@
       "count": 27
     },
     {
-      "publisher": "BitDegree",
-      "count": 26
-    },
-    {
       "publisher": "facebook.com",
-      "count": 25
+      "count": 23
     },
     {
       "publisher": "LinkedIn",
@@ -92,16 +92,16 @@
       "count": 21
     },
     {
+      "publisher": "Bybit",
+      "count": 20
+    },
+    {
       "publisher": "TradingView",
       "count": 19
     },
     {
-      "publisher": "Bybit",
-      "count": 19
-    },
-    {
       "publisher": "AirdropAlert",
-      "count": 17
+      "count": 18
     }
   ],
   "invalidSources": [],
