@@ -36,7 +36,9 @@ async function assetsFetch(request){
   }catch{return new Response('Not Found',{status:404})}
 }
 
-// Admin authentication is implemented once in functions/api/admin-auth.mjs.\nconst env={...process.env,ASSETS:{fetch:assetsFetch},PAYMENTS:createPaymentsStore(process.env.REDIS_URL)};\nconst server=http.createServer(async(req,res)=>{
+// Admin authentication is implemented once in functions/api/admin-auth.mjs.
+const env={...process.env,ASSETS:{fetch:assetsFetch},PAYMENTS:createPaymentsStore(process.env.REDIS_URL)};
+const server=http.createServer(async(req,res)=>{
   try{
     const host=req.headers.host||'localhost';
     const origin='http://'+host;
