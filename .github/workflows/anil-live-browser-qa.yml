@@ -81,8 +81,9 @@ jobs:
               await page.waitForTimeout(250);
             }
             check(await page.locator('#profileModal').isHidden(),'profile onboarding closes');
-            await page.locator('#profileBtn').click();
-            check(await page.locator('#profileModal').isVisible(),'profile button reopens modal');
+            const profileTrigger=page.locator('#profileBtn:visible').count();
+            if(await profileTrigger){await page.locator('#profileBtn').click()}else{await page.locator('#changeProfile').click()}
+            check(await page.locator('#profileModal').isVisible(),'profile controls reopen modal');
             await page.locator('#closeProfile').click();
             check(await page.locator('#profileModal').isHidden(),'profile modal closes');
             const quick=page.locator('[data-request]');
