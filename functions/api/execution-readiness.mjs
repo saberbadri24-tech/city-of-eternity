@@ -22,7 +22,7 @@ export async function handleExecutionReadiness(req,env){
     tonMain:Boolean(mainTon),
     tonTemporary:Boolean(tempTon),
     fx:Boolean(Number.isFinite(fx)&&fx>0),
-    durableStore:Boolean(env?.PAYMENTS),
+    durableStore:Boolean(env?.REDIS_URL)&&String(env?.PAYMENTS_DURABLE||'false').toLowerCase()==='true',
     assets:Boolean(env?.ASSETS)
   };
   return json({
