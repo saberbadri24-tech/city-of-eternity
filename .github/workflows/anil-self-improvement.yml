@@ -57,7 +57,7 @@ jobs:
           PY
       - name: Generate bounded patch
         id: patch
-        if: steps.gate.outputs.count == '0'
+        if: steps.keygate.outputs.enabled == 'true' && steps.gate.outputs.count == '0'
         env: {OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}}
         run: |
           python - <<'PY'
@@ -92,7 +92,7 @@ jobs:
           npx playwright install --with-deps chromium
           node scripts/production-browser-smoke.mjs
       - name: Open review PR
-        if: steps.gate.outputs.count == '0' && steps.patch.outputs.skip != 'true'
+        if: steps.keygate.outputs.enabled == 'true' && steps.gate.outputs.count == '0' && steps.patch.outputs.skip != 'true'
         env: {GH_TOKEN: ${{ github.token }}}
         run: |
           PATHV=$(python -c 'import json;print(json.load(open("/tmp/change.json"))["path"])')
