@@ -63,7 +63,7 @@ export async function adminAuth(req,env){
   return verifySessionValue(m[1],secret);
 }
 
-export function adminConfigured(env){return secretOf(env).length>=10}
+export function adminConfigured(env){return secretOf(env).length>=9}
 
 export async function adminSelfTest(env){
   if(!adminConfigured(env))return {ok:false,configured:false,loginStatus:503,sessionValid:false,secretExposed:false};
