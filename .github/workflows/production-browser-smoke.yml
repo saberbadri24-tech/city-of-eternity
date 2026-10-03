@@ -1,24 +1,43 @@
-name: ANIL X Production Browser Smoke
+name: ANIL X Production Browser QA
 
 on:
   schedule:
     - cron: "*/15 * * * *"
   workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
 
 jobs:
-  smoke:
+  browser-qa:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
+
       - name: Install Playwright
         run: npm install --no-save playwright@1.55.0
+
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
-      - name: Run production smoke test
+
+      - name: Full production browser QA
         env:
           ANIL_BASE_URL: https://city-of-eternity.onrender.com
         run: node scripts/production-browser-smoke.mjs
+
+      - name: Upload QA report and screenshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: anilx-browser-qa-${{ github.run_number }}
+          path: artifacts/anil-browser/
+          if-no-files-found: warn
+          retention-days: 7
