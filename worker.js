@@ -128,9 +128,9 @@ async function revenueFleetState(env){
   const persistence=!!env.PAYMENTS;
   const durable=String(env.PAYMENTS_DURABLE||'false').toLowerCase()==='true';
   const engines=REVENUE_FLEET.map(e=>{
-    const operational=e.status==='OWNER_GATED'?ton&&temp:e.status==='ACTIVE'?variza&&persistence:false;
+    const operational=e.status==='OWNER_GATED'?ton&&persistence:e.status==='ACTIVE'?variza&&persistence:false;
     const state=e.status==='OWNER_GATED'
-      ? (ton&&temp?'READY_OWNER_APPROVAL':'BLOCKED_MISSING_TEMP_TON')
+      ? (ton&&persistence?'READY_OWNER_APPROVAL':'BLOCKED_OWNER_DEPENDENCY')
       : e.status==='ACTIVE'
         ? (variza&&persistence?'LIVE_REVENUE_PATH':variza?'PAYMENT_READY_NO_DURABLE_STORAGE':'BLOCKED_PAYMENT')
         : 'DEPENDENCY_REQUIRED';
