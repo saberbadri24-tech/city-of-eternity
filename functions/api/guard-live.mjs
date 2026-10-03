@@ -10,7 +10,7 @@ async function fromGithub(name){
   return JSON.parse(Buffer.from(String(d.content).replace(/\s/g,''),'base64').toString('utf8'));
 }
 async function fetchJson(name){
-  try{const r=await fetch(BASE+name,{headers:{accept:'application/json','cache-control':'no-cache'}});if(!r.ok)throw Error('raw_'+r.status);return {data:await r.json(),source:'raw'}}
+  try{const r=await fetch(BASE+name+'?v='+Math.floor(Date.now()/60000),{headers:{accept:'application/json','cache-control':'no-cache'}});if(!r.ok)throw Error('raw_'+r.status);return {data:await r.json(),source:'raw'}}
   catch(rawError){
     try{return {data:await fromGithub(name),source:'github-api'}}catch(apiError){
       return {data:{error:String(apiError.message||rawError.message||'source_error'),source:'error'},source:'error'}
