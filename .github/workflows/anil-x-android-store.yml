@@ -38,8 +38,8 @@ jobs:
         working-directory: mobile
         run: |
           test -f android/variables.gradle
-          grep -q 'compileSdkVersion = 36\|compileSdkVersion 36' android/variables.gradle || true
-          grep -q 'targetSdkVersion = 36\|targetSdkVersion 36' android/variables.gradle || true
+          grep -Eq 'compileSdkVersion[[:space:]]*=[[:space:]]*36|compileSdkVersion[[:space:]]+36' android/variables.gradle
+          grep -Eq 'targetSdkVersion[[:space:]]*=[[:space:]]*36|targetSdkVersion[[:space:]]+36' android/variables.gradle
       - name: Build release bundle
         working-directory: mobile/android
         run: ./gradlew bundleRelease
