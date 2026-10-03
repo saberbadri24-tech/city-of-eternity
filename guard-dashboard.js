@@ -1,6 +1,6 @@
 (()=>{'use strict';
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const MANIFEST=location.hostname.endsWith('onrender.com')?location.origin+'/render-tonconnect-manifest.json':'https://saberbadri24-tech.github.io/city-of-eternity/tonconnect-manifest.json';const API_BASE=location.hostname.endsWith('onrender.com')?'': 'https://city-of-eternity.onrender.com';
+const MANIFEST=location.origin+'/render-tonconnect-manifest.json';const API_BASE='';
 let tonUI=null,wallet=null,temporaryWalletAddress='',guardStatus={},opportunities=[],displayLimit=100;
 
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
