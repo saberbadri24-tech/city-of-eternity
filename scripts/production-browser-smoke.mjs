@@ -88,6 +88,8 @@ async function inventory(url) {
       try {
         await page.goto(url, { waitUntil: "domcontentloaded", timeout: 15000 });
         await waitStable();
+        const modal = page.locator("#profileModal");
+        if (await modal.isVisible().catch(() => false)) await page.locator("#closeProfile").click().catch(() => {});
         const targetButton = page.locator("button").nth(b.i);
         if (!(await targetButton.isVisible().catch(() => false))) {
           skippedHidden.push({ url, text: b.text, reason: "hidden UI control" });
