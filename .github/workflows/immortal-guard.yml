@@ -117,12 +117,15 @@ jobs:
             echo "No Guard state changes."
             exit 0
           fi
+          # Rebase is unsafe here because Guard intentionally regenerates many JSON state files.
+          # Reset the working tree to the latest main, keep only freshly generated Guard state,
+          # then publish that state as a fast-forward commit.
+          git fetch origin main
+          git reset --mixed origin/main
+          git add guard-*.json rewards.json
+          if git diff --cached --quiet; then
+            echo "No Guard state changes after sync."
+            exit 0
+          fi
           git commit -m "chore: refresh immortal guard state"
-          for attempt in 1 2 3; do
-            git fetch origin main
-            git rebase origin/main && git push origin HEAD:main && exit 0
-            git rebase --abort || true
-            sleep $((attempt * 3))
-          done
-          echo "Guard state push failed after 3 rebase attempts."
-          exit 1
+          git push origin HEAD:main
