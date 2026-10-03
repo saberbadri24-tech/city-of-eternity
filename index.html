@@ -124,7 +124,7 @@
 </section>
 </main>
 
-<footer><strong>ANIL X STUDIO</strong><span>Global · Human · Intelligent</span><a href="admin.html">Owner Console</a></footer>
+<footer><strong>ANIL X STUDIO</strong><span>Global · Human · Intelligent</span><nav aria-label="ANIL X"><a href="account.html">Account</a><a href="prizes.html">Rewards</a><a href="feedback.html">Feedback</a><a href="fun.html">Discovery</a><a href="admin.html">Owner Console</a></nav></footer>
 
 <div id="profileModal" class="profile-modal" hidden><div class="profile-card">
   <button id="closeProfile" class="close" type="button">×</button><span class="eyebrow">PERSONAL WORKSPACE</span><h2>Shape the experience.</h2><p>Choose an age range and goal. You can change them later.</p>
@@ -138,7 +138,11 @@
 <script>
 if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 const idle=window.requestIdleCallback||((f)=>setTimeout(f,900));
-idle(()=>{['anilx-enhance.js?v=20260918-2','experience-dna.js?v=20260927-2','webmcp.js?v=20260918-1','adaptive-shell.js?v=20260918-2','site-guard-center.js?v=20260927-1','experience-layer.js?v=20261003-perf2'].forEach(src=>{const s=document.createElement('script');s.src=src;s.defer=true;document.head.appendChild(s)})},{timeout:1800});
+const load=src=>{const s=document.createElement('script');s.src=src;s.defer=true;document.head.appendChild(s)};
+idle(()=>{['experience-dna.js?v=20260927-2','adaptive-shell.js?v=20260918-2','site-guard-center.js?v=20260927-1'].forEach(load)}, {timeout:1800});
+setTimeout(()=>load('experience-layer.js?v=20261003-perf2'),1600);
+setTimeout(()=>load('webmcp.js?v=20260918-1'),2400);
+setTimeout(()=>load('anilx-enhance.js?v=20260918-2'),3400);
 </script>
 <script src="unified-i18n-v3.js?v=20261003-perf3" defer></script>
 </body></html>
