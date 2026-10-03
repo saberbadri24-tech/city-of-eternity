@@ -54,16 +54,16 @@ export async function onRequestPost({ request, env }) {
         local.status = 'amount_mismatch';
         local.updatedAt = now();
         local.providerAmount = Number.isFinite(paidAmount) ? paidAmount : null;
-        state.orders.set(local.id, local);
-        return json({ ok: true, orderId: local.id, status: 'amount_mismatch' }, 200);
+        state.orders.set(local.orderId, local);
+        return json({ ok: true, orderId: local.orderId, status: 'amount_mismatch' }, 200);
       }
       local.status = 'paid';
       local.paidAt = now();
       local.attemptCode = payload.attempt_code || null;
       local.providerAmount = paidAmount;
       local.updatedAt = now();
-      state.orders.set(local.id, local);
-      return json({ ok: true, orderId: local.id, status: 'paid' });
+      state.orders.set(local.orderId, local);
+      return json({ ok: true, orderId: local.orderId, status: 'paid' });
     }
 
     const deliveryId =

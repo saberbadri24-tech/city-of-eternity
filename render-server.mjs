@@ -5,6 +5,7 @@ import {fileURLToPath} from 'node:url';
 import {gzip} from 'node:zlib';
 import {promisify} from 'node:util';
 import {createHmac} from 'node:crypto';
+import {createPaymentsStore} from './functions/api/render-payments-store.mjs';
 
 const gzipAsync=promisify(gzip);
 const root=path.dirname(fileURLToPath(import.meta.url));
@@ -36,7 +37,7 @@ async function assetsFetch(request){
 const ADMIN_SECRET=String(process.env.ANIL_ADMIN_PASSWORD||'');
 // Admin authentication is fail-closed at the login endpoint; a missing secret must never take the public ANIL X runtime offline.
 
-const env={...process.env,ASSETS:{fetch:assetsFetch}};
+const env={...process.env,ASSETS:{fetch:assetsFetch},PAYMENTS:createPaymentsStore(process.env.REDIS_URL)};
 const loginAttempts=new Map();
 const b64u=s=>Buffer.from(s).toString('base64').replace(/=+$/,'').replace(/\+/g,'-').replace(/\//g,'_');
 const signNode=(v,secret)=>b64u(createHmac('sha256',secret).update(v).digest());
