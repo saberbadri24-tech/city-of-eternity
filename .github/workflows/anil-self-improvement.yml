@@ -31,13 +31,15 @@ jobs:
       - name: Check for existing improvement PR
         if: steps.keygate.outputs.enabled == 'true'
         id: gate
-        env: {GH_TOKEN: ${{ github.token }}}
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           n=$(gh pr list --state open --search "head:anil/self-improve-" --json number --jq 'length')
           echo "count=$n" >> "$GITHUB_OUTPUT"
       - name: Ask Astra for one bounded improvement
         if: steps.keygate.outputs.enabled == 'true' && steps.gate.outputs.count == '0'
-        env: {OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           python - <<'PY'
           import json,os,urllib.request,re
