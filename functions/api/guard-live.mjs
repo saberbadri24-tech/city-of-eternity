@@ -61,6 +61,8 @@ export async function handleGuardLive(req,env){
   const receiptItems=Array.isArray(receipts.items)?receipts.items:[];
   const approvalItems=Array.isArray(transfer.approvals)?transfer.approvals:Array.isArray(transfer.items)?transfer.items:[];
   const compact=(x)=>({id:x?.id||x?.opportunityId||null,title:String(x?.title||x?.name||'فرصت').slice(0,100),source:String(x?.source||x?.resolvedDomain||'').slice(0,80),status:String(x?.status||x?.verification||'').slice(0,40),value:Number(x?.value||x?.rewardUsd||x?.estimatedValueUsd||0)||0});
+  const temporaryConfigured=String(status.temporaryWallet||'').toLowerCase()==='configured';
+  const permanentConfigured=Boolean(status.permanentWallet||status.permanentAddress);
   const out={
     ok:true,source:'ANIL-X-local-guard-state',
     updatedAt:status.updatedAt||status.lastScan||opportunities.updatedAt||null,
@@ -76,7 +78,7 @@ export async function handleGuardLive(req,env){
     opportunities:{count:Number(status.discoveryCount||status.counts?.opportunities||oppItems.length||0),items:oppItems.slice(0,5).map(compact)},
     valueHunter:{count:Number(status.highValueCandidates||status.counts?.incomePriority||highItems.length||0),items:highItems.slice(0,5).map(compact)},
     revenue:{confirmedIncome:Number(ledger.confirmedIncome||ledger.totalReceived||0),status:String(ledger.status||'UNCONFIRMED').slice(0,30)},
-    transfer:{status:catchItems.some(x=>x.status==='PENDING_OWNER')?'OWNER_APPROVAL_REQUIRED':String(transfer.status||'OWNER_APPROVAL_REQUIRED').slice(0,40),temporaryConfigured:false,temporaryWalletUsed:false,catchQueueConfigured:Boolean(env?.PAYMENTS),catchQueuePending:catchItems.filter(x=>x.status==='PENDING_OWNER').length,permanentConfigured:Boolean(status.permanentWallet||status.permanentAddress),pendingApprovals:catchItems.filter(x=>x.status==='PENDING_OWNER').length},
+    transfer:{status:catchItems.some(x=>x.status==='PENDING_OWNER')?'OWNER_APPROVAL_REQUIRED':String(transfer.status||'OWNER_APPROVAL_REQUIRED').slice(0,40),temporaryConfigured,temporaryWalletUsed:false,catchQueueConfigured:Boolean(env?.PAYMENTS),catchQueuePending:catchItems.filter(x=>x.status==='PENDING_OWNER').length,permanentConfigured,pendingApprovals:catchItems.filter(x=>x.status==='PENDING_OWNER').length},
     ai:{
       live:Boolean(ai.live||ai.healthy||ai.overall==='healthy'),
       configured:Boolean(ai.configured||ai.providers||Object.values(ai.providerAvailability||{}).some(Boolean)),
