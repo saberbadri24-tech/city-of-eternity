@@ -1,5 +1,5 @@
 (()=>{'use strict';
-const API='https://city-of-eternity.onrender.com';
+const API='';
 const services=[
 {id:'website',name:'AI Website Build',description:'ساخت سایت حرفه‌ای',price:149},
 {id:'teaser',name:'Marketing Teaser',description:'تیزر تبلیغاتی',price:49},
