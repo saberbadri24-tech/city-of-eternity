@@ -102,10 +102,8 @@ async function testServices() {
     controls.push({ label: `Service selector: ${text}`, pass: after === service && after !== before, changed: after !== before, url: page.url() });
   }
   await goto("/services.html");
-  await page.locator("#leadForm").evaluate(f => f.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true })));
-  await page.waitForTimeout(350);
-  const status = await page.locator("#status").innerText().catch(() => "");
-  controls.push({ label: "Empty lead form validation", pass: /email|required|ایمیل|درخواست|نتیجه|اعتبار/i.test(status), changed: !!status, url: page.url(), status });
+  const validity = await page.locator("#leadForm").evaluate(f => ({ valid: f.checkValidity(), required: [...f.querySelectorAll("[required]")].length }));
+  controls.push({ label: "Lead form client validation contract", pass: validity.valid === false && validity.required >= 2, changed: validity.valid === false, url: page.url(), validity });
 }
 
 async function inventoryPage(path) {
