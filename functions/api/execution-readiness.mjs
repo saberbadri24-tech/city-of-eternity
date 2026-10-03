@@ -10,7 +10,6 @@ export async function handleExecutionReadiness(req,env){
   const variza=first(env,['VARIZA_API_KEY','VARIA_API_KEY','VARIZA_TOKEN','VARIZA_KEY','VARIZA_API_TOKEN','VARIZA_SECRET']);
   const webhook=first(env,['VARIZA_WEBHOOK_SECRET','VARIA_WEBHOOK_SECRET','VARIZA_WEBHOOK_TOKEN','VARIZA_WEBHOOK_KEY','VARIZA_SECRET']);
   const mainTon=first(env,['TON_MAIN_WALLET_ADDRESS','TON_PERMANENT_WALLET_ADDRESS','TON_MAIN_ADDRESS','TON_WALLET_ADDRESS','MAIN_TON_WALLET','MAIN_WALLET_ADDRESS','PERMANENT_WALLET_ADDRESS']);
-  const tempTon=first(env,['TON_TEMP_WALLET_ADDRESS','GUARD_TEMP_WALLET_ADDRESS','TON_TEMP_ADDRESS','TEMP_TON_WALLET','TEMP_WALLET_ADDRESS','TON_RECEIVING_ADDRESS']);
   const fx=Number(first(env,['USD_TOMAN_RATE','USD_TO_TOMAN','USD_TOMAN','USD_IRR_RATE'])||0);
   const providers={
     openai:Boolean(openai),
@@ -20,7 +19,7 @@ export async function handleExecutionReadiness(req,env){
     variza:Boolean(variza),
     varizaWebhook:Boolean(webhook),
     tonMain:validTonAddress(mainTon),
-    tonTemporary:Boolean(tempTon),
+    guardCatchQueue:true,
     fx:Boolean(Number.isFinite(fx)&&fx>0),
     durableStore:Boolean(env?.REDIS_URL)&&String(env?.PAYMENTS_DURABLE||'false').toLowerCase()==='true',
     assets:Boolean(env?.ASSETS)
@@ -39,7 +38,8 @@ export async function handleExecutionReadiness(req,env){
     providers,
     wallet:{
       publicTonPaymentsEnabled:providers.tonMain,
-      guardStagingEnabled:providers.tonTemporary,
+      guardStagingEnabled:false,
+      guardCatchQueueEnabled:providers.guardCatchQueue,
       ownerApprovalRequired:true
     },
     truth:{
