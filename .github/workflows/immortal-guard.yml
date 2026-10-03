@@ -2,8 +2,6 @@ name: Immortal Guard — Continuous Radar
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
   schedule:
     - cron: "7/5 * * * *"
 
@@ -16,7 +14,6 @@ concurrency:
 
 jobs:
   guard:
-    if: github.event_name != 'push' || github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
