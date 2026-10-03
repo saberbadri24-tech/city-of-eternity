@@ -22,7 +22,7 @@ async function writeGate(env,key,value){
 export async function adminLogin(req,env){
   if(req.method!=='POST')return json({ok:false,error:'method_not_allowed'},405);
   const secret=secretOf(env);
-  if(secret.length<10)return json({ok:false,error:'admin_password_not_configured'},503);
+  if(secret.length<9)return json({ok:false,error:'admin_password_not_configured'},503);
   const ip=ipOf(req),key='admin/login/'+b64uJson(ip),now=Date.now(),gate=await readGate(env,key);
   if(Number(gate.blockedUntil)>now)return json({ok:false,error:'too_many_attempts'},429);
   const body=await req.json().catch(()=>null);
