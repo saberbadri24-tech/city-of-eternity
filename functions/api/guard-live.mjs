@@ -5,7 +5,9 @@ const LOCAL={
  ledger:'guard-evidence-ledger.json',
  transfer:'guard-approvals.json',
  receipts:'guard-receipts.json',
- ai:'guard-capabilities.json'
+ ai:'guard-capabilities.json',
+ radar:'guard-super-radar.json',
+ sourceHealth:'guard-source-health.json'
 };
 const REMOTE='https://raw.githubusercontent.com/saberbadri24-tech/city-of-eternity/main/';
 let cache={at:0,data:null};
