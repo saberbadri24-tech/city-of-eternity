@@ -1,8 +1,6 @@
 (()=>{'use strict';
 const CDN='https://unpkg.com/@tonconnect/ui@3.0.2/dist/tonconnect-ui.min.js';
-const MANIFEST=location.hostname.endsWith('onrender.com')
- ? location.origin+'/render-tonconnect-manifest.json'
- : 'https://saberbadri24-tech.github.io/city-of-eternity/tonconnect-manifest.json';
+const MANIFEST=location.origin+'/render-tonconnect-manifest.json';
 function start(){
  if(!window.TON_CONNECT_UI?.TonConnectUI)return false;
  let host=document.querySelector('#ton-connect');
