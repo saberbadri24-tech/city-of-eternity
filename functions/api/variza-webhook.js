@@ -88,7 +88,8 @@ export async function onRequestPost({ request, env }) {
     if (order) {
       const paid =
         Number.isFinite(Number(payload.amount)) &&
-        Number(payload.amount) >= Number(order.providerAmount ?? order.amount);
+        Number.isFinite(Number(order.providerAmount ?? order.amount)) &&
+        Number(payload.amount) === Number(order.providerAmount ?? order.amount);
 
       const updated = {
         ...order,
