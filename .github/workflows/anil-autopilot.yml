@@ -13,7 +13,10 @@ jobs:
         env:
           ANIL_API_URL: https://city-of-eternity.onrender.com
         run: |
+          ID_TOKEN=$(curl -fsSL -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x" | jq -r '.value')
+          test -n "$ID_TOKEN" && test "$ID_TOKEN" != "null"
           curl --fail --silent --show-error \
             -X POST "$ANIL_API_URL/api/autopilot" \
             -H "content-type: application/json" \
+            -H "Authorization: Bearer $ID_TOKEN" \
             -d '{}'
