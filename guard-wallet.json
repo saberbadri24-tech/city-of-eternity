@@ -1,10 +1,10 @@
 {
-  "temporaryWalletAddress": "",
-  "mainWalletAddress": "",
+  "walletRole": "MAIN_TREASURY",
+  "temporaryWalletUsed": false,
   "mode": "owner-approval",
   "configured": false,
   "privateKeysCollected": false,
   "automaticSigning": false,
   "automaticTransfer": false,
-  "notes": "Temporary Guard receiving address is runtime-secret supplied; permanent/main wallet is never copied into Guard state."
+  "notes": "Immortal Guard prepares verified opportunities for owner approval; irreversible movement goes only to the owner-configured main treasury wallet. No private key or seed phrase is collected."
 }
