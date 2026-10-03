@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-10-03T11:22:52.745785+00:00",
+  "updatedAt": "2026-10-03T11:40:26.669876+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,90 +20,9 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1871,
-  "uniqueNewsPublishers": 547,
-  "topPublishers": [
-    {
-      "publisher": "Binance",
-      "count": 110
-    },
-    {
-      "publisher": "Immunefi",
-      "count": 89
-    },
-    {
-      "publisher": "HackerOne",
-      "count": 71
-    },
-    {
-      "publisher": "CoinMarketCap",
-      "count": 69
-    },
-    {
-      "publisher": "x.com",
-      "count": 60
-    },
-    {
-      "publisher": "Yelp",
-      "count": 52
-    },
-    {
-      "publisher": "GitHub",
-      "count": 49
-    },
-    {
-      "publisher": "Coin Gabbar",
-      "count": 47
-    },
-    {
-      "publisher": "Reddit",
-      "count": 45
-    },
-    {
-      "publisher": "RootData",
-      "count": 43
-    },
-    {
-      "publisher": "BitDegree",
-      "count": 28
-    },
-    {
-      "publisher": "polygonscan.com",
-      "count": 28
-    },
-    {
-      "publisher": "ccn.com",
-      "count": 27
-    },
-    {
-      "publisher": "Phemex",
-      "count": 27
-    },
-    {
-      "publisher": "facebook.com",
-      "count": 25
-    },
-    {
-      "publisher": "LinkedIn",
-      "count": 22
-    },
-    {
-      "publisher": "Bitget",
-      "count": 21
-    },
-    {
-      "publisher": "TradingView",
-      "count": 20
-    },
-    {
-      "publisher": "Bybit",
-      "count": 20
-    },
-    {
-      "publisher": "AirdropAlert",
-      "count": 18
-    }
-  ],
+  "discoveryCandidateCount": 0,
+  "uniqueNewsPublishers": 0,
+  "topPublishers": [],
   "invalidSources": [],
   "sourceDomains": [
     "algorand.co",
