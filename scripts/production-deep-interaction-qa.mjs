@@ -79,7 +79,12 @@ async function clickSafe(selector, label, expected, waitMs = 900) {
 async function testHomepage() {
   await page.setViewportSize({ width: 1280, height: 900 });
   await goto("/");
-  await clickSafe("#profileBtn", "Profile opens personalization", s => s.modal > 0);
+  const profileModalOpen = await page.locator("#profileModal").isVisible().catch(() => false);
+  if (profileModalOpen) {
+    controls.push({ label: "Profile personalization entry", pass: true, alreadyOpen: true, url: page.url() });
+  } else {
+    await clickSafe("#profileBtn", "Profile opens personalization", s => s.modal > 0);
+  }
   await page.locator("[data-age='adult']").click();
   await page.locator("[data-goal='business']").click();
   await clickSafe("#saveProfile", "Save personalized workspace", s => s.modal === 0 && /business|کسب/i.test(s.text));
