@@ -18,6 +18,7 @@ const networkErrors = [];
 const buttonResults = [];
 const pages = [];
 const skippedRisk = [];
+const skippedHidden = [];
 const visited = new Set();
 
 page.on("console", m => {
@@ -87,6 +88,11 @@ async function inventory(url) {
       try {
         await page.goto(url, { waitUntil: "domcontentloaded", timeout: 15000 });
         await waitStable();
+        const targetButton = page.locator("button").nth(b.i);
+        if (!(await targetButton.isVisible().catch(() => false))) {
+          skippedHidden.push({ url, text: b.text, reason: "hidden UI control" });
+          continue;
+        }
         const before = await page.locator("body").innerText().catch(() => "");
         const beforeUrl = page.url();
         await page.locator("button").nth(b.i).click({ timeout: 3000 });
@@ -135,6 +141,7 @@ const report = {
   buttonsPassed: buttonResults.filter(x => x.pass).length,
   buttonsFailed: buttonResults.filter(x => !x.pass).length,
   riskyButtonsSkipped: skippedRisk.length,
+  hiddenButtonsSkipped: skippedHidden.length,
   consoleErrors: consoleErrors.length,
   networkErrors: networkErrors.length,
   pages,
