@@ -64,7 +64,7 @@ export async function handleGuardLive(req,env){
     opportunities:{count:Number(status.discoveryCount||status.counts?.opportunities||oppItems.length||0),items:oppItems.slice(0,5).map(compact)},
     valueHunter:{count:Number(status.highValueCandidates||status.counts?.incomePriority||highItems.length||0),items:highItems.slice(0,5).map(compact)},
     revenue:{confirmedIncome:Number(ledger.confirmedIncome||ledger.totalReceived||0),status:String(ledger.status||'UNCONFIRMED').slice(0,30)},
-    transfer:{status:String(transfer.status||'OWNER_APPROVAL_REQUIRED').slice(0,40),temporaryConfigured:Boolean(status.temporaryWallet==='configured'),permanentConfigured:Boolean(status.permanentWallet||status.permanentAddress),pendingApprovals:approvalItems.length},
+    transfer:{status:String(transfer.status||'OWNER_APPROVAL_REQUIRED').slice(0,40),temporaryConfigured:Boolean(status.temporaryWallet==='configured'),permanentConfigured:Boolean(status.permanentWallet||status.permanentAddress),pendingApprovals:Number(status.waitingOwner||status.counts?.waitingOwner||0)},
     ai:{live:Boolean(ai.live||ai.healthy||ai.overall==='healthy'),configured:Boolean(ai.configured||ai.providers),successfulCalls:Number(ai.successfulCalls||0)},
     sources:Object.fromEntries(entries.map(([key,x])=>[key,x.source])),
     safety:{autoClaim:false,autoSigning:false,autoTransfer:false,secretStorage:false,bypassControls:false,ownerApprovalRequired:true}
