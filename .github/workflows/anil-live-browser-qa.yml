@@ -70,7 +70,13 @@ jobs:
             check(readiness.ok(),'GET /api/execution-readiness');
             const gd=await page.request.get(base+'/api/guard/live?t='+Date.now());
             check(gd.ok(),'GET /api/guard/live');
-            const sd=await page.request.post(base+'/api/anil/super-team',{data:{task:'QA only: inspect live state, return evidence and stop conditions; do not mutate anything.'}});
+            const oidc=await page.request.get('https://api.github.com/repos/saberbadri24-tech/city-of-eternity/actions/oidc/token?audience=anil-x');
+            check(oidc.ok(),'GitHub OIDC token endpoint');
+            const od=await oidc.json();
+            const sd=await page.request.post(base+'/api/anil/super-team',{
+              headers:{Authorization:'Bearer '+String(od?.value||'')},
+              data:{task:'QA only: inspect live state, return evidence and stop conditions; do not mutate anything.'}
+            });
             check(sd.ok(),'POST /api/anil/super-team');
             const sjson=await sd.json();
             check(sjson.engine==='ANIL-SUPER-TEAM','super-team engine identity');
