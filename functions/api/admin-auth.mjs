@@ -56,3 +56,14 @@ export async function adminAuth(req,env){
 }
 
 export function adminConfigured(env){return secretOf(env).length>=12}
+
+export async function adminSelfTest(env){
+  if(!adminConfigured(env))return {ok:false,configured:false,loginStatus:503,sessionValid:false,secretExposed:false};
+  const secret=secretOf(env);
+  const loginReq=new Request('https://internal/api/admin/password/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({password:secret})});
+  const loginRes=await adminLogin(loginReq,env);
+  const cookie=loginRes.headers.get('set-cookie')||'';
+  const sessionReq=new Request('https://internal/api/admin/secretary',{method:'POST',headers:{cookie}});
+  const sessionValid=loginRes.status===200&&await adminAuth(sessionReq,env);
+  return {ok:sessionValid,configured:true,loginStatus:loginRes.status,sessionValid,secretExposed:false};
+}
