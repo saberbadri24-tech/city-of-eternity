@@ -17,7 +17,8 @@
     "ANIL_X_is_the_only_main_site": true,
     "cityOfEternity_is_not_an_ANIL_X_runtime_module": true,
     "immortalGuard_is_inside_owner_console": true,
-    "no_duplicate_guard_engines": true
+    "no_duplicate_guard_engines": true,
+    "guardReceivingWallet": "MAIN_TREASURY"
   },
   "operating_rule": {
     "continueFromLatestCommit": true,
@@ -52,9 +53,10 @@
     "adminPasswordRequiredPattern": "^.{9}$",
     "walletSource": "Render environment secret TON_MAIN_WALLET",
     "walletMustBeValidatedAtRuntime": true,
-    "temporaryGuardWalletSource": "GitHub Actions secret TON_GUARD_TEMP_WALLET",
-    "temporaryGuardWalletMustBeDistinctFromMain": true,
-    "guardPublicStateMustNeverContainMainWallet": true
+    "temporaryGuardWalletSource": null,
+    "temporaryGuardWalletMustBeDistinctFromMain": false,
+    "guardPublicStateMustNeverContainMainWallet": true,
+    "temporaryWalletUsed": false
   },
   "ownerRuntimeRequirements": {
     "TON_MAIN_WALLET": "SET_IN_RENDER_SECRET",
