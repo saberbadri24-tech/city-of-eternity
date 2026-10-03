@@ -11,7 +11,7 @@ jobs:
   polish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Attach experience layer
         run: |
           grep -q 'ANIL_X_EXPERIENCE_POLISH_V2' script.js || cat experience-layer.js >> script.js
