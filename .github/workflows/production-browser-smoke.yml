@@ -35,6 +35,7 @@ jobs:
       - name: Deep production interaction QA
         env:
           ANIL_BASE_URL: https://city-of-eternity.onrender.com
+          ANIL_ADMIN_PASSWORD: ${{ secrets.ANIL_ADMIN_PASSWORD }}
         run: node scripts/production-deep-interaction-qa.mjs
 
       - name: Full production browser QA
