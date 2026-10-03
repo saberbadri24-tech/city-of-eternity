@@ -1,8 +1,10 @@
 {
-  "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
+  "temporaryWalletAddress": "",
   "mainWalletAddress": "",
   "mode": "owner-approval",
+  "configured": false,
   "privateKeysCollected": false,
   "automaticSigning": false,
-  "notes": "Public addresses only. Owner approval is required before signing or transferring funds."
+  "automaticTransfer": false,
+  "notes": "Guard temporary wallet must come only from dedicated TON_GUARD_TEMP_WALLET runtime secret. Permanent/main wallet is never copied into Guard state."
 }
