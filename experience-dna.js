@@ -40,7 +40,7 @@ const adapt=()=>{
  document.documentElement.dataset.axFormat=dna.prefs.format||'text';
  document.body.classList.toggle('ax-discovery-mode',!!dna.prefs.discovery);
  const badge=document.querySelector('#audienceBadge');
- if(badge&&dna.prefs.goal) badge.textContent='تجربه زنده · '+({business:'کسب‌وکار',create:'خلق',fix:'حل مشکل',learn:'یادگیری',discover:'کشف'}[dna.prefs.goal]||'شخصی');
+ if(badge&&dna.prefs.goal){const fa=document.documentElement.lang==='fa'||document.documentElement.dir==='rtl';const labels=fa?{business:'کسب‌وکار',create:'خلق',fix:'حل مشکل',learn:'یادگیری',discover:'کشف'}:{business:'Business',create:'Creating',fix:'Fixing',learn:'Learning',discover:'Exploring'};badge.textContent=(fa?'تجربه زنده · ':'Live experience · ')+(labels[dna.prefs.goal]|| (fa?'شخصی':'Personal'));}
 };
 const trackClicks=()=>{
  document.addEventListener('click',e=>{
