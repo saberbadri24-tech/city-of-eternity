@@ -8,6 +8,10 @@ on:
     workflows: ["ANIL X Predeploy CI"]
     types: [completed]
 
+concurrency:
+  group: anilx-revenue-flywheel
+  cancel-in-progress: true
+
 permissions:
   contents: read
   id-token: write
