@@ -76,6 +76,28 @@ async function clickSafe(selector, label, expected, waitMs = 900) {
   }
 }
 
+async function authenticateOwner() {
+  const secret = process.env.ANIL_ADMIN_PASSWORD || "";
+  if (!secret) {
+    controls.push({ label: "Owner authentication", pass: true, skipped: true, reason: "CI admin secret not configured" });
+    return false;
+  }
+  await goto("/admin.html");
+  const login = page.locator("#login");
+  if (!(await login.isVisible().catch(() => false))) {
+    controls.push({ label: "Owner authentication", pass: true, alreadyAuthenticated: true, url: page.url() });
+    return true;
+  }
+  await page.locator("#p1").fill(secret);
+  const responsePromise = page.waitForResponse(res => res.url().includes("/api/admin/login") && res.request().method() === "POST", { timeout: 12000 }).catch(() => null);
+  await page.locator("#loginBtn").click();
+  const response = await responsePromise;
+  await page.waitForTimeout(700);
+  const hidden = !(await login.isVisible().catch(() => true));
+  controls.push({ label: "Owner authentication", pass: hidden && (!response || response.ok()), status: response?.status?.() || null, url: page.url() });
+  return hidden;
+}
+
 async function testHomepage() {
   await page.setViewportSize({ width: 1280, height: 900 });
   await goto("/");
@@ -194,6 +216,7 @@ async function inventoryPage(path) {
 
 await testHomepage();
 await testServices();
+await authenticateOwner();
 for (const p of ["/revenue-engine.html","/guard.html","/admin.html"]) {
   await page.setViewportSize({ width: 1280, height: 900 });
   await inventoryPage(p);
