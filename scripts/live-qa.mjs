@@ -58,7 +58,7 @@ console.log(JSON.stringify({
   adminAuthSelfTest:true,
   durableAccounting:true,
   mainTonConfigured:true,
-  temporaryWalletSeparated:false,
+  temporaryWalletConfigured:false,
   runtimeReady:true,
   homepage:true
 }));
