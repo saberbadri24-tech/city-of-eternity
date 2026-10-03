@@ -1,0 +1,23 @@
+name: ANIL X autonomy
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  revenue-flywheel:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run ANIL X autonomous cycle
+        run: |
+          set -e
+          curl --fail --silent --show-error --max-time 45 -X POST \
+            "https://city-of-eternity.onrender.com/api/revenue/fleet/run" \
+            -H "content-type: application/json" \
+            -d '{}' \
+            -o /tmp/anilx.json
+          cat /tmp/anilx.json
