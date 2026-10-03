@@ -14,6 +14,18 @@ async function sessionCookie(secret,now=Date.now()){
   const sig=await sign(payload,secret);
   return {payload,sig,cookie:`session=${payload}.${sig}`};
 }
+async function verifySessionValue(raw,secret){
+  const token=String(raw||'');
+  const [body,sig]=token.split('.');
+  if(!body||!sig)return false;
+  const expected=await sign(body,secret);
+  if(sig!==expected)return false;
+  try{
+    const padded=body.replace(/-/g,'+').replace(/_/g,'/')+'='.repeat((4-body.length%4)%4);
+    const data=JSON.parse(atob(padded));
+    return data.sub==='admin'&&Number(data.exp)>Date.now();
+  }catch{return false}
+}
 function ipOf(req){return String(req.headers.get('x-forwarded-for')||'unknown').split(',')[0].trim().slice(0,120)}
 async function readGate(env,key){
   try{return env?.PAYMENTS?await env.PAYMENTS.get(key,'json')||{count:0,blockedUntil:0}:attempts.get(key)||{count:0,blockedUntil:0}}
@@ -48,15 +60,7 @@ export async function adminAuth(req,env){
   const raw=req.headers.get('cookie')||'';
   const m=raw.match(/(?:^|; )session=([^;]+)/);
   if(!m)return false;
-  const [body,sig]=m[1].split('.');
-  if(!body||!sig)return false;
-  const expected=await sign(body,secret);
-  if(sig!==expected)return false;
-  try{
-    const padded=body.replace(/-/g,'+').replace(/_/g,'/')+'='.repeat((4-body.length%4)%4);
-    const data=JSON.parse(atob(padded));
-    return data.sub==='admin'&&Number(data.exp)>Date.now();
-  }catch{return false}
+  return verifySessionValue(m[1],secret);
 }
 
 export function adminConfigured(env){return secretOf(env).length>=10}
@@ -72,5 +76,6 @@ export async function adminSelfTest(env){
   const cookie=responseCookie||issued.cookie;
   const sessionReq=new Request('https://internal/api/admin/secretary',{method:'POST',headers:{cookie}});
   const sessionValid=loginRes.status===200&&await adminAuth(sessionReq,env);
-  return {ok:sessionValid,configured:true,loginStatus:loginRes.status,sessionValid,cookieIssued:Boolean(responseCookie),cookieFormat:/^session=[^.]+\.[^;]+$/.test(cookie),secretExposed:false};
+  const directSessionValid=await verifySessionValue(cookie.replace(/^session=/,''),secret);
+  return {ok:sessionValid&&directSessionValid,configured:true,loginStatus:loginRes.status,sessionValid,directSessionValid,cookieIssued:Boolean(responseCookie),cookieFormat:/^session=[^.]+\.[^;]+$/.test(cookie),secretExposed:false};
 }
