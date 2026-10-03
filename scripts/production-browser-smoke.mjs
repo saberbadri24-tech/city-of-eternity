@@ -81,6 +81,10 @@ async function inventory(url) {
 
     for (const b of info.buttons) {
       if (!b.text || b.disabled) continue;
+      if (b.request) {
+        skippedHidden.push({ url, text: b.text, reason: "covered by deep production interaction QA with live /api/plan request verification" });
+        continue;
+      }
       if (risk.test(b.text)) {
         skippedRisk.push({ url, text: b.text, reason: "destructive/auth/payment/wallet action requires explicit owner interaction" });
         continue;
