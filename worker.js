@@ -69,7 +69,8 @@ async function revenueFleetStatus(env){
    ok:true,
    truth:{
      paymentReady:configured.variza,
-     persistentAccounting:configured.persistence,
+     persistentAccounting:configured.durableAccounting,
+storageConfigured:configured.storage,
      aiReady:configured.ai,
      tonReady:configured.ton
    },
@@ -113,7 +114,7 @@ async function revenueFleetStatus(env){
 }
 async function revenueFleetState(env){
   const latest=await kvGet(env,'revenue-fleet/latest',null);
-  return {ok:true,latest,persistence:!!env.PAYMENTS,engines:await Promise.all(REVENUE_FLEET.map(async e=>await kvGet(env,'revenue-engine/'+e.id,{id:e.id,status:e.status,operational:(e.status==='OWNER_GATED'&&!!env.TON_RECEIVING_ADDRESS)||(e.status==='ACTIVE'&&!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY))})))};
+  return {ok:true,latest,storageConfigured:!!env.PAYMENTS,durableAccounting:String(env.PAYMENTS_DURABLE||'false').toLowerCase()==='true',engines:await Promise.all(REVENUE_FLEET.map(async e=>await kvGet(env,'revenue-engine/'+e.id,{id:e.id,status:e.status,operational:(e.status==='OWNER_GATED'&&!!env.TON_RECEIVING_ADDRESS)||(e.status==='ACTIVE'&&!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY))})))};
 }
 
 const REVENUE_PROGRAMS=[
