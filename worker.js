@@ -35,6 +35,8 @@ async function kvPut(env,key,value){if(env.PAYMENTS)await env.PAYMENTS.put(key,J
 async function kvList(env,prefix,limit=100){if(!env.PAYMENTS)return[];try{const x=await env.PAYMENTS.list({prefix});const keys=(x?.keys||[]).slice(-limit);return (await Promise.all(keys.map(k=>env.PAYMENTS.get(k.name,'json').catch(()=>null)))).filter(Boolean)}catch{return[]}}
 async function runAutopilotSafe(env){return await autopilot(new Request('https://internal/api/autopilot',{method:'POST'}),env).then(async r=>await r.json()).catch(e=>({ok:false,error:String(e?.message||e)}))}
 const V90_DEFAULTS={pricesUsd:{FIX:19,START:29,BUILD:79,GROW:199},permissions:{autoReports:true,autoMessaging:true,autoSeo:true,autoPaymentDiagnostics:true,autoBenchmark:true,autoLeadReview:true}};
+const getMainTonAddress=env=>String(env.TON_MAIN_WALLET_ADDRESS||env.TON_PERMANENT_WALLET_ADDRESS||'').trim();
+const getTempTonAddress=env=>String(env.TON_TEMP_WALLET_ADDRESS||env.GUARD_TEMP_WALLET_ADDRESS||env.TON_RECEIVING_ADDRESS||'').trim();
 const REVENUE_FLEET=[
 {id:'ai-automation-agency',name:'AI Automation Agency',mode:'service',status:'ACTIVE',monetization:'project+retainer',prereq:'ANIL-X lead/order/payment'},
 {id:'ai-integration-agents',name:'AI Integration & Agents',mode:'service',status:'ACTIVE',monetization:'project+maintenance',prereq:'ANIL-X lead/order/payment'},
@@ -60,7 +62,8 @@ const REVENUE_FLEET=[
 ];
 async function revenueFleetStatus(env){
  const configured={
-   ton:!!env.TON_RECEIVING_ADDRESS,
+   ton:!!getMainTonAddress(env),
+   guardTempTon:!!getTempTonAddress(env),
    variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY),
    ai:!!(env.OPENAI_API_KEY||env.GEMINI_API_KEY||env.ANTHROPIC_API_KEY),
    persistence:!!env.PAYMENTS,
@@ -94,7 +97,7 @@ storageConfigured:configured.storage,
   const revenueLeads=await kvList(env,'revenue-leads/',500);
   const leadCount=new Set([...persistedLeads,...revenueLeads].map(x=>x?.id).filter(Boolean)).size;
   const paidOrders=(await kvList(env,'orders/',500)).filter(x=>x?.status==='paid');
-  const configured={ton:!!env.TON_RECEIVING_ADDRESS,variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY),ai:!!(env.OPENAI_API_KEY||env.GEMINI_API_KEY||env.ANTHROPIC_API_KEY)};
+  const configured={ton:!!getMainTonAddress(env),guardTempTon:!!getTempTonAddress(env),variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY),ai:!!(env.OPENAI_API_KEY||env.GEMINI_API_KEY||env.ANTHROPIC_API_KEY)};
   const states=[];
   for(const engine of REVENUE_FLEET){
     let operational=(engine.status==='OWNER_GATED'&&configured.ton)||(engine.status==='ACTIVE'&&configured.variza);
@@ -385,7 +388,8 @@ async function runtimeRoutes(req,env,u){
     const report=await runAutopilotSafe(env);return rjson({ok:true,cycle:report,steps:['Discover','Analyze','Build','Sell','Get Paid','Measure','Learn','Improve']});
   }
 if(p==='/api/payment-config'){
-    return rjson({ok:true,ton:{enabled:!!env.TON_RECEIVING_ADDRESS,address:env.TON_RECEIVING_ADDRESS||null},fiat:{provider:'variza',enabled:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY)}});
+    const mainTon=getMainTonAddress(env),tempTon=getTempTonAddress(env);
+    return rjson({ok:true,ton:{enabled:Boolean(mainTon),address:mainTon||null,mainConfigured:Boolean(mainTon)},guard:{temporaryWalletConfigured:Boolean(tempTon),temporaryAddress:tempTon||null},fiat:{provider:'variza',enabled:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY)}});
   }
   if(p==='/api/revenue/catalog'){
     return rjson({ok:true,merchant:'ANIL X STUDIO',currency:'USD',services:[
@@ -571,4 +575,4 @@ async function secretary(req,env){
   const r=await fetch('https://api.openai.com/v1/chat/completions',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+env.OPENAI_API_KEY},body:JSON.stringify({model:env.ASTRA_MODEL||'gpt-5-mini',messages:[{role:'system',content:'تو بدرخان، دستیار اجرایی خصوصی ANIL X هستی. فارسی پاسخ بده. هرگز اجرای واقعی را بدون نتیجه ابزار ادعا نکن. برای گارد جاویدان هرگز seed/private key نخواه و برای امضای تراکنش تأیید مالک لازم است. اگر ابزار مستقیم در دسترس نیست، فقط برنامه اقدام و وضعیت قابل اثبات را گزارش کن.'},{role:'user',content:command}],temperature:.15})});if(!r.ok)return json({ok:false,error:'assistant_provider_'+r.status},502);
   const d=await r.json();return json({ok:true,text:d?.choices?.[0]?.message?.content||'بررسی انجام شد.',action:'گزارش'});
 }
-export default{async fetch(req,env,ctx){const u=new URL(req.url);if(u.pathname==='/api/guard/live'&&req.method==='GET')return handleGuardLive(req,env);if(u.pathname==='/api/health'||u.pathname==='/api/_healthcheck'){const adminConfigured=String(env.ANIL_ADMIN_PASSWORD||'').length>=8;return json({ok:true,ready:adminConfigured,service:'ANIL X',runtime:'unified-worker',configured:{admin:adminConfigured,openai:!!env.OPENAI_API_KEY,anthropic:!!env.ANTHROPIC_API_KEY,gemini:!!env.GEMINI_API_KEY,variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY),payments:!!env.PAYMENTS,assets:!!env.ASSETS},routes:['/api/plan','/api/analyze','/api/vision','/api/voice','/api/ton/account','/api/ton/transactions','/api/javidan/trinity','/api/account','/api/memory','/api/order','/api/fx','/api/discovery','/api/free-request','/api/free-admin','/api/payment-status','/api/worker','/api/pay','/api/variza-webhook','/api/revenue/fleet','/api/revenue/fleet/run','/api/revenue/programs','/api/guard/live'],revenue:{persistence:!!env.PAYMENTS,variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY),ton:!!env.TON_RECEIVING_ADDRESS}},200);}const runtime=await runtimeRoutes(req,env,u);if(runtime)return runtime;if(u.pathname==='/api/analyze')return analyze(req,env);if(u.pathname==='/api/vision')return vision(req,env);if(u.pathname==='/api/voice')return voice(req,env);if(u.pathname==='/api/ton/account'||u.pathname==='/api/ton/transactions')return tonApi(req);if(u.pathname==='/api/anil/execution-readiness')return handleExecutionReadiness(req,env);if(u.pathname==='/api/plan')return handlePlan(req,env);if(u.pathname==='/api/javidan/trinity')return handleJavidan(req,env);if(u.pathname==='/api/admin/password/login')return adminLogin(req,env);if(u.pathname==='/api/admin/secretary')return secretary(req,env);if(u.pathname==='/api/pay')return pay({request:req,env});if(u.pathname==='/api/variza-webhook')return webhook({request:req,env});if(u.pathname.startsWith('/api/'))return json({ok:false,error:'not_found'},404);return env.ASSETS.fetch(req)}};
+export default{async fetch(req,env,ctx){const u=new URL(req.url);if(u.pathname==='/api/guard/live'&&req.method==='GET')return handleGuardLive(req,env);if(u.pathname==='/api/health'||u.pathname==='/api/_healthcheck'){const adminConfigured=String(env.ANIL_ADMIN_PASSWORD||'').length>=8;return json({ok:true,ready:adminConfigured,service:'ANIL X',runtime:'unified-worker',configured:{admin:adminConfigured,openai:!!env.OPENAI_API_KEY,anthropic:!!env.ANTHROPIC_API_KEY,gemini:!!env.GEMINI_API_KEY,variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY),payments:!!env.PAYMENTS,assets:!!env.ASSETS},routes:['/api/plan','/api/analyze','/api/vision','/api/voice','/api/ton/account','/api/ton/transactions','/api/javidan/trinity','/api/account','/api/memory','/api/order','/api/fx','/api/discovery','/api/free-request','/api/free-admin','/api/payment-status','/api/worker','/api/pay','/api/variza-webhook','/api/revenue/fleet','/api/revenue/fleet/run','/api/revenue/programs','/api/guard/live'],revenue:{persistence:!!env.PAYMENTS,variza:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY),ton:!!getMainTonAddress(env),guardTemporaryTon:!!getTempTonAddress(env)}},200);}const runtime=await runtimeRoutes(req,env,u);if(runtime)return runtime;if(u.pathname==='/api/analyze')return analyze(req,env);if(u.pathname==='/api/vision')return vision(req,env);if(u.pathname==='/api/voice')return voice(req,env);if(u.pathname==='/api/ton/account'||u.pathname==='/api/ton/transactions')return tonApi(req);if(u.pathname==='/api/anil/execution-readiness')return handleExecutionReadiness(req,env);if(u.pathname==='/api/plan')return handlePlan(req,env);if(u.pathname==='/api/javidan/trinity')return handleJavidan(req,env);if(u.pathname==='/api/admin/password/login')return adminLogin(req,env);if(u.pathname==='/api/admin/secretary')return secretary(req,env);if(u.pathname==='/api/pay')return pay({request:req,env});if(u.pathname==='/api/variza-webhook')return webhook({request:req,env});if(u.pathname.startsWith('/api/'))return json({ok:false,error:'not_found'},404);return env.ASSETS.fetch(req)}};
