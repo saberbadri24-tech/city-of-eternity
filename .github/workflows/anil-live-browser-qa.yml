@@ -9,6 +9,8 @@ jobs:
   live-smoke:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
       - name: Authentication source lint
         run: |
           set -euo pipefail
