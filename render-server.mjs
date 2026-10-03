@@ -7,6 +7,7 @@ import {promisify} from 'node:util';
 import {createHmac} from 'node:crypto';
 import {createPaymentsStore} from './functions/api/render-payments-store.mjs';
 import {handleExecutionReadiness} from './functions/api/execution-readiness.mjs';
+import {adminLogin,adminConfigured} from './functions/api/admin-auth.mjs';
 
 const gzipAsync=promisify(gzip);
 const root=path.dirname(fileURLToPath(import.meta.url));
@@ -35,44 +36,24 @@ async function assetsFetch(request){
   }catch{return new Response('Not Found',{status:404})}
 }
 
-const ADMIN_SECRET=String(process.env.ANIL_ADMIN_PASSWORD||'').normalize('NFKC').trim();
-// Admin authentication is fail-closed at the login endpoint; a missing secret must never take the public ANIL X runtime offline.
-
-const env={...process.env,ASSETS:{fetch:assetsFetch},PAYMENTS:createPaymentsStore(process.env.REDIS_URL)};
-const loginAttempts=new Map();
-const b64u=s=>Buffer.from(s).toString('base64').replace(/=+$/,'').replace(/\+/g,'-').replace(/\//g,'_');
-const signNode=(v,secret)=>b64u(createHmac('sha256',secret).update(v).digest());
-const jsonNode=(obj,status=200,extra={})=>new Response(JSON.stringify(obj),{status,headers:{'content-type':'application/json; charset=utf-8',...extra}});
-async function directAdminLogin(req){
-  if(req.method!=='POST')return jsonNode({ok:false,error:'method_not_allowed'},405);
-  const secret=String(process.env.ANIL_ADMIN_PASSWORD||'').normalize('NFKC').trim();
-  if(secret.length<8)return jsonNode({ok:false,error:'admin_password_not_configured'},503);
-  const ip=String(req.headers['x-forwarded-for']||'unknown').split(',')[0].trim();
-  const now=Date.now(),gate=loginAttempts.get(ip)||{count:0,until:0};
-  if(gate.until>now)return jsonNode({ok:false,error:'too_many_attempts'},429);
-  let body={};try{body=JSON.parse(await new Promise((resolve,reject)=>{let s='';req.on('data',c=>s+=c);req.on('end',()=>{try{resolve(s)}catch(e){reject(e)}});req.on('error',reject)}))||{}}catch{return jsonNode({ok:false,error:'invalid_json'},400)}
-  const pass=String(body.password||'').normalize('NFKC').trim();
-  if(pass!==secret){const count=gate.count+1;loginAttempts.set(ip,{count,until:count>=5?now+900000:0});return jsonNode({ok:false,error:'invalid_credentials'},401)}
-  loginAttempts.delete(ip);
-  const payload=b64u(JSON.stringify({sub:'admin',exp:now+43200000}));
-  const sig=signNode(payload,secret);
-  return jsonNode({ok:true,expiresAt:now+43200000},200,{'set-cookie':`session=${payload}.${sig}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=43200`});
-}
-
-const server=http.createServer(async(req,res)=>{
+// Admin authentication is implemented once in functions/api/admin-auth.mjs.\nconst env={...process.env,ASSETS:{fetch:assetsFetch},PAYMENTS:createPaymentsStore(process.env.REDIS_URL)};\nconst server=http.createServer(async(req,res)=>{
   try{
     const host=req.headers.host||'localhost';
     const origin='http://'+host;
     const u=new URL(origin+(req.url||'/'));
 
     if(u.pathname==='/api/health'&&req.method==='GET'){
-      return res.end(await (async()=>{const out={ok:true,ready:true,service:'ANIL X',runtime:'render-static-gateway',configured:{admin:Boolean(process.env.ANIL_ADMIN_PASSWORD),openai:Boolean(process.env.OPENAI_API_KEY),anthropic:Boolean(process.env.ANTHROPIC_API_KEY),gemini:Boolean(process.env.GEMINI_API_KEY),variza:Boolean(process.env.VARIZA_API_KEY||process.env.VARIA_API_KEY||process.env.VARIZA_TOKEN||process.env.VARIZA_KEY),payments:Boolean(process.env.PAYMENTS||process.env.REDIS_URL),assets:true},revenue:{storageConfigured:Boolean(process.env.REDIS_URL),durableAccounting:String(process.env.PAYMENTS_DURABLE||'false').toLowerCase()==='true',variza:Boolean(process.env.VARIZA_API_KEY||process.env.VARIA_API_KEY||process.env.VARIZA_TOKEN||process.env.VARIZA_KEY),ton:Boolean(process.env.TON_MAIN_WALLET_ADDRESS||process.env.TON_PERMANENT_WALLET_ADDRESS),guardTemporaryTon:Boolean(process.env.TON_TEMP_WALLET_ADDRESS||process.env.GUARD_TEMP_WALLET_ADDRESS||process.env.TON_RECEIVING_ADDRESS)}};res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');return JSON.stringify(out)})());
+      return res.end(await (async()=>{const out={ok:true,ready:adminConfigured(env),service:'ANIL X',runtime:'render-static-gateway',configured:{admin:adminConfigured(env),openai:Boolean(process.env.OPENAI_API_KEY),anthropic:Boolean(process.env.ANTHROPIC_API_KEY),gemini:Boolean(process.env.GEMINI_API_KEY),variza:Boolean(process.env.VARIZA_API_KEY||process.env.VARIA_API_KEY||process.env.VARIZA_TOKEN||process.env.VARIZA_KEY),payments:Boolean(process.env.PAYMENTS||process.env.REDIS_URL),assets:true},revenue:{storageConfigured:Boolean(process.env.REDIS_URL),durableAccounting:String(process.env.PAYMENTS_DURABLE||'false').toLowerCase()==='true',variza:Boolean(process.env.VARIZA_API_KEY||process.env.VARIA_API_KEY||process.env.VARIZA_TOKEN||process.env.VARIZA_KEY),ton:Boolean(process.env.TON_MAIN_WALLET_ADDRESS||process.env.TON_PERMANENT_WALLET_ADDRESS),guardTemporaryTon:Boolean(process.env.TON_TEMP_WALLET_ADDRESS||process.env.GUARD_TEMP_WALLET_ADDRESS||process.env.TON_RECEIVING_ADDRESS)}};res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');return JSON.stringify(out)})());
     }
     if(u.pathname==='/api/execution-readiness'){
       const rr=await handleExecutionReadiness(req,env);res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
     }
     if(u.pathname==='/api/admin/password/login'&&req.method==='POST'){
-      const rr=await directAdminLogin(req);res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
+      const chunks=[];for await(const chunk of req)chunks.push(chunk);
+      const body=chunks.length?Buffer.concat(chunks):undefined;
+      const request=new Request(origin+(req.url||'/'),{method:req.method,headers:req.headers,body});
+      const rr=await adminLogin(request,env);
+      res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
     }
     if((req.method==='GET'||req.method==='HEAD')&&!u.pathname.startsWith('/api/')){
       const response=await assetsFetch(new Request(u,{method:req.method,headers:req.headers}));
