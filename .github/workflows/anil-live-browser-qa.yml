@@ -78,6 +78,10 @@ jobs:
               await page.waitForTimeout(350);
               check(!(await page.locator('#requestInput').inputValue()).includes('<script'),'quick action safe input');
             }
+            await page.locator('#requestInput').fill('I need a professional website for my business');
+            await page.locator('#requestForm').evaluate(form=>form.requestSubmit());
+            await page.waitForTimeout(900);
+            check(await page.locator('#chat .msg').count()>=3,'main chat sends and renders a response');
             await page.locator('#voiceBtn').click().catch(()=>{});
             await page.waitForTimeout(250);
             check(errors.length===0,'no browser page errors during public smoke');
