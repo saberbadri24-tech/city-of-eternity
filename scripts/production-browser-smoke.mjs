@@ -49,7 +49,7 @@ async function inventory(url) {
   if (visited.has(url) || visited.size >= 25) return;
   visited.add(url);
   try {
-    const response = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
+    const response = await gotoWithRetry(url);
     await waitStable();
     if (!response || !response.ok()) {
       errors.push({ type: "http", url, status: response?.status() || null });
@@ -91,7 +91,7 @@ async function inventory(url) {
       }
 
       try {
-        await page.goto(url, { waitUntil: "domcontentloaded", timeout: 15000 });
+        await gotoWithRetry(url);
         await waitStable();
         const modal = page.locator("#profileModal");
         if (await modal.isVisible().catch(() => false)) await page.locator("#closeProfile").click().catch(() => {});
@@ -121,7 +121,7 @@ async function inventory(url) {
           stateChanged: before !== after,
           afterUrl,
         });
-        if (afterUrl !== url) await page.goto(url, { waitUntil: "domcontentloaded", timeout: 15000 }).catch(() => {});
+        if (afterUrl !== url) await gotoWithRetry(url).catch(() => {});
       } catch (e) {
         const item = { type: "button", url, text: b.text, error: String(e?.message || e) };
         errors.push(item);
