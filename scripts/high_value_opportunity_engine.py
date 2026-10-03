@@ -171,6 +171,7 @@ def main():
     for x in ranked:
         project=x.get("projectIdentity") or project_identity(x)
         if project and project in used_projects: continue
+        if not x.get("officialEligible"): continue
         if x.get("rewardType")=="prize_pool": continue
         if x["estimatedRewardUsd"] <= 0 or x.get("expired"): continue
         portfolio.append({"id":x.get("id") or x.get("opportunityId") or x.get("url"),
