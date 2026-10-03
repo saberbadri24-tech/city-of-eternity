@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-10-03T01:02:15.737479+00:00",
+  "updatedAt": "2026-10-03T01:24:35.483698+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,8 +20,8 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1881,
-  "uniqueNewsPublishers": 543,
+  "discoveryCandidateCount": 1880,
+  "uniqueNewsPublishers": 544,
   "topPublishers": [
     {
       "publisher": "Binance",
@@ -41,7 +41,7 @@
     },
     {
       "publisher": "x.com",
-      "count": 63
+      "count": 64
     },
     {
       "publisher": "GitHub",
@@ -53,7 +53,7 @@
     },
     {
       "publisher": "Coin Gabbar",
-      "count": 48
+      "count": 49
     },
     {
       "publisher": "RootData",
@@ -84,10 +84,6 @@
       "count": 26
     },
     {
-      "publisher": "LinkedIn",
-      "count": 23
-    },
-    {
       "publisher": "Bitget",
       "count": 22
     },
@@ -102,6 +98,10 @@
     {
       "publisher": "Medium",
       "count": 17
+    },
+    {
+      "publisher": "airdropalert.com",
+      "count": 16
     }
   ],
   "invalidSources": [],

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-03T01:02:19+00:00",
+  "generatedAt": "2026-10-03T01:24:38+00:00",
   "engine": "Immortal Guard Opportunity Graph",
-  "nodeCount": 3775,
-  "edgeCount": 1881,
+  "nodeCount": 3773,
+  "edgeCount": 1880,
   "nodes": [
     {
       "id": "0c99e9b1baae1e2e",
@@ -1278,18 +1278,6 @@
       "label": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5GMU1SeEJPNEdnLThrelNSa3RVdGlHZXl6NFE0SzVzQWU2dUFpWThwc1BPVjJuRnA0WVhRNkdKR1dYaDhQZVUwM1Boam1OM2NI?oc=5"
     },
     {
-      "id": "968f8dd6f58b5f3d",
-      "type": "opportunity",
-      "key": "little caesars fundraising | click to raise money for a cause - little caesars fundraising",
-      "label": "Little Caesars Fundraising | Click to Raise Money for a Cause - Little Caesars Fundraising"
-    },
-    {
-      "id": "38e42583e9a2c3d2",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBHWUR3ckp5UC13X3VWOVpKWmVSY1RCTnZfMnVSMkd6UUVuRUpFYUhtU002M0ZZSWgzS2NmNUd3eW5BVzNHVW1HY2NqUEJVZm8?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBHWUR3ckp5UC13X3VWOVpKWmVSY1RCTnZfMnVSMkd6UUVuRUpFYUhtU002M0ZZSWgzS2NmNUd3eW5BVzNHVW1HY2NqUEJVZm8?oc=5"
-    },
-    {
       "id": "c0167c5d56f5d04d",
       "type": "opportunity",
       "key": "legal - warhammer",
@@ -1326,6 +1314,18 @@
       "label": "https://news.google.com/rss/articles/CBMic0FVX3lxTE0yajEzc0M1c1MtWWZzVGVJbUVablZqbFFjV1dVVDB4NHhUX1VXZUxuQXZ1YWw1M1BxUWNRMmY4R3hPTXFjZUYzQ0lTUlVYSDdOWUVKMW1pUjdxYVQyV3p1bFM5dmRZSWxHSnNoMnlNTkp6VXM?oc=5"
     },
     {
+      "id": "b4962658c93b0d81",
+      "type": "opportunity",
+      "key": "nearly a million investors lost a total of $3.8 billion on trump crypto coin - the new york times",
+      "label": "Nearly a Million Investors Lost a Total of $3.8 Billion on Trump Crypto Coin - The New York Times"
+    },
+    {
+      "id": "534d831fae7cfd05",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPdHhsX0xRVUN5QW1UaVVUWTUwVFltek91TmZrY2x3MUFhSVg3V2VrQjc5LXIyU1BycUx2bXRtT0VtSVdVUFpibkx2VmpwRG9GZ0NFdXcySmJUUDlzUjhJcVp4S1owTGQyRzBzY2Y1bnAyTWcxRmFyTW9EMElTMmNMSUdYRWFIZkNJYjVLVA?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPdHhsX0xRVUN5QW1UaVVUWTUwVFltek91TmZrY2x3MUFhSVg3V2VrQjc5LXIyU1BycUx2bXRtT0VtSVdVUFpibkx2VmpwRG9GZ0NFdXcySmJUUDlzUjhJcVp4S1owTGQyRzBzY2Y1bnAyTWcxRmFyTW9EMElTMmNMSUdYRWFIZkNJYjVLVA?oc=5"
+    },
+    {
       "id": "1c88e88b8ee9d451",
       "type": "opportunity",
       "key": "grafana pricing | free, pro, enterprise - grafana labs",
@@ -1336,6 +1336,18 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMiQkFVX3lxTFBPZFFCYkgwZUprZ1NwMk4xdWhEWFczWkQxcTEtLWdiU0ozbmZVVkloQTRHeFU5SzlqYURqZVpmVEkzZw?oc=5",
       "label": "https://news.google.com/rss/articles/CBMiQkFVX3lxTFBPZFFCYkgwZUprZ1NwMk4xdWhEWFczWkQxcTEtLWdiU0ozbmZVVkloQTRHeFU5SzlqYURqZVpmVEkzZw?oc=5"
+    },
+    {
+      "id": "968f8dd6f58b5f3d",
+      "type": "opportunity",
+      "key": "little caesars fundraising | click to raise money for a cause - little caesars fundraising",
+      "label": "Little Caesars Fundraising | Click to Raise Money for a Cause - Little Caesars Fundraising"
+    },
+    {
+      "id": "38e42583e9a2c3d2",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBHWUR3ckp5UC13X3VWOVpKWmVSY1RCTnZfMnVSMkd6UUVuRUpFYUhtU002M0ZZSWgzS2NmNUd3eW5BVzNHVW1HY2NqUEJVZm8?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBHWUR3ckp5UC13X3VWOVpKWmVSY1RCTnZfMnVSMkd6UUVuRUpFYUhtU002M0ZZSWgzS2NmNUd3eW5BVzNHVW1HY2NqUEJVZm8?oc=5"
     },
     {
       "id": "08a81ba65127aef2",
@@ -1602,18 +1614,6 @@
       "label": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9vMWpqR2pzMVVUZW82aHFTLV9YejRNbWVrLUFZYTBYTXAtODA4NWhfXzhkVGRfbGhsRVJDSVc2bU1taDE5Q3BZMFVNMzh0REVHWWZsY1VPQWx6MG8?oc=5"
     },
     {
-      "id": "7e2abe798cfe054b",
-      "type": "opportunity",
-      "key": "proquest | better research, better learning, better insights. - proquest",
-      "label": "ProQuest | Better research, better learning, better insights. - ProQuest"
-    },
-    {
-      "id": "8f702daf3153601f",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiPkFVX3lxTE50OG1pa3RoS2JkUkRvNW9EMTZ6cFd3SDhsRUxtRktQYlFNRVFuTjVvX1A5U2dVNHpHYVlBUWJB?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiPkFVX3lxTE50OG1pa3RoS2JkUkRvNW9EMTZ6cFd3SDhsRUxtRktQYlFNRVFuTjVvX1A5U2dVNHpHYVlBUWJB?oc=5"
-    },
-    {
       "id": "483b544c7159af13",
       "type": "opportunity",
       "key": "confluence | ai workspace for knowledge & collaboration - atlassian",
@@ -1626,6 +1626,18 @@
       "label": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5IRk03TkpxVEhGQ1dzcXF6UnZpZm9HTndUaUx0YmRRUTZNMFBzeVlkM1U1OGFtWFBsOWRWaUZuUVJ5UnFOUXJEbU5vbUVWSjZFRGF6dVNoa1A?oc=5"
     },
     {
+      "id": "7e2abe798cfe054b",
+      "type": "opportunity",
+      "key": "proquest | better research, better learning, better insights. - proquest",
+      "label": "ProQuest | Better research, better learning, better insights. - ProQuest"
+    },
+    {
+      "id": "8f702daf3153601f",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiPkFVX3lxTE50OG1pa3RoS2JkUkRvNW9EMTZ6cFd3SDhsRUxtRktQYlFNRVFuTjVvX1A5U2dVNHpHYVlBUWJB?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiPkFVX3lxTE50OG1pa3RoS2JkUkRvNW9EMTZ6cFd3SDhsRUxtRktQYlFNRVFuTjVvX1A5U2dVNHpHYVlBUWJB?oc=5"
+    },
+    {
       "id": "20c40068504dad44",
       "type": "opportunity",
       "key": "handel's homemade ice cream - handel's homemade ice cream",
@@ -1636,6 +1648,30 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMiQkFVX3lxTE5uVEQ0WjQyM3RZWURROVRBRnV1R1BJZ0NyQzRVU1daOExsSnNmNDdWN2ZaNFhBYzhYejZKQ2o0QlVLdw?oc=5",
       "label": "https://news.google.com/rss/articles/CBMiQkFVX3lxTE5uVEQ0WjQyM3RZWURROVRBRnV1R1BJZ0NyQzRVU1daOExsSnNmNDdWN2ZaNFhBYzhYejZKQ2o0QlVLdw?oc=5"
+    },
+    {
+      "id": "f63785d8de48dec0",
+      "type": "opportunity",
+      "key": "your personal, business and international banking partner in ok and tx | ibc - ibc bank",
+      "label": "Your Personal, Business and International Banking Partner in OK and TX | IBC - IBC Bank"
+    },
+    {
+      "id": "7b4d995f958648d0",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiN0FVX3lxTE96enpHVXU2aktsUGZxSmtneV9RQ3kwWjdTUUcxb2V2MElWVjR1QnRJRTktY255ckU?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiN0FVX3lxTE96enpHVXU2aktsUGZxSmtneV9RQ3kwWjdTUUcxb2V2MElWVjR1QnRJRTktY255ckU?oc=5"
+    },
+    {
+      "id": "e481d9c5531e1931",
+      "type": "opportunity",
+      "key": "ea forums english - ea forums",
+      "label": "EA Forums English - EA Forums"
+    },
+    {
+      "id": "64d7dfc2caae0a8a",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1uaThLRWM5eUpSc2FEcXJpMFMyR2FkYlVUeUJ5VkpXTW53VnhVY0tJSFhQOV95MW8xazYyeUFvM2RXajFxZ1pZZ2J2QTM4U1BISk15cC1B?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1uaThLRWM5eUpSc2FEcXJpMFMyR2FkYlVUeUJ5VkpXTW53VnhVY0tJSFhQOV95MW8xazYyeUFvM2RXajFxZ1pZZ2J2QTM4U1BISk15cC1B?oc=5"
     },
     {
       "id": "004e0f5eaf2caf64",
@@ -1662,6 +1698,18 @@
       "label": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNTXJLVnphaHd2TkZIdGVYOVZSTVp4Mkx2c3dzOUQxTy16ekMwMmlJVnRHQlBURTNoSE1LUEZPNDZEbG03T3JPSjlVMUtCT19mY1F5bTdrNzdRXzFRczg1T0VWcWxaeGpINkRiNHJhNHQycGR5QTdhdHQ4NzdrQW1VOEQ1WUZhbnVVcTlGYQ?oc=5"
     },
     {
+      "id": "2faa01fbdd30aafb",
+      "type": "opportunity",
+      "key": "shoes: women's, men's & kids shoes from top brands - dsw",
+      "label": "Shoes: Women's, Men's & Kids Shoes from Top Brands - DSW"
+    },
+    {
+      "id": "aac722900cef9336",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE92VWsyMGNoOFhEdUlwb1hVdTR6ZzcxSzlZZTNKWmx2Rk14ekxQWTg3NFNSTEE3Smh4d2NUaWRpR0dRRVBpdVlzQ2VWLWxnS2R3M3A0dg?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE92VWsyMGNoOFhEdUlwb1hVdTR6ZzcxSzlZZTNKWmx2Rk14ekxQWTg3NFNSTEE3Smh4d2NUaWRpR0dRRVBpdVlzQ2VWLWxnS2R3M3A0dg?oc=5"
+    },
+    {
       "id": "7b4427c90959f692",
       "type": "opportunity",
       "key": "fever vs. aces game 3 prediction, best bets: a’ja wilson to fend off caitlin clark - new york post",
@@ -1686,18 +1734,6 @@
       "label": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5IN1hqc2dnM1FKNi1EOXA5a2lZQVAycWhwZFBOMDU4cVZ4WFAzY1BreHdzNHFTTmhBNXBVQlpxb2ItMGtndE80LVpZUVhNdmlwTWM0VVNR?oc=5"
     },
     {
-      "id": "6e7da8aea75dc3f3",
-      "type": "opportunity",
-      "key": "what are you still paying for that you meant to cancel? i handed mine to an ai assistant: $1,285 a year cancelled so far. the prompt guide for the tedious part of yours. - nate’s substack",
-      "label": "What are you still paying for that you meant to cancel? I handed mine to an AI assistant: $1,285 a year cancelled so far. The prompt guide for the tedious part of yours. - Nate’s Substack"
-    },
-    {
-      "id": "fba231b5983ab13d",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQbEJzYjVIY1o3NjRDOHg4QVhZTElYQ3pibW5pTXZlY2JTVjVMSkgwbDhPRl9WMXhYR3ZrYkFiay0tVVlieTMzeDFubDlkOTFsaGpSbGxZeWR4enQycFlfemxPb0lxRWxtdEM5QWhLOU1DanhtMmJ4XzNlN2FRWHVCVXJRdDJaLWc?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQbEJzYjVIY1o3NjRDOHg4QVhZTElYQ3pibW5pTXZlY2JTVjVMSkgwbDhPRl9WMXhYR3ZrYkFiay0tVVlieTMzeDFubDlkOTFsaGpSbGxZeWR4enQycFlfemxPb0lxRWxtdEM5QWhLOU1DanhtMmJ4XzNlN2FRWHVCVXJRdDJaLWc?oc=5"
-    },
-    {
       "id": "4b67935b19d56bda",
       "type": "opportunity",
       "key": "fabletics - fabletics",
@@ -1708,6 +1744,18 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5CTlR2aTA1aDBSMnNrallXUnNZNW1YSThET0RuNXlhMzhNVjBlOVNUdy1jb3VqVFdzTThwTTJOVWYyZWlIMDNfYXdsZw?oc=5",
       "label": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5CTlR2aTA1aDBSMnNrallXUnNZNW1YSThET0RuNXlhMzhNVjBlOVNUdy1jb3VqVFdzTThwTTJOVWYyZWlIMDNfYXdsZw?oc=5"
+    },
+    {
+      "id": "6e7da8aea75dc3f3",
+      "type": "opportunity",
+      "key": "what are you still paying for that you meant to cancel? i handed mine to an ai assistant: $1,285 a year cancelled so far. the prompt guide for the tedious part of yours. - nate’s substack",
+      "label": "What are you still paying for that you meant to cancel? I handed mine to an AI assistant: $1,285 a year cancelled so far. The prompt guide for the tedious part of yours. - Nate’s Substack"
+    },
+    {
+      "id": "fba231b5983ab13d",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQbEJzYjVIY1o3NjRDOHg4QVhZTElYQ3pibW5pTXZlY2JTVjVMSkgwbDhPRl9WMXhYR3ZrYkFiay0tVVlieTMzeDFubDlkOTFsaGpSbGxZeWR4enQycFlfemxPb0lxRWxtdEM5QWhLOU1DanhtMmJ4XzNlN2FRWHVCVXJRdDJaLWc?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQbEJzYjVIY1o3NjRDOHg4QVhZTElYQ3pibW5pTXZlY2JTVjVMSkgwbDhPRl9WMXhYR3ZrYkFiay0tVVlieTMzeDFubDlkOTFsaGpSbGxZeWR4enQycFlfemxPb0lxRWxtdEM5QWhLOU1DanhtMmJ4XzNlN2FRWHVCVXJRdDJaLWc?oc=5"
     },
     {
       "id": "41254a67f7a89133",
@@ -1840,6 +1888,18 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOOU9zak91Snl4bFJIM0lBSXdPWDBXdlJtUmZ3U20tbWZnRkxhdlc4RkU1cHVuajJwaHJvOU1RYXpDYWtHM3hCLVk1YWhrTzltS2ROR0pJc252elZTLW9vN194aGg4Ym5JWGw0NXI1aVVVbUJIdUpCdHpqYTRDTDMtQw?oc=5",
       "label": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOOU9zak91Snl4bFJIM0lBSXdPWDBXdlJtUmZ3U20tbWZnRkxhdlc4RkU1cHVuajJwaHJvOU1RYXpDYWtHM3hCLVk1YWhrTzltS2ROR0pJc252elZTLW9vN194aGg4Ym5JWGw0NXI1aVVVbUJIdUpCdHpqYTRDTDMtQw?oc=5"
+    },
+    {
+      "id": "e6f79706440823f1",
+      "type": "opportunity",
+      "key": "the no-fee gift card kids actually want - chuck e. cheese",
+      "label": "The No-Fee Gift Card Kids Actually Want - Chuck E. Cheese"
+    },
+    {
+      "id": "710de5927d942c30",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFB2bDlLRExjMUhnVHZjRjhTMUtGb1NoWG9UUHlzSVBPX2RyWG5EV0pvSEh3M3BTaENEMFlXTmsxQU4zbWc2U2lQOUxNZ0dHc1Y0YlE?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFB2bDlLRExjMUhnVHZjRjhTMUtGb1NoWG9UUHlzSVBPX2RyWG5EV0pvSEh3M3BTaENEMFlXTmsxQU4zbWc2U2lQOUxNZ0dHc1Y0YlE?oc=5"
     },
     {
       "id": "c5f1d8da436ca9f6",
@@ -2082,18 +2142,6 @@
       "label": "https://news.google.com/rss/articles/CBMiOkFVX3lxTE1sOWE1dHRGN05vZThqZ0hHLTA0ZlR0V2VKbEtYbWNndkhzcFgxTFlYTXZiQUEyb1hnMHc?oc=5"
     },
     {
-      "id": "e9c649bb82368025",
-      "type": "opportunity",
-      "key": "seagm - game top-up, gift card & voucher | game credits | mobile games - seagm",
-      "label": "SEAGM - Game Top-Up, Gift Card & Voucher | Game Credits | Mobile Games - SEAGM"
-    },
-    {
-      "id": "8b9da6cf9a390154",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiOkFVX3lxTE13aGMtNV9PbUl3RURKTmZRRmNUZjMxQVN1eHd0dlNmZ2wxZDhSQ2lpdWlxbWRLa1RTTGc?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiOkFVX3lxTE13aGMtNV9PbUl3RURKTmZRRmNUZjMxQVN1eHd0dlNmZ2wxZDhSQ2lpdWlxbWRLa1RTTGc?oc=5"
-    },
-    {
       "id": "b736711ae31f0a56",
       "type": "opportunity",
       "key": "anthropic just gave me $200 in free extra usage. which is… exactly what my max plan costs per month. - reddit.com",
@@ -2166,6 +2214,18 @@
       "label": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFB1VkVidkpIY3pPNUgtNjAxbUk2dXlDVlNvRzJzaXAxeGpxenczWWN1MjBHM3h5UVgwV0JlWmM4Q1dlRVFiQ19QdVE0SWtJbnF6YXJZ?oc=5"
     },
     {
+      "id": "310677011eeaf9aa",
+      "type": "opportunity",
+      "key": "get a local toll-free or did connect customer phone number - amazon aws documentation",
+      "label": "Get a local toll-free or DID Connect Customer phone number - Amazon AWS Documentation"
+    },
+    {
+      "id": "a03f8275fc08ea0f",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOX09QS1g4cmMxM0RNeEtkNjZVX1VOSTVWY2JqZERCZTUxNEZHN0pnQ2RmZWh6QlVLZ2RkZDVydmVpS0FTWWNnUGpHempPa3h0aTgteTZVUHExTExteDdLNkp3Z3c1cWtTb3hDdHR4ZWdoRjFMUGo3bzdCckZUanRTeGZZVQ?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOX09QS1g4cmMxM0RNeEtkNjZVX1VOSTVWY2JqZERCZTUxNEZHN0pnQ2RmZWh6QlVLZ2RkZDVydmVpS0FTWWNnUGpHempPa3h0aTgteTZVUHExTExteDdLNkp3Z3c1cWtTb3hDdHR4ZWdoRjFMUGo3bzdCckZUanRTeGZZVQ?oc=5"
+    },
+    {
       "id": "c8a303a1431c864a",
       "type": "opportunity",
       "key": "changes for apps in the european union - apple developer",
@@ -2226,10 +2286,10 @@
       "label": "https://news.google.com/rss/articles/CBMiR0FVX3lxTFBwb0RnZnRzUnFQS1dQWTlFWXVkSGY0MXVqUlY1d25xOElsVFVZejFGeGZ1cmZoUzJyTzZSQTRBV1VYSlctQktR?oc=5"
     },
     {
-      "id": "5b320177110d2411",
+      "id": "8923639290f661a6",
       "type": "opportunity",
-      "key": "fliff promo code rotowire: get up to $250 in free play today (october 1) - rotowire",
-      "label": "Fliff Promo Code ROTOWIRE: Get Up To $250 in Free Play Today (October 1) - RotoWire"
+      "key": "fliff promo code rotowire: get up to $250 in free play today (october 1) - rotowire.com",
+      "label": "Fliff Promo Code ROTOWIRE: Get Up To $250 in Free Play Today (October 1) - rotowire.com"
     },
     {
       "id": "7be30c08bbd939eb",
@@ -2248,30 +2308,6 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOUUhmeVFITkk3bF9rdTVKcFlGS3B3ZUEzd2h4M0ZYOHNxQWZCVmMyQzc2Ry04bmRNbXAyVFQ5TDducXljcnZ1WXdGdkwxX3pVNzRWM01tQ05UUlF6Z2w2dUI2SG5TdnZCeXpXandkZVg4MnA5N2xacnZvNWZPaTNzV0dHTHZqLTg5QU1qRHczejJ5bURoRHc?oc=5",
       "label": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOUUhmeVFITkk3bF9rdTVKcFlGS3B3ZUEzd2h4M0ZYOHNxQWZCVmMyQzc2Ry04bmRNbXAyVFQ5TDducXljcnZ1WXdGdkwxX3pVNzRWM01tQ05UUlF6Z2w2dUI2SG5TdnZCeXpXandkZVg4MnA5N2xacnZvNWZPaTNzV0dHTHZqLTg5QU1qRHczejJ5bURoRHc?oc=5"
-    },
-    {
-      "id": "80f379492e882368",
-      "type": "opportunity",
-      "key": "$paws token distribution scam - pcrisk.com",
-      "label": "$PAWS Token Distribution Scam - PCrisk.com"
-    },
-    {
-      "id": "997a86175d865b34",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMifEFVX3lxTE84akFIUlJQVW5ZNE5uODMxME1pQWY1ZUVYcGwtYUdmMVZ4cHVvbGxRZHVrRENMTHVQaURFOHR4YUlqOW9vUjYtV2o3VUF0Q2FyMVZvUHVVUWRrUTZlMGtoV1FXZ3NoaXMwM2VRZ0tjaTdMdXJsRUZLWHN1SzI?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMifEFVX3lxTE84akFIUlJQVW5ZNE5uODMxME1pQWY1ZUVYcGwtYUdmMVZ4cHVvbGxRZHVrRENMTHVQaURFOHR4YUlqOW9vUjYtV2o3VUF0Q2FyMVZvUHVVUWRrUTZlMGtoV1FXZ3NoaXMwM2VRZ0tjaTdMdXJsRUZLWHN1SzI?oc=5"
-    },
-    {
-      "id": "310677011eeaf9aa",
-      "type": "opportunity",
-      "key": "get a local toll-free or did connect customer phone number - amazon aws documentation",
-      "label": "Get a local toll-free or DID Connect Customer phone number - Amazon AWS Documentation"
-    },
-    {
-      "id": "a03f8275fc08ea0f",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOX09QS1g4cmMxM0RNeEtkNjZVX1VOSTVWY2JqZERCZTUxNEZHN0pnQ2RmZWh6QlVLZ2RkZDVydmVpS0FTWWNnUGpHempPa3h0aTgteTZVUHExTExteDdLNkp3Z3c1cWtTb3hDdHR4ZWdoRjFMUGo3bzdCckZUanRTeGZZVQ?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOX09QS1g4cmMxM0RNeEtkNjZVX1VOSTVWY2JqZERCZTUxNEZHN0pnQ2RmZWh6QlVLZ2RkZDVydmVpS0FTWWNnUGpHempPa3h0aTgteTZVUHExTExteDdLNkp3Z3c1cWtTb3hDdHR4ZWdoRjFMUGo3bzdCckZUanRTeGZZVQ?oc=5"
     },
     {
       "id": "79e742cea84944a9",
@@ -2322,10 +2358,10 @@
       "label": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1xUVV0eURFZU05RTR3VWg2VVYtQ2dkcG45UHUzVlNweE90RWFkZEljN09Xd0t3UGYwbWM3UzlIWDEzX3NhLUs2OEowcFBaUjJPVXBydQ?oc=5"
     },
     {
-      "id": "60083881345b2b85",
+      "id": "2bfa8b8420cb200f",
       "type": "opportunity",
-      "key": "betr social sportsbook promo code rotowire1: 200 bc no sweat token - rotowire",
-      "label": "Betr Social Sportsbook Promo Code ROTOWIRE1: 200 BC No Sweat Token - RotoWire"
+      "key": "betr social sportsbook promo code rotowire1: 200 bc no sweat token - rotowire.com",
+      "label": "Betr Social Sportsbook Promo Code ROTOWIRE1: 200 BC No Sweat Token - rotowire.com"
     },
     {
       "id": "438cb4d7909d7b15",
@@ -2356,42 +2392,6 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1PSVY5YnNVeF9IRlZkYjJoS0JyMDdyTTlvOHIwTmlnaXM3YkF1ZXk1bUs4WXBGNHdIbkhjSXhUSDBHY05pMWh5WkVudVVXaWQzc0l0Tm1tUl9keTQ?oc=5",
       "label": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1PSVY5YnNVeF9IRlZkYjJoS0JyMDdyTTlvOHIwTmlnaXM3YkF1ZXk1bUs4WXBGNHdIbkhjSXhUSDBHY05pMWh5WkVudVVXaWQzc0l0Tm1tUl9keTQ?oc=5"
-    },
-    {
-      "id": "e6b33e2e572348e8",
-      "type": "opportunity",
-      "key": "us orders - frequently asked questions - hanes",
-      "label": "US ORDERS - FREQUENTLY ASKED QUESTIONS - Hanes"
-    },
-    {
-      "id": "921964eddfd049fe",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiR0FVX3lxTFBldm9RVXl4UG1kb3lUdVRXLUluUW1WZGFvcVA1ajhHa1U2cmdabGNEYXhBNXl0NXpjcmdwVHVFTkI2S0tiMmJz?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiR0FVX3lxTFBldm9RVXl4UG1kb3lUdVRXLUluUW1WZGFvcVA1ajhHa1U2cmdabGNEYXhBNXl0NXpjcmdwVHVFTkI2S0tiMmJz?oc=5"
-    },
-    {
-      "id": "c95f8df2c524d477",
-      "type": "opportunity",
-      "key": "americommerce cashback - usa today",
-      "label": "AmeriCommerce cashback - USA Today"
-    },
-    {
-      "id": "3f9c088432dd01b0",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFA1NTRjbEZfV0NGZjluamJBd28zeUdKZmoyM0VyMzdUdXU0Yk1pbGdISElXbUdtVEZvZEFPaTBGcjNWOU9OXzd5c25SaEdMVlVfRFFKdUZDQ1RHaUU?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFA1NTRjbEZfV0NGZjluamJBd28zeUdKZmoyM0VyMzdUdXU0Yk1pbGdISElXbUdtVEZvZEFPaTBGcjNWOU9OXzd5c25SaEdMVlVfRFFKdUZDQ1RHaUU?oc=5"
-    },
-    {
-      "id": "735df2284a3d7edb",
-      "type": "opportunity",
-      "key": "i purchased a digital item - how do i claim it? - g2a",
-      "label": "I purchased a digital item - How do I claim it? - G2A"
-    },
-    {
-      "id": "bcd9d1197f8913a0",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNM3JnbDlRX3I3REItb3NTRFRIWVN4cU9ORHlWMzhxbWJqdF9iaUV6SVZNLWdqSFhMMGJvclY0alotZ1Z3dDNraGtDT2JXZmJRc0daS0VpeWZGLUgtNkJDcTNaVW8wWnhqLTdwaGhlQU1XclpuWWxWdERtYm1mWWE5R1NSbDRmUjhTU1JZc3J6VVZlaFBqZHRaOA?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNM3JnbDlRX3I3REItb3NTRFRIWVN4cU9ORHlWMzhxbWJqdF9iaUV6SVZNLWdqSFhMMGJvclY0alotZ1Z3dDNraGtDT2JXZmJRc0daS0VpeWZGLUgtNkJDcTNaVW8wWnhqLTdwaGhlQU1XclpuWWxWdERtYm1mWWE5R1NSbDRmUjhTU1JZc3J6VVZlaFBqZHRaOA?oc=5"
     },
     {
       "id": "315284068961fd3e",
@@ -3150,10 +3150,10 @@
       "label": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5PVkVlLXE0cWl5UG5MZzRGaTJnLTNRZ3M1aWNvVTQxTTlhcmpYamhIUTVkenhUOXJJNmF1ZEI0SlJHZTN2WDBtbjdTTUpLV1JKSm1yZ0V3?oc=5"
     },
     {
-      "id": "446f47c25756e3c9",
+      "id": "0d285983b8a3c76f",
       "type": "opportunity",
-      "key": "how to claim daily sidra chain - tiktok",
-      "label": "How to Claim Daily Sidra Chain - TikTok"
+      "key": "how to claim daily sidra chain - tiktok.com",
+      "label": "How to Claim Daily Sidra Chain - tiktok.com"
     },
     {
       "id": "707b4e4d33fa1da0",
@@ -4668,10 +4668,10 @@
       "label": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOcDdUby15WHB3OUVleFBaTFdmRS1jVkM3eVRCLTcwb3Y0MUxieVFmMVlDdG51QmFzd1pwcm10eG5VWm9MeDk3bXB4RjBjWEh4NnI2Szd6Rk5NdzQ4c1dqUU5MRmV2Mm9Hb0xWN09BS1lHR0diUWVMNW4xM1lRWnR6aVhSdFYxZjRWTGp2ZUxTUGE?oc=5"
     },
     {
-      "id": "7fd57dde36f559a1",
+      "id": "ca04d6694d4e4315",
       "type": "opportunity",
-      "key": "cpa exam mcqs: financial reporting australia | pdf | fair value | historical cost - scribd",
-      "label": "CPA Exam MCQs: Financial Reporting Australia | PDF | Fair Value | Historical Cost - Scribd"
+      "key": "cpa exam mcqs: financial reporting australia | pdf | fair value | historical cost - scribd.com",
+      "label": "CPA Exam MCQs: Financial Reporting Australia | PDF | Fair Value | Historical Cost - scribd.com"
     },
     {
       "id": "feb6617080968870",
@@ -4800,10 +4800,10 @@
       "label": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1UV2x6X1haVW40TFUzTEVRVVBFbXFPdUU1YUtOSG1XaFQwTWY0ejVRb0M0Y1duWThmc1Y4LTVhbUVIbFpxQ3VGNlh0b0RiLXdGV1E?oc=5"
     },
     {
-      "id": "c06be14a8bb8d564",
+      "id": "71443001b30c5090",
       "type": "opportunity",
-      "key": "billonarie-biker (eng) - scribd",
-      "label": "Billonarie-Biker (Eng) - Scribd"
+      "key": "billonarie-biker (eng) - scribd.com",
+      "label": "Billonarie-Biker (Eng) - scribd.com"
     },
     {
       "id": "03a6081885ff680b",
@@ -4812,10 +4812,10 @@
       "label": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1MSmRmLVNIUU90VFR6NmxkMXZZOEZFbUZLRGg5MzJsMml4SWVzTWtnZFp6ZVJrU0FGUmtuM3JlMXc0T0FsRU4yaGJqeVZ6ZEpkcS1ucnMxbzlIc0RzNHFuekVBVkttSXRMQy1jamRSd3o?oc=5"
     },
     {
-      "id": "584aea83bcebaa96",
+      "id": "6b15656ccccb8e1e",
       "type": "opportunity",
-      "key": "bta312x-800c triac datasheet | pdf | contractual term | electrical engineering - scribd",
-      "label": "BTA312X-800C Triac Datasheet | PDF | Contractual Term | Electrical Engineering - Scribd"
+      "key": "bta312x-800c triac datasheet | pdf | contractual term | electrical engineering - scribd.com",
+      "label": "BTA312X-800C Triac Datasheet | PDF | Contractual Term | Electrical Engineering - scribd.com"
     },
     {
       "id": "1af790bb50ece222",
@@ -6000,10 +6000,10 @@
       "label": "https://news.google.com/rss/articles/CBMic0FVX3lxTE5mcFpTUlNxWkpJVi1SdVBaRW8zYjRNYWhfcHdJSFM5bWxNRHhuYXRHUWwtT3Zzai1kR3o5S0hYUFdrRzdHeEtaQm44VkV4eHpheUk2TGQ3Y0dWUld5R3pfYnV4NDhVV0xFOVBVSzNWcXRLQk0?oc=5"
     },
     {
-      "id": "ce82c69c7aacc8ab",
+      "id": "07c6a34e05961e9c",
       "type": "opportunity",
-      "key": "how to buy pyth network (pyth) in 2026 - 99bitcoins",
-      "label": "How to Buy Pyth Network (PYTH) in 2026 - 99Bitcoins"
+      "key": "how to buy pyth network (pyth) in 2026 - 99bitcoins.com",
+      "label": "How to Buy Pyth Network (PYTH) in 2026 - 99bitcoins.com"
     },
     {
       "id": "f10f38eb1a8d64fb",
@@ -7362,10 +7362,10 @@
       "label": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPN3k4YV9JWmlLRHo5UEZRWFBWWTFBajBZaHhjTG9uOU5rNHJRWkZFWFJ2Njd2TWFqaHc2bUluVlpCNW9xalh2dzBrbWtlbXppZHE5OW8yVXFYM2oyZkdXdXZGQnd4MHpFZkNsOThFY3hGLUltQUpHU0xKWW1TSDVGdm5MOTdHRjRuWnVSWnZSVEhmMmxOMkE?oc=5"
     },
     {
-      "id": "a6e5f4ffe796b68c",
+      "id": "80ee2671c5376277",
       "type": "opportunity",
-      "key": "lily liu on solana’s vision: building the future of digital finance - linkedin",
-      "label": "Lily Liu on Solana’s Vision: Building the Future of Digital Finance - LinkedIn"
+      "key": "lily liu on solana’s vision: building the future of digital finance - linkedin.com",
+      "label": "Lily Liu on Solana’s Vision: Building the Future of Digital Finance - linkedin.com"
     },
     {
       "id": "feff94543309d795",
@@ -7548,10 +7548,10 @@
       "label": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1EQnhzbTJTMWRpUVFWMXNWZGx5SEg3R0pVcE1DWGdmN1NLV2ROZXJDal9XN1R4SUZ6WDR1TGZqelVld2tHVDE5a0FpZktaQWJISk45NlNHSHZ2YlU2cHc?oc=5"
     },
     {
-      "id": "0410f71a516bd725",
+      "id": "189f9f85645e20eb",
       "type": "opportunity",
-      "key": "🌈 unraveling the rainbow airdrop: a comprehensive guide - linkedin",
-      "label": "🌈 Unraveling the Rainbow Airdrop: A Comprehensive Guide - LinkedIn"
+      "key": "🌈 unraveling the rainbow airdrop: a comprehensive guide - linkedin.com",
+      "label": "🌈 Unraveling the Rainbow Airdrop: A Comprehensive Guide - linkedin.com"
     },
     {
       "id": "d85212f4e20ca13c",
@@ -7572,10 +7572,10 @@
       "label": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9qQWF1RXhObmhXQzJSVjg3b00yZ3F4Q1RPTEN0YnpfN29CTE1ycnRNSTNsNVltWC1aYkFQSUVNbDFRd2pyMkNwU3VzWXBXR2xRemVBYUxwejZXRzhKR2c?oc=5"
     },
     {
-      "id": "ac0be551588e28d7",
+      "id": "ed7f1126715ccfc1",
       "type": "opportunity",
-      "key": "export copytrading records 1734155804616 - scribd",
-      "label": "Export Copytrading Records 1734155804616 - Scribd"
+      "key": "export copytrading records 1734155804616 - scribd.com",
+      "label": "Export Copytrading Records 1734155804616 - scribd.com"
     },
     {
       "id": "5b2ad1ad35d84278",
@@ -8064,10 +8064,10 @@
       "label": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1QbW95RjhzbjN2RkNOM1Bza1cyajNFUWs2cmpSa3hRVnYwU0xLVjNRdjRlbDNTNE5XbTg0QmVJWGtJU0Jxd2piYW1sS0F6RGhOVzZPSzVKQnBWQmR1dzlNQ3MxY1ZIU2FLa3hMNEpQeWVkODFLbkRqcm53?oc=5"
     },
     {
-      "id": "622c8080e8b495ba",
+      "id": "02d3cce2f8c66879",
       "type": "opportunity",
-      "key": "ethan clime - head of developer relations @ston.fi dex - linkedin",
-      "label": "Ethan Clime - Head of Developer Relations @STON.fi DEX - LinkedIn"
+      "key": "ethan clime - head of developer relations @ston.fi dex - linkedin.com",
+      "label": "Ethan Clime - Head of Developer Relations @STON.fi DEX - linkedin.com"
     },
     {
       "id": "c52c9ae7e7a3c308",
@@ -8280,10 +8280,10 @@
       "label": "https://news.google.com/rss/articles/CBMieEFVX3lxTE4xTVBfaVhxQTdDdmFQYk9GRl82Vktmd2l1UzFpbUVvSnJGNl9weXNWX21KSk9lRGVxbk95RHV2YlhkSXRxUENxa05DaHJveWJHUXdzWTJObzV5WjNEUVB0dUNsMW5NcDJST0w0bkdPb1JVOUdrUUpaRg?oc=5"
     },
     {
-      "id": "5650395eb7fcd1fb",
+      "id": "86d80d2eed4cb240",
       "type": "opportunity",
-      "key": "wesley chapel races legislative clock - mecktimes.com",
-      "label": "Wesley Chapel races legislative clock - mecktimes.com"
+      "key": "wesley chapel races legislative clock - mecklenburg times",
+      "label": "Wesley Chapel races legislative clock - Mecklenburg Times"
     },
     {
       "id": "009e243ad02f44c5",
@@ -8316,10 +8316,10 @@
       "label": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5ERXF3NWtHOVJYLXhqQkZHdTJJMWNqbFVic1NVVEo3YmNqM3hWa2t0ZFQxVjJVaEVsUXhPaXF3a0phbE91bi10eU81VlpfS1pPNTE1d2lVbExMajZGckhuV1RyZ1BMSzdjZ2w1cUJXVjVqRlFV?oc=5"
     },
     {
-      "id": "89605af061b7fde1",
+      "id": "7eba705ebe68bd43",
       "type": "opportunity",
-      "key": "austin muchow - mental health therapist (lmft) at nice healthcare - linkedin",
-      "label": "Austin Muchow - Mental Health Therapist (LMFT) at Nice Healthcare - LinkedIn"
+      "key": "austin muchow - mental health therapist (lmft) at nice healthcare - linkedin.com",
+      "label": "Austin Muchow - Mental Health Therapist (LMFT) at Nice Healthcare - linkedin.com"
     },
     {
       "id": "7b229f66e8a3356c",
@@ -10356,18 +10356,6 @@
       "label": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE83ZmlrVHBUZ3REYzI4clliMFZhUng3X05jVkJNejlpV1o5VFpXcEUxdHJ4QXVGLWp5QlNXRmd0aUpCa1N1a296WHNicHJrVEVUMHdtZ1lGOWpVNHQwLXNUOFRIUQ?oc=5"
     },
     {
-      "id": "95533db62707c593",
-      "type": "opportunity",
-      "key": "the smart contract integration guide i wish i had - medium",
-      "label": "The Smart Contract Integration Guide I Wish I Had - Medium"
-    },
-    {
-      "id": "668632d5c62f8e69",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQMnFFR1RnYXpNV3hOOG5TOEJZMFZHdFBpSkR4WnFibUVXeUp2cHM4ckZWVkttM21BRDV2TzczWE1nRGxCNEFsX3dVRFY2OVRET3Q4LUZBTXU1YzdhWkZxdFFET2Q1dVFFNjdSQmE5dmxaSUoyTGkzeGJEYUNMQm9WU2ItNkNmOFF3anotbzZsWkhLWk1pVGp2T2t3?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQMnFFR1RnYXpNV3hOOG5TOEJZMFZHdFBpSkR4WnFibUVXeUp2cHM4ckZWVkttM21BRDV2TzczWE1nRGxCNEFsX3dVRFY2OVRET3Q4LUZBTXU1YzdhWkZxdFFET2Q1dVFFNjdSQmE5dmxaSUoyTGkzeGJEYUNMQm9WU2ItNkNmOFF3anotbzZsWkhLWk1pVGp2T2t3?oc=5"
-    },
-    {
       "id": "330d69447a15adae",
       "type": "opportunity",
       "key": "faqs - coinbase",
@@ -10378,6 +10366,18 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5kdGt3QS1iYlpULTV3VnE2Z3R2NGt3RGVIWGFvRzE4eWxac01oZjNvNV9GTHRZeGE5VHlqd0dXVnZ6ZjJmMGw1V2RhelJCd2ZUU1ZEUmgxaU1WaWc1LTd2R2dTb1Jydw?oc=5",
       "label": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5kdGt3QS1iYlpULTV3VnE2Z3R2NGt3RGVIWGFvRzE4eWxac01oZjNvNV9GTHRZeGE5VHlqd0dXVnZ6ZjJmMGw1V2RhelJCd2ZUU1ZEUmgxaU1WaWc1LTd2R2dTb1Jydw?oc=5"
+    },
+    {
+      "id": "95533db62707c593",
+      "type": "opportunity",
+      "key": "the smart contract integration guide i wish i had - medium",
+      "label": "The Smart Contract Integration Guide I Wish I Had - Medium"
+    },
+    {
+      "id": "668632d5c62f8e69",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQMnFFR1RnYXpNV3hOOG5TOEJZMFZHdFBpSkR4WnFibUVXeUp2cHM4ckZWVkttM21BRDV2TzczWE1nRGxCNEFsX3dVRFY2OVRET3Q4LUZBTXU1YzdhWkZxdFFET2Q1dVFFNjdSQmE5dmxaSUoyTGkzeGJEYUNMQm9WU2ItNkNmOFF3anotbzZsWkhLWk1pVGp2T2t3?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQMnFFR1RnYXpNV3hOOG5TOEJZMFZHdFBpSkR4WnFibUVXeUp2cHM4ckZWVkttM21BRDV2TzczWE1nRGxCNEFsX3dVRFY2OVRET3Q4LUZBTXU1YzdhWkZxdFFET2Q1dVFFNjdSQmE5dmxaSUoyTGkzeGJEYUNMQm9WU2ItNkNmOFF3anotbzZsWkhLWk1pVGp2T2t3?oc=5"
     },
     {
       "id": "85d772bcffe79ada",
@@ -10444,18 +10444,6 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE5Za3RndWFXdlZyREdVZnVUQkZqNHVsT2p0bUR3bU5GMVFQTU1IU01aNTdUbXVjd09xV3RpUTc5ZjlTbDQzczEwZF9FQ3U?oc=5",
       "label": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE5Za3RndWFXdlZyREdVZnVUQkZqNHVsT2p0bUR3bU5GMVFQTU1IU01aNTdUbXVjd09xV3RpUTc5ZjlTbDQzczEwZF9FQ3U?oc=5"
-    },
-    {
-      "id": "6d74f7e5fed90555",
-      "type": "opportunity",
-      "key": "claim price today: live claim to usd, chart | buy claim coin - web3.bitget.com",
-      "label": "CLAIM Price Today: Live CLAIM to USD, Chart | Buy CLAIM Coin - web3.bitget.com"
-    },
-    {
-      "id": "b2b7367be1d7f9c0",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOTjNNTGMxUVhhblc3Q0NlRzAxMXJjZ2RXa1Rnb3UtQUtJYldJZUFEUHRDSHhUenpxbXd6X3pJOVdiWG52TmJndVBhOHpkbFdmN3NrYnZDdDVCZ1RQTW9UbjlYQWlvRWtWeHdPYlloemtUZDZZNUJEd2VoWHNhZkxoWEV5aGFrQQ?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOTjNNTGMxUVhhblc3Q0NlRzAxMXJjZ2RXa1Rnb3UtQUtJYldJZUFEUHRDSHhUenpxbXd6X3pJOVdiWG52TmJndVBhOHpkbFdmN3NrYnZDdDVCZ1RQTW9UbjlYQWlvRWtWeHdPYlloemtUZDZZNUJEd2VoWHNhZkxoWEV5aGFrQQ?oc=5"
     },
     {
       "id": "03f6ec81c85d83e1",
@@ -11106,10 +11094,10 @@
       "label": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9oY0c5SFpybjhQYmtOZUZVZEdsVnlfTVc4WWE5ai1XZThFRXhHSW5XLXVqODlUcGw3UlZzU0J6ZDB3ZWhfR0JaODB5aHNCeVYw?oc=5"
     },
     {
-      "id": "155debaf72740daf",
+      "id": "65e20ec31d457f22",
       "type": "opportunity",
-      "key": "agriculture supply chain management based on blockchain architecture and smart contracts - wiley online library",
-      "label": "Agriculture Supply Chain Management Based on Blockchain Architecture and Smart Contracts - Wiley Online Library"
+      "key": "agriculture supply chain management based on blockchain architecture and smart contracts - onlinelibrary.wiley.com",
+      "label": "Agriculture Supply Chain Management Based on Blockchain Architecture and Smart Contracts - onlinelibrary.wiley.com"
     },
     {
       "id": "4cac4a1894b6a123",
@@ -11140,18 +11128,6 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1tNTduWE1Xdy1Fa05US1lUQXI1OWtUMm52dlpJRnJCSHBUcjc1QUF2ekhvblhwMXVFX2lVd21VVHVZbVBuTXpNQ2JqVkRDSHBrQVNGMS1qcVJncWs4LXZ2cWk3WWs?oc=5",
       "label": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1tNTduWE1Xdy1Fa05US1lUQXI1OWtUMm52dlpJRnJCSHBUcjc1QUF2ekhvblhwMXVFX2lVd21VVHVZbVBuTXpNQ2JqVkRDSHBrQVNGMS1qcVJncWs4LXZ2cWk3WWs?oc=5"
-    },
-    {
-      "id": "583e208e1456527c",
-      "type": "opportunity",
-      "key": "how to check if an address owns an nft - ethereum stack exchange",
-      "label": "How to check if an address owns an NFT - Ethereum Stack Exchange"
-    },
-    {
-      "id": "d258a8ab7e16f6df",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNWXAybVVGMFhReGdfRHdQOVp3bDF3OFJUWHN5N0t5VC1MNFM1Qk1lMGx0N3gzT1paZnp6d0ZlMEFtaVpKLWpZTWg1eGIwWTJOV0hwZloySzRmQ1VYdENYQ0x3QWNGUkpIQ1E4cG9oWWF4cEl6TXhBR3BkbExKMUI3RGlBYTh3MkRRMldXYWE4aTNlM2kt?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNWXAybVVGMFhReGdfRHdQOVp3bDF3OFJUWHN5N0t5VC1MNFM1Qk1lMGx0N3gzT1paZnp6d0ZlMEFtaVpKLWpZTWg1eGIwWTJOV0hwZloySzRmQ1VYdENYQ0x3QWNGUkpIQ1E4cG9oWWF4cEl6TXhBR3BkbExKMUI3RGlBYTh3MkRRMldXYWE4aTNlM2kt?oc=5"
     },
     {
       "id": "7b72532d188e7d9b",
@@ -11238,10 +11214,10 @@
       "label": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9MZE82Q3E1enhTd0ZPLVoyWEU0VWVoN0hiWEJQSUk4SmN4bzBVYVJaRnBNQy1Md2ZaOThkaWh6Y0lSaGdRdFltdWhLS2l0cmgwdXZFaFN4bjJxUlk?oc=5"
     },
     {
-      "id": "c716159ab014c0e7",
+      "id": "0f402a1a129a8044",
       "type": "opportunity",
-      "key": "a conceptual model for blockchain‐based agriculture food supply chain system - wiley online library",
-      "label": "A Conceptual Model for Blockchain‐Based Agriculture Food Supply Chain System - Wiley Online Library"
+      "key": "a conceptual model for blockchain‐based agriculture food supply chain system - onlinelibrary.wiley.com",
+      "label": "A Conceptual Model for Blockchain‐Based Agriculture Food Supply Chain System - onlinelibrary.wiley.com"
     },
     {
       "id": "5801072df981d6e7",
@@ -11272,18 +11248,6 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE42RkhTZVZfMDFSbVlrNUhCQnJmU3o1MDNzYkVwOFNvYWVlOW5kZkdzZlNoT0dnd2NqY083bDQ3Vk9XQXFYYnBHQXpKN2p0dzlheVB1RmdB?oc=5",
       "label": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE42RkhTZVZfMDFSbVlrNUhCQnJmU3o1MDNzYkVwOFNvYWVlOW5kZkdzZlNoT0dnd2NqY083bDQ3Vk9XQXFYYnBHQXpKN2p0dzlheVB1RmdB?oc=5"
-    },
-    {
-      "id": "8b0705c99963bca6",
-      "type": "opportunity",
-      "key": "pay-if-paid clauses do not prevent a subcontractor's right to make a claim against the surety on a payment bond - linkedin",
-      "label": "Pay-If-Paid Clauses Do Not Prevent a Subcontractor's Right to Make a Claim Against the Surety on a Payment Bond - LinkedIn"
-    },
-    {
-      "id": "b1ebdb1e90ea65c2",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPMFU0VGxVa19MNk03RUdvUERfTjVOSGoxRnE2eEF5Z29mWHFoZVEyM0FlYVJSSW1Fd1ozM0xJWUI5WGRSVF9uUHRzVFE2T01iNFZOZTQtVkk5d3kwMi1mNVVjTWxxVGx0WG1tRVpqUnRyRHBvc292ZjkyRktybW96NkNuNm1UbVlQQXZ6Wk9nLXRxWTY5cW1OcjZ1c3ZlRUU?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPMFU0VGxVa19MNk03RUdvUERfTjVOSGoxRnE2eEF5Z29mWHFoZVEyM0FlYVJSSW1Fd1ozM0xJWUI5WGRSVF9uUHRzVFE2T01iNFZOZTQtVkk5d3kwMi1mNVVjTWxxVGx0WG1tRVpqUnRyRHBvc292ZjkyRktybW96NkNuNm1UbVlQQXZ6Wk9nLXRxWTY5cW1OcjZ1c3ZlRUU?oc=5"
     },
     {
       "id": "44f7af672034caad",
@@ -11320,6 +11284,42 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1MNVkybFBzZ3ZGb1JLLUYtLWliNGpHak9mRFdzUFc5TF9pS0ZoUE1jaDZlWXhYLWlySW1oMTFUaW90bTZpVUNtSFNGTzc2TDBMUmc?oc=5",
       "label": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1MNVkybFBzZ3ZGb1JLLUYtLWliNGpHak9mRFdzUFc5TF9pS0ZoUE1jaDZlWXhYLWlySW1oMTFUaW90bTZpVUNtSFNGTzc2TDBMUmc?oc=5"
+    },
+    {
+      "id": "3987d472b88218ec",
+      "type": "opportunity",
+      "key": "legacy wallet - google play",
+      "label": "Legacy Wallet - Google Play"
+    },
+    {
+      "id": "f791a31d2eb49aa5",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMidEFVX3lxTFB2dTgwbTk5aFRUOFhQaU9nT3J3YVphM2xpcG5OLWQtNE9SYllTM2Z0Q1VRekVRczZqUkdlRUhHa3Zoa1JtRVZPcW14dlNjc2FQVllJU0JrWU1zNTI3UUtfajdNbTdiU2hRb085UEw1RVpnbVl6?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMidEFVX3lxTFB2dTgwbTk5aFRUOFhQaU9nT3J3YVphM2xpcG5OLWQtNE9SYllTM2Z0Q1VRekVRczZqUkdlRUhHa3Zoa1JtRVZPcW14dlNjc2FQVllJU0JrWU1zNTI3UUtfajdNbTdiU2hRb085UEw1RVpnbVl6?oc=5"
+    },
+    {
+      "id": "38e7c30783c208af",
+      "type": "opportunity",
+      "key": "an oracle-based on-chain privacy - mdpi",
+      "label": "An Oracle-Based On-Chain Privacy - MDPI"
+    },
+    {
+      "id": "767e4b33bf44624c",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE1SMksxQ0ttd0FCckVHTTA2UFFhU3VWeUUxckdSZHRwMkx2S3lfV0YwOUtKNGRzRW9HRlRxRzhZRWdCQVZnVExJZ085ZC05dw?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE1SMksxQ0ttd0FCckVHTTA2UFFhU3VWeUUxckdSZHRwMkx2S3lfV0YwOUtKNGRzRW9HRlRxRzhZRWdCQVZnVExJZ085ZC05dw?oc=5"
+    },
+    {
+      "id": "d6fa56d49d05bbd0",
+      "type": "opportunity",
+      "key": "how not to lose your digital assets - bitnob.com",
+      "label": "How Not to Lose Your Digital Assets - bitnob.com"
+    },
+    {
+      "id": "0102cd8b4cab1694",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1PLWdDRlo1eWFUeUQwSlhncWtSR3BhTUd6RE84Q3NGendvNlNJYWVIbWdCbC12ei13RmN5LUtWSldienh1Q3NxVFhuREpGMmVIS0pZUTE4T1hfT2FoOGxoZ0ZsTnFCUk1oSjFPdVpENVUzYXI3QjJOdFBn?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1PLWdDRlo1eWFUeUQwSlhncWtSR3BhTUd6RE84Q3NGendvNlNJYWVIbWdCbC12ei13RmN5LUtWSldienh1Q3NxVFhuREpGMmVIS0pZUTE4T1hfT2FoOGxoZ0ZsTnFCUk1oSjFPdVpENVUzYXI3QjJOdFBn?oc=5"
     },
     {
       "id": "0487d5b4b6eb6089",
@@ -12588,18 +12588,6 @@
       "label": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9kR3ZFZHdVN0tDR0V4NlJXS0ZjMm53dUU4Q2NPNmpaeTNfQ3ozRnJtekl3YlU2em1xLS1aQjF1ekhuSUthLWktYXZPOEh3YlY3NUFMNkpkWG9jT3c0dTFWdGpB?oc=5"
     },
     {
-      "id": "662163ea78c8a804",
-      "type": "opportunity",
-      "key": "ct tge: the next chapter of concrete ct, the native governance and configuration token of the concrete ecosystem, reaches its token generation event (tge) on september 30, 2026. issued by concrete network, ltd., ct launches with a fixed - x",
-      "label": "CT TGE: The Next Chapter of Concrete CT, the native governance and configuration token of the Concrete ecosystem, reaches its Token Generation Event (TGE) on September 30, 2026. Issued by Concrete Network, Ltd., CT launches with a fixed - x"
-    },
-    {
-      "id": "88d727b7733da5ca",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBJSGFTeFdReVhBZDlUSUVGMTJGWEppd05QOGIxekVnVTI0Wm13d0xZdTc0SXdqajQ4LTNCZld3TDZMZ24wQWU5ZzZ6aUdCb25BNzkzWmFGZ1gzRC1yWG9xdmh3?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBJSGFTeFdReVhBZDlUSUVGMTJGWEppd05QOGIxekVnVTI0Wm13d0xZdTc0SXdqajQ4LTNCZld3TDZMZ24wQWU5ZzZ6aUdCb25BNzkzWmFGZ1gzRC1yWG9xdmh3?oc=5"
-    },
-    {
       "id": "91b9b67ddb28eba4",
       "type": "opportunity",
       "key": "gravity bridge $5.4m denom mapping exploit (explained) - quillaudits",
@@ -12610,6 +12598,18 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPcW9fbEEwXzNRTDNMcXNNYVNkb1UzczJHY19HQWxpRDEyQ0tKYzc4dF9GbGMwa0M5emU2SGlnd2g2LVB6TmhVMnE0ckF5eDVpZWZZUHNJMDFUN1RrdjZvV0NaQ1pSamZPNlIxSWMzaVNIQ3dTUGxoREpXYnRCamdscl9oMHFXLV83X1ZCOFRB?oc=5",
       "label": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPcW9fbEEwXzNRTDNMcXNNYVNkb1UzczJHY19HQWxpRDEyQ0tKYzc4dF9GbGMwa0M5emU2SGlnd2g2LVB6TmhVMnE0ckF5eDVpZWZZUHNJMDFUN1RrdjZvV0NaQ1pSamZPNlIxSWMzaVNIQ3dTUGxoREpXYnRCamdscl9oMHFXLV83X1ZCOFRB?oc=5"
+    },
+    {
+      "id": "662163ea78c8a804",
+      "type": "opportunity",
+      "key": "ct tge: the next chapter of concrete ct, the native governance and configuration token of the concrete ecosystem, reaches its token generation event (tge) on september 30, 2026. issued by concrete network, ltd., ct launches with a fixed - x",
+      "label": "CT TGE: The Next Chapter of Concrete CT, the native governance and configuration token of the Concrete ecosystem, reaches its Token Generation Event (TGE) on September 30, 2026. Issued by Concrete Network, Ltd., CT launches with a fixed - x"
+    },
+    {
+      "id": "88d727b7733da5ca",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBJSGFTeFdReVhBZDlUSUVGMTJGWEppd05QOGIxekVnVTI0Wm13d0xZdTc0SXdqajQ4LTNCZld3TDZMZ24wQWU5ZzZ6aUdCb25BNzkzWmFGZ1gzRC1yWG9xdmh3?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBJSGFTeFdReVhBZDlUSUVGMTJGWEppd05QOGIxekVnVTI0Wm13d0xZdTc0SXdqajQ4LTNCZld3TDZMZ24wQWU5ZzZ6aUdCb25BNzkzWmFGZ1gzRC1yWG9xdmh3?oc=5"
     },
     {
       "id": "3988533b1c21f3c9",
@@ -13644,10 +13644,10 @@
       "label": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5IQlhJSk9pX3ZqLUlBWFVfMW5INkNtb0xGMEYzUDkwT213SGJiWHR0Tm1QN0dlQUt6NzhhVEhMRkU5UFhVT1p6Y2dvT2xkY1lVZnowcQ?oc=5"
     },
     {
-      "id": "140bd044d0f7094f",
+      "id": "daa60829a44cb1e8",
       "type": "opportunity",
-      "key": "top 10 defi security best practices - certik",
-      "label": "Top 10 DeFi Security Best Practices - CertiK"
+      "key": "top 10 defi security best practices - certik.com",
+      "label": "Top 10 DeFi Security Best Practices - certik.com"
     },
     {
       "id": "f9e46a23b8c876c7",
@@ -13764,18 +13764,6 @@
       "label": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9aNlcyYXUta2FaX21xYkw1clRmekJiaVhhSTh4TVhETVkyaXF4NkJkTHJFRmh1ZmRqallXbk9icnpEX3pJU29JckxFYXJQRGVWb283SzFuZWEyaEZLclVvbXVSb3ZNV1p6RDYya01ZTlU0enkzQkZrUk1ENzhBRk0?oc=5"
     },
     {
-      "id": "83566c3a76e485e2",
-      "type": "opportunity",
-      "key": "address: 0x429f49fa...e25d5ee7d - polygonscan.com",
-      "label": "Address: 0x429f49fa...e25d5ee7d - polygonscan.com"
-    },
-    {
-      "id": "19414965a21289c1",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9tMFR6bWo1YkZkbE8tUmhOT2Q4clItVzhzeDRlMlFDSGhyYmVEeWJ0TFRIRUkyek80Y3RrbG9OeGQwaExpZ3laZGhYTnM5OXY4RFJlNXNZRTBUaU82cFI3bTBJeV9pN01QZ2R5bGFvakR4S3pCYU1BUkxxcmUtQWc?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9tMFR6bWo1YkZkbE8tUmhOT2Q4clItVzhzeDRlMlFDSGhyYmVEeWJ0TFRIRUkyek80Y3RrbG9OeGQwaExpZ3laZGhYTnM5OXY4RFJlNXNZRTBUaU82cFI3bTBJeV9pN01QZ2R5bGFvakR4S3pCYU1BUkxxcmUtQWc?oc=5"
-    },
-    {
       "id": "30b73160efadb2f9",
       "type": "opportunity",
       "key": "polymarket: pusd token | address: 0xc011a7e1...342e82dfb - polygonscan.com",
@@ -13786,6 +13774,18 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5yRi1VTk9aMjN5VGl1NVJSQnluVHNqQkRpb3NVbXJybl8xNFR2bDVNWlk1WjhYSFFEb0VjOUZhN1VpMk5PdFNNTjNIRFdmcWxNRnZuaXJUVFJfTThabkctckthN3lNcWl0R2VNWTl4OU9mTjZYejZnWkJHSmNnZWs?oc=5",
       "label": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5yRi1VTk9aMjN5VGl1NVJSQnluVHNqQkRpb3NVbXJybl8xNFR2bDVNWlk1WjhYSFFEb0VjOUZhN1VpMk5PdFNNTjNIRFdmcWxNRnZuaXJUVFJfTThabkctckthN3lNcWl0R2VNWTl4OU9mTjZYejZnWkJHSmNnZWs?oc=5"
+    },
+    {
+      "id": "83566c3a76e485e2",
+      "type": "opportunity",
+      "key": "address: 0x429f49fa...e25d5ee7d - polygonscan.com",
+      "label": "Address: 0x429f49fa...e25d5ee7d - polygonscan.com"
+    },
+    {
+      "id": "19414965a21289c1",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9tMFR6bWo1YkZkbE8tUmhOT2Q4clItVzhzeDRlMlFDSGhyYmVEeWJ0TFRIRUkyek80Y3RrbG9OeGQwaExpZ3laZGhYTnM5OXY4RFJlNXNZRTBUaU82cFI3bTBJeV9pN01QZ2R5bGFvakR4S3pCYU1BUkxxcmUtQWc?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9tMFR6bWo1YkZkbE8tUmhOT2Q4clItVzhzeDRlMlFDSGhyYmVEeWJ0TFRIRUkyek80Y3RrbG9OeGQwaExpZ3laZGhYTnM5OXY4RFJlNXNZRTBUaU82cFI3bTBJeV9pN01QZ2R5bGFvakR4S3pCYU1BUkxxcmUtQWc?oc=5"
     },
     {
       "id": "ab58d058c89cdef8",
@@ -13872,18 +13872,6 @@
       "label": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1lMFdFWnlZcElibEhuUXh6aFN2ZUFyMEhqeVlfU0VDVDNORVFzSEpYUHg3Q0J0cE5JX05VeE1iOHNGcC14ZVVTZnJMVGFlcm1CaEliT1R0V29zNkplbzlfSmdESEV4aHZFbHhNQ1RtSXFyOENTUGl4TDgzZmlIRmc?oc=5"
     },
     {
-      "id": "a79c2cdc74eb3f7a",
-      "type": "opportunity",
-      "key": "aave: pool addresses provider v3 - polygonscan.com",
-      "label": "Aave: Pool Addresses Provider V3 - polygonscan.com"
-    },
-    {
-      "id": "e0cc5665572bbd27",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMif0FVX3lxTFB0c1gwdEpOYkhfU1haazVMVmR2eHAwYktjQ0lyTDR6MVp3X19IdUZsNno4dVVBcll6eFN5T0JjM0xmRjlIYU9MbjV2MndrWTFRbHJFSUJoYkNmLWM1TlZWNmRWQ2FnWnNMMm5TUUc2dHZ1VkdoOVhfcmZkcTY5M2s?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMif0FVX3lxTFB0c1gwdEpOYkhfU1haazVMVmR2eHAwYktjQ0lyTDR6MVp3X19IdUZsNno4dVVBcll6eFN5T0JjM0xmRjlIYU9MbjV2MndrWTFRbHJFSUJoYkNmLWM1TlZWNmRWQ2FnWnNMMm5TUUc2dHZ1VkdoOVhfcmZkcTY5M2s?oc=5"
-    },
-    {
       "id": "da34f73c7aec2741",
       "type": "opportunity",
       "key": "how to use the polygon bridge? - binance",
@@ -13906,6 +13894,30 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPbjZmVjlYUHFydk9ab3FzTlZmTmo0XzdJWnp4bVE3b3NZaGxUWHdZMzd4bkRqdmU2VkltRkpzbExmd0NsLTNJcndTVUhyTXFxcnp6T2c2ekhVWE53Q2c2c1JicmswWmcyUmJCcGVocEc4Zkk5cGJReGZyMWdEUjFTUTFfWFBJMS1URWQtVm9OUkdfUU43Yk9lWG5KNkJpM1B6cDF2SExB?oc=5",
       "label": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPbjZmVjlYUHFydk9ab3FzTlZmTmo0XzdJWnp4bVE3b3NZaGxUWHdZMzd4bkRqdmU2VkltRkpzbExmd0NsLTNJcndTVUhyTXFxcnp6T2c2ekhVWE53Q2c2c1JicmswWmcyUmJCcGVocEc4Zkk5cGJReGZyMWdEUjFTUTFfWFBJMS1URWQtVm9OUkdfUU43Yk9lWG5KNkJpM1B6cDF2SExB?oc=5"
+    },
+    {
+      "id": "a79c2cdc74eb3f7a",
+      "type": "opportunity",
+      "key": "aave: pool addresses provider v3 - polygonscan.com",
+      "label": "Aave: Pool Addresses Provider V3 - polygonscan.com"
+    },
+    {
+      "id": "e0cc5665572bbd27",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMif0FVX3lxTFB0c1gwdEpOYkhfU1haazVMVmR2eHAwYktjQ0lyTDR6MVp3X19IdUZsNno4dVVBcll6eFN5T0JjM0xmRjlIYU9MbjV2MndrWTFRbHJFSUJoYkNmLWM1TlZWNmRWQ2FnWnNMMm5TUUc2dHZ1VkdoOVhfcmZkcTY5M2s?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMif0FVX3lxTFB0c1gwdEpOYkhfU1haazVMVmR2eHAwYktjQ0lyTDR6MVp3X19IdUZsNno4dVVBcll6eFN5T0JjM0xmRjlIYU9MbjV2MndrWTFRbHJFSUJoYkNmLWM1TlZWNmRWQ2FnWnNMMm5TUUc2dHZ1VkdoOVhfcmZkcTY5M2s?oc=5"
+    },
+    {
+      "id": "f7ff33b28c05c5ff",
+      "type": "opportunity",
+      "key": "security notice: magic eden exploit a vulnerability in an old magic eden trading contract, payment processor v2, is currently being exploited to take nfts from wallets that previously listed assets on magic eden. decentraland’s smart contra",
+      "label": "Security Notice: Magic Eden Exploit A vulnerability in an old Magic Eden trading contract, Payment Processor V2, is currently being exploited to take NFTs from wallets that previously listed assets on Magic Eden. Decentraland’s smart contra"
+    },
+    {
+      "id": "36489ea7ed29ff58",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1zWFlKeDNRMl96X3BEckt6OUZwOUY0YzkyYWZSUVp2ZnBRX3hRZ2xxMHc3RjR2X1pfMTdvYUM3VW4xTG1CMFRNV1MtWFNxVEtyTHNsRlVxb2pkTkcyUW8xZDE1RQ?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1zWFlKeDNRMl96X3BEckt6OUZwOUY0YzkyYWZSUVp2ZnBRX3hRZ2xxMHc3RjR2X1pfMTdvYUM3VW4xTG1CMFRNV1MtWFNxVEtyTHNsRlVxb2pkTkcyUW8xZDE1RQ?oc=5"
     },
     {
       "id": "84278d2887a3a073",
@@ -14076,18 +14088,6 @@
       "label": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFA5ajItSVNxRjRpN3pXTF9HYjMzSGNJQTkxRVYySUNLdkp2WklHaUJFV3I5RFBlSGZyOVVjRG0yY2hiOUlUVXVaUXJGODQ2ZDU2ZWFXc2k5dw?oc=5"
     },
     {
-      "id": "d6fa56d49d05bbd0",
-      "type": "opportunity",
-      "key": "how not to lose your digital assets - bitnob.com",
-      "label": "How Not to Lose Your Digital Assets - bitnob.com"
-    },
-    {
-      "id": "0102cd8b4cab1694",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1PLWdDRlo1eWFUeUQwSlhncWtSR3BhTUd6RE84Q3NGendvNlNJYWVIbWdCbC12ei13RmN5LUtWSldienh1Q3NxVFhuREpGMmVIS0pZUTE4T1hfT2FoOGxoZ0ZsTnFCUk1oSjFPdVpENVUzYXI3QjJOdFBn?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1PLWdDRlo1eWFUeUQwSlhncWtSR3BhTUd6RE84Q3NGendvNlNJYWVIbWdCbC12ei13RmN5LUtWSldienh1Q3NxVFhuREpGMmVIS0pZUTE4T1hfT2FoOGxoZ0ZsTnFCUk1oSjFPdVpENVUzYXI3QjJOdFBn?oc=5"
-    },
-    {
       "id": "17240069cae6f1ee",
       "type": "opportunity",
       "key": "address: 0x204f72f3...a1da95e14 - polygonscan.com",
@@ -14146,18 +14146,6 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9aSWZzUWc0NkllVDVKaWlfMTlfTlhRNFBSMS1Vb3BpMUNiaUZPMno3a2VyTEdJNmtoVnRDNWM2Sk93S1NXLUV0TV91OTZ4X01lOHg0ektucHgtNXdteVdnNEUzcjVKVVZpLVhJN3lR?oc=5",
       "label": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9aSWZzUWc0NkllVDVKaWlfMTlfTlhRNFBSMS1Vb3BpMUNiaUZPMno3a2VyTEdJNmtoVnRDNWM2Sk93S1NXLUV0TV91OTZ4X01lOHg0ektucHgtNXdteVdnNEUzcjVKVVZpLVhJN3lR?oc=5"
-    },
-    {
-      "id": "3987d472b88218ec",
-      "type": "opportunity",
-      "key": "legacy wallet - google play",
-      "label": "Legacy Wallet - Google Play"
-    },
-    {
-      "id": "f791a31d2eb49aa5",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMidEFVX3lxTFB2dTgwbTk5aFRUOFhQaU9nT3J3YVphM2xpcG5OLWQtNE9SYllTM2Z0Q1VRekVRczZqUkdlRUhHa3Zoa1JtRVZPcW14dlNjc2FQVllJU0JrWU1zNTI3UUtfajdNbTdiU2hRb085UEw1RVpnbVl6?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMidEFVX3lxTFB2dTgwbTk5aFRUOFhQaU9nT3J3YVphM2xpcG5OLWQtNE9SYllTM2Z0Q1VRekVRczZqUkdlRUhHa3Zoa1JtRVZPcW14dlNjc2FQVllJU0JrWU1zNTI3UUtfajdNbTdiU2hRb085UEw1RVpnbVl6?oc=5"
     },
     {
       "id": "2f425298bc804dd1",
@@ -14256,28 +14244,16 @@
       "label": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE1XQlptbE5Qam1pbEdSUDl0NWJGcHlsa0hYSDVZb3d5bXVaYTF1UjlTOFhCQjZCX0ZZWTZVLThMWm5naU9HUzVNSlp0ekFTRGJJckdZY3RNZThPWEZr?oc=5"
     },
     {
-      "id": "10b62a9f971ad41a",
+      "id": "09faa3b276c3229e",
       "type": "opportunity",
-      "key": "zero‐knowledge proof enabled blockchain smart contracts for efficient health insurance system - wiley online library",
-      "label": "Zero‐Knowledge Proof Enabled Blockchain Smart Contracts for Efficient Health Insurance System - Wiley Online Library"
+      "key": "zero‐knowledge proof enabled blockchain smart contracts for efficient health insurance system - onlinelibrary.wiley.com",
+      "label": "Zero‐Knowledge Proof Enabled Blockchain Smart Contracts for Efficient Health Insurance System - onlinelibrary.wiley.com"
     },
     {
       "id": "e2e86fccb023c99a",
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFBsbHAtaXVKTUtrTEVQejY0bDRCUE1SaGRHRy1LSWxIRnNQcDhTbHBobDZoQW0xSkZsWDJQVUVNcnlJQWI5MTAzSldOb2VHWllMZmZRd0JGRU1za1YzemJrMWxpTzQ5Rm1j?oc=5",
       "label": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFBsbHAtaXVKTUtrTEVQejY0bDRCUE1SaGRHRy1LSWxIRnNQcDhTbHBobDZoQW0xSkZsWDJQVUVNcnlJQWI5MTAzSldOb2VHWllMZmZRd0JGRU1za1YzemJrMWxpTzQ5Rm1j?oc=5"
-    },
-    {
-      "id": "4cf1623988283395",
-      "type": "opportunity",
-      "key": "crypto miner: bitcoin factory - apple",
-      "label": "Crypto Miner: Bitcoin Factory - Apple"
-    },
-    {
-      "id": "230fdbbb0e803d57",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMie0FVX3lxTE05ckVfelpzTFpGZ2xtR0k3ZnAyZWJwQmVZc2dMSlJNVS1WUnM5LVAxUnJLdjloU1FUYnpaeWxJU2pSVjRjaU5YTXhxOWVJOElYaHBPZV8xbUlUeXBubHJtRFhRUHY2amJhSzlRS0w2RFNDaHdKYjNUWWlnMA?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMie0FVX3lxTE05ckVfelpzTFpGZ2xtR0k3ZnAyZWJwQmVZc2dMSlJNVS1WUnM5LVAxUnJLdjloU1FUYnpaeWxJU2pSVjRjaU5YTXhxOWVJOElYaHBPZV8xbUlUeXBubHJtRFhRUHY2amJhSzlRS0w2RFNDaHdKYjNUWWlnMA?oc=5"
     },
     {
       "id": "47629fa00db9241b",
@@ -14808,10 +14784,10 @@
       "label": "https://news.google.com/rss/articles/CBMiS0FVX3lxTFBoaHBaWkJZTWktOVlVczlJMG5rVXZiVjdUMkNORjZVRlN2cHNDdS1MSmNSU3dmWUFxRzRIbnJkeWdTMTFZZ190RHJaaw?oc=5"
     },
     {
-      "id": "0c25fd4d4a6907c1",
+      "id": "a5ed82d9ebeebd8b",
       "type": "opportunity",
-      "key": "\"rust enthusiast | building on move | 3x hackathon winner (coindcx unfold '24, aptos winter school) | aspiring smart contract auditor | pre-final year student at iit guwahati\" - linkedin india",
-      "label": "\"Rust Enthusiast | Building on Move | 3x Hackathon Winner (CoinDCX Unfold '24, Aptos Winter School) | Aspiring Smart Contract Auditor | Pre-Final Year Student at IIT Guwahati\" - LinkedIn India"
+      "key": "\"rust enthusiast | building on move | 3x hackathon winner (coindcx unfold '24, aptos winter school) | aspiring smart contract auditor | pre-final year student at iit guwahati\" - in.linkedin.com",
+      "label": "\"Rust Enthusiast | Building on Move | 3x Hackathon Winner (CoinDCX Unfold '24, Aptos Winter School) | Aspiring Smart Contract Auditor | Pre-Final Year Student at IIT Guwahati\" - in.linkedin.com"
     },
     {
       "id": "98349e4feb10bd8c",
@@ -16458,10 +16434,10 @@
       "label": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNaHk2M0owVFBEczJOajRLQmxXemhGUzlWZGMtYlczeFRNRno1TGFGNDMxZkFhVmY1bjhBV2QyM2UyN3VwTG9iVHQ2TjZVZlhVQTBZMWxGS01qZXhfNlhSdlFPLTJqQlFsOU5tVUxKTWw3N3BZZDE4b082d2JvaXV5VXE1SV9XQm1VV2N2QWVQT0RKdw?oc=5"
     },
     {
-      "id": "06b26e40d4183784",
+      "id": "86af75bab4ca0007",
       "type": "opportunity",
-      "key": "open usd goes live: stripe, visa, and mastercard deploy business stablecoin infrastructure - techtimes.com",
-      "label": "Open USD Goes Live: Stripe, Visa, and Mastercard Deploy Business Stablecoin Infrastructure - techtimes.com"
+      "key": "open usd goes live: stripe, visa, and mastercard deploy business stablecoin infrastructure - tech times",
+      "label": "Open USD Goes Live: Stripe, Visa, and Mastercard Deploy Business Stablecoin Infrastructure - Tech Times"
     },
     {
       "id": "86d0dfd8ebf4d723",
@@ -18594,10 +18570,10 @@
       "label": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5DSU5iQTU5YU1CM1lFUWIwVXNpVzBZZWZSejhJcC1UdThiNmxxNnpiQXlVWk9aVkdWZlJ5Um56MF9CT1pTbjdRYXBMdDI3ZVlDODh6cXVaTzBnNTNZVGlPZF8wUS16YllEQ1E?oc=5"
     },
     {
-      "id": "255c601f96da46b7",
+      "id": "9c3fca0a0418d14f",
       "type": "opportunity",
-      "key": "shevchenko gives near intents attacker 48 hours - thedefiant.io",
-      "label": "Shevchenko Gives NEAR Intents Attacker 48 Hours - thedefiant.io"
+      "key": "shevchenko gives near intents attacker 48 hours - the defiant",
+      "label": "Shevchenko Gives NEAR Intents Attacker 48 Hours - The Defiant"
     },
     {
       "id": "2f3c33dd2b970a60",
@@ -18690,10 +18666,10 @@
       "label": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQVERtekZxc3pBQ2lfOFV3VnJ1YURaUnlXX3d6c0ZkaDFMbHZNbW1Od0VIX2xUSWU4d2pKaHI4XzBJaDF6aDhvVTdBdUkwT2NWTDNXQnZvbE1XVjZ5MGFMRHlENmVJeEFEaWppZ3dZWHBQRHB5M3ZhNlR2eVZMTC0zV3lTaU5ON3ZfV0o0bFRmbWtzUdIBmgFBVV95cUxOMWpYR2VZbHhURVZ0QUEyNWdNbHY3NmRGSU82SmJHY2Jrcl8taHNTSGlNZHlJLUFJNjlNSXIwZnZLS2lBYWo5ajY4WGVsS1RDTFQ4YVA2ZDBtZ3lycHdvZ1g5NGpVMmJsTk1UM084dTg3WjF1VjhkMkR0TGMxQ2RYZmNhYU9ZWmZjeEl5TWZfTTVRMDlYOHQtc1dn?oc=5"
     },
     {
-      "id": "ca3b3d8449d790a7",
+      "id": "d3a2074b1c86b97e",
       "type": "opportunity",
-      "key": "flock safety crosses 100,000 cameras as 53 cities cancel over unauthorized federal data access - techtimes.com",
-      "label": "Flock Safety Crosses 100,000 Cameras as 53 Cities Cancel Over Unauthorized Federal Data Access - techtimes.com"
+      "key": "flock safety crosses 100,000 cameras as 53 cities cancel over unauthorized federal data access - tech times",
+      "label": "Flock Safety Crosses 100,000 Cameras as 53 Cities Cancel Over Unauthorized Federal Data Access - Tech Times"
     },
     {
       "id": "cd707c64f6ace3b6",
@@ -19158,10 +19134,10 @@
       "label": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOLXJteTJYaWZYOWRwWTJrM2o0OGFqOHZ6OTlqalRxNkpSeEd1UENMdjJRUjdsVDc0a1RJa3U0cl9IaXBnbGdXTzQwRlVLLWlnLXFaME96ckNRU1ZSU3ROazd1eHdtVnJuN2h2U29OMjNuRXJ1Uk5TOXE1VHZoaHBlLXltak1MOVNvMmkwVVJEWW12SHRieHZadEJWRGM?oc=5"
     },
     {
-      "id": "9ea122dc62581a63",
+      "id": "d17ef39d5e40fb96",
       "type": "opportunity",
-      "key": "ledger launches agent stack: ai proposes, hardware enforces the final crypto move - techtimes.com",
-      "label": "Ledger Launches Agent Stack: AI Proposes, Hardware Enforces the Final Crypto Move - techtimes.com"
+      "key": "ledger launches agent stack: ai proposes, hardware enforces the final crypto move - tech times",
+      "label": "Ledger Launches Agent Stack: AI Proposes, Hardware Enforces the Final Crypto Move - Tech Times"
     },
     {
       "id": "547e0bb5979a2086",
@@ -19530,18 +19506,6 @@
       "label": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNYV9GVkNOcFRDcFg0ckZNWk1CZTJUaUdTdUNqSzhLbER0Skw3Nl9jSXhSUVdWeXVDX3ZWcDdkbHgwRTdkZE80SGdKVGlocW5IRnVUcnlXdTNGMVFWc0tSckduNG1fdXA2SkpJUmtvMEtRcGxlTDlmTk1NRk93T1FuYjR1eGU0Rkx1NUxTSUtLaU4?oc=5"
     },
     {
-      "id": "db61a352f6c31a20",
-      "type": "opportunity",
-      "key": "happy pi day 2026: major feature and ecosystem releases supporting pioneers and developers - pi network",
-      "label": "Happy Pi Day 2026: Major Feature and Ecosystem Releases Supporting Pioneers and Developers - Pi Network"
-    },
-    {
-      "id": "5cce121757b8c26a",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE9TZHdzR3FmMUlqckUwbDB4X2xSb2M3bXQyaVUwQzN0WXZDX1ZaRjQ0S1F3NV9VT1VIVGN0cFJYMUVLMmxXUmwxZGxGYXU?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE9TZHdzR3FmMUlqckUwbDB4X2xSb2M3bXQyaVUwQzN0WXZDX1ZaRjQ0S1F3NV9VT1VIVGN0cFJYMUVLMmxXUmwxZGxGYXU?oc=5"
-    },
-    {
       "id": "663f9f15e0b8c4d5",
       "type": "opportunity",
       "key": "binance alpha trading competition: trade zest protocol (zest) and share $200k worth of rewards (2026-07-22) - binance",
@@ -19590,16 +19554,28 @@
       "label": "https://news.google.com/rss/articles/CBMic0FVX3lxTE9GM2JDY0Vkd1Vuem91SEgydjhaNjQ5S1p3VWREcElENVF6Mk83TW9FMkVudnp0aFpDc0JHXzlQU1BIRGEyb0U1Z2t0SnkyeFlvcTZ3d3R5LUZ4YlY4X3lLam9xQkk1cDQ2Ym9ENDRyVGZPdkk?oc=5"
     },
     {
-      "id": "6f9a88cdf97b7982",
+      "id": "db61a352f6c31a20",
       "type": "opportunity",
-      "key": "alpha vs. omega conflict event - valorant",
-      "label": "Alpha vs. Omega Conflict Event - VALORANT"
+      "key": "happy pi day 2026: major feature and ecosystem releases supporting pioneers and developers - pi network",
+      "label": "Happy Pi Day 2026: Major Feature and Ecosystem Releases Supporting Pioneers and Developers - Pi Network"
     },
     {
-      "id": "941c9ff83fe93836",
+      "id": "5cce121757b8c26a",
       "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNWVgzSnJyb2VqekNJXzJmVXl6ekNtcVQ4WmxVNzhIT3czYTdnaFBQN2p3R2JNOGpNSF9PS0FJVWlIMDAtNXE4LXEySFpBMUFzaER1Y2hiYUYyMDRnMklQdlYydkZYWWViLUhpRHIyaWlrNHI0bFZ2bVI0TmF6TUxwS1N0RURZNFk?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNWVgzSnJyb2VqekNJXzJmVXl6ekNtcVQ4WmxVNzhIT3czYTdnaFBQN2p3R2JNOGpNSF9PS0FJVWlIMDAtNXE4LXEySFpBMUFzaER1Y2hiYUYyMDRnMklQdlYydkZYWWViLUhpRHIyaWlrNHI0bFZ2bVI0TmF6TUxwS1N0RURZNFk?oc=5"
+      "key": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE9TZHdzR3FmMUlqckUwbDB4X2xSb2M3bXQyaVUwQzN0WXZDX1ZaRjQ0S1F3NV9VT1VIVGN0cFJYMUVLMmxXUmwxZGxGYXU?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE9TZHdzR3FmMUlqckUwbDB4X2xSb2M3bXQyaVUwQzN0WXZDX1ZaRjQ0S1F3NV9VT1VIVGN0cFJYMUVLMmxXUmwxZGxGYXU?oc=5"
+    },
+    {
+      "id": "0284cda2b8f29ee1",
+      "type": "opportunity",
+      "key": "binance alpha trading competition: trade zest protocol (zest) and share $200k worth of rewards (2026-05-26) - binance",
+      "label": "Binance Alpha Trading Competition: Trade Zest Protocol (ZEST) and Share $200K Worth of Rewards (2026-05-26) - Binance"
+    },
+    {
+      "id": "998792ed1242b197",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOTnBnUm83b0VZS3RlMXJrVFY3b0poNGxiVnRTY2RkMGktd2VWM19QdEc0VGVYWGkzelQ2cWpsckZiX2JTLWtjNnloUDg5dmhqOW9zRmYyeHZjRmRFVkF6VjYwNklEeWZjSS1LUG9JWldRY1lPUC12bkc4MXdRWUtTMmFHd0dRNVkzbkJ3TXkxb0k?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOTnBnUm83b0VZS3RlMXJrVFY3b0poNGxiVnRTY2RkMGktd2VWM19QdEc0VGVYWGkzelQ2cWpsckZiX2JTLWtjNnloUDg5dmhqOW9zRmYyeHZjRmRFVkF6VjYwNklEeWZjSS1LUG9JWldRY1lPUC12bkc4MXdRWUtTMmFHd0dRNVkzbkJ3TXkxb0k?oc=5"
     },
     {
       "id": "48013d5057d3e869",
@@ -19612,6 +19588,18 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNWDJoNjNJLUdHazJFRUdaRXgzUUU3YjdpY3VYMjdzcEdwclU0VUNjMDdkV0ZsN1VFdUxVQksyR0F5VFc3YmlEMWI1QTJINXFmWFc1WFhGUnExMTU1Qms3SXhSbXFfdHl3ODBxZkhnT0NtMVZITHd0bjB4NDBhTUU0Nlo2Y2tjOGt3cXVuNTJ1NnViZw?oc=5",
       "label": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNWDJoNjNJLUdHazJFRUdaRXgzUUU3YjdpY3VYMjdzcEdwclU0VUNjMDdkV0ZsN1VFdUxVQksyR0F5VFc3YmlEMWI1QTJINXFmWFc1WFhGUnExMTU1Qms3SXhSbXFfdHl3ODBxZkhnT0NtMVZITHd0bjB4NDBhTUU0Nlo2Y2tjOGt3cXVuNTJ1NnViZw?oc=5"
+    },
+    {
+      "id": "6f9a88cdf97b7982",
+      "type": "opportunity",
+      "key": "alpha vs. omega conflict event - valorant",
+      "label": "Alpha vs. Omega Conflict Event - VALORANT"
+    },
+    {
+      "id": "941c9ff83fe93836",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNWVgzSnJyb2VqekNJXzJmVXl6ekNtcVQ4WmxVNzhIT3czYTdnaFBQN2p3R2JNOGpNSF9PS0FJVWlIMDAtNXE4LXEySFpBMUFzaER1Y2hiYUYyMDRnMklQdlYydkZYWWViLUhpRHIyaWlrNHI0bFZ2bVI0TmF6TUxwS1N0RURZNFk?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNWVgzSnJyb2VqekNJXzJmVXl6ekNtcVQ4WmxVNzhIT3czYTdnaFBQN2p3R2JNOGpNSF9PS0FJVWlIMDAtNXE4LXEySFpBMUFzaER1Y2hiYUYyMDRnMklQdlYydkZYWWViLUhpRHIyaWlrNHI0bFZ2bVI0TmF6TUxwS1N0RURZNFk?oc=5"
     },
     {
       "id": "3081514fd0c8914d",
@@ -19638,18 +19626,6 @@
       "label": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1SYk16TzZtcTRaZDNuc2x6bXo0UVdyek1TM1g3S1pIRUlrU0wxdUpjcy1RcWxmU0VCVXZVODlGbnZHUWN3TXZfQ2V1T2VQZmJFa29SQW14OGVvUHV4aHfSAWNBVV95cUxOMDZHX2hXMG5YVnhjejgzdDZoQjdnR0JTVmp2dU9IMWRBUUppRUc4ck5lZHNpQW9rX3RZLWdwU3B4RWNMSmVLeERieXhJWDFkUDdmMmtVMVFMUVhMLWlwNlQyR3M?oc=5"
     },
     {
-      "id": "0284cda2b8f29ee1",
-      "type": "opportunity",
-      "key": "binance alpha trading competition: trade zest protocol (zest) and share $200k worth of rewards (2026-05-26) - binance",
-      "label": "Binance Alpha Trading Competition: Trade Zest Protocol (ZEST) and Share $200K Worth of Rewards (2026-05-26) - Binance"
-    },
-    {
-      "id": "998792ed1242b197",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOTnBnUm83b0VZS3RlMXJrVFY3b0poNGxiVnRTY2RkMGktd2VWM19QdEc0VGVYWGkzelQ2cWpsckZiX2JTLWtjNnloUDg5dmhqOW9zRmYyeHZjRmRFVkF6VjYwNklEeWZjSS1LUG9JWldRY1lPUC12bkc4MXdRWUtTMmFHd0dRNVkzbkJ3TXkxb0k?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOTnBnUm83b0VZS3RlMXJrVFY3b0poNGxiVnRTY2RkMGktd2VWM19QdEc0VGVYWGkzelQ2cWpsckZiX2JTLWtjNnloUDg5dmhqOW9zRmYyeHZjRmRFVkF6VjYwNklEeWZjSS1LUG9JWldRY1lPUC12bkc4MXdRWUtTMmFHd0dRNVkzbkJ3TXkxb0k?oc=5"
-    },
-    {
       "id": "683fd2c08174cc04",
       "type": "opportunity",
       "key": "ethereum validator check: 0x01 sweeps your rewards - cryptoticker",
@@ -19674,10 +19650,10 @@
       "label": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOclpMcW56akFqSm8xdEJjN2F1cXp6akZnZk9CNlhqM1dHcl9qMF9lcDZvZDBqWVBMMnZJTmRqREt2TGFfSUQydi1NODdFWnpQblY1b3VjYy01a2lZbHlEc1Iyd2t0U1RNVy1Cb2wyYlVmVHNLVVJGS1FJSlFVQTJqckM3dW54VmZ4?oc=5"
     },
     {
-      "id": "b84f1d81194ef2a9",
+      "id": "7ccb1ba5acbb33d0",
       "type": "opportunity",
-      "key": "garena free fire max codes 06 april 2026: claim free rewards, skins, diamonds and exclusive in-game items - the times of india",
-      "label": "Garena Free Fire MAX codes 06 April 2026: Claim free rewards, skins, diamonds and exclusive in-game items - The Times of India"
+      "key": "garena free fire max codes 06 april 2026: claim free rewards, skins, diamonds and exclusive in-game items - timesofindia.indiatimes.com",
+      "label": "Garena Free Fire MAX codes 06 April 2026: Claim free rewards, skins, diamonds and exclusive in-game items - timesofindia.indiatimes.com"
     },
     {
       "id": "92f76673354e0e2a",
@@ -19689,37 +19665,13 @@
       "id": "980fa88bf04059d8",
       "type": "opportunity",
       "key": "latest blue protocol codes - eurogamer.net",
-      "label": "Latest Blue Protocol codes - Eurogamer.net"
+      "label": "Latest Blue Protocol codes - eurogamer.net"
     },
     {
       "id": "ae0efe98fd6d0e2e",
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE53cjJ0b0w1OTVvWjFRTVdNQ2NKQkNOazRXZHp6VWh1WUlmQl9Nd1ctZmZMUmRDdmxKQl8xcWdoUGVPMmI2Um55bWowRkctdU9CY2d2SmxyVTY?oc=5",
       "label": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE53cjJ0b0w1OTVvWjFRTVdNQ2NKQkNOazRXZHp6VWh1WUlmQl9Nd1ctZmZMUmRDdmxKQl8xcWdoUGVPMmI2Um55bWowRkctdU9CY2d2SmxyVTY?oc=5"
-    },
-    {
-      "id": "ce34c6cc6c73e424",
-      "type": "opportunity",
-      "key": "veil protocol: rainbow six mobile enters the fog - ubisoft",
-      "label": "Veil Protocol: Rainbow Six Mobile Enters the Fog - Ubisoft"
-    },
-    {
-      "id": "e164d17e34b35af0",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQVWZpT0RlMHBTeDdzYjMzT0ZIRU91X1p3NzBMdW5WNzdrMUhJWm9JVUpoWWxpVFBCbWJyMjBtZEcydG5pMEs4NG5UdHVsZV9CS2c3dDJoOFJ2RGNWcEFtRlZVdjR0eVJaX09uUmtrdm5NZkZIdTJPdnA5UXNDM2VMRnJuczZRdDB3QzdaY3ZhNTAzNUpjLV96UzNTQlhiUkhoMXhVUDhnT0VzSlMtNmJQSWZ4d2hjZVQ1SGxqRnR4b1Y2Y2pfUU4tV3ZybDZqNDhmRFd3?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQVWZpT0RlMHBTeDdzYjMzT0ZIRU91X1p3NzBMdW5WNzdrMUhJWm9JVUpoWWxpVFBCbWJyMjBtZEcydG5pMEs4NG5UdHVsZV9CS2c3dDJoOFJ2RGNWcEFtRlZVdjR0eVJaX09uUmtrdm5NZkZIdTJPdnA5UXNDM2VMRnJuczZRdDB3QzdaY3ZhNTAzNUpjLV96UzNTQlhiUkhoMXhVUDhnT0VzSlMtNmJQSWZ4d2hjZVQ1SGxqRnR4b1Y2Y2pfUU4tV3ZybDZqNDhmRFd3?oc=5"
-    },
-    {
-      "id": "7cd7eccea8b954c9",
-      "type": "opportunity",
-      "key": "get a weapon skin on twitch during the m.u.t.e protocol: flesh & metal event! - ubisoft",
-      "label": "Get A Weapon Skin on Twitch During the M.U.T.E Protocol: Flesh & Metal Event! - Ubisoft"
-    },
-    {
-      "id": "46178175db3dc63c",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOY3VtbUZIVDZjcm1BVFZWUGVza0Vmd3BiR0xWVTRJTk5jaExoQVFpQ3ZrUVVrWFJoeUJ3UHUtWGpXTWs2OTBxcDdyVTl1Q3N2bkJMcFA4X3ktUmlmUTE5ZWI1bDhXdWhXOXNxcGZ5bGF6OWtKWlI1ZlloU1dHU1B6ODdwdjdyczdQcXBNaS1GeUpHNVZEZU9rVG1JSmFMNTZDa0tCVlUwci14OHBmZFQ4Ump6eGUtZ3gyZHMwd2VpeHlJTXRXNjIyMjliWm5POHM0THNqem5DS3U5enNXbEhNclNxeGh5MnQ1RDNMWDFSUGQ?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOY3VtbUZIVDZjcm1BVFZWUGVza0Vmd3BiR0xWVTRJTk5jaExoQVFpQ3ZrUVVrWFJoeUJ3UHUtWGpXTWs2OTBxcDdyVTl1Q3N2bkJMcFA4X3ktUmlmUTE5ZWI1bDhXdWhXOXNxcGZ5bGF6OWtKWlI1ZlloU1dHU1B6ODdwdjdyczdQcXBNaS1GeUpHNVZEZU9rVG1JSmFMNTZDa0tCVlUwci14OHBmZFQ4Ump6eGUtZ3gyZHMwd2VpeHlJTXRXNjIyMjliWm5POHM0THNqem5DS3U5enNXbEhNclNxeGh5MnQ1RDNMWDFSUGQ?oc=5"
     },
     {
       "id": "3f227c7ee0cf0810",
@@ -19734,6 +19686,18 @@
       "label": "https://news.google.com/rss/articles/CBMic0FVX3lxTE9tYTZxZHhoVUFvVG5SMVVhWU9ZQjVjcVFCY3VncWk4OTFEMUxkMGllWm54ckM0cVZUdWdhUFBvRlRGYXY5WkRPTmFjekU0cjM3dlBuYkltSlV6cXBIWUxzcG1acDV6bDQtQkdsUmo2MDhMWnc?oc=5"
     },
     {
+      "id": "ce34c6cc6c73e424",
+      "type": "opportunity",
+      "key": "veil protocol: rainbow six mobile enters the fog - ubisoft",
+      "label": "Veil Protocol: Rainbow Six Mobile Enters the Fog - Ubisoft"
+    },
+    {
+      "id": "e164d17e34b35af0",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQVWZpT0RlMHBTeDdzYjMzT0ZIRU91X1p3NzBMdW5WNzdrMUhJWm9JVUpoWWxpVFBCbWJyMjBtZEcydG5pMEs4NG5UdHVsZV9CS2c3dDJoOFJ2RGNWcEFtRlZVdjR0eVJaX09uUmtrdm5NZkZIdTJPdnA5UXNDM2VMRnJuczZRdDB3QzdaY3ZhNTAzNUpjLV96UzNTQlhiUkhoMXhVUDhnT0VzSlMtNmJQSWZ4d2hjZVQ1SGxqRnR4b1Y2Y2pfUU4tV3ZybDZqNDhmRFd3?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQVWZpT0RlMHBTeDdzYjMzT0ZIRU91X1p3NzBMdW5WNzdrMUhJWm9JVUpoWWxpVFBCbWJyMjBtZEcydG5pMEs4NG5UdHVsZV9CS2c3dDJoOFJ2RGNWcEFtRlZVdjR0eVJaX09uUmtrdm5NZkZIdTJPdnA5UXNDM2VMRnJuczZRdDB3QzdaY3ZhNTAzNUpjLV96UzNTQlhiUkhoMXhVUDhnT0VzSlMtNmJQSWZ4d2hjZVQ1SGxqRnR4b1Y2Y2pfUU4tV3ZybDZqNDhmRFd3?oc=5"
+    },
+    {
       "id": "a83572daf4fb0d3d",
       "type": "opportunity",
       "key": "best eth staking pools in 2026: our top picks! - coinbureau.com",
@@ -19744,6 +19708,18 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMia0FVX3lxTE51NmhFaXRoZ2xDbkZ0NHVvd083RmJoOS05d0Fmck5PM2JWRkg2ekQ5MHREVXhkUDJfczNtUkRFRHZQVEpBLWdQZVRZZ3ozb19JMmw4N3JkdlAwRkdBcXU1UDViWnN2d2pOZ0JF?oc=5",
       "label": "https://news.google.com/rss/articles/CBMia0FVX3lxTE51NmhFaXRoZ2xDbkZ0NHVvd083RmJoOS05d0Fmck5PM2JWRkg2ekQ5MHREVXhkUDJfczNtUkRFRHZQVEpBLWdQZVRZZ3ozb19JMmw4N3JkdlAwRkdBcXU1UDViWnN2d2pOZ0JF?oc=5"
+    },
+    {
+      "id": "7cd7eccea8b954c9",
+      "type": "opportunity",
+      "key": "get a weapon skin on twitch during the m.u.t.e protocol: flesh & metal event! - ubisoft",
+      "label": "Get A Weapon Skin on Twitch During the M.U.T.E Protocol: Flesh & Metal Event! - Ubisoft"
+    },
+    {
+      "id": "46178175db3dc63c",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOY3VtbUZIVDZjcm1BVFZWUGVza0Vmd3BiR0xWVTRJTk5jaExoQVFpQ3ZrUVVrWFJoeUJ3UHUtWGpXTWs2OTBxcDdyVTl1Q3N2bkJMcFA4X3ktUmlmUTE5ZWI1bDhXdWhXOXNxcGZ5bGF6OWtKWlI1ZlloU1dHU1B6ODdwdjdyczdQcXBNaS1GeUpHNVZEZU9rVG1JSmFMNTZDa0tCVlUwci14OHBmZFQ4Ump6eGUtZ3gyZHMwd2VpeHlJTXRXNjIyMjliWm5POHM0THNqem5DS3U5enNXbEhNclNxeGh5MnQ1RDNMWDFSUGQ?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOY3VtbUZIVDZjcm1BVFZWUGVza0Vmd3BiR0xWVTRJTk5jaExoQVFpQ3ZrUVVrWFJoeUJ3UHUtWGpXTWs2OTBxcDdyVTl1Q3N2bkJMcFA4X3ktUmlmUTE5ZWI1bDhXdWhXOXNxcGZ5bGF6OWtKWlI1ZlloU1dHU1B6ODdwdjdyczdQcXBNaS1GeUpHNVZEZU9rVG1JSmFMNTZDa0tCVlUwci14OHBmZFQ4Ump6eGUtZ3gyZHMwd2VpeHlJTXRXNjIyMjliWm5POHM0THNqem5DS3U5enNXbEhNclNxeGh5MnQ1RDNMWDFSUGQ?oc=5"
     },
     {
       "id": "980a5ea49c457a88",
@@ -19758,10 +19734,10 @@
       "label": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPSFBGZnZPQmZIV2JsYW42RThaeW0xWWk0TkxjVWhmQkNfYnNqMjFPTVpWMXBnb1d3NjFIN1RxSDRzOWdWUmtpckNwaUx3LUo1ZHRDWGhTODRXbXZ2d01rakxlX0pRSi1oUllSVmoxUV9MaGYzZmlQNWZtclp0STUtT3o5Si1MRGNZNlJodVVNYTYyUmdKODRLVmU4QQ?oc=5"
     },
     {
-      "id": "ce23158b63a9a094",
+      "id": "c24dbd976d5259d0",
       "type": "opportunity",
-      "key": "kelp dao review 2026: fees, pros, cons, & safety - milk road",
-      "label": "Kelp DAO Review 2026: Fees, Pros, Cons, & Safety - Milk Road"
+      "key": "kelp dao review 2026: fees, pros, cons, & safety - milkroad.com",
+      "label": "Kelp DAO Review 2026: Fees, Pros, Cons, & Safety - milkroad.com"
     },
     {
       "id": "90bc765c596966c1",
@@ -19806,18 +19782,6 @@
       "label": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPT3Jzc1J5ZUlwWWVWRlJMNGpfWjA2U0x1N0VZd0gyalNlYzhHQ1AybnVaUDlON0h0a1FrZURrQ1BPZmI5dHpyaU1DTlk3d2VsdDF6NzVBUFV3bEtaeDZGNlRsSWZGOE9YalFSd3huM0pZem9xNjZtZUJkSG5KTmdFZmZibw?oc=5"
     },
     {
-      "id": "e3e14e88db49c807",
-      "type": "opportunity",
-      "key": "secure espresso, earn rewards: a guide to staking esp and boosted bonuses - paragraph.com",
-      "label": "Secure Espresso, Earn Rewards: A Guide to Staking ESP and Boosted Bonuses - paragraph.com"
-    },
-    {
-      "id": "75320d5ff9bd9baa",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPNHJtUVRuSHZVUlhVTEU0bl9vLW56aFZ2dE5nUXZYUkhJU1pKTmNtclN0VjktTmJNU0tkaDlnMm9nMFMzekxxcTUtYTRrZUNwYnl1c3JEbmlBbmZxNkFoX09LZUh4V01xZWsxdEVXbGRnbkRlSDI4clRIZklYVzFnZTIzLVJSOFdaVF85MHlTWkVjVXRyQ0U1QjQ2UEswZEVRVjlDUXNna3QzWjg?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPNHJtUVRuSHZVUlhVTEU0bl9vLW56aFZ2dE5nUXZYUkhJU1pKTmNtclN0VjktTmJNU0tkaDlnMm9nMFMzekxxcTUtYTRrZUNwYnl1c3JEbmlBbmZxNkFoX09LZUh4V01xZWsxdEVXbGRnbkRlSDI4clRIZklYVzFnZTIzLVJSOFdaVF85MHlTWkVjVXRyQ0U1QjQ2UEswZEVRVjlDUXNna3QzWjg?oc=5"
-    },
-    {
       "id": "26cb619fd1433f4b",
       "type": "opportunity",
       "key": "spur protocol daily quiz answer 4 august 2026: earn rewards - coin gabbar",
@@ -19840,18 +19804,6 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPaTFVbDZjRkd6Y2hBY184d0E1QWhvMUloM2pVZ1ZlUW5NTTBXUFlMUVc3eWxiNDZJWVFpcnZDZFNWRll2MVlBQl94X0U0bF8wX1UxOHBrZG9PQTdWVWxYN3I2Z0I2bmNuYXZ5bHRGcVpOVmlWZlN5ZFpLX3lfR2NjUGxCQkNWcHhLdEhqM1lzb0t0dw?oc=5",
       "label": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPaTFVbDZjRkd6Y2hBY184d0E1QWhvMUloM2pVZ1ZlUW5NTTBXUFlMUVc3eWxiNDZJWVFpcnZDZFNWRll2MVlBQl94X0U0bF8wX1UxOHBrZG9PQTdWVWxYN3I2Z0I2bmNuYXZ5bHRGcVpOVmlWZlN5ZFpLX3lfR2NjUGxCQkNWcHhLdEhqM1lzb0t0dw?oc=5"
-    },
-    {
-      "id": "4d5e9d29a9bec4d4",
-      "type": "opportunity",
-      "key": "blue protocol: star resonance codes (september 2026) - pocket gamer",
-      "label": "Blue Protocol: Star Resonance codes (September 2026) - Pocket Gamer"
-    },
-    {
-      "id": "8ef26f8adb7d837b",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5xUGJ6dGVOWHd0TFU5aWNnSjlCdGRYZWV4MFcwZWFZcDdVb283NkZ2TlRjZ1YwQVlCUnRtVXFrYV9fRU42Sk9vanVOcTZuWWVzWXVzQVJHdi03NU9KS1ZEbm54RDBGOG81a0JqYzdYcmw?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5xUGJ6dGVOWHd0TFU5aWNnSjlCdGRYZWV4MFcwZWFZcDdVb283NkZ2TlRjZ1YwQVlCUnRtVXFrYV9fRU42Sk9vanVOcTZuWWVzWXVzQVJHdi03NU9KS1ZEbm54RDBGOG81a0JqYzdYcmw?oc=5"
     },
     {
       "id": "09038e1f761f3d63",
@@ -19902,6 +19854,18 @@
       "label": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1mc1JNV3poRmdQZXpTQzdEb000UzJMcFN4RTMyV2RwUWV2UjlnVU9RU0FocVJVTWJrUzJzUVBRU0RuNDRWUXNEMDVpT0xINUNjbTUycUk2eExUZlJyTlQ1dXB0ZVhKRGVWUkU1TzRtWFl5ZldFNTJBSmViY3FrQQ?oc=5"
     },
     {
+      "id": "e3e14e88db49c807",
+      "type": "opportunity",
+      "key": "secure espresso, earn rewards: a guide to staking esp and boosted bonuses - paragraph.com",
+      "label": "Secure Espresso, Earn Rewards: A Guide to Staking ESP and Boosted Bonuses - paragraph.com"
+    },
+    {
+      "id": "75320d5ff9bd9baa",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPNHJtUVRuSHZVUlhVTEU0bl9vLW56aFZ2dE5nUXZYUkhJU1pKTmNtclN0VjktTmJNU0tkaDlnMm9nMFMzekxxcTUtYTRrZUNwYnl1c3JEbmlBbmZxNkFoX09LZUh4V01xZWsxdEVXbGRnbkRlSDI4clRIZklYVzFnZTIzLVJSOFdaVF85MHlTWkVjVXRyQ0U1QjQ2UEswZEVRVjlDUXNna3QzWjg?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPNHJtUVRuSHZVUlhVTEU0bl9vLW56aFZ2dE5nUXZYUkhJU1pKTmNtclN0VjktTmJNU0tkaDlnMm9nMFMzekxxcTUtYTRrZUNwYnl1c3JEbmlBbmZxNkFoX09LZUh4V01xZWsxdEVXbGRnbkRlSDI4clRIZklYVzFnZTIzLVJSOFdaVF85MHlTWkVjVXRyQ0U1QjQ2UEswZEVRVjlDUXNna3QzWjg?oc=5"
+    },
+    {
       "id": "546a83274cdb4c6d",
       "type": "opportunity",
       "key": "marina protocol daily quiz today 1 october 2026: earn coins - coin gabbar",
@@ -19926,6 +19890,18 @@
       "label": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNZHgxcWQxTFJPemNtNTlfa0k5QjBwUEZ4WjNUVlBqNnM1eDV3aVNSUG1NVDgyWDVwdUJXSlRISnBEOUtCRldETUphTFJGWU9kbTZoZktUeWF0UktGcC1zNlN1eTBCcWJfUTJQWUN3dlhOdklEdFhWT3lmRExnb1VaYUtFVUM1ZXlxSno0WDZIbkJYZGFkQnl5N09GTQ?oc=5"
     },
     {
+      "id": "4d5e9d29a9bec4d4",
+      "type": "opportunity",
+      "key": "blue protocol: star resonance codes (september 2026) - pocket gamer",
+      "label": "Blue Protocol: Star Resonance codes (September 2026) - Pocket Gamer"
+    },
+    {
+      "id": "8ef26f8adb7d837b",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5xUGJ6dGVOWHd0TFU5aWNnSjlCdGRYZWV4MFcwZWFZcDdVb283NkZ2TlRjZ1YwQVlCUnRtVXFrYV9fRU42Sk9vanVOcTZuWWVzWXVzQVJHdi03NU9KS1ZEbm54RDBGOG81a0JqYzdYcmw?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5xUGJ6dGVOWHd0TFU5aWNnSjlCdGRYZWV4MFcwZWFZcDdVb283NkZ2TlRjZ1YwQVlCUnRtVXFrYV9fRU42Sk9vanVOcTZuWWVzWXVzQVJHdi03NU9KS1ZEbm54RDBGOG81a0JqYzdYcmw?oc=5"
+    },
+    {
       "id": "543de37ee1d167b5",
       "type": "opportunity",
       "key": "marina protocol daily quiz today 30 september 2026: earn coins - coin gabbar",
@@ -19938,10 +19914,10 @@
       "label": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPZDlhU081c2xsREV4QXQzZTFUT1R1OE5tSG8xdTVBQlkzUlJ3Z3ljXzJKSFBMUG5GN3FBRHhMRnJuM09qQVpPdklFby13T1MtOVlZRnpORUlKYnJkTEVZZ3ByM18ybUJvRXlvMnFUVzRQNjdDZnUwak41bXd3UTNwOUV1LXZMSzF6?oc=5"
     },
     {
-      "id": "66600aa702dc1930",
+      "id": "93058ea65a21c97e",
       "type": "opportunity",
-      "key": "red dead redemption 2 february 2026 free dlc for rdo officially confirmed - screenrant",
-      "label": "Red Dead Redemption 2 February 2026 Free DLC For RDO Officially Confirmed - ScreenRant"
+      "key": "red dead redemption 2 february 2026 free dlc for rdo officially confirmed - screenrant.com",
+      "label": "Red Dead Redemption 2 February 2026 Free DLC For RDO Officially Confirmed - screenrant.com"
     },
     {
       "id": "5d5fe6e759665fa6",
@@ -19998,18 +19974,6 @@
       "label": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQbVZ2WXV5N3hjb2hnYkRwbmxHbkp3TWFIUTNXN3JUVmM5MExsVkVJZnpLNjZxc2FyRGZSWHF1V1NPMWxxamFVZTBVZExQZVU2c05KSU9NbzM2WGwxbjUtVUxFbjB0QW9yWW9JckVuZkUxZHRJUHhwNFpScXpLMGc1akVjOWNKN3dXNzY1NVdJVlpic3pOUmg2V0phaw?oc=5"
     },
     {
-      "id": "a12ece98e7a2f7c1",
-      "type": "opportunity",
-      "key": "binance word of the day 05 march 2026: complete answers and claim your bnb rewards today - hokanews",
-      "label": "Binance Word of the Day 05 March 2026: Complete Answers and Claim Your BNB Rewards Today - Hokanews"
-    },
-    {
-      "id": "530d4554bf052be0",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBRSHA2eDFPWjlpaDJVYURuT2wzR0F0TW0xcEFEMTc1M0Z1aVVsdHIwcWs5Y0JuSzRRWXpiSlEtUXR4ZHJQTGIzdmRCUzJSZzlVa1lWUUFwYUxtWjJ6R3VTMUl2dzFzR0NiZmZZTzhLOFdzVlZOVkxaSmZiUQ?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBRSHA2eDFPWjlpaDJVYURuT2wzR0F0TW0xcEFEMTc1M0Z1aVVsdHIwcWs5Y0JuSzRRWXpiSlEtUXR4ZHJQTGIzdmRCUzJSZzlVa1lWUUFwYUxtWjJ6R3VTMUl2dzFzR0NiZmZZTzhLOFdzVlZOVkxaSmZiUQ?oc=5"
-    },
-    {
       "id": "fb7048e3b839345d",
       "type": "opportunity",
       "key": "pi network celebrates pi day 2026 with launchpad, second migrations, and kyc rewards - captainaltcoin",
@@ -20046,10 +20010,10 @@
       "label": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE5YeVQxeFJLYk9BZ180Tm9ZQ3lpaWgtcXBtM3JrVklQQWRpQzRTaUplc002TC1EdXpTZktPWENZTnJCUFBYaGVlVmkzMXNpblFpUXBobTNoRQ?oc=5"
     },
     {
-      "id": "0839d923cb51a178",
+      "id": "a75cd6175e8cc996",
       "type": "opportunity",
-      "key": "blue protocol: star resonance codes - pocket tactics",
-      "label": "Blue Protocol: Star Resonance codes - Pocket Tactics"
+      "key": "blue protocol: star resonance codes - pockettactics.com",
+      "label": "Blue Protocol: Star Resonance codes - pockettactics.com"
     },
     {
       "id": "f22328a0c03d725f",
@@ -20106,18 +20070,6 @@
       "label": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxOZWVWV3BObW9nWWw5OWdBdnYtU0EwMzFMcGNieWE4Q0ZGZEhlQmZTWHVBZDUzWGdnd3RaaV94OTRYdDM5Z2R6aFU4OVhVQ2VEa3R0OVJ6ZUxQT2R0eG9BeElQeGFudE1rZEE2N0Jpb2tBN25vMEdCcmR6c045WjNFb2NJeXJjZHFXcVBkc2xvSi14bGI4Qml6UDlmNXh0dWNsLTNjTVc0dWZuOVZBOXZsT1VfQWlyMVM1MUJHQnVQbXlQeVo5allUcXljd2pzZ2JQaDRmWUxDenlSMTV3NEFXQVY1aWFiZ2FuN0xQMWxOY9IB9AFBVV95cUxPVlV5OUdwX01xTGFXOU13a1VwczJHMHN4ekdObmdlMjZmb0lINUM3amFLNjRNd2pUNEJJZ2tHRTNuVGxDWFJHdTVMaGQyd3N2UXZKTVZqYTByNUZ1RzBYSUYyeVdldTRDdDZLd2tpYkV6REhncDg5c04wZUo5V3FpeEk3eGZJckJNQ29PbHdKWXdYb0RPVThmakFFSFBuaDR6NlIxMDlDR25iY1pIT2x0ektRZjRwVG44WC1jdDhVYms5NXRXcDBpY3VTdHRxNnphaC03ZEEydjE1d2NzbG0wSWFqSDBwZHU4WWFsNEpzWElhdlpU?oc=5"
     },
     {
-      "id": "c39304b23c100ff6",
-      "type": "opportunity",
-      "key": "tiles survive! codes (september 2026) - ease your post-apocalyptic survival efforts - pocket gamer",
-      "label": "Tiles Survive! codes (September 2026) - Ease your post-apocalyptic survival efforts - Pocket Gamer"
-    },
-    {
-      "id": "5786f4fc56ade111",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE01V19aWVZJdHhCdFZMVktua1o0RHBEWDF6eXVRd0JIY2gtb0FDb3EwRk9Ndzk1N2E0YVhpUk11Tl82bXMyZ3gtbWZ0SGVtRmtDV1luWDl5cFd4dWV0?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE01V19aWVZJdHhCdFZMVktua1o0RHBEWDF6eXVRd0JIY2gtb0FDb3EwRk9Ndzk1N2E0YVhpUk11Tl82bXMyZ3gtbWZ0SGVtRmtDV1luWDl5cFd4dWV0?oc=5"
-    },
-    {
       "id": "540a69630693d638",
       "type": "opportunity",
       "key": "spur protocol daily quiz october 2, 2026: answer and rewards - hokanews",
@@ -20152,6 +20104,30 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9LZi1VNml4WlgwQ1ZrdjR1RDNPWFgzUlFVWUo4WGpEVUlvLWY3ZlpaSE9LYXE4UGFiSlZTM2JDMkZBSExqNklrbnZNX3J5MGs1YUpuRWNTZ2YwaEFmcURlOUlwd3poaTZjdklDZS1UTnBNYmFmSE81TXIyNA?oc=5",
       "label": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9LZi1VNml4WlgwQ1ZrdjR1RDNPWFgzUlFVWUo4WGpEVUlvLWY3ZlpaSE9LYXE4UGFiSlZTM2JDMkZBSExqNklrbnZNX3J5MGs1YUpuRWNTZ2YwaEFmcURlOUlwd3poaTZjdklDZS1UTnBNYmFmSE81TXIyNA?oc=5"
+    },
+    {
+      "id": "c39304b23c100ff6",
+      "type": "opportunity",
+      "key": "tiles survive! codes (september 2026) - ease your post-apocalyptic survival efforts - pocket gamer",
+      "label": "Tiles Survive! codes (September 2026) - Ease your post-apocalyptic survival efforts - Pocket Gamer"
+    },
+    {
+      "id": "5786f4fc56ade111",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE01V19aWVZJdHhCdFZMVktua1o0RHBEWDF6eXVRd0JIY2gtb0FDb3EwRk9Ndzk1N2E0YVhpUk11Tl82bXMyZ3gtbWZ0SGVtRmtDV1luWDl5cFd4dWV0?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE01V19aWVZJdHhCdFZMVktua1o0RHBEWDF6eXVRd0JIY2gtb0FDb3EwRk9Ndzk1N2E0YVhpUk11Tl82bXMyZ3gtbWZ0SGVtRmtDV1luWDl5cFd4dWV0?oc=5"
+    },
+    {
+      "id": "a12ece98e7a2f7c1",
+      "type": "opportunity",
+      "key": "binance word of the day 05 march 2026: complete answers and claim your bnb rewards today - hokanews",
+      "label": "Binance Word of the Day 05 March 2026: Complete Answers and Claim Your BNB Rewards Today - Hokanews"
+    },
+    {
+      "id": "530d4554bf052be0",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBRSHA2eDFPWjlpaDJVYURuT2wzR0F0TW0xcEFEMTc1M0Z1aVVsdHIwcWs5Y0JuSzRRWXpiSlEtUXR4ZHJQTGIzdmRCUzJSZzlVa1lWUUFwYUxtWjJ6R3VTMUl2dzFzR0NiZmZZTzhLOFdzVlZOVkxaSmZiUQ?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBRSHA2eDFPWjlpaDJVYURuT2wzR0F0TW0xcEFEMTc1M0Z1aVVsdHIwcWs5Y0JuSzRRWXpiSlEtUXR4ZHJQTGIzdmRCUzJSZzlVa1lWUUFwYUxtWjJ6R3VTMUl2dzFzR0NiZmZZTzhLOFdzVlZOVkxaSmZiUQ?oc=5"
     },
     {
       "id": "94634fae5e885694",
@@ -20502,10 +20478,10 @@
       "label": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9tdkNZZDhrbm5BbUJUbVpDdFljeXlHaXRLVXJkRFliVV9yajZ5dWo0enEycnJmc1hCaEh2RV9tWHh2QWlyZXdjQ0UzNUFCZzRBYVplcThkN1AzLWZXV2o5MDQ0VQ?oc=5"
     },
     {
-      "id": "9456784865315f1a",
+      "id": "ccfb80bb017ddd91",
       "type": "opportunity",
-      "key": "bitcoin hyper ($hyper) price prediction 2026-2030: can it hit $1? - 99bitcoins",
-      "label": "Bitcoin Hyper ($HYPER) Price Prediction 2026-2030: Can it Hit $1? - 99Bitcoins"
+      "key": "bitcoin hyper ($hyper) price prediction 2026-2030: can it hit $1? - 99bitcoins.com",
+      "label": "Bitcoin Hyper ($HYPER) Price Prediction 2026-2030: Can it Hit $1? - 99bitcoins.com"
     },
     {
       "id": "e66911ce3efdc001",
@@ -20826,10 +20802,10 @@
       "label": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPRGdJSExldWZyOURDZ0Z5R2diYzdUN3RFb2N1MlRtOXd2ckc4RVMyY2VXRExYM21fWVNnZ01JSjZBZXc3ZGxhaDZxRGxMNVpSdFpCZEFJSzlZeTVsNGVJNzVLYWV1NkJtcGVNU1R6d0JJSmlleXFFNVZrQjFTMllfWllB?oc=5"
     },
     {
-      "id": "857618a2026f8b2d",
+      "id": "6e7deb7b609a2f72",
       "type": "opportunity",
-      "key": "10 best crypto staking coins to invest in 2026 - 99bitcoins",
-      "label": "10 Best Crypto Staking Coins to Invest in 2026 - 99Bitcoins"
+      "key": "10 best crypto staking coins to invest in 2026 - 99bitcoins.com",
+      "label": "10 Best Crypto Staking Coins to Invest in 2026 - 99bitcoins.com"
     },
     {
       "id": "8c5974bd988fc704",
@@ -20874,10 +20850,10 @@
       "label": "https://news.google.com/rss/articles/CBMid0FVX3lxTE02LUdDVnhVd0kyWWx5dTVGenp5WWpaemhocjNURUVMUkwxUEp5S0pZZ2NPMTdBdW5CVm55ZE5Kam1qSnNPX2g0dlZtXzZsQUFIZmxDVk55T3hPeE1OMXBiQVVNTFdKSlBIX2VucldwTFphejZDY3B3?oc=5"
     },
     {
-      "id": "0d63dcca7feae73f",
+      "id": "95d38f8ddee4e942",
       "type": "opportunity",
-      "key": "ethereum staking rewards face mandatory 10% cut: protocol proposal ignites governance debate - techtimes.com",
-      "label": "Ethereum Staking Rewards Face Mandatory 10% Cut: Protocol Proposal Ignites Governance Debate - techtimes.com"
+      "key": "ethereum staking rewards face mandatory 10% cut: protocol proposal ignites governance debate - tech times",
+      "label": "Ethereum Staking Rewards Face Mandatory 10% Cut: Protocol Proposal Ignites Governance Debate - Tech Times"
     },
     {
       "id": "decf6415d28e37ec",
@@ -20886,10 +20862,10 @@
       "label": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNdy1JWG5sYUdzNWtiSTZPVHhEME5oYTlJd2dFMGlVbWZ0MFI2Q3NlU1NlS20yeFNMaWVwc3IzLTVKTHlmdDVKVUxBR0FUODdXVXVyWmJLLXlDSFV1TWFxQUVKTHk2M0xndmRydmhPU0Q5T0Q1c0tHZktxT3pFZXR2WXhMZHBJUTZHTkpVTDVIZnJMczY4aE1OWjlFZTVuTGhENUFkQVBsSHIxbDREdjlXb1FGc1IwZE84bWpqakZlZktLT3gxX2I1WUdZeG90eHNGQ2ducTRLWWRHY1ktOFE?oc=5"
     },
     {
-      "id": "a70d091c65bddeda",
+      "id": "ba286cdbe3c0a035",
       "type": "opportunity",
-      "key": "ethereum foundation cuts 54 jobs, shuts zk research lab, slashes budget 40% - techtimes.com",
-      "label": "Ethereum Foundation Cuts 54 Jobs, Shuts ZK Research Lab, Slashes Budget 40% - techtimes.com"
+      "key": "ethereum foundation cuts 54 jobs, shuts zk research lab, slashes budget 40% - tech times",
+      "label": "Ethereum Foundation Cuts 54 Jobs, Shuts ZK Research Lab, Slashes Budget 40% - Tech Times"
     },
     {
       "id": "0a71fa27b5ea2a34",
@@ -21246,10 +21222,10 @@
       "label": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFA4VXYwX1JEV1NSWW9WNDRCVXhEaDRRSWdweW13OUhpN1FXVDZyVkZKOWVOWkZwNVFEQkR5THktaDdYSWJjSXhNTDBueW1xMVk5X1VUeDJMTG54QnZRa1RJRWwtakY?oc=5"
     },
     {
-      "id": "a7edfc4cc8e3a4e3",
+      "id": "fc497f94554a1882",
       "type": "opportunity",
-      "key": "10+ best crypto staking platforms for 2026: earn high staking apy - 99bitcoins",
-      "label": "10+ Best Crypto Staking Platforms for 2026: Earn High Staking APY - 99Bitcoins"
+      "key": "10+ best crypto staking platforms for 2026: earn high staking apy - 99bitcoins.com",
+      "label": "10+ Best Crypto Staking Platforms for 2026: Earn High Staking APY - 99bitcoins.com"
     },
     {
       "id": "bf24dd0b6ed98da6",
@@ -21342,10 +21318,10 @@
       "label": "https://news.google.com/rss/articles/CBMiREFVX3lxTE84Qk9yelJlc3pFc082TkZBRmhzSWNoM3UzNU5rVTZsYVVGMFdJM3lNWkhQMUxKbUJlN19DUmVHWGt2bmRO?oc=5"
     },
     {
-      "id": "2921e10f79b25819",
+      "id": "75e4bcfd216b08f9",
       "type": "opportunity",
-      "key": "algorand staking: best sites to stake algo in 2026 - 99bitcoins",
-      "label": "Algorand Staking: Best Sites to Stake ALGO in 2026 - 99Bitcoins"
+      "key": "algorand staking: best sites to stake algo in 2026 - 99bitcoins.com",
+      "label": "Algorand Staking: Best Sites to Stake ALGO in 2026 - 99bitcoins.com"
     },
     {
       "id": "dfcac4c52cd74997",
@@ -21702,10 +21678,10 @@
       "label": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPai1hdExJOU5hQ2NKSDhhVmlTblpGZGdEeXp6bkRhLW90b3FPNDNqeHc0cHVmc0daMjZZS2xPcm5uWHpQcDl6VmRySjItbEp3Uk9qcnktWUhrb1V2bkdEQkt4WHdIWTFnckhwYUJ3R2FET1NUXzltTXFDZjZSRGEybjZzbDNBMmk5Z0hEeGlURVdHdTVRSUFzUVBvMlBBNzBObDJUeGdWczJMYkNNY09QalFhNHpQWldySTVva0NzYUotaW13LVZCYXpuOVVPaHVEVi1lZWdKcw?oc=5"
     },
     {
-      "id": "835213933938e40f",
+      "id": "9f0973e7e9ebfd80",
       "type": "opportunity",
-      "key": "xrp vs cardano: which will hit $5 first? - 247wallst.com",
-      "label": "XRP vs Cardano: Which Will Hit $5 First? - 247wallst.com"
+      "key": "xrp vs cardano: which will hit $5 first? - 24/7 wall st.",
+      "label": "XRP vs Cardano: Which Will Hit $5 First? - 24/7 Wall St."
     },
     {
       "id": "1dddb1c1497ad824",
@@ -21762,18 +21738,6 @@
       "label": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5WamUwZjdjYS1IMWpGSTVGXzlCVFRIYWwtVmc3M281QXBLYjNGbXJ6bmtHV2d6c0dUaEhrQ2lnS2wta1FlU1h6bGEzUWhoN2pIdHI00gFTQVVfeXFMTlZqZTBmN2NhLUgxakZJNUZfOUJUVEhhbC1WZzczbzVBcEtiM0Ztcnpua0dXZ3pzR1RoSGtDaWdLbC1rUWVTWHpsYTNRaGg3akh0cjQ?oc=5"
     },
     {
-      "id": "a3489f754b6f623c",
-      "type": "opportunity",
-      "key": "kava hosts $150k testnet competition: the loan wars - the block",
-      "label": "Kava Hosts $150K Testnet Competition: The Loan Wars - The Block"
-    },
-    {
-      "id": "c573bb0781c54d17",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNeVpiRzFSZzFUeGJwNnF5RXdJSmszRlQwVXlNT1hkdmxrUXp6QjJZUlNVeHMxZnB1UlRTelExQVFaV2JNdnJ3UzVLYWZnUUxCS3lDYVRRSTR2R05iZUVpTU1DdGFuZzcwLWlZZldKMVdhdkpVYUVyOTZNdGZNSHVvU2NNNk1yTnE3YVMzVzRIRUR2Z2NZbzM1NElQMEpPOFR6NXZV?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNeVpiRzFSZzFUeGJwNnF5RXdJSmszRlQwVXlNT1hkdmxrUXp6QjJZUlNVeHMxZnB1UlRTelExQVFaV2JNdnJ3UzVLYWZnUUxCS3lDYVRRSTR2R05iZUVpTU1DdGFuZzcwLWlZZldKMVdhdkpVYUVyOTZNdGZNSHVvU2NNNk1yTnE3YVMzVzRIRUR2Z2NZbzM1NElQMEpPOFR6NXZV?oc=5"
-    },
-    {
       "id": "0b2d479be3e215ce",
       "type": "opportunity",
       "key": "ethgas airdrop guide: steps to potential reward - cryptorank",
@@ -21784,6 +21748,18 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFA1cTl5NXdSVlZYb1pmZGxGdHFxb0poMFNua3N2QU8ya2huTGN1TXhwMkdvcmlYdFp6c05CNVNFNFIxNFNrVUZnbUJxb3pqVDFkbEtSZ2ZQV1I4d1RXZmxxc3RLOA?oc=5",
       "label": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFA1cTl5NXdSVlZYb1pmZGxGdHFxb0poMFNua3N2QU8ya2huTGN1TXhwMkdvcmlYdFp6c05CNVNFNFIxNFNrVUZnbUJxb3pqVDFkbEtSZ2ZQV1I4d1RXZmxxc3RLOA?oc=5"
+    },
+    {
+      "id": "a3489f754b6f623c",
+      "type": "opportunity",
+      "key": "kava hosts $150k testnet competition: the loan wars - the block",
+      "label": "Kava Hosts $150K Testnet Competition: The Loan Wars - The Block"
+    },
+    {
+      "id": "c573bb0781c54d17",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNeVpiRzFSZzFUeGJwNnF5RXdJSmszRlQwVXlNT1hkdmxrUXp6QjJZUlNVeHMxZnB1UlRTelExQVFaV2JNdnJ3UzVLYWZnUUxCS3lDYVRRSTR2R05iZUVpTU1DdGFuZzcwLWlZZldKMVdhdkpVYUVyOTZNdGZNSHVvU2NNNk1yTnE3YVMzVzRIRUR2Z2NZbzM1NElQMEpPOFR6NXZV?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNeVpiRzFSZzFUeGJwNnF5RXdJSmszRlQwVXlNT1hkdmxrUXp6QjJZUlNVeHMxZnB1UlRTelExQVFaV2JNdnJ3UzVLYWZnUUxCS3lDYVRRSTR2R05iZUVpTU1DdGFuZzcwLWlZZldKMVdhdkpVYUVyOTZNdGZNSHVvU2NNNk1yTnE3YVMzVzRIRUR2Z2NZbzM1NElQMEpPOFR6NXZV?oc=5"
     },
     {
       "id": "cdcfae0cd1bfbc5b",
@@ -21810,18 +21786,6 @@
       "label": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOOUI1b1FHZnNMT2tmd240VVlOVjk5MXZreERiVngwQUM4VmlxMVM4UFl4dUx2RTNFWm1vM0J3aXhsbjVrVVdWNnRVdE1xQldPZW85eGtaVEFaSFRZejEwUEFMTjVENTZZWXVfZ3RtbThodndZM01LNjBlNDU5VGNzRm1mUDZOMVgzRHp1MHVhNUFJQy1vUnhBVnZFa0Z4LTJsRnAzbw?oc=5"
     },
     {
-      "id": "240b02fcc5129dad",
-      "type": "opportunity",
-      "key": "how to participate in the crypto market with no money in 2023 - coinmarketcap",
-      "label": "How To Participate in the Crypto Market With No Money in 2023 - CoinMarketCap"
-    },
-    {
-      "id": "2a4f401febf0e9e3",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOUnlmWWQ2d29XaldPTzFDRUVWazcwSnhjTWtWUFJQQXZXYkYxOWJEZ2phdzRWODl1eGE4TXR1cTR6dTc2TlZhdlV6Rm5qYWw5UnBkVHhsR3NQNWxCaXRBRmdvaEY2RHpxV0ZDdU1QZFpmMW5RY29RZGk3aG41YzVjcHpBOVg5cnlCZjFXYkdvWkItRkpKMDZlaU1taw?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOUnlmWWQ2d29XaldPTzFDRUVWazcwSnhjTWtWUFJQQXZXYkYxOWJEZ2phdzRWODl1eGE4TXR1cTR6dTc2TlZhdlV6Rm5qYWw5UnBkVHhsR3NQNWxCaXRBRmdvaEY2RHpxV0ZDdU1QZFpmMW5RY29RZGk3aG41YzVjcHpBOVg5cnlCZjFXYkdvWkItRkpKMDZlaU1taw?oc=5"
-    },
-    {
       "id": "0828f26de4f101cf",
       "type": "opportunity",
       "key": "the airdrop guide of camp network: unlocking rewards in a pioneering layer-1 blockchain - coinex",
@@ -21832,6 +21796,18 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQdmRBNjBaMlE0a1dGOUhveWpuMkNfSTlIb2hiTlAzRWhGZ1hfOWFxV2xlQ29BTjk3Mll5TVppRVNvWXJtTlFEVWVTRXhCdzduZTlJekJUZy14cHdBT3h1RElHdTRqakxvWW9aSE1DeXUySDFYVTAxakp2TGlHbnM4SlUwRFppa2tLdjM4MWlkZ3Y2TjlPMU16WUdESXM3eUUyNWNQc2FJbnV3cUhBVExsVFk3c1NsalkzYzZDRnlud25NdzhwYXpLMGhySDM?oc=5",
       "label": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQdmRBNjBaMlE0a1dGOUhveWpuMkNfSTlIb2hiTlAzRWhGZ1hfOWFxV2xlQ29BTjk3Mll5TVppRVNvWXJtTlFEVWVTRXhCdzduZTlJekJUZy14cHdBT3h1RElHdTRqakxvWW9aSE1DeXUySDFYVTAxakp2TGlHbnM4SlUwRFppa2tLdjM4MWlkZ3Y2TjlPMU16WUdESXM3eUUyNWNQc2FJbnV3cUhBVExsVFk3c1NsalkzYzZDRnlud25NdzhwYXpLMGhySDM?oc=5"
+    },
+    {
+      "id": "240b02fcc5129dad",
+      "type": "opportunity",
+      "key": "how to participate in the crypto market with no money in 2023 - coinmarketcap",
+      "label": "How To Participate in the Crypto Market With No Money in 2023 - CoinMarketCap"
+    },
+    {
+      "id": "2a4f401febf0e9e3",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOUnlmWWQ2d29XaldPTzFDRUVWazcwSnhjTWtWUFJQQXZXYkYxOWJEZ2phdzRWODl1eGE4TXR1cTR6dTc2TlZhdlV6Rm5qYWw5UnBkVHhsR3NQNWxCaXRBRmdvaEY2RHpxV0ZDdU1QZFpmMW5RY29RZGk3aG41YzVjcHpBOVg5cnlCZjFXYkdvWkItRkpKMDZlaU1taw?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOUnlmWWQ2d29XaldPTzFDRUVWazcwSnhjTWtWUFJQQXZXYkYxOWJEZ2phdzRWODl1eGE4TXR1cTR6dTc2TlZhdlV6Rm5qYWw5UnBkVHhsR3NQNWxCaXRBRmdvaEY2RHpxV0ZDdU1QZFpmMW5RY29RZGk3aG41YzVjcHpBOVg5cnlCZjFXYkdvWkItRkpKMDZlaU1taw?oc=5"
     },
     {
       "id": "7ac957c9e6667601",
@@ -21882,10 +21858,10 @@
       "label": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNZWhfT2NqdzcwWlhQSjlNdFM2SlZvM2kxc3Y0ajZDWnBTMkhOclJuaHpwVDJTLWVXbXVpMXNnRzdzamFEWVpRbTVIM1l1WnRXckxqT29fa0lNc1psLUVQRWdXYjF2aTRUUUJUVDFXLW9sR09BTmdTMU9nNkFnR0g3VVFtemd2bVp6TmJXUDZaSDNFTmdsbzBoaldFVFZZa3VtZ1NBaHJlNUlFSVlnTXdELTRiR0wzY3Ja?oc=5"
     },
     {
-      "id": "4c88a4ab50f1a38e",
+      "id": "5650caf77f8452b7",
       "type": "opportunity",
-      "key": "coinlist review (2026): the best established crypto launchpad? - 99bitcoins",
-      "label": "CoinList Review (2026): The Best Established Crypto Launchpad? - 99Bitcoins"
+      "key": "coinlist review (2026): the best established crypto launchpad? - 99bitcoins.com",
+      "label": "CoinList Review (2026): The Best Established Crypto Launchpad? - 99bitcoins.com"
     },
     {
       "id": "d9418860ecda3797",
@@ -22228,6 +22204,18 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBiQWFyY1pCLTNWajhyUHRWRHFTRE92WG04cmF5WHRsVlh4dHJCMkV5Y00xTkVsOVVIT3dTVnVWZ0dMSVJ5aDJfcERkaUNoa2Z3T1dPeHhRTmtjWTlqbUFVeGliZm1HNHFuWW5yaEYwWjFtd3RoenIwMWJMTU5tWnM?oc=5",
       "label": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBiQWFyY1pCLTNWajhyUHRWRHFTRE92WG04cmF5WHRsVlh4dHJCMkV5Y00xTkVsOVVIT3dTVnVWZ0dMSVJ5aDJfcERkaUNoa2Z3T1dPeHhRTmtjWTlqbUFVeGliZm1HNHFuWW5yaEYwWjFtd3RoenIwMWJMTU5tWnM?oc=5"
+    },
+    {
+      "id": "a37466c64996a77c",
+      "type": "opportunity",
+      "key": "kiichain presale guide: everything to know about the kii public sale - coin gabbar",
+      "label": "KiiChain Presale Guide: Everything to Know About the KII Public Sale - Coin Gabbar"
+    },
+    {
+      "id": "0da5c9e2faafa961",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQN3cwRzZFamFVdF9IQ2NjeG1QQVpUaUN4TzZzVWNoT3dYOUFRQW1Yd0hvdmU5OHRDd2JDSG16Vmc1MWhXM1J5WlJYQkxjcW4yQzVpdFNqdWRmYUFNdnBIMldLNDgyTmVqZ3FfR0xSdm5UZVl3a29MQnVHTEdhZGJFM2t1bHJlN2xZTGZ0WUQxdkdveGRDNkZkV2dkbw?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQN3cwRzZFamFVdF9IQ2NjeG1QQVpUaUN4TzZzVWNoT3dYOUFRQW1Yd0hvdmU5OHRDd2JDSG16Vmc1MWhXM1J5WlJYQkxjcW4yQzVpdFNqdWRmYUFNdnBIMldLNDgyTmVqZ3FfR0xSdm5UZVl3a29MQnVHTEdhZGJFM2t1bHJlN2xZTGZ0WUQxdkdveGRDNkZkV2dkbw?oc=5"
     },
     {
       "id": "076c27e43266b92b",
@@ -23193,11 +23181,6 @@
       "relation": "url"
     },
     {
-      "from": "968f8dd6f58b5f3d",
-      "to": "38e42583e9a2c3d2",
-      "relation": "url"
-    },
-    {
       "from": "c0167c5d56f5d04d",
       "to": "fa1e9a4826ece6e8",
       "relation": "url"
@@ -23213,8 +23196,18 @@
       "relation": "url"
     },
     {
+      "from": "b4962658c93b0d81",
+      "to": "534d831fae7cfd05",
+      "relation": "url"
+    },
+    {
       "from": "1c88e88b8ee9d451",
       "to": "f7d10c55316e0a94",
+      "relation": "url"
+    },
+    {
+      "from": "968f8dd6f58b5f3d",
+      "to": "38e42583e9a2c3d2",
       "relation": "url"
     },
     {
@@ -23328,18 +23321,28 @@
       "relation": "url"
     },
     {
-      "from": "7e2abe798cfe054b",
-      "to": "8f702daf3153601f",
-      "relation": "url"
-    },
-    {
       "from": "483b544c7159af13",
       "to": "9a49eecbd1775276",
       "relation": "url"
     },
     {
+      "from": "7e2abe798cfe054b",
+      "to": "8f702daf3153601f",
+      "relation": "url"
+    },
+    {
       "from": "20c40068504dad44",
       "to": "0b7521cbeaa99ee4",
+      "relation": "url"
+    },
+    {
+      "from": "f63785d8de48dec0",
+      "to": "7b4d995f958648d0",
+      "relation": "url"
+    },
+    {
+      "from": "e481d9c5531e1931",
+      "to": "64d7dfc2caae0a8a",
       "relation": "url"
     },
     {
@@ -23353,6 +23356,11 @@
       "relation": "url"
     },
     {
+      "from": "2faa01fbdd30aafb",
+      "to": "aac722900cef9336",
+      "relation": "url"
+    },
+    {
       "from": "7b4427c90959f692",
       "to": "4af59ef67a40df80",
       "relation": "url"
@@ -23363,13 +23371,13 @@
       "relation": "url"
     },
     {
-      "from": "6e7da8aea75dc3f3",
-      "to": "fba231b5983ab13d",
+      "from": "4b67935b19d56bda",
+      "to": "2ec59a189e6d5067",
       "relation": "url"
     },
     {
-      "from": "4b67935b19d56bda",
-      "to": "2ec59a189e6d5067",
+      "from": "6e7da8aea75dc3f3",
+      "to": "fba231b5983ab13d",
       "relation": "url"
     },
     {
@@ -23425,6 +23433,11 @@
     {
       "from": "a8ab2bd4588ea945",
       "to": "1be5fd078e686627",
+      "relation": "url"
+    },
+    {
+      "from": "e6f79706440823f1",
+      "to": "710de5927d942c30",
       "relation": "url"
     },
     {
@@ -23528,11 +23541,6 @@
       "relation": "url"
     },
     {
-      "from": "e9c649bb82368025",
-      "to": "8b9da6cf9a390154",
-      "relation": "url"
-    },
-    {
       "from": "b736711ae31f0a56",
       "to": "a7e030ea12fa8813",
       "relation": "url"
@@ -23563,6 +23571,11 @@
       "relation": "url"
     },
     {
+      "from": "310677011eeaf9aa",
+      "to": "a03f8275fc08ea0f",
+      "relation": "url"
+    },
+    {
       "from": "c8a303a1431c864a",
       "to": "520eae412b4e3491",
       "relation": "url"
@@ -23588,23 +23601,13 @@
       "relation": "url"
     },
     {
-      "from": "5b320177110d2411",
+      "from": "8923639290f661a6",
       "to": "7be30c08bbd939eb",
       "relation": "url"
     },
     {
       "from": "b048afe0ddfe7d0f",
       "to": "484f04caf39494b0",
-      "relation": "url"
-    },
-    {
-      "from": "80f379492e882368",
-      "to": "997a86175d865b34",
-      "relation": "url"
-    },
-    {
-      "from": "310677011eeaf9aa",
-      "to": "a03f8275fc08ea0f",
       "relation": "url"
     },
     {
@@ -23628,7 +23631,7 @@
       "relation": "url"
     },
     {
-      "from": "60083881345b2b85",
+      "from": "2bfa8b8420cb200f",
       "to": "438cb4d7909d7b15",
       "relation": "url"
     },
@@ -23640,21 +23643,6 @@
     {
       "from": "94ab29667eaa20ba",
       "to": "dfb1543b16738896",
-      "relation": "url"
-    },
-    {
-      "from": "e6b33e2e572348e8",
-      "to": "921964eddfd049fe",
-      "relation": "url"
-    },
-    {
-      "from": "c95f8df2c524d477",
-      "to": "3f9c088432dd01b0",
-      "relation": "url"
-    },
-    {
-      "from": "735df2284a3d7edb",
-      "to": "bcd9d1197f8913a0",
       "relation": "url"
     },
     {
@@ -23973,7 +23961,7 @@
       "relation": "url"
     },
     {
-      "from": "446f47c25756e3c9",
+      "from": "0d285983b8a3c76f",
       "to": "707b4e4d33fa1da0",
       "relation": "url"
     },
@@ -24608,7 +24596,7 @@
       "relation": "url"
     },
     {
-      "from": "7fd57dde36f559a1",
+      "from": "ca04d6694d4e4315",
       "to": "feb6617080968870",
       "relation": "url"
     },
@@ -24663,12 +24651,12 @@
       "relation": "url"
     },
     {
-      "from": "c06be14a8bb8d564",
+      "from": "71443001b30c5090",
       "to": "03a6081885ff680b",
       "relation": "url"
     },
     {
-      "from": "584aea83bcebaa96",
+      "from": "6b15656ccccb8e1e",
       "to": "1af790bb50ece222",
       "relation": "url"
     },
@@ -25168,7 +25156,7 @@
       "relation": "url"
     },
     {
-      "from": "ce82c69c7aacc8ab",
+      "from": "07c6a34e05961e9c",
       "to": "f10f38eb1a8d64fb",
       "relation": "url"
     },
@@ -25753,7 +25741,7 @@
       "relation": "url"
     },
     {
-      "from": "a6e5f4ffe796b68c",
+      "from": "80ee2671c5376277",
       "to": "feff94543309d795",
       "relation": "url"
     },
@@ -25833,7 +25821,7 @@
       "relation": "url"
     },
     {
-      "from": "0410f71a516bd725",
+      "from": "189f9f85645e20eb",
       "to": "d85212f4e20ca13c",
       "relation": "url"
     },
@@ -25843,7 +25831,7 @@
       "relation": "url"
     },
     {
-      "from": "ac0be551588e28d7",
+      "from": "ed7f1126715ccfc1",
       "to": "5b2ad1ad35d84278",
       "relation": "url"
     },
@@ -26048,7 +26036,7 @@
       "relation": "url"
     },
     {
-      "from": "622c8080e8b495ba",
+      "from": "02d3cce2f8c66879",
       "to": "c52c9ae7e7a3c308",
       "relation": "url"
     },
@@ -26138,7 +26126,7 @@
       "relation": "url"
     },
     {
-      "from": "5650395eb7fcd1fb",
+      "from": "86d80d2eed4cb240",
       "to": "009e243ad02f44c5",
       "relation": "url"
     },
@@ -26153,7 +26141,7 @@
       "relation": "url"
     },
     {
-      "from": "89605af061b7fde1",
+      "from": "7eba705ebe68bd43",
       "to": "7b229f66e8a3356c",
       "relation": "url"
     },
@@ -27008,13 +26996,13 @@
       "relation": "url"
     },
     {
-      "from": "95533db62707c593",
-      "to": "668632d5c62f8e69",
+      "from": "330d69447a15adae",
+      "to": "6ab648d6958054b7",
       "relation": "url"
     },
     {
-      "from": "330d69447a15adae",
-      "to": "6ab648d6958054b7",
+      "from": "95533db62707c593",
+      "to": "668632d5c62f8e69",
       "relation": "url"
     },
     {
@@ -27045,11 +27033,6 @@
     {
       "from": "29272d912d6c854d",
       "to": "7e2534a8a36784ab",
-      "relation": "url"
-    },
-    {
-      "from": "6d74f7e5fed90555",
-      "to": "b2b7367be1d7f9c0",
       "relation": "url"
     },
     {
@@ -27323,7 +27306,7 @@
       "relation": "url"
     },
     {
-      "from": "155debaf72740daf",
+      "from": "65e20ec31d457f22",
       "to": "4cac4a1894b6a123",
       "relation": "url"
     },
@@ -27335,11 +27318,6 @@
     {
       "from": "b0eb5fab3665edae",
       "to": "7e15a2d8e073e704",
-      "relation": "url"
-    },
-    {
-      "from": "583e208e1456527c",
-      "to": "d258a8ab7e16f6df",
       "relation": "url"
     },
     {
@@ -27378,7 +27356,7 @@
       "relation": "url"
     },
     {
-      "from": "c716159ab014c0e7",
+      "from": "0f402a1a129a8044",
       "to": "5801072df981d6e7",
       "relation": "url"
     },
@@ -27390,11 +27368,6 @@
     {
       "from": "c5344d7e8fabac90",
       "to": "0c4b8b168f696703",
-      "relation": "url"
-    },
-    {
-      "from": "8b0705c99963bca6",
-      "to": "b1ebdb1e90ea65c2",
       "relation": "url"
     },
     {
@@ -27410,6 +27383,21 @@
     {
       "from": "c826441c894033b3",
       "to": "c355c529159e8cc3",
+      "relation": "url"
+    },
+    {
+      "from": "3987d472b88218ec",
+      "to": "f791a31d2eb49aa5",
+      "relation": "url"
+    },
+    {
+      "from": "38e7c30783c208af",
+      "to": "767e4b33bf44624c",
+      "relation": "url"
+    },
+    {
+      "from": "d6fa56d49d05bbd0",
+      "to": "0102cd8b4cab1694",
       "relation": "url"
     },
     {
@@ -27943,13 +27931,13 @@
       "relation": "url"
     },
     {
-      "from": "662163ea78c8a804",
-      "to": "88d727b7733da5ca",
+      "from": "91b9b67ddb28eba4",
+      "to": "cbb80b305e14618f",
       "relation": "url"
     },
     {
-      "from": "91b9b67ddb28eba4",
-      "to": "cbb80b305e14618f",
+      "from": "662163ea78c8a804",
+      "to": "88d727b7733da5ca",
       "relation": "url"
     },
     {
@@ -28383,7 +28371,7 @@
       "relation": "url"
     },
     {
-      "from": "140bd044d0f7094f",
+      "from": "daa60829a44cb1e8",
       "to": "f9e46a23b8c876c7",
       "relation": "url"
     },
@@ -28433,13 +28421,13 @@
       "relation": "url"
     },
     {
-      "from": "83566c3a76e485e2",
-      "to": "19414965a21289c1",
+      "from": "30b73160efadb2f9",
+      "to": "01d3384cbad8854d",
       "relation": "url"
     },
     {
-      "from": "30b73160efadb2f9",
-      "to": "01d3384cbad8854d",
+      "from": "83566c3a76e485e2",
+      "to": "19414965a21289c1",
       "relation": "url"
     },
     {
@@ -28478,11 +28466,6 @@
       "relation": "url"
     },
     {
-      "from": "a79c2cdc74eb3f7a",
-      "to": "e0cc5665572bbd27",
-      "relation": "url"
-    },
-    {
       "from": "da34f73c7aec2741",
       "to": "418804a43577bd42",
       "relation": "url"
@@ -28490,6 +28473,16 @@
     {
       "from": "305ddfb98dff3910",
       "to": "32f7a49538428d29",
+      "relation": "url"
+    },
+    {
+      "from": "a79c2cdc74eb3f7a",
+      "to": "e0cc5665572bbd27",
+      "relation": "url"
+    },
+    {
+      "from": "f7ff33b28c05c5ff",
+      "to": "36489ea7ed29ff58",
       "relation": "url"
     },
     {
@@ -28563,11 +28556,6 @@
       "relation": "url"
     },
     {
-      "from": "d6fa56d49d05bbd0",
-      "to": "0102cd8b4cab1694",
-      "relation": "url"
-    },
-    {
       "from": "17240069cae6f1ee",
       "to": "b7a538827da064b7",
       "relation": "url"
@@ -28590,11 +28578,6 @@
     {
       "from": "5e30e112ea0cc137",
       "to": "dbc67c74f8597b73",
-      "relation": "url"
-    },
-    {
-      "from": "3987d472b88218ec",
-      "to": "f791a31d2eb49aa5",
       "relation": "url"
     },
     {
@@ -28638,13 +28621,8 @@
       "relation": "url"
     },
     {
-      "from": "10b62a9f971ad41a",
+      "from": "09faa3b276c3229e",
       "to": "e2e86fccb023c99a",
-      "relation": "url"
-    },
-    {
-      "from": "4cf1623988283395",
-      "to": "230fdbbb0e803d57",
       "relation": "url"
     },
     {
@@ -28868,7 +28846,7 @@
       "relation": "url"
     },
     {
-      "from": "0c25fd4d4a6907c1",
+      "from": "a5ed82d9ebeebd8b",
       "to": "98349e4feb10bd8c",
       "relation": "url"
     },
@@ -29558,7 +29536,7 @@
       "relation": "url"
     },
     {
-      "from": "06b26e40d4183784",
+      "from": "86af75bab4ca0007",
       "to": "86d0dfd8ebf4d723",
       "relation": "url"
     },
@@ -30468,7 +30446,7 @@
       "relation": "url"
     },
     {
-      "from": "255c601f96da46b7",
+      "from": "9c3fca0a0418d14f",
       "to": "2f3c33dd2b970a60",
       "relation": "url"
     },
@@ -30508,7 +30486,7 @@
       "relation": "url"
     },
     {
-      "from": "ca3b3d8449d790a7",
+      "from": "d3a2074b1c86b97e",
       "to": "cd707c64f6ace3b6",
       "relation": "url"
     },
@@ -30703,7 +30681,7 @@
       "relation": "url"
     },
     {
-      "from": "9ea122dc62581a63",
+      "from": "d17ef39d5e40fb96",
       "to": "547e0bb5979a2086",
       "relation": "url"
     },
@@ -30858,11 +30836,6 @@
       "relation": "url"
     },
     {
-      "from": "db61a352f6c31a20",
-      "to": "5cce121757b8c26a",
-      "relation": "url"
-    },
-    {
       "from": "663f9f15e0b8c4d5",
       "to": "c03f8bff6c931be6",
       "relation": "url"
@@ -30883,13 +30856,23 @@
       "relation": "url"
     },
     {
-      "from": "6f9a88cdf97b7982",
-      "to": "941c9ff83fe93836",
+      "from": "db61a352f6c31a20",
+      "to": "5cce121757b8c26a",
+      "relation": "url"
+    },
+    {
+      "from": "0284cda2b8f29ee1",
+      "to": "998792ed1242b197",
       "relation": "url"
     },
     {
       "from": "48013d5057d3e869",
       "to": "f3930c64c99dc981",
+      "relation": "url"
+    },
+    {
+      "from": "6f9a88cdf97b7982",
+      "to": "941c9ff83fe93836",
       "relation": "url"
     },
     {
@@ -30903,11 +30886,6 @@
       "relation": "url"
     },
     {
-      "from": "0284cda2b8f29ee1",
-      "to": "998792ed1242b197",
-      "relation": "url"
-    },
-    {
       "from": "683fd2c08174cc04",
       "to": "aeaf8c306fa3ceab",
       "relation": "url"
@@ -30918,7 +30896,7 @@
       "relation": "url"
     },
     {
-      "from": "b84f1d81194ef2a9",
+      "from": "7ccb1ba5acbb33d0",
       "to": "92f76673354e0e2a",
       "relation": "url"
     },
@@ -30928,18 +30906,13 @@
       "relation": "url"
     },
     {
-      "from": "ce34c6cc6c73e424",
-      "to": "e164d17e34b35af0",
-      "relation": "url"
-    },
-    {
-      "from": "7cd7eccea8b954c9",
-      "to": "46178175db3dc63c",
-      "relation": "url"
-    },
-    {
       "from": "3f227c7ee0cf0810",
       "to": "836ab239598ecf2e",
+      "relation": "url"
+    },
+    {
+      "from": "ce34c6cc6c73e424",
+      "to": "e164d17e34b35af0",
       "relation": "url"
     },
     {
@@ -30948,12 +30921,17 @@
       "relation": "url"
     },
     {
+      "from": "7cd7eccea8b954c9",
+      "to": "46178175db3dc63c",
+      "relation": "url"
+    },
+    {
       "from": "980a5ea49c457a88",
       "to": "5d82159b11a70fff",
       "relation": "url"
     },
     {
-      "from": "ce23158b63a9a094",
+      "from": "c24dbd976d5259d0",
       "to": "90bc765c596966c1",
       "relation": "url"
     },
@@ -30973,11 +30951,6 @@
       "relation": "url"
     },
     {
-      "from": "e3e14e88db49c807",
-      "to": "75320d5ff9bd9baa",
-      "relation": "url"
-    },
-    {
       "from": "26cb619fd1433f4b",
       "to": "31750b6bc3cd9bd7",
       "relation": "url"
@@ -30985,11 +30958,6 @@
     {
       "from": "52ef2bd88206b2c3",
       "to": "3fbfd829293e9912",
-      "relation": "url"
-    },
-    {
-      "from": "4d5e9d29a9bec4d4",
-      "to": "8ef26f8adb7d837b",
       "relation": "url"
     },
     {
@@ -31013,6 +30981,11 @@
       "relation": "url"
     },
     {
+      "from": "e3e14e88db49c807",
+      "to": "75320d5ff9bd9baa",
+      "relation": "url"
+    },
+    {
       "from": "546a83274cdb4c6d",
       "to": "509204578c27dec5",
       "relation": "url"
@@ -31023,12 +30996,17 @@
       "relation": "url"
     },
     {
+      "from": "4d5e9d29a9bec4d4",
+      "to": "8ef26f8adb7d837b",
+      "relation": "url"
+    },
+    {
       "from": "543de37ee1d167b5",
       "to": "6ff16bcd56cf40a3",
       "relation": "url"
     },
     {
-      "from": "66600aa702dc1930",
+      "from": "93058ea65a21c97e",
       "to": "5d5fe6e759665fa6",
       "relation": "url"
     },
@@ -31053,11 +31031,6 @@
       "relation": "url"
     },
     {
-      "from": "a12ece98e7a2f7c1",
-      "to": "530d4554bf052be0",
-      "relation": "url"
-    },
-    {
       "from": "fb7048e3b839345d",
       "to": "2520a75d94a8137f",
       "relation": "url"
@@ -31073,7 +31046,7 @@
       "relation": "url"
     },
     {
-      "from": "0839d923cb51a178",
+      "from": "a75cd6175e8cc996",
       "to": "f22328a0c03d725f",
       "relation": "url"
     },
@@ -31098,11 +31071,6 @@
       "relation": "url"
     },
     {
-      "from": "c39304b23c100ff6",
-      "to": "5786f4fc56ade111",
-      "relation": "url"
-    },
-    {
       "from": "540a69630693d638",
       "to": "32f77fc64c67b341",
       "relation": "url"
@@ -31115,6 +31083,16 @@
     {
       "from": "e169c729da53e6a6",
       "to": "defc3ea1bc9774ea",
+      "relation": "url"
+    },
+    {
+      "from": "c39304b23c100ff6",
+      "to": "5786f4fc56ade111",
+      "relation": "url"
+    },
+    {
+      "from": "a12ece98e7a2f7c1",
+      "to": "530d4554bf052be0",
       "relation": "url"
     },
     {
@@ -31263,7 +31241,7 @@
       "relation": "url"
     },
     {
-      "from": "9456784865315f1a",
+      "from": "ccfb80bb017ddd91",
       "to": "e66911ce3efdc001",
       "relation": "url"
     },
@@ -31398,7 +31376,7 @@
       "relation": "url"
     },
     {
-      "from": "857618a2026f8b2d",
+      "from": "6e7deb7b609a2f72",
       "to": "8c5974bd988fc704",
       "relation": "url"
     },
@@ -31418,12 +31396,12 @@
       "relation": "url"
     },
     {
-      "from": "0d63dcca7feae73f",
+      "from": "95d38f8ddee4e942",
       "to": "decf6415d28e37ec",
       "relation": "url"
     },
     {
-      "from": "a70d091c65bddeda",
+      "from": "ba286cdbe3c0a035",
       "to": "0a71fa27b5ea2a34",
       "relation": "url"
     },
@@ -31573,7 +31551,7 @@
       "relation": "url"
     },
     {
-      "from": "a7edfc4cc8e3a4e3",
+      "from": "fc497f94554a1882",
       "to": "bf24dd0b6ed98da6",
       "relation": "url"
     },
@@ -31613,7 +31591,7 @@
       "relation": "url"
     },
     {
-      "from": "2921e10f79b25819",
+      "from": "75e4bcfd216b08f9",
       "to": "dfcac4c52cd74997",
       "relation": "url"
     },
@@ -31763,7 +31741,7 @@
       "relation": "url"
     },
     {
-      "from": "835213933938e40f",
+      "from": "9f0973e7e9ebfd80",
       "to": "1dddb1c1497ad824",
       "relation": "url"
     },
@@ -31788,13 +31766,13 @@
       "relation": "url"
     },
     {
-      "from": "a3489f754b6f623c",
-      "to": "c573bb0781c54d17",
+      "from": "0b2d479be3e215ce",
+      "to": "58381a4be91c32bf",
       "relation": "url"
     },
     {
-      "from": "0b2d479be3e215ce",
-      "to": "58381a4be91c32bf",
+      "from": "a3489f754b6f623c",
+      "to": "c573bb0781c54d17",
       "relation": "url"
     },
     {
@@ -31808,13 +31786,13 @@
       "relation": "url"
     },
     {
-      "from": "240b02fcc5129dad",
-      "to": "2a4f401febf0e9e3",
+      "from": "0828f26de4f101cf",
+      "to": "1811778964c7dca8",
       "relation": "url"
     },
     {
-      "from": "0828f26de4f101cf",
-      "to": "1811778964c7dca8",
+      "from": "240b02fcc5129dad",
+      "to": "2a4f401febf0e9e3",
       "relation": "url"
     },
     {
@@ -31838,7 +31816,7 @@
       "relation": "url"
     },
     {
-      "from": "4c88a4ab50f1a38e",
+      "from": "5650caf77f8452b7",
       "to": "d9418860ecda3797",
       "relation": "url"
     },
@@ -31980,6 +31958,11 @@
     {
       "from": "c320db1c7933fa68",
       "to": "23b7bf2e029fcd69",
+      "relation": "url"
+    },
+    {
+      "from": "a37466c64996a77c",
+      "to": "0da5c9e2faafa961",
       "relation": "url"
     },
     {
