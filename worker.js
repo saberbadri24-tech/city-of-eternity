@@ -140,6 +140,8 @@ const REVENUE_PROGRAMS=[
 {id:'creator-content',name:'Creator / YouTube Content',type:'media',status:'READY_ACCOUNT',description:'تولید و بسته‌بندی محتوای کانال؛ درآمد پلتفرم فقط بعد از احراز شرایط و تأیید خود پلتفرم.',engine:'content-engine'},
 {id:'affiliate-referrals',name:'Affiliate / Referral',type:'affiliate',status:'READY_PARTNER',description:'سیستم ثبت و اندازه‌گیری referral؛ فقط با برنامه رسمی و لینک اختصاصی شریک.',engine:'growth-seo'},
 {id:'guard-opportunities',name:'Immortal Guard Opportunities',type:'opportunity',status:'OWNER_GATED',description:'کشف و راستی‌آزمایی فرصت‌های قانونی؛ عملیات حساس و انتقال نهایی با تأیید مالک.',engine:'immortal-guard'},
+{id:'airdrop-campaign-launch',name:'Airdrop Campaign Launch',type:'b2b',status:'LIVE',description:'طراحی و راه‌اندازی کمپین پاداش/ایردراپ برای پروژه‌ها با کشف مخاطب، صفحات کمپین، eligibility و گزارش عملکرد؛ عملیات حساس owner-gated.',engine:'immortal-guard'},
+{id:'airdrop-intelligence',name:'Airdrop Intelligence Report',type:'research',status:'LIVE',description:'گزارش فرصت‌ها، رقبا، eligibility و ریسک برای پروژه‌ها و کاربران حرفه‌ای.',engine:'immortal-guard'},
 {id:'recurring-maintenance',name:'Maintenance & Support Retainer',type:'recurring',status:'LIVE',description:'قرارداد نگهداری، مانیتورینگ و رفع مشکل دوره‌ای پس از سفارش.',engine:'retention'}
 ];
 async function getV90Config(env){const x=await kvGet(env,'admin/config',null);return {pricesUsd:{...V90_DEFAULTS.pricesUsd,...(x?.pricesUsd||{})},permissions:{...V90_DEFAULTS.permissions,...(x?.permissions||{})},updatedAt:x?.updatedAt||new Date(0).toISOString()}}
@@ -286,6 +288,8 @@ async function runtimeRoutes(req,env,u){
     if(!/^\\S+@\\S+\\.\\S+$/.test(email))return rjson({ok:false,error:'valid_email_required'},400);
     const catalog={
       website:{name:'AI Website Build',price:149},
+      'airdrop-campaign':{name:'Airdrop Campaign Launch',price:299},
+      'airdrop-intelligence':{name:'Airdrop Intelligence Report',price:49},
       teaser:{name:'Marketing Teaser',price:49},
       fix:{name:'Website Fix',price:39},
       growth:{name:'Growth & SEO',price:79},
@@ -336,7 +340,7 @@ async function runtimeRoutes(req,env,u){
   if(p==='/api/revenue/hunt'&&req.method==='POST'){
     const b=await req.json().catch(()=>({})),request=clean(b.request||b.need,3000),email=clean(b.email,160),country=clean(b.country||'International',80),market=clean(b.market||country,100);
     if(!request)return rjson({ok:false,error:'request_required'},400);
-    const c=(()=>{const t=request.toLowerCase();const map=[['website',['website','site','سایت'],149],['teaser',['teaser','video','تیزر','ویدیو'],49],['fix',['fix','bug','error','خطا','ارور'],39],['growth',['seo','growth','سئو','رشد','traffic','فروش'],79],['automation',['automation','workflow','اتوماسیون','خودکار'],99],['ai-agent',['agent','ایجنت','هوش مصنوعی'],129]];let best=map[0],score=0;for(const x of map){const s=x[1].reduce((n,k)=>n+(t.includes(k)?20:0),0);if(s>score){score=s;best=x}}const leadScore=Math.min(100,30+(email?15:0)+(request.length>80?20:0)+score);return {service:best[0],price:best[2],score:leadScore}})();
+    const c=(()=>{const t=request.toLowerCase();const map=[['airdrop-campaign',['airdrop campaign','airdrop','quest campaign','campaign launch','ایردراپ','کمپین'],299],['airdrop-intelligence',['airdrop research','airdrop report','opportunity report','گزارش ایردراپ','تحقیق ایردراپ'],49],['website',['website','site','سایت'],149],['teaser',['teaser','video','تیزر','ویدیو'],49],['fix',['fix','bug','error','خطا','ارور'],39],['growth',['seo','growth','سئو','رشد','traffic','فروش'],79],['automation',['automation','workflow','اتوماسیون','خودکار'],99],['ai-agent',['agent','ایجنت','هوش مصنوعی'],129]];let best=map[0],score=0;for(const x of map){const s=x[1].reduce((n,k)=>n+(t.includes(k)?20:0),0);if(s>score){score=s;best=x}}const leadScore=Math.min(100,30+(email?15:0)+(request.length>80?20:0)+score);return {service:best[0],price:best[2],score:leadScore}})();
     const lead={id:id(),email,country,market,request,source:clean(b.source||'revenue-hunter',60),status:c.score>=70?'qualified':'new',score:c.score,recommendedService:c.service,recommendedPrice:c.price,createdAt:now(),updatedAt:now()};
     state.revenueLeads.set(lead.id,lead);await kvPut(env,'lead/'+lead.id,lead);await kvPut(env,'revenue-leads/'+lead.id,lead);
     return rjson({ok:true,lead,engine:'revenue-hunter'},201);
@@ -346,7 +350,7 @@ async function runtimeRoutes(req,env,u){
     let lead=leadId?await kvGet(env,'revenue-leads/'+leadId,null):null;
     if(!lead&&leadId)lead=state.revenueLeads.get(leadId)||null;
     const textReq=lead?.request||request;if(!textReq)return rjson({ok:false,error:'lead_or_request_required'},400);
-    const t=textReq.toLowerCase(),items=[['website',149,['website','site','سایت']],['teaser',49,['teaser','video','تیزر','ویدیو']],['fix',39,['fix','bug','error','خطا','ارور']],['growth',79,['seo','growth','سئو','رشد','traffic','فروش']],['automation',99,['automation','workflow','اتوماسیون','خودکار']],['ai-agent',129,['agent','ایجنت','هوش مصنوعی']]];
+    const t=textReq.toLowerCase(),items=[['airdrop-campaign',299,['airdrop','quest campaign','campaign','ایردراپ','کمپین']],['airdrop-intelligence',49,['airdrop report','research','گزارش ایردراپ','تحقیق']],['website',149,['website','site','سایت']],['teaser',49,['teaser','video','تیزر','ویدیو']],['fix',39,['fix','bug','error','خطا','ارور']],['growth',79,['seo','growth','سئو','رشد','traffic','فروش']],['automation',99,['automation','workflow','اتوماسیون','خودکار']],['ai-agent',129,['agent','ایجنت','هوش مصنوعی']]];
     let best=items[0],hits=0;for(const x of items){const n=x[2].reduce((s,k)=>s+(t.includes(k)?1:0),0);if(n>hits){hits=n;best=x}}
     const offer={id:id(),leadId:lead?.id||null,service:best[0],priceUsd:best[1],pricingPolicy:'ANIL-X-target-price; market benchmark not asserted',upsell:best[0]==='website'?['growth','automation']:best[0]==='growth'?['automation']:['growth'],createdAt:now(),status:'draft'};
     await kvPut(env,'offers/'+offer.id,offer);return rjson({ok:true,offer,engine:'offer-engine'},201);
@@ -380,10 +384,10 @@ async function runtimeRoutes(req,env,u){
   }
   if(p==='/api/agent/catalog'&&req.method==='GET'){
     return rjson({ok:true,protocol:'ANIL-X-Agent-Commerce-v1',services:[
-      {id:'website',name:'AI Website Build',priceUsd:149,currency:'USD'},{id:'teaser',name:'Marketing Teaser',priceUsd:49,currency:'USD'},{id:'fix',name:'Website Fix',priceUsd:39,currency:'USD'},{id:'growth',name:'Growth & SEO',priceUsd:79,currency:'USD'},{id:'automation',name:'Business Automation',priceUsd:99,currency:'USD'},{id:'ai-agent',name:'AI Agent Integration',priceUsd:129,currency:'USD'}],payment:{provider:'Variza',requiresCheckout:true},safety:{draftOrderOnly:true,no_secret_access:true}});
+      {id:'website',name:'AI Website Build',priceUsd:149,currency:'USD'},{id:'airdrop-campaign',name:'Airdrop Campaign Launch',priceUsd:299,currency:'USD'},{id:'airdrop-intelligence',name:'Airdrop Intelligence Report',priceUsd:49,currency:'USD'},{id:'teaser',name:'Marketing Teaser',priceUsd:49,currency:'USD'},{id:'fix',name:'Website Fix',priceUsd:39,currency:'USD'},{id:'growth',name:'Growth & SEO',priceUsd:79,currency:'USD'},{id:'automation',name:'Business Automation',priceUsd:99,currency:'USD'},{id:'ai-agent',name:'AI Agent Integration',priceUsd:129,currency:'USD'}],payment:{provider:'Variza',requiresCheckout:true},safety:{draftOrderOnly:true,no_secret_access:true}});
   }
   if(p==='/api/agent/orders'&&req.method==='POST'){
-    const b=await req.json().catch(()=>({})),service=clean(b.service,80),cat={website:149,teaser:49,fix:39,growth:79,automation:99,'ai-agent':129};if(!cat[service])return rjson({ok:false,error:'service_not_found'},404);
+    const b=await req.json().catch(()=>({})),service=clean(b.service,80),cat={website:149,'airdrop-campaign':299,'airdrop-intelligence':49,teaser:49,fix:39,growth:79,automation:99,'ai-agent':129};if(!cat[service])return rjson({ok:false,error:'service_not_found'},404);
     const order={id:id(),agentId:clean(b.agentId||'external-agent',120),service,amount:cat[service],currency:'USD',description:clean(b.description||'',1000),status:'draft',paymentRequired:true,createdAt:now(),source:'agent-commerce'};await kvPut(env,'orders/'+order.id,order);return rjson({ok:true,order},201);
   }
   if(p==='/api/agent/orders'&&req.method==='GET'){
@@ -398,7 +402,7 @@ if(p==='/api/payment-config'){
   }
   if(p==='/api/revenue/catalog'){
     return rjson({ok:true,merchant:'ANIL X STUDIO',currency:'USD',services:[
-      {id:'website',name:'AI Website Build',price:149},{id:'teaser',name:'Marketing Teaser',price:49},
+      {id:'website',name:'AI Website Build',price:149},{id:'airdrop-campaign',name:'Airdrop Campaign Launch',price:299},{id:'airdrop-intelligence',name:'Airdrop Intelligence Report',price:49},{id:'teaser',name:'Marketing Teaser',price:49},
       {id:'fix',name:'Website Fix',price:39},{id:'growth',name:'Growth & SEO',price:79},
       {id:'automation',name:'Business Automation',price:99},{id:'ai-agent',name:'AI Agent Integration',price:129}
     ]});
