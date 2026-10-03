@@ -90,7 +90,7 @@ async function testHomepage() {
     const text = (await b.innerText()).trim().replace(/\\s+/g, " ");
     const request = await b.getAttribute("data-request");
     if (!request || !text || dangerous(text, await b.getAttribute("id"), "")) continue;
-    await clickSafe(`[data-request]`.concat(":nth-of-type(", String(i + 1), ")"), `Quick/capability action: ${text.slice(0,70)}`, s => /chat|گفتگو|anil|آنیل|got it|گرفتم|route/i.test(s.text));
+    await clickSafe(`[data-request=${JSON.stringify(request)}]`, `Quick/capability action: ${text.slice(0,70)}`, s => /chat|گفتگو|anil|آنیل|got it|گرفتم|route/i.test(s.text));
   }
   await goto("/");
   const lang = page.locator("#axLanguage select");
