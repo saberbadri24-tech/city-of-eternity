@@ -3,8 +3,8 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@netlify/blobs": "^10.0.0",
-    "ioredis": "^5.4.1"
+    "@netlify/blobs": "^11.1.3",
+    "ioredis": "^6.0.0"
   },
   "scripts": {
     "verify:syntax": "node scripts/verify-syntax.mjs",
