@@ -28,7 +28,7 @@ jobs:
         env:
           BASE_URL: https://city-of-eternity.onrender.com
         run: |
-          cat > /tmp/anil-live-qa.mjs <<'EOF'
+          cat > ./anil-live-qa.mjs <<'EOF'
           import { chromium } from 'playwright';
           const base=process.env.BASE_URL;
           const fail=[];
@@ -91,4 +91,5 @@ jobs:
           if(fail.length){console.error('SUMMARY',fail);process.exit(1)}
           console.log('ANIL X LIVE QA PASS');
           EOF
-          node /tmp/anil-live-qa.mjs
+          node ./anil-live-qa.mjs
+          rm -f ./anil-live-qa.mjs
