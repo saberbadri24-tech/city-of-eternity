@@ -18,7 +18,7 @@ page.on("response", r => {
 
 async function stable() {
   await page.waitForLoadState("domcontentloaded", { timeout: 15000 }).catch(() => {});
-  await page.waitForTimeout(350);
+  await page.waitForTimeout(1200);
 }
 async function snapshot() {
   return await page.evaluate(() => ({
