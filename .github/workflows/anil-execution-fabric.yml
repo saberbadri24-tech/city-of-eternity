@@ -24,7 +24,8 @@ jobs:
       - run: node scripts/anil-final-contract-smoke.mjs
         env:
           BASE_URL: https://city-of-eternity.onrender.com
+      - run: npm install --no-save playwright@1.55.0
       - run: npx playwright install --with-deps chromium
       - run: node scripts/production-browser-smoke.mjs
         env:
-          BASE_URL: https://city-of-eternity.onrender.com
+          ANIL_BASE_URL: https://city-of-eternity.onrender.com
