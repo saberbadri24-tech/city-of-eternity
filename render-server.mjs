@@ -34,7 +34,7 @@ async function assetsFetch(request){
   }catch{return new Response('Not Found',{status:404})}
 }
 
-const ADMIN_SECRET=String(process.env.ANIL_ADMIN_PASSWORD||'');
+const ADMIN_SECRET=String(process.env.ANIL_ADMIN_PASSWORD||'').normalize('NFKC').trim();
 // Admin authentication is fail-closed at the login endpoint; a missing secret must never take the public ANIL X runtime offline.
 
 const env={...process.env,ASSETS:{fetch:assetsFetch},PAYMENTS:createPaymentsStore(process.env.REDIS_URL)};
