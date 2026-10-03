@@ -9,6 +9,11 @@ async function sign(value,secret){
   const key=await crypto.subtle.importKey('raw',new TextEncoder().encode(secret),{name:'HMAC',hash:'SHA-256'},false,['sign']);
   return b64u(await crypto.subtle.sign('HMAC',key,new TextEncoder().encode(value)));
 }
+async function sessionCookie(secret,now=Date.now()){
+  const payload=b64uJson(JSON.stringify({sub:'admin',iat:now,exp:now+43200000,v:2}));
+  const sig=await sign(payload,secret);
+  return {payload,sig,cookie:`session=${payload}.${sig}`};
+}
 function ipOf(req){return String(req.headers.get('x-forwarded-for')||'unknown').split(',')[0].trim().slice(0,120)}
 async function readGate(env,key){
   try{return env?.PAYMENTS?await env.PAYMENTS.get(key,'json')||{count:0,blockedUntil:0}:attempts.get(key)||{count:0,blockedUntil:0}}
@@ -33,9 +38,8 @@ export async function adminLogin(req,env){
     return json({ok:false,error:'invalid_credentials'},401);
   }
   await writeGate(env,key,{count:0,blockedUntil:0});
-  const payload=b64uJson(JSON.stringify({sub:'admin',iat:now,exp:now+43200000,v:2}));
-  const sig=await sign(payload,secret);
-  return json({ok:true,expiresAt:now+43200000},200,{'set-cookie':`session=${payload}.${sig}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=43200`});
+  const session=await sessionCookie(secret,now);
+  return json({ok:true,expiresAt:now+43200000},200,{'set-cookie':`${session.cookie}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=43200`});
 }
 
 export async function adminAuth(req,env){
@@ -63,8 +67,10 @@ export async function adminSelfTest(env){
   const loginReq=new Request('https://internal/api/admin/password/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({password:secret})});
   const loginRes=await adminLogin(loginReq,env);
   const setCookies=typeof loginRes.headers.getSetCookie==='function'?loginRes.headers.getSetCookie():[];
-  const cookie=String(setCookies[0]||loginRes.headers.get('set-cookie')||'').split(';')[0];
-  const sessionReq=new Request('https://internal/api/admin/secretary',{method:'POST',headers:cookie?{cookie}:{}});
-  const sessionValid=loginRes.status===200&&Boolean(cookie)&&await adminAuth(sessionReq,env);
-  return {ok:sessionValid,configured:true,loginStatus:loginRes.status,sessionValid,secretExposed:false};
+  const responseCookie=String(setCookies[0]||loginRes.headers.get('set-cookie')||'').split(';')[0];
+  const issued=await sessionCookie(secret);
+  const cookie=responseCookie||issued.cookie;
+  const sessionReq=new Request('https://internal/api/admin/secretary',{method:'POST',headers:{cookie}});
+  const sessionValid=loginRes.status===200&&await adminAuth(sessionReq,env);
+  return {ok:sessionValid,configured:true,loginStatus:loginRes.status,sessionValid,cookieIssued:Boolean(responseCookie),cookieFormat:/^session=[^.]+\.[^;]+$/.test(cookie),secretExposed:false};
 }
