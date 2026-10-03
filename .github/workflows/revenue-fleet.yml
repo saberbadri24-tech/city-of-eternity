@@ -1,8 +1,6 @@
 name: ANIL X 5 minute revenue cycle
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '*/5 * * * *'
 
 permissions:
   id-token: write
