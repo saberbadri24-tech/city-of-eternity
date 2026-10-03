@@ -7,7 +7,7 @@ const json = (data, status = 200) => new Response(JSON.stringify(data), {
 const id = () => crypto.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
 export async function onRequestPost({ request, env }) {
-  const apiKey = env.VARIZA_API_KEY || env.VARIA_API_KEY || env.VARIZA_TOKEN || env.VARIZA_KEY;
+  const apiKey = env.VARIZA_API_KEY || env.VARIA_API_KEY || env.VARIZA_TOKEN || env.VARIZA_KEY || env.VARIZA_API_TOKEN || env.VARIZA_SECRET;
   if (!apiKey) return json({ ok: false, error: "payment_not_configured" }, 503);
 
   try {
@@ -18,6 +18,12 @@ export async function onRequestPost({ request, env }) {
     }
 
     const orderId = String(body?.orderId || id()).slice(0, 120);
+    const existing = env.PAYMENTS
+      ? await env.PAYMENTS.get(`orders/${orderId}`, "json").catch(() => null)
+      : state.orders.get(orderId) || null;
+    if (existing?.status === "pending" && existing?.payUrl) {
+      return json({ ok: true, orderId, amount: existing.amount, status: "pending", payUrl: existing.payUrl, reused: true });
+    }
     const client = String(body?.client || "مشتری ANIL X").trim().slice(0, 120);
     const description = String(body?.description || "پرداخت ANIL X").trim().slice(0, 240);
     const origin = new URL(request.url).origin;
@@ -73,6 +79,7 @@ export async function onRequestPost({ request, env }) {
       amount,
       providerAmount: amount,
       providerCurrency: "IRR",
+      providerAmountUnit: "toman",
       orderAmount: Number(sourceOrder?.amount || 0),
       orderCurrency: String(sourceOrder?.currency || "USD"),
       service: String(sourceOrder?.service || ""),
