@@ -1,0 +1,84 @@
+name: ANIL X Live Browser QA
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Playwright
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Run live site and API smoke
+        env:
+          BASE_URL: https://city-of-eternity.onrender.com
+        run: |
+          cat > /tmp/anil-live-qa.mjs <<'EOF'
+          import { chromium } from 'playwright';
+          const base=process.env.BASE_URL;
+          const fail=[];
+          const check=(ok,msg)=>{if(!ok){fail.push(msg);console.error('FAIL',msg)}else console.log('PASS',msg)};
+          const browser=await chromium.launch({headless:true});
+          const page=await browser.newPage({viewport:{width:390,height:844}});
+          const errors=[];
+          page.on('pageerror',e=>errors.push(String(e)));
+          page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});
+          try{
+            const health=await page.request.get(base+'/api/health');
+            check(health.ok(),'GET /api/health');
+            const hd=await health.json();
+            check(hd.ok===true,'health payload ok');
+            check(hd.configured?.admin===true,'admin secret configured');
+            const readiness=await page.request.get(base+'/api/execution-readiness');
+            check(readiness.ok(),'GET /api/execution-readiness');
+            const gd=await page.request.get(base+'/api/guard/live?t='+Date.now());
+            check(gd.ok(),'GET /api/guard/live');
+            const sd=await page.request.post(base+'/api/anil/super-team',{data:{task:'QA only: inspect live state, return evidence and stop conditions; do not mutate anything.'}});
+            check(sd.ok(),'POST /api/anil/super-team');
+            const sjson=await sd.json();
+            check(sjson.engine==='ANIL-SUPER-TEAM','super-team engine identity');
+            check(sjson.safety?.finalCommand==='ANIL','ANIL final command boundary');
+            check(sjson.safety?.autoSigning===false,'auto-signing disabled');
+            const bad=await page.request.post(base+'/api/admin/password/login',{data:{password:'__ANIL_QA_INVALID_PASSWORD_2026__'}});
+            check(bad.status()===401,'wrong admin password rejected');
+            await page.goto(base+'/',{waitUntil:'domcontentloaded'});
+            await page.waitForTimeout(1200);
+            check(await page.title().then(t=>/ANIL X/i.test(t)),'homepage title');
+            check(await page.locator('#requestForm').count()===1,'main chat composer exists');
+            check(await page.locator('#profileBtn').count()===1,'profile button exists');
+            check(await page.locator('#voiceBtn').count()===1,'voice button exists');
+            check(await page.locator('#imageInput').count()===1,'file/image input exists');
+            const quick=page.locator('[data-request]');
+            const quickCount=await quick.count();
+            check(quickCount>=4,'quick action buttons discovered');
+            for(let i=0;i<quickCount;i++){
+              await quick.nth(i).click();
+              await page.waitForTimeout(350);
+              check(!(await page.locator('#requestInput').inputValue()).includes('<script'),'quick action safe input');
+            }
+            await page.locator('#profileBtn').click();
+            check(await page.locator('#profileModal').isVisible(),'profile modal opens');
+            await page.locator('[data-age="adult"]').click();
+            await page.locator('[data-goal="business"]').click();
+            await page.locator('#saveProfile').click();
+            await page.waitForTimeout(250);
+            check(await page.locator('#profileModal').isHidden(),'profile modal closes after save');
+            await page.locator('#voiceBtn').click().catch(()=>{});
+            await page.waitForTimeout(250);
+            check(errors.length===0,'no browser page errors during public smoke');
+            await page.goto(base+'/admin.html',{waitUntil:'domcontentloaded'});
+            await page.waitForTimeout(600);
+            check(await page.locator('#p1').count()===1,'admin password field exists');
+            check(await page.locator('#loginBtn').count()===1,'admin login button exists');
+          }finally{
+            await browser.close();
+          }
+          if(fail.length){console.error('SUMMARY',fail);process.exit(1)}
+          console.log('ANIL X LIVE QA PASS');
+          EOF
+          node /tmp/anil-live-qa.mjs
