@@ -4,9 +4,6 @@ on:
   schedule:
     - cron: "*/5 * * * *"
   workflow_dispatch:
-  workflow_run:
-    workflows: ["ANIL X Predeploy CI"]
-    types: [completed]
 
 concurrency:
   group: anilx-revenue-flywheel
@@ -18,7 +15,7 @@ permissions:
 
 jobs:
   revenue-flywheel:
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - name: Mint GitHub OIDC token
