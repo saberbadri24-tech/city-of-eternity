@@ -1,4 +1,8 @@
 const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','access-control-allow-origin':'*','access-control-allow-methods':'POST,OPTIONS','access-control-allow-headers':'content-type'};
+const planCache=new Map();
+const cacheKey=x=>JSON.stringify({r:String(x?.requestText||''),l:String(x?.language||''),a:String(x?.ageProfile||''),g:String(x?.goal||'')}).slice(0,7000);
+const cacheGet=k=>{const v=planCache.get(k);if(!v)return null;if(Date.now()-v.t>45000){planCache.delete(k);return null}return v.d};
+const cacheSet=(k,d)=>{planCache.set(k,{t:Date.now(),d});while(planCache.size>80)planCache.delete(planCache.keys().next().value)};
 const json=(d,s=200)=>new Response(JSON.stringify(d),{status:s,headers:H});
 const text=v=>String(v||'').trim();
 const firstEnv=(env,keys)=>keys.map(k=>env?.[k]).find(v=>typeof v==='string'&&v.trim())||'';
@@ -50,15 +54,21 @@ export async function handlePlan(request,env){if(request.method==='OPTIONS')retu
 const searchIntent=/(latest|today|news|current|price|research|search|تحقیق|جستجو|جدیدترین|امروز|قیمت|اخبار|بررسی)/i.test(requestText);
 const searchPromise=searchIntent?toolWebSearch(env,requestText):Promise.resolve(null);
 const toolPromise=urls.length?Promise.all(urls.map(u=>toolFetchUrl(env,u))):Promise.resolve([]);
-const promptBase={request:requestText,profile:body?.profile||{},conversation:body?.turns||[],fallback};
+const promptBase={request:requestText,profile:body?.profile||{},conversation:(body?.turns||[]).slice(-8),fallback};
+const ck=cacheKey({requestText,language:body?.language,ageProfile:body?.ageProfile,goal:body?.profile?.goal});
+const cached=cacheGet(ck);if(cached)return json({...cached,cached:true});
 const [searchResults,toolResults]=await Promise.all([searchPromise,toolPromise]);
 const prompt=JSON.stringify({...promptBase,toolResults,searchResults});
 const reviewPrompt=JSON.stringify({...promptBase,context:body?.profile||{}});
 let astra=null,claude=null,gemini=null,errors=[];
-const providerResults=await Promise.allSettled([openai(env,prompt),claude(env,reviewPrompt),gemini(env,reviewPrompt)]);
-if(providerResults[0].status==='fulfilled')astra=providerResults[0].value;else if(providerResults[0].reason)errors.push(String(providerResults[0].reason?.message||providerResults[0].reason||'astra_error'));
-if(providerResults[1].status==='fulfilled')claude=providerResults[1].value;else if(providerResults[1].reason)errors.push(String(providerResults[1].reason?.message||providerResults[1].reason||'claude_error'));
-if(providerResults[2].status==='fulfilled')gemini=providerResults[2].value;else if(providerResults[2].reason)errors.push(String(providerResults[2].reason?.message||providerResults[2].reason||'gemini_error'));
+const complexity=String(requestText).length>180||searchIntent||urls.length>0||/(code|bug|error|audit|security|payment|contract|research|compare|تحلیل|کد|خطا|امنیت|پرداخت|تحقیق|مقایسه)/i.test(requestText);
+const ar=await Promise.allSettled([openai(env,prompt)]);
+if(ar[0].status==='fulfilled')astra=ar[0].value;else if(ar[0].reason)errors.push(String(ar[0].reason?.message||ar[0].reason||'astra_error'));
+if(complexity){
+ const reviewers=await Promise.allSettled([claude(env,reviewPrompt),gemini(env,reviewPrompt)]);
+ if(reviewers[0].status==='fulfilled')claude=reviewers[0].value;else if(reviewers[0].reason)errors.push(String(reviewers[0].reason?.message||reviewers[0].reason||'claude_error'));
+ if(reviewers[1].status==='fulfilled')gemini=reviewers[1].value;else if(reviewers[1].reason)errors.push(String(reviewers[1].reason?.message||reviewers[1].reason||'gemini_error'));
+}
 if(!astra&&claude){astra={title:fallback.title,desc:claude.corrections||fallback.desc,moves:fallback.moves,reply:claude.reply||('گرفتم؛ '+fallback.title),confidence:Number(claude.confidence)||.45,specialist:'Claude'};}
 if(!astra&&gemini){astra={title:fallback.title,desc:gemini.corrections||fallback.desc,moves:fallback.moves,reply:gemini.reply||('گرفتم؛ '+fallback.title),confidence:Number(gemini.confidence)||.45,specialist:'Gemini'};}
 let toolExecutions=[];
@@ -71,4 +81,4 @@ if(toolExecutions.length&&astra){
     if(finalAstra)astra={...astra,...finalAstra,toolCalls:toolExecutions.map(x=>({tool:x.tool,executed:true}))};
   }catch(e){errors.push(String(e?.message||e))}
 }
-const reply=astra?.reply||('گرفتم: '+(astra?.title||fallback.title)); const text=reply;return json({ok:true,source:astra?'ai-council':'local-fallback',orchestrator:astra?'astra':'local',reviewer:claude?'claude':'local',research:gemini?'gemini':'local',specialists:{astra:{live:!!astra,provider:'openai'},claude:{live:!!claude,provider:'anthropic'},gemini:{live:!!gemini,provider:'google'},vision:{live:false,endpoint:'/api/vision'},voice:{live:false,endpoint:'/api/voice'}},router:{selected:astra?.specialist||fallback.title,providerErrors:errors.slice(0,4),tools:{urls:toolResults.length,used:toolResults.some(x=>x?.ok),webSearch:Boolean(searchResults?.ok),searchProvider:searchResults?.provider||null,planned:toolExecutions.map(x=>({tool:x.tool,ok:!!x.result?.ok}))}},plan:{title:astra?.title||fallback.title,desc:astra?.desc||fallback.desc,moves:Array.isArray(astra?.moves)&&astra.moves.length?astra.moves.slice(0,6):fallback.moves},reply,text,answer:reply,confidence:Number(astra?.confidence)||.55})}catch(e){const fallback=localPlan(requestText);return json({ok:true,source:'local-fallback',orchestrator:'local',reviewer:'local',research:'local',specialists:{astra:{live:false,provider:'local'},claude:{live:false,provider:'local'},gemini:{live:false,provider:'local'},vision:{live:false,endpoint:'/api/vision'},voice:{live:false,endpoint:'/api/voice'}},router:{selected:fallback.title,providerErrors:[String(e?.message||e).slice(0,240)],tools:{urls:0,used:false,webSearch:false,searchProvider:null,planned:[]}},plan:fallback,reply:'گرفتم؛ '+fallback.title+'. مسیر پایه ANIL X آماده است.',text:'گرفتم؛ '+fallback.title+'. مسیر پایه ANIL X آماده است.',answer:'گرفتم؛ '+fallback.title+'. مسیر پایه ANIL X آماده است.',confidence:.25})}}
+const reply=astra?.reply||('گرفتم: '+(astra?.title||fallback.title)); const text=reply;const result={ok:true,source:astra?'ai-council':'local-fallback',orchestrator:astra?'astra':'local',reviewer:claude?'claude':'local',research:gemini?'gemini':'local',specialists:{astra:{live:!!astra,provider:'openai'},claude:{live:!!claude,provider:'anthropic'},gemini:{live:!!gemini,provider:'google'},vision:{live:false,endpoint:'/api/vision'},voice:{live:false,endpoint:'/api/voice'}},router:{selected:astra?.specialist||fallback.title,providerErrors:errors.slice(0,4),tools:{urls:toolResults.length,used:toolResults.some(x=>x?.ok),webSearch:Boolean(searchResults?.ok),searchProvider:searchResults?.provider||null,planned:toolExecutions.map(x=>({tool:x.tool,ok:!!x.result?.ok}))}},plan:{title:astra?.title||fallback.title,desc:astra?.desc||fallback.desc,moves:Array.isArray(astra?.moves)&&astra.moves.length?astra.moves.slice(0,6):fallback.moves},reply,text,answer:reply,confidence:Number(astra?.confidence)||.55};cacheSet(ck,result);return json(result)}catch(e){const fallback=localPlan(requestText);return json({ok:true,source:'local-fallback',orchestrator:'local',reviewer:'local',research:'local',specialists:{astra:{live:false,provider:'local'},claude:{live:false,provider:'local'},gemini:{live:false,provider:'local'},vision:{live:false,endpoint:'/api/vision'},voice:{live:false,endpoint:'/api/voice'}},router:{selected:fallback.title,providerErrors:[String(e?.message||e).slice(0,240)],tools:{urls:0,used:false,webSearch:false,searchProvider:null,planned:[]}},plan:fallback,reply:'گرفتم؛ '+fallback.title+'. مسیر پایه ANIL X آماده است.',text:'گرفتم؛ '+fallback.title+'. مسیر پایه ANIL X آماده است.',answer:'گرفتم؛ '+fallback.title+'. مسیر پایه ANIL X آماده است.',confidence:.25})}}
