@@ -7,12 +7,6 @@ import {handleExecutionReadiness} from './functions/api/execution-readiness.mjs'
 import {adminLogin,adminConfigured,adminSelfTest} from './functions/api/admin-auth.mjs';
 
 const root=path.dirname(fileURLToPath(import.meta.url));
-let guardFastCache=null;
-try{
-  const read=(name)=>JSON.parse(readFileSync(path.join(root,name),'utf8'));
-  const status=read('guard-status.json'),radar=read('guard-super-radar.json'),ledger=read('guard-evidence-ledger.json');
-  guardFastCache={status,radar,ledger,loadedAt:Date.now()};
-}catch{}
 let workerPromise=null;
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.svg':'image/svg+xml','.webmanifest':'application/manifest+json','.ico':'image/x-icon','.txt':'text/plain; charset=utf-8','.xml':'application/xml; charset=utf-8','.webp':'image/webp','.mp3':'audio/mpeg'};
 
@@ -47,14 +41,13 @@ const server=http.createServer(async(req,res)=>{
       return res.end(await (async()=>{const mainTon=process.env.TON_MAIN_WALLET||process.env.TON_MAIN_WALLET_ADDRESS||process.env.TON_PERMANENT_WALLET_ADDRESS;const out={ok:true,ready:adminConfigured(env),service:'ANIL X',runtime:'render-static-gateway',configured:{admin:adminConfigured(env),openai:Boolean(process.env.OPENAI_API_KEY),anthropic:Boolean(process.env.ANTHROPIC_API_KEY),gemini:Boolean(process.env.GEMINI_API_KEY),variza:Boolean(process.env.VARIZA_API_KEY||process.env.VARIA_API_KEY||process.env.VARIZA_TOKEN||process.env.VARIZA_KEY||process.env.VARIZA_API||process.env.VARIZA_ACCESS_TOKEN||process.env.VARIZA_BEARER_TOKEN),payments:Boolean(process.env.PAYMENTS||process.env.REDIS_URL),assets:true},revenue:{storageConfigured:Boolean(process.env.REDIS_URL),durableAccounting:String(process.env.PAYMENTS_DURABLE||'false').toLowerCase()==='true',variza:Boolean(process.env.VARIZA_API_KEY||process.env.VARIA_API_KEY||process.env.VARIZA_TOKEN||process.env.VARIZA_KEY),ton:Boolean(mainTon),guardCatchQueue:true,temporaryWalletUsed:false}};res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');return JSON.stringify(out)})());
     }
     if(u.pathname==='/api/guard/live'&&req.method==='GET'){
-      const snap=guardFastCache||{status:{},radar:{},ledger:{}};
-      const status=snap.status||{},radar=snap.radar||{},ledger=snap.ledger||{};
-      const updatedAt=status.updatedAt||status.lastScan||radar.generatedAt||null;
+      let status={};
+      try{status=JSON.parse(await fs.readFile(path.join(root,'guard-status.json'),'utf8'))}catch{}
+      const updatedAt=status.updatedAt||status.lastScan||null;
       const ageMs=Date.parse(String(updatedAt||''));
       const minutesSinceUpdate=Number.isFinite(ageMs)?Math.max(0,Math.round((Date.now()-ageMs)/60000)):null;
-      const body={ok:true,source:'ANIL-X-local-guard-state',updatedAt,freshness:{minutesSinceUpdate,stale:minutesSinceUpdate===null||minutesSinceUpdate>15,requiredMaxMinutes:15},guard:{status:String(status.status||status.mode||'NORMAL'),discoveryCount:Number(status.discoveryCount||status.counts?.opportunities||0),sourcesScanned:Number(status.sourcesScanned||0),sourcesReachable:Number(status.sourcesReachable||0),waitingOwner:Number(status.waitingOwner||0),highValueCandidates:Number(status.highValueCandidates||status.counts?.incomePriority||0)},radar:{candidates:Number(radar?.summary?.totalCandidates||0),officialCandidates:Number(radar?.summary?.officialCandidates||0),actionableOfficial:Number(radar?.summary?.actionableOfficial||0),highPriority:Number(radar?.summary?.highPriority||0)},revenue:{confirmedIncome:Number(ledger.confirmedIncome||ledger.totalReceived||0),status:String(ledger.status||'UNCONFIRMED')},transfer:{status:'OWNER_APPROVAL_REQUIRED',temporaryWalletUsed:false},safety:{autoClaim:false,autoSigning:false,autoTransfer:false,secretStorage:false,ownerApprovalRequired:true}};
+      const body={ok:true,source:'ANIL-X-local-guard-state',updatedAt,freshness:{minutesSinceUpdate,stale:minutesSinceUpdate===null||minutesSinceUpdate>15,requiredMaxMinutes:15},guard:{status:String(status.status||status.mode||'NORMAL'),discoveryCount:Number(status.discoveryCount||status.counts?.opportunities||0),sourcesScanned:Number(status.sourcesScanned||0),sourcesReachable:Number(status.sourcesReachable||0),waitingOwner:Number(status.waitingOwner||0),highValueCandidates:Number(status.highValueCandidates||status.counts?.incomePriority||0)},radar:{available:false,reason:'large_radar_state_not_loaded_into_render_heap'},revenue:{confirmedIncome:0,status:'UNCONFIRMED'},transfer:{status:'OWNER_APPROVAL_REQUIRED',temporaryWalletUsed:false},safety:{autoClaim:false,autoSigning:false,autoTransfer:false,secretStorage:false,ownerApprovalRequired:true}};
       res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');res.setHeader('cache-control','no-store');res.end(JSON.stringify(body));
-      void (async()=>{try{const read=async name=>JSON.parse(await fs.readFile(path.join(root,name),'utf8'));guardFastCache={status:await read('guard-status.json'),radar:await read('guard-super-radar.json'),ledger:await read('guard-evidence-ledger.json'),loadedAt:Date.now()};}catch{}})();
       return;
     }
     if(u.pathname==='/api/anil/super-team'&&req.method==='GET'){
