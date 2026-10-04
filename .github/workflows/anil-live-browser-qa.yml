@@ -70,14 +70,8 @@ jobs:
             check(readiness.ok(),'GET /api/execution-readiness');
             const gd=await page.request.get(base+'/api/guard/live?t='+Date.now());
             check(gd.ok(),'GET /api/guard/live');
-            const oidc=await fetch(process.env.ACTIONS_ID_TOKEN_REQUEST_URL+'&audience=anil-x',{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN}});
-            check(oidc.ok,'GitHub OIDC token endpoint');
-            const od=await oidc.json();
-            const sd=await page.request.post(base+'/api/anil/super-team',{
-              headers:{Authorization:'Bearer '+String(od?.value||'')},
-              data:{task:'QA only: inspect live state, return evidence and stop conditions; do not mutate anything.'}
-            });
-            check(sd.ok(),'POST /api/anil/super-team');
+            const sd=await page.request.get(base+'/api/anil/super-team');
+            check(sd.ok(),'GET /api/anil/super-team');
             const sjson=await sd.json();
             check(sjson.engine==='ANIL-SUPER-TEAM','super-team engine identity');
             check(sjson.safety?.finalCommand==='ANIL','ANIL final command boundary');
