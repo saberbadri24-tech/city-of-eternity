@@ -4,11 +4,12 @@ const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
 const input=$('#requestInput'),form=$('#requestForm'),count=$('#charCount'),chat=$('#chat');
 const AI_URL=(window.ANILX_API_URL||'/api/plan');
 const routes=[
-{id:'website',keys:['سایت','وب سایت','وب‌سایت','وبسایت','فروشگاه','لندینگ','website','store'],title:'Build and launch a website',moves:['نتیجه مطلوب','نمونه قابل دیدن','اجرا و تست']},
-{id:'video',keys:['تیزر','ویدیو','فیلم','کلیپ','محتوا','video','teaser'],title:'Create video content',moves:['هدف','سناریو','پیش‌نمایش']},
-{id:'fix',keys:['خطا','خراب','درست نمی','مشکل','ارور','کند','کار نمی','bug','error','fix'],title:'Diagnose and fix the problem',moves:['شواهد','تشخیص','آزمون']},
-{id:'growth',keys:['فروش','مشتری','رشد','تبلیغ','سئو','بازدید','درآمد','sales','growth','seo'],title:'Business growth engine',moves:['هدف تجاری','پیشنهاد','اندازه‌گیری']},
-{id:'prototype',keys:['پیش نمایش','پیش‌نمایش','نمونه قبل','ماکت','prototype','preview'],title:'Preview before execution',moves:['نتیجه','نمونه','اصلاح']}];
+{id:'lead',keys:['لید','سرنخ','مشتری بالقوه','مشتری','lead','prospect','qualification'],title:'Qualify and organize leads',moves:['دریافت اطلاعات','امتیازدهی','پیگیری','تحویل']},
+{id:'support',keys:['پشتیبانی','سوال مشتری','پاسخ مشتری','support','customer service','faq'],title:'Customer support workflow',moves:['درک درخواست','پاسخ','ثبت','پیگیری']},
+{id:'ops',keys:['ادمین','اداری','فاکتور','صورتحساب','invoice','admin','operations','bookkeeping'],title:'Business operations workflow',moves:['جمع‌آوری داده','ثبت','کنترل','گزارش']},
+{id:'schedule',keys:['رزرو','جلسه','قرار','زمان‌بندی','schedule','appointment','booking'],title:'Scheduling workflow',moves:['بررسی زمان','هماهنگی','تأیید','یادآوری']},
+{id:'document',keys:['قرارداد','پروپوزال','گزارش','سند','pdf','excel','proposal','report','document'],title:'Document and data workflow',moves:['دریافت فایل','استخراج','تحلیل','خروجی']},
+
 const fallback={id:'custom',title:'Custom ANIL X path',moves:['فهم خواسته','اقدام بعدی','بررسی نتیجه']};
 const normalize=s=>String(s||'').trim().toLowerCase().replace(/[يى]/g,'ی').replace(/ك/g,'ک').replace(/[\u200c\u200d]/g,' ').replace(/\s+/g,' ');
 const findRoute=t=>{const x=normalize(t);let best=fallback,score=0;for(const r of routes){const n=r.keys.reduce((a,k)=>a+(x.includes(normalize(k))?1:0),0);if(n>score){best=r;score=n}}return best};
