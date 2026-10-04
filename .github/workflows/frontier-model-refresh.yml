@@ -3,7 +3,7 @@ name: ANIL X Frontier Model Refresh
 on:
   workflow_dispatch:
   schedule:
-    - cron: "17 2 * * *"
+    - cron: "17 */6 * * *"
 
 permissions:
   contents: write
