@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-10-04T00:30:36.761222+00:00",
+  "generatedAt": "2026-10-04T00:43:09.682376+00:00",
   "status": "NORMAL",
   "flags": [],
   "current": {
-    "discoveryCount": 1875,
+    "discoveryCount": 1870,
     "sourceCount": 0
   },
   "previous": {
-    "discoveryCount": 1871,
+    "discoveryCount": 1875,
     "sourceCount": 0
   },
   "policy": "Anomalies quarantine confidence; they never create rewards or authorize actions."
