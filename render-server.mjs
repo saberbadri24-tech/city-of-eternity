@@ -15,10 +15,10 @@ const gzipAsync=promisify(gzip);
 const root=path.dirname(fileURLToPath(import.meta.url));
 const assetCache=new Map();
 const gzipCache=new Map();
-const ASSET_CACHE_MAX_BYTES=8*1024*1024;
-const ASSET_CACHE_ITEM_MAX=512*1024;
-const GZIP_CACHE_MAX_BYTES=4*1024*1024;
-const GZIP_CACHE_ITEM_MAX=512*1024;
+const ASSET_CACHE_MAX_BYTES=2*1024*1024;
+const ASSET_CACHE_ITEM_MAX=256*1024;
+const GZIP_CACHE_MAX_BYTES=1024*1024;
+const GZIP_CACHE_ITEM_MAX=128*1024;
 let assetCacheBytes=0;
 let gzipCacheBytes=0;
 function cacheSetBounded(map,key,value,maxBytes,maxItem,currentBytes,setBytes){
