@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-04T08:25:35+00:00",
+  "generatedAt": "2026-10-04T08:33:48+00:00",
   "engine": "Immortal Guard Novelty Engine",
   "items": {
     "45ca31c3315a5978f404": {
@@ -243,9 +243,6 @@
     "526847e0e0a0f83d9ec3": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
-    "582e31f8733d0bd6809c": {
-      "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
-    },
     "27976e2e996a13bf1c34": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
@@ -306,6 +303,9 @@
     "e0f9775c6c699ae2c59b": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
+    "07d8663d9a1977eecc72": {
+      "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
+    },
     "015c56342b5aff47fd74": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
@@ -339,7 +339,7 @@
     "4b4c07b8c561ebdffe7a": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
-    "a38f0ac7dff71ab2dcba": {
+    "da1d3aaa2021f78f9233": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "79d2fd9e9a43b804ee39": {
@@ -732,9 +732,6 @@
     "8d0d81e1ae47572118f3": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
-    "ed9a1bc1b73d2122a5d4": {
-      "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
-    },
     "3e5179c1710ad3ec49a5": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
@@ -934,6 +931,9 @@
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "04957df3197be12ae38e": {
+      "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
+    },
+    "ca01af29f4d05359311a": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "d67a0a675ca78e726de8": {
@@ -1413,6 +1413,9 @@
     "5e67139915646c10bb70": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
+    "04fb719f47acf26f57d9": {
+      "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
+    },
     "04d9135b1e972c90fcfe": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
@@ -1597,9 +1600,6 @@
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "35c3c2d7cf1860775b86": {
-      "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
-    },
-    "be955325cf8bea6516a0": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "2f28713c4a581479b157": {
@@ -2271,7 +2271,7 @@
     "1094a500e3f993803d76": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
-    "b1e19714ab52fc7f7f85": {
+    "d2edfa753723f5afd72b": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "9f26a038e852e44763d3": {
@@ -2397,7 +2397,7 @@
     "3a4ab22571a62b1ab3db": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
-    "5a69c0c5b321fe552889": {
+    "e07d2237715285d95036": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "e8b932e05b9f36405209": {
@@ -2610,7 +2610,7 @@
     "d1de93055cde39cefdaf": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
-    "c3a21cba34b69b6d85f1": {
+    "3a6f8710e0317944aff6": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "65e0307bed6b032f941c": {
@@ -2721,6 +2721,9 @@
     "1d8a855b26536620dc5d": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
+    "1ea10359e40d3d603863": {
+      "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
+    },
     "3e29e02db23fab931d71": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
@@ -2730,19 +2733,19 @@
     "69461e1359fe5bc1cca1": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
-    "70031d8bf976ea181419": {
+    "1ea5b285f15314d39e1e": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "972c57149e24c7835310": {
-      "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
-    },
-    "1ea10359e40d3d603863": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "b517ebd19d8124ca8544": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "1d7908baf93b712d44a1": {
+      "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
+    },
+    "eefd24e282cf0f99bd90": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "ee0ba7dffa9cb66781c8": {
@@ -2770,9 +2773,6 @@
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "e3190af8d0bb03dfb553": {
-      "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
-    },
-    "ae074872cefce0a37004": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "6ca4471fa1160ccf7f8b": {
@@ -2809,6 +2809,9 @@
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "cbfa64bf5294de532cd5": {
+      "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
+    },
+    "ae074872cefce0a37004": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "acfa1a1be262c81c988d": {
@@ -2848,9 +2851,6 @@
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "1fab3e1ce296df322fb2": {
-      "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
-    },
-    "4e955601a947211e982b": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "affc9855c6669b012fad": {
@@ -3135,7 +3135,7 @@
     "8d24caab6109a432469f": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
-    "e830e107e83778a2042f": {
+    "9a67f5f890d577abfd1b": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "d82edd2994ba9bf818cd": {
@@ -3178,6 +3178,9 @@
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "f0870ede23c1d011dbe0": {
+      "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
+    },
+    "4e955601a947211e982b": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "b24091925ee468e1e5a0": {
@@ -3591,7 +3594,7 @@
     "aebfbba5aa2521a10b60": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
-    "0ecab3159dea3ff3468d": {
+    "17d6f06c5ca0c514f1ec": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "fca0bb05f25292786745": {
@@ -3933,9 +3936,6 @@
     "fb9a76dbdf079fd3a0a2": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
-    "38f22418a44c9c3f4bf1": {
-      "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
-    },
     "4b374d415cc6bb11ec42": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
@@ -3967,6 +3967,9 @@
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "7a7393ab8e934e98c47f": {
+      "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
+    },
+    "38f22418a44c9c3f4bf1": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "2d3b82c35e36ac94511f": {
@@ -4119,13 +4122,16 @@
     "b1c32fbcef14df704442": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
-    "59ad20f1654b131b14c8": {
+    "f048ab030b4cca1c8ef9": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "a49919cbbd8e8f6c5aaa": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "22e0a9465d99a396a4a7": {
+      "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
+    },
+    "f7baf6f322441019e0b9": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "5aa0a5e909eb9169cfca": {
@@ -4140,16 +4146,16 @@
     "d06294321a33f24f8200": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
+    "258a445218e26ee6bb27": {
+      "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
+    },
     "a48e769bf67de76c5f98": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "d702b933b1fb425328ee": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
-    "0e9b4f40acce21c2eb7d": {
-      "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
-    },
-    "258a445218e26ee6bb27": {
+    "a8da5c8077963e4cc6d8": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "68d1139080ca3fe1eef7": {
@@ -4938,7 +4944,7 @@
     "6b77c787b5a9ff6ef7f5": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
-    "3e43df5bc28687bac7a1": {
+    "2a885f702cf3a122bc39": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "66a28315a8231d8a34f5": {
@@ -4968,7 +4974,7 @@
     "ee25a69a64a5d869e387": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
-    "bc01f91c54b2b8ac25e4": {
+    "4bb07e5ee5a2e9f96d20": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "cd2c26f1e4537f0fb314": {
@@ -5610,7 +5616,7 @@
     "d9d4eb5e9864f0d3502f": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
-    "39057cd9bf11131f79e9": {
+    "16f82442a060b27dff25": {
       "sig": "06183ba86fc2686c6667ea8db7f22914d9bb4984e8a01238f3b396b91b8cbb81"
     },
     "fb2fbc3171fb0fe73b30": {
