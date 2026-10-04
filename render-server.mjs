@@ -1,8 +1,7 @@
 import http from 'node:http';
-import {promises as fs,readFileSync} from 'node:fs';
+import {promises as fs,createReadStream} from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {createHmac} from 'node:crypto';
 
 const root=path.dirname(fileURLToPath(import.meta.url));
 let workerPromise=null;
@@ -104,16 +103,28 @@ const server=http.createServer(async(req,res)=>{
       res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
     }
     if((req.method==='GET'||req.method==='HEAD')&&!u.pathname.startsWith('/api/')){
+      const rel=decodeURIComponent(u.pathname).replace(/^\/+/, '')||'index.html';
+      const safe=!rel.includes('..');
+      const file=safe?(path.extname(path.join(root,rel))?path.join(root,rel):path.join(root,'index.html')):null;
+      const ext=file?path.extname(file).toLowerCase():'';
+      const isHtml=ext==='.html';
+      const isAdmin=file?path.basename(file)==='admin.html':false;
+      if(file&&!isHtml){
+        try{
+          const st=await fs.stat(file);
+          const etag='W/"'+st.size.toString(16)+'-'+Math.floor(st.mtimeMs).toString(16)+'"';
+          const cache=isAdmin?'no-store':u.search?'public,max-age=31536000,immutable':'public,max-age=86400,stale-while-revalidate=604800';
+          if(req.headers['if-none-match']===etag){res.statusCode=304;res.setHeader('etag',etag);res.end();return}
+          res.statusCode=200;res.setHeader('content-type',mime[ext]||'application/octet-stream');res.setHeader('cache-control',cache);res.setHeader('etag',etag);res.setHeader('x-content-type-options','nosniff');res.setHeader('referrer-policy','strict-origin-when-cross-origin');res.setHeader('content-length',String(st.size));
+          if(req.method==='HEAD'){res.end();return}
+          createReadStream(file).on('error',()=>{if(!res.headersSent){res.statusCode=404;res.end('Not Found')}else res.destroy()}).pipe(res);
+          return;
+        }catch{}
+      }
       const response=await assetsFetch(new Request(u,{method:req.method,headers:req.headers}));
-      res.statusCode=response.status;
-      response.headers.forEach((v,k)=>res.setHeader(k,v));
+      res.statusCode=response.status;response.headers.forEach((v,k)=>res.setHeader(k,v));
       if(req.method==='HEAD'){res.end();return}
-      let buf=Buffer.from(await response.arrayBuffer());
-      const ae=String(req.headers['accept-encoding']||'');
-      const type=response.headers.get('content-type')||'';
-      res.setHeader('content-length',String(buf.length));
-      res.end(buf);
-      return;
+      const buf=Buffer.from(await response.arrayBuffer());res.setHeader('content-length',String(buf.length));res.end(buf);return;
     }
 
     const chunks=[];for await(const chunk of req)chunks.push(chunk);
