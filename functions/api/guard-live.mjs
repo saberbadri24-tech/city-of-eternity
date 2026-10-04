@@ -34,9 +34,7 @@ async function readCatchQueue(env){
 }
 async function read(env,key,req){
   const local=await readLocal(env,LOCAL[key],req);
-  if(local)return {data:local,source:'anilx-local'};
-  const remote=await readRemote(LOCAL[key]);
-  return {data:remote,source:remote?'anilx-github':'unavailable'};
+  return {data:local,source:local?'anilx-local':'unavailable'};
 }
 function outdatedMinutes(value,now){const t=Date.parse(String(value||''));return Number.isFinite(t)?Math.max(0,Math.round((now-t)/60000)):null}
 export async function handleGuardLive(req,env){
