@@ -28,12 +28,24 @@ async function verifySessionValue(raw,secret){
 }
 function ipOf(req){return String(req.headers.get('x-forwarded-for')||'unknown').split(',')[0].trim().slice(0,120)}
 async function readGate(env,key){
-  try{return env?.PAYMENTS?await env.PAYMENTS.get(key,'json')||{count:0,blockedUntil:0}:attempts.get(key)||{count:0,blockedUntil:0}}
-  catch{return attempts.get(key)||{count:0,blockedUntil:0}}
+  const local=attempts.get(key);
+  if(local)return local;
+  if(!env?.PAYMENTS)return {count:0,blockedUntil:0};
+  try{
+    const result=await Promise.race([
+      env.PAYMENTS.get(key,'json'),
+      new Promise(resolve=>setTimeout(()=>resolve(null),900))
+    ]);
+    return result||{count:0,blockedUntil:0};
+  }catch{return {count:0,blockedUntil:0}}
 }
 async function writeGate(env,key,value){
   attempts.set(key,value);
-  try{if(env?.PAYMENTS)await env.PAYMENTS.put(key,JSON.stringify(value))}catch{}
+  if(!env?.PAYMENTS)return;
+  Promise.race([
+    env.PAYMENTS.put(key,JSON.stringify(value)),
+    new Promise(resolve=>setTimeout(resolve,900))
+  ]).catch(()=>{});
 }
 
 export async function adminLogin(req,env){
