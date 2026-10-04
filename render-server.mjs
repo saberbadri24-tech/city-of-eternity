@@ -2,8 +2,6 @@ import http from 'node:http';
 import {promises as fs,readFileSync} from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {gzip} from 'node:zlib';
-import {promisify} from 'node:util';
 import {createHmac} from 'node:crypto';
 import {createPaymentsStore} from './functions/api/render-payments-store.mjs';
 import {handleExecutionReadiness} from './functions/api/execution-readiness.mjs';
@@ -11,27 +9,7 @@ import {adminLogin,adminConfigured,adminSelfTest} from './functions/api/admin-au
 import {handleGuardLive} from './functions/api/guard-live.mjs';
 import {handleSuperTeam} from './functions/api/anil-super-team.mjs';
 
-const gzipAsync=promisify(gzip);
 const root=path.dirname(fileURLToPath(import.meta.url));
-const assetCache=new Map();
-const gzipCache=new Map();
-const ASSET_CACHE_MAX_BYTES=2*1024*1024;
-const ASSET_CACHE_ITEM_MAX=256*1024;
-const GZIP_CACHE_MAX_BYTES=1024*1024;
-const GZIP_CACHE_ITEM_MAX=128*1024;
-let assetCacheBytes=0;
-let gzipCacheBytes=0;
-function cacheSetBounded(map,key,value,maxBytes,maxItem,currentBytes,setBytes){
-  if(!value||value.length>maxItem)return currentBytes;
-  const prior=map.get(key);
-  if(prior)setBytes(currentBytes-prior.length);
-  while(currentBytes+value.length>maxBytes&&map.size){
-    const first=map.keys().next().value;
-    const old=map.get(first);map.delete(first);currentBytes-=old?.length||0;
-  }
-  map.set(key,value);
-  return currentBytes+value.length;
-}
 let guardFastCache=null;
 try{
   const read=(name)=>JSON.parse(readFileSync(path.join(root,name),'utf8'));
@@ -42,8 +20,6 @@ let workerPromise=null;
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.svg':'image/svg+xml','.webmanifest':'application/manifest+json','.ico':'image/x-icon','.txt':'text/plain; charset=utf-8','.xml':'application/xml; charset=utf-8','.webp':'image/webp','.mp3':'audio/mpeg'};
 
 const getWorker=()=>workerPromise||(workerPromise=import('./worker.js').then(m=>m.default));
-const HOT_ASSETS=['index.html','style.css','script.js','completion-layer.js','anilx-enhance.js','experience-dna.js','adaptive-shell.js','site-guard-center.js','webmcp.js','tonconnect.js'];
-void Promise.all(HOT_ASSETS.map(async name=>{try{const file=path.join(root,name);const data=await fs.readFile(file);assetCacheBytes=cacheSetBounded(assetCache,file,data,ASSET_CACHE_MAX_BYTES,ASSET_CACHE_ITEM_MAX,assetCacheBytes,v=>{assetCacheBytes=v})}catch{}}));
 
 async function assetsFetch(request){
   const u=new URL(request.url);
@@ -52,8 +28,7 @@ async function assetsFetch(request){
   let file=path.join(root,rel);
   if(!path.extname(file))file=path.join(root,'index.html');
   try{
-    let data=assetCache.get(file);
-    if(!data){data=await fs.readFile(file);assetCacheBytes=cacheSetBounded(assetCache,file,data,ASSET_CACHE_MAX_BYTES,ASSET_CACHE_ITEM_MAX,assetCacheBytes,v=>{assetCacheBytes=v})}
+    const data=await fs.readFile(file);
     const ext=path.extname(file).toLowerCase();
     const isAdmin=path.basename(file)==='admin.html';
     const cache=isAdmin?'no-store':ext==='.html'?'public,max-age=300,stale-while-revalidate=1800':ext==='.xml'?'public,max-age=300,stale-while-revalidate=1800':'public,max-age=86400,stale-while-revalidate=604800';
@@ -118,12 +93,6 @@ const server=http.createServer(async(req,res)=>{
       let buf=Buffer.from(await response.arrayBuffer());
       const ae=String(req.headers['accept-encoding']||'');
       const type=response.headers.get('content-type')||'';
-      if(buf.length>1024&&/gzip/i.test(ae)&&/(text|javascript|json|svg|xml)/i.test(type)){
-        const cachedGzip=gzipCache.get(String(u.pathname));
-        if(cachedGzip)buf=cachedGzip;else{buf=await gzipAsync(buf,{level:4});gzipCacheBytes=cacheSetBounded(gzipCache,String(u.pathname),buf,GZIP_CACHE_MAX_BYTES,GZIP_CACHE_ITEM_MAX,gzipCacheBytes,v=>{gzipCacheBytes=v});}
-        res.setHeader('content-encoding','gzip');
-        res.setHeader('vary','Accept-Encoding');
-      }
       res.setHeader('content-length',String(buf.length));
       res.end(buf);
       return;
