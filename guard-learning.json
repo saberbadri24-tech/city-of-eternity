@@ -1152,9 +1152,18 @@
       "officialSourceMatches": 0,
       "claimSignals": 0,
       "eligibilitySignals": 0
+    },
+    {
+      "timestamp": "2026-10-04T01:49:42.404518+00:00",
+      "type": "discovery_verification",
+      "discovered": 1870,
+      "resolved": 1869,
+      "officialSourceMatches": 0,
+      "claimSignals": 0,
+      "eligibilitySignals": 0
     }
   ],
-  "lastUpdate": "2026-10-04T00:42:54.545278+00:00",
+  "lastUpdate": "2026-10-04T01:51:36.577193+00:00",
   "verificationEngine": "resolve -> canonical -> trusted-domain check -> claim/eligibility/reward signal extraction",
   "safetyGate": "No discovery item can auto-claim. Owner approval remains mandatory for opportunity-specific actions."
 }
