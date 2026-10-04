@@ -8,6 +8,8 @@ import {createHmac} from 'node:crypto';
 import {createPaymentsStore} from './functions/api/render-payments-store.mjs';
 import {handleExecutionReadiness} from './functions/api/execution-readiness.mjs';
 import {adminLogin,adminConfigured,adminSelfTest} from './functions/api/admin-auth.mjs';
+import {handleGuardLive} from './functions/api/guard-live.mjs';
+import {handleSuperTeam} from './functions/api/anil-super-team.mjs';
 
 const gzipAsync=promisify(gzip);
 const root=path.dirname(fileURLToPath(import.meta.url));
@@ -58,9 +60,12 @@ const server=http.createServer(async(req,res)=>{
       const body={ok:true,source:'ANIL-X-local-guard-state',updatedAt:status.updatedAt||status.lastScan||opportunities.updatedAt||null,freshness:{stale:false,requiredMaxMinutes:15},guard:{status:String(status.status||status.mode||'NORMAL'),discoveryCount:Number(status.discoveryCount||status.counts?.opportunities||oppItems.length||0),sourcesScanned:Number(status.sourcesScanned||0),sourcesReachable:Number(status.sourcesReachable||0),waitingOwner:Number(status.waitingOwner||0),highValueCandidates:Number(status.highValueCandidates||status.counts?.incomePriority||highItems.length||0)},opportunities:{count:oppItems.length,items:oppItems.slice(0,5).map(x=>({id:x?.id||null,title:String(x?.title||x?.name||'فرصت').slice(0,100),source:String(x?.source||x?.resolvedDomain||'').slice(0,100),status:String(x?.status||x?.verification||'').slice(0,50)}))},valueHunter:{count:highItems.length,items:highItems.slice(0,5).map(x=>({id:x?.id||null,title:String(x?.title||x?.name||'فرصت').slice(0,100),source:String(x?.source||x?.resolvedDomain||'').slice(0,100),status:String(x?.status||x?.verification||'').slice(0,50)}))},revenue:{confirmedIncome:Number(ledger.confirmedIncome||ledger.totalReceived||0),status:String(ledger.status||'UNCONFIRMED')},transfer:{status:'OWNER_APPROVAL_REQUIRED',temporaryConfigured:false,temporaryWalletUsed:false,catchQueueConfigured:Boolean(process.env.REDIS_URL),catchQueuePending:Number(status.waitingOwner||0)},ai:{live:false,configured:false,successfulCalls:0,providers:{}},safety:{autoClaim:false,autoSigning:false,autoTransfer:false,secretStorage:false,bypassControls:false,ownerApprovalRequired:true}};
       res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');res.setHeader('cache-control','no-store');res.end(JSON.stringify(body));return;
     }
-    if(u.pathname==='/api/anil/super-team'&&req.method==='GET'){
-      const body={ok:true,engine:'ANIL-SUPER-TEAM',version:'2.0.0-frontier-aware',generatedAt:new Date().toISOString(),task:'read-only live QA snapshot',chain:['ANIL','Astra','Claude','Gemini','Guard','Revenue Fleet','QA Sentinel'],safety:{finalCommand:'ANIL',irreversibleActions:'OWNER_APPROVAL',moneyMovement:'OWNER_APPROVAL',privateKeys:false,seedPhrases:false,autoSigning:false,captchaBypass:false,kycBypass:false},truth:{revenueCountsOnlyWhenSettled:true,providerConfigurationIsNotRuntimeProof:true,modelCatalogIsNotRuntimeProof:true}};
-      res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');res.setHeader('cache-control','no-store');res.end(JSON.stringify(body));return;
+    if((u.pathname==='/api/anil/super-team')&&(req.method==='GET'||req.method==='POST')){
+      const chunks=[];for await(const chunk of req)chunks.push(chunk);
+      const body=chunks.length?Buffer.concat(chunks):undefined;
+      const request=new Request(origin+(req.url||'/'),{method:req.method,headers:req.headers,body:['GET','HEAD'].includes(req.method)?undefined:body});
+      const rr=await handleSuperTeam(request,env,{guardHandler:handleGuardLive});
+      res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
     }
     if(u.pathname==='/api/execution-readiness'){
       const rr=await handleExecutionReadiness(req,env);res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
