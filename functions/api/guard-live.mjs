@@ -52,7 +52,7 @@ export async function handleGuardLive(req,env){
   const ai=data.ai.data||{};
   const radar=data.radar.data||{};
   const sourceHealth=data.sourceHealth.data||{};
-  const catchItems=await readCatchQueue(env);
+  // Public live radar must never wait on the owner catch queue/storage. The admin panel reads that queue directly.
   const ageMinutes=outdatedMinutes(status.updatedAt||status.lastScan||opportunities.updatedAt||null,now);
   const oppItems=Array.isArray(opportunities.items)?opportunities.items:Array.isArray(opportunities.opportunities)?opportunities.opportunities:[];
   const highItems=Array.isArray(value.items)?value.items:Array.isArray(value.opportunities)?value.opportunities:[];
@@ -76,7 +76,7 @@ export async function handleGuardLive(req,env){
     opportunities:{count:Number(status.discoveryCount||status.counts?.opportunities||oppItems.length||0),items:oppItems.slice(0,5).map(compact)},
     valueHunter:{count:Number(status.highValueCandidates||status.counts?.incomePriority||highItems.length||0),items:highItems.slice(0,5).map(compact)},
     revenue:{confirmedIncome:Number(ledger.confirmedIncome||ledger.totalReceived||0),status:String(ledger.status||'UNCONFIRMED').slice(0,30)},
-    transfer:{status:catchItems.some(x=>x.status==='PENDING_OWNER')?'OWNER_APPROVAL_REQUIRED':String(transfer.status||'OWNER_APPROVAL_REQUIRED').slice(0,40),temporaryConfigured,temporaryWalletUsed:false,catchQueueConfigured:Boolean(env?.PAYMENTS),catchQueuePending:catchItems.filter(x=>x.status==='PENDING_OWNER').length,permanentConfigured,pendingApprovals:catchItems.filter(x=>x.status==='PENDING_OWNER').length},
+    transfer:{status:String(transfer.status||'OWNER_APPROVAL_REQUIRED').slice(0,40),temporaryConfigured,temporaryWalletUsed:false,catchQueueConfigured:Boolean(env?.PAYMENTS),catchQueuePending:0,permanentConfigured,pendingApprovals:Number(status.waitingOwner||0)},
     ai:{
       live:Boolean(ai.live||ai.healthy||ai.overall==='healthy'),
       configured:Boolean(ai.configured||ai.providers||Object.values(ai.providerAvailability||{}).some(Boolean)),
