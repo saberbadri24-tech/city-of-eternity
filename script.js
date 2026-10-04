@@ -10,6 +10,7 @@ const routes=[
 {id:'schedule',keys:['رزرو','جلسه','قرار','زمان‌بندی','schedule','appointment','booking'],title:'Scheduling workflow',moves:['بررسی زمان','هماهنگی','تأیید','یادآوری']},
 {id:'document',keys:['قرارداد','پروپوزال','گزارش','سند','pdf','excel','proposal','report','document'],title:'Document and data workflow',moves:['دریافت فایل','استخراج','تحلیل','خروجی']},
 
+ ];
 const fallback={id:'custom',title:'Custom ANIL X path',moves:['فهم خواسته','اقدام بعدی','بررسی نتیجه']};
 const normalize=s=>String(s||'').trim().toLowerCase().replace(/[يى]/g,'ی').replace(/ك/g,'ک').replace(/[\u200c\u200d]/g,' ').replace(/\s+/g,' ');
 const findRoute=t=>{const x=normalize(t);let best=fallback,score=0;for(const r of routes){const n=r.keys.reduce((a,k)=>a+(x.includes(normalize(k))?1:0),0);if(n>score){best=r;score=n}}return best};
