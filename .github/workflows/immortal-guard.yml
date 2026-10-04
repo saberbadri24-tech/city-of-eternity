@@ -8,7 +8,7 @@ on:
       - "guard-*.json"
       - "rewards.json"
   schedule:
-    - cron: "7/5 * * * *"
+    - cron: "*/5 * * * *"
 
 permissions:
   contents: write
