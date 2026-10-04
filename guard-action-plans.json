@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-04T11:14:19+00:00",
+  "generatedAt": "2026-10-04T11:24:47+00:00",
   "engine": "Immortal Guard Action Planner",
-  "planCount": 1916,
+  "planCount": 1915,
   "plans": [
     {
       "id": "binance-airdrop-portal",
@@ -621,17 +621,6 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
-      "id": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBiYXJtSTNMMlIwc3ItVk04TUwyc010SlpnYXFFMkYyX3Z3WEpVMWcyS2RQNTQwOXhNRjVaQzczdWZ3dHRRQXkyMzV2RVIyLXBXaHMyU05EYnVjOUFfc2hoeFFnQ3FTTFhrLW1sNHd3VmYwUGdTNHpZTDcwOA?oc=5",
-      "title": "How to Claim Jupiter Airdrop: Get Ready for Round 3 - BitDegree",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBiYXJtSTNMMlIwc3ItVk04TUwyc010SlpnYXFFMkYyX3Z3WEpVMWcyS2RQNTQwOXhNRjVaQzczdWZ3dHRRQXkyMzV2RVIyLXBXaHMyU05EYnVjOUFfc2hoeFFnQ3FTTFhrLW1sNHd3VmYwUGdTNHpZTDcwOA?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
       "id": "https://news.google.com/rss/articles/CBMitwFBVV95cUxORUJSTEpTazdFSlhGUWhEb1VYWGVxaFRjQmZSakN3cXlBZ0hnRGlQT2FURTdzWUdUaE1yTTdoUEJJNTVNcEV1TjdUNzFOY0FmSnBqZFJMcEhvcmpVTkxySU1sYVlsY3d3aHJJTkRzV29PRGV0b1c1ZXJjUWJldnBGMERkbVFweVMyN3JmdG1UYTlFRVl4TmxRYW1MUE1DQXgxMlQ0eldwMTgzNUxFWVZyeGQ1dEVQMkU?oc=5",
       "title": "What Is a Crypto Faucet? How Free Bitcoin and Crypto Rewards Work in 2026 - Bitcoin Foundation",
       "status": "OWNER_REVIEW",
@@ -1139,7 +1128,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5fbUZPZ0tkc1E1Z1VCbXdxZnlxVllKeEdJR2JQUmNnaWl5TEtsaHJEaHJrTEE3OVc0VzhBN0NDNUZjZ1JFanRGdEVvMDQ0ZDEyb1JwZ0FnX1VNVUgtck10YnJYSEJQeF9BQ3k5T192ZTZtOGlq?oc=5",
-      "title": "THE TERRA LUNA CRASH Jiageng Liu Igor Makarov Antoinette Schoar Working Paper 31160 - National Bureau of Economic Research | NBER",
+      "title": "THE TERRA LUNA CRASH Jiageng Liu Igor Makarov Antoinette Schoar Working Paper 31160 - nber.org",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -1530,6 +1519,17 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9ZaEY3eDJIRl9YbGQ4Nm1YVEl4alM1NEk2bFVxTnpGdVlQR25fVU9yNUVVemdhdThvc25KZXpma1VjcGFUWG9Calc0SXBHVzZCaE5WbjNnd2FvM1NORkNJ?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
+      "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBIck5qSUNxOVEtOUlUNzVaSDRfODd6Rk9hamxlVTN5VGYxVDB3SmxrYXRSMUdyZzRNM01GU0pSakFPa1BFYXpmRzJqQnh3MnctSW5yMDdR?oc=5",
+      "title": "Investigating the Luna-Terra Collapse through the Temporal Multilayer Graph Structure of the Ethereum Stablecoin Ecosystem - ACM Digital Library",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBIck5qSUNxOVEtOUlUNzVaSDRfODd6Rk9hamxlVTN5VGYxVDB3SmxrYXRSMUdyZzRNM01GU0pSakFPa1BFYXpmRzJqQnh3MnctSW5yMDdR?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -1930,17 +1930,6 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
-      "id": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNQ2IxaUsyVkI5aV9Jd0VuRWlHMmFTWW9XTnJQUTVmTG9hc3dRTUFJb21UeDUwdTdSWUZHbVB4QU1kcmZMTFhXYV80Z1J2X2laOE9DTDNWb0xRbXJjUG1fMGZOQXlvVnZEZXFqd3doR2hHNUUwazVWVVpOTmhwRU5NRXZ3QUxMSGRXdmtBMmIwdEprQ3dSaXc?oc=5",
-      "title": "GLM-5.3 and the spread of advanced cyber capabilities - Reddit",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNQ2IxaUsyVkI5aV9Jd0VuRWlHMmFTWW9XTnJQUTVmTG9hc3dRTUFJb21UeDUwdTdSWUZHbVB4QU1kcmZMTFhXYV80Z1J2X2laOE9DTDNWb0xRbXJjUG1fMGZOQXlvVnZEZXFqd3doR2hHNUUwazVWVVpOTmhwRU5NRXZ3QUxMSGRXdmtBMmIwdEprQ3dSaXc?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
       "id": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPWmt4aUNjTmFmcmpDVE1xX29ZbDZpZnBTQ3U3TlF3M2pma25wM3J3eHUzUE9MMlYtaHRac2g5dEtRZGRWeVloQjJhZ1c3ZDI2VHJQV0poRk15UU9UbjlydngwNEppU3B5WkdReTRWNTk5ZWxVb1BDVjRSUDAzNjB1Mmc3WWdqY3V2Nk11Ni05cHprXzNwaUNQSk9lMjhNc2FGbFpjblhKUzFJNlhPV2dBZmlYcHJYM0lq?oc=5",
       "title": "Fever vs. Aces Game 3 prediction, best bets: A’ja Wilson to fend off Caitlin Clark - New York Post",
       "status": "OWNER_REVIEW",
@@ -1948,6 +1937,17 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPWmt4aUNjTmFmcmpDVE1xX29ZbDZpZnBTQ3U3TlF3M2pma25wM3J3eHUzUE9MMlYtaHRac2g5dEtRZGRWeVloQjJhZ1c3ZDI2VHJQV0poRk15UU9UbjlydngwNEppU3B5WkdReTRWNTk5ZWxVb1BDVjRSUDAzNjB1Mmc3WWdqY3V2Nk11Ni05cHprXzNwaUNQSk9lMjhNc2FGbFpjblhKUzFJNlhPV2dBZmlYcHJYM0lq?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
+      "id": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNQ2IxaUsyVkI5aV9Jd0VuRWlHMmFTWW9XTnJQUTVmTG9hc3dRTUFJb21UeDUwdTdSWUZHbVB4QU1kcmZMTFhXYV80Z1J2X2laOE9DTDNWb0xRbXJjUG1fMGZOQXlvVnZEZXFqd3doR2hHNUUwazVWVVpOTmhwRU5NRXZ3QUxMSGRXdmtBMmIwdEprQ3dSaXc?oc=5",
+      "title": "GLM-5.3 and the spread of advanced cyber capabilities - Reddit",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNQ2IxaUsyVkI5aV9Jd0VuRWlHMmFTWW9XTnJQUTVmTG9hc3dRTUFJb21UeDUwdTdSWUZHbVB4QU1kcmZMTFhXYV80Z1J2X2laOE9DTDNWb0xRbXJjUG1fMGZOQXlvVnZEZXFqd3doR2hHNUUwazVWVVpOTmhwRU5NRXZ3QUxMSGRXdmtBMmIwdEprQ3dSaXc?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -1964,7 +1964,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOcmQ5WmJCdGpmdDFYX3NXb1RJNTFMODM3aGdPQm9Rc1ZiRXZyRWNJeHVVYjZaNkdobzY3VVlaOU1LSlh6REM5RmtrV2NIdWJhWEt5a3d3SUp6a185ajhDTFZ1dDg5UVZVMzdzLVZYMUVwQk0wQjRpNlhhMHpaUS0xTkt5OEcwRUNXbFdnNmlKUkNKWGZqSVE?oc=5",
-      "title": "Six iconic firearms compete in Idaho state gun vote - LocalNews8.com",
+      "title": "Six iconic firearms compete in Idaho state gun vote - localnews8.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -2250,7 +2250,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9MWXJxQTdfd3RiQWx6djc2ZHNoYmFHSG5Pcktrc0VLY2FSaG56UXU2ZEthWTVuN25jOGdFanhuNU8yNE5VUUR5MWJ3eW5rUm1RcDRqOG1tVVNxSEtHNjgxNzhtWGxtYTZx0gFoQVVfeXFMTzFuYW1JMXFhaGExbHRwS3Q4QkswNDZqRmgwMnM2MUlXdU1yLVdHS25qdUtHZzFaUmtyWklzVWlGSHg0SFczYjBHUURVWmM4NE1kZ3FuMUVWNnhEVU8tYzdHSXVPV1ltTm8?oc=5",
-      "title": "Betr Promo Code FOXSPORTS: Four No Sweat Entries, Up to $200 back in Bonuses + New User Free Pick - foxsports.com",
+      "title": "Betr Promo Code FOXSPORTS: Four No Sweat Entries, Up to $200 back in Bonuses + New User Free Pick - FOX Sports",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -2333,6 +2333,17 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMiPkFVX3lxTE1MUFRiZldURF90Ul96Vlg2LXRaOE16YVVRVDJTYnpNNXNsNDl3c0VYeDJnMmlIR0FaTVhQV3R3?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
+      "id": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE9xNnExVlF0U2J1Nm5KWjZWQ2xfMTdaNEpOdXdnY1BOUVQ1QzNUNVZYMW9tcGM0RnBsV0gtbUE5S1pnWXNNMzFrSg?oc=5",
+      "title": "Join the PizzaExpress Club and Get Rewarded - Pizza Express",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE9xNnExVlF0U2J1Nm5KWjZWQ2xfMTdaNEpOdXdnY1BOUVQ1QzNUNVZYMW9tcGM0RnBsV0gtbUE5S1pnWXNNMzFrSg?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -2619,17 +2630,6 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPM0plZnRSWVVYNk1TaVJKLUhpVXBBdWNTZTdrdXo2d3RvaDUyME9EemdrX0xTWllhMTVuUExQTUpDY2VObzJpMHpqWl9TeG4yMXNrN25KR3JsYTNic2t6ZGVIbExUOEp0UEprVVVLZ2dOREx3cFdjNE9DOF85blp2U0REaGhaSUNSTHhfSGtXY1lNdnRWd19Ra3lwOWNsYmUtQ3M4?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
-      "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9SUUhMOTlOZWs2ZzB0YXJwODFJVGZxNHp3MEw5ZFY3Zzk3VlpuX3VxeUpTTVFBalZzY0lqYnQtLXU5UDY0YnItMUZlX3gyaWJ1VUpjU0RB?oc=5",
-      "title": "Terms of Service - draft2digital.com",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9SUUhMOTlOZWs2ZzB0YXJwODFJVGZxNHp3MEw5ZFY3Zzk3VlpuX3VxeUpTTVFBalZzY0lqYnQtLXU5UDY0YnItMUZlX3gyaWJ1VUpjU0RB?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -6880,17 +6880,6 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
-      "id": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5HcGtDcmtMNTVDRWxpZE9NTTRDbVpQSHZyNUdqY1ZUQzh2RU8zZnRHZ0pzTGE0U1JRZzIxQmktdzhCTTNacWE1QTYxWGNiQlRuUG9EWA?oc=5",
-      "title": "How is the price of FOX determined? - uphold.com",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5HcGtDcmtMNTVDRWxpZE9NTTRDbVpQSHZyNUdqY1ZUQzh2RU8zZnRHZ0pzTGE0U1JRZzIxQmktdzhCTTNacWE1QTYxWGNiQlRuUG9EWA?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
       "id": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPQ0t0ZGZPVXBMWWlNaTlwbDM3bWgzRUlJVWFPQ3VWV0dNc2JKTWpxMkZLVXdhcEpWQVpSenV4RkRGM1AyWnEzU2l0TGFfUTY1T2Yza2FacFE4VlZCbE82SDRRejZhUXp6dDU2REM2WWtxWnktRkVzT29tcHZjRUkxZ3dPSjA2QmFBNDN5WVhsTnNYa3NBc2draFV3QjVacllyRjlPUFZMWUZJcVV5QmZhTnNwNUxZY1R2Y3kyZTI1b3lzNlhlVWtwTklWUmxXQ0Rr?oc=5",
       "title": "Turn your voice on X into up to 1,000 USDT. 💰 Join Amplify & Win: • Link your X account • Post why users should join Bybit • Climb the repost leaderboard The more reposts your post gets, the higher you rank 🚀 Live until Mar 24! Start here →",
       "status": "OWNER_REVIEW",
@@ -6898,6 +6887,17 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPQ0t0ZGZPVXBMWWlNaTlwbDM3bWgzRUlJVWFPQ3VWV0dNc2JKTWpxMkZLVXdhcEpWQVpSenV4RkRGM1AyWnEzU2l0TGFfUTY1T2Yza2FacFE4VlZCbE82SDRRejZhUXp6dDU2REM2WWtxWnktRkVzT29tcHZjRUkxZ3dPSjA2QmFBNDN5WVhsTnNYa3NBc2draFV3QjVacllyRjlPUFZMWUZJcVV5QmZhTnNwNUxZY1R2Y3kyZTI1b3lzNlhlVWtwTklWUmxXQ0Rr?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
+      "id": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9fd3dHMXhNMFZOU1ZtVHEySDY4elgxSTVDaEJMRW5VYS1lSFNOTlVpN284YVZKT3N0YTRhVVRYdDc5QV82aXU2WDNnZjB2bEZlV3NlNmxaNEFUaGQ1?oc=5",
+      "title": "See {{ASSET_NAME}} ({{ASSET_CODE}}) price on Uphold - uphold.com",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9fd3dHMXhNMFZOU1ZtVHEySDY4elgxSTVDaEJMRW5VYS1lSFNOTlVpN284YVZKT3N0YTRhVVRYdDc5QV82aXU2WDNnZjB2bEZlV3NlNmxaNEFUaGQ1?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -7067,6 +7067,17 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
+      "id": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5kRV82MFNOdXF4eXZRMHFVODVIY3RIRjI4aFBTMmJoU0trTk1NLVpLUGNldFNVaFFOZWxxb3FkcWdMZVZ3VW9VaU92LTdNamppRk5fVEl4S3lXVzF5ZmJ1ODhpU0xlWGQyMUFEUVBUd3VySXZKRXV0b2JuYTRTaDA?oc=5",
+      "title": "What Is Binance Stocks Trading? - Binance",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5kRV82MFNOdXF4eXZRMHFVODVIY3RIRjI4aFBTMmJoU0trTk1NLVpLUGNldFNVaFFOZWxxb3FkcWdMZVZ3VW9VaU92LTdNamppRk5fVEl4S3lXVzF5ZmJ1ODhpU0xlWGQyMUFEUVBUd3VySXZKRXV0b2JuYTRTaDA?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
       "id": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1RenpVSnhmWm8xVWJpTURZZkxDQ3k4SlF6c1pqTjNPQ01GZnAtMG1HM19aRVFHQmpHTFZCbHkzYWEzUVByb3RJVkpjWUczV3oyVzJLM3YtYnF1UDJYLTdsWDA4MUlLQTdaMnR1Q2xhWFA?oc=5",
       "title": "Rain Management, W.L.L. Risk Disclosures - rain.com",
       "status": "OWNER_REVIEW",
@@ -7217,17 +7228,6 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5ySmswVFJQbWlJMGEyR25FXzlZUEVSWU1YQ05Dcmg1RlA3Z1lTbE92WUl3V0pEMWZjVjg3eUpGeWhKYS1QVS0xSGQ2VEFIMDRpNmNWc3lsU1djR3hEdmctMG93?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
-      "id": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5aem8zdlFydjJsOGVyVjFVby1HRF9sd2pSMFhqaGp3R2J3TDMtc0xGMmQ3N3R6aDBZZ1gxV0hhVklBT253RUF3cUg3UFp0T1hOZS1ZT1JlMUxVVlB3eWNsaVBNRXAtdlY1bGxNZQ?oc=5",
-      "title": "OKX UAE \"The Beautiful Game\" Campaign - okx.com",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5aem8zdlFydjJsOGVyVjFVby1HRF9sd2pSMFhqaGp3R2J3TDMtc0xGMmQ3N3R6aDBZZ1gxV0hhVklBT253RUF3cUg3UFp0T1hOZS1ZT1JlMUxVVlB3eWNsaVBNRXAtdlY1bGxNZQ?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -7397,17 +7397,6 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
-      "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5UZndFTUcxX0pZRC1Xd1BfbF9JbktEWVE4NlRqTVlvUDlkT2VPZkl4S0RDdWZrX3RIcnlJa00tX1Q5UzVZekpqa2RxWWlwMElra0JmWEl3?oc=5",
-      "title": "Sun Token wallet - tangem.com",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5UZndFTUcxX0pZRC1Xd1BfbF9JbktEWVE4NlRqTVlvUDlkT2VPZkl4S0RDdWZrX3RIcnlJa00tX1Q5UzVZekpqa2RxWWlwMElra0JmWEl3?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
       "id": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE0zTnh1Uy1LODZPaVRJTDJxamJwY1hMTDhOcXlQaWJKNU9SRlVCN0VvQzRPdV8zNnZpWlh2cjhKdnR6RzR0YXdQSmZwWWdMTUpHbWhuMzhibw?oc=5",
       "title": "Self Token wallet - tangem.com",
       "status": "OWNER_REVIEW",
@@ -7448,17 +7437,6 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9qQWF1RXhObmhXQzJSVjg3b00yZ3F4Q1RPTEN0YnpfN29CTE1ycnRNSTNsNVltWC1aYkFQSUVNbDFRd2pyMkNwU3VzWXBXR2xRemVBYUxwejZXRzhKR2c?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
-      "id": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOa1JEY0JKbUkweTZDSmx4UWtNaWE2ODRVaDZnMTJGRnRWQkViTVJjVFpZVF9WdnJyLVZkM1dLcGptWFBobFdSX21ub2pkdDhBT2xZejQzN3NiYjBtQkRLWDNtak5ldFNEaWNWWG40TjJUdnpJNFRXRUlsV0VrUVRoNXZHVlNfNVAzSlE?oc=5",
-      "title": "Export Copytrading Records 1734155804616 - Scribd",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOa1JEY0JKbUkweTZDSmx4UWtNaWE2ODRVaDZnMTJGRnRWQkViTVJjVFpZVF9WdnJyLVZkM1dLcGptWFBobFdSX21ub2pkdDhBT2xZejQzN3NiYjBtQkRLWDNtak5ldFNEaWNWWG40TjJUdnpJNFRXRUlsV0VrUVRoNXZHVlNfNVAzSlE?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -7529,6 +7507,17 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
+      "id": "https://news.google.com/rss/articles/CBMiQ0FVX3lxTE95SXI4VmRveDVxM0tydU9tU2l5N05VVWV4NFdYTjA4TG5DSjJQeDdlUHRTN0EtVWQ1ajFSYWxld1p6Tzg?oc=5",
+      "title": "Aura Coin on Solana - solana-gifft.com",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiQ0FVX3lxTE95SXI4VmRveDVxM0tydU9tU2l5N05VVWV4NFdYTjA4TG5DSjJQeDdlUHRTN0EtVWQ1ajFSYWxld1p6Tzg?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
       "id": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNbDlSZ1Z3MDdzYlF5aFRmWkt1YTJiX3JjT2hVTkJpczJCWTNUU0N5UmdjaEFJVDRFRnZxOXVab1Y4S1RXSVc4b2o0NUlfR1IxQlVQRFppakoxeGNTeERoSXpYX1JNdnRITWhxN1ZBNHpJT0wyU0xvaUtENEhVRlJZSTFzeDNqam9TNVJGaXdSVEVXUWM?oc=5",
       "title": "Bsc Transaction Hash: 0x33c8e7d220... - bscscan.com",
       "status": "OWNER_REVIEW",
@@ -7562,17 +7551,6 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
-      "id": "https://news.google.com/rss/articles/CBMiPkFVX3lxTE5BU2dobFR3OEJwbGxvLVo0VVJrZ3BlcjE0VXV5ZUxvN0NycmdEZFVQM2NsLVJQQ0tsNGNrNS1B?oc=5",
-      "title": "Aura Coin on Solana - jupdecem.com",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMiPkFVX3lxTE5BU2dobFR3OEJwbGxvLVo0VVJrZ3BlcjE0VXV5ZUxvN0NycmdEZFVQM2NsLVJQQ0tsNGNrNS1B?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
       "id": "https://news.google.com/rss/articles/CBMiPEFVX3lxTFBrRlV3QWVUb0MxZUpyMGtFT3VKM2czeUNmcXhQMmNMZTR5LXdxOXMwNm1aOXNXaHJOMlJRbA?oc=5",
       "title": "SOL Bull Token: - joinsolbull.com",
       "status": "OWNER_REVIEW",
@@ -7591,6 +7569,17 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxORVppY1NEWkhYYVJud1RSd1hObDNQU1JGMklodVNnNjBibUVZM2NobzRSZmRpRHRKUlFIVVRoNWF6eWg4Vy1SaUhyc285ZXg5dGh0b3FqeWEzZnF2ajhaaE9VbVBMcVQ4b1FlR0pkOUJrSG1qOTdESGk5Qm1lcnJNbDhhdEZKdFNDOFlpRHF3RHZiQ0U?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
+      "id": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBqTm16VGxQTzhmX2JlUEZlNkRxcnFmUV9feFdPWUttY0tDd3ZtaVVVZEdKT2RuVUd5UE01RWs0VnlLTUluSXB0Ql8xdEx1T2QtdERYdXMzdU5haVRrYVFtel9pMTE3Zkt0QTUwTHVXaVk0clBB?oc=5",
+      "title": "What is this they took my 100 tokens overnight 😡 - facebook.com",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBqTm16VGxQTzhmX2JlUEZlNkRxcnFmUV9feFdPWUttY0tDd3ZtaVVVZEdKT2RuVUd5UE01RWs0VnlLTUluSXB0Ql8xdEx1T2QtdERYdXMzdU5haVRrYVFtel9pMTE3Zkt0QTUwTHVXaVk0clBB?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -9817,6 +9806,17 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
+      "id": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFBRZUNVRDVIQ25RMDNQdnQ3U19sdWo0QkhQZVRSQzVNWFJBcnNwbnRIaWZSOENZZVlQbEw0c0dqMHd1ZndSazNkT3VDTG5rSUtVaUZWRQ?oc=5",
+      "title": "World Liberty Financial USD price today, USD1 to USD live price, marketcap and chart - CoinMarketCap",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFBRZUNVRDVIQ25RMDNQdnQ3U19sdWo0QkhQZVRSQzVNWFJBcnNwbnRIaWZSOENZZVlQbEw0c0dqMHd1ZndSazNkT3VDTG5rSUtVaUZWRQ?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
       "id": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNR0lsaTZjZk5VR19EZlBKVTFvNmpTal9nZFcxT2IwaGp1OEVLckpWSUhfUGNySDJ0VUo4RzhGOWE4MG5YUm1xQ19NVDhwZkVXNmtRX0pmZzZiQ0M0eEQwc0FHZ1FMaG1ibTBFWmQ5c05abUdTVi1HMEVrMmxhWW1MbDVENmNPTkFsN2tCeg?oc=5",
       "title": "Base Launches its First Builder Quest & Brings New Developers Onchain - thirdweb blog",
       "status": "OWNER_REVIEW",
@@ -9846,17 +9846,6 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBhazRrYzh3MTBMSWVlYjdXUVdWM2wxQ0taNjVIS1FwR3JPVXdFS2lvQ0duanAtTEczN3V0T1JIOVQwTzVubHVEN2d1QjVDNXc3TE9Jb01jbzk?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
-      "id": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBkX0wxSWNhM290SV9JMmVhNjZOaHhHUWRNYTQ3bVhsbzBXX2VQX0NPQ1Y2bjZObDBFQlBzR1hyQkJmb0Q3ZW03SkhBamxHMFVYUjJCNkc2TVY?oc=5",
-      "title": "AriaAI price today, ARIA to USD live price, marketcap and chart - CoinMarketCap",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBkX0wxSWNhM290SV9JMmVhNjZOaHhHUWRNYTQ3bVhsbzBXX2VQX0NPQ1Y2bjZObDBFQlBzR1hyQkJmb0Q3ZW03SkhBamxHMFVYUjJCNkc2TVY?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -10181,7 +10170,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBRRUtCVHk5RVAtQUE5Q1k0aTNkVFJURmhXdzlmeXZ3cUhva0k5RzlKQXVqUlFfSjZ4M1FvNFV5cmxLT21TRW5aTXdqSHByd2hSREpuLUZ0WjNKMGo5Nmh2ZFZ3bWJheU1kSlFLeG12NmR1WlRCM2c?oc=5",
-      "title": "Smart contract based digital evidence management framework over blockchain for vehicle accident investigation in IoV era - sciencedirect.com",
+      "title": "Smart contract based digital evidence management framework over blockchain for vehicle accident investigation in IoV era - ScienceDirect.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10389,6 +10378,17 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
+      "id": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5HZ1RCb2RRanhUNkwtMzhFWS1qdjc1czBOY0laZFhOYUQzTHVBUExFWkU1YS1aSHp1anRLNi03WTZmY01EUFM1QW4wczZwX0hGRk5iZkd5a3NEYjBSVWRjSElLSXZidlBsZXVN?oc=5",
+      "title": "Basic Attention Token price today, BAT to USD live price, marketcap and chart - CoinMarketCap",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5HZ1RCb2RRanhUNkwtMzhFWS1qdjc1czBOY0laZFhOYUQzTHVBUExFWkU1YS1aSHp1anRLNi03WTZmY01EUFM1QW4wczZwX0hGRk5iZkd5a3NEYjBSVWRjSElLSXZidlBsZXVN?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
       "id": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5qTnFMRGNXQ2hKSUczUktEa3FfTUFJOGxDcy0xN0FKbDdTYW5WQVFQMTFxMHV0LUpMRi1KMVZCTk5jTE1kLWcwUHg1LVhvY3JUbktuQW9saEk?oc=5",
       "title": "Telcoin price today, TEL to USD live price, marketcap and chart - CoinMarketCap",
       "status": "OWNER_REVIEW",
@@ -10444,17 +10444,6 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
-      "id": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5HZ1RCb2RRanhUNkwtMzhFWS1qdjc1czBOY0laZFhOYUQzTHVBUExFWkU1YS1aSHp1anRLNi03WTZmY01EUFM1QW4wczZwX0hGRk5iZkd5a3NEYjBSVWRjSElLSXZidlBsZXVN?oc=5",
-      "title": "Basic Attention Token price today, BAT to USD live price, marketcap and chart - CoinMarketCap",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5HZ1RCb2RRanhUNkwtMzhFWS1qdjc1czBOY0laZFhOYUQzTHVBUExFWkU1YS1aSHp1anRLNi03WTZmY01EUFM1QW4wczZwX0hGRk5iZkd5a3NEYjBSVWRjSElLSXZidlBsZXVN?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
       "id": "https://news.google.com/rss/articles/CBMiakFVX3lxTFA4VkpsR1FFQUhKcklaOXRLcHBFSG4zYlpVZWNZLUR4Zl9UODhvVVBfdXdWYmphZTM2MVZETnZJTndQWEhkM3otZE85emtKeGNUOVdhc2xZdFFyWkRrX0pBa2lZME8xa2VsWkE?oc=5",
       "title": "Coinbase Wrapped XRP price today, CBXRP to USD live price, marketcap and chart - CoinMarketCap",
       "status": "OWNER_REVIEW",
@@ -10489,7 +10478,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1GUEFlM1hELXlTd3ctbF9XY19udHFZSG5Da0ZlSnYteThZMzRPM1VuOUpMOGlFQVBNdWl6MkUybmJkSldObGY0eGx1Y2g3ZG5pLXZnN2ZoWERaT2Y5bjU0d2FvaHQ0UThWcXFFM25qWlZHSjlMb0E?oc=5",
-      "title": "Design and implementation of a New Blockchain-based digital health passport: A Moroccan case study - sciencedirect.com",
+      "title": "Design and implementation of a New Blockchain-based digital health passport: A Moroccan case study - ScienceDirect.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10522,7 +10511,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBDbGRKLWlUT1lEOHlDeXB0ZFRyZEJrZHZGNE9KZEl3QUM2STlSbUdCa3hpWkEyNEp1ZGFZOHhlU3ZETlVXb05NaFp5UGZYU2liSHE2THpBODVBOGJCazJxOTNYQUhvUUp1SDhJNVFnZnJSOVBNN2c?oc=5",
-      "title": "Tokenized stocks for trading and capital raising - sciencedirect.com",
+      "title": "Tokenized stocks for trading and capital raising - ScienceDirect.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10533,7 +10522,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9VREZvMDFzbmw0cXNzWGdLRjBKX0VlalZ1THZ1eG96N1g0RkVhMnE4eHhFYVhteXpYYnhXdFRWRDFBaUVYZnp2VUlCME51MDVtSFc1TERSdk8yY1YwbFU0S1FSOWp5NHB1ZmJwMkJnWnAxSy1ENkE?oc=5",
-      "title": "Security checklists for Ethereum smart contract development: Patterns and best practices - sciencedirect.com",
+      "title": "Security checklists for Ethereum smart contract development: Patterns and best practices - ScienceDirect.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10616,17 +10605,6 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5EX3dkcmN3Nnc1cGJUME1yZjNhYk1ycTcxQUZ6Uzh0R2sxMHR6WDVVYTUzT2lRYU1ZNXJxc3lrTmlrc2tXbk5tTjJ5RlNHNnNPTkxkNkxpenNZbjNiZ1YxYUdubms1Z2UwTkJJUg?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
-      "id": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1tNTduWE1Xdy1Fa05US1lUQXI1OWtUMm52dlpJRnJCSHBUcjc1QUF2ekhvblhwMXVFX2lVd21VVHVZbVBuTXpNQ2JqVkRDSHBrQVNGMS1qcVJncWs4LXZ2cWk3WWs?oc=5",
-      "title": "How to Add USDT to MetaMask (USDT0 Contract Included) - datawallet.com",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1tNTduWE1Xdy1Fa05US1lUQXI1OWtUMm52dlpJRnJCSHBUcjc1QUF2ekhvblhwMXVFX2lVd21VVHVZbVBuTXpNQ2JqVkRDSHBrQVNGMS1qcVJncWs4LXZ2cWk3WWs?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -10775,7 +10753,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5jWHZGWHIwZ1FZUkxHRk82al8tUDBfYnkwLThZbWJreUNYd2N3Z1lob2VEemxWWi12ZWVDaGtWdG1aYWxvb293RXhPeGM2ZTlvNUEwUHQxVUlHUkJKUXlrX3BzS1dGM1lKNmdCYkJqeXdxUFh1RmlsMGg5QQ?oc=5",
-      "title": "Blockchain-Based Data Storage for Internet of Things Networks - sciencedirect.com",
+      "title": "Blockchain-Based Data Storage for Internet of Things Networks - ScienceDirect.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10873,6 +10851,17 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
+      "id": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9VSzh4MEdTenN4MjUtZ08talM1cXVZSzZyV3FLN3BZM0xNZGxTb0RNdTM3ZF9raXlrNUNqTXU1VS04aGk5dFBNOGd0dEJUWVdWbkRCdU9XWHhBOTBh?oc=5",
+      "title": "Squid Game (squidgametoken.vip) price today, SQUID to USD live price, marketcap and chart - CoinMarketCap",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9VSzh4MEdTenN4MjUtZ08talM1cXVZSzZyV3FLN3BZM0xNZGxTb0RNdTM3ZF9raXlrNUNqTXU1VS04aGk5dFBNOGd0dEJUWVdWbkRCdU9XWHhBOTBh?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
       "id": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQT0tUc3JUbmUxSDc3UWIyelBVM2Y0aEFvcGJiNGFHMEIxUmpXZ011MkVLYjF4Slp6ajBpMGkwMFNOb0JTaWxuTTctLW81ZnptZnJTbHdDMlpvVXVET3ZhZC1FQ2ltVWRyd0Z1OE1jWTQzZVFLQmdDOVFENl9YSE1PazlZeUV0bVZRaHYzeE4yTkdDS0hhX0xxTWx2ajJIV3poMTNacTR1MVdjUFE?oc=5",
       "title": "How to claim the token straight thru the contract - Reddit",
       "status": "OWNER_REVIEW",
@@ -10913,6 +10902,17 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE04aW5QYmF2ZTROV1pLRktndnJjTzdFU3RrTk9qaUlac2JHeTJTT1BJc1RsRmZpVnA4aThER0I2UGF5OUhNaUpWRWpYRV92elNQRDJVMFN3ZDZUV05jWFRtUUhxWFdZVi0xY3UxLXVXLXBxVEh0emhfTXhBcHFGWU0?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
+      "id": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1tNTduWE1Xdy1Fa05US1lUQXI1OWtUMm52dlpJRnJCSHBUcjc1QUF2ekhvblhwMXVFX2lVd21VVHVZbVBuTXpNQ2JqVkRDSHBrQVNGMS1qcVJncWs4LXZ2cWk3WWs?oc=5",
+      "title": "How to Add USDT to MetaMask (USDT0 Contract Included) - datawallet.com",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1tNTduWE1Xdy1Fa05US1lUQXI1OWtUMm52dlpJRnJCSHBUcjc1QUF2ekhvblhwMXVFX2lVd21VVHVZbVBuTXpNQ2JqVkRDSHBrQVNGMS1qcVJncWs4LXZ2cWk3WWs?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },

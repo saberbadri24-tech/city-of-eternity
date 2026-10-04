@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-10-04T11:12:13.591397+00:00",
+  "updatedAt": "2026-10-04T11:22:41.222623+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,12 +20,12 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1877,
-  "uniqueNewsPublishers": 544,
+  "discoveryCandidateCount": 1876,
+  "uniqueNewsPublishers": 545,
   "topPublishers": [
     {
       "publisher": "Binance",
-      "count": 111
+      "count": 112
     },
     {
       "publisher": "Immunefi",
@@ -37,7 +37,7 @@
     },
     {
       "publisher": "CoinMarketCap",
-      "count": 72
+      "count": 71
     },
     {
       "publisher": "x.com",
@@ -53,7 +53,7 @@
     },
     {
       "publisher": "Coin Gabbar",
-      "count": 45
+      "count": 46
     },
     {
       "publisher": "RootData",
@@ -68,10 +68,6 @@
       "count": 30
     },
     {
-      "publisher": "BitDegree",
-      "count": 28
-    },
-    {
       "publisher": "Phemex",
       "count": 28
     },
@@ -80,12 +76,16 @@
       "count": 28
     },
     {
+      "publisher": "BitDegree",
+      "count": 27
+    },
+    {
       "publisher": "Bitget",
       "count": 26
     },
     {
       "publisher": "facebook.com",
-      "count": 23
+      "count": 24
     },
     {
       "publisher": "AirdropAlert",
