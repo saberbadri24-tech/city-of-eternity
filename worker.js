@@ -411,7 +411,7 @@ async function runtimeRoutes(req,env,u){
   }
 if(p==='/api/payment-config'){
     const mainTon=getMainTonAddress(env);
-    return rjson({ok:true,ton:{enabled:Boolean(mainTon),address:mainTon||null,mainConfigured:Boolean(mainTon)},guard:{catchQueueConfigured:Boolean(env.PAYMENTS),temporaryWalletUsed:false},fiat:{provider:'variza',enabled:!!getVarizaApiKey(env)}});
+    return rjson({ok:true,ton:{enabled:validTonAddress(mainTon),address:validTonAddress(mainTon)?mainTon:null,mainConfigured:validTonAddress(mainTon)},guard:{catchQueueConfigured:Boolean(env.PAYMENTS),temporaryWalletUsed:false},fiat:{provider:'variza',enabled:!!getVarizaApiKey(env)}});
   }
   if(p==='/api/revenue/catalog'){
     return rjson({ok:true,merchant:'ANIL X STUDIO',currency:'USD',services:[
