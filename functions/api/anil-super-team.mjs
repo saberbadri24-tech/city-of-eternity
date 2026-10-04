@@ -13,7 +13,7 @@ const providerKey={astra:['OPENAI_API_KEY','OPENAI_KEY'],claude:['ANTHROPIC_API_
 const modelKey={astra:['ASTRA_MODEL','ANIL_OPENAI_MODEL'],claude:['CLAUDE_MODEL','ANIL_ANTHROPIC_MODEL'],gemini:['GEMINI_MODEL','ANIL_GEMINI_MODEL']};
 const extract=raw=>{try{return JSON.parse(raw)}catch{const m=String(raw||'').match(/\{[\s\S]*\}/);try{return m?JSON.parse(m[0]):null}catch{return null}}};
 async function brain(env,who,prompt){
- const key=firstEnv(env,providerKey[who]); const model=firstEnv(env,modelKey[who]);
+ const key=firstEnv(env,providerKey[who]); const model=firstEnv(env,modelKey[who])||({astra:'gpt-6-astra',claude:'claude-opus-5',gemini:'gemini-3.8-flash'}[who]||null);
  if(!key)return {live:false,provider:who,model:model||null,reason:'runtime_secret_missing'};
  if(!model)return {live:false,provider:who,model:null,reason:'runtime_model_not_configured'};
  try{
