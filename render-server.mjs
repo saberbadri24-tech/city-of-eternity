@@ -3,11 +3,8 @@ import {promises as fs,readFileSync} from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHmac} from 'node:crypto';
-import {createPaymentsStore} from './functions/api/render-payments-store.mjs';
 import {handleExecutionReadiness} from './functions/api/execution-readiness.mjs';
 import {adminLogin,adminConfigured,adminSelfTest} from './functions/api/admin-auth.mjs';
-import {handleGuardLive} from './functions/api/guard-live.mjs';
-import {handleSuperTeam} from './functions/api/anil-super-team.mjs';
 
 const root=path.dirname(fileURLToPath(import.meta.url));
 let guardFastCache=null;
@@ -37,7 +34,9 @@ async function assetsFetch(request){
 }
 
 // Admin authentication is implemented once in functions/api/admin-auth.mjs.
-const env={...process.env,ASSETS:{fetch:assetsFetch},PAYMENTS:createPaymentsStore(process.env.REDIS_URL)};
+let paymentsStorePromise=null;
+const getPaymentsStore=()=>paymentsStorePromise||(paymentsStorePromise=process.env.REDIS_URL?import('./functions/api/render-payments-store.mjs').then(m=>m.createPaymentsStore(process.env.REDIS_URL)):Promise.resolve(null));
+const env={...process.env,ASSETS:{fetch:assetsFetch},PAYMENTS:null};
 const server=http.createServer(async(req,res)=>{
   try{
     const host=req.headers.host||'localhost';
@@ -68,6 +67,7 @@ const server=http.createServer(async(req,res)=>{
       const chunks=[];for await(const chunk of req)chunks.push(chunk);
       const body=chunks.length?Buffer.concat(chunks):undefined;
       const request=new Request(origin+(req.url||'/'),{method:'POST',headers:req.headers,body});
+      const {handleSuperTeam}=await import('./functions/api/anil-super-team.mjs');
       const rr=await handleSuperTeam(request,env,{});
       res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
     }
