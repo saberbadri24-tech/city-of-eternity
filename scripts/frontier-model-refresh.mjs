@@ -17,7 +17,16 @@ async function fetchCatalog(p){
  }catch(e){return {provider:p.id,configured:true,models:[],error:String(e?.message||e).slice(0,180)}}
 }
 const results=[]; for(const p of providers)results.push(await fetchCatalog(p));
-const normalized={schemaVersion:1,sourcePolicy:"official provider model APIs only",providers:results};
+const preferred={
+ openai:["gpt-6-astra","gpt-6.1-sol","gpt-6-luna"],
+ anthropic:["claude-opus-5","claude-fable-5","claude-sonnet-5"],
+ google_gemini:["gemini-3.8-flash","gemini-3.7-flash","gemini-3.1-pro-preview"]
+};
+for(const item of results){
+ const ids=new Set(item.models.map(x=>String(x.id||x.name||"").replace(/^models\//,"")));
+ item.preferred=preferred[item.provider]?.find(id=>ids.has(id))||preferred[item.provider]?.[0]||null;
+}
+const normalized={schemaVersion:2,sourcePolicy:"official provider model APIs only",providers:results};
 let previous=null;try{previous=JSON.parse(await fs.readFile(out,"utf8"))}catch{}
 const stable=JSON.stringify(normalized),oldStable=previous?JSON.stringify({schemaVersion:previous.schemaVersion,sourcePolicy:previous.sourcePolicy,providers:previous.providers}):"";
 if(stable!==oldStable){
