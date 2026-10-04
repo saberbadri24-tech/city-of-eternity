@@ -1,5 +1,5 @@
 import http from 'node:http';
-import {promises as fs} from 'node:fs';
+import {promises as fs,readFileSync} from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {gzip} from 'node:zlib';
@@ -15,6 +15,12 @@ const gzipAsync=promisify(gzip);
 const root=path.dirname(fileURLToPath(import.meta.url));
 const assetCache=new Map();
 const gzipCache=new Map();
+let guardFastCache=null;
+try{
+  const read=(name)=>JSON.parse(readFileSync(path.join(root,name),'utf8'));
+  const status=read('guard-status.json'),radar=read('guard-super-radar.json'),ledger=read('guard-evidence-ledger.json');
+  guardFastCache={status,radar,ledger,loadedAt:Date.now()};
+}catch{}
 let workerPromise=null;
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.svg':'image/svg+xml','.webmanifest':'application/manifest+json','.ico':'image/x-icon','.txt':'text/plain; charset=utf-8','.xml':'application/xml; charset=utf-8','.webp':'image/webp','.mp3':'audio/mpeg'};
 
@@ -50,12 +56,12 @@ const server=http.createServer(async(req,res)=>{
       return res.end(await (async()=>{const mainTon=process.env.TON_MAIN_WALLET||process.env.TON_MAIN_WALLET_ADDRESS||process.env.TON_PERMANENT_WALLET_ADDRESS;const out={ok:true,ready:adminConfigured(env),service:'ANIL X',runtime:'render-static-gateway',configured:{admin:adminConfigured(env),openai:Boolean(process.env.OPENAI_API_KEY),anthropic:Boolean(process.env.ANTHROPIC_API_KEY),gemini:Boolean(process.env.GEMINI_API_KEY),variza:Boolean(process.env.VARIZA_API_KEY||process.env.VARIA_API_KEY||process.env.VARIZA_TOKEN||process.env.VARIZA_KEY||process.env.VARIZA_API||process.env.VARIZA_ACCESS_TOKEN||process.env.VARIZA_BEARER_TOKEN),payments:Boolean(process.env.PAYMENTS||process.env.REDIS_URL),assets:true},revenue:{storageConfigured:Boolean(process.env.REDIS_URL),durableAccounting:String(process.env.PAYMENTS_DURABLE||'false').toLowerCase()==='true',variza:Boolean(process.env.VARIZA_API_KEY||process.env.VARIA_API_KEY||process.env.VARIZA_TOKEN||process.env.VARIZA_KEY),ton:Boolean(mainTon),guardCatchQueue:true,temporaryWalletUsed:false}};res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');return JSON.stringify(out)})());
     }
     if(u.pathname==='/api/guard/live'&&req.method==='GET'){
-      const readJson=async name=>{try{return JSON.parse(await fs.readFile(path.join(root,name),'utf8'));}catch{return null;}};
-      const status=await readJson('guard-status.json')||{};
-      const radar=await readJson('guard-super-radar.json')||{};
-      const ledger=await readJson('guard-evidence-ledger.json')||{};
+      const snap=guardFastCache||{status:{},radar:{},ledger:{}};
+      const status=snap.status||{},radar=snap.radar||{},ledger=snap.ledger||{};
       const body={ok:true,source:'ANIL-X-local-guard-state',updatedAt:status.updatedAt||status.lastScan||radar.generatedAt||null,freshness:{stale:false,requiredMaxMinutes:15},guard:{status:String(status.status||status.mode||'NORMAL'),discoveryCount:Number(status.discoveryCount||status.counts?.opportunities||0),sourcesScanned:Number(status.sourcesScanned||0),sourcesReachable:Number(status.sourcesReachable||0),waitingOwner:Number(status.waitingOwner||0),highValueCandidates:Number(status.highValueCandidates||status.counts?.incomePriority||0)},radar:{candidates:Number(radar?.summary?.totalCandidates||0),officialCandidates:Number(radar?.summary?.officialCandidates||0),actionableOfficial:Number(radar?.summary?.actionableOfficial||0),highPriority:Number(radar?.summary?.highPriority||0)},revenue:{confirmedIncome:Number(ledger.confirmedIncome||ledger.totalReceived||0),status:String(ledger.status||'UNCONFIRMED')},transfer:{status:'OWNER_APPROVAL_REQUIRED',temporaryWalletUsed:false},safety:{autoClaim:false,autoSigning:false,autoTransfer:false,secretStorage:false,ownerApprovalRequired:true}};
-      res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');res.setHeader('cache-control','no-store');res.end(JSON.stringify(body));return;
+      res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');res.setHeader('cache-control','no-store');res.end(JSON.stringify(body));
+      void (async()=>{try{const read=async name=>JSON.parse(await fs.readFile(path.join(root,name),'utf8'));guardFastCache={status:await read('guard-status.json'),radar:await read('guard-super-radar.json'),ledger:await read('guard-evidence-ledger.json'),loadedAt:Date.now()};}catch{}})();
+      return;
     }
     if(u.pathname==='/api/anil/super-team'&&req.method==='GET'){
       const body={ok:true,engine:'ANIL-SUPER-TEAM',version:'2.0.0-frontier-aware',generatedAt:new Date().toISOString(),task:'read-only live QA snapshot',chain:['ANIL','Astra','Claude','Gemini','Guard','Revenue Fleet','QA Sentinel'],executionMode:'local-safe',evidence:{providerKeys:{astra:Boolean(env.OPENAI_API_KEY||env.OPENAI_KEY),claude:Boolean(env.ANTHROPIC_API_KEY||env.ANTHROPIC_KEY),gemini:Boolean(env.GEMINI_API_KEY||env.GOOGLE_GEMINI_API_KEY||env.GOOGLE_API_KEY)}},safety:{finalCommand:'ANIL',irreversibleActions:'OWNER_APPROVAL',moneyMovement:'OWNER_APPROVAL',privateKeys:false,seedPhrases:false,autoSigning:false,captchaBypass:false,kycBypass:false},truth:{revenueCountsOnlyWhenSettled:true,providerConfigurationIsNotRuntimeProof:true,modelCatalogIsNotRuntimeProof:true}};
