@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-04T11:24:47+00:00",
+  "generatedAt": "2026-10-04T11:38:35+00:00",
   "engine": "Immortal Guard Modular Core",
   "overall": "healthy",
   "modules": {
@@ -59,7 +59,7 @@
     "autoTransfer": false,
     "ownerApprovalRequired": true
   },
-  "opportunityCount": 9216,
+  "opportunityCount": 9217,
   "opportunityIds": [
     "003f7c77dac44f452619",
     "0055e0decd73da70a1c1",
@@ -681,7 +681,6 @@
     "5161a4ebcce057d5b729",
     "517a73e15ba9aa72cd5c",
     "518b96ac38a3c0520485",
-    "51e5f66b63293be145ce",
     "51e826eba49e058c9763",
     "51f7182b2db20f20e99f",
     "51fd194cadf3b0afc6d6",
@@ -855,7 +854,6 @@
     "690bc3d586b0749c7a4d",
     "6931a8d117282733a8cd",
     "69374b3ca2cb3214d28e",
-    "6957d988a6208207110b",
     "695a17767767683507fb",
     "69db06dd80ed756bfffc",
     "6a22bbcbbe95daaf44ed",
@@ -892,6 +890,7 @@
     "6ecee1713a21b93d49dc",
     "6ed7d605e87c617dcb73",
     "6ee4b2b007c4dcd27287",
+    "6eee50962d4f9138406a",
     "6f1276b702c294bcc86e",
     "6f1f8e81d2255b4bde5f",
     "6f24dbd2f131c1a24d1b",
@@ -1076,7 +1075,6 @@
     "872b58ca651c563dc92d",
     "8735104951670d126666",
     "87363d9b02da7e8ae7ef",
-    "8736dfe075d40edaa10c",
     "875c75d429468c3e7926",
     "875f59c304eb597b9fe4",
     "876f96e01583620c4b55",
@@ -1104,6 +1102,7 @@
     "8ad74d6bd8ec9e325456",
     "8b2b83437160bbf0bd62",
     "8b6110e05b8fef2dbfe7",
+    "8b8005e84da0563c5e52",
     "8ba3cb22442a85537e82",
     "8bb1792d28c54498ce61",
     "8bd5ca354352d3c494f2",
@@ -1329,7 +1328,6 @@
     "abcf04e79f53c4f49b70",
     "ac4cf5dfe35603ae9184",
     "ac5cdee9de15a68176f9",
-    "ac63ecdc6980561dab3b",
     "acac478bef34cfe8e359",
     "accf542afb401180c27e",
     "ace8c673160b21812f0c",
@@ -1602,6 +1600,7 @@
     "celestia-ecosystem",
     "cf03797c8608670fb2a5",
     "cf0d5438258e586517d7",
+    "cf18762a59a2d56f304d",
     "cf5220f78d278f273def",
     "cf7849813abce082e0c3",
     "cfa4136908b47b702dd1",
@@ -4580,6 +4579,7 @@
     "free-5c4d73c5dc8c3778ba65",
     "free-5c5153c114ec2e499011",
     "free-5c5960e220f5db87cb93",
+    "free-5c66b71f9fa574be24b2",
     "free-5c68b3c989a7da0fda01",
     "free-5c6aeefb2e0eb02011a5",
     "free-5c7283c9d36ce0beea99",
@@ -8091,6 +8091,7 @@
     "free-d717aca7c26d15ac7c74",
     "free-d7328d7a07bd6217f02d",
     "free-d7344644492608c2b8f1",
+    "free-d73823de2bc19606872a",
     "free-d74a09d9c8efe248532c",
     "free-d758a0e1048ff88165f4",
     "free-d75d47482bb616645e97",
@@ -9288,24 +9289,26 @@
     "opportunity_graph": {
       "state": "healthy",
       "returncode": 0,
-      "stdout": "{\"nodes\": 3764, \"edges\": 1876, \"convergence\": 4, \"blindSpots\": 1869}\n",
+      "stdout": "{\"nodes\": 3762, \"edges\": 1875, \"convergence\": 4, \"blindSpots\": 1868}\n",
       "stderr": ""
     },
     "novelty": {
       "state": "healthy",
       "returncode": 0,
-      "stdout": "{\"new\": 15, \"changed\": 0}\n",
+      "stdout": "{\"new\": 13, \"changed\": 0}\n",
       "stderr": ""
     },
     "action_planner": {
       "state": "healthy",
       "returncode": 0,
-      "stdout": "{\"plans\": 1915}\n",
+      "stdout": "{\"plans\": 1914}\n",
       "stderr": ""
     },
     "unlock_value": {
-      "state": "failed",
-      "error": "TimeoutExpired"
+      "state": "healthy",
+      "returncode": 0,
+      "stdout": "{\"recordsObserved\": 1915, \"checksGenerated\": 9481, \"top\": {\"checkId\": \"00eb10094610894a9f02\", \"opportunityId\": \"f4e5e97364f7811efcea\", \"title\": \"Smart Contract Bug Bounties Statistics 2026: Hidden Risks Now - CoinLaw\", \"missingDimension\": \"contract\", \"unlockScore\": 123.0, \"affectedObservedRecords\": 1915, \"observedSignalCount\": 6, \"sourceDomain\": \"news.google.com\", \"verificationAction\": \"verify the official contract address from project documentation\", \"reason\": \"prioritize a missing fact whose verification can reduce uncertainty across multiple observed records\", \"costClass\": \"MEDIUM\", \"hypothesisOnly\": true, \"noInventedClaim\": true, \"ownerApprovalRequired\": true}}\n",
+      "stderr": ""
     }
   }
 }
