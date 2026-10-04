@@ -130,5 +130,5 @@ jobs:
             echo "No Guard state changes after sync."
             exit 0
           fi
-          git commit -m "chore: refresh immortal guard state"
+          git commit -m "chore: refresh immortal guard state [skip render]"
           git push origin HEAD:main
