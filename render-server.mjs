@@ -49,7 +49,10 @@ const server=http.createServer(async(req,res)=>{
     if(u.pathname==='/api/guard/live'&&req.method==='GET'){
       const snap=guardFastCache||{status:{},radar:{},ledger:{}};
       const status=snap.status||{},radar=snap.radar||{},ledger=snap.ledger||{};
-      const body={ok:true,source:'ANIL-X-local-guard-state',updatedAt:status.updatedAt||status.lastScan||radar.generatedAt||null,freshness:{stale:false,requiredMaxMinutes:15},guard:{status:String(status.status||status.mode||'NORMAL'),discoveryCount:Number(status.discoveryCount||status.counts?.opportunities||0),sourcesScanned:Number(status.sourcesScanned||0),sourcesReachable:Number(status.sourcesReachable||0),waitingOwner:Number(status.waitingOwner||0),highValueCandidates:Number(status.highValueCandidates||status.counts?.incomePriority||0)},radar:{candidates:Number(radar?.summary?.totalCandidates||0),officialCandidates:Number(radar?.summary?.officialCandidates||0),actionableOfficial:Number(radar?.summary?.actionableOfficial||0),highPriority:Number(radar?.summary?.highPriority||0)},revenue:{confirmedIncome:Number(ledger.confirmedIncome||ledger.totalReceived||0),status:String(ledger.status||'UNCONFIRMED')},transfer:{status:'OWNER_APPROVAL_REQUIRED',temporaryWalletUsed:false},safety:{autoClaim:false,autoSigning:false,autoTransfer:false,secretStorage:false,ownerApprovalRequired:true}};
+      const updatedAt=status.updatedAt||status.lastScan||radar.generatedAt||null;
+      const ageMs=Date.parse(String(updatedAt||''));
+      const minutesSinceUpdate=Number.isFinite(ageMs)?Math.max(0,Math.round((Date.now()-ageMs)/60000)):null;
+      const body={ok:true,source:'ANIL-X-local-guard-state',updatedAt,freshness:{minutesSinceUpdate,stale:minutesSinceUpdate===null||minutesSinceUpdate>15,requiredMaxMinutes:15},guard:{status:String(status.status||status.mode||'NORMAL'),discoveryCount:Number(status.discoveryCount||status.counts?.opportunities||0),sourcesScanned:Number(status.sourcesScanned||0),sourcesReachable:Number(status.sourcesReachable||0),waitingOwner:Number(status.waitingOwner||0),highValueCandidates:Number(status.highValueCandidates||status.counts?.incomePriority||0)},radar:{candidates:Number(radar?.summary?.totalCandidates||0),officialCandidates:Number(radar?.summary?.officialCandidates||0),actionableOfficial:Number(radar?.summary?.actionableOfficial||0),highPriority:Number(radar?.summary?.highPriority||0)},revenue:{confirmedIncome:Number(ledger.confirmedIncome||ledger.totalReceived||0),status:String(ledger.status||'UNCONFIRMED')},transfer:{status:'OWNER_APPROVAL_REQUIRED',temporaryWalletUsed:false},safety:{autoClaim:false,autoSigning:false,autoTransfer:false,secretStorage:false,ownerApprovalRequired:true}};
       res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');res.setHeader('cache-control','no-store');res.end(JSON.stringify(body));
       void (async()=>{try{const read=async name=>JSON.parse(await fs.readFile(path.join(root,name),'utf8'));guardFastCache={status:await read('guard-status.json'),radar:await read('guard-super-radar.json'),ledger:await read('guard-evidence-ledger.json'),loadedAt:Date.now()};}catch{}})();
       return;
@@ -75,10 +78,12 @@ const server=http.createServer(async(req,res)=>{
       const rr=await handleExecutionReadiness(req,env);res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
     }
     if((u.pathname==='/api/admin/self-test'||u.pathname==='/api/admin/auth-self-test')&&req.method==='GET'){
+      env.PAYMENTS=await getPaymentsStore();
       const out=await adminSelfTest(env);
       res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');res.setHeader('cache-control','no-store');res.end(JSON.stringify(out));return;
     }
     if(u.pathname==='/api/admin/password/login'&&req.method==='POST'){
+      env.PAYMENTS=await getPaymentsStore();
       const chunks=[];for await(const chunk of req)chunks.push(chunk);
       const body=chunks.length?Buffer.concat(chunks):undefined;
       const request=new Request(origin+(req.url||'/'),{method:req.method,headers:req.headers,body});
@@ -104,6 +109,7 @@ const server=http.createServer(async(req,res)=>{
       method:req.method,headers:req.headers,
       body:['GET','HEAD'].includes(req.method)?undefined:body
     });
+    env.PAYMENTS=await getPaymentsStore();
     const worker=await getWorker();
     const response=await worker.fetch(request,env,{});
     res.statusCode=response.status;
