@@ -50,7 +50,7 @@ const server=http.createServer(async(req,res)=>{
     if(u.pathname==='/api/execution-readiness'){
       const rr=await handleExecutionReadiness(req,env);res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
     }
-    if(u.pathname==='/api/admin/self-test'&&req.method==='GET'){
+    if((u.pathname==='/api/admin/self-test'||u.pathname==='/api/admin/auth-self-test')&&req.method==='GET'){
       const out=await adminSelfTest(env);
       res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');res.setHeader('cache-control','no-store');res.end(JSON.stringify(out));return;
     }
