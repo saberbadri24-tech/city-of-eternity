@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "sourcePolicy": "official provider model APIs only",
+  "providers": [
+    {
+      "provider": "openai",
+      "configured": false,
+      "models": [],
+      "error": "credential_missing"
+    },
+    {
+      "provider": "anthropic",
+      "configured": false,
+      "models": [],
+      "error": "credential_missing"
+    },
+    {
+      "provider": "google_gemini",
+      "configured": false,
+      "models": [],
+      "error": "credential_missing"
+    }
+  ],
+  "generatedAt": "2026-10-04T08:28:12.027Z"
+}
