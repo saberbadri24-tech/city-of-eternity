@@ -4,6 +4,11 @@ const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
 const input=$('#requestInput'),form=$('#requestForm'),count=$('#charCount'),chat=$('#chat');
 const AI_URL=(window.ANILX_API_URL||'/api/plan');
 const routes=[
+{id:'website',keys:['website','store','landing'],title:'Build and launch a website',moves:['Outcome','Preview','Test']},
+{id:'video',keys:['video','teaser','clip'],title:'Create video content',moves:['Goal','Script','Preview']},
+{id:'fix',keys:['bug','error','fix','slow'],title:'Diagnose and fix the problem',moves:['Evidence','Diagnosis','Test']},
+{id:'growth',keys:['sales','growth','seo','revenue'],title:'Business growth engine',moves:['Goal','Offer','Measure']},
+{id:'prototype',keys:['prototype','preview','mockup'],title:'Preview before execution',moves:['Result','Sample','Refine']},
 {id:'lead',keys:['لید','سرنخ','مشتری بالقوه','مشتری','lead','prospect','qualification'],title:'Qualify and organize leads',moves:['دریافت اطلاعات','امتیازدهی','پیگیری','تحویل']},
 {id:'support',keys:['پشتیبانی','سوال مشتری','پاسخ مشتری','support','customer service','faq'],title:'Customer support workflow',moves:['درک درخواست','پاسخ','ثبت','پیگیری']},
 {id:'ops',keys:['ادمین','اداری','فاکتور','صورتحساب','invoice','admin','operations','bookkeeping'],title:'Business operations workflow',moves:['جمع‌آوری داده','ثبت','کنترل','گزارش']},
