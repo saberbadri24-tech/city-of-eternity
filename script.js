@@ -1,3 +1,6 @@
+
+/* ANIL-X-CONTINUITY: ADVANCED MODE / ANIL X ONLY / preserve frontier audit context until final release */
+try{document.documentElement.dataset.anilxContinuity='ANIL-X-ADVANCED-AUDIT-V1';}catch{}
 // ANIL_X_EXPERIENCE_POLISH_V2
 (()=>{'use strict';
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
