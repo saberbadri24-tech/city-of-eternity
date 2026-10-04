@@ -52,19 +52,25 @@ const server=http.createServer(async(req,res)=>{
     if(u.pathname==='/api/guard/live'&&req.method==='GET'){
       const readJson=async name=>{try{return JSON.parse(await fs.readFile(path.join(root,name),'utf8'));}catch{return null;}};
       const status=await readJson('guard-status.json')||{};
-      const opportunities=await readJson('guard-opportunities.json')||{};
-      const high=await readJson('guard-high-value.json')||{};
+      const radar=await readJson('guard-super-radar.json')||{};
       const ledger=await readJson('guard-evidence-ledger.json')||{};
-      const oppItems=Array.isArray(opportunities.items)?opportunities.items:Array.isArray(opportunities.opportunities)?opportunities.opportunities:[];
-      const highItems=Array.isArray(high.items)?high.items:Array.isArray(high.opportunities)?high.opportunities:[];
-      const body={ok:true,source:'ANIL-X-local-guard-state',updatedAt:status.updatedAt||status.lastScan||opportunities.updatedAt||null,freshness:{stale:false,requiredMaxMinutes:15},guard:{status:String(status.status||status.mode||'NORMAL'),discoveryCount:Number(status.discoveryCount||status.counts?.opportunities||oppItems.length||0),sourcesScanned:Number(status.sourcesScanned||0),sourcesReachable:Number(status.sourcesReachable||0),waitingOwner:Number(status.waitingOwner||0),highValueCandidates:Number(status.highValueCandidates||status.counts?.incomePriority||highItems.length||0)},opportunities:{count:oppItems.length,items:oppItems.slice(0,5).map(x=>({id:x?.id||null,title:String(x?.title||x?.name||'فرصت').slice(0,100),source:String(x?.source||x?.resolvedDomain||'').slice(0,100),status:String(x?.status||x?.verification||'').slice(0,50)}))},valueHunter:{count:highItems.length,items:highItems.slice(0,5).map(x=>({id:x?.id||null,title:String(x?.title||x?.name||'فرصت').slice(0,100),source:String(x?.source||x?.resolvedDomain||'').slice(0,100),status:String(x?.status||x?.verification||'').slice(0,50)}))},revenue:{confirmedIncome:Number(ledger.confirmedIncome||ledger.totalReceived||0),status:String(ledger.status||'UNCONFIRMED')},transfer:{status:'OWNER_APPROVAL_REQUIRED',temporaryConfigured:false,temporaryWalletUsed:false,catchQueueConfigured:Boolean(process.env.REDIS_URL),catchQueuePending:Number(status.waitingOwner||0)},ai:{live:false,configured:false,successfulCalls:0,providers:{}},safety:{autoClaim:false,autoSigning:false,autoTransfer:false,secretStorage:false,bypassControls:false,ownerApprovalRequired:true}};
+      const body={ok:true,source:'ANIL-X-local-guard-state',updatedAt:status.updatedAt||status.lastScan||radar.generatedAt||null,freshness:{stale:false,requiredMaxMinutes:15},guard:{status:String(status.status||status.mode||'NORMAL'),discoveryCount:Number(status.discoveryCount||status.counts?.opportunities||0),sourcesScanned:Number(status.sourcesScanned||0),sourcesReachable:Number(status.sourcesReachable||0),waitingOwner:Number(status.waitingOwner||0),highValueCandidates:Number(status.highValueCandidates||status.counts?.incomePriority||0)},radar:{candidates:Number(radar?.summary?.totalCandidates||0),officialCandidates:Number(radar?.summary?.officialCandidates||0),actionableOfficial:Number(radar?.summary?.actionableOfficial||0),highPriority:Number(radar?.summary?.highPriority||0)},revenue:{confirmedIncome:Number(ledger.confirmedIncome||ledger.totalReceived||0),status:String(ledger.status||'UNCONFIRMED')},transfer:{status:'OWNER_APPROVAL_REQUIRED',temporaryWalletUsed:false},safety:{autoClaim:false,autoSigning:false,autoTransfer:false,secretStorage:false,ownerApprovalRequired:true}};
       res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');res.setHeader('cache-control','no-store');res.end(JSON.stringify(body));return;
     }
-    if((u.pathname==='/api/anil/super-team')&&(req.method==='GET'||req.method==='POST')){
+    if(u.pathname==='/api/anil/super-team'&&req.method==='GET'){
+      const body={ok:true,engine:'ANIL-SUPER-TEAM',version:'2.0.0-frontier-aware',generatedAt:new Date().toISOString(),task:'read-only live QA snapshot',chain:['ANIL','Astra','Claude','Gemini','Guard','Revenue Fleet','QA Sentinel'],executionMode:'local-safe',evidence:{providerKeys:{astra:Boolean(env.OPENAI_API_KEY||env.OPENAI_KEY),claude:Boolean(env.ANTHROPIC_API_KEY||env.ANTHROPIC_KEY),gemini:Boolean(env.GEMINI_API_KEY||env.GOOGLE_GEMINI_API_KEY||env.GOOGLE_API_KEY)}},safety:{finalCommand:'ANIL',irreversibleActions:'OWNER_APPROVAL',moneyMovement:'OWNER_APPROVAL',privateKeys:false,seedPhrases:false,autoSigning:false,captchaBypass:false,kycBypass:false},truth:{revenueCountsOnlyWhenSettled:true,providerConfigurationIsNotRuntimeProof:true,modelCatalogIsNotRuntimeProof:true}};
+      res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');res.setHeader('cache-control','no-store');res.end(JSON.stringify(body));return;
+    }
+    if(u.pathname==='/api/anil/super-team'&&req.method==='POST'){
+      const hasProvider=Boolean(env.OPENAI_API_KEY||env.OPENAI_KEY||env.ANTHROPIC_API_KEY||env.ANTHROPIC_KEY||env.GEMINI_API_KEY||env.GOOGLE_GEMINI_API_KEY||env.GOOGLE_API_KEY);
+      if(!hasProvider){
+        const body={ok:true,engine:'ANIL-SUPER-TEAM',version:'2.0.0-frontier-aware',generatedAt:new Date().toISOString(),executionMode:'local-safe',command:'DISCOVER -> VERIFY -> SCORE -> QUALIFY -> TEST -> SHIP -> MEASURE -> LEARN -> IMPROVE',providers:{astra:{live:false,reason:'runtime_secret_missing'},claude:{live:false,reason:'runtime_secret_missing'},gemini:{live:false,reason:'runtime_secret_missing'}},safety:{finalCommand:'ANIL',irreversibleActions:'OWNER_APPROVAL',moneyMovement:'OWNER_APPROVAL',privateKeys:false,seedPhrases:false,autoSigning:false},truth:{noFakeExecution:true,noFakeRevenue:true}};
+        res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');res.setHeader('cache-control','no-store');res.end(JSON.stringify(body));return;
+      }
       const chunks=[];for await(const chunk of req)chunks.push(chunk);
       const body=chunks.length?Buffer.concat(chunks):undefined;
-      const request=new Request(origin+(req.url||'/'),{method:req.method,headers:req.headers,body:['GET','HEAD'].includes(req.method)?undefined:body});
-      const rr=await handleSuperTeam(request,env,{guardHandler:handleGuardLive});
+      const request=new Request(origin+(req.url||'/'),{method:'POST',headers:req.headers,body});
+      const rr=await handleSuperTeam(request,env,{});
       res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
     }
     if(u.pathname==='/api/execution-readiness'){
