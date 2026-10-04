@@ -58,6 +58,7 @@ const server=http.createServer(async(req,res)=>{
     if(u.pathname==='/api/guard/live'&&req.method==='GET'){
       let snap={};
       try{snap=JSON.parse(await fs.readFile(path.join(root,'guard-live-summary.json'),'utf8'))}catch{}
+      if(!snap.updatedAt){try{snap={status:JSON.parse(await fs.readFile(path.join(root,'guard-status.json'),'utf8')),radar:{},ledger:{}}}catch{}}
       const status=snap.status||{},radar=snap.radar||{},ledger=snap.ledger||{};
       const updatedAt=snap.updatedAt||status.updatedAt||status.lastScan||null;
       const ageMs=Date.parse(String(updatedAt||''));
