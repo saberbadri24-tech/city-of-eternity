@@ -25,6 +25,12 @@ jobs:
       - name: Install mobile toolchain
         working-directory: mobile
         run: npm install
+      - name: Use Java 21 for Capacitor Android
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: gradle
       - name: Stage ANIL X web bundle
         working-directory: mobile
         run: npm run stage
