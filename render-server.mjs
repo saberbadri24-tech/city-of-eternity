@@ -7,7 +7,7 @@ import {promisify} from 'node:util';
 import {createHmac} from 'node:crypto';
 import {createPaymentsStore} from './functions/api/render-payments-store.mjs';
 import {handleExecutionReadiness} from './functions/api/execution-readiness.mjs';
-import {adminLogin,adminConfigured} from './functions/api/admin-auth.mjs';
+import {adminLogin,adminConfigured,adminSelfTest} from './functions/api/admin-auth.mjs';
 
 const gzipAsync=promisify(gzip);
 const root=path.dirname(fileURLToPath(import.meta.url));
@@ -49,6 +49,10 @@ const server=http.createServer(async(req,res)=>{
     }
     if(u.pathname==='/api/execution-readiness'){
       const rr=await handleExecutionReadiness(req,env);res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
+    }
+    if(u.pathname==='/api/admin/self-test'&&req.method==='GET'){
+      const out=await adminSelfTest(env);
+      res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');res.setHeader('cache-control','no-store');res.end(JSON.stringify(out));return;
     }
     if(u.pathname==='/api/admin/password/login'&&req.method==='POST'){
       const chunks=[];for await(const chunk of req)chunks.push(chunk);
