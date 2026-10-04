@@ -1,25 +1,28 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "sourcePolicy": "official provider model APIs only",
   "providers": [
     {
       "provider": "openai",
       "configured": false,
       "models": [],
-      "error": "credential_missing"
+      "error": "credential_missing",
+      "preferred": "gpt-6-astra"
     },
     {
       "provider": "anthropic",
       "configured": false,
       "models": [],
-      "error": "credential_missing"
+      "error": "credential_missing",
+      "preferred": "claude-opus-5"
     },
     {
       "provider": "google_gemini",
       "configured": false,
       "models": [],
-      "error": "credential_missing"
+      "error": "credential_missing",
+      "preferred": "gemini-3.8-flash"
     }
   ],
-  "generatedAt": "2026-10-04T08:28:12.027Z"
+  "generatedAt": "2026-10-04T16:52:16.872Z"
 }
