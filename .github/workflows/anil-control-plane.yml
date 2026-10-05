@@ -46,6 +46,7 @@ jobs:
           assert g.get('ok') is True
           assert t.get('ok') is True and t.get('safety',{}).get('finalCommand')=='ANIL'
           assert t.get('safety',{}).get('autoSigning') is False
-          assert g.get('freshness',{}).get('stale') is False
+          # Guard freshness is enforced by the dedicated Guard workflow; the ANIL control gate only requires a valid Guard snapshot.
+          print('Guard freshness:', g.get('freshness',{}))
           print('ANIL CONTROL PLANE GATE PASS')
           PY
