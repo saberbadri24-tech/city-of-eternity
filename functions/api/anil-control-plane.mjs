@@ -153,13 +153,14 @@ export async function handleControlPlane(req,env){
  };
 
  if(req.method==='POST'){
-  const readOnly={read_live_state:'live_state',health_check:'health',inspect_guard:'guard',inspect_payment:'payment',inspect_wallet:'wallet',inspect_github:'github',search_code:'github',read_file:'github',build_evidence_ledger:'audit'};
+  const readOnly={read_live_state:'live_state',health_check:'health',inspect_guard:'guard',inspect_payment:'payment',inspect_wallet:'wallet',inspect_github:'github',search_code:'github',read_file:'github',read_render_logs:'render',build_evidence_ledger:'audit'};
   const sensitive=['change_files','create_files','commit','deploy','rollback','write_audit_event','request_owner_approval'];
   if(readOnly[requestedOperation]){
    let evidence=null;
    if(['inspect_github','search_code','read_file'].includes(requestedOperation)) evidence=await directGitHub(env,requestedOperation,requestBody).catch(e=>({error:String(e?.message||e)}));
    else if(requestedOperation==='read_render_logs') evidence=await directRender(env,requestedOperation).catch(e=>({error:String(e?.message||e)}));
    else if(requestedOperation==='health_check') evidence={runtime:'use /api/health',directRender:await directRender(env,'health_check').catch(e=>({error:String(e?.message||e)}))};
+   else if(requestedOperation==='read_render_logs') evidence=await directRender(env,requestedOperation).catch(e=>({error:String(e?.message||e)}));
    result.execution={requestedOperation,status:'accepted',mode:'read_only_adapter',evidenceRequired:true,evidence};
   }else if(sensitive.includes(requestedOperation)){
    result.execution={requestedOperation,status:'owner_approval_required',mode:'fail_closed',policy:SAFETY};
