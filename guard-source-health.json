@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-10-05T06:07:51.360228+00:00",
+  "updatedAt": "2026-10-05T09:34:36.335412+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,28 +20,28 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1847,
-  "uniqueNewsPublishers": 533,
+  "discoveryCandidateCount": 1846,
+  "uniqueNewsPublishers": 537,
   "topPublishers": [
     {
       "publisher": "Binance",
-      "count": 118
+      "count": 124
     },
     {
-      "publisher": "Immunefi",
+      "publisher": "immunefi.com",
       "count": 89
     },
     {
       "publisher": "CoinMarketCap",
-      "count": 75
-    },
-    {
-      "publisher": "HackerOne",
       "count": 71
     },
     {
+      "publisher": "HackerOne",
+      "count": 70
+    },
+    {
       "publisher": "x.com",
-      "count": 64
+      "count": 65
     },
     {
       "publisher": "Yelp",
@@ -49,22 +49,22 @@
     },
     {
       "publisher": "Reddit",
-      "count": 44
-    },
-    {
-      "publisher": "GitHub",
-      "count": 42
+      "count": 51
     },
     {
       "publisher": "Coin Gabbar",
-      "count": 42
+      "count": 44
     },
     {
       "publisher": "RootData",
-      "count": 41
+      "count": 42
     },
     {
-      "publisher": "BitDegree",
+      "publisher": "GitHub",
+      "count": 40
+    },
+    {
+      "publisher": "bitdegree.org",
       "count": 31
     },
     {
@@ -76,32 +76,32 @@
       "count": 28
     },
     {
-      "publisher": "polygonscan.com",
-      "count": 28
+      "publisher": "facebook.com",
+      "count": 25
     },
     {
       "publisher": "AirdropAlert",
-      "count": 24
-    },
-    {
-      "publisher": "facebook.com",
-      "count": 23
+      "count": 25
     },
     {
       "publisher": "Bitget",
-      "count": 23
+      "count": 22
     },
     {
       "publisher": "LinkedIn",
       "count": 20
     },
     {
-      "publisher": "TradingView",
+      "publisher": "Bybit",
       "count": 18
     },
     {
-      "publisher": "Bybit",
+      "publisher": "Hokanews",
       "count": 18
+    },
+    {
+      "publisher": "TradingView",
+      "count": 16
     }
   ],
   "invalidSources": [],
