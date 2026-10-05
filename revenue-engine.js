@@ -37,11 +37,13 @@ async function startOrder(service){
  const email=prompt('ایمیل واقعی مشتری:'); if(!email)return;
  const description=prompt('نیاز دقیق مشتری:'); if(!description)return;
  try{
-  const lead=await get('/api/free-request',{method:'POST',body:JSON.stringify({name,email,country:'International',request:description})});
+  const lead=await get('/api/revenue/hunt',{method:'POST',body:JSON.stringify({email,country:'International',market:'International',request:description,source:'revenue-engine'})});
   if(!lead.ok)throw Error(lead.error||'lead_error');
-  const order=await get('/api/order',{method:'POST',body:JSON.stringify({accountId:'web-'+lead.id,service:s.id,description:description+' | Lead: '+lead.id,currency:'USD',amount:s.price})});
-  if(!order.ok)throw Error(order.error||'order_error');
-  try{const fx=await get('/api/fx');const toman=Math.max(1000,Math.round(s.price*Number(fx.tomanRate||fx.rate/10)));location.href='payment.html?order='+encodeURIComponent(order.order.id)+'&amount='+encodeURIComponent(toman)+'&ton=0'}catch{throw Error('نرخ USD/تومان برای پرداخت واقعی تنظیم نشده است')}
+  const checkout=await get('/api/revenue/checkout',{method:'POST',body:JSON.stringify({leadId:lead.lead.id,email,service:s.id,description})});
+  if(!checkout.ok)throw Error(checkout.error||'checkout_error');
+  if(checkout.payment?.ready&&checkout.payment?.payUrl){location.href=checkout.payment.payUrl;return}
+  const reason=checkout.payment?.error||'payment_not_ready';
+  throw Error(reason==='payment_not_configured'?'پرداخت واقعی هنوز پیکربندی نشده است':reason==='fx_unavailable'?'نرخ USD/تومان برای پرداخت واقعی تنظیم نشده است':reason==='storage_unavailable'?'ذخیره‌سازی پایدار سفارش تنظیم نشده است':reason);
  }catch(e){$('#status').textContent='سفارش ثبت نشد: '+e.message}
 }
 $('#run').onclick=async()=>{const b=$('#run');b.disabled=true;$('#status').textContent='چرخه خودکار درآمد در حال اجراست…';try{const d=await get('/api/revenue/fleet/run',{method:'POST'});$('#status').textContent='چرخه اجرا شد · ارتقا: '+(d.promoted||0)+' · واجدشرایط: '+(d.qualified||0)+' · پیشنهاد: '+(d.offers||0);await load()}catch(e){$('#status').textContent='چرخه اجرا نشد: '+e.message}finally{b.disabled=false}};
