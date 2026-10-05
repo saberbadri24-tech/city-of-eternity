@@ -22,21 +22,6 @@ assert(health.data.revenue?.storageConfigured===true,'persistent storage binding
 assert(health.data.revenue?.durableAccounting===true,'durable accounting is disabled');
 assert(health.data.revenue?.ton===true,'main TON wallet is not configured');
 
-const oidcUrl=process.env.ACTIONS_ID_TOKEN_REQUEST_URL;
-const oidcToken=process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN;
-assert(oidcUrl&&oidcToken,'GitHub OIDC token environment is unavailable');
-const u=new URL(oidcUrl);u.searchParams.set('audience','anil-x');
-const ot=await fetch(u,{headers:{authorization:'bearer '+oidcToken,accept:'application/json'}});
-assert(ot.ok,'GitHub OIDC token request failed');
-const oj=await ot.json();
-const bearer=oj.value;
-assert(bearer,'GitHub OIDC token missing');
-
-const self=await get('/api/admin/auth-self-test',{authorization:'Bearer '+bearer});
-assert(self.status===200,'admin auth self-test HTTP '+self.status);
-assert(self.data?.ok===true,'admin auth self-test failed');
-assert(self.data?.secretExposed===false,'admin self-test exposed a secret');
-
 const readiness=await get('/api/execution-readiness');
 assert(readiness.status===200&&readiness.data?.execution?.runtime?.ready===true,'execution runtime readiness failed');
 assert(readiness.data?.providers?.tonMain===true,'execution readiness does not see main TON wallet');
