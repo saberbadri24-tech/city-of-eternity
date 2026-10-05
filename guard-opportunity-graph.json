@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-05T18:52:58+00:00",
+  "generatedAt": "2026-10-05T18:59:39+00:00",
   "engine": "Immortal Guard Opportunity Graph",
-  "nodeCount": 3720,
-  "edgeCount": 1856,
+  "nodeCount": 3725,
+  "edgeCount": 1858,
   "nodes": [
     {
       "id": "0c99e9b1baae1e2e",
@@ -1434,10 +1434,10 @@
       "label": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE42WHBCYUFCWTlWTHg3M0NtbDFtWU5xZHlPRWZHa0NGejZ3aVV2M2swUE9IUDl3Sm4zWnZXMjVqYV9ISzdTWUpYelNnclc?oc=5"
     },
     {
-      "id": "14f75609ddc87a30",
+      "id": "240e86fc2affb6f5",
       "type": "opportunity",
-      "key": "a tech glossary to thrive and survive in the ai era - asiatimes.com",
-      "label": "A tech glossary to thrive and survive in the AI era - asiatimes.com"
+      "key": "a tech glossary to thrive and survive in the ai era - asia times",
+      "label": "A tech glossary to thrive and survive in the AI era - Asia Times"
     },
     {
       "id": "671d863a170eecf2",
@@ -1569,7 +1569,7 @@
       "id": "3ca31c7f88a5b558",
       "type": "opportunity",
       "key": "jim cramer: “nvidia literally can’t make their own chips fast enough.” here’s my 45% upside scenario: - tikr.com",
-      "label": "Jim Cramer: “NVIDIA Literally Can’t Make Their Own Chips Fast Enough.” Here’s My 45% Upside Scenario: - TIKR.com"
+      "label": "Jim Cramer: “NVIDIA Literally Can’t Make Their Own Chips Fast Enough.” Here’s My 45% Upside Scenario: - tikr.com"
     },
     {
       "id": "62b3a369ca074793",
@@ -2512,18 +2512,6 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQWGctZHJjYWNIYVM5eEVBZXNlanFfOHFiZTFKRnVRTFFIN1dvMzI0QUNGaVppT1JRa21wNVAzbDg4Q1dUdHY1N2lLdkZZanp5RXFkR2FNM05USGVoNThZU3Rfc1oyZ0RDVEF4cE8yZXhSODFUTFdDdVUyNTBrRUphRQ?oc=5",
       "label": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQWGctZHJjYWNIYVM5eEVBZXNlanFfOHFiZTFKRnVRTFFIN1dvMzI0QUNGaVppT1JRa21wNVAzbDg4Q1dUdHY1N2lLdkZZanp5RXFkR2FNM05USGVoNThZU3Rfc1oyZ0RDVEF4cE8yZXhSODFUTFdDdVUyNTBrRUphRQ?oc=5"
-    },
-    {
-      "id": "3702405e39a33497",
-      "type": "opportunity",
-      "key": "$vault - lockupthevault.com",
-      "label": "$vault - lockupthevault.com"
-    },
-    {
-      "id": "ffca191772c4daa9",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiQEFVX3lxTE9yekdiUmpjeHNWMGh4YjVyOWtlaldYajdRYkZYeEdicVZPWHJobTd2cThXQ21YTzI5QVNLRVFkaGs?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiQEFVX3lxTE9yekdiUmpjeHNWMGh4YjVyOWtlaldYajdRYkZYeEdicVZPWHJobTd2cThXQ21YTzI5QVNLRVFkaGs?oc=5"
     },
     {
       "id": "7f34a3ca818ccb17",
@@ -7968,18 +7956,6 @@
       "label": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFB5d1JYX29STENXdVJGbXNlcTUyWVZvdzliQXQtcmU0N3dvcnJ1WjZ3NVh4aE5KN1N3TE1IeVNGWV96S0VEUVlmVUdBVTNKSXc?oc=5"
     },
     {
-      "id": "f01a1254a510a273",
-      "type": "opportunity",
-      "key": "top 10 best photo spots in concord, nc - updated 2026 - yelp",
-      "label": "TOP 10 BEST Photo Spots in Concord, NC - Updated 2026 - Yelp"
-    },
-    {
-      "id": "2f7c009952111971",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMifEFVX3lxTFB6azhKV3JTUkJXYWRCVlphYjZhUDBEVV9ESURrVFhRYWZBT2NyNlMxSXljRERRcXBOV1dVcHQ0RndKMTNndU0td2o0SDdDbHpYb3o3NXJYcXJQTlB4Z3prcGZZT0d5aVFyMmJVOTRKQjVUaWdYRGUyUm9EQ2s?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMifEFVX3lxTFB6azhKV3JTUkJXYWRCVlphYjZhUDBEVV9ESURrVFhRYWZBT2NyNlMxSXljRERRcXBOV1dVcHQ0RndKMTNndU0td2o0SDdDbHpYb3o3NXJYcXJQTlB4Z3prcGZZT0d5aVFyMmJVOTRKQjVUaWdYRGUyUm9EQ2s?oc=5"
-    },
-    {
       "id": "8a599d8b395c78c7",
       "type": "opportunity",
       "key": "top 10 best civil attorney in charlotte, nc - updated 2026 - quality & affordability - yelp",
@@ -8026,18 +8002,6 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1QbW95RjhzbjN2RkNOM1Bza1cyajNFUWs2cmpSa3hRVnYwU0xLVjNRdjRlbDNTNE5XbTg0QmVJWGtJU0Jxd2piYW1sS0F6RGhOVzZPSzVKQnBWQmR1dzlNQ3MxY1ZIU2FLa3hMNEpQeWVkODFLbkRqcm53?oc=5",
       "label": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1QbW95RjhzbjN2RkNOM1Bza1cyajNFUWs2cmpSa3hRVnYwU0xLVjNRdjRlbDNTNE5XbTg0QmVJWGtJU0Jxd2piYW1sS0F6RGhOVzZPSzVKQnBWQmR1dzlNQ3MxY1ZIU2FLa3hMNEpQeWVkODFLbkRqcm53?oc=5"
-    },
-    {
-      "id": "3b1d80b13690011a",
-      "type": "opportunity",
-      "key": "top 10 best things to do in mooresville, nc - updated 2026 - yelp",
-      "label": "TOP 10 BEST Things to Do in Mooresville, NC - Updated 2026 - Yelp"
-    },
-    {
-      "id": "97c7de32db4c2358",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNWk5FT0oyb3FKS29oZFQyRTBOMUZDdkdjUTEtdWRjVEhYdW5TZmEzaElROUVZbGlSWTFYYVczMlFaVDJ4WnN2UXJFNTluS3lsMV9ZaWdDcFQ1SmFRT1Y2NFhISThfUTlqM2IyWEN2NXhVTE1ZaG5oMS1XMEdqR3F6LVFaVQ?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNWk5FT0oyb3FKS29oZFQyRTBOMUZDdkdjUTEtdWRjVEhYdW5TZmEzaElROUVZbGlSWTFYYVczMlFaVDJ4WnN2UXJFNTluS3lsMV9ZaWdDcFQ1SmFRT1Y2NFhISThfUTlqM2IyWEN2NXhVTE1ZaG5oMS1XMEdqR3F6LVFaVQ?oc=5"
     },
     {
       "id": "222c568d78e66caa",
@@ -8146,6 +8110,18 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQUzg0cE1HMFZWcjQtaG9kWWxSbW5ITHVwdVdVYnpGdkJBYURBYUJoOXFZU3JrS2p0NF9ER2FqakYxOGVkZ3VCbFpBYl9VQnh0RnJiRmwtdkZPYVpiRXREQmZldkZMV21ZekZTOGI1QjVXaXVrV3JXZUt1SnFSQ19wRnZnSFdCekRCNFd3MjJB?oc=5",
       "label": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQUzg0cE1HMFZWcjQtaG9kWWxSbW5ITHVwdVdVYnpGdkJBYURBYUJoOXFZU3JrS2p0NF9ER2FqakYxOGVkZ3VCbFpBYl9VQnh0RnJiRmwtdkZPYVpiRXREQmZldkZMV21ZekZTOGI1QjVXaXVrV3JXZUt1SnFSQ19wRnZnSFdCekRCNFd3MjJB?oc=5"
+    },
+    {
+      "id": "1841b154c8ec5797",
+      "type": "opportunity",
+      "key": "all \"air duct cleaning\" results near me in charlotte, nc - october 2026 - yelp",
+      "label": "All \"Air Duct Cleaning\" results near me in Charlotte, NC - October 2026 - Yelp"
+    },
+    {
+      "id": "78e1d3e9c7f5318c",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBWYWVtNWN4UkZtSUpvOW82U1RfN0NWZGtYdG94WGU0U0tGaS1ZVXJnMjBVcVdaLVVaZ2pxLXhyNTNqTjYwcHhXellHZFpveFhqTnNXRjBWSFNQNjYwSW5wakxUdWdQTW10V29iUHNRM2wxZHQwVlZVRm5tR0s0QQ?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBWYWVtNWN4UkZtSUpvOW82U1RfN0NWZGtYdG94WGU0U0tGaS1ZVXJnMjBVcVdaLVVaZ2pxLXhyNTNqTjYwcHhXellHZFpveFhqTnNXRjBWSFNQNjYwSW5wakxUdWdQTW10V29iUHNRM2wxZHQwVlZVRm5tR0s0QQ?oc=5"
     },
     {
       "id": "806299f77691be16",
@@ -8742,18 +8718,6 @@
       "label": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5QQ2ZtaGFhcXR3MnExX0ZjaFFXczVTR19jcVMzdmM4ZU5JS1dPMEhrU192Unk0aVFzeFIyTHpWQXVoN1RuSy0ybU8zRUQ5Z3hpTzRLMzE4VDFlNC1tS0xHbjM5OEZ1QVQ5RnZaUFVnOVJrSzVGYXZVaDFPaU1jTVU?oc=5"
     },
     {
-      "id": "9800f4bcfc1b02b6",
-      "type": "opportunity",
-      "key": "top options for restaurants near w catawba ave, cornelius, nc 28031 - updated 2026 - yelp",
-      "label": "Top Options for Restaurants near W Catawba Ave, Cornelius, NC 28031 - Updated 2026 - Yelp"
-    },
-    {
-      "id": "5f5c20700a81d97f",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMingFBVV95cUxQRzhwWmRLRGJnTTJjZ3o0Y1dleUlRelFkRzczRFFXbS1SQnZFLXZNSzNMQ01EczhsNXFSRVZqVW5Td3ZCZUktalRJRnpLeXZVQ3pSRHlSNDhZcUp3N0xKQk85bVAxWUxrbHpLQk9RRW9QX0oxeWZqVlJCRnVOcmlKNzJLa2lLVmYzTmNkcF96NWlWbjVzRUFTbzBHSV8wQQ?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMingFBVV95cUxQRzhwWmRLRGJnTTJjZ3o0Y1dleUlRelFkRzczRFFXbS1SQnZFLXZNSzNMQ01EczhsNXFSRVZqVW5Td3ZCZUktalRJRnpLeXZVQ3pSRHlSNDhZcUp3N0xKQk85bVAxWUxrbHpLQk9RRW9QX0oxeWZqVlJCRnVOcmlKNzJLa2lLVmYzTmNkcF96NWlWbjVzRUFTbzBHSV8wQQ?oc=5"
-    },
-    {
       "id": "f57718e7f3ad4635",
       "type": "opportunity",
       "key": "kimco realty annual report 2023 - s1.q4cdn.com",
@@ -8932,6 +8896,30 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQZnJCUFdNbkZXSmoxOXo2WHFJT21qUE80UE16TENMMVB6c0VqY3FfSEg5XzRKNHdIZUllaE11eGtYM0ZnY1Q5THROUUlJNkxfaTltS2p3WFc4emF1Z2U1akFEX2RBenlvbDRiWVBVY2t3Tk50clBoS1lyRmNXaTU1NWlyOE5VQi1kek16RjNscTlfR0Fr?oc=5",
       "label": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQZnJCUFdNbkZXSmoxOXo2WHFJT21qUE80UE16TENMMVB6c0VqY3FfSEg5XzRKNHdIZUllaE11eGtYM0ZnY1Q5THROUUlJNkxfaTltS2p3WFc4emF1Z2U1akFEX2RBenlvbDRiWVBVY2t3Tk50clBoS1lyRmNXaTU1NWlyOE5VQi1kek16RjNscTlfR0Fr?oc=5"
+    },
+    {
+      "id": "d59b2d65d0a1e8fe",
+      "type": "opportunity",
+      "key": "top 10 best free kids activities in mooresville, nc - updated 2026 - yelp",
+      "label": "TOP 10 BEST Free Kids Activities in Mooresville, NC - Updated 2026 - Yelp"
+    },
+    {
+      "id": "c819126909b32e19",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQbTg3WFdsUWZNTGtRVjVqOFU0dWduSmRlYUN6VU5PazNISGllZnJZOGcweFhqWTJ2VnRhTTVyZ0E1WElGYm56RVJpR1VQYUJGemxjNWpBOE1tc2xQVFo2WFI0TzQxS01ueUt6VnRPYlNrUFpKb001eFVabC1MNGRKdi10VkpYVXNfU1lyLXB3?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQbTg3WFdsUWZNTGtRVjVqOFU0dWduSmRlYUN6VU5PazNISGllZnJZOGcweFhqWTJ2VnRhTTVyZ0E1WElGYm56RVJpR1VQYUJGemxjNWpBOE1tc2xQVFo2WFI0TzQxS01ueUt6VnRPYlNrUFpKb001eFVabC1MNGRKdi10VkpYVXNfU1lyLXB3?oc=5"
+    },
+    {
+      "id": "4b1d819c8fce7dc3",
+      "type": "opportunity",
+      "key": "top 10 best lakes for swimming in charlotte, nc - updated 2026 - yelp",
+      "label": "TOP 10 BEST Lakes for Swimming in Charlotte, NC - Updated 2026 - Yelp"
+    },
+    {
+      "id": "a39182b2a5943758",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNNnJqeFQ4SXNLUFF3dWwzeGpETHBVZjlkamVjaFZveFNydi1yMnZ0eGdWcnRXZVJveVAwRUF5QnZZamdxZ19uWUdMckxxUHp1UEhCb2drQy1fYl9kMm1Eb2VSRE9CTzExNFliU1AwN3hud2RMSmd4RmowTHdXN0t5RHlGTF9LdzJh?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNNnJqeFQ4SXNLUFF3dWwzeGpETHBVZjlkamVjaFZveFNydi1yMnZ0eGdWcnRXZVJveVAwRUF5QnZZamdxZ19uWUdMckxxUHp1UEhCb2drQy1fYl9kMm1Eb2VSRE9CTzExNFliU1AwN3hud2RMSmd4RmowTHdXN0t5RHlGTF9LdzJh?oc=5"
     },
     {
       "id": "e6f1acd8229af5d5",
@@ -10332,12 +10320,6 @@
       "label": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5Jcjk3QTdvcXlVSU5XTlhNMFhUc0RhdzJRUDNoazdHdGVLNXFfbEVlcHltQXBWNUlDNFQ3YXdQLURNcEZiY1lZSll0Y0IxVVk0WEpJYWVBTTNyMjZQRm01cjducy1KU0NOcmhic1pVNnYySUJE?oc=5"
     },
     {
-      "id": "6ab648d6958054b7",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5kdGt3QS1iYlpULTV3VnE2Z3R2NGt3RGVIWGFvRzE4eWxac01oZjNvNV9GTHRZeGE5VHlqd0dXVnZ6ZjJmMGw1V2RhelJCd2ZUU1ZEUmgxaU1WaWc1LTd2R2dTb1Jydw?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5kdGt3QS1iYlpULTV3VnE2Z3R2NGt3RGVIWGFvRzE4eWxac01oZjNvNV9GTHRZeGE5VHlqd0dXVnZ6ZjJmMGw1V2RhelJCd2ZUU1ZEUmgxaU1WaWc1LTd2R2dTb1Jydw?oc=5"
-    },
-    {
       "id": "59c9a304632803b8",
       "type": "opportunity",
       "key": "bridging - robinhood",
@@ -10554,6 +10536,18 @@
       "label": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBRRUtCVHk5RVAtQUE5Q1k0aTNkVFJURmhXdzlmeXZ3cUhva0k5RzlKQXVqUlFfSjZ4M1FvNFV5cmxLT21TRW5aTXdqSHByd2hSREpuLUZ0WjNKMGo5Nmh2ZFZ3bWJheU1kSlFLeG12NmR1WlRCM2c?oc=5"
     },
     {
+      "id": "fda2d6c7e1a63104",
+      "type": "opportunity",
+      "key": "erc20 token security: what you need to consider - medium",
+      "label": "ERC20 Token Security: What You Need to Consider - Medium"
+    },
+    {
+      "id": "27c610698a4134bf",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQcENuc3EzY1dKanFodmtQYUtmYXlCYi00c3NHemp0aXBWQXQwVHFhbGtfV0wzRi1yZkpqMkdvQ1VjRER0RVpiczZ3eDcxeTUzMkVocmxzSVZ4enhSUVEzeUcydWc2VUN5SWo5OHlHOTFlS0d0SWxZV3RJRHFIc0t3LURWaU1zb2pxd2RZMDhJOEhnS2p3UkJSbw?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQcENuc3EzY1dKanFodmtQYUtmYXlCYi00c3NHemp0aXBWQXQwVHFhbGtfV0wzRi1yZkpqMkdvQ1VjRER0RVpiczZ3eDcxeTUzMkVocmxzSVZ4enhSUVEzeUcydWc2VUN5SWo5OHlHOTFlS0d0SWxZV3RJRHFIc0t3LURWaU1zb2pxd2RZMDhJOEhnS2p3UkJSbw?oc=5"
+    },
+    {
       "id": "daf8a6f78836d63b",
       "type": "opportunity",
       "key": "base bridging guide - botto: botto",
@@ -10576,18 +10570,6 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5TMGNnNFc0aWl5YTVMX0ZzWFlUcGstTjlhTlpqSWFXRENWWkZpU1RUSmpXZXYzUzNpUEMyVzZkdWt4V21xckNVZlF6UzVGSkQ4S1AzSjRzeFNyQ0VPbjRUMUg2UG15MHM?oc=5",
       "label": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5TMGNnNFc0aWl5YTVMX0ZzWFlUcGstTjlhTlpqSWFXRENWWkZpU1RUSmpXZXYzUzNpUEMyVzZkdWt4V21xckNVZlF6UzVGSkQ4S1AzSjRzeFNyQ0VPbjRUMUg2UG15MHM?oc=5"
-    },
-    {
-      "id": "ba94457a5345f960",
-      "type": "opportunity",
-      "key": "brickken price today, bkn to usd live price, marketcap and chart - coinmarketcap",
-      "label": "Brickken price today, BKN to USD live price, marketcap and chart - CoinMarketCap"
-    },
-    {
-      "id": "985cfc26350ba417",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5BRUtsQXlNMXp2LVhycXhJMWhzWnE5REs1S1NjZnIzRzNhSlVfRFJic3NEeGp5TUNKb0x2MDhTN2R6M1c4ZTlDSUZBUVUzd2FqSi1LZmx4emMxdw?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5BRUtsQXlNMXp2LVhycXhJMWhzWnE5REs1S1NjZnIzRzNhSlVfRFJic3NEeGp5TUNKb0x2MDhTN2R6M1c4ZTlDSUZBUVUzd2FqSi1LZmx4emMxdw?oc=5"
     },
     {
       "id": "24670b7afd08a8b3",
@@ -10650,16 +10632,28 @@
       "label": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE4yUUtnZy1HVm5aa3JhRUV2MWUtTEMtX0RJbVBFdDRMcGpTZ0tROHdqaFppVG9UbWhjRUpVR0dqWlJkUm1BMDBRQVItU1FJdkF2enFSLUtiVWp6QQ?oc=5"
     },
     {
-      "id": "fda2d6c7e1a63104",
+      "id": "6fc03d58c9d10695",
       "type": "opportunity",
-      "key": "erc20 token security: what you need to consider - medium",
-      "label": "ERC20 Token Security: What You Need to Consider - Medium"
+      "key": "vaultpoint: a blockchain-based ssi model that complies with oauth 2.0 - mdpi",
+      "label": "VaultPoint: A Blockchain-Based SSI Model that Complies with OAuth 2.0 - MDPI"
     },
     {
-      "id": "27c610698a4134bf",
+      "id": "3ff24e7c135ee46d",
       "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQcENuc3EzY1dKanFodmtQYUtmYXlCYi00c3NHemp0aXBWQXQwVHFhbGtfV0wzRi1yZkpqMkdvQ1VjRER0RVpiczZ3eDcxeTUzMkVocmxzSVZ4enhSUVEzeUcydWc2VUN5SWo5OHlHOTFlS0d0SWxZV3RJRHFIc0t3LURWaU1zb2pxd2RZMDhJOEhnS2p3UkJSbw?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQcENuc3EzY1dKanFodmtQYUtmYXlCYi00c3NHemp0aXBWQXQwVHFhbGtfV0wzRi1yZkpqMkdvQ1VjRER0RVpiczZ3eDcxeTUzMkVocmxzSVZ4enhSUVEzeUcydWc2VUN5SWo5OHlHOTFlS0d0SWxZV3RJRHFIc0t3LURWaU1zb2pxd2RZMDhJOEhnS2p3UkJSbw?oc=5"
+      "key": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5rTkk1NTlocDJ6MHFZakFFV0J2UURza3RmMk9vZjBSaEVpSzJ4WkVGN0RjeDFUT2tRNTdRQXEwTzFXZFRRMkdjaEhFM2NFRUNw?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5rTkk1NTlocDJ6MHFZakFFV0J2UURza3RmMk9vZjBSaEVpSzJ4WkVGN0RjeDFUT2tRNTdRQXEwTzFXZFRRMkdjaEhFM2NFRUNw?oc=5"
+    },
+    {
+      "id": "ba94457a5345f960",
+      "type": "opportunity",
+      "key": "brickken price today, bkn to usd live price, marketcap and chart - coinmarketcap",
+      "label": "Brickken price today, BKN to USD live price, marketcap and chart - CoinMarketCap"
+    },
+    {
+      "id": "985cfc26350ba417",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5BRUtsQXlNMXp2LVhycXhJMWhzWnE5REs1S1NjZnIzRzNhSlVfRFJic3NEeGp5TUNKb0x2MDhTN2R6M1c4ZTlDSUZBUVUzd2FqSi1LZmx4emMxdw?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5BRUtsQXlNMXp2LVhycXhJMWhzWnE5REs1S1NjZnIzRzNhSlVfRFJic3NEeGp5TUNKb0x2MDhTN2R6M1c4ZTlDSUZBUVUzd2FqSi1LZmx4emMxdw?oc=5"
     },
     {
       "id": "26edf4f8cca71a3f",
@@ -14250,6 +14244,18 @@
       "label": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE12V1c5d1h1akd4YTdRc1VYRFIxeXRIeGRGdmlMcGtPdFpHSGg5NkxqWExKVGx1OGY0akRaVmNFYV9nSjlxVEpKY0F3dDY3aC1hbEljdEU0OVA?oc=5"
     },
     {
+      "id": "3ab922403959be7f",
+      "type": "opportunity",
+      "key": "merlin chain price today, merl to usd live price, marketcap and chart - coinmarketcap",
+      "label": "Merlin Chain price today, MERL to USD live price, marketcap and chart - CoinMarketCap"
+    },
+    {
+      "id": "273b75278f8483e5",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1YQzYyZFBNVmhfTnI0M1MwVXBpWmk1RGdTbERmUE5fYnp1RjkwTXp5MVRUNllTUmp5aW9XQV8zd0twUTR4Ul9aaGowaUhDREZWc1N0djZXQkZEYnlwUzZB?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1YQzYyZFBNVmhfTnI0M1MwVXBpWmk1RGdTbERmUE5fYnp1RjkwTXp5MVRUNllTUmp5aW9XQV8zd0twUTR4Ul9aaGowaUhDREZWc1N0djZXQkZEYnlwUzZB?oc=5"
+    },
+    {
       "id": "b48044a723ae10b0",
       "type": "opportunity",
       "key": "what are the top crypto projects and dapps in the sui ecosystem in 2026? - bingx",
@@ -14272,18 +14278,6 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMia0FVX3lxTE8zS0t3SUtIemNDaVktd3VPSVhSX1JNc0dublF0aFRvVi00ckdhZnI5MUY4cnRVNnZUV25JZTR5bjhKaEFocFlRYjNkaUZXVHl4dXl4MGd6NEFtS1g2LXhReVhZQUxlUGtuVUow?oc=5",
       "label": "https://news.google.com/rss/articles/CBMia0FVX3lxTE8zS0t3SUtIemNDaVktd3VPSVhSX1JNc0dublF0aFRvVi00ckdhZnI5MUY4cnRVNnZUV25JZTR5bjhKaEFocFlRYjNkaUZXVHl4dXl4MGd6NEFtS1g2LXhReVhZQUxlUGtuVUow?oc=5"
-    },
-    {
-      "id": "4267e9c0f4c54aac",
-      "type": "opportunity",
-      "key": "mystenlabs ctf - github",
-      "label": "MystenLabs CTF - GitHub"
-    },
-    {
-      "id": "32a93d823a0bad9b",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE1lYVRSNGtsWlp2TmlIalp3ZjBlUTFYSzNaWHNxWTE0ZlBaRWJ2U2p0aE11WUxzMGlmZ1lsZlB4MlA4TkU5bEpWcQ?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE1lYVRSNGtsWlp2TmlIalp3ZjBlUTFYSzNaWHNxWTE0ZlBaRWJ2U2p0aE11WUxzMGlmZ1lsZlB4MlA4TkU5bEpWcQ?oc=5"
     },
     {
       "id": "6496b294e4d887f3",
@@ -14538,6 +14532,18 @@
       "label": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1xcmFpZHhrWTdaS1VRdWtVdEhDeUk4VjE2WUM5MzBFTDZPT0pHY0VaUFV4b29MVzRObXhOUTllellfV1JSWXBIMHVueWdGSFpaaDdZQkE0a3BXM2IwcmFjUWJzNHpvZw?oc=5"
     },
     {
+      "id": "486e51c14fc6e813",
+      "type": "opportunity",
+      "key": "silencio - rootdata.com",
+      "label": "Silencio - rootdata.com"
+    },
+    {
+      "id": "2914174bf48a56a0",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5PMG51YTR3TENTN0YxQjU3VW1iVXM1NjE2X1BtWFhGZHdsUmlieFRxS0MxdVppemg2ZnR1clpZeEUzWEY0REpBTkVEZV9LUTF3eWF3aFZITFB3RnJDMXZ4dnEyMnpPbGg5aU9wajhlTQ?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5PMG51YTR3TENTN0YxQjU3VW1iVXM1NjE2X1BtWFhGZHdsUmlieFRxS0MxdVppemg2ZnR1clpZeEUzWEY0REpBTkVEZV9LUTF3eWF3aFZITFB3RnJDMXZ4dnEyMnpPbGg5aU9wajhlTQ?oc=5"
+    },
+    {
       "id": "a5c001a30848ca66",
       "type": "opportunity",
       "key": "hypurr nfts explained: floor price, utility & outlook (2026) - datawallet.com",
@@ -14694,18 +14700,6 @@
       "label": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9sWkFjQnladnhZZ2lJc3pUVzhUTjR3R1ZEakhfbWZaOVE0LXdiX0VsQ1VfWGhpRUZWUXhDRnQ0NjhsNEFYckJKbjBMWlpaWl9ubFNfRXlpS0F4U3kxak85Q2pnQzZTTFBVZ3c?oc=5"
     },
     {
-      "id": "486e51c14fc6e813",
-      "type": "opportunity",
-      "key": "silencio - rootdata.com",
-      "label": "Silencio - rootdata.com"
-    },
-    {
-      "id": "2914174bf48a56a0",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5PMG51YTR3TENTN0YxQjU3VW1iVXM1NjE2X1BtWFhGZHdsUmlieFRxS0MxdVppemg2ZnR1clpZeEUzWEY0REpBTkVEZV9LUTF3eWF3aFZITFB3RnJDMXZ4dnEyMnpPbGg5aU9wajhlTQ?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5PMG51YTR3TENTN0YxQjU3VW1iVXM1NjE2X1BtWFhGZHdsUmlieFRxS0MxdVppemg2ZnR1clpZeEUzWEY0REpBTkVEZV9LUTF3eWF3aFZITFB3RnJDMXZ4dnEyMnpPbGg5aU9wajhlTQ?oc=5"
-    },
-    {
       "id": "d7e69288441efe1e",
       "type": "opportunity",
       "key": "how to add a network to metamask (evm chains & more) - datawallet.com",
@@ -14850,18 +14844,6 @@
       "label": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9XN3ZiRk9Lai04MkVBeGNIOVQ3UlRoV2xka1pYWGtfbHV6cHd0OVk5SXJYeXBvUlN5QWlVamhOODBCUnk2Tm1lVm5yWHRtLXQwTGdPNDZ5TGQ2Y0wxZmk4?oc=5"
     },
     {
-      "id": "4b699ae662517db3",
-      "type": "opportunity",
-      "key": "fake crypto airdrops: warning signs to watch for - airdropalert",
-      "label": "Fake Crypto Airdrops: Warning Signs to Watch For - AirdropAlert"
-    },
-    {
-      "id": "6a4a96b4b6d90caf",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5faUtWcE5SS3g1LTctcm81eGsxVVJkQW1nenpHVXh1S19kb2VWOXhicUUyRzdrRzkza2RRMWdqbVhDZl9VRDdZYnVoLWFtejRGSy13dXBSYjRrNVo2dGRBbE8yVUc4NXlzNjVsekdCTGNJNEpl?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5faUtWcE5SS3g1LTctcm81eGsxVVJkQW1nenpHVXh1S19kb2VWOXhicUUyRzdrRzkza2RRMWdqbVhDZl9VRDdZYnVoLWFtejRGSy13dXBSYjRrNVo2dGRBbE8yVUc4NXlzNjVsekdCTGNJNEpl?oc=5"
-    },
-    {
       "id": "dbf4c0a74c6306df",
       "type": "opportunity",
       "key": "termini e condizioni del negozio online - epalinuro",
@@ -14922,6 +14904,18 @@
       "label": "https://news.google.com/rss/articles/CBMibEFVX3lxTE1DTGNHUkZXUFdIVG8yOGxQN2Jja0VHTW5tZkpwTFJNOEpSeG53YU9oWGJSNkVEeXNFQXFSaDdRZExUUUFHTjk1T2RmMEZLbDlVRjZ0Ni0xYWtsSHB6SVM5Y3NnUmhLdS1iODlOQQ?oc=5"
     },
     {
+      "id": "47629fa00db9241b",
+      "type": "opportunity",
+      "key": "injective price today, inj to usd live price, marketcap and chart - coinmarketcap",
+      "label": "Injective price today, INJ to USD live price, marketcap and chart - CoinMarketCap"
+    },
+    {
+      "id": "29e9929e472f1d1a",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9vWU5VbU9CNzVJeE14dHdnZF9ZRFN5TGYyOVFabEJjaHpFQVVoVUNWZ3MxZjREVEFTS2QzVjRQSElzYzBXZmVBaENpMFVZci1DMjBtQWdoa0xKWm8?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9vWU5VbU9CNzVJeE14dHdnZF9ZRFN5TGYyOVFabEJjaHpFQVVoVUNWZ3MxZjREVEFTS2QzVjRQSElzYzBXZmVBaENpMFVZci1DMjBtQWdoa0xKWm8?oc=5"
+    },
+    {
       "id": "9742396d952ca978",
       "type": "opportunity",
       "key": "tokerr price today, tokr to usd live price, marketcap and chart - coinmarketcap",
@@ -14932,6 +14926,18 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE9CMk85N3FQZWJwSGEtMEk1Slg2S0dTWHM1WV9yclhUZFpVdElfOVd0Q01YWnFDS0g4NGs4R0l5OUxYazVzaXhaUXF6WWxMai1teFVQQnFhcw?oc=5",
       "label": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE9CMk85N3FQZWJwSGEtMEk1Slg2S0dTWHM1WV9yclhUZFpVdElfOVd0Q01YWnFDS0g4NGs4R0l5OUxYazVzaXhaUXF6WWxMai1teFVQQnFhcw?oc=5"
+    },
+    {
+      "id": "1f0531b8beefc7a1",
+      "type": "opportunity",
+      "key": "paal ai price today, paal to usd live price, marketcap and chart - coinmarketcap",
+      "label": "PAAL AI price today, PAAL to USD live price, marketcap and chart - CoinMarketCap"
+    },
+    {
+      "id": "523282f2f71e6c2d",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5aWmRfekVPM0czQXl3WW1tZnZxYWVCN1RuVVNFQ1JsWFR6SmFJS1ZmUzdVZWMxLV81RTFWbHlwcElBc2x3RnN4blBoX2ZJWFNFUmdJVThOcVk?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5aWmRfekVPM0czQXl3WW1tZnZxYWVCN1RuVVNFQ1JsWFR6SmFJS1ZmUzdVZWMxLV81RTFWbHlwcElBc2x3RnN4blBoX2ZJWFNFUmdJVThOcVk?oc=5"
     },
     {
       "id": "4d17b4a63490e231",
@@ -14956,6 +14962,30 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9XUjZUMUdtMWJOd3BuMnhnb0lDZHJYRExqWlhxdFlaUkp0RkNzeUxQRnJRck90U2QyM3ZhUGFmYUJTZTNIUU9KYUhZWHV5aTgw?oc=5",
       "label": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9XUjZUMUdtMWJOd3BuMnhnb0lDZHJYRExqWlhxdFlaUkp0RkNzeUxQRnJRck90U2QyM3ZhUGFmYUJTZTNIUU9KYUhZWHV5aTgw?oc=5"
+    },
+    {
+      "id": "9b8cede0f01ad55b",
+      "type": "opportunity",
+      "key": "yom price today, yom to usd live price, marketcap and chart - coinmarketcap",
+      "label": "YOM price today, YOM to USD live price, marketcap and chart - CoinMarketCap"
+    },
+    {
+      "id": "16f4676f1404e135",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE55VXp0YzZDMnlhT2lMbHVlVEFkRW1YRUJjUnhQdHVTbnN3LXZkdTlHQ2g2VXAxSENlWXExT2NaS3ZQZEZ4SzUtOWs5Q0djMVdDbjBN?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE55VXp0YzZDMnlhT2lMbHVlVEFkRW1YRUJjUnhQdHVTbnN3LXZkdTlHQ2g2VXAxSENlWXExT2NaS3ZQZEZ4SzUtOWs5Q0djMVdDbjBN?oc=5"
+    },
+    {
+      "id": "4b699ae662517db3",
+      "type": "opportunity",
+      "key": "fake crypto airdrops: warning signs to watch for - airdropalert",
+      "label": "Fake Crypto Airdrops: Warning Signs to Watch For - AirdropAlert"
+    },
+    {
+      "id": "6a4a96b4b6d90caf",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5faUtWcE5SS3g1LTctcm81eGsxVVJkQW1nenpHVXh1S19kb2VWOXhicUUyRzdrRzkza2RRMWdqbVhDZl9VRDdZYnVoLWFtejRGSy13dXBSYjRrNVo2dGRBbE8yVUc4NXlzNjVsekdCTGNJNEpl?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5faUtWcE5SS3g1LTctcm81eGsxVVJkQW1nenpHVXh1S19kb2VWOXhicUUyRzdrRzkza2RRMWdqbVhDZl9VRDdZYnVoLWFtejRGSy13dXBSYjRrNVo2dGRBbE8yVUc4NXlzNjVsekdCTGNJNEpl?oc=5"
     },
     {
       "id": "a94625d70fc30638",
@@ -15018,16 +15048,16 @@
       "label": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE02M3RoQUhTUUE1b2VoNnR5bmtqNlRBRGxrdGlMTXY0Q25IejJpNzZlcmJPUV9ndjJRTHI4dlZuVzJXbmtNRXZPcTZqR3ByYUJSai1EN3Rnc3U?oc=5"
     },
     {
-      "id": "1a6ff87e9a1f64c7",
+      "id": "173723c70f69e10e",
       "type": "opportunity",
-      "key": "block street price today, bsb to usd live price, marketcap and chart - coinmarketcap",
-      "label": "Block Street price today, BSB to USD live price, marketcap and chart - CoinMarketCap"
+      "key": "dao maker price today, dao to usd live price, marketcap and chart - coinmarketcap",
+      "label": "DAO Maker price today, DAO to USD live price, marketcap and chart - CoinMarketCap"
     },
     {
-      "id": "8c1bca8b08b60ee8",
+      "id": "e400479645faedc8",
       "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBxTGlhbGFLdklyYlFJX3hGdjB5YkxiRF8wekNhMXEyOURBZnN4QndGRENlamlKOXpMMFp1dVZLTzZSZUNuNnRjYzRPSi1qNFp2Vkhjc3dyRkN4dlFzQVBZ?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBxTGlhbGFLdklyYlFJX3hGdjB5YkxiRF8wekNhMXEyOURBZnN4QndGRENlamlKOXpMMFp1dVZLTzZSZUNuNnRjYzRPSi1qNFp2Vkhjc3dyRkN4dlFzQVBZ?oc=5"
+      "key": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9CVV9YLVFuUVZ2d1VEY1hoQmhXX05SdmVxdGpVTlcxUVQ5a2poSGQwT0NNQ1lHU0pwT01CdlQtNWgzQ1Q3MDhQWnY0STRhekZtQ016dU1mZk5RQWc?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9CVV9YLVFuUVZ2d1VEY1hoQmhXX05SdmVxdGpVTlcxUVQ5a2poSGQwT0NNQ1lHU0pwT01CdlQtNWgzQ1Q3MDhQWnY0STRhekZtQ016dU1mZk5RQWc?oc=5"
     },
     {
       "id": "d8b9291f4f8dfb0d",
@@ -15090,18 +15120,6 @@
       "label": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5Qb19aOXc3SXlzd3N0M0dmSFFSazV1WFVka0J3NVVwbXJoaFJuTXBGaTZYNk5NMEM0cDVWSG9TalpMenNYUU9HOEpWb0wxamxJOXcwcg?oc=5"
     },
     {
-      "id": "0de5779e636454ce",
-      "type": "opportunity",
-      "key": "tokenbox price today, tbx to usd live price, marketcap and chart - coinmarketcap",
-      "label": "Tokenbox price today, TBX to USD live price, marketcap and chart - CoinMarketCap"
-    },
-    {
-      "id": "d6226a11f4969fe0",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5UT0ZCMkloTHBNem1qYzJ3LWVIYjNTd0FSTlVQRnNLOGdDOHZmaDJIX09VT3g5Vk41d2R4bldwMEJjWTdSWC1pODZaR1lrVkUxb2hxUGdUWWJDQQ?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5UT0ZCMkloTHBNem1qYzJ3LWVIYjNTd0FSTlVQRnNLOGdDOHZmaDJIX09VT3g5Vk41d2R4bldwMEJjWTdSWC1pODZaR1lrVkUxb2hxUGdUWWJDQQ?oc=5"
-    },
-    {
       "id": "8c49cac3a880503c",
       "type": "opportunity",
       "key": "discover akita inu (akita): price, journey & how to own it in 2026 - phemex",
@@ -15114,16 +15132,16 @@
       "label": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9qVTBJeFVXZVV5enVzc3RLZmxXcEtHai1VMXpGbDB6OE5SOGFPZGFwTk5ZWk93N0Mxc2w5S2tXQ0o2RUZrQ28tSU1yM2EtMTQ3UnRZYXd4VVNiVWZYX2xCWUFrS2ZDcTQ?oc=5"
     },
     {
-      "id": "333d91c9c239d9df",
+      "id": "e5438a88af04db1e",
       "type": "opportunity",
-      "key": "aergo price today, aergo to usd live price, marketcap and chart - coinmarketcap",
-      "label": "Aergo price today, AERGO to USD live price, marketcap and chart - CoinMarketCap"
+      "key": "peculium price today, pcl to usd live price, marketcap and chart - coinmarketcap",
+      "label": "PECULIUM price today, PCL to USD live price, marketcap and chart - CoinMarketCap"
     },
     {
-      "id": "612f6a581095530c",
+      "id": "b930fdcad5fe6e5d",
       "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE03MkdYa2JGWkV0VWtOWVJoTzRGb2o4SjhBcUhOT0x2elBpMHFIRFUzbU1xV1dvaktKaGQwcVBlYUNHWHgzXzZwUDNXcGVvdDdTS3gteHBR?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE03MkdYa2JGWkV0VWtOWVJoTzRGb2o4SjhBcUhOT0x2elBpMHFIRFUzbU1xV1dvaktKaGQwcVBlYUNHWHgzXzZwUDNXcGVvdDdTS3gteHBR?oc=5"
+      "key": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBUdVV3LTU3V0JEMjd2SGxoQ3J6bEgxQW5BYVgyMTFLS2V3YlkzMHQxQWZCemtERF84TDg5LVVkRGRVUjJQZW9BQWVIeUlPRktBaW5pXzEyR1JhcFdSNGc?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBUdVV3LTU3V0JEMjd2SGxoQ3J6bEgxQW5BYVgyMTFLS2V3YlkzMHQxQWZCemtERF84TDg5LVVkRGRVUjJQZW9BQWVIeUlPRktBaW5pXzEyR1JhcFdSNGc?oc=5"
     },
     {
       "id": "859450416aad7747",
@@ -15138,18 +15156,6 @@
       "label": "https://news.google.com/rss/articles/CBMibEFVX3lxTE1DWm1PbmxxZzd2ckNzT2c3N19pNTIxM0tOWldEVmFLVEJfYVVheC0yN0RLOTR6Z19ZQ3hOMER3aVVHd29GZl9HX202Z3hnRXd6N3M1VXhoZEphR3RqcnBMMEV1d2dkSWxTWnpaRg?oc=5"
     },
     {
-      "id": "bfab9292588493a5",
-      "type": "opportunity",
-      "key": "lido staked ether price: steth/usd live price chart, market cap & news today - coingecko",
-      "label": "Lido Staked Ether Price: STETH/USD Live Price Chart, Market Cap & News Today - CoinGecko"
-    },
-    {
-      "id": "17ee703165bb97ae",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1rSWhNN2g1LUdRZDB0OVFxNUtGX1Vvd3REWXdENXBNUFh4Z2JLbUNleUl0X2dBems2cHlBWjh1NFBGNW5aaHQzemQya2JONy1WUG11NEczcHBjMXNjUDlfWm53?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1rSWhNN2g1LUdRZDB0OVFxNUtGX1Vvd3REWXdENXBNUFh4Z2JLbUNleUl0X2dBems2cHlBWjh1NFBGNW5aaHQzemQya2JONy1WUG11NEczcHBjMXNjUDlfWm53?oc=5"
-    },
-    {
       "id": "203451f229468894",
       "type": "opportunity",
       "key": "yuru coin price today, yuru to usd live price, marketcap and chart - coinmarketcap",
@@ -15160,30 +15166,6 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFB6TzVqUzZidnFKZUFXcUVBU1NxZlFjZjl3UU1WSkxlWjEwZEp0Ynd5c0tKUFg5NzRrYWowWGdoSER3cC1DY0NlaEhZZUlaVVdpOHBFRTNpemk3VXM?oc=5",
       "label": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFB6TzVqUzZidnFKZUFXcUVBU1NxZlFjZjl3UU1WSkxlWjEwZEp0Ynd5c0tKUFg5NzRrYWowWGdoSER3cC1DY0NlaEhZZUlaVVdpOHBFRTNpemk3VXM?oc=5"
-    },
-    {
-      "id": "dbac2ea4ef0be79d",
-      "type": "opportunity",
-      "key": "what is a rug pull and how to spot one - bybit",
-      "label": "What is a rug pull and how to spot one - Bybit"
-    },
-    {
-      "id": "0f079d554ca11031",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1JYjRhdU5IWGdXbHR5OWFIdm4zcWFuVmxsRUJPeWVJMk96aC1vYS1yVnVDWlhSdzE1OEh5MUJ6WEJITHBfRGhpbkxNNWs5cExxcFk0c0hQeHJZNDVyTjI0NXVab3g?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1JYjRhdU5IWGdXbHR5OWFIdm4zcWFuVmxsRUJPeWVJMk96aC1vYS1yVnVDWlhSdzE1OEh5MUJ6WEJITHBfRGhpbkxNNWs5cExxcFk0c0hQeHJZNDVyTjI0NXVab3g?oc=5"
-    },
-    {
-      "id": "49145595c4256a1e",
-      "type": "opportunity",
-      "key": "mantle staked ether price today, meth to usd live price, marketcap and chart - coinmarketcap",
-      "label": "Mantle Staked Ether price today, METH to USD live price, marketcap and chart - CoinMarketCap"
-    },
-    {
-      "id": "54b8b40c33f08626",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5aYTlRMFVNQzM2N25CYjBhR2xPN2NSNl9pX1NJdUt6dnZ1Qk54bFpLZ0JJV1V0emJZdW85Q20yWEM5Zld3Y0kyVDRQQV85U2xZaVVqbnY5d0ltOW1DT01TalZOMEVUYmFO?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5aYTlRMFVNQzM2N25CYjBhR2xPN2NSNl9pX1NJdUt6dnZ1Qk54bFpLZ0JJV1V0emJZdW85Q20yWEM5Zld3Y0kyVDRQQV85U2xZaVVqbnY5d0ltOW1DT01TalZOMEVUYmFO?oc=5"
     },
     {
       "id": "0ad5553b25074ed3",
@@ -15664,6 +15646,18 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBGQmJ0eWJUbk9NMW41YTM5b0I1Y2NRd040OHk2cUx3OWJHLVB4d2MwWERtZ2FJSUhpTDhrZldyTjZJaEw3bjNpSnpkZExtYTdYREhLMTlhUnNqUVAyUnV3YlRNQWVoRkl5NmkwQ3JmcTNUendybGc?oc=5",
       "label": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBGQmJ0eWJUbk9NMW41YTM5b0I1Y2NRd040OHk2cUx3OWJHLVB4d2MwWERtZ2FJSUhpTDhrZldyTjZJaEw3bjNpSnpkZExtYTdYREhLMTlhUnNqUVAyUnV3YlRNQWVoRkl5NmkwQ3JmcTNUendybGc?oc=5"
+    },
+    {
+      "id": "dbac2ea4ef0be79d",
+      "type": "opportunity",
+      "key": "what is a rug pull and how to spot one - bybit",
+      "label": "What is a rug pull and how to spot one - Bybit"
+    },
+    {
+      "id": "0f079d554ca11031",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1JYjRhdU5IWGdXbHR5OWFIdm4zcWFuVmxsRUJPeWVJMk96aC1vYS1yVnVDWlhSdzE1OEh5MUJ6WEJITHBfRGhpbkxNNWs5cExxcFk0c0hQeHJZNDVyTjI0NXVab3g?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1JYjRhdU5IWGdXbHR5OWFIdm4zcWFuVmxsRUJPeWVJMk96aC1vYS1yVnVDWlhSdzE1OEh5MUJ6WEJITHBfRGhpbkxNNWs5cExxcFk0c0hQeHJZNDVyTjI0NXVab3g?oc=5"
     },
     {
       "id": "0487d5b4b6eb6089",
@@ -16230,18 +16224,6 @@
       "label": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9IQ0EzOV82dnlTUkRCOTdVRlhuamJ0WTY4ZGhBUzNIdGVKRnRGNEpSUTQzdmVvdkxGNDlrUW93VjdwVm50OHUwc1ZZZnk4RHB4b1VacGNvUDV5Mko1MFZKNW50cHdyQQ?oc=5"
     },
     {
-      "id": "4423009f25d9455e",
-      "type": "opportunity",
-      "key": "shiba inu steps beyond shibarium, opens a second front on solana - beincrypto",
-      "label": "Shiba Inu Steps Beyond Shibarium, Opens a Second Front on Solana - BeInCrypto"
-    },
-    {
-      "id": "a287df7726c12dce",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5SVUphNEtud2pYd3JCel90QWF3LWdyR2dZYVEwcWJsQjRnMTJqRGZwNmdfSG5qTkwtSXVNQ0xuaDd6NHB6RFpNM2dQUjBBM2U3Q3UtSzBaY29kczlFVVlPZ2dDZlVjbVU?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5SVUphNEtud2pYd3JCel90QWF3LWdyR2dZYVEwcWJsQjRnMTJqRGZwNmdfSG5qTkwtSXVNQ0xuaDd6NHB6RFpNM2dQUjBBM2U3Q3UtSzBaY29kczlFVVlPZ2dDZlVjbVU?oc=5"
-    },
-    {
       "id": "92d289c5256c7d34",
       "type": "opportunity",
       "key": "lukso rich list — top 100 holders & distribution chart - cryptorank",
@@ -16252,18 +16234,6 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE16U1ZZaWdEMWlOSXExRERIcERBV1lRMk5sM3oxbFZWM1Bfa1FIMGsySjhRZWc2WVBYdHB1a1VTeGl1bElTd25fbUUtWXB3Nmx6YUtGbjk5THZwOE5nOFE?oc=5",
       "label": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE16U1ZZaWdEMWlOSXExRERIcERBV1lRMk5sM3oxbFZWM1Bfa1FIMGsySjhRZWc2WVBYdHB1a1VTeGl1bElTd25fbUUtWXB3Nmx6YUtGbjk5THZwOE5nOFE?oc=5"
-    },
-    {
-      "id": "76a8c335473e59de",
-      "type": "opportunity",
-      "key": "solana launches dgld gold token backed by physical gold - the cryptonomist",
-      "label": "Solana Launches DGLD Gold Token Backed by Physical Gold - The Cryptonomist"
-    },
-    {
-      "id": "87765354b27c2f20",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9zaWNXWFoyQTMwS2RseTB1QV9NRU9qT1pHLTJTWndSd3kxMmtjMXFuLWlGRjR0WUlNODd6UHIxTGdrcUZtd1Q2WWNPYzdmbzMyY1Uxa2xWUVI3MXR0aVlpVlpnVVZUeUE?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9zaWNXWFoyQTMwS2RseTB1QV9NRU9qT1pHLTJTWndSd3kxMmtjMXFuLWlGRjR0WUlNODd6UHIxTGdrcUZtd1Q2WWNPYzdmbzMyY1Uxa2xWUVI3MXR0aVlpVlpnVVZUeUE?oc=5"
     },
     {
       "id": "a1e5a675a28fbc08",
@@ -16278,16 +16248,16 @@
       "label": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1fN29PMVExOHN5RkJjdUdQUXpKUThUVTJ3d19vVmZPcXF5azdocG5DM25NajU5NktCVEk4cHdCamdLTkFWU0xjeHYxbVFBZE9jMmszN1NvNjQ?oc=5"
     },
     {
-      "id": "553035c1df1fec7e",
+      "id": "9eed1fc211587083",
       "type": "opportunity",
-      "key": "xrp healthcare ai (xrphai) tokenomics: market insights, token supply, distribution & price data | mexc - mexc.co",
-      "label": "XRP Healthcare AI (XRPHAI) Tokenomics: Market Insights, Token Supply, Distribution & Price Data | MEXC - mexc.co"
+      "key": "dog food token (oishii) tokenomics: market insights, token supply, distribution & price data | mexc - mexc.co",
+      "label": "Dog Food Token (OISHII) Tokenomics: Market Insights, Token Supply, Distribution & Price Data | MEXC - mexc.co"
     },
     {
-      "id": "7e084442da9e7d2a",
+      "id": "99283820c04c9f60",
       "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1fR0lja0NUb2w0a2s2WkszUVFqVHhyUC1RWEd6N0NlcVU4VGZDYUFNd2NWRHhadTBSVDJGUjNMVDFjLXljZWZZVGhPN2VKMVROZzQtUTN3?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1fR0lja0NUb2w0a2s2WkszUVFqVHhyUC1RWEd6N0NlcVU4VGZDYUFNd2NWRHhadTBSVDJGUjNMVDFjLXljZWZZVGhPN2VKMVROZzQtUTN3?oc=5"
+      "key": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5zSkNZUHNMb2N2WHRrajQybHoyWWZzd0tFaVFSRk5IRWM0eHV3VWNYV3V2c2VzTVBuX2lWWndNc1dJQTZjNjFUS2pyQkQxYThMdDRzMnFVNURRX3F0WWh0VA?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5zSkNZUHNMb2N2WHRrajQybHoyWWZzd0tFaVFSRk5IRWM0eHV3VWNYV3V2c2VzTVBuX2lWWndNc1dJQTZjNjFUS2pyQkQxYThMdDRzMnFVNURRX3F0WWh0VA?oc=5"
     },
     {
       "id": "dc0e783091892a13",
@@ -16338,16 +16308,16 @@
       "label": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNal9HTTJCYU1PZHJ4YVlra3ZjOWhWXzd3Zjh2T0tsZ2tsS2ZMSTZSUWdDT3pTUWZ6NHcxdmZoWFdvYWhzbFJpN3RjUW91US1zdklSQkgzT0E1cXdBUHpUZHdwX1Fhd0NmVVR5ZXFNUWhfbHpxVXZyUVh4ektFSFhfUnF5RExNMVdTVUJCRkpEZ2gyQkRnNVBReHo1Vkx0elVLU2FtY0p3?oc=5"
     },
     {
-      "id": "a23d6dcbbabf3ce8",
+      "id": "553035c1df1fec7e",
       "type": "opportunity",
-      "key": "citrea (ctr) tokenomics: market insights, token supply, distribution & price data | mexc - mexc.co",
-      "label": "Citrea (CTR) Tokenomics: Market Insights, Token Supply, Distribution & Price Data | MEXC - mexc.co"
+      "key": "xrp healthcare ai (xrphai) tokenomics: market insights, token supply, distribution & price data | mexc - mexc.co",
+      "label": "XRP Healthcare AI (XRPHAI) Tokenomics: Market Insights, Token Supply, Distribution & Price Data | MEXC - mexc.co"
     },
     {
-      "id": "d7af0b4551b95412",
+      "id": "7e084442da9e7d2a",
       "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1ISVg2Q00yZkNrTHNkeHJrN202LXBkekdNZHpHYmRMc2RLYlRYN29MZkduWHFHMDREY2ZsaGZSSHV1T0ZvZ0E4dmNaRWdoREdpSHc?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1ISVg2Q00yZkNrTHNkeHJrN202LXBkekdNZHpHYmRMc2RLYlRYN29MZkduWHFHMDREY2ZsaGZSSHV1T0ZvZ0E4dmNaRWdoREdpSHc?oc=5"
+      "key": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1fR0lja0NUb2w0a2s2WkszUVFqVHhyUC1RWEd6N0NlcVU4VGZDYUFNd2NWRHhadTBSVDJGUjNMVDFjLXljZWZZVGhPN2VKMVROZzQtUTN3?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1fR0lja0NUb2w0a2s2WkszUVFqVHhyUC1RWEd6N0NlcVU4VGZDYUFNd2NWRHhadTBSVDJGUjNMVDFjLXljZWZZVGhPN2VKMVROZzQtUTN3?oc=5"
     },
     {
       "id": "81331c875d5cd6f4",
@@ -16362,6 +16332,18 @@
       "label": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE90VDY4X2pfQ1UtczlGSWJFWHdQX1lLb1VCLWpkUTFkS3FiOUJoVzBjaDY4R1BIRW5sYU14UlcyR0RMZjVVNE52TGZsdXR2WE9FRGZiV1hB?oc=5"
     },
     {
+      "id": "a23d6dcbbabf3ce8",
+      "type": "opportunity",
+      "key": "citrea (ctr) tokenomics: market insights, token supply, distribution & price data | mexc - mexc.co",
+      "label": "Citrea (CTR) Tokenomics: Market Insights, Token Supply, Distribution & Price Data | MEXC - mexc.co"
+    },
+    {
+      "id": "d7af0b4551b95412",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1ISVg2Q00yZkNrTHNkeHJrN202LXBkekdNZHpHYmRMc2RLYlRYN29MZkduWHFHMDREY2ZsaGZSSHV1T0ZvZ0E4dmNaRWdoREdpSHc?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1ISVg2Q00yZkNrTHNkeHJrN202LXBkekdNZHpHYmRMc2RLYlRYN29MZkduWHFHMDREY2ZsaGZSSHV1T0ZvZ0E4dmNaRWdoREdpSHc?oc=5"
+    },
+    {
       "id": "23eb4dbdb9aa03fe",
       "type": "opportunity",
       "key": "super micro computer, inc. tokenized stock (xstock) rich list — top 100 holders & distribution chart - cryptorank",
@@ -16374,18 +16356,6 @@
       "label": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOQXNSMm5YSV9PNWxUQ2FyWEZ5dVpIMkpZbDJ4SjJNLUFHS3FoSzdpTGhwMmhSYW1TcFRpeV93clVYcUVLaGZnWXRSQWN6aDVhY3JDbUdJY0V3d2R1SWEwU3I1ak5wVmJRODJqb3czSkpKX2ZNbUJPQ0cxV2Z4Sk9iVkVWUjNRbDBQbWVr?oc=5"
     },
     {
-      "id": "ec435d36bccc280f",
-      "type": "opportunity",
-      "key": "gugugaga (咕咕嘎嘎) tokenomics: market insights, token supply, distribution & price data | mexc - mexc.co",
-      "label": "gugugaga (咕咕嘎嘎) Tokenomics: Market Insights, Token Supply, Distribution & Price Data | MEXC - mexc.co"
-    },
-    {
-      "id": "0198177351700f68",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1OUmtTRHBOeXJ5UzNoQi1UQ1V4ZXUwZWdfaHdIaFJkY1ZPSVNtbURNMDVaclg1dW8xWVdneGtneWpfZXVhbGx5b2RZTEt4Q3JDUTE1TzhQR2s?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1OUmtTRHBOeXJ5UzNoQi1UQ1V4ZXUwZWdfaHdIaFJkY1ZPSVNtbURNMDVaclg1dW8xWVdneGtneWpfZXVhbGx5b2RZTEt4Q3JDUTE1TzhQR2s?oc=5"
-    },
-    {
       "id": "211e4886edeb8568",
       "type": "opportunity",
       "key": "mame inu (mame) tokenomics: market insights, token supply, distribution & price data | mexc - mexc",
@@ -16396,6 +16366,18 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE8tTWRZUWVPRlhvcHRnTnFhWGlKZnVLbWVQT3JzZjBFSGk5ZkU5QThQRXlxUXNteVh3SUM2ZC0tMlNrNGx0TUpYSUJVSTRlOU1ZZE5KVQ?oc=5",
       "label": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE8tTWRZUWVPRlhvcHRnTnFhWGlKZnVLbWVQT3JzZjBFSGk5ZkU5QThQRXlxUXNteVh3SUM2ZC0tMlNrNGx0TUpYSUJVSTRlOU1ZZE5KVQ?oc=5"
+    },
+    {
+      "id": "ec435d36bccc280f",
+      "type": "opportunity",
+      "key": "gugugaga (咕咕嘎嘎) tokenomics: market insights, token supply, distribution & price data | mexc - mexc.co",
+      "label": "gugugaga (咕咕嘎嘎) Tokenomics: Market Insights, Token Supply, Distribution & Price Data | MEXC - mexc.co"
+    },
+    {
+      "id": "0198177351700f68",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1OUmtTRHBOeXJ5UzNoQi1UQ1V4ZXUwZWdfaHdIaFJkY1ZPSVNtbURNMDVaclg1dW8xWVdneGtneWpfZXVhbGx5b2RZTEt4Q3JDUTE1TzhQR2s?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1OUmtTRHBOeXJ5UzNoQi1UQ1V4ZXUwZWdfaHdIaFJkY1ZPSVNtbURNMDVaclg1dW8xWVdneGtneWpfZXVhbGx5b2RZTEt4Q3JDUTE1TzhQR2s?oc=5"
     },
     {
       "id": "ce2a88e9b2d53c55",
@@ -16420,6 +16402,30 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQQ3d2UjBjTTAxNDJrQndCM3cwOGV6TjdoV3EzMEpmZmM4aTB1SDZLakJjYXdVMm9pMGJ1UE9DZFFpNGxuQkV6VEw4bUw1a2xqTzJMZlRWNlI0anVIZm1CTHVvMUxwc3VBU2pXX2xCSHF3THA4MkNWVWtWUE02TDVjcXd4R21RY2R5UW5MeFBZX3VjY2g4VnhQSlJxc1h3bk5MZklOVmdaMA?oc=5",
       "label": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQQ3d2UjBjTTAxNDJrQndCM3cwOGV6TjdoV3EzMEpmZmM4aTB1SDZLakJjYXdVMm9pMGJ1UE9DZFFpNGxuQkV6VEw4bUw1a2xqTzJMZlRWNlI0anVIZm1CTHVvMUxwc3VBU2pXX2xCSHF3THA4MkNWVWtWUE02TDVjcXd4R21RY2R5UW5MeFBZX3VjY2g4VnhQSlJxc1h3bk5MZklOVmdaMA?oc=5"
+    },
+    {
+      "id": "4423009f25d9455e",
+      "type": "opportunity",
+      "key": "shiba inu steps beyond shibarium, opens a second front on solana - beincrypto",
+      "label": "Shiba Inu Steps Beyond Shibarium, Opens a Second Front on Solana - BeInCrypto"
+    },
+    {
+      "id": "a287df7726c12dce",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5SVUphNEtud2pYd3JCel90QWF3LWdyR2dZYVEwcWJsQjRnMTJqRGZwNmdfSG5qTkwtSXVNQ0xuaDd6NHB6RFpNM2dQUjBBM2U3Q3UtSzBaY29kczlFVVlPZ2dDZlVjbVU?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5SVUphNEtud2pYd3JCel90QWF3LWdyR2dZYVEwcWJsQjRnMTJqRGZwNmdfSG5qTkwtSXVNQ0xuaDd6NHB6RFpNM2dQUjBBM2U3Q3UtSzBaY29kczlFVVlPZ2dDZlVjbVU?oc=5"
+    },
+    {
+      "id": "76a8c335473e59de",
+      "type": "opportunity",
+      "key": "solana launches dgld gold token backed by physical gold - the cryptonomist",
+      "label": "Solana Launches DGLD Gold Token Backed by Physical Gold - The Cryptonomist"
+    },
+    {
+      "id": "87765354b27c2f20",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9zaWNXWFoyQTMwS2RseTB1QV9NRU9qT1pHLTJTWndSd3kxMmtjMXFuLWlGRjR0WUlNODd6UHIxTGdrcUZtd1Q2WWNPYzdmbzMyY1Uxa2xWUVI3MXR0aVlpVlpnVVZUeUE?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9zaWNXWFoyQTMwS2RseTB1QV9NRU9qT1pHLTJTWndSd3kxMmtjMXFuLWlGRjR0WUlNODd6UHIxTGdrcUZtd1Q2WWNPYzdmbzMyY1Uxa2xWUVI3MXR0aVlpVlpnVVZUeUE?oc=5"
     },
     {
       "id": "83ad852b306a5e29",
@@ -16470,16 +16476,16 @@
       "label": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQYld0VHBwcFNuXzE2NHhHeDctMVRTTnNBdk5lUlhjNU9wN01aeGNNV1MwakxqY1ZnUjNkNFctbFJKem9rVGpaLTZ2ZTQ0b3lrWkFmYWZRYkhvbktXX1ZxV095Q2VXNHp5ejVOTE1zb0tXbE1uVkpfRmxDNWttMHVYVFdHRXZDek0tWllIUkh6MVBUdnc?oc=5"
     },
     {
-      "id": "d4d9e7b51b3c3b3d",
+      "id": "d0d59bc727cacf23",
       "type": "opportunity",
-      "key": "5 top 100x cryptos to watch in october 2026: apeing's 85% apy stands out - openpr.com",
-      "label": "5 Top 100x Cryptos to Watch in October 2026: Apeing's 85% APY Stands Out - openPR.com"
+      "key": "bee network news: treasure box update 1.29.10 goes live in app - coin gabbar",
+      "label": "Bee Network News: Treasure Box Update 1.29.10 Goes Live in App - Coin Gabbar"
     },
     {
-      "id": "35db5818efd956cd",
+      "id": "8026f59cca5743a2",
       "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOSkpObDhyZldmZXluUkFlRXl3WmZvbDNVWHhPNWY1cHM4TmdrM0JJMGxidmdwUkxPUWViWVlVcVVFVHc1dU1wV2lvQ0hCUTktdnBteUQwVFRiUjJUZkdiZmpjSE45TVg2a1J3VWNxYXBEa0hiRExOQ0hqRlB4QjR4aTQ2YUJLYkRZYUdtUnM3VjBYdjRraDBFREV5cw?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOSkpObDhyZldmZXluUkFlRXl3WmZvbDNVWHhPNWY1cHM4TmdrM0JJMGxidmdwUkxPUWViWVlVcVVFVHc1dU1wV2lvQ0hCUTktdnBteUQwVFRiUjJUZkdiZmpjSE45TVg2a1J3VWNxYXBEa0hiRExOQ0hqRlB4QjR4aTQ2YUJLYkRZYUdtUnM3VjBYdjRraDBFREV5cw?oc=5"
+      "key": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOX21sTDhoNkt1NEpSYzJOMW5PRHo3NWpPY09QM3lsREtIeGtmYVBGc25ieUl0djRBTkcxTzVQUHJiY2tnaWVOVmVpanpFRGUweHFjTWxyZUthUHJYQW9HVDM1eUUtWFo2YlNhbzJGb09NdFlyQ0R5eXZrU3NNYWhWejlqQVVoR2pSenRHYlhHWQ?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOX21sTDhoNkt1NEpSYzJOMW5PRHo3NWpPY09QM3lsREtIeGtmYVBGc25ieUl0djRBTkcxTzVQUHJiY2tnaWVOVmVpanpFRGUweHFjTWxyZUthUHJYQW9HVDM1eUUtWFo2YlNhbzJGb09NdFlyQ0R5eXZrU3NNYWhWejlqQVVoR2pSenRHYlhHWQ?oc=5"
     },
     {
       "id": "5d7426eecd910844",
@@ -16494,18 +16500,6 @@
       "label": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOczZNSlBvempoaWNpN19sNmVYSDFtRV9lYTBJNDdzOTFVMUg1MmpoUnNkNnJzRjhYLWEtU1kyU0RhRXgtdW9sRmMzSWFVeWJ3eWtJVl9keFkwN1UzNHR6azM2R1Q2OGpaRl9GVHVFSVhZQUZJaGtHSXJ5Mjg4RVJIc3F3?oc=5"
     },
     {
-      "id": "cd29fa8101dced6f",
-      "type": "opportunity",
-      "key": "swissborg joins eurøpe consortium to back euro stablecoin eurøp - crypto briefing",
-      "label": "SwissBorg joins Eurøpe Consortium to back euro stablecoin EURØP - Crypto Briefing"
-    },
-    {
-      "id": "bc90eb487b2f97f6",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOMzR2dkJ5RFVqZDgtWkFtM3JTQUo2RkxlTUpuMVdFYXVzVmJZeFlyZzR4ZUU0LW5aUlI5dlA3YWRPVlp2ZHIyenR2aFBJTWxyUzZHSzhZdm5JUXE5YlcyZnlZc2NrYW1QSl9QTTcxN1pSbzc2cDktckM0WDFJWWhTazVqMGU?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOMzR2dkJ5RFVqZDgtWkFtM3JTQUo2RkxlTUpuMVdFYXVzVmJZeFlyZzR4ZUU0LW5aUlI5dlA3YWRPVlp2ZHIyenR2aFBJTWxyUzZHSzhZdm5JUXE5YlcyZnlZc2NrYW1QSl9QTTcxN1pSbzc2cDktckM0WDFJWWhTazVqMGU?oc=5"
-    },
-    {
       "id": "3b43aeb74b6cc287",
       "type": "opportunity",
       "key": "syntax verse daily quiz answer 6 october 2026: quiz and vault - coin gabbar",
@@ -16516,6 +16510,30 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOUGh5dWNfRS1zLUlnOExTSXo1cHdFbnFDR1U3bjl6dlZCaUpack94dUZ0SVhjVnVMOUdDZkd6Mlh6VlBVV1RsX2pmazVpWXpoMlZzcEFNRDhsdlZDLWoyemJXOUcyRkt4d0ZxWmg1Vl9zY0x6VEdqZFFNUG9RWmZRc3hZSjM5YTBk?oc=5",
       "label": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOUGh5dWNfRS1zLUlnOExTSXo1cHdFbnFDR1U3bjl6dlZCaUpack94dUZ0SVhjVnVMOUdDZkd6Mlh6VlBVV1RsX2pmazVpWXpoMlZzcEFNRDhsdlZDLWoyemJXOUcyRkt4d0ZxWmg1Vl9zY0x6VEdqZFFNUG9RWmZRc3hZSjM5YTBk?oc=5"
+    },
+    {
+      "id": "d4d9e7b51b3c3b3d",
+      "type": "opportunity",
+      "key": "5 top 100x cryptos to watch in october 2026: apeing's 85% apy stands out - openpr.com",
+      "label": "5 Top 100x Cryptos to Watch in October 2026: Apeing's 85% APY Stands Out - openPR.com"
+    },
+    {
+      "id": "35db5818efd956cd",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOSkpObDhyZldmZXluUkFlRXl3WmZvbDNVWHhPNWY1cHM4TmdrM0JJMGxidmdwUkxPUWViWVlVcVVFVHc1dU1wV2lvQ0hCUTktdnBteUQwVFRiUjJUZkdiZmpjSE45TVg2a1J3VWNxYXBEa0hiRExOQ0hqRlB4QjR4aTQ2YUJLYkRZYUdtUnM3VjBYdjRraDBFREV5cw?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOSkpObDhyZldmZXluUkFlRXl3WmZvbDNVWHhPNWY1cHM4TmdrM0JJMGxidmdwUkxPUWViWVlVcVVFVHc1dU1wV2lvQ0hCUTktdnBteUQwVFRiUjJUZkdiZmpjSE45TVg2a1J3VWNxYXBEa0hiRExOQ0hqRlB4QjR4aTQ2YUJLYkRZYUdtUnM3VjBYdjRraDBFREV5cw?oc=5"
+    },
+    {
+      "id": "cd29fa8101dced6f",
+      "type": "opportunity",
+      "key": "swissborg joins eurøpe consortium to back euro stablecoin eurøp - crypto briefing",
+      "label": "SwissBorg joins Eurøpe Consortium to back euro stablecoin EURØP - Crypto Briefing"
+    },
+    {
+      "id": "bc90eb487b2f97f6",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOMzR2dkJ5RFVqZDgtWkFtM3JTQUo2RkxlTUpuMVdFYXVzVmJZeFlyZzR4ZUU0LW5aUlI5dlA3YWRPVlp2ZHIyenR2aFBJTWxyUzZHSzhZdm5JUXE5YlcyZnlZc2NrYW1QSl9QTTcxN1pSbzc2cDktckM0WDFJWWhTazVqMGU?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOMzR2dkJ5RFVqZDgtWkFtM3JTQUo2RkxlTUpuMVdFYXVzVmJZeFlyZzR4ZUU0LW5aUlI5dlA3YWRPVlp2ZHIyenR2aFBJTWxyUzZHSzhZdm5JUXE5YlcyZnlZc2NrYW1QSl9QTTcxN1pSbzc2cDktckM0WDFJWWhTazVqMGU?oc=5"
     },
     {
       "id": "e4dea82afd2b070f",
@@ -16564,18 +16582,6 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMifkFVX3lxTE0tcl8wYkpoREREMl8zZXBCd1hoTk95NWozeGNaQXRFMGZuU1p6VkMtWkhjZmc4anJ4Q2M0TGsxamM1d01nWTh5dVAzRXVIRFJySTlibTlmSXZBM0xPc1BrdU91WVRtMktlc096WnlWRDZYR2ZEc3FPSkd0aUNJUQ?oc=5",
       "label": "https://news.google.com/rss/articles/CBMifkFVX3lxTE0tcl8wYkpoREREMl8zZXBCd1hoTk95NWozeGNaQXRFMGZuU1p6VkMtWkhjZmc4anJ4Q2M0TGsxamM1d01nWTh5dVAzRXVIRFJySTlibTlmSXZBM0xPc1BrdU91WVRtMktlc096WnlWRDZYR2ZEc3FPSkd0aUNJUQ?oc=5"
-    },
-    {
-      "id": "d0d59bc727cacf23",
-      "type": "opportunity",
-      "key": "bee network news: treasure box update 1.29.10 goes live in app - coin gabbar",
-      "label": "Bee Network News: Treasure Box Update 1.29.10 Goes Live in App - Coin Gabbar"
-    },
-    {
-      "id": "8026f59cca5743a2",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOX21sTDhoNkt1NEpSYzJOMW5PRHo3NWpPY09QM3lsREtIeGtmYVBGc25ieUl0djRBTkcxTzVQUHJiY2tnaWVOVmVpanpFRGUweHFjTWxyZUthUHJYQW9HVDM1eUUtWFo2YlNhbzJGb09NdFlyQ0R5eXZrU3NNYWhWejlqQVVoR2pSenRHYlhHWQ?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOX21sTDhoNkt1NEpSYzJOMW5PRHo3NWpPY09QM3lsREtIeGtmYVBGc25ieUl0djRBTkcxTzVQUHJiY2tnaWVOVmVpanpFRGUweHFjTWxyZUthUHJYQW9HVDM1eUUtWFo2YlNhbzJGb09NdFlyQ0R5eXZrU3NNYWhWejlqQVVoR2pSenRHYlhHWQ?oc=5"
     },
     {
       "id": "ddf64f746f0ffae0",
@@ -18678,6 +18684,18 @@
       "label": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNa0tIR2ZZRlN3ZVVxNGNaakd6a1RoX094ekRHRnNmVzBRQnowWXdtUkVMOWpBTXZRSm84a1RMeFBFN2p1SEdiSm5iWVNTV0pUcktVY0ZQQVRVNTViaXFqVGpiQWl1TkFEbUJVZ013RWpWbDlHOUdXZUhveFVpZy1PemthRHZrWi1JQUVHOVhhbUIzSUhYV201WmJoVmVGclhK0gGmAUFVX3lxTE12LU5yazliOU1qc09hSFNFSks3NUZYOExZekhRWFF0Q240Y19GOHEwLTE4MlphMF9pQmMxSWhRaXlva0hvbW92RlpLV1ZRXzVQcC1POU9XaFZ4QlFzSG55NWJTYW45SXk3cnZkM29vNThSWEY2b0QwWkZ1R2U1YWxvN1lRN2RYWkxUaWJISDBXZjZVbTMxYng4bDR3WE45ZVFLbTBpeHc?oc=5"
     },
     {
+      "id": "7adbd2455105c8fe",
+      "type": "opportunity",
+      "key": "zircuit launches $495k grants program to accelerate web3 super apps - international business times",
+      "label": "Zircuit Launches $495K Grants Program to Accelerate Web3 Super Apps - International Business Times"
+    },
+    {
+      "id": "8a0e280e180ef552",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOSk1vUVZ2dW5nQVFVWWlHeVFxZmRMQ1VRd3liQXdUd1lTTGMwLWVrb2Fkck5SM2ZMMWthd2FUc1pqVVpjR2ZQV0I4OEFISFU5WjFfYVgtMFpZVlU5SlM4X3R0Yzh2bEhNa3MzMlVPNU9iZ3lTNjhFeUJmQXBBekRDY1hNRlhET29KelNyZ29WbEQtcG5sbnVxZ1lhR1docGNtSkVZczNUQzZVYVdMdklyell4OA?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOSk1vUVZ2dW5nQVFVWWlHeVFxZmRMQ1VRd3liQXdUd1lTTGMwLWVrb2Fkck5SM2ZMMWthd2FUc1pqVVpjR2ZQV0I4OEFISFU5WjFfYVgtMFpZVlU5SlM4X3R0Yzh2bEhNa3MzMlVPNU9iZ3lTNjhFeUJmQXBBekRDY1hNRlhET29KelNyZ29WbEQtcG5sbnVxZ1lhR1docGNtSkVZczNUQzZVYVdMdklyell4OA?oc=5"
+    },
+    {
       "id": "8031ac22c3161452",
       "type": "opportunity",
       "key": "solana colosseum has launched the crypto world’s fair hackathon for projects on all blockchains: prizes will exceed $3.3 million - ua.news",
@@ -18846,6 +18864,18 @@
       "label": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOZzl1YjNGT1hjZzJZR0JpMDlhY2ZVdUxjVlVvTkRFMlJNenlabi1XaFNUVTM2QWp3cmk0VmdzMjRFVjJJOE1ncHRMNnFhMlZuajJOY2hxay1RLTlLQ0J2MmE1WTZkVE02YzBBV2tfMGNnWHdpZTV5TkpXRjJHMXhEbkR4c3QwaG9wem83dnM5RmxaWHNRVi1ZWWpLQk1GTFlHSnMzYmdLREl4SW9rR1RNeg?oc=5"
     },
     {
+      "id": "681fe16f92885ce8",
+      "type": "opportunity",
+      "key": "hedera backs ethonline 2026 with $15k in bounties for x402 agentic payments and tokenization builds - genfinity.io",
+      "label": "Hedera Backs ETHOnline 2026 With $15K in Bounties for x402 Agentic Payments and Tokenization Builds - genfinity.io"
+    },
+    {
+      "id": "d5fdb634cac34f42",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNTWpEYXhNS3RLNTNSTjhQMG5Fc0tRQzZiRWpFMzN6bHBNckxwYndPdDU0ZzQwMV8wMWlvcXEyQmhldC0wRXFFbXBWYTdxLVRDTy1MMHl6RnN2R2RkclhxUjRlSGdIWC1WcGZhNDlTb201VG9mcF9ZdTV3Q3lDbzNiSXBpYk1Yd1ZPRmFvVDZ4OWJteVowSjdZempuU0JuTHZF?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNTWpEYXhNS3RLNTNSTjhQMG5Fc0tRQzZiRWpFMzN6bHBNckxwYndPdDU0ZzQwMV8wMWlvcXEyQmhldC0wRXFFbXBWYTdxLVRDTy1MMHl6RnN2R2RkclhxUjRlSGdIWC1WcGZhNDlTb201VG9mcF9ZdTV3Q3lDbzNiSXBpYk1Yd1ZPRmFvVDZ4OWJteVowSjdZempuU0JuTHZF?oc=5"
+    },
+    {
       "id": "47d4c62943159dde",
       "type": "opportunity",
       "key": "announcing the chainlink chromion hackathon winners - chainlink",
@@ -18868,18 +18898,6 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMijAJBVV95cUxORFotM0thVWFwdm9LTFZfMXdwLW1rcmxvajZ5dHdBS1Zzd240TUs2by1wUk81aHhybk5wY2Q5dFIwaTJhSkthck9sQUZLOG1aUjZ1SE5HVVdKZFhFbFFCZTZFSlBkenhpQ0ZEc3k4aldmalpvNWtHSnRFdnd5RmJCSEZYMGFTeFhVcWQ1ZVZvd2w5XzNuT2Nzejg4RERSZHAzQk0yRk5EQmllR2VuTkZ2QlRIckVMenBnT1FLS3ZIcV83QnFnWlRWelp0emw4UG14ckNueVJrODNYUU1UR2pJbVBGejVxZVBucXlVRlFzem5yY096WmFYbGlVbVVYLWlJbWdUbUh3aUNRbDJl0gGSAkFVX3lxTE5vd2t6ZXRoYlZwc0hfRnRoS1BpeE5TM0VabHUyZ0g4dEl4N1BWc2szRzMwRWZETW93NUdMN002MHBQRG1Ea1IzeWFjbUhGVHNmLVBLZWVXOFNweENuSDFmRGprOEJYdHFYejduYkhSN0h3YXp4NVlzVWtoUFBIWks5TUlpeXFFb2IzTXM3aWRYUkhKVzBnci1QVWpDY1hDc1ZRLVpRYU4zakstM290NjE0cnJHTjQ5ZzdzbEJwMDhsaWF0cUFaTUdTc2VXdDZwVzBzLUY3dzl2TEJ6X1NXU2ZUMEVTb0FfbTFWc0xXWlFmYWVKOXpWQXhocHdlejAycm5BU29KMnRNSkw4dHdDb1BzcFE?oc=5",
       "label": "https://news.google.com/rss/articles/CBMijAJBVV95cUxORFotM0thVWFwdm9LTFZfMXdwLW1rcmxvajZ5dHdBS1Zzd240TUs2by1wUk81aHhybk5wY2Q5dFIwaTJhSkthck9sQUZLOG1aUjZ1SE5HVVdKZFhFbFFCZTZFSlBkenhpQ0ZEc3k4aldmalpvNWtHSnRFdnd5RmJCSEZYMGFTeFhVcWQ1ZVZvd2w5XzNuT2Nzejg4RERSZHAzQk0yRk5EQmllR2VuTkZ2QlRIckVMenBnT1FLS3ZIcV83QnFnWlRWelp0emw4UG14ckNueVJrODNYUU1UR2pJbVBGejVxZVBucXlVRlFzem5yY096WmFYbGlVbVVYLWlJbWdUbUh3aUNRbDJl0gGSAkFVX3lxTE5vd2t6ZXRoYlZwc0hfRnRoS1BpeE5TM0VabHUyZ0g4dEl4N1BWc2szRzMwRWZETW93NUdMN002MHBQRG1Ea1IzeWFjbUhGVHNmLVBLZWVXOFNweENuSDFmRGprOEJYdHFYejduYkhSN0h3YXp4NVlzVWtoUFBIWks5TUlpeXFFb2IzTXM3aWRYUkhKVzBnci1QVWpDY1hDc1ZRLVpRYU4zakstM290NjE0cnJHTjQ5ZzdzbEJwMDhsaWF0cUFaTUdTc2VXdDZwVzBzLUY3dzl2TEJ6X1NXU2ZUMEVTb0FfbTFWc0xXWlFmYWVKOXpWQXhocHdlejAycm5BU29KMnRNSkw4dHdDb1BzcFE?oc=5"
-    },
-    {
-      "id": "281b562735873589",
-      "type": "opportunity",
-      "key": "xrpl hackathon seoul 2025 - crypto news",
-      "label": "XRPL Hackathon Seoul 2025 - Crypto News"
-    },
-    {
-      "id": "74b990293f66363d",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9iV1lxUWVCV2ZfX244enNPVVZlbkFfellCV0lzaWFkVDNPc21ZRmM5R1pGcjhWZzJ0dEhIV0tMdkM5Zy1YVWpWYUVHM2lwUWJSejNkXzVCaXNxdEZRV0VRc1BR?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9iV1lxUWVCV2ZfX244enNPVVZlbkFfellCV0lzaWFkVDNPc21ZRmM5R1pGcjhWZzJ0dEhIV0tMdkM5Zy1YVWpWYUVHM2lwUWJSejNkXzVCaXNxdEZRV0VRc1BR?oc=5"
     },
     {
       "id": "bd5fc88c4c0fde11",
@@ -18916,6 +18934,18 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxORTRpWkNCSzI2a3p4YmRJVFdjZWNNZHlHYVF3M1dlZmlScHktZTVmZ0hGRXZpWm52cTNQWTgybmFwLXhBcEN4MXh6amVUbmE2eVctRzJCSmk1ZzhEYXdGa1hYejJUUll0alA4UUFKVmRNRUpnRng4ZWZLNUFHX1VnM0h1b3BvY1ZUUm5HZ285VmkwX3lHVFA0SEN5d2RQbklUdDYwaUtCQW9xX3ZyNEplZThnTWxJaWVIWE1obWtzWFY2Zl9YbFc2R2hGVTBraGxtSU9OZGo1UUIxTWl3VTVEbU5acGdmNzZz0gHuAUFVX3lxTE9sQzJfSlRzQmMyenF3RGZxVzc3STQ4d0Z1R00wMzdPaldkOUZnV0Q0M2tESzlWNVFpd2FyUGNQUWtiYzlDcWc0cmstUG90TEdDVkxUT2t5cWo5a1pxN3IzOGRUZG9XZDRCSUxMNWNzQnVNQ3U1WVVZOWN1bVpFbk5LTGJvckVwQW5HcEZFZG0xS3lqMlBDTkd4cEdSaUdoRGNhaWNwRE5VTWp6WTJNa2pNQl9tS0xjMnZPVUx1Y09NQjlIM1Jiam90NnBJUXZ2SmZaZ0E1SlR1VW1CRFBjcmNIMlczakFHRHhrWGlNQmc?oc=5",
       "label": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxORTRpWkNCSzI2a3p4YmRJVFdjZWNNZHlHYVF3M1dlZmlScHktZTVmZ0hGRXZpWm52cTNQWTgybmFwLXhBcEN4MXh6amVUbmE2eVctRzJCSmk1ZzhEYXdGa1hYejJUUll0alA4UUFKVmRNRUpnRng4ZWZLNUFHX1VnM0h1b3BvY1ZUUm5HZ285VmkwX3lHVFA0SEN5d2RQbklUdDYwaUtCQW9xX3ZyNEplZThnTWxJaWVIWE1obWtzWFY2Zl9YbFc2R2hGVTBraGxtSU9OZGo1UUIxTWl3VTVEbU5acGdmNzZz0gHuAUFVX3lxTE9sQzJfSlRzQmMyenF3RGZxVzc3STQ4d0Z1R00wMzdPaldkOUZnV0Q0M2tESzlWNVFpd2FyUGNQUWtiYzlDcWc0cmstUG90TEdDVkxUT2t5cWo5a1pxN3IzOGRUZG9XZDRCSUxMNWNzQnVNQ3U1WVVZOWN1bVpFbk5LTGJvckVwQW5HcEZFZG0xS3lqMlBDTkd4cEdSaUdoRGNhaWNwRE5VTWp6WTJNa2pNQl9tS0xjMnZPVUx1Y09NQjlIM1Jiam90NnBJUXZ2SmZaZ0E1SlR1VW1CRFBjcmNIMlczakFHRHhrWGlNQmc?oc=5"
+    },
+    {
+      "id": "281b562735873589",
+      "type": "opportunity",
+      "key": "xrpl hackathon seoul 2025 - crypto news",
+      "label": "XRPL Hackathon Seoul 2025 - Crypto News"
+    },
+    {
+      "id": "74b990293f66363d",
+      "type": "domain",
+      "key": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9iV1lxUWVCV2ZfX244enNPVVZlbkFfellCV0lzaWFkVDNPc21ZRmM5R1pGcjhWZzJ0dEhIV0tMdkM5Zy1YVWpWYUVHM2lwUWJSejNkXzVCaXNxdEZRV0VRc1BR?oc=5",
+      "label": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9iV1lxUWVCV2ZfX244enNPVVZlbkFfellCV0lzaWFkVDNPc21ZRmM5R1pGcjhWZzJ0dEhIV0tMdkM5Zy1YVWpWYUVHM2lwUWJSejNkXzVCaXNxdEZRV0VRc1BR?oc=5"
     },
     {
       "id": "e796386f5eca10e9",
@@ -20838,10 +20868,10 @@
       "label": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOZHllUVo5cWpXNnFnLXlzZUJCTEY0THRnYW9VbmVYVGprV3VsSEpjb29keE9IenVnbDhxXzdJeFJJT0lLclRiME5zalV3N1NCcUZKLW12aFZkWHdDVlNkMFgtMnBLd1V5V1VfZnZpWFJwRHBfVDdTRkdwekVrNHh3d3NvMm96d1VjOGtDV2hJcFVwQXNuU0NiQjlZNVc0YXNzV1pfdFNrOFZzbzZUeUw0NjFTejRYUjl3TmpMWURrRXNwX19uRWc?oc=5"
     },
     {
-      "id": "55e1f45e20242e50",
+      "id": "5ba1a2794b4e1729",
       "type": "opportunity",
-      "key": "10 easiest crypto to mine: best profitable coins in september 2026 - ventureburn.com",
-      "label": "10 Easiest Crypto to Mine: Best Profitable Coins In September 2026 - ventureburn.com"
+      "key": "10 easiest crypto to mine: best profitable coins in september 2026 - ventureburn",
+      "label": "10 Easiest Crypto to Mine: Best Profitable Coins In September 2026 - Ventureburn"
     },
     {
       "id": "18c03f1bb5a86ab8",
@@ -20976,10 +21006,10 @@
       "label": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQLTNlLW5US3hId0NZRldHVm9ZdEQ3bE04UTAxTDlHT0h2RGtpQzBRc2h1RXlOcE1lQThZbUZRZ0t0YmhCYXhCSkE5bDVjYzhXdi1GaWxvbmdMWXZaYjJTVmZSeFkxSVJmVnhXS3BJajFQTnROaU1HeGVhZklxTS01cjFHeDVIcHE3RHY2NXNnSlg?oc=5"
     },
     {
-      "id": "c4e8fa88146bb4f2",
+      "id": "3fae29cc4b44f1e8",
       "type": "opportunity",
-      "key": "2025’s best mobile crypto mining apps for btc, doge & ltc (android & ios) - ventureburn.com",
-      "label": "2025’s Best Mobile Crypto Mining Apps for BTC, DOGE & LTC (Android & iOS) - ventureburn.com"
+      "key": "2025’s best mobile crypto mining apps for btc, doge & ltc (android & ios) - ventureburn",
+      "label": "2025’s Best Mobile Crypto Mining Apps for BTC, DOGE & LTC (Android & iOS) - Ventureburn"
     },
     {
       "id": "1ca9217632d339a8",
@@ -22928,7 +22958,7 @@
       "relation": "url"
     },
     {
-      "from": "14f75609ddc87a30",
+      "from": "240e86fc2affb6f5",
       "to": "671d863a170eecf2",
       "relation": "url"
     },
@@ -23375,11 +23405,6 @@
     {
       "from": "060aaff873489813",
       "to": "0d5af7a9fa658693",
-      "relation": "url"
-    },
-    {
-      "from": "3702405e39a33497",
-      "to": "ffca191772c4daa9",
       "relation": "url"
     },
     {
@@ -25683,11 +25708,6 @@
       "relation": "url"
     },
     {
-      "from": "f01a1254a510a273",
-      "to": "2f7c009952111971",
-      "relation": "url"
-    },
-    {
       "from": "8a599d8b395c78c7",
       "to": "2de342bf7a257d6b",
       "relation": "url"
@@ -25705,11 +25725,6 @@
     {
       "from": "ee0eafb6bf3424dd",
       "to": "15868615910c3e86",
-      "relation": "url"
-    },
-    {
-      "from": "3b1d80b13690011a",
-      "to": "97c7de32db4c2358",
       "relation": "url"
     },
     {
@@ -25755,6 +25770,11 @@
     {
       "from": "a0b1d776b51e3574",
       "to": "50f5b04bdedd5c55",
+      "relation": "url"
+    },
+    {
+      "from": "1841b154c8ec5797",
+      "to": "78e1d3e9c7f5318c",
       "relation": "url"
     },
     {
@@ -26008,11 +26028,6 @@
       "relation": "url"
     },
     {
-      "from": "9800f4bcfc1b02b6",
-      "to": "5f5c20700a81d97f",
-      "relation": "url"
-    },
-    {
       "from": "f57718e7f3ad4635",
       "to": "782c98a0fba4d0a7",
       "relation": "url"
@@ -26085,6 +26100,16 @@
     {
       "from": "db538ea91e49ca9f",
       "to": "9be82577767cb3cd",
+      "relation": "url"
+    },
+    {
+      "from": "d59b2d65d0a1e8fe",
+      "to": "c819126909b32e19",
+      "relation": "url"
+    },
+    {
+      "from": "4b1d819c8fce7dc3",
+      "to": "a39182b2a5943758",
       "relation": "url"
     },
     {
@@ -26673,11 +26698,6 @@
       "relation": "url"
     },
     {
-      "from": "330d69447a15adae",
-      "to": "6ab648d6958054b7",
-      "relation": "url"
-    },
-    {
       "from": "59c9a304632803b8",
       "to": "3076dee3524d7997",
       "relation": "url"
@@ -26768,6 +26788,11 @@
       "relation": "url"
     },
     {
+      "from": "fda2d6c7e1a63104",
+      "to": "27c610698a4134bf",
+      "relation": "url"
+    },
+    {
       "from": "daf8a6f78836d63b",
       "to": "60448224a29a3a63",
       "relation": "url"
@@ -26775,11 +26800,6 @@
     {
       "from": "1c778b0148dbae38",
       "to": "543d8d8f653e3a0d",
-      "relation": "url"
-    },
-    {
-      "from": "ba94457a5345f960",
-      "to": "985cfc26350ba417",
       "relation": "url"
     },
     {
@@ -26808,8 +26828,13 @@
       "relation": "url"
     },
     {
-      "from": "fda2d6c7e1a63104",
-      "to": "27c610698a4134bf",
+      "from": "6fc03d58c9d10695",
+      "to": "3ff24e7c135ee46d",
+      "relation": "url"
+    },
+    {
+      "from": "ba94457a5345f960",
+      "to": "985cfc26350ba417",
       "relation": "url"
     },
     {
@@ -28313,6 +28338,11 @@
       "relation": "url"
     },
     {
+      "from": "3ab922403959be7f",
+      "to": "273b75278f8483e5",
+      "relation": "url"
+    },
+    {
       "from": "b48044a723ae10b0",
       "to": "d777bdbf05091b01",
       "relation": "url"
@@ -28320,11 +28350,6 @@
     {
       "from": "db9e45c6007885ed",
       "to": "d0ee3063cdae772b",
-      "relation": "url"
-    },
-    {
-      "from": "4267e9c0f4c54aac",
-      "to": "32a93d823a0bad9b",
       "relation": "url"
     },
     {
@@ -28433,6 +28458,11 @@
       "relation": "url"
     },
     {
+      "from": "486e51c14fc6e813",
+      "to": "2914174bf48a56a0",
+      "relation": "url"
+    },
+    {
       "from": "a5c001a30848ca66",
       "to": "927a3302bb3be1fa",
       "relation": "url"
@@ -28498,11 +28528,6 @@
       "relation": "url"
     },
     {
-      "from": "486e51c14fc6e813",
-      "to": "2914174bf48a56a0",
-      "relation": "url"
-    },
-    {
       "from": "d7e69288441efe1e",
       "to": "5d7aa94360a1f2ca",
       "relation": "url"
@@ -28563,11 +28588,6 @@
       "relation": "url"
     },
     {
-      "from": "4b699ae662517db3",
-      "to": "6a4a96b4b6d90caf",
-      "relation": "url"
-    },
-    {
       "from": "dbf4c0a74c6306df",
       "to": "072059528b006af2",
       "relation": "url"
@@ -28593,8 +28613,18 @@
       "relation": "url"
     },
     {
+      "from": "47629fa00db9241b",
+      "to": "29e9929e472f1d1a",
+      "relation": "url"
+    },
+    {
       "from": "9742396d952ca978",
       "to": "ac0445bcc5ef6415",
+      "relation": "url"
+    },
+    {
+      "from": "1f0531b8beefc7a1",
+      "to": "523282f2f71e6c2d",
       "relation": "url"
     },
     {
@@ -28605,6 +28635,16 @@
     {
       "from": "1b3e51fa3e15cea3",
       "to": "01061655827bf5d1",
+      "relation": "url"
+    },
+    {
+      "from": "9b8cede0f01ad55b",
+      "to": "16f4676f1404e135",
+      "relation": "url"
+    },
+    {
+      "from": "4b699ae662517db3",
+      "to": "6a4a96b4b6d90caf",
       "relation": "url"
     },
     {
@@ -28633,8 +28673,8 @@
       "relation": "url"
     },
     {
-      "from": "1a6ff87e9a1f64c7",
-      "to": "8c1bca8b08b60ee8",
+      "from": "173723c70f69e10e",
+      "to": "e400479645faedc8",
       "relation": "url"
     },
     {
@@ -28663,18 +28703,13 @@
       "relation": "url"
     },
     {
-      "from": "0de5779e636454ce",
-      "to": "d6226a11f4969fe0",
-      "relation": "url"
-    },
-    {
       "from": "8c49cac3a880503c",
       "to": "452f5d144eb77943",
       "relation": "url"
     },
     {
-      "from": "333d91c9c239d9df",
-      "to": "612f6a581095530c",
+      "from": "e5438a88af04db1e",
+      "to": "b930fdcad5fe6e5d",
       "relation": "url"
     },
     {
@@ -28683,23 +28718,8 @@
       "relation": "url"
     },
     {
-      "from": "bfab9292588493a5",
-      "to": "17ee703165bb97ae",
-      "relation": "url"
-    },
-    {
       "from": "203451f229468894",
       "to": "138199bab8f949b3",
-      "relation": "url"
-    },
-    {
-      "from": "dbac2ea4ef0be79d",
-      "to": "0f079d554ca11031",
-      "relation": "url"
-    },
-    {
-      "from": "49145595c4256a1e",
-      "to": "54b8b40c33f08626",
       "relation": "url"
     },
     {
@@ -28900,6 +28920,11 @@
     {
       "from": "382995641c441ada",
       "to": "6cecac4a19bc1c21",
+      "relation": "url"
+    },
+    {
+      "from": "dbac2ea4ef0be79d",
+      "to": "0f079d554ca11031",
       "relation": "url"
     },
     {
@@ -29138,18 +29163,8 @@
       "relation": "url"
     },
     {
-      "from": "4423009f25d9455e",
-      "to": "a287df7726c12dce",
-      "relation": "url"
-    },
-    {
       "from": "92d289c5256c7d34",
       "to": "40041a0127db537e",
-      "relation": "url"
-    },
-    {
-      "from": "76a8c335473e59de",
-      "to": "87765354b27c2f20",
       "relation": "url"
     },
     {
@@ -29158,8 +29173,8 @@
       "relation": "url"
     },
     {
-      "from": "553035c1df1fec7e",
-      "to": "7e084442da9e7d2a",
+      "from": "9eed1fc211587083",
+      "to": "99283820c04c9f60",
       "relation": "url"
     },
     {
@@ -29183,8 +29198,8 @@
       "relation": "url"
     },
     {
-      "from": "a23d6dcbbabf3ce8",
-      "to": "d7af0b4551b95412",
+      "from": "553035c1df1fec7e",
+      "to": "7e084442da9e7d2a",
       "relation": "url"
     },
     {
@@ -29193,18 +29208,23 @@
       "relation": "url"
     },
     {
+      "from": "a23d6dcbbabf3ce8",
+      "to": "d7af0b4551b95412",
+      "relation": "url"
+    },
+    {
       "from": "23eb4dbdb9aa03fe",
       "to": "77a67807907338b1",
       "relation": "url"
     },
     {
-      "from": "ec435d36bccc280f",
-      "to": "0198177351700f68",
+      "from": "211e4886edeb8568",
+      "to": "4a41dae77072a761",
       "relation": "url"
     },
     {
-      "from": "211e4886edeb8568",
-      "to": "4a41dae77072a761",
+      "from": "ec435d36bccc280f",
+      "to": "0198177351700f68",
       "relation": "url"
     },
     {
@@ -29215,6 +29235,16 @@
     {
       "from": "dc169e12e8cfa981",
       "to": "7def63c960df2443",
+      "relation": "url"
+    },
+    {
+      "from": "4423009f25d9455e",
+      "to": "a287df7726c12dce",
+      "relation": "url"
+    },
+    {
+      "from": "76a8c335473e59de",
+      "to": "87765354b27c2f20",
       "relation": "url"
     },
     {
@@ -29238,8 +29268,8 @@
       "relation": "url"
     },
     {
-      "from": "d4d9e7b51b3c3b3d",
-      "to": "35db5818efd956cd",
+      "from": "d0d59bc727cacf23",
+      "to": "8026f59cca5743a2",
       "relation": "url"
     },
     {
@@ -29248,13 +29278,18 @@
       "relation": "url"
     },
     {
-      "from": "cd29fa8101dced6f",
-      "to": "bc90eb487b2f97f6",
+      "from": "3b43aeb74b6cc287",
+      "to": "8f59a43cac7cfee4",
       "relation": "url"
     },
     {
-      "from": "3b43aeb74b6cc287",
-      "to": "8f59a43cac7cfee4",
+      "from": "d4d9e7b51b3c3b3d",
+      "to": "35db5818efd956cd",
+      "relation": "url"
+    },
+    {
+      "from": "cd29fa8101dced6f",
+      "to": "bc90eb487b2f97f6",
       "relation": "url"
     },
     {
@@ -29275,11 +29310,6 @@
     {
       "from": "f3ecc08b96c62229",
       "to": "2eb20e2fd2d0d9fd",
-      "relation": "url"
-    },
-    {
-      "from": "d0d59bc727cacf23",
-      "to": "8026f59cca5743a2",
       "relation": "url"
     },
     {
@@ -30183,6 +30213,11 @@
       "relation": "url"
     },
     {
+      "from": "7adbd2455105c8fe",
+      "to": "8a0e280e180ef552",
+      "relation": "url"
+    },
+    {
       "from": "8031ac22c3161452",
       "to": "804443b6d6c9f3dd",
       "relation": "url"
@@ -30253,6 +30288,11 @@
       "relation": "url"
     },
     {
+      "from": "681fe16f92885ce8",
+      "to": "d5fdb634cac34f42",
+      "relation": "url"
+    },
+    {
       "from": "47d4c62943159dde",
       "to": "d50ac65f3c34c205",
       "relation": "url"
@@ -30260,11 +30300,6 @@
     {
       "from": "b09ccba94e240a60",
       "to": "b7bd6528858331e2",
-      "relation": "url"
-    },
-    {
-      "from": "281b562735873589",
-      "to": "74b990293f66363d",
       "relation": "url"
     },
     {
@@ -30280,6 +30315,11 @@
     {
       "from": "e7e0219cfcf39f43",
       "to": "41065a62bdea9dd2",
+      "relation": "url"
+    },
+    {
+      "from": "281b562735873589",
+      "to": "74b990293f66363d",
       "relation": "url"
     },
     {
@@ -31083,7 +31123,7 @@
       "relation": "url"
     },
     {
-      "from": "55e1f45e20242e50",
+      "from": "5ba1a2794b4e1729",
       "to": "18c03f1bb5a86ab8",
       "relation": "url"
     },
@@ -31143,7 +31183,7 @@
       "relation": "url"
     },
     {
-      "from": "c4e8fa88146bb4f2",
+      "from": "3fae29cc4b44f1e8",
       "to": "1ca9217632d339a8",
       "relation": "url"
     },
