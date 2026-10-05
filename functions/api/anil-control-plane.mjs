@@ -26,6 +26,33 @@ const SAFETY={
 };
 
 function adapter(configured,mode,extra={}){return {configured,mode,...extra};}
+async function timedFetch(url,init={},ms=8000){
+ const ctl=new AbortController(); const timer=setTimeout(()=>ctl.abort(),ms);
+ try{return await fetch(url,{...init,signal:ctl.signal})}finally{clearTimeout(timer)}
+}
+async function directGitHub(env,operation,body){
+ const token=first(env,['GITHUB_TOKEN','GH_TOKEN']); if(!token)return {configured:false,mode:'github-actions-controlled'};
+ const repo='saberbadri24-tech/city-of-eternity';
+ const headers={accept:'application/vnd.github+json',authorization:'Bearer '+token,'user-agent':'ANIL-X-Control-Plane'};
+ if(operation==='inspect_github')return {configured:true,repo,source:'github-api',data:await (await timedFetch('https://api.github.com/repos/'+repo,{headers})).json()};
+ if(operation==='read_file'){
+  const path=String(body.path||'').replace(/^\\/+?/,''); if(!/^[A-Za-z0-9_./-]{1,300}$/.test(path))return {configured:true,error:'invalid_path'};
+  const r=await timedFetch('https://api.github.com/repos/'+repo+'/contents/'+path+'?ref=main',{headers}); return {configured:true,path,status:r.status,data:await r.json()};
+ }
+ if(operation==='search_code'){
+  const q=String(body.query||'').trim().slice(0,200); if(!q)return {configured:true,error:'query_required'};
+  const r=await timedFetch('https://api.github.com/search/code?q='+encodeURIComponent(q+' repo:'+repo),{headers}); return {configured:true,status:r.status,data:await r.json()};
+ }
+ return {configured:true,mode:'github-api',operation};
+}
+async function directRender(env,operation){
+ const token=first(env,['RENDER_API_KEY','RENDER_TOKEN']); if(!token)return {configured:false,mode:'render-health-via-runtime'};
+ const service='srv-dargiel9fdbs739gsnug';
+ const headers={accept:'application/json',authorization:'Bearer '+token};
+ const path=operation==='read_render_logs'?'/v1/services/'+service+'/events?limit=20':'/v1/services/'+service;
+ const r=await timedFetch('https://api.render.com'+path,{headers});
+ return {configured:true,source:'render-api',status:r.status,data:await r.json().catch(()=>null)};
+}
 
 export async function handleControlPlane(req,env){
  if(req.method!=='GET'&&req.method!=='POST')return json({ok:false,error:'method_not_allowed'},405);
@@ -129,7 +156,11 @@ export async function handleControlPlane(req,env){
   const readOnly={read_live_state:'live_state',health_check:'health',inspect_guard:'guard',inspect_payment:'payment',inspect_wallet:'wallet',inspect_github:'github',search_code:'github',read_file:'github',build_evidence_ledger:'audit'};
   const sensitive=['change_files','create_files','commit','deploy','rollback','write_audit_event','request_owner_approval'];
   if(readOnly[requestedOperation]){
-   result.execution={requestedOperation,status:'accepted',mode:'read_only_adapter',evidenceRequired:true};
+   let evidence=null;
+   if(['inspect_github','search_code','read_file'].includes(requestedOperation)) evidence=await directGitHub(env,requestedOperation,requestBody).catch(e=>({error:String(e?.message||e)}));
+   else if(requestedOperation==='read_render_logs') evidence=await directRender(env,requestedOperation).catch(e=>({error:String(e?.message||e)}));
+   else if(requestedOperation==='health_check') evidence={runtime:'use /api/health',directRender:await directRender(env,'health_check').catch(e=>({error:String(e?.message||e)}))};
+   result.execution={requestedOperation,status:'accepted',mode:'read_only_adapter',evidenceRequired:true,evidence};
   }else if(sensitive.includes(requestedOperation)){
    result.execution={requestedOperation,status:'owner_approval_required',mode:'fail_closed',policy:SAFETY};
   }else if(!OPERATIONS.includes(requestedOperation)){
