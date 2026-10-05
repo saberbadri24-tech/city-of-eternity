@@ -103,6 +103,11 @@ const server=http.createServer(async(req,res)=>{
       const rr=await handleSuperTeam(request,env,{});
       res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
     }
+    if(u.pathname==='/api/anil/control-plane'&&(req.method==='GET'||req.method==='POST')){
+      const {handleControlPlane}=await import('./functions/api/anil-control-plane.mjs');
+      const rr=await handleControlPlane(new Request(origin+(req.url||'/'),{method:req.method,headers:req.headers}),env);
+      res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
+    }
     if(u.pathname==='/api/execution-readiness'){
       const {adminAuth}=await import('./functions/api/admin-auth.mjs');
       if(!(await adminAuth(req,env))){res.statusCode=401;res.setHeader('content-type','application/json; charset=utf-8');res.end(JSON.stringify({ok:false,error:'admin_auth_required'}));return;}
