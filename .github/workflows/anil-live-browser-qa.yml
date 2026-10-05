@@ -57,7 +57,7 @@ jobs:
             check(hd.ok===true,'health payload ok');
             check(hd.configured?.admin===true,'admin secret configured');
             const readiness=await page.request.get(base+'/api/execution-readiness');
-            check(readiness.ok(),'GET /api/execution-readiness');
+            check(readiness.status()===401,'execution readiness remains owner-gated');
             const gd=await page.request.get(base+'/api/guard/live?t='+Date.now());
             check(gd.ok(),'GET /api/guard/live');
             const sd=await page.request.get(base+'/api/anil/super-team');
