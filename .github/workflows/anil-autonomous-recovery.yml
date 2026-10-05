@@ -68,7 +68,7 @@ jobs:
       - name: Publish recovery evidence
         if: always()
         uses: actions/upload-artifact@v4
-        with
+        with:
           name: anil-autonomous-recovery-${{ github.run_id }}
           path: .anil/recovery/latest.json
           retention-days: 14
