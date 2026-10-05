@@ -56,7 +56,20 @@ const server=http.createServer(async(req,res)=>{
     }
     if(u.pathname==='/api/guard/live'&&req.method==='GET'){
       let snap={};
-      try{snap=JSON.parse(await fs.readFile(path.join(root,'guard-live-summary.json'),'utf8'))}catch{}
+      // Guard runs every 5 minutes and intentionally publishes state with [skip render].
+      // Read the public GitHub snapshot here so Render does not need a full deploy for every heartbeat.
+      const guardRemote='https://raw.githubusercontent.com/saberbadri24-tech/city-of-eternity/main/guard-live-summary.json';
+      const guardCache=globalThis.__anilxGuardRemoteCache||{at:0,snap:null};
+      if(guardCache.snap&&Date.now()-guardCache.at<60000) snap=guardCache.snap;
+      if(!snap.updatedAt){
+        try{
+          const ac=new AbortController();const timer=setTimeout(()=>ac.abort(),5000);
+          const rr=await fetch(guardRemote+'?v='+Math.floor(Date.now()/60000),{headers:{accept:'application/json','cache-control':'no-cache'},signal:ac.signal});
+          clearTimeout(timer);
+          if(rr.ok){const remoteSnap=await rr.json();if(remoteSnap&&typeof remoteSnap==='object'){snap=remoteSnap;guardCache.at=Date.now();guardCache.snap=remoteSnap;globalThis.__anilxGuardRemoteCache=guardCache;}}
+        }catch{}
+      }
+      if(!snap.updatedAt){try{snap=JSON.parse(await fs.readFile(path.join(root,'guard-live-summary.json'),'utf8'))}catch{}}
       if(!snap.updatedAt){try{snap={status:JSON.parse(await fs.readFile(path.join(root,'guard-status.json'),'utf8')),radar:{},ledger:{}}}catch{}}
       const status=snap.status||{},radar=snap.radar||{},ledger=snap.ledger||{};
       const scanUpdatedAt=snap.updatedAt||status.updatedAt||status.lastScan||null;
