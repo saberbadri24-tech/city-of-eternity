@@ -29,9 +29,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: npm
+          package-manager-cache: false
       - name: Install
-        run: npm ci --ignore-scripts
+        run: npm install --ignore-scripts
       - name: Local integrity
         id: local
         continue-on-error: true
