@@ -1,10 +1,10 @@
 (()=>{'use strict';
 const API='';
 const services=[
-{id:'website',name:'AI Website Build',description:'ساخت سایت حرفه‌ای',price:199},
+{id:'website',name:'AI Website Build',description:'ساخت سایت حرفه‌ای',price:79},
 {id:'teaser',name:'Marketing Teaser',description:'تیزر تبلیغاتی',price:29},
 {id:'fix',name:'Website Fix',description:'رفع خطا و بهینه‌سازی',price:19},
-{id:'growth',name:'Growth & SEO',description:'رشد و SEO',price:79},
+{id:'growth',name:'Growth & SEO',description:'رشد و SEO',price:199},
 {id:'automation',name:'Business Automation',description:'خودکارسازی فرایند',price:79},
 {id:'ai-agent',name:'AI Agent Integration',description:'اتصال AI Agent',price:199}
 ];
