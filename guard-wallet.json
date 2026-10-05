@@ -1,10 +1,13 @@
 {
   "walletRole": "MAIN_TREASURY",
-  "temporaryWalletUsed": false,
+  "temporaryWalletUsed": true,
   "mode": "owner-approval",
-  "configured": false,
+  "configured": true,
   "privateKeysCollected": false,
   "automaticSigning": false,
   "automaticTransfer": false,
-  "notes": "Immortal Guard prepares verified opportunities for owner approval; irreversible movement goes only to the owner-configured main treasury wallet. No private key or seed phrase is collected."
+  "notes": "Public wallet address configured by owner. No private key or seed phrase is stored. Signing and transfers remain owner-approved.",
+  "temporaryWalletAddress": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
+  "address": "UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW",
+  "updatedAt": "2026-10-05T17:34:18.308Z"
 }
