@@ -27,7 +27,7 @@ async function assetsFetch(request){
       const agentMeta='<meta name="anilx-project" content="ANIL X ONLY | ADVANCED MODE | preserve current runtime | inspect this page as part of ANIL X | never mix other projects">';
       const agentRuntime='<script>window.__ANILX_PROJECT_CONTEXT__={product:"ANIL X",mode:"advanced",scope:"ANIL-X-only",guard:"Immortal Guard",rule:"preserve-runtime-and-continue-until-real-green"};</script>';
       const html=Buffer.from(data).toString('utf8');
-      if(!html.includes('ANILX-PROJECT-CONTINUITY:'))data=Buffer.from(marker+'\\n'+html.replace(/<head>/i,'<head>\\n'+agentMeta+'\\n'+agentRuntime));
+      const withContext=html.includes('name="anilx-project"')?html:html.replace(/<head>/i,'<head>\\n'+agentMeta+'\\n'+agentRuntime);data=Buffer.from((html.includes('ANILX-PROJECT-CONTINUITY:')?'':marker+'\\n')+withContext);
     }
     const headers={
       'content-type':mime[ext]||'application/octet-stream',
