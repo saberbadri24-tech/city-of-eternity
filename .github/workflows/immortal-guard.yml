@@ -8,7 +8,7 @@ on:
       - "guard-*.json"
       - "rewards.json"
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "1-59/5 * * * *"
 
 permissions:
   contents: write
@@ -42,72 +42,50 @@ jobs:
 
       - name: Discovery
         run: python scripts/global_opportunity_discovery.py
-
       - name: Official-source discovery
         run: python scripts/official_discovery.py
-
       - name: Discovery verification
         run: python scripts/verify_global_discovery.py
-
       - name: Strict free-real-token hunter
         run: python scripts/free_real_token_engine.py
-
       - name: Airdrop+ intelligence scan
         run: python scripts/airdrop_guard.py
-
       - name: Safe no-signature claim lane
         run: python scripts/guard_safe_claim_engine.py
-
       - name: Source health
         run: python scripts/guard_source_health.py
-
       - name: Opportunity intelligence
         run: python scripts/opportunity_intelligence.py
-
       - name: High-value opportunity engine
         run: python scripts/high_value_opportunity_engine.py
-
       - name: TON receipt monitor
         run: python scripts/guard_ton_receipts.py
-
       - name: Threat engine
         run: python scripts/guard_threat_engine.py
-
       - name: Evidence ledger
         run: python scripts/guard_evidence_ledger.py
-
       - name: Anomaly engine
         run: python scripts/guard_anomaly_engine.py
-
       - name: Replay engine
         run: python scripts/guard_replay_engine.py
-
       - name: Workflow security
         run: python scripts/guard_workflow_security.py
-
       - name: Agent contract
         run: python scripts/guard_agent_contract.py
-
       - name: Evolution engine
         run: python scripts/guard_evolution_engine.py
-
       - name: Horizon engine
         run: python scripts/guard_horizon_engine.py
-
       - name: Modular core
         run: python scripts/guard_modular_core.py
-
       - name: Action planner
         run: python scripts/guard_action_planner.py
-
       - name: Super Radar regression
         run: |
           python -m py_compile scripts/guard_super_radar.py scripts/test_guard_super_radar.py
           python scripts/test_guard_super_radar.py
-
       - name: Super Airdrop / Immortal Guard fusion
         run: python scripts/guard_super_radar.py
-
       - name: Final fail-closed preflight
         run: python scripts/guard_final_preflight.py
 
@@ -149,9 +127,6 @@ jobs:
             echo "No Guard state changes."
             exit 0
           fi
-          # Rebase is unsafe here because Guard intentionally regenerates many JSON state files.
-          # Reset the working tree to the latest main, keep only freshly generated Guard state,
-          # then publish that state as a fast-forward commit.
           git fetch origin main
           git reset --mixed origin/main
           git add guard-*.json rewards.json
