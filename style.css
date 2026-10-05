@@ -5,3 +5,4 @@
 
 /* ANIL X performance layer: keep below-fold rendering off the critical path. */
 .section,.heritage,footer{content-visibility:auto;contain-intrinsic-size:720px}img,video{max-width:100%;height:auto}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
