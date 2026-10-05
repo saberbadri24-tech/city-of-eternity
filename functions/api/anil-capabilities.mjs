@@ -17,7 +17,18 @@ export function handleAnilCapabilities(req,env){
         stripe:envFlag(env,'STRIPE_SECRET_KEY'),
         paypal:envFlag(env,'PAYPAL_CLIENT_ID','PAYPAL_CLIENT_SECRET')
       },
-      deployment:{renderAutoDeploy:true,githubActions:true}
+      deployment:{renderAutoDeploy:true,githubActions:true},
+      ownerAssistant:{
+        liveControlPlane:true,
+        controlledChangeQueue:true,
+        autonomousRecovery:true,
+        superTeam:true,
+        guardRadar:true,
+        revenueCycle:true,
+        postChangeQA:true,
+        rollbackGate:true,
+        mutationBoundary:'owner-approved controlled GitHub workflow'
+      }
     },
     executionBoundary:{
       productionMutation:'PR/review path',
