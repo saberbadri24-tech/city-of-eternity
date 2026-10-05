@@ -280,7 +280,7 @@ async function runtimeRoutes(req,env,u){
     const ai=!!(getAiConfig(env).openai||getAiConfig(env).gemini||getAiConfig(env).anthropic);
     const storageConfigured=!!env.PAYMENTS;
     const persistence=storageConfigured&&String(env.PAYMENTS_DURABLE||'false').toLowerCase()==='true';
-    return rjson({ok:true,customerPath:{brief:true,leadCapture:true,qualification:true,offer:true,order:true,checkout:payment&&fx,paymentGateway:payment,fxConfigured:fx,persistentAccounting:persistence,storageConfigured,aiReady:ai},blockers:[...(!payment?['VARIZA_API_KEY']:[]),...(!fx?['USD_IRR_RATE']:[])],truth:'customer arrival is external; everything inside this path is explicit and testable'});
+    return rjson({ok:true,customerPath:{brief:true,leadCapture:true,qualification:true,offer:true,order:true,checkout:payment&&fx&&storageConfigured,paymentGateway:payment,fxConfigured:fx,persistentAccounting:persistence,storageConfigured,aiReady:ai},blockers:[...(!payment?['VARIZA_API_KEY']:[]),...(!fx?['USD_IRR_RATE']:[]),...(!storageConfigured?['PAYMENTS_STORAGE']:[])],truth:'customer arrival is external; everything inside this path is explicit and testable'});
   }
   if(p==='/api/revenue/programs'&&req.method==='GET'){
     const configured={variza:!!getVarizaApiKey(env),ton:validTonAddress(getMainTonAddress(env)),ai:!!(getAiConfig(env).openai||getAiConfig(env).gemini||getAiConfig(env).anthropic),gsc:!!(env.GSC_ACCESS_TOKEN||env.GSC_SERVICE_ACCOUNT_JSON),storage:!!env.PAYMENTS};
