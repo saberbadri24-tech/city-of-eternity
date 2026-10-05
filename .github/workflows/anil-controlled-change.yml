@@ -84,6 +84,17 @@ jobs:
       - name: Merge verified owner-approved change
         if: env.ANIL_REQUEST_ID != ''
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: \${{ github.token }}
         run: |
           gh pr merge "anil/$ANIL_REQUEST_ID" --squash --delete-branch --repo "$GITHUB_REPOSITORY"
+
+      - name: Mark controlled request processed
+        if: env.ANIL_REQUEST_ID != ''
+        env:
+          ANIL_API_URL: https://city-of-eternity.onrender.com
+        run: |
+          TOKEN="$(curl -fsSL -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x" | python -c 'import sys,json; print(json.load(sys.stdin)["value"])')"
+          curl --fail --silent --show-error -X DELETE \
+            -H "Authorization: Bearer $TOKEN" \
+            "$ANIL_API_URL/api/anil/automation/queue?id=$ANIL_REQUEST_ID"
