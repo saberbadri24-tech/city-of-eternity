@@ -16,6 +16,7 @@ async function waitHealth(){
 }
 function assert(ok,msg){if(!ok)throw new Error(msg)}
 const health=await waitHealth();
+console.log('LIVE HEALTH',JSON.stringify(health.data));
 assert(health.data.service==='ANIL X','wrong live service identity');
 assert(health.data.configured?.admin===true,'admin secret is not configured');
 assert(health.data.revenue?.storageConfigured===true,'persistent storage binding missing');
@@ -23,15 +24,18 @@ assert(health.data.revenue?.durableAccounting===true,'durable accounting is disa
 assert(health.data.revenue?.ton===true,'main TON wallet is not configured');
 
 const readiness=await get('/api/execution-readiness');
+console.log('LIVE READINESS',JSON.stringify(readiness.data));
 assert(readiness.status===200&&readiness.data?.execution?.runtime?.ready===true,'execution runtime readiness failed');
 assert(readiness.data?.providers?.tonMain===true,'execution readiness does not see main TON wallet');
 assert(readiness.data?.providers?.durableStore===true,'execution readiness does not see durable store');
 
 const payment=await get('/api/payment-config');
+console.log('LIVE PAYMENT',JSON.stringify(payment.data));
 assert(payment.status===200&&payment.data?.ton?.mainConfigured===true,'payment config main wallet failed');
 assert(payment.data?.guard?.temporaryWalletConfigured!==true,'temporary wallet must not equal an unverified permanent wallet');
 
 const customer=await get('/api/revenue/customer-ready');
+console.log('LIVE CUSTOMER',JSON.stringify(customer.data));
 assert(customer.status===200&&customer.data?.customerPath?.storageConfigured===true,'customer path storage failed');
 
 const home=await get('/');
