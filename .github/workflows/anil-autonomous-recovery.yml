@@ -1,0 +1,80 @@
+name: ANIL X Autonomous Recovery
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "*/10 * * * *"
+
+concurrency:
+  group: anil-autonomous-recovery
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  actions: write
+  issues: write
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 20
+      - name: Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install
+        run: npm ci --ignore-scripts
+      - name: Local integrity
+        id: local
+        continue-on-error: true
+        run: |
+          node scripts/verify-syntax.mjs
+          node scripts/system-integrity-audit.mjs
+          node scripts/anil-final-contract-smoke.mjs
+      - name: Live health and recovery smoke
+        id: live
+        continue-on-error: true
+        env:
+          ANILX_LIVE_URL: https://city-of-eternity.onrender.com
+        run: node scripts/live-qa.mjs
+      - name: Retry failed workflow jobs once
+        if: steps.local.outcome == 'failure' || steps.live.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run list --repo "${{ github.repository }}" --branch main --limit 20 --json databaseId,status,conclusion,name,headSha > /tmp/anil-runs.json
+          node - <<'NODE'
+          const fs=require("fs"),cp=require("child_process");
+          const rows=JSON.parse(fs.readFileSync('/tmp/anil-runs.json','utf8'));
+          const sha=process.env.GITHUB_SHA;
+          const candidates=rows.filter(r=>r.headSha===sha && r.databaseId!==Number(process.env.GITHUB_RUN_ID) && r.conclusion==='failure');
+          for(const r of candidates.slice(0,3)){
+            cp.execFileSync('gh',['run','rerun',String(r.databaseId),'--failed','--repo',process.env.GITHUB_REPOSITORY],{stdio:'inherit'});
+          }
+          NODE
+      - name: Write recovery evidence
+        if: always()
+        run: |
+          mkdir -p .anil/recovery
+          printf '{"engine":"ANIL-AUTONOMOUS-RECOVERY","commit":"%s","local":"%s","live":"%s"}\n' "$GITHUB_SHA" "${{ steps.local.outcome }}" "${{ steps.live.outcome }}" > .anil/recovery/latest.json
+      - name: Publish recovery evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with
+          name: anil-autonomous-recovery-${{ github.run_id }}
+          path: .anil/recovery/latest.json
+          retention-days: 14
+      - name: Open incident when unhealthy
+        if: steps.local.outcome == 'failure' || steps.live.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create --repo "${{ github.repository }}" --title "ANIL AUTO-RECOVERY: unhealthy runtime at $GITHUB_SHA" --body "Local: ${{ steps.local.outcome }}; Live: ${{ steps.live.outcome }}; evidence: anil-autonomous-recovery-${{ github.run_id }}"
