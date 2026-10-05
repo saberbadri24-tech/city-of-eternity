@@ -119,8 +119,7 @@ const server=http.createServer(async(req,res)=>{
     }
     if(u.pathname==='/api/admin/password/login'&&req.method==='POST'){
       env.PAYMENTS=await getPaymentsStore();
-      const chunks=[];for await(const chunk of req)chunks.push(chunk);
-      const body=chunks.length?Buffer.concat(chunks):undefined;
+      const body=await readBody(req);
       const request=new Request(origin+(req.url||'/'),{method:req.method,headers:req.headers,body});
       const {adminLogin}=await import('./functions/api/admin-auth.mjs');
       const rr=await adminLogin(request,env);
