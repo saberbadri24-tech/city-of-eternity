@@ -12,6 +12,7 @@ const MAX_BODY_BYTES=512*1024;
 const PRIVATE_ROOTS=new Set(['.git','.github','app','mobile','ui','netlify','functions','scripts']);
 const PRIVATE_FILES=new Set(['package.json','package-lock.json','render-server.mjs','worker.js','_worker.js','wrangler.json','netlify.toml','_headers','.env','.env.local']);
 const publicPath=rel=>{const clean=String(rel||'').replace(/^\/+/, '');if(!clean||clean.includes('..'))return false;const first=clean.split('/')[0];if(first.startsWith('.')&&first!=='.well-known')return false;if(PRIVATE_ROOTS.has(first)||PRIVATE_FILES.has(clean)||PRIVATE_FILES.has(path.basename(clean)))return false;return true;};
+const toWebRequest=(req,origin)=>{const headers=new Headers();for(const [k,v] of Object.entries(req.headers||{})){if(Array.isArray(v))headers.set(k,v.join(', '));else if(v!=null)headers.set(k,String(v));}return new Request(origin+(req.url||'/'),{method:req.method||'GET',headers});};
 const readBody=async(req,limit=MAX_BODY_BYTES)=>{let total=0;const chunks=[];for await(const chunk of req){total+=chunk.length;if(total>limit)throw Object.assign(new Error('request_body_too_large'),{statusCode:413});chunks.push(chunk)}return chunks.length?Buffer.concat(chunks):undefined};
 
 async function assetsFetch(request){
@@ -110,9 +111,9 @@ const server=http.createServer(async(req,res)=>{
     }
     if(u.pathname==='/api/execution-readiness'){
       const {adminAuth}=await import('./functions/api/admin-auth.mjs');
-      if(!(await adminAuth(req,env))){res.statusCode=401;res.setHeader('content-type','application/json; charset=utf-8');res.end(JSON.stringify({ok:false,error:'admin_auth_required'}));return;}
+      if(!(await adminAuth(toWebRequest(req,origin),env))){res.statusCode=401;res.setHeader('content-type','application/json; charset=utf-8');res.end(JSON.stringify({ok:false,error:'admin_auth_required'}));return;}
       const {handleExecutionReadiness}=await import('./functions/api/execution-readiness.mjs');
-      const rr=await handleExecutionReadiness(req,env);res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
+      const rr=await handleExecutionReadiness(toWebRequest(req,origin),env);res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
     }
     if((u.pathname==='/api/admin/self-test'||u.pathname==='/api/admin/auth-self-test')&&req.method==='GET'){
       const {adminAuth}=await import('./functions/api/admin-auth.mjs');
