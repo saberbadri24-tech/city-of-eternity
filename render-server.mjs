@@ -8,11 +8,16 @@ let workerPromise=null;
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.svg':'image/svg+xml','.webmanifest':'application/manifest+json','.ico':'image/x-icon','.txt':'text/plain; charset=utf-8','.xml':'application/xml; charset=utf-8','.webp':'image/webp','.mp3':'audio/mpeg'};
 
 const getWorker=()=>workerPromise||(workerPromise=import('./worker.js').then(m=>m.default));
+const MAX_BODY_BYTES=512*1024;
+const PRIVATE_ROOTS=new Set(['.git','.github','app','mobile','ui','netlify','functions','scripts']);
+const PRIVATE_FILES=new Set(['package.json','package-lock.json','render-server.mjs','worker.js','_worker.js','wrangler.json','netlify.toml','_headers','.env','.env.local']);
+const publicPath=rel=>{const clean=String(rel||'').replace(/^\/+/, '');if(!clean||clean.includes('..'))return false;const first=clean.split('/')[0];if(first.startsWith('.')&&first!=='.well-known')return false;if(PRIVATE_ROOTS.has(first)||PRIVATE_FILES.has(clean)||PRIVATE_FILES.has(path.basename(clean)))return false;return true;};
+const readBody=async(req,limit=MAX_BODY_BYTES)=>{let total=0;const chunks=[];for await(const chunk of req){total+=chunk.length;if(total>limit)throw Object.assign(new Error('request_body_too_large'),{statusCode:413});chunks.push(chunk)}return chunks.length?Buffer.concat(chunks):undefined};
 
 async function assetsFetch(request){
   const u=new URL(request.url);
   let rel=decodeURIComponent(u.pathname).replace(/^\/+/, '')||'index.html';
-  if(rel.includes('..'))return new Response('Not Found',{status:404});
+  if(!publicPath(rel))return new Response('Not Found',{status:404});
   let file=path.join(root,rel);
   if(!path.extname(file))file=path.join(root,'index.html');
   try{
@@ -92,18 +97,21 @@ const server=http.createServer(async(req,res)=>{
         const body={ok:true,engine:'ANIL-SUPER-TEAM',version:'2.0.0-frontier-aware',generatedAt:new Date().toISOString(),executionMode:'local-safe',command:'DISCOVER -> VERIFY -> SCORE -> QUALIFY -> TEST -> SHIP -> MEASURE -> LEARN -> IMPROVE',providers:{astra:{live:false,reason:'runtime_secret_missing'},claude:{live:false,reason:'runtime_secret_missing'},gemini:{live:false,reason:'runtime_secret_missing'}},safety:{finalCommand:'ANIL',irreversibleActions:'OWNER_APPROVAL',moneyMovement:'OWNER_APPROVAL',privateKeys:false,seedPhrases:false,autoSigning:false},truth:{noFakeExecution:true,noFakeRevenue:true}};
         res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');res.setHeader('cache-control','no-store');res.end(JSON.stringify(body));return;
       }
-      const chunks=[];for await(const chunk of req)chunks.push(chunk);
-      const body=chunks.length?Buffer.concat(chunks):undefined;
+      const body=await readBody(req);
       const request=new Request(origin+(req.url||'/'),{method:'POST',headers:req.headers,body});
       const {handleSuperTeam}=await import('./functions/api/anil-super-team.mjs');
       const rr=await handleSuperTeam(request,env,{});
       res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
     }
     if(u.pathname==='/api/execution-readiness'){
+      const {adminAuth}=await import('./functions/api/admin-auth.mjs');
+      if(!(await adminAuth(req,env))){res.statusCode=401;res.setHeader('content-type','application/json; charset=utf-8');res.end(JSON.stringify({ok:false,error:'admin_auth_required'}));return;}
       const {handleExecutionReadiness}=await import('./functions/api/execution-readiness.mjs');
       const rr=await handleExecutionReadiness(req,env);res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
     }
     if((u.pathname==='/api/admin/self-test'||u.pathname==='/api/admin/auth-self-test')&&req.method==='GET'){
+      const {adminAuth}=await import('./functions/api/admin-auth.mjs');
+      if(!(await adminAuth(req,env))){res.statusCode=401;res.setHeader('content-type','application/json; charset=utf-8');res.end(JSON.stringify({ok:false,error:'admin_auth_required'}));return;}
       env.PAYMENTS=await getPaymentsStore();
       const {adminSelfTest}=await import('./functions/api/admin-auth.mjs');
       const out=await adminSelfTest(env);
@@ -120,7 +128,7 @@ const server=http.createServer(async(req,res)=>{
     }
     if((req.method==='GET'||req.method==='HEAD')&&!u.pathname.startsWith('/api/')){
       const rel=decodeURIComponent(u.pathname).replace(/^\/+/, '')||'index.html';
-      const safe=!rel.includes('..');
+      const safe=publicPath(rel);
       const file=safe?(path.extname(path.join(root,rel))?path.join(root,rel):path.join(root,'index.html')):null;
       const ext=file?path.extname(file).toLowerCase():'';
       const isHtml=ext==='.html';
@@ -143,8 +151,7 @@ const server=http.createServer(async(req,res)=>{
       const buf=Buffer.from(await response.arrayBuffer());res.setHeader('content-length',String(buf.length));res.end(buf);return;
     }
 
-    const chunks=[];for await(const chunk of req)chunks.push(chunk);
-    const body=chunks.length?Buffer.concat(chunks):undefined;
+    const body=await readBody(req);
     const request=new Request(origin+(req.url||'/'),{
       method:req.method,headers:req.headers,
       body:['GET','HEAD'].includes(req.method)?undefined:body
@@ -158,7 +165,7 @@ const server=http.createServer(async(req,res)=>{
     res.setHeader('content-length',String(buf.length));
     res.end(buf);
   }catch(err){
-    res.statusCode=500;
+    res.statusCode=Number(err?.statusCode)||500;
     res.setHeader('content-type','application/json');
     res.end(JSON.stringify({ok:false,error:'render_runtime_error',message:String(err?.message||err)}));
   }
