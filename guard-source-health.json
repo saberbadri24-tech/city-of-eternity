@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-10-05T17:29:06.815668+00:00",
+  "updatedAt": "2026-10-05T17:37:06.312608+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,12 +20,12 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1857,
+  "discoveryCandidateCount": 1863,
   "uniqueNewsPublishers": 541,
   "topPublishers": [
     {
       "publisher": "Binance",
-      "count": 119
+      "count": 118
     },
     {
       "publisher": "Immunefi",
@@ -33,7 +33,7 @@
     },
     {
       "publisher": "CoinMarketCap",
-      "count": 74
+      "count": 76
     },
     {
       "publisher": "HackerOne",
@@ -41,10 +41,10 @@
     },
     {
       "publisher": "x.com",
-      "count": 65
+      "count": 66
     },
     {
-      "publisher": "yelp.com",
+      "publisher": "Yelp",
       "count": 52
     },
     {
@@ -56,12 +56,16 @@
       "count": 46
     },
     {
-      "publisher": "RootData",
-      "count": 41
-    },
-    {
       "publisher": "GitHub",
       "count": 40
+    },
+    {
+      "publisher": "rootdata.com",
+      "count": 34
+    },
+    {
+      "publisher": "Phemex",
+      "count": 32
     },
     {
       "publisher": "BitDegree",
@@ -69,38 +73,34 @@
     },
     {
       "publisher": "CCN.com",
-      "count": 29
-    },
-    {
-      "publisher": "Phemex",
-      "count": 29
+      "count": 30
     },
     {
       "publisher": "polygonscan.com",
-      "count": 27
+      "count": 28
     },
     {
       "publisher": "AirdropAlert",
       "count": 26
     },
     {
-      "publisher": "facebook.com",
-      "count": 23
-    },
-    {
       "publisher": "Bitget",
       "count": 23
     },
     {
+      "publisher": "facebook.com",
+      "count": 22
+    },
+    {
       "publisher": "LinkedIn",
-      "count": 18
+      "count": 20
+    },
+    {
+      "publisher": "Medium",
+      "count": 17
     },
     {
       "publisher": "Bybit",
-      "count": 18
-    },
-    {
-      "publisher": "TradingView",
       "count": 17
     }
   ],
