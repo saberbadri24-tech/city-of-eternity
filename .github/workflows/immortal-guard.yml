@@ -124,6 +124,7 @@ jobs:
           ledger=read('guard-evidence-ledger.json')
           summary={
             'updatedAt': status.get('updatedAt') or status.get('lastScan') or radar.get('generatedAt'),
+            'heartbeatAt': __import__('datetime').datetime.now(__import__('datetime').timezone.utc).isoformat(),
             'status': status,
             'radar': {
               'totalCandidates': radar.get('summary',{}).get('totalCandidates',0),
