@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-10-05T10:07:38.777366+00:00",
+  "updatedAt": "2026-10-05T10:26:49.930678+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,20 +20,20 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1850,
-  "uniqueNewsPublishers": 537,
+  "discoveryCandidateCount": 1848,
+  "uniqueNewsPublishers": 535,
   "topPublishers": [
     {
       "publisher": "Binance",
-      "count": 124
+      "count": 121
     },
     {
-      "publisher": "Immunefi",
+      "publisher": "immunefi.com",
       "count": 89
     },
     {
       "publisher": "CoinMarketCap",
-      "count": 71
+      "count": 76
     },
     {
       "publisher": "HackerOne",
@@ -45,11 +45,11 @@
     },
     {
       "publisher": "Yelp",
-      "count": 53
+      "count": 54
     },
     {
       "publisher": "Reddit",
-      "count": 50
+      "count": 47
     },
     {
       "publisher": "Coin Gabbar",
@@ -57,27 +57,31 @@
     },
     {
       "publisher": "RootData",
-      "count": 43
+      "count": 40
     },
     {
-      "publisher": "github.com",
-      "count": 38
+      "publisher": "GitHub",
+      "count": 39
     },
     {
-      "publisher": "BitDegree",
+      "publisher": "bitdegree.org",
       "count": 31
     },
     {
       "publisher": "Phemex",
+      "count": 30
+    },
+    {
+      "publisher": "CCN.com",
       "count": 29
     },
     {
-      "publisher": "ccn.com",
-      "count": 28
+      "publisher": "polygonscan.com",
+      "count": 27
     },
     {
       "publisher": "facebook.com",
-      "count": 26
+      "count": 25
     },
     {
       "publisher": "AirdropAlert",
@@ -85,15 +89,11 @@
     },
     {
       "publisher": "Bitget",
-      "count": 23
+      "count": 22
     },
     {
       "publisher": "LinkedIn",
-      "count": 20
-    },
-    {
-      "publisher": "Medium",
-      "count": 18
+      "count": 19
     },
     {
       "publisher": "TradingView",
