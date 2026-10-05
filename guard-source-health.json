@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-10-05T18:59:34.003810+00:00",
+  "updatedAt": "2026-10-05T19:07:02.763533+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,15 +20,15 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1858,
-  "uniqueNewsPublishers": 542,
+  "discoveryCandidateCount": 1857,
+  "uniqueNewsPublishers": 543,
   "topPublishers": [
     {
       "publisher": "Binance",
-      "count": 117
+      "count": 120
     },
     {
-      "publisher": "Immunefi",
+      "publisher": "immunefi.com",
       "count": 89
     },
     {
@@ -44,7 +44,7 @@
       "count": 65
     },
     {
-      "publisher": "Yelp",
+      "publisher": "yelp.com",
       "count": 52
     },
     {
@@ -56,12 +56,12 @@
       "count": 45
     },
     {
-      "publisher": "GitHub",
-      "count": 39
+      "publisher": "RootData",
+      "count": 40
     },
     {
-      "publisher": "rootdata.com",
-      "count": 39
+      "publisher": "GitHub",
+      "count": 37
     },
     {
       "publisher": "BitDegree",
@@ -73,7 +73,7 @@
     },
     {
       "publisher": "Phemex",
-      "count": 30
+      "count": 29
     },
     {
       "publisher": "polygonscan.com",
@@ -92,16 +92,16 @@
       "count": 23
     },
     {
+      "publisher": "LinkedIn",
+      "count": 19
+    },
+    {
       "publisher": "Bybit",
       "count": 18
     },
     {
       "publisher": "Medium",
       "count": 17
-    },
-    {
-      "publisher": "tradingview.com",
-      "count": 16
     }
   ],
   "invalidSources": [],
