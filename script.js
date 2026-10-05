@@ -43,7 +43,32 @@ function bindAction(e){const el=e.target.closest('[data-request],[data-chat]');i
 document.addEventListener('click',bindAction,true);
 form?.addEventListener('submit',e=>{e.preventDefault();handle(input?.value||'')});
 input?.addEventListener('input',updateCount);
-const image=$('#imageInput'),preview=$('#imagePreview');image?.addEventListener('change',async()=>{const f=image.files?.[0];if(!f)return;if(preview){preview.hidden=false;preview.textContent=`فایل «${f.name}» آماده بررسی است.`}input?.focus()});
+const image=$('#imageInput'),preview=$('#imagePreview');
+async function compressImage(file){
+  if(!/^image\/(png|jpeg|jpg|webp)$/i.test(file.type))return null;
+  const src=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(String(r.result));r.onerror=reject;r.readAsDataURL(file)});
+  const img=await new Promise((resolve,reject)=>{const x=new Image();x.onload=()=>resolve(x);x.onerror=reject;x.src=src});
+  const max=1600,scale=Math.min(1,max/Math.max(img.naturalWidth||img.width,img.naturalHeight||img.height));
+  const c=document.createElement('canvas');c.width=Math.max(1,Math.round((img.naturalWidth||img.width)*scale));c.height=Math.max(1,Math.round((img.naturalHeight||img.height)*scale));
+  const ctx=c.getContext('2d',{alpha:false});ctx.drawImage(img,0,0,c.width,c.height);
+  return c.toDataURL('image/jpeg',.82);
+}
+async function analyzeImageFile(file){
+  const dataUrl=await compressImage(file);if(!dataUrl)return null;
+  const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),12000);
+  try{
+    const r=await fetch('/api/vision',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({dataUrl,prompt:input?.value?.trim()||'این تصویر را برای من تحلیل کن و نکات مهم، متن قابل خواندن و مشکلات احتمالی را بگو.'}),signal:controller.signal});
+    const d=await r.json().catch(()=>({}));if(!r.ok||!d.ok)throw Error(d.error||'vision_unavailable');return d.reply||'تصویر بررسی شد.';
+  }finally{clearTimeout(timer)}
+}
+image?.addEventListener('change',async()=>{
+  const f=image.files?.[0];if(!f)return;
+  if(preview){preview.hidden=false;preview.textContent=`فایل «${f.name}» آماده بررسی است…`}
+  if(/^image\//i.test(f.type)){
+    try{const reply=await analyzeImageFile(f);addMsg('user',`[Image] ${f.name}`);const node=addMsg('bot',reply);state.turns.push({role:'user',text:`[Image] ${f.name}`});state.turns.push({role:'assistant',text:reply});state.turns=state.turns.slice(-10);save();if(preview)preview.textContent=`تصویر «${f.name}» تحلیل شد.`}catch(err){if(preview)preview.textContent='تصویر آماده است؛ تحلیل زنده در دسترس نیست ('+(err.message||'خطا')+').';}
+  }
+  input?.focus();
+});
 const voice=$('#voiceBtn'),status=$('#voiceStatus');let speechRecognizer=null;if(voice&&('SpeechRecognition'in window||'webkitSpeechRecognition'in window)){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;speechRecognizer=new SR();const rec=speechRecognizer;rec.lang=(window.ANILX_LANGUAGE==='fa'?'fa-IR':window.ANILX_LANGUAGE==='ar'?'ar-SA':'en-US');rec.interimResults=false;voice.addEventListener('click',e=>{e.preventDefault();try{rec.start();voice.setAttribute('aria-pressed','true');if(status){status.hidden=false;status.textContent='در حال شنیدن…'}}catch{}});rec.onresult=e=>{const t=e.results?.[0]?.[0]?.transcript||'';if(input){input.value=t;updateCount();handle(t)}};rec.onerror=()=>{voice.setAttribute('aria-pressed','false')};rec.onend=()=>voice.setAttribute('aria-pressed','false')}else voice?.addEventListener('click',()=>{if(status){status.hidden=false;status.textContent='ورودی صوتی در این مرورگر در دسترس نیست.'}});
 const modal=$('#profileModal'),ageGrid=$('#ageGrid'),goalGrid=$('#goalGrid'),saveProfile=$('#saveProfile'),close=$('#closeProfile'),profileBtn=$('#profileBtn'),change=$('#changeProfile');
 function syncProfile(){ Array.from(document.querySelectorAll('[data-age]')).forEach(b=>b.classList.toggle('active',b.dataset.age===profile.age));Array.from(document.querySelectorAll('[data-goal]')).forEach(b=>b.classList.toggle('active',b.dataset.goal===profile.goal));if(saveProfile)saveProfile.disabled=!(profile.age&&profile.goal);const fa=window.ANILX_LANGUAGE==='fa';const an=fa?ageNamesFa:ageNames,gn=fa?goalNamesFa:goalNames;const badge=$('#audienceBadge'),line=$('#welcomeLine');if(badge)badge.textContent=profile.age?`${an[profile.age]} · ${gn[profile.goal]|| (fa?'تجربه شخصی':'Personal')}`:(fa?'تجربه شخصی تو':'Personal workspace');if(line)line.textContent=profile.age?(fa?`تجربه تو آماده است: ${an[profile.age]} · ${gn[profile.goal]||'هدف آزاد'}`:`Workspace ready: ${an[profile.age]} · ${gn[profile.goal]||'Open goal'}`):(fa?'اول خودت را به ANIL X معرفی کن.':'Choose your profile to personalize Anil.');}
