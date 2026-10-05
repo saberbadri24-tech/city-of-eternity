@@ -29,6 +29,9 @@ function adapter(configured,mode,extra={}){return {configured,mode,...extra};}
 
 export async function handleControlPlane(req,env){
  if(req.method!=='GET'&&req.method!=='POST')return json({ok:false,error:'method_not_allowed'},405);
+ let requestBody={};
+ if(req.method==='POST'){requestBody=await req.json().catch(()=>({}));}
+ const requestedOperation=String(requestBody.operation||'read_live_state');
 
  const renderKey=first(env,['RENDER_API_KEY','RENDER_TOKEN']);
  const githubKey=first(env,['GITHUB_TOKEN','GH_TOKEN']);
@@ -121,5 +124,19 @@ export async function handleControlPlane(req,env){
    modelApisAreNotAssumedLive:true
   }
  };
+
+ if(req.method==='POST'){
+  const readOnly={read_live_state:'live_state',health_check:'health',inspect_guard:'guard',inspect_payment:'payment',inspect_wallet:'wallet',inspect_github:'github',search_code:'github',read_file:'github',build_evidence_ledger:'audit'};
+  const sensitive=['change_files','create_files','commit','deploy','rollback','write_audit_event','request_owner_approval'];
+  if(readOnly[requestedOperation]){
+   result.execution={requestedOperation,status:'accepted',mode:'read_only_adapter',evidenceRequired:true};
+  }else if(sensitive.includes(requestedOperation)){
+   result.execution={requestedOperation,status:'owner_approval_required',mode:'fail_closed',policy:SAFETY};
+  }else if(!OPERATIONS.includes(requestedOperation)){
+   return json({ok:false,error:'unknown_operation',requestedOperation,allowedOperations:OPERATIONS},400);
+  }else{
+   result.execution={requestedOperation,status:'planned_not_executed',mode:'fail_closed'};
+  }
+ }
  return json(result);
 }
