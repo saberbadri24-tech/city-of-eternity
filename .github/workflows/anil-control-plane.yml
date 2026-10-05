@@ -1,0 +1,51 @@
+name: ANIL X Control Plane — regression stop and operational gate
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+  id-token: write
+concurrency:
+  group: anil-control-plane-gate
+  cancel-in-progress: true
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - run: npm install
+      - name: Syntax dependency contract gate
+        run: |
+          npm audit --omit=dev --audit-level=high
+          node scripts/verify-syntax.mjs
+          node scripts/anil-final-contract-smoke.mjs
+      - name: Production browser QA
+        env:
+          ANIL_BASE_URL: https://city-of-eternity.onrender.com
+        run: |
+          npm install --no-save playwright@1.63.0
+          npx playwright install --with-deps chromium
+          node scripts/production-browser-smoke.mjs
+      - name: Live control-plane gate
+        env:
+          BASE_URL: https://city-of-eternity.onrender.com
+        run: |
+          set -euo pipefail
+          curl -fsSL --max-time 30 "$BASE_URL/api/health" >/tmp/health.json
+          curl -fsSL --max-time 30 "$BASE_URL/api/guard/live?t=$(date +%s)" >/tmp/guard.json
+          curl -fsSL --max-time 30 "$BASE_URL/api/anil/super-team" >/tmp/team.json
+          python - <<'PY'
+          import json
+          h=json.load(open('/tmp/health.json')); g=json.load(open('/tmp/guard.json')); t=json.load(open('/tmp/team.json'))
+          assert h.get('ok') is True
+          assert g.get('ok') is True
+          assert t.get('ok') is True and t.get('safety',{}).get('finalCommand')=='ANIL'
+          assert t.get('safety',{}).get('autoSigning') is False
+          assert g.get('freshness',{}).get('stale') is False
+          print('ANIL CONTROL PLANE GATE PASS')
+          PY
