@@ -36,7 +36,7 @@ async function directGitHub(env,operation,body){
  const headers={accept:'application/vnd.github+json',authorization:'Bearer '+token,'user-agent':'ANIL-X-Control-Plane'};
  if(operation==='inspect_github')return {configured:true,repo,source:'github-api',data:await (await timedFetch('https://api.github.com/repos/'+repo,{headers})).json()};
  if(operation==='read_file'){
-  const path=String(body.path||'').replace(/^\\/+?/,''); if(!/^[A-Za-z0-9_./-]{1,300}$/.test(path))return {configured:true,error:'invalid_path'};
+  const path=String(body.path||'').replace(/^\/+/, ''); if(!/^[A-Za-z0-9_./-]{1,300}$/.test(path))return {configured:true,error:'invalid_path'};
   const r=await timedFetch('https://api.github.com/repos/'+repo+'/contents/'+path+'?ref=main',{headers}); return {configured:true,path,status:r.status,data:await r.json()};
  }
  if(operation==='search_code'){
