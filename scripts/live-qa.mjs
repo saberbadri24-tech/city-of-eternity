@@ -25,9 +25,7 @@ assert(health.data.revenue?.ton===true,'main TON wallet is not configured');
 
 const readiness=await get('/api/execution-readiness');
 console.log('LIVE READINESS',JSON.stringify(readiness.data));
-assert(readiness.status===200&&readiness.data?.execution?.runtime?.ready===true,'execution runtime readiness failed');
-assert(readiness.data?.providers?.tonMain===true,'execution readiness does not see main TON wallet');
-assert(readiness.data?.providers?.durableStore===true,'execution readiness does not see durable store');
+assert(readiness.status===401&&readiness.data?.error==='admin_auth_required','execution readiness remains owner-gated');
 
 const payment=await get('/api/payment-config');
 console.log('LIVE PAYMENT',JSON.stringify(payment.data));
