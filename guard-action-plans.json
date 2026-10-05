@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-05T16:57:26+00:00",
+  "generatedAt": "2026-10-05T17:31:13+00:00",
   "engine": "Immortal Guard Action Planner",
   "planCount": 1896,
   "plans": [
@@ -1567,6 +1567,17 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
+      "id": "https://news.google.com/rss/articles/CBMiPkFVX3lxTE1RekRJT3NnZXlIRm1aNUR5MmJWMGIyV1lHbFVnM1dwNW90cTBfM2ZLZzJid21lV3pHX29jRGZR?oc=5",
+      "title": "Coinbase - Buy and Sell Bitcoin, Ethereum, and more with trust - Coinbase",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiPkFVX3lxTE1RekRJT3NnZXlIRm1aNUR5MmJWMGIyV1lHbFVnM1dwNW90cTBfM2ZLZzJid21lV3pHX29jRGZR?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
       "id": "https://news.google.com/rss/articles/CBMiPkFVX3lxTFBDX3BuTVVpeThYMC1vMmNUclZaaDJTN3ZyeU1oYTZFME5iY042eWZRSkxlS2FlX0pPSW9TakpR?oc=5",
       "title": "It's Parts-A-Thon Time! - John Deere",
       "status": "OWNER_REVIEW",
@@ -1578,13 +1589,13 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
-      "id": "https://news.google.com/rss/articles/CBMiPkFVX3lxTE1RekRJT3NnZXlIRm1aNUR5MmJWMGIyV1lHbFVnM1dwNW90cTBfM2ZLZzJid21lV3pHX29jRGZR?oc=5",
-      "title": "Coinbase - Buy and Sell Bitcoin, Ethereum, and more with trust - Coinbase",
+      "id": "https://news.google.com/rss/articles/CBMiPEFVX3lxTE43VmRSS1JYRkRQM0V3S1NjT0N4OHA4SnYxa0NqYldpNmtsdUF2LWN0VEQ2cUtZbWozaDZ3MA?oc=5",
+      "title": "Postmark: Fast, Reliable Email Delivery Service | SMTP | API - Postmark",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
       "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMiPkFVX3lxTE1RekRJT3NnZXlIRm1aNUR5MmJWMGIyV1lHbFVnM1dwNW90cTBfM2ZLZzJid21lV3pHX29jRGZR?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMiPEFVX3lxTE43VmRSS1JYRkRQM0V3S1NjT0N4OHA4SnYxa0NqYldpNmtsdUF2LWN0VEQ2cUtZbWozaDZ3MA?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -1700,7 +1711,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMic0FVX3lxTE9oSERuVk5BbnVQdFU0NUJIX291OGhiQ3NPVGFLWGdvQ1l6R0VET0VXYkI1RG1mRHhvV2p2amx6dnJ0NklhVXRlMUw1NWFCbVpFNC00aS10YVNlSUNJbXcyTW1jU01kR0FCV2phbllaR01SbFE?oc=5",
-      "title": "Welcome to October 3, 2026 - The Innermost Loop",
+      "title": "Welcome to October 3, 2026 - theinnermostloop.substack.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -1732,6 +1743,17 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
+      "id": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE0wWUpvWXlNaGxPaFZ4czJuWHJxdmU3cTlVWDM3NU5ldkM3cFBWS2pZcXdnOFQ4bFRPekJ5akpMaWJZb3loS1NwZ01ZUlhNMU1WekE?oc=5",
+      "title": "Fan Rewards - About - NASCAR.com",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE0wWUpvWXlNaGxPaFZ4czJuWHJxdmU3cTlVWDM3NU5ldkM3cFBWS2pZcXdnOFQ4bFRPekJ5akpMaWJZb3loS1NwZ01ZUlhNMU1WekE?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
       "id": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE9TVlBqamJJUGVXRlFLUjBJMlVUa1NIZWd5QXNWbXBWVVNub0ZHN0UzWFhvNkF1MWQtT2RvTVZJV2pjSmZkbDZYYkpaOXdwbjdYVlFTVGwtYw?oc=5",
       "title": "Cloudflare Workers - Global Serverless Functions Platform - cloudflare.com",
       "status": "OWNER_REVIEW",
@@ -1739,17 +1761,6 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE9TVlBqamJJUGVXRlFLUjBJMlVUa1NIZWd5QXNWbXBWVVNub0ZHN0UzWFhvNkF1MWQtT2RvTVZJV2pjSmZkbDZYYkpaOXdwbjdYVlFTVGwtYw?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
-      "id": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE0wWUpvWXlNaGxPaFZ4czJuWHJxdmU3cTlVWDM3NU5ldkM3cFBWS2pZcXdnOFQ4bFRPekJ5akpMaWJZb3loS1NwZ01ZUlhNMU1WekE?oc=5",
-      "title": "Fan Rewards - About - nascar.com",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE0wWUpvWXlNaGxPaFZ4czJuWHJxdmU3cTlVWDM3NU5ldkM3cFBWS2pZcXdnOFQ4bFRPekJ5akpMaWJZb3loS1NwZ01ZUlhNMU1WekE?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -1886,6 +1897,28 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
+      "id": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5CSE53aVVlUkZOci10SjF4RG5lWVkxM2EtUFNFTG5BVjdqa2xmWjhkRGxWcEFKN0pwa1BEMWpTSE1wbER4dHhVdkNxWjVjWnpIUTFWQWZRRjB3dDA?oc=5",
+      "title": "Account - Lenovo",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5CSE53aVVlUkZOci10SjF4RG5lWVkxM2EtUFNFTG5BVjdqa2xmWjhkRGxWcEFKN0pwa1BEMWpTSE1wbER4dHhVdkNxWjVjWnpIUTFWQWZRRjB3dDA?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
+      "id": "https://news.google.com/rss/articles/CBMiP0FVX3lxTE8wa0taSVFfRGU5TWdFb3BLVFNMckR1cVdFWWNrT0lTVV9venRUcGoxREpSd3Q5TDluQi1LUE94cw?oc=5",
+      "title": "Seeker | Solana Mobile (@solanamobile) - x.com",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiP0FVX3lxTE8wa0taSVFfRGU5TWdFb3BLVFNMckR1cVdFWWNrT0lTVV9venRUcGoxREpSd3Q5TDluQi1LUE94cw?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
       "id": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9UVnFjMjVKcjBXTExoY0JWUnhITXBrbXR1SjdYWk5RTk9FWWJsNjlfVnU0eDhfZjhqOS1KS0w2ODY0T1A0Wk92dVp1SHktSTczcmJfa2pvWXlneU5l?oc=5",
       "title": "MONOPOLY - Consumer Care - Hasbro",
       "status": "OWNER_REVIEW",
@@ -1897,17 +1930,6 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
-      "id": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1WUFoxZ3RGODZGR3dkMmNPYUNabFhHY3lRZURXYmZTOWEyNXA3aGtxbUY4cVY4YktlbUpMNUhWLU1SU3hmXy0wSUt6cV93NFV4YjQ1MzJ3LVppMDVGNmEwV0RZalF2elc5T3c?oc=5",
-      "title": "mPerks Rewards - Meijer",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1WUFoxZ3RGODZGR3dkMmNPYUNabFhHY3lRZURXYmZTOWEyNXA3aGtxbUY4cVY4YktlbUpMNUhWLU1SU3hmXy0wSUt6cV93NFV4YjQ1MzJ3LVppMDVGNmEwV0RZalF2elc5T3c?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
       "id": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBuT1V3M0cwQnRZeHc1aW9lX3QwcjlEcjljVGRCSk1CT0FOcUxuVlhKRzFmaXZQb2YwYWd4UTNNemljUnplc3V6Sm16Uk13ZXdENEtSUnlvZEVzM3psbzdsVXV4eXlhUGxNUHJOd0ZlZXY?oc=5",
       "title": "SOLIDWORKS Design Associate (CSWA) - SolidWorks",
       "status": "OWNER_REVIEW",
@@ -1915,6 +1937,17 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBuT1V3M0cwQnRZeHc1aW9lX3QwcjlEcjljVGRCSk1CT0FOcUxuVlhKRzFmaXZQb2YwYWd4UTNNemljUnplc3V6Sm16Uk13ZXdENEtSUnlvZEVzM3psbzdsVXV4eXlhUGxNUHJOd0ZlZXY?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
+      "id": "https://news.google.com/rss/articles/CBMimwFBVV95cUxObWFDWFp0cEY5ZUFqd01nYmlLVWg0cjBreFFXaFMxZGFOV085T3RNVDdsRTlwcFpPb3E3MnkwbjNjVlRaWjVDNjAtSkUzZGtKSHpiVWJZc1BjVXNsdlR6TEdhd1hKTlM0aVJWUHNKUEppSlh2OHhwYjVFTVhyVC1oZ2RSNnJzVHV1UkRna09wcVBwdlFoSWkwdTBVQQ?oc=5",
+      "title": "CEO Andy Jassy’s 2025 Letter to Shareholders - About Amazon",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxObWFDWFp0cEY5ZUFqd01nYmlLVWg0cjBreFFXaFMxZGFOV085T3RNVDdsRTlwcFpPb3E3MnkwbjNjVlRaWjVDNjAtSkUzZGtKSHpiVWJZc1BjVXNsdlR6TEdhd1hKTlM0aVJWUHNKUEppSlh2OHhwYjVFTVhyVC1oZ2RSNnJzVHV1UkRna09wcVBwdlFoSWkwdTBVQQ?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -1942,7 +1975,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBNTy1MUVNHMEZhYzRoM3RLekNjWmpPWkpRZHJHQmhKekJjNTB2aUFWbVU5dnNhNXNZc3ppNkNsVXJ0NlpJMzVKamJXbkZBTFloTlVfazdVNG5TdHpGSERGTXBJMmhndVV4RG0yUEhtYWVDZVh4aUE?oc=5",
-      "title": "Azure OpenAI in Foundry Models - azure.microsoft.com",
+      "title": "Azure OpenAI in Foundry Models - Microsoft Azure",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -2007,13 +2040,13 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
-      "id": "https://news.google.com/rss/articles/CBMimwFBVV95cUxObWFDWFp0cEY5ZUFqd01nYmlLVWg0cjBreFFXaFMxZGFOV085T3RNVDdsRTlwcFpPb3E3MnkwbjNjVlRaWjVDNjAtSkUzZGtKSHpiVWJZc1BjVXNsdlR6TEdhd1hKTlM0aVJWUHNKUEppSlh2OHhwYjVFTVhyVC1oZ2RSNnJzVHV1UkRna09wcVBwdlFoSWkwdTBVQQ?oc=5",
-      "title": "CEO Andy Jassy’s 2025 Letter to Shareholders - aboutamazon.com",
+      "id": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFA0SkRzY1laSzVEZVpaXy10QXVnb1h0V01nRmI2clk2VUJ2Ykd3ejhkc0YxLUVXazJTMDdSOUNKdDhtZm5PQ0REa3Z6Z01BWkNi?oc=5",
+      "title": "Gift Cards & E-Gift Cards - Coach",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
       "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxObWFDWFp0cEY5ZUFqd01nYmlLVWg0cjBreFFXaFMxZGFOV085T3RNVDdsRTlwcFpPb3E3MnkwbjNjVlRaWjVDNjAtSkUzZGtKSHpiVWJZc1BjVXNsdlR6TEdhd1hKTlM0aVJWUHNKUEppSlh2OHhwYjVFTVhyVC1oZ2RSNnJzVHV1UkRna09wcVBwdlFoSWkwdTBVQQ?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFA0SkRzY1laSzVEZVpaXy10QXVnb1h0V01nRmI2clk2VUJ2Ykd3ejhkc0YxLUVXazJTMDdSOUNKdDhtZm5PQ0REa3Z6Z01BWkNi?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -2107,7 +2140,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQUW5vbDBuY2F2OHkyMXByMFItbjd5dHY3Y2FLQ1NULWx5VndSM294akllT2dmS2htNnFkeExJQWo5QkNWa2NqSjVXTm9KanFEYnJYSmhGdG0wdFh0T2NuNmM0Qk90TjVZcGN3RVY0Y2RTSE1JZ2Rkd2t5eVlxWkYyVzZoeFgxUjF2?oc=5",
-      "title": "Flare (FLR) token airdrop - help.coinbase.com",
+      "title": "Flare (FLR) token airdrop - Coinbase",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -2184,7 +2217,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9MWXJxQTdfd3RiQWx6djc2ZHNoYmFHSG5Pcktrc0VLY2FSaG56UXU2ZEthWTVuN25jOGdFanhuNU8yNE5VUUR5MWJ3eW5rUm1RcDRqOG1tVVNxSEtHNjgxNzhtWGxtYTZx0gFoQVVfeXFMTzFuYW1JMXFhaGExbHRwS3Q4QkswNDZqRmgwMnM2MUlXdU1yLVdHS25qdUtHZzFaUmtyWklzVWlGSHg0SFczYjBHUURVWmM4NE1kZ3FuMUVWNnhEVU8tYzdHSXVPV1ltTm8?oc=5",
-      "title": "Betr Promo Code FOXSPORTS: Four No Sweat Entries, Up to $200 back in Bonuses + New User Free Pick - FOX Sports",
+      "title": "Betr Promo Code FOXSPORTS: Four No Sweat Entries, Up to $200 back in Bonuses + New User Free Pick - foxsports.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -2227,6 +2260,17 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
+      "id": "https://news.google.com/rss/articles/CBMiQkFVX3lxTE9XbTBpT2RFajlndmJkMDg1Qkd6MEtyOThBWWtRdmpNQjcyXzZEdDI2MWctWTh0YTZaWDVNbWE1Umk5QQ?oc=5",
+      "title": "The Web3 Mobile Evolution - Solana Mobile",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiQkFVX3lxTE9XbTBpT2RFajlndmJkMDg1Qkd6MEtyOThBWWtRdmpNQjcyXzZEdDI2MWctWTh0YTZaWDVNbWE1Umk5QQ?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
       "id": "https://news.google.com/rss/articles/CBMiREFVX3lxTE5XRjBCbGRhTENYbzh0eXBLVi1XNE5iRElqOG9hNnY0WG8zMDA4Q0ZiTkE4SkcxeVp5ZG12UzZoeWR0SVg0?oc=5",
       "title": "Pax Gold (PAXG) - Paxos",
       "status": "OWNER_REVIEW",
@@ -2260,6 +2304,17 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
+      "id": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBvX09PUjRIaF9qMEo1a1dud2ppU1hYZ0FqNVFFdXViWHdKTHRSQlhxTVY3anptRWR6dHRNcUp3UDBBcDNyQ2JRWDJibi11b21WekMw?oc=5",
+      "title": "What Are Crypto Airdrops? Types, Strategies & History (2026) - AirdropAlert",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBvX09PUjRIaF9qMEo1a1dud2ppU1hYZ0FqNVFFdXViWHdKTHRSQlhxTVY3anptRWR6dHRNcUp3UDBBcDNyQ2JRWDJibi11b21WekMw?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
       "id": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE5YUWE4SjE2WjkxWnEydU9rLUsyVHBJV3dZdFVOZmIxMGRCMDZHM0NDTURtcTNEVDQzb2hjei1TZ1ZUYm5zakF4eTE3b3A1Sy1pOUpZNnRCaw?oc=5",
       "title": "Panera Bread Coupons & Promo Codes - Groupon",
       "status": "OWNER_REVIEW",
@@ -2272,7 +2327,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPcGJFNUZieGxhVk5rWFBoSFpTbFp6UUVXTDU5a2tfajNoNVNWZW5GQi1ET28tUFcwSTFEcjI2UktyNVV0NjlhcGxNUk5tZnpBSnNRYXdoQURkZHJaMHhtZlN0TmFZTXBwcVl5enRfay1EWHcwZ0syajdwZG1STXNNZDc3TUR0RDQ1MTlranZBS1FudDdCUjdHa0xTVmVhTkpRQ1l3T0tQcm0?oc=5",
-      "title": "Fliff Promo Code ROTOWIRE: Get Up To $250 in Free Play Today (October 2) - rotowire.com",
+      "title": "Fliff Promo Code ROTOWIRE: Get Up To $250 in Free Play Today (October 2) - RotoWire",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -2294,7 +2349,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1kWWdGdjhwSlA0WW01NVczVFlJN09nLU51bHJodlpUVVBOS0ZRT2tjS2JRU0F1TVNXUkg5aG1neTFYVnZvTV9pMEtac29vWEhYVWtwTkdB?oc=5",
-      "title": "Claim SECRET Black Ops 7 Season 5 Rewards ASAP… (Free Bundles, Camos, & Skins) - YouTube",
+      "title": "Claim SECRET Black Ops 7 Season 5 Rewards ASAP… (Free Bundles, Camos, & Skins) - youtube.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -2316,7 +2371,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNTWtaY2ViMmZESHAtcHBGOGhSUzJjQ3NyQXg4V2VVeW9ucDgzZG92bm82cXNqcndxTm5TeEc1MkJBUXoweTAyQUxKMzE4UF9NTVdzVW4wa09zSjJBcjBKbXlGcEpodVhlT3dObVJCVXJ4X3BJZ1RaN2FiVGlNWHNKN1ppejluVGxRQWJPNXphQVFrRl95dzBFUm5fSXZXZ1pfTFhCcWxubHI?oc=5",
-      "title": "Fliff Promo Code ROTOWIRE: Get Up To $250 in Free Play Today (October 4) - rotowire.com",
+      "title": "Fliff Promo Code ROTOWIRE: Get Up To $250 in Free Play Today (October 4) - RotoWire",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -2338,7 +2393,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxON3NrWkpDZUVVRm9BREVpMzFONVpWOG9PR25QT3lqZVJ1WmxXNVhDdnd1SmhaZVFoRnhONG5XVFQxeTN4X01hN3FIamxWVHRqWTBPcE5iVzNCcktYUkN4YUlLdDNPNzRkQUxBT0xVVWJUZHluMWtUNXlvYjFkczBpX0plRjR3Ujd6V3FSQ3B5UGs0emNtU1hWUHluZVM1cXczOTlnUTk4YVI?oc=5",
-      "title": "Fliff Promo Code ROTOWIRE: Get Up To $250 in Free Play Today (October 3) - rotowire.com",
+      "title": "Fliff Promo Code ROTOWIRE: Get Up To $250 in Free Play Today (October 3) - RotoWire",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -2359,8 +2414,41 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
+      "id": "https://news.google.com/rss/articles/CBMiOkFVX3lxTE13aGMtNV9PbUl3RURKTmZRRmNUZjMxQVN1eHd0dlNmZ2wxZDhSQ2lpdWlxbWRLa1RTTGc?oc=5",
+      "title": "SEAGM - Game Top-Up, Gift Card & Voucher | Game Credits | Mobile Games - SEAGM",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiOkFVX3lxTE13aGMtNV9PbUl3RURKTmZRRmNUZjMxQVN1eHd0dlNmZ2wxZDhSQ2lpdWlxbWRLa1RTTGc?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
+      "id": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE9WVTMyRVl1NjR6OGJiS0lFQ0I3YUtnREhpclAtdUNZLUhzQmRVUE1zMS0tWHpEX1JnS2hyWWtFbm1oTVZ2U3V0ZlhB?oc=5",
+      "title": "Buying Theatre Tokens - Theatre Tokens",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE9WVTMyRVl1NjR6OGJiS0lFQ0I3YUtnREhpclAtdUNZLUhzQmRVUE1zMS0tWHpEX1JnS2hyWWtFbm1oTVZ2U3V0ZlhB?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
+      "id": "https://news.google.com/rss/articles/CBMiR0FVX3lxTFBwb0RnZnRzUnFQS1dQWTlFWXVkSGY0MXVqUlY1d25xOElsVFVZejFGeGZ1cmZoUzJyTzZSQTRBV1VYSlctQktR?oc=5",
+      "title": "GETTY IMAGES CONTENT LICENSE AGREEMENT - Getty Images",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiR0FVX3lxTFBwb0RnZnRzUnFQS1dQWTlFWXVkSGY0MXVqUlY1d25xOElsVFVZejFGeGZ1cmZoUzJyTzZSQTRBV1VYSlctQktR?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
       "id": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNb3FCQWhZNWtuaDJHeDVJX0pNLVpLV25vanFQeTNJV0RRQl9PVjI5NkFCZmxkdDI2RVYzQW5Zc1NlcktSVnQ5cWxianRyRW9neWJnU0FuVkVxN3lnVFlJWWwxRG9CZjFOUDQwUVlTWlZUQkhrc1djSVN2eU4yTkNYX1p5OVpqRFVVNEIwbzZ4SkN3Xzk0MXZUWFVHNEszN21RYjR6eTlGa2s?oc=5",
-      "title": "Fliff Promo Code ROTOWIRE: Get Up To $250 in Free Play Today (October 1) - rotowire.com",
+      "title": "Fliff Promo Code ROTOWIRE: Get Up To $250 in Free Play Today (October 1) - RotoWire",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -2403,17 +2491,6 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
-      "id": "https://news.google.com/rss/articles/CBMiOkFVX3lxTE13aGMtNV9PbUl3RURKTmZRRmNUZjMxQVN1eHd0dlNmZ2wxZDhSQ2lpdWlxbWRLa1RTTGc?oc=5",
-      "title": "SEAGM - Game Top-Up, Gift Card & Voucher | Game Credits | Mobile Games - SEAGM",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMiOkFVX3lxTE13aGMtNV9PbUl3RURKTmZRRmNUZjMxQVN1eHd0dlNmZ2wxZDhSQ2lpdWlxbWRLa1RTTGc?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
       "id": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5zZnFWTGJQWmpJdUU1NHhFeGV6SXFuWk9qM2FYeHR2aDZiMHpKV1lUcllHNjBOWFFMSG5TSFVoMlZZUy1YUlJuWm80SnBtMWZYT1RPVi1NUjlsOFpl?oc=5",
       "title": "Alibaba Cloud Invite & Earn Plan - Alibaba Cloud",
       "status": "OWNER_REVIEW",
@@ -2448,7 +2525,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQd0dxY2FCYnZlMy1wUW5Wdl8tSmNRRlRlRG1UemJlc3oxQWd0MWtVVFJCdmVMdkJWVDkxNmE3Vmp3Vi1zZFpDdE1zYnVQaV9sMTJWdnk5MjNjZnBneWVEV1dIM1RMY0xZbVh2MW9aaVNCNkJucUItaXlnRnRDSVB1M3NXN010OWduNzN1YkhPRjc0UW1kQ2tFd1ZJMFozRmJQaDh4STRQWkY?oc=5",
-      "title": "Betr Social Sportsbook Promo Code ROTOWIRE1: 200 BC No Sweat Token - rotowire.com",
+      "title": "Betr Social Sportsbook Promo Code ROTOWIRE1: 200 BC No Sweat Token - RotoWire",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -2535,17 +2612,6 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
-      "id": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxOdHBQSHoxUksyb1QzM3dleF9yNUxKT19yZVplZFZicVFJZnRCdnFPam1PcHdFcHJ1dHk1bzJKY1VobnhCZ0hYaWZMTGpFSjNkZUFERGZtelFkSnNNSEM0aVlkWS1OUGpaYUg0U2hIbkFXMzFZT0paaEZNRUM4Vzc4b0gxWDZvUi1NZFRWcG00aUE0eE5HOXFrcnYyMWY0WEFqNmRGcWJyLVJQdjVjeEV4eVZhbV9KREkyRjZLM3cwYkhWNTRDV2Zma1R0YkxtOGNrdEs2OVhOVkk4dnl0d3Nid19R?oc=5",
-      "title": "Celebrate Teacher’s Day with us tomorrow, October 5! Buy any order of Nachos and get a FREE refreshing Lemonade on the house. Tag your favorite teacher to let them know! 👇 Open from 2PM-8PM Located at Mohon, Boundary Dauin-Zamboanguita ❤️ -",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxOdHBQSHoxUksyb1QzM3dleF9yNUxKT19yZVplZFZicVFJZnRCdnFPam1PcHdFcHJ1dHk1bzJKY1VobnhCZ0hYaWZMTGpFSjNkZUFERGZtelFkSnNNSEM0aVlkWS1OUGpaYUg0U2hIbkFXMzFZT0paaEZNRUM4Vzc4b0gxWDZvUi1NZFRWcG00aUE0eE5HOXFrcnYyMWY0WEFqNmRGcWJyLVJQdjVjeEV4eVZhbV9KREkyRjZLM3cwYkhWNTRDV2Zma1R0YkxtOGNrdEs2OVhOVkk4dnl0d3Nid19R?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
       "id": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5uVGNCRjRGS00zRkVNY1JOWjNMLVVyOXNaMzluQXNwLVpNWkFPZUhUY1NhNElsUW1CNDlvNkRNdkNzQ1JCMC0xYndtNWt1VTgtZ3c?oc=5",
       "title": "The cold-start tax on Web3 builders, and why a shared platform layer is the only thing that removes it. A founder who wants to ship a consumer app on a blockchain today pays three taxes before writing a line of product. A token tax: design ",
       "status": "OWNER_REVIEW",
@@ -2564,72 +2630,6 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE84akFIUlJQVW5ZNE5uODMxME1pQWY1ZUVYcGwtYUdmMVZ4cHVvbGxRZHVrRENMTHVQaURFOHR4YUlqOW9vUjYtV2o3VUF0Q2FyMVZvUHVVUWRrUTZlMGtoV1FXZ3NoaXMwM2VRZ0tjaTdMdXJsRUZLWHN1SzI?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
-      "id": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNaXFBcUxyQ0ZOS244N2x3REsyZmhILVRuRV9ycDZOb19pdEkyRGdENjhOdnhXWmFzRy1wdy1PdDdFcE1tdmx0VWh5VlFPNXJwS3RIM1NRZTk5UzRpaUpGS0IwLVV2VTAtUjVWc3BHeFhUUjNJbXIwTTB0cnkyc2JaSFVqSTZFcjA?oc=5",
-      "title": "PANERA PROMO CODES, DISCOUNTS & COUPONS - Panera Bread",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNaXFBcUxyQ0ZOS244N2x3REsyZmhILVRuRV9ycDZOb19pdEkyRGdENjhOdnhXWmFzRy1wdy1PdDdFcE1tdmx0VWh5VlFPNXJwS3RIM1NRZTk5UzRpaUpGS0IwLVV2VTAtUjVWc3BHeFhUUjNJbXIwTTB0cnkyc2JaSFVqSTZFcjA?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
-      "id": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1UR25oYWI5REktT3RTazBWaFZob1U3dVdKYTdxaFhmdUFTdlF0QzU0QmFOWmZPUThxVWJrenI2VE5Uem9DcFBrSWpvQ1E2WXF2bHhtbktYZm9Sb0dfT2w3NVgwRUF6NGluWkpucWhVdVI?oc=5",
-      "title": "MyMcDonald's Rewards FAQ's - McDonald's",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1UR25oYWI5REktT3RTazBWaFZob1U3dVdKYTdxaFhmdUFTdlF0QzU0QmFOWmZPUThxVWJrenI2VE5Uem9DcFBrSWpvQ1E2WXF2bHhtbktYZm9Sb0dfT2w3NVgwRUF6NGluWkpucWhVdVI?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
-      "id": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNS3RnSEhINlBOQTJjbmg2Z3hnZ1JhbGcyZW1FZEVpaVVXWUN2akhsN0VlTTVleVljbXpRNGtQSjhyeERjOHFyV09TWDFpWXZiajJKUVoycTBJeHo1dWQwTVZpWmc5cnU2MUhmSU9tX2pCSEJkRnRIT19qMVlISXhRVDlBVGsyMF8zR3c5aHNVakR1Z1Ywcjd5cXB2cnBsLUJJd1lXWF9YTDVfUk1qUGhPbFJyWEhOV3ZwMWN5TzN5eEdrX1ZUd2Nlc2RnR2o4RkM1SGNoTTJVVk1tbnZNaE5TOA?oc=5",
-      "title": "Hello again DPG Members, We're aware that the Stat Boost Reset Tokens are currently unavailable in the Savage Pass. Our team is currently assessing the issue, and the Tokens should be added to the Pass by 5:00 PM ET today. Please note that ",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNS3RnSEhINlBOQTJjbmg2Z3hnZ1JhbGcyZW1FZEVpaVVXWUN2akhsN0VlTTVleVljbXpRNGtQSjhyeERjOHFyV09TWDFpWXZiajJKUVoycTBJeHo1dWQwTVZpWmc5cnU2MUhmSU9tX2pCSEJkRnRIT19qMVlISXhRVDlBVGsyMF8zR3c5aHNVakR1Z1Ywcjd5cXB2cnBsLUJJd1lXWF9YTDVfUk1qUGhPbFJyWEhOV3ZwMWN5TzN5eEdrX1ZUd2Nlc2RnR2o4RkM1SGNoTTJVVk1tbnZNaE5TOA?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
-      "id": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQemtOZ1FURWFUTmpkWVRGRkVjUUR1cEVWUUdpc21TMnh3NEhRYzlhelN2eUxUanUwOXU2bVRrWk5sOHJjaTNUS1EzM1N1NWhDWm9qU01PUW90YzNjaWRPcm9xMXViUmNDM1dMaGlPNC1MNzZKS2FvYzg3bERBV01JZUJfS29yeTluanZWUjBTUV9OU1JYazRrcUgwYnVCYkJkVmc?oc=5",
-      "title": "Can I withdraw money from my brokerage account tax free as long as long as my withdrawal stays below my initial contributions of post-tax income? - Reddit",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQemtOZ1FURWFUTmpkWVRGRkVjUUR1cEVWUUdpc21TMnh3NEhRYzlhelN2eUxUanUwOXU2bVRrWk5sOHJjaTNUS1EzM1N1NWhDWm9qU01PUW90YzNjaWRPcm9xMXViUmNDM1dMaGlPNC1MNzZKS2FvYzg3bERBV01JZUJfS29yeTluanZWUjBTUV9OU1JYazRrcUgwYnVCYkJkVmc?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
-      "id": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9QbEVTTTdUa3NlZU9ma1ZiZWVUM2xtcWxpMkt2SWRGdG1iakZjeXZtamkwZ2FaOFU5azduRWh1YU4xN1R0bHRmQzZDYlVhU3dFWWZXSjhTSVpKUUgzV1owbmZDdmVvMlZkYlhjZDd6MlNOQTFy?oc=5",
-      "title": "Full article: Ownership in the 21st century: property law of digital assets - Taylor & Francis Online",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9QbEVTTTdUa3NlZU9ma1ZiZWVUM2xtcWxpMkt2SWRGdG1iakZjeXZtamkwZ2FaOFU5azduRWh1YU4xN1R0bHRmQzZDYlVhU3dFWWZXSjhTSVpKUUgzV1owbmZDdmVvMlZkYlhjZDd6MlNOQTFy?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
-      "id": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5oRlhabG1ObnVzZGQ2eHFKV2dPWmNrU0R3RGtJbDJzYTRLTzN3RTRRWTJUalh6c2tzeWNrVTJWR0g2alkxcDZhY1dwQUYzX0NiTUdLSzdVcHdDZFF6QzZvM3VQRjZzVHRmVjFuSWFvVEpnRnU1RHhV?oc=5",
-      "title": "Clawee - Real Claw Machines - Apple",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5oRlhabG1ObnVzZGQ2eHFKV2dPWmNrU0R3RGtJbDJzYTRLTzN3RTRRWTJUalh6c2tzeWNrVTJWR0g2alkxcDZhY1dwQUYzX0NiTUdLSzdVcHdDZFF6QzZvM3VQRjZzVHRmVjFuSWFvVEpnRnU1RHhV?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -2701,7 +2701,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBNTDZHVHJnbmlpazFxVDRRTEg4NVV5YVhUU1RaWDBHNnp6YTd1dWRONTdBZ3hEVUE1eDI3YThka0gwVmREZzZiZ0tEeFJVbGRrdmpOVDln?oc=5",
-      "title": "🔥ያለምንም ክፍያ 4 አይነት Airdrop ተቀበሉ 🤑 | Free of Fee No Gas Fee Airdrops🤑They will be listed soon 🚀 - YouTube",
+      "title": "🔥ያለምንም ክፍያ 4 አይነት Airdrop ተቀበሉ 🤑 | Free of Fee No Gas Fee Airdrops🤑They will be listed soon 🚀 - youtube.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -3097,7 +3097,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFA5elBvVXpKRlNCbnE5NGpOVEtadEhOSjB0STFUY3c2OXB3aVkyQjF3T292VUNqWUM0RldWSWl0RHhXRkEwdVU2S3poU214bFBIVktXTnB3?oc=5",
-      "title": "🔥 Claim These 5 Airdrops - Don't Miss Them - YouTube",
+      "title": "🔥 Claim These 5 Airdrops - Don't Miss Them - youtube.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -3240,7 +3240,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9vbnRGMzlZX3RSZ01SODJ0WGJqeHpmWjZ2OHI4U28zRzJhZ1NsdGtNaHdieXltWjhvZEk0c1I1a2lGQXNmTXRwZC1yazk0ZzVqYWZrQmdR?oc=5",
-      "title": "Arichain Airdrop Claim is Live | Ariwallet Task Proof Submission Step by Step | Verify EVM wallet - YouTube",
+      "title": "Arichain Airdrop Claim is Live | Ariwallet Task Proof Submission Step by Step | Verify EVM wallet - youtube.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -3339,7 +3339,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9jODY1OUNoazNSSUpHTnEyWHg1cmJfMnFnWWpFVU45MEM2REdSSkJfblhRdzB1RV9oeXc3ZWhuWF9RTUdiaE9hNEF4VjJWcGozeWkwaWV3?oc=5",
-      "title": "NovaEX airdrop claim is live | I Finally Unlocked My NovaEX AI Airdrop – Here's How - YouTube",
+      "title": "NovaEX airdrop claim is live | I Finally Unlocked My NovaEX AI Airdrop – Here's How - youtube.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -3422,6 +3422,17 @@
       "eligibilityObserved": null,
       "evidence": [],
       "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNOUcwcDdkTlcteTdrV1h1ajdjZWoyMWZZeVV1UmYtcmhwZzlUaVlCTDdZeDNITWpBMDRyaVEyQ3hqQkhYUU10bVJtTy1xdWt5U01zT3haNm1vMGtscjFRQ1NwMEtNRVhXZXR6bmlPbmxYYXJOeFhCRWhvWFNsQ3F2ZHhSYmxhZFBwV0ZfelVCdWQ?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
+      "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9XYWNUdkpkR0dYaTNNUWw2LUhqaGktemkwSzRSVkp1RHBNako0Ylo3ejZNa25aa21KZnpreGdMUUtIRUw2TzB4UVQ2ZzVQYUdmZ19VZFhR?oc=5",
+      "title": "Billions network airdrop claim is Live - How to claim today | billions network airdrop allocation - youtube.com",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9XYWNUdkpkR0dYaTNNUWw2LUhqaGktemkwSzRSVkp1RHBNako0Ylo3ejZNa25aa21KZnpreGdMUUtIRUw2TzB4UVQ2ZzVQYUdmZ19VZFhR?oc=5",
       "ownerApprovalRequired": true,
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
@@ -3658,7 +3669,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9DM3k4SW5razhuLXBueEV6VG9UZHRFR2dWMDdFYTk1UmVxcF9aZDdpVjQ3b21zT0ZBX0o4MmprNTFjMU5zaWZ6U1hpUnNrbkxITlVOaE13?oc=5",
-      "title": "Alphea Hub APT Claim Live | Get Your APT & Add to Trust Wallet | New Crypto Airdrop 2026 - YouTube",
+      "title": "Alphea Hub APT Claim Live | Get Your APT & Add to Trust Wallet | New Crypto Airdrop 2026 - youtube.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -3713,7 +3724,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBCbU5oTU5NT0s0aU1oSG5LemdiT0RvUTJoTVd6eWNiNzZkVzg0VTJhQXNrd1RFZnBkNjhBWkRCeW5jdnFSZGx6aWlaVHV1TlpwTk1tWkNB?oc=5",
-      "title": "Orbition Network Allocation CLaim 🎁✅ Ratio 1:1 $OBN Token!! 80% Withdraw Initial Round!! #Orbition - YouTube",
+      "title": "Orbition Network Allocation CLaim 🎁✅ Ratio 1:1 $OBN Token!! 80% Withdraw Initial Round!! #Orbition - youtube.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -3833,17 +3844,6 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
-      "id": "https://news.google.com/rss/articles/CBMiQ0FVX3lxTE41TWhrWW90Yk5xdVJNWXJaSHo1elluZU9FQjlDUHMwd2p6Wlc4a3FScjdURWlUWkRzNlM1WU9DRDQtUms?oc=5",
-      "title": "Airdrop Alert Daily 🦇🔊 #AAD (uTube) (@AirdropAlertAAD) - x.com",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMiQ0FVX3lxTE41TWhrWW90Yk5xdVJNWXJaSHo1elluZU9FQjlDUHMwd2p6Wlc4a3FScjdURWlUWkRzNlM1WU9DRDQtUms?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
       "id": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQVFdObnhqNjhxazZSOVFiR1hONk5uWkhIbGI2LUhTWXp1eXlUY3NHeTRYeU4xVm85dWwwSGd2OG9POGg0ZmhjR0dremlUX0tYdWtKMTBOT1FvWjhGR1ZTYWNPeVdxa3lvNUdlQm41YXJyeGRleUxBSTFQTnBtSWVFeGUxajl0N0lKTkNWY2NObXc?oc=5",
       "title": "Binance USDe Reward Distribution is Live – Now with 12% APR Promotion - Binance",
       "status": "OWNER_REVIEW",
@@ -3911,7 +3911,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1WRy1NS2hhbnE0Z3duMEFXN09kVDUxRjcwcnBNM3k1VTlnM2xuUGhMY19vTXROZXpzUG02Q0lobjRWRXRiMWdOMEFjRUp2OTBQblE?oc=5",
-      "title": "YouTube - YouTube",
+      "title": "YouTube - youtube.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -4021,7 +4021,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE8wQnhuV0JGZlQ0Z0JjU1dfWnBLSkNaZFdsU0R6NkU5djh3akx6aUtER1ROdDRibHg5Qmt1QjUxczl3TVhWV0ljeE9YRFozV0p4X3hBcg?oc=5",
-      "title": "YouTube - YouTube",
+      "title": "YouTube - youtube.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -4087,7 +4087,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBhaDJERUY1NnhYanJ0Y3lkOWZyTXF2Q25SOS1Nd0ZPcThFU05OYzh6VWpLdkJSd05OUHNUdkRBQzFfTW9CQlQwT3NNa0tqUkk5SHgyQWFB?oc=5",
-      "title": "cPen INK Distribution LIVE! 🖋️ How to Add INK to Wallet & PancakeSwap Live Trades 2026 - YouTube",
+      "title": "cPen INK Distribution LIVE! 🖋️ How to Add INK to Wallet & PancakeSwap Live Trades 2026 - youtube.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -5440,7 +5440,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiSkFVX3lxTFA4Mm9Hd0YwM1h6LVBkOG5Yc3FFRy04dzRNbkxIWTJ1SWtXUkdqTnV6ZHFvNTc1ZjZPb3F3ekJhMnJESFY2czdma0t3?oc=5",
-      "title": "Anar B. - Hypernova - uk.linkedin.com",
+      "title": "Anar B. - Hypernova - LinkedIn",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -5473,7 +5473,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNWWszd19QSFc5VlJoWW5EeEFQemxheGpxZS1FWGM4cDVDbHlwU2Z3YVphSFBZLWdVWkRrRm9YSTNzWnhYbGJuZ1hOUjA0N3lZdnVPbnUzeGlxc2hTZFEzY1ZHMzFYTExiamNXMEhDYmxyTl9ja0VPLUFwOVR6cDRtLTVzSlhlRlVMVVN3YUZ3?oc=5",
-      "title": "Finally. Gridex Protocol brings Order books on Ethereum - Yahoo Finance UK",
+      "title": "Finally. Gridex Protocol brings Order books on Ethereum - uk.finance.yahoo.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -5539,7 +5539,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOdE16TUhQbHRsUkU0Q3lmU0dYWlN1a1VmREtoWFAtV3RKQUl2UnZRcldhRmlDSG9fZ1RoWEtrd1FsTjdvSmhySF93bDVFTXN6OXNRMHFGWUlEbVgwc3FmQVNTSVFsRU8wdmVsUy1SSzZZRk8xX3VJR2d2eWdrT0ZPTUY0clgzLXdXdDZ2YnNUSWItOTg?oc=5",
-      "title": "TOP 10 BEST Kids Birthday Party near Springboro, OH 45066 - Updated 2026 - Quality & Affordability - Yelp",
+      "title": "TOP 10 BEST Kids Birthday Party near Springboro, OH 45066 - Updated 2026 - Quality & Affordability - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -5990,7 +5990,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFB3Ry1TLW9mbnB4bkZGZkkwQmJnMXhXQk40QWZoR0htdFdwWFlMUmpYX21TRXRJMWgyT1Z4T0hnamtQQTFKbi1iRC1KM2o2Q2k0VXI1TzB4d2Nyajc3dV9z?oc=5",
-      "title": "Top 7 Best Tether (USDT) Wallets to Consider in 2026 - CryptoPotato",
+      "title": "Top 7 Best Tether (USDT) Wallets to Consider in 2026 - cryptopotato.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -6276,7 +6276,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFB3Y3A1SVA5Y3NkTWpGb0Z0ZTA4U183NEtSWTJhTFhIQTZrMDQ3eV9Xc0JMdWZVRHU4Smh2Qnc1SFFLZUJhWTFEOWZwVFZsVEtmNzFpeFJR?oc=5",
-      "title": "PART 1 | BINARY TRADING COURSE | ISHAQ TRADING COURSE | - YouTube",
+      "title": "PART 1 | BINARY TRADING COURSE | ISHAQ TRADING COURSE | - youtube.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -6705,7 +6705,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5VdGZfb2Jubk5wenlVYi1tVEVQalIyQ1Q5VmRkOElQdzZsUWRXVlI3ZmJMVnowRlE3cnRnUWNjMXE5MHBISW1RNG1JOHQwWXFNZXB2Z3Nn?oc=5",
-      "title": "How Kenyans Got Free Crypto with $SAHARA – No Coding, No Trading! - YouTube",
+      "title": "How Kenyans Got Free Crypto with $SAHARA – No Coding, No Trading! - youtube.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -7673,7 +7673,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOdDN3Z1ktSnhwZG94RG95ZGlDZ280aUo3YUNJMTdlQ09RUVJQblc0X2lIQjBiQkdDQko2X2JwWktLX3lEalNEU0JwZlprb0N2ZnV3d3oxaGYzbnVKQmRHVmFHbnVEUWx6OWRmcnctbENqYXB5MkFlY0Q2cWJCcU1uNzF4SnpfVkVRbEdvOUhtdllfQQ?oc=5",
-      "title": "TOP 10 BEST Places to Take Pictures in Mooresville, NC - Updated 2026 - Yelp",
+      "title": "TOP 10 BEST Places to Take Pictures in Mooresville, NC - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -7684,7 +7684,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNNGtMamYtVjVnNTdCQ193cFJLN09KNng1MjJFLWtBUnF6VFg4dkhPaDVsVTlVVm5INVg0VEtVQTZHQWFTZEtuRkFYV2lZQVk0N1oxZ0N5N0xMUjBtSkIwUWRkTVRaV2RtYnJNN3g2VENQc3ctLXhMRDBXXzQ2aXh1Yi1lVQ?oc=5",
-      "title": "TOP 10 BEST Butcher Shop in Mooresville, NC - (2026 Guide) - Yelp",
+      "title": "TOP 10 BEST Butcher Shop in Mooresville, NC - (2026 Guide) - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -7717,7 +7717,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPZWktbXVaNVY0dFJ6Sm9QcWFYNVJJTUp5UlMwbzNoXzM0Q3R4cnZ6Tl96T0wySXFOR29lbE9FS0xBMzRzeVYtaFFPSWl0djFGX0VPLTdfb2w5V0xfdEE5a2FSQ0o1dURHbXhVb2I0TU90N2tvcTd3cHN4M1YzbVc3SlBQbw?oc=5",
-      "title": "TOP 10 BEST Asian near Huntersville, NC 28078 - Updated 2026 - Yelp",
+      "title": "TOP 10 BEST Asian near Huntersville, NC 28078 - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -7739,7 +7739,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOZF9ubUZkcWJJU21tNWR3N3FfNmtDbktyVVJzbUJGdUQtYy1uYXdwN0Qzd251S1VPQ1dWZWZNaHVDNTFUc0wybFBDZHg3b3E3VGlUVS1pT19QdG5EMVlnZ3ExZUlobUE4SWNObFdiUzFtaS0yYjV0cF9TVktIUjdoMDBQVEZVbldYVGQxTDZaLVE3MUw5QXVraDl0VXVRX1kzWkl4UXdvZ3Q?oc=5",
-      "title": "TOP 10 BEST Restaurants With Private Party Rooms near Cornelius, NC 28031 - Updated 2026 - Yelp",
+      "title": "TOP 10 BEST Restaurants With Private Party Rooms near Cornelius, NC 28031 - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -7816,7 +7816,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOdllXSU1pLURyS1dEdUdha3VFSVE5akp1aUdMdEo2T1JWM002LU9OdU9uR2Y0WWxiSTQ1LURQbVhJTHVuR1FVLXZIaTk3LVZ3UmJ2dnh4STUzZl9iYmZkNnJEZnpKak9ycTlIc0lqZVlVYlk1ZWlQUVRjNVFUUWxJN0UxOA?oc=5",
-      "title": "TOP 10 BEST Civil Attorney in Charlotte, NC - Updated 2026 - Quality & Affordability - Yelp",
+      "title": "TOP 10 BEST Civil Attorney in Charlotte, NC - Updated 2026 - Quality & Affordability - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -7827,7 +7827,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNMjJkQ01FXzIwLTNvX3Z5WF9KWDZKUEZnclJqakxwTHB6elduTGt3MmtfQ0tKaEJNT3lSOWV3SllRRGM5MnRBVWZoT2JESU5xS0VPLVV3WHZjVFJsbnRHbGZpSzlMM01IVDgxMnRIbUg5LWtCUHozSV9qeC03T0RYV2VZTzhFdnM?oc=5",
-      "title": "TOP 10 BEST New Restaurants in Mooresville, NC - Updated 2026 - Yelp",
+      "title": "TOP 10 BEST New Restaurants in Mooresville, NC - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -7849,7 +7849,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1QbW95RjhzbjN2RkNOM1Bza1cyajNFUWs2cmpSa3hRVnYwU0xLVjNRdjRlbDNTNE5XbTg0QmVJWGtJU0Jxd2piYW1sS0F6RGhOVzZPSzVKQnBWQmR1dzlNQ3MxY1ZIU2FLa3hMNEpQeWVkODFLbkRqcm53?oc=5",
-      "title": "2522 W Watrous Ave, Tampa, FL 33629 - Redfin",
+      "title": "2522 W Watrous Ave, Tampa, FL 33629 - redfin.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -7860,7 +7860,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMikwFBVV95cUxORzBsZ1NJSEJqSzE2NjVZZFNvOU5aR1MzUUxsSlVGdEtCeTg3Q2JCeDlzZGtmcEs5QUFoMlFoVFpkakxyNkFWdEZ4bkpNc2NlSXV4TXpROVdQazE2SF8yazdNd2FMV0ZINlloMHFyalZ5YnZEczlkZktxMTNYOHNKUUJFejVqeE1XRDMyTGUxTV9kdWs?oc=5",
-      "title": "Top 10 Options for New Years Eve Dinner near Cornelius, NC 28031 - Updated 2026 - Yelp",
+      "title": "Top 10 Options for New Years Eve Dinner near Cornelius, NC 28031 - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -7893,7 +7893,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPY1pOUFFjX29vVVM5TkJkMkJaZ0o4XzRqOEk0bkVJanZkenFrZ2tST2xYQ2RnT0d3TkZ2YW0zS2tMelJCYnRfNGZ5MkFEMXBUNHAtWTBWSTExanM2X0dRckswSVlqV2l3UXdpbE1vc25pZDBJbDNINWRFNGk0RC1raVByaDN4UlNyMmxfVmZLOA?oc=5",
-      "title": "Top 10 Options for Places to Take Pictures in Charlotte, NC - Updated 2026 - Yelp",
+      "title": "Top 10 Options for Places to Take Pictures in Charlotte, NC - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -7904,7 +7904,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMieEFVX3lxTE4xUWV4eDd4N3IzRGdGczZBSTRDbjE0S1lKUlF1TnZOS2ZSR3plbkRNUUhoUVlwaXdJNzZDcXVDWDIwRGNTZUJOSkpGVHlSVDhSeWNJQ0NaWXhkakRsbkVJbnR5bFh6WE5Ra2VUUVFNVTBfNmFEX2N5RA?oc=5",
-      "title": "THE BEST 10 Beaches near HICKORY, NC 28602 - Updated 2026 - Hours - Yelp",
+      "title": "THE BEST 10 Beaches near HICKORY, NC 28602 - Updated 2026 - Hours - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -7915,7 +7915,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNdjlvVUU5Vm1KUXh2akJXdjRqVHVDMU1rc3hMYWtkQVZFcDBZUElHY3NWb2RGNDZEZTdab3NOb08yOU9acWhjbnY4bkRvWGcyQ0s3elVaOVZ3RS1ES0NmbUpHdTJ5X1BFaDY1WHZ6NW5Tem1mRUdOeTFBRDdKcFAwTjRUdHM5U2l4enlMU3Z3ZkJvbjhF?oc=5",
-      "title": "TOP 10 BEST Waterfront Restaurants near Davidson, NC 28036 - Updated 2026 - Yelp",
+      "title": "TOP 10 BEST Waterfront Restaurants near Davidson, NC 28036 - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -7959,7 +7959,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBWYWVtNWN4UkZtSUpvOW82U1RfN0NWZGtYdG94WGU0U0tGaS1ZVXJnMjBVcVdaLVVaZ2pxLXhyNTNqTjYwcHhXellHZFpveFhqTnNXRjBWSFNQNjYwSW5wakxUdWdQTW10V29iUHNRM2wxZHQwVlZVRm5tR0s0QQ?oc=5",
-      "title": "Top 10 Best Air Duct Cleaning Near Charlotte, North Carolina - With Real Reviews - Yelp",
+      "title": "Top 10 Best Air Duct Cleaning Near Charlotte, North Carolina - With Real Reviews - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -7970,7 +7970,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPZmJ1ZEtyWWJWTUNaRzR5SGRDT3Qtejd5MlFGa2p0YXYzVVpnVGxaMkJDdTQwZ0RCbWEtcmJXQk5JdENkWXp2RFp4V3hCZlJRZkFnNHV2b0xSbF9mWENISE5tMjQyWVJWbzlycnkzUDRac3ZHZXd0N1NzTi1lTm1vWnBwTXI5aVVoSWhwZWUyTFFFdw?oc=5",
-      "title": "TOP 10 BEST Japanese Restaurant near Cornelius, NC 28031 - Updated 2026 - Yelp",
+      "title": "TOP 10 BEST Japanese Restaurant near Cornelius, NC 28031 - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -7981,7 +7981,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPTmVvNWl1bzItWnBSOHVBOUxEU1dVZW96cWtkZmE3dkMxNXBkcV9SVzFBU1U4WEJ4YVBQcEptdTV6VElPWTFCdVAwT3RDcVY0T2pQdHdZeG11V3AxZ1NabDQybHZCLXV6XzJxaVFLN1dSMXpPajl3WkVzZUNRSnVvbk9zY1gxYXBrcnpzY1lIUkR0cEE?oc=5",
-      "title": "Top 10 Options for Places to Take Pictures near Denver, NC 28037 - Updated 2026 - Yelp",
+      "title": "Top 10 Options for Places to Take Pictures near Denver, NC 28037 - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -7992,7 +7992,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOcEtXZTlOQzlvLTBBemgtWVh2ZVNQbGg1WkNxOVpvazVuUlFFV2UyanpMQzNRUVB5b2FZWExDc0p1X0FPQThEU1FVOU9Kc0llWkNld1V0cU5BQjhVU2Z5SEZlVXloMjUtYUpUN1BOVDR3Q3BzU3pJM2txMml6WHZqTmdjSjFsUkU?oc=5",
-      "title": "TOP 10 BEST Lookout Points near Lenoir, NC 28645 - Updated 2026 - Yelp",
+      "title": "TOP 10 BEST Lookout Points near Lenoir, NC 28645 - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8003,7 +8003,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1BMnJJN0FTWjRxNWE3Q0dobFNOZ1hSRXJUQ1dLYUZKOWpvUkE1aHg0N0pZUDl0eFE0ZlBZXzA1YS1YU2hOaGJhTy1FNF9CMDlXZU1wRldpam55UQ?oc=5",
-      "title": "Hope Park - Yelp",
+      "title": "Hope Park - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8014,7 +8014,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBKNTl3cmR2S2NCcVVzMjFFQnlyWDJDZEpGRGo0Q3RuTlQtUXZXcUYwNTVQRGhqZFNyN0xfSVF4M1hlQm9TMk52YVZVNFpiSnM0d2VYVC1EWQ?oc=5",
-      "title": "Dorton Park - Yelp",
+      "title": "Dorton Park - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8025,7 +8025,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMieEFVX3lxTE4xTVBfaVhxQTdDdmFQYk9GRl82Vktmd2l1UzFpbUVvSnJGNl9weXNWX21KSk9lRGVxbk95RHV2YlhkSXRxUENxa05DaHJveWJHUXdzWTJObzV5WjNEUVB0dUNsMW5NcDJST0w0bkdPb1JVOUdrUUpaRg?oc=5",
-      "title": "THE BEST 10 Parks near CORNELIUS, NC 28031 - Updated 2026 - Hours - Yelp",
+      "title": "THE BEST 10 Parks near CORNELIUS, NC 28031 - Updated 2026 - Hours - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8058,7 +8058,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5ERXF3NWtHOVJYLXhqQkZHdTJJMWNqbFVic1NVVEo3YmNqM3hWa2t0ZFQxVjJVaEVsUXhPaXF3a0phbE91bi10eU81VlpfS1pPNTE1d2lVbExMajZGckhuV1RyZ1BMSzdjZ2w1cUJXVjVqRlFV?oc=5",
-      "title": "THE BEST 10 Parks near DENVER, NC 28037 - Updated 2026 - Hours - Yelp",
+      "title": "THE BEST 10 Parks near DENVER, NC 28037 - Updated 2026 - Hours - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8080,7 +8080,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9aSGktaU9pSlFxbWdWUTJxOVg1akxuUGpGM3FrbC1rZ2JFaWQxaDVLa1Q3NnRtVTlZSFdmNWV4N2pCbU1MOUVUek40eFYtbTZ2dXNVREVzWHQxdXkyYjJwckpOdUVUWDFzaUMxQlRBMHc0YTVkV2c?oc=5",
-      "title": "THE BEST 10 BAGELS IN DAVIE COUNTY, NC - UPDATED OCTOBER 2026 - VERIFIED LISTINGS ONLY - HOURS - Yelp",
+      "title": "THE BEST 10 BAGELS IN DAVIE COUNTY, NC - UPDATED OCTOBER 2026 - VERIFIED LISTINGS ONLY - HOURS - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8091,7 +8091,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNV0lCM1JZVzY5U0l5ak03QlZmYk04T1U4UXFvRDF6c3N4ZVZ1U3dVNGMwU1B4Rk5mUmltb1JhLU1QZVNsYl9WTUlVbDlLN0FnZzU1bmZxUDRrT3REN0QwTm81UElUd3o1bmhaNkRWTThJMWVJRGc3aWFlTVRyNzJHRm5R?oc=5",
-      "title": "TOP 10 BEST Fishing Ponds in Charlotte, NC - Updated 2026 - Yelp",
+      "title": "TOP 10 BEST Fishing Ponds in Charlotte, NC - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8179,7 +8179,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMic0FVX3lxTFA4TFlhRUlBVERPNzVuSDBKU3UtS3kwVUdYZ1RJWl9PbDRSa2FRSHByRm9hMlJNS1VaNTVOVjZ6MDZBd210cHpUQ3dWVG9UV1VGX3pTOHBFY0dlUkRiVC1QNkk2UWFLaG1qbmswREJYaldmZzg?oc=5",
-      "title": "THE BEST 10 Dog Parks in CONCORD, NC - Updated 2026 - Hours - Yelp",
+      "title": "THE BEST 10 Dog Parks in CONCORD, NC - Updated 2026 - Hours - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8190,7 +8190,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiekFVX3lxTE9vYlIwdHBtUFhYMnhTWjhWdVJYU2VKSUh1bXVKRlVfQllGRUdrb1J5cDFiYVRXdWtUdzBPLXczUWVKU3VWTmNWM0VIVkg5eVNhNmlTem5pTS0wVVVzY2NibnVZVTVVU0ZRZXlvN05IejllLWhhbE5PS2Z3?oc=5",
-      "title": "THE BEST 10 Beaches near DAVIDSON, NC 28036 - Updated 2026 - Hours - Yelp",
+      "title": "THE BEST 10 Beaches near DAVIDSON, NC 28036 - Updated 2026 - Hours - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8201,7 +8201,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOdk42UHRIT0JGcEcwRXJKOUQwSTdmQThMbnREOFNiZ1lsUGNjT0JmUWZlRXJnZDNGWDhkWUhzQU9iUWNTTngtV2NIODE0a2ZFQ0VTemdVTEtUdkQtazY0SmphNExZSjF0aks5YXVHbFhtcUlqN05mUWlPSHdpWTdsQ2Z3?oc=5",
-      "title": "Top 10 Options for Lawyers near Mint Hill, NC 28227 - Updated 2026 - Quality & Affordability - Yelp",
+      "title": "Top 10 Options for Lawyers near Mint Hill, NC 28227 - Updated 2026 - Quality & Affordability - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8212,7 +8212,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5EQXB2Qmt3aWhHVG1JcVdXblNrbUJXMWphdnZZc0ZZenI0cGFsYUhGcmxvbEJmT1YzVWcxMGVNZ20wNjFxQi14bDBMbUVHeVdMTjV6bFg2ZGNNQ0U?oc=5",
-      "title": "MAGLA PARK - Updated September 2026 - 93 Spencer St, Mooresville, North Carolina - Parks - Phone Number - Yelp",
+      "title": "MAGLA PARK - Updated September 2026 - 93 Spencer St, Mooresville, North Carolina - Parks - Phone Number - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8223,7 +8223,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPZ1ltUU1pYk9pWi05dVRiOFlEYzF6RXZIOUdrQkFJRUZrbzlkQ3R0UThHaEhEMmZiX1J4YzhyVFdxMGhTOHNhRXQ2Q1FhdlNDQzB5Zml2aU1pOEhOVndTR1BzZDNUSmQ2OGJLdWZENFVrby1jRUFxWVRDTmlYMTN0N2tGazk?oc=5",
-      "title": "TOP 10 BEST Commercial Hvac in Charlotte, NC - Updated 2026 - Quality & Affordability - Yelp",
+      "title": "TOP 10 BEST Commercial Hvac in Charlotte, NC - Updated 2026 - Quality & Affordability - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8234,7 +8234,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPdGthcms3b3loSmw5THJFVWpMRURXd2tRX3RvV2pSV0o2YUFSeXJ5QldTTVQ3MGowcEh0MzBrckozVmFHeXYzaE01amZoMmhrX3ZuQjk1a3lHUHpzeUNEdTV4Y0hlRzBzdkpmclN6ellQQlhEUS03cVlfZVN6akVnTlZpZi1QVzh0?oc=5",
-      "title": "TOP 10 BEST Breakfast near Huntersville, NC 28078 - Updated 2026 - Yelp",
+      "title": "TOP 10 BEST Breakfast near Huntersville, NC 28078 - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8245,7 +8245,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPN2k1NmxfQXZWbnNUSEZMSGl3S2gyZzNwcjNGU1JXVE0zbEdZcXBlc3FtNl95NkstRzByQTcwWmJHTlhKWGlTWXhGYm5DMm0tWEw3dmVZNnhsWFVGUUN3LUZiUElQTmFwdFUxbzhFMldVejI4ZkxNYmhmb1NRWGxJajJJeG9QazBNbUNnTkJrTTA?oc=5",
-      "title": "TOP 10 BEST Hip New Restaurants near Davidson, NC 28036 - Updated 2026 - Yelp",
+      "title": "TOP 10 BEST Hip New Restaurants near Davidson, NC 28036 - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8300,7 +8300,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNZWxmaC16c1h6ZVlVZENONm8wNlVOMzBOd3l5eVcxdk9FM2d4VTdiS1AyWFhIeXhZZU1zNDcyZU0yN2pnYkQ5bmtYOXZsamtsWU5QZHQ2V0Vzd3hjMktrTzRGRHBjbjFOSW9NRy1FQlEyVUJxc0x3Ym1ablE1ODgyYXZPbFlDUQ?oc=5",
-      "title": "TOP 10 BEST Lakes for Picnic in Charlotte, NC - Updated 2026 - Yelp",
+      "title": "TOP 10 BEST Lakes for Picnic in Charlotte, NC - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8311,7 +8311,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNcWUxdDd0UWp6Z05KRHdLTXRPOFJGMjdNcGZpYUl3Z2JSSElRVWx3Zi1ONzl4UkhnMERuQW14MFVJSXV0VzVLN2x0UjJRaWNTemxnRHozZWFTX2lrR0tsM1hJa0FqeXNERlMxOWtRM3lhZmpnWmdQMWN4S0VxYzdOcA?oc=5",
-      "title": "TOP 10 BEST Picnic Areas in Charlotte, NC - Updated 2026 - Yelp",
+      "title": "TOP 10 BEST Picnic Areas in Charlotte, NC - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8333,7 +8333,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBTSldQR18xVzVBbVFOblkzUlhZV3lYUzhCZG0zaGo3N3U3WjYxcDRUQTM2RVUwMnFfT1g5WUY4NlBsVEI2UFFVdVB6dnkxOFRRdGNYNnFTZVVFNm1nR0FlcUJjc2ZLaVA5TUVHeWJuTnBSUklFb1RFQ0ZQRjhBYTg?oc=5",
-      "title": "TOP 10 BEST Lunch near Cornelius, NC 28031 - Updated 2026 - Yelp",
+      "title": "TOP 10 BEST Lunch near Cornelius, NC 28031 - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8344,7 +8344,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNM2NEZm1yRHFLampYZUhQZXBlMlM2elNfczI5MkhYcmZDTXByeWswcXU4TzhEOFhva1pOOWxpeXB4MXRQUzVIclhOb0lCZzBDSTFqZFA3bUJGSVV4QmVYMjVPM085UGZxaXppS0lVNW11SEQ0TUF1STMzZUxOVGl5eV9MdHpqcDFKd1p2MGF3?oc=5",
-      "title": "Top 10 Options for Places to Take Pictures in Gastonia, NC - Updated 2026 - Yelp",
+      "title": "Top 10 Options for Places to Take Pictures in Gastonia, NC - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8355,7 +8355,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOOEs5UmlPRUI1aVVTdU5yWDdDeWdzVEpzYWJJQmVEX3puUjdUSjFOSG10SGhoeGp3ek8xbG01UXFPNW42VHRFZzZNV2JPWFNHSXpxdTFBRm13WlJwNGp5ajAzTUNHWEFpQ285WEVJMHpKbGptYzJ1VXk1Y0poa1NXdUxhNA?oc=5",
-      "title": "TOP 10 BEST Swimming Lakes in Charlotte, NC - Updated 2026 - Yelp",
+      "title": "TOP 10 BEST Swimming Lakes in Charlotte, NC - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8366,7 +8366,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOeVVMT18yMDI2WW93eTJSZU1ETk10aThqTm5wLWZOR2FBRVpYSkZWbmVBdzU0TE9xU3RKVXRMX3paUXF3THZUT29HX3ZPZXVkTUhvUl9nZEt0QVNSUHNkWUlVaG9kNndFUEpmM3Bxb2Rsdk5PMlFlQnJmSDdJN1pSTF9PZnNadw?oc=5",
-      "title": "TOP 10 BEST Divorce Attorney in Charlotte, NC - Updated 2026 - Quality & Affordability - Yelp",
+      "title": "TOP 10 BEST Divorce Attorney in Charlotte, NC - Updated 2026 - Quality & Affordability - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8377,7 +8377,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNdHpwQ1ZjdmRwNlJtbjBIZl9sU1N2Smxwb2xxMEptdEh1Y0tuY09DM1R6R0tOMG1hc2tYTGM1OXpGdXV6WlUwVk9JWmRUUERySGd3V0k1WFpueEo2dWlFcDA0aTMyUlhmblRTS0ptMVdvSzA3NlZ0eC1zRkxtZnd6eGotT2VyZGc?oc=5",
-      "title": "Top 10 Options for Scenic Night View in Charlotte, NC - Updated 2026 - Yelp",
+      "title": "Top 10 Options for Scenic Night View in Charlotte, NC - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8388,7 +8388,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPeUlsYlpvLUJqcjlYRjgxREl4RjlNRm5GYzh3cmNINzdERmZKRGVlLVcxVnRxZzNLODVfbkNFNFQ3WjFrRkRudVpTU2NOYWd3VjNvREVxVUdqYmdZWmtMX0xSZDJFb3NGVWJHbTYxUkJkTlNLZDQ4c2QybjNnWW5ESEpZZnBkV3JtU2pxdnFaS2xsUQ?oc=5",
-      "title": "TOP 10 BEST Outdoor Basketball Courts in Charlotte, NC - Updated 2026 - Yelp",
+      "title": "TOP 10 BEST Outdoor Basketball Courts in Charlotte, NC - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8399,7 +8399,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOOERIWXo0eWEyWmxSSkhBMHRFU2pRTGxxWEtOWHItaS1yd3AwZ2ZwSFY1Y1RBSkFsZV9PZEVtSmprMG9yQ0ZiRGg3Wm80TmRuT1hmb3R4eHJZX1JnbC11YWotMHR3Z19VTnRmdnF4UDhwRmx2YmJiQk1ZNV9ocThqbkxUZTc?oc=5",
-      "title": "THE BEST 10 Beaches in LAKE NORMAN OF CATAWBA, NC - Updated 2026 - Hours - Yelp",
+      "title": "THE BEST 10 Beaches in LAKE NORMAN OF CATAWBA, NC - Updated 2026 - Hours - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8421,7 +8421,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQRHhha3ZUcVN5eTl3di05VGluWHRSbmxVbzZhUHJvLUp3amMzQ1JPdzgwSmt0U0draUVXUExiQ2V2ZUpCUEVyeG5CSHBEejNsLVlrVlg3ZzFyRHQyVjNLamlLXzRHUUFCVW5nTktTeHBucUh5MWswc1dWb3hxWjFXS1JoRDBlYUF6QWEzS1pJMWMxa3lSajNBMDJpdw?oc=5",
-      "title": "TOP 10 BEST Places to Take Pictures near Huntersville, NC 28078 - Updated 2026 - Yelp",
+      "title": "TOP 10 BEST Places to Take Pictures near Huntersville, NC 28078 - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8443,7 +8443,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFA5VVQ4Mjh5d0Q3cnM2MjZPVnJobWd3MWhfc210OUZXM1pCMV83VVNFZkxfQ3pfQnpseVVaODJlVGZyZU5GN09IcEM2VFp4Vm1QZ3I5aVhTb1JpNWNVRFE?oc=5",
-      "title": "LIBERTY PARK - Updated October 2026 - 18 Photos - 225 E Iredell Ave, Mooresville, North Carolina - Parks - Yelp",
+      "title": "LIBERTY PARK - Updated October 2026 - 18 Photos - 225 E Iredell Ave, Mooresville, North Carolina - Parks - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8465,7 +8465,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1fbHFfV21QUWdDWVpqSHBJYnI0aDNfcG9la2NGa0pDeDBpb2dQdE0yVm9Vb0ZqTndhS2pVaFNENGswNktsZWd6MXMzaDdGNWMxSWdfZk5Ub01CWHZ6Q3g5OVN3QWMtbzE0OExocktDdDY5eTFnVDln?oc=5",
-      "title": "THE BEST 10 BAKERIES IN MOORESVILLE, NC - UPDATED OCTOBER 2026 - VERIFIED LISTINGS ONLY - HOURS - Yelp",
+      "title": "THE BEST 10 BAKERIES IN MOORESVILLE, NC - UPDATED OCTOBER 2026 - VERIFIED LISTINGS ONLY - HOURS - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8476,7 +8476,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMifEFVX3lxTE5KS0VydjJrNU55ZzBzRnJTN25KMGhkbV95SGFJTmdPN0xSeGhsblo2cHpsQzFkLVBMZ3Z4NUI4RXhob0x6OVBsRDhqSVpOZmtvQXIxcmozWENsTXI4eExUSDBJMUNIWl80bF9uQWhxX01KT2NRWFIzU2dfdVo?oc=5",
-      "title": "TOP 10 BEST Dog Parks in Charlotte, NC - Updated 2026 - Yelp",
+      "title": "TOP 10 BEST Dog Parks in Charlotte, NC - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8498,7 +8498,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBmSEtmVlB2NEszN2JPSk5RWFBOY2dLRHdHNXZYQ093TldXM0xxWEpYaV81eVdXajdQZ05ydlFFa3lJMlNUUVN0Y2JtWXloSjFCVHZlS1V5bmxuWnBlMVF6Smo3UHU4djZsNGVCTDZlZWU2REFpRXdMNFJ2Q28xQQ?oc=5",
-      "title": "Bakeries Mooresville, NC - Yelp",
+      "title": "Bakeries Mooresville, NC - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8509,7 +8509,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5QQ2ZtaGFhcXR3MnExX0ZjaFFXczVTR19jcVMzdmM4ZU5JS1dPMEhrU192Unk0aVFzeFIyTHpWQXVoN1RuSy0ybU8zRUQ5Z3hpTzRLMzE4VDFlNC1tS0xHbjM5OEZ1QVQ5RnZaUFVnOVJrSzVGYXZVaDFPaU1jTVU?oc=5",
-      "title": "TOP 10 BEST Sunset View in Charlotte, NC - Updated 2026 - Yelp",
+      "title": "TOP 10 BEST Sunset View in Charlotte, NC - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8542,7 +8542,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMieEFVX3lxTE51MU5UQld4M21MdTFYQ0FoWm1HZ2twS2gzVVhoVUxGYzE0NGRDY0d0WlhUeVpkRk9sYzBGMlRvbjI4VEpGM1B6UkpVRXI0a2d1WGFLQ3BXNEFTaFJyT3h3RzRZOERFSW5ha21uSzZTZXFnNDNia0xJYw?oc=5",
-      "title": "The Best 10 Donuts near Davidson, NC 28036 - Yelp",
+      "title": "The Best 10 Donuts near Davidson, NC 28036 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8575,7 +8575,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQeEY3eHNtSThLZy1meHRLWXRWV29HYlViUzNkV0I0Y3lvNDJQMlh2Z0NlbUVEZ2F4VlRoNUdONHd1dTMxZDRKUl9YS25uakhaUHpLeEs2VGZwazR0TFlLR2tEUk56d3U4VDM3U3diZHhyRWt0Y3lHb2RKMkxtM0VzdmZTQ3JDZk0?oc=5",
-      "title": "TOP 10 BEST Places to Study in Mooresville, NC - (2026 Guide) - Yelp",
+      "title": "TOP 10 BEST Places to Study in Mooresville, NC - (2026 Guide) - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8586,7 +8586,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOTkJWOFMwZ21vczRvQUQwZHNRQUpNRDlpZWI2LVY5TFZ0RFRUbGxLWlVxX01UU1lyN2xUb01NMGtwdUJkZDRYbFFVQ0xPRlpuOEN4Zjk3b0ctbkRmQldCR0NhWE1qNmRSZDFCY0RDNzNRQlJXYktUSVBRYk5aN1B1V3JVMTE4dzU0?oc=5",
-      "title": "TOP 10 BEST Splash Pad near Mount Holly, NC 28120 - Updated 2026 - Yelp",
+      "title": "TOP 10 BEST Splash Pad near Mount Holly, NC 28120 - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8597,7 +8597,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9kTDN0eU9Cbk9tZVB0WWp2b2lxR1dBY2k2MEJxVEV1ZE1pNXE3RnNnS2FpS0swVWpLSVNuWVNzSzh1ZlU0ekFEODNma3l3aG1UQ2hIWDFlY3dtbm9xeXYwMUxlMVlMMHVVUHAzeGFkSWh1bU9y?oc=5",
-      "title": "THE BEST 10 Beaches in GREENSBORO, NC - Updated 2026 - Hours - Yelp",
+      "title": "THE BEST 10 Beaches in GREENSBORO, NC - Updated 2026 - Hours - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8619,7 +8619,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPbkNQUjNvak5JWWhfaEdZUzd4X3NVV3JIbVJSdi15Vk13Sm1lemtXVnJvWkRqQU5vQS1xQTZLZEw1UENXeDQzS3dONG42dFQwTmlkUWNqN3BSTlZLZXlHRE9mT0d6UU5GODJZa3NhVXR4Z2h4SGhoeW00NkxXMGFtX0tXMTFOeXB1MzNYYQ?oc=5",
-      "title": "TOP 10 BEST Car Accident Attorney in Charlotte, NC - Updated 2026 - Quality & Affordability - Yelp",
+      "title": "TOP 10 BEST Car Accident Attorney in Charlotte, NC - Updated 2026 - Quality & Affordability - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8652,7 +8652,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNZHRxX2NDQ19tdzU2b0lXalV6ZldOdVc3THVsZDE4cW4zZzVWNDVqQ0NDUDNfV0FpYTJFdGhKcGlaNDRjMUpCYl9OaXo5YTZGeThBU0RDOHVsR0dCOHFPcVV1LWZBZHc4d2VuOHJLZ0FlTGdWSmdfUVhXWG5PaGZmb1ZR?oc=5",
-      "title": "Top Options for Toddler Parks in Charlotte, NC - Updated 2026 - Yelp",
+      "title": "Top Options for Toddler Parks in Charlotte, NC - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8663,7 +8663,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQZnJCUFdNbkZXSmoxOXo2WHFJT21qUE80UE16TENMMVB6c0VqY3FfSEg5XzRKNHdIZUllaE11eGtYM0ZnY1Q5THROUUlJNkxfaTltS2p3WFc4emF1Z2U1akFEX2RBenlvbDRiWVBVY2t3Tk50clBoS1lyRmNXaTU1NWlyOE5VQi1kek16RjNscTlfR0Fr?oc=5",
-      "title": "Coffee Shops Free Wifi Davidson, NC 28036 - Yelp",
+      "title": "Coffee Shops Free Wifi Davidson, NC 28036 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8674,7 +8674,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQbTg3WFdsUWZNTGtRVjVqOFU0dWduSmRlYUN6VU5PazNISGllZnJZOGcweFhqWTJ2VnRhTTVyZ0E1WElGYm56RVJpR1VQYUJGemxjNWpBOE1tc2xQVFo2WFI0TzQxS01ueUt6VnRPYlNrUFpKb001eFVabC1MNGRKdi10VkpYVXNfU1lyLXB3?oc=5",
-      "title": "TOP 10 BEST Free Kids Activities in Mooresville, NC - Updated 2026 - Yelp",
+      "title": "TOP 10 BEST Free Kids Activities in Mooresville, NC - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -8685,7 +8685,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNNnJqeFQ4SXNLUFF3dWwzeGpETHBVZjlkamVjaFZveFNydi1yMnZ0eGdWcnRXZVJveVAwRUF5QnZZamdxZ19uWUdMckxxUHp1UEhCb2drQy1fYl9kMm1Eb2VSRE9CTzExNFliU1AwN3hud2RMSmd4RmowTHdXN0t5RHlGTF9LdzJh?oc=5",
-      "title": "TOP 10 BEST Lakes for Swimming in Charlotte, NC - Updated 2026 - Yelp",
+      "title": "TOP 10 BEST Lakes for Swimming in Charlotte, NC - Updated 2026 - yelp.com",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9884,7 +9884,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPT2t3N0h3RERlM0wxYXkyOUFmWWw0LUU4eW9rYy1uUnhpYUtXMlVGaHVWWWhpQmozaGRNV1ZnelVFR1MyWF9aV2otTndZd3BkTUZhNzgxa2FOR3lvSTN1eXhZTnRHRVJmYzV4NmhIVWpfVmxHZm4zbjVVT1dMQnFaVnpLQ0ExQlBnRDQzUjFjVFRBUjE0M0Rj?oc=5",
-      "title": "Claim and withdraw your tokens - help.coinbase.com",
+      "title": "Claim and withdraw your tokens - Coinbase",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -9972,7 +9972,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5Jcjk3QTdvcXlVSU5XTlhNMFhUc0RhdzJRUDNoazdHdGVLNXFfbEVlcHltQXBWNUlDNFQ3YXdQLURNcEZiY1lZSll0Y0IxVVk0WEpJYWVBTTNyMjZQRm01cjducy1KU0NOcmhic1pVNnYySUJE?oc=5",
-      "title": "FAQs - help.coinbase.com",
+      "title": "FAQs - Coinbase",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
@@ -10213,17 +10213,6 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
-      "id": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5BRUtsQXlNMXp2LVhycXhJMWhzWnE5REs1S1NjZnIzRzNhSlVfRFJic3NEeGp5TUNKb0x2MDhTN2R6M1c4ZTlDSUZBUVUzd2FqSi1LZmx4emMxdw?oc=5",
-      "title": "Brickken price today, BKN to USD live price, marketcap and chart - CoinMarketCap",
-      "status": "OWNER_REVIEW",
-      "claimMethodObserved": "never-auto-claim",
-      "eligibilityObserved": null,
-      "evidence": [],
-      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5BRUtsQXlNMXp2LVhycXhJMWhzWnE5REs1S1NjZnIzRzNhSlVfRFJic3NEeGp5TUNKb0x2MDhTN2R6M1c4ZTlDSUZBUVUzd2FqSi1LZmx4emMxdw?oc=5",
-      "ownerApprovalRequired": true,
-      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
-    },
-    {
       "id": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNN0ppLTA5eHo4UVl5UDJVZUVxYUZyTlh6RzRSblN3X0hqWkNOWnpDOVpRYlJjVzFoNnBKMnV5TzhYMVZFbmNSQllPNmE5dXNHbnVEYjNxdlV1SHRuV0xHeFRmSFBoU3o3elIzSkZJUHRxbHNWWEprMU03cGtSQ3h0TlI5aEYwbjZMSllycXEyVTVTWkpTMUpDZWJsaldUQmliTlV6Zll6WUwyQ2lYVmZUOGRpdlFmZm9Id3JaLVZqMElEM2ZhLWkzTQ?oc=5",
       "title": "How to Revoke Token Approvals and Protect Your Crypto Wallet from Appr - DCENT Shop",
       "status": "OWNER_REVIEW",
@@ -10290,6 +10279,17 @@
       "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
     },
     {
+      "id": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5BRUtsQXlNMXp2LVhycXhJMWhzWnE5REs1S1NjZnIzRzNhSlVfRFJic3NEeGp5TUNKb0x2MDhTN2R6M1c4ZTlDSUZBUVUzd2FqSi1LZmx4emMxdw?oc=5",
+      "title": "Brickken price today, BKN to USD live price, marketcap and chart - CoinMarketCap",
+      "status": "OWNER_REVIEW",
+      "claimMethodObserved": "never-auto-claim",
+      "eligibilityObserved": null,
+      "evidence": [],
+      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5BRUtsQXlNMXp2LVhycXhJMWhzWnE5REs1S1NjZnIzRzNhSlVfRFJic3NEeGp5TUNKb0x2MDhTN2R6M1c4ZTlDSUZBUVUzd2FqSi1LZmx4emMxdw?oc=5",
+      "ownerApprovalRequired": true,
+      "nextStep": "verify official claim method, then prepare unsigned action; owner signs/acts"
+    },
+    {
       "id": "https://news.google.com/rss/articles/CBMifEFVX3lxTE1lZjU2NDNrYW5BdU5ocmJVeG5hRWphNXhYLTZjLWdSdjlOeVV5OXltNE5jNnpvTTJ2NFM0TWpkU1JfU0V3MTNmU25pQjI0bVhBQ05tS2RSLXpIeGtUeUp3Z3FZdzgxUjJMTUJoS1hPTzdubmVUV2J5MmV4cFE?oc=5",
       "title": "Solana to Base Bridge: Compare Routes & Fees - Earnpark",
       "status": "OWNER_REVIEW",
@@ -10335,7 +10335,7 @@
     },
     {
       "id": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5VTXowbEw5Q214NVcxZ2FiNmp1b1RQdjhpVVVmRzNJMm9mOHVJNWJqdFJDRHJOdG0xcXVOSHZoel9RUU11SHN3Qm51bFhhY005dElYM0ZpSVBYeGlvUzVJ?oc=5",
-      "title": "Enhancing smart contract security using a code representation and GAN based methodology - nature.com",
+      "title": "Enhancing smart contract security using a code representation and GAN based methodology - Nature",
       "status": "OWNER_REVIEW",
       "claimMethodObserved": "never-auto-claim",
       "eligibilityObserved": null,
