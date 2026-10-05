@@ -37,12 +37,14 @@ async function assetsFetch(request){
     }
     const headers={
       'content-type':mime[ext]||'application/octet-stream',
-      'cache-control':cache,
+      'cache-control':isHtml||ext==='.js'||ext==='.mjs'||ext==='.css'||ext==='.webmanifest'||path.basename(file)==='sw.js'?'no-store':cache,
+      'content-length':String(data.byteLength),
       'x-content-type-options':'nosniff',
       'referrer-policy':'strict-origin-when-cross-origin',
       'permissions-policy':'camera=(),microphone=(self),geolocation=(),payment=(self)',
       'cross-origin-opener-policy':'same-origin-allow-popups',
-      'cross-origin-resource-policy':'same-site'
+      'cross-origin-resource-policy':'cross-origin',
+      'strict-transport-security':'max-age=31536000'
     };
     return new Response(data,{status:200,headers});
   }catch{return new Response('Not Found',{status:404})}
