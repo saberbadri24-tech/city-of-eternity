@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-05T19:09:09+00:00",
+  "generatedAt": "2026-10-05T19:17:59+00:00",
   "engine": "Immortal Guard Modular Core",
   "overall": "healthy",
   "modules": {
@@ -59,7 +59,7 @@
     "autoTransfer": false,
     "ownerApprovalRequired": true
   },
-  "opportunityCount": 9544,
+  "opportunityCount": 9542,
   "opportunityIds": [
     "003f7c77dac44f452619",
     "004c2693b6fd2c8b3902",
@@ -99,6 +99,7 @@
     "043744cf830961ec3e71",
     "043c8ad89c54f043de79",
     "04562056b49089ddb3ce",
+    "0463cf580753a72cea9f",
     "0477b53f56e6ea250fbd",
     "04c897ee217fc204bfab",
     "0525c5d56cc7453e1368",
@@ -703,6 +704,7 @@
     "563e77c780c8d10027f8",
     "564ef1bc45dc9d0dbe97",
     "5679ef9c79b42ffe91e2",
+    "5681538c719820bfd683",
     "568643ec47b482d5c2d5",
     "569344dcf5faf0779285",
     "569ecebacb3afe5c71c9",
@@ -751,7 +753,6 @@
     "5c7d663f0ccf9cadba73",
     "5c886e77c967fd065e04",
     "5ca1bf0d30209c886702",
-    "5d34e67f25cd2e65d5e1",
     "5dabeef26f42ce99b105",
     "5dbe810df145a6ea2aa1",
     "5ddc26bb391c94a43e2d",
@@ -794,7 +795,6 @@
     "61e5b26595244344401c",
     "6231fd9214db037c11f2",
     "62400b62b3c0aae104a7",
-    "629d70feb4394a2c2a8c",
     "62aa2a69efa59e826e75",
     "62c405d12fc253e7b65e",
     "62dc62750ccf9897795f",
@@ -963,7 +963,6 @@
     "79c0cac93d09f852d152",
     "79e9f2f26b5d0915ca03",
     "7a007753a4ca29a5076a",
-    "7a21616bc0de69b4783d",
     "7a243d34cf6e821ff9f2",
     "7a28ff827b40d9cb060f",
     "7ab5f014cffcd0635afa",
@@ -981,7 +980,6 @@
     "7c1b3bc6853f57d2410b",
     "7c3efa2c25d5f6b6e178",
     "7c5f7581581dfc787cf3",
-    "7c7eb538eb960f5f961b",
     "7d3b36e9470989e1e357",
     "7d5017dcfd895b003d9c",
     "7d9b0efd04e6e08835ce",
@@ -1190,6 +1188,7 @@
     "9970c5f5c45bf14878f9",
     "9976d9eecb51ba11ca8a",
     "997d5c9344e31c38b152",
+    "99be8b74b3957ac6a704",
     "99ce2e4eaadfdc8dfe1f",
     "99d2df7bdc06955fa2e8",
     "99fe1b421110635f72b5",
@@ -1599,7 +1598,6 @@
     "d17ed4e7bb820a2615b7",
     "d18f9822a5b8153ee8b5",
     "d1b38a6566f37825c626",
-    "d1c8135b40adb10764f3",
     "d23788de916d34500015",
     "d257ab6a1f109543bb83",
     "d25de3430cb692f36bd1",
@@ -1789,7 +1787,6 @@
     "ebcff17182eda0399164",
     "ebd06c80188c7e5ec49c",
     "ec16552785fa19cf997d",
-    "ec2202b5b0536dcb2d53",
     "ecc942e5fa61f159255c",
     "ecd3afdb7c4bf7fa45d2",
     "ece94f3b01dd68ca2caa",
@@ -5313,6 +5310,7 @@
     "free-70e7176375fc5d8bb79d",
     "free-70f61d3768f522bd5f63",
     "free-7102dd2aaac4cc5accb9",
+    "free-7103ff2b49037ceb3de2",
     "free-7104ef9c8756ad120bfc",
     "free-710d7122f7ab9a2bdd43",
     "free-71164c9c499e9b50978c",
@@ -9616,24 +9614,26 @@
     "opportunity_graph": {
       "state": "healthy",
       "returncode": 0,
-      "stdout": "{\"nodes\": 3723, \"edges\": 1857, \"convergence\": 5, \"blindSpots\": 1847}\n",
+      "stdout": "{\"nodes\": 3716, \"edges\": 1854, \"convergence\": 5, \"blindSpots\": 1842}\n",
       "stderr": ""
     },
     "novelty": {
       "state": "healthy",
       "returncode": 0,
-      "stdout": "{\"new\": 327, \"changed\": 0}\n",
+      "stdout": "{\"new\": 63, \"changed\": 0}\n",
       "stderr": ""
     },
     "action_planner": {
       "state": "healthy",
       "returncode": 0,
-      "stdout": "{\"plans\": 1896}\n",
+      "stdout": "{\"plans\": 1893}\n",
       "stderr": ""
     },
     "unlock_value": {
-      "state": "failed",
-      "error": "TimeoutExpired"
+      "state": "healthy",
+      "returncode": 0,
+      "stdout": "{\"recordsObserved\": 1894, \"checksGenerated\": 9374, \"top\": {\"checkId\": \"158938de32716a0c0ea9\", \"opportunityId\": \"be8f23dca916d11cd4df\", \"title\": \"Best Crypto Airdrops August 2026: Top 5 Projects to Watch - Coin Gabbar\", \"missingDimension\": \"contract\", \"unlockScore\": 129.75, \"affectedObservedRecords\": 1894, \"observedSignalCount\": 5, \"sourceDomain\": \"news.google.com\", \"verificationAction\": \"verify the official contract address from project documentation\", \"reason\": \"prioritize a missing fact whose verification can reduce uncertainty across multiple observed records\", \"costClass\": \"MEDIUM\", \"hypothesisOnly\": true, \"noInventedClaim\": true, \"ownerApprovalRequired\": true}}\n",
+      "stderr": ""
     }
   }
 }
