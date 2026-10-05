@@ -117,7 +117,7 @@ const server=http.createServer(async(req,res)=>{
     }
     if((u.pathname==='/api/admin/self-test'||u.pathname==='/api/admin/auth-self-test')&&req.method==='GET'){
       const {adminAuth}=await import('./functions/api/admin-auth.mjs');
-      if(!(await adminAuth(req,env))){res.statusCode=401;res.setHeader('content-type','application/json; charset=utf-8');res.end(JSON.stringify({ok:false,error:'admin_auth_required'}));return;}
+      if(!(await adminAuth(toWebRequest(req,origin),env))){res.statusCode=401;res.setHeader('content-type','application/json; charset=utf-8');res.end(JSON.stringify({ok:false,error:'admin_auth_required'}));return;}
       env.PAYMENTS=await getPaymentsStore();
       const {adminSelfTest}=await import('./functions/api/admin-auth.mjs');
       const out=await adminSelfTest(env);
