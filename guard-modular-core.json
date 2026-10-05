@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-05T10:05:00+00:00",
+  "generatedAt": "2026-10-05T10:09:44+00:00",
   "engine": "Immortal Guard Modular Core",
   "overall": "healthy",
   "modules": {
@@ -59,7 +59,7 @@
     "autoTransfer": false,
     "ownerApprovalRequired": true
   },
-  "opportunityCount": 9405,
+  "opportunityCount": 9404,
   "opportunityIds": [
     "003f7c77dac44f452619",
     "004c2693b6fd2c8b3902",
@@ -1513,7 +1513,6 @@
     "c8cc592d1e136bc12f94",
     "c8ef131393085ecfcad8",
     "c9085a94e4a2b1ef7ffd",
-    "c940f72da4c194924f14",
     "c94ece8b0786caf7704d",
     "c9a47fb473ff9079ebbb",
     "c9a582ecc729eab91dca",
@@ -9477,19 +9476,19 @@
     "opportunity_graph": {
       "state": "healthy",
       "returncode": 0,
-      "stdout": "{\"nodes\": 3709, \"edges\": 1851, \"convergence\": 5, \"blindSpots\": 1837}\n",
+      "stdout": "{\"nodes\": 3707, \"edges\": 1850, \"convergence\": 5, \"blindSpots\": 1836}\n",
       "stderr": ""
     },
     "novelty": {
       "state": "healthy",
       "returncode": 0,
-      "stdout": "{\"new\": 328, \"changed\": 0}\n",
+      "stdout": "{\"new\": 327, \"changed\": 0}\n",
       "stderr": ""
     },
     "action_planner": {
       "state": "healthy",
       "returncode": 0,
-      "stdout": "{\"plans\": 1890}\n",
+      "stdout": "{\"plans\": 1889}\n",
       "stderr": ""
     },
     "unlock_value": {

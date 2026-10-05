@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-05T10:03:00+00:00",
+  "generatedAt": "2026-10-05T10:07:44+00:00",
   "engine": "Immortal Guard Opportunity Graph",
-  "nodeCount": 3709,
-  "edgeCount": 1851,
+  "nodeCount": 3707,
+  "edgeCount": 1850,
   "nodes": [
     {
       "id": "0c99e9b1baae1e2e",
@@ -9546,10 +9546,10 @@
       "label": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9RRE91a1dKOXJreUhnWkZsb2dsZkZGdWpmVThPdElJN2hNZVlWMURiTXZxTnFrc00tNVR5WDlBSmltV1Jpbk1wVjRiUUxRdTBNZUFQOGk0MnBHOXJFSjNJ?oc=5"
     },
     {
-      "id": "d248e3d1609a9aee",
+      "id": "b9e92e48a3b05dee",
       "type": "opportunity",
-      "key": "security analysis and formal verification on blockchain and its applications - emerald.com",
-      "label": "Security Analysis and Formal Verification on Blockchain and its Applications - emerald.com"
+      "key": "security analysis and formal verification on blockchain and its applications - emerald publishing",
+      "label": "Security Analysis and Formal Verification on Blockchain and its Applications - Emerald Publishing"
     },
     {
       "id": "411c08c9a0372fd5",
@@ -16312,18 +16312,6 @@
       "type": "domain",
       "key": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE8tTWRZUWVPRlhvcHRnTnFhWGlKZnVLbWVQT3JzZjBFSGk5ZkU5QThQRXlxUXNteVh3SUM2ZC0tMlNrNGx0TUpYSUJVSTRlOU1ZZE5KVQ?oc=5",
       "label": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE8tTWRZUWVPRlhvcHRnTnFhWGlKZnVLbWVQT3JzZjBFSGk5ZkU5QThQRXlxUXNteVh3SUM2ZC0tMlNrNGx0TUpYSUJVSTRlOU1ZZE5KVQ?oc=5"
-    },
-    {
-      "id": "a23d6dcbbabf3ce8",
-      "type": "opportunity",
-      "key": "citrea (ctr) tokenomics: market insights, token supply, distribution & price data | mexc - mexc.co",
-      "label": "Citrea (CTR) Tokenomics: Market Insights, Token Supply, Distribution & Price Data | MEXC - mexc.co"
-    },
-    {
-      "id": "d7af0b4551b95412",
-      "type": "domain",
-      "key": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1ISVg2Q00yZkNrTHNkeHJrN202LXBkekdNZHpHYmRMc2RLYlRYN29MZkduWHFHMDREY2ZsaGZSSHV1T0ZvZ0E4dmNaRWdoREdpSHc?oc=5",
-      "label": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1ISVg2Q00yZkNrTHNkeHJrN202LXBkekdNZHpHYmRMc2RLYlRYN29MZkduWHFHMDREY2ZsaGZSSHV1T0ZvZ0E4dmNaRWdoREdpSHc?oc=5"
     },
     {
       "id": "1ac98e339d55900c",
@@ -26277,7 +26265,7 @@
       "relation": "url"
     },
     {
-      "from": "d248e3d1609a9aee",
+      "from": "b9e92e48a3b05dee",
       "to": "411c08c9a0372fd5",
       "relation": "url"
     },
@@ -29104,11 +29092,6 @@
     {
       "from": "211e4886edeb8568",
       "to": "4a41dae77072a761",
-      "relation": "url"
-    },
-    {
-      "from": "a23d6dcbbabf3ce8",
-      "to": "d7af0b4551b95412",
       "relation": "url"
     },
     {
