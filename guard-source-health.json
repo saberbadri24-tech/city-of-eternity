@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-10-05T15:19:51.528456+00:00",
+  "updatedAt": "2026-10-05T16:50:20.478308+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,12 +20,12 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1855,
-  "uniqueNewsPublishers": 535,
+  "discoveryCandidateCount": 1858,
+  "uniqueNewsPublishers": 540,
   "topPublishers": [
     {
       "publisher": "Binance",
-      "count": 119
+      "count": 120
     },
     {
       "publisher": "Immunefi",
@@ -41,11 +41,11 @@
     },
     {
       "publisher": "x.com",
-      "count": 63
+      "count": 65
     },
     {
       "publisher": "Yelp",
-      "count": 53
+      "count": 52
     },
     {
       "publisher": "Reddit",
@@ -53,26 +53,26 @@
     },
     {
       "publisher": "Coin Gabbar",
-      "count": 45
+      "count": 46
     },
     {
-      "publisher": "rootdata.com",
+      "publisher": "RootData",
       "count": 41
     },
     {
-      "publisher": "GitHub",
-      "count": 40
+      "publisher": "github.com",
+      "count": 39
     },
     {
       "publisher": "BitDegree",
-      "count": 31
-    },
-    {
-      "publisher": "Phemex",
       "count": 30
     },
     {
       "publisher": "CCN.com",
+      "count": 30
+    },
+    {
+      "publisher": "Phemex",
       "count": 29
     },
     {
@@ -80,28 +80,28 @@
       "count": 27
     },
     {
-      "publisher": "AirdropAlert",
-      "count": 26
-    },
-    {
       "publisher": "facebook.com",
       "count": 25
     },
     {
+      "publisher": "AirdropAlert",
+      "count": 25
+    },
+    {
       "publisher": "Bitget",
-      "count": 21
+      "count": 22
+    },
+    {
+      "publisher": "LinkedIn",
+      "count": 18
+    },
+    {
+      "publisher": "Bybit",
+      "count": 18
     },
     {
       "publisher": "TradingView",
       "count": 17
-    },
-    {
-      "publisher": "Bybit",
-      "count": 17
-    },
-    {
-      "publisher": "LinkedIn",
-      "count": 16
     }
   ],
   "invalidSources": [],
