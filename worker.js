@@ -225,6 +225,19 @@ async function anilChangeRequest(req,env){
     }
     return rjson({ok:true,request:null});
   }
+  if(req.method==='DELETE'){
+    if(!(await githubActionsAuth(req,env)))return rjson({ok:false,error:'github_actions_auth_required'},401);
+    if(!env.PAYMENTS)return rjson({ok:false,error:'persistence_not_configured'},503);
+    const u=new URL(req.url),rid=clean(u.searchParams.get('id'),120);
+    if(!rid)return rjson({ok:false,error:'id_required'},400);
+    const key='anil/change/'+rid;
+    const item=await env.PAYMENTS.get(key,'json').catch(()=>null);
+    if(!item)return rjson({ok:false,error:'request_not_found'},404);
+    if(item.status!=='queued')return rjson({ok:true,request:item,alreadyProcessed:true});
+    const completed={...item,status:'processed',processedAt:now(),updatedAt:now()};
+    await env.PAYMENTS.put(key,JSON.stringify(completed));
+    return rjson({ok:true,request:completed});
+  }
   return rjson({ok:false,error:'method_not_allowed'},405);
 }
 
