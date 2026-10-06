@@ -14,7 +14,8 @@ jobs:
         run: |
           set -euo pipefail
           curl -fsSL --max-time 20 https://city-of-eternity.onrender.com/api/health >/dev/null
-          curl -fsSL --max-time 20 https://city-of-eternity.onrender.com/api/revenue/fleet >/tmp/fleet.json
+          TOKEN=$(curl -fsSL -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x" | python -c "import sys,json; print(json.load(sys.stdin)['value'])")
+          curl -fsSL --max-time 20 -H "Authorization: Bearer $TOKEN" https://city-of-eternity.onrender.com/api/revenue/fleet >/tmp/fleet.json
           python - <<'PY'
           import json
           d=json.load(open('/tmp/fleet.json'))
