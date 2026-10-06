@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-10-06T13:17:37.996062+00:00",
+  "updatedAt": "2026-10-06T13:32:42.610681+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,12 +20,12 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1867,
-  "uniqueNewsPublishers": 545,
+  "discoveryCandidateCount": 1865,
+  "uniqueNewsPublishers": 546,
   "topPublishers": [
     {
       "publisher": "Binance",
-      "count": 122
+      "count": 121
     },
     {
       "publisher": "Immunefi",
@@ -33,7 +33,7 @@
     },
     {
       "publisher": "CoinMarketCap",
-      "count": 78
+      "count": 80
     },
     {
       "publisher": "hackerone.com",
@@ -41,11 +41,11 @@
     },
     {
       "publisher": "x.com",
-      "count": 65
+      "count": 66
     },
     {
       "publisher": "Yelp",
-      "count": 50
+      "count": 48
     },
     {
       "publisher": "reddit.com",
@@ -57,51 +57,51 @@
     },
     {
       "publisher": "RootData",
-      "count": 42
+      "count": 38
     },
     {
       "publisher": "GitHub",
-      "count": 37
+      "count": 36
     },
     {
       "publisher": "AirdropAlert",
-      "count": 33
+      "count": 34
     },
     {
       "publisher": "BitDegree",
-      "count": 29
+      "count": 30
     },
     {
       "publisher": "polygonscan.com",
+      "count": 30
+    },
+    {
+      "publisher": "CCN.com",
       "count": 29
     },
     {
       "publisher": "phemex.com",
-      "count": 27
-    },
-    {
-      "publisher": "CCN.com",
-      "count": 26
+      "count": 28
     },
     {
       "publisher": "facebook.com",
-      "count": 24
+      "count": 25
     },
     {
       "publisher": "LinkedIn",
-      "count": 21
+      "count": 20
     },
     {
       "publisher": "TradingView",
       "count": 20
     },
     {
-      "publisher": "Bitget",
+      "publisher": "Medium",
       "count": 19
     },
     {
-      "publisher": "Medium",
-      "count": 17
+      "publisher": "Bybit",
+      "count": 18
     }
   ],
   "invalidSources": [],
