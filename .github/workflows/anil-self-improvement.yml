@@ -86,7 +86,7 @@ jobs:
         continue-on-error: false
       - name: Test and browser verify
         if: steps.keygate.outputs.enabled == 'true' && steps.gate.outputs.count == '0' && steps.patch.outputs.skip != 'true'
-        env: {ANIL_BASE_URL: https://city-of-eternity.onrender.com}
+        env: {ANIL_BASE_URL: https://anil-x-live.onrender.com}
         run: |
           npm install
           npm test --if-present
