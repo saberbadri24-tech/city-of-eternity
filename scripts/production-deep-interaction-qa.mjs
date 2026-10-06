@@ -1,7 +1,7 @@
 import { chromium } from "playwright";
 import fs from "node:fs";
 
-const base = process.env.ANIL_BASE_URL || "https://city-of-eternity.onrender.com";
+const base = process.env.ANIL_BASE_URL || "https://anil-x-live.onrender.com";
 const oidcToken = process.env.ANIL_OIDC_TOKEN || "";
 const origin = new URL(base).origin;
 const pagesToCheck = ["/", "/?lang=en", "/?lang=fa", "/services.html", "/revenue-engine.html", "/guard.html", "/admin.html"];
