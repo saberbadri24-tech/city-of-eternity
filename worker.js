@@ -623,7 +623,7 @@ if(p==='/api/payment-config'){
   if(p==='/api/guard/ingest'&&req.method==='POST'){
     if(!(await githubActionsAuth(req,env)))return rjson({ok:false,error:'github_actions_auth_required'},401);
     const b=await req.json().catch(()=>({}));
-    const allowed=['status','opportunities','highValue','sourceHealth','capabilities','radar','receipts','official'];
+    const allowed=['status','opportunities','highValue','sourceHealth','capabilities','radar','receipts','official','ledger'];
     const payload={};
     for(const key of allowed){if(b[key]&&typeof b[key]==='object')payload[key]=b[key];}
     payload.updatedAt=now();
