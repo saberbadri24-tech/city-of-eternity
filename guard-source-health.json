@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-10-06T09:47:13.949532+00:00",
+  "updatedAt": "2026-10-06T10:10:48.881832+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,20 +20,20 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1878,
-  "uniqueNewsPublishers": 544,
+  "discoveryCandidateCount": 1886,
+  "uniqueNewsPublishers": 551,
   "topPublishers": [
     {
       "publisher": "Binance",
-      "count": 122
+      "count": 123
     },
     {
       "publisher": "Immunefi",
-      "count": 87
+      "count": 88
     },
     {
       "publisher": "CoinMarketCap",
-      "count": 82
+      "count": 72
     },
     {
       "publisher": "HackerOne",
@@ -41,15 +41,15 @@
     },
     {
       "publisher": "x.com",
-      "count": 65
+      "count": 63
+    },
+    {
+      "publisher": "Reddit",
+      "count": 54
     },
     {
       "publisher": "Yelp",
       "count": 52
-    },
-    {
-      "publisher": "Reddit",
-      "count": 45
     },
     {
       "publisher": "Coin Gabbar",
@@ -57,31 +57,31 @@
     },
     {
       "publisher": "RootData",
-      "count": 44
+      "count": 41
     },
     {
       "publisher": "GitHub",
-      "count": 38
+      "count": 37
     },
     {
       "publisher": "AirdropAlert",
-      "count": 31
+      "count": 32
     },
     {
       "publisher": "bitdegree.org",
-      "count": 30
+      "count": 31
+    },
+    {
+      "publisher": "Phemex",
+      "count": 31
     },
     {
       "publisher": "polygonscan.com",
       "count": 29
     },
     {
-      "publisher": "Phemex",
-      "count": 28
-    },
-    {
       "publisher": "CCN.com",
-      "count": 26
+      "count": 27
     },
     {
       "publisher": "facebook.com",
@@ -89,18 +89,18 @@
     },
     {
       "publisher": "Bitget",
-      "count": 22
-    },
-    {
-      "publisher": "LinkedIn",
-      "count": 20
+      "count": 21
     },
     {
       "publisher": "TradingView",
       "count": 20
     },
     {
-      "publisher": "Bybit",
+      "publisher": "Medium",
+      "count": 18
+    },
+    {
+      "publisher": "LinkedIn",
       "count": 18
     }
   ],
