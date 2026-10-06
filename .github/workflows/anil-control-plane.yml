@@ -26,14 +26,14 @@ jobs:
           node scripts/anil-final-contract-smoke.mjs
       - name: Production browser QA
         env:
-          ANIL_BASE_URL: https://city-of-eternity.onrender.com
+          ANIL_BASE_URL: https://anil-x-live.onrender.com
         run: |
           npm install --no-save playwright@1.63.0
           npx playwright install --with-deps chromium
           node scripts/production-browser-smoke.mjs
       - name: Live control-plane gate
         env:
-          BASE_URL: https://city-of-eternity.onrender.com
+          BASE_URL: https://anil-x-live.onrender.com
         run: |
           set -euo pipefail
           curl -fsSL --max-time 30 "$BASE_URL/api/health" >/tmp/health.json
