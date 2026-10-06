@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Run revenue fleet
         env:
-          ANIL_X_REVENUE_URL: https://city-of-eternity.onrender.com/api/revenue/fleet/run
+          ANIL_X_REVENUE_URL: https://anil-x-live.onrender.com/api/revenue/fleet/run
         run: |
           set -euo pipefail
           ID_TOKEN=$(curl -fsSL -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x" | jq -r '.value')
