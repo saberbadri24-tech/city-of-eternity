@@ -49,7 +49,7 @@ export async function handleCapabilityKernel(req,env){
  return json({
   ok:true,engine:'ANIL-CAPABILITY-KERNEL',version:'1.0.0',
   truth:{executionIsNeverClaimedWithoutEvidence:true,providerAccessIsNeverInferred:true},
-  capabilityLevel:{target:100,design:100,live:Math.round((Object.values(caps.adapters).filter(x=>x.configured).length/Object.keys(caps.adapters).length)*100)},
+  capabilityLevel:{target:100,design:100,configured:Math.round((Object.values(caps.adapters).filter(x=>x.configured).length/Object.keys(caps.adapters).length)*100),runtimeVerified:null},
   capabilities:caps,plan,
   execution:{status:approvalRequired?'owner_approval_required':'read_only_ready',approvalRequired},
   next:{controlPlane:'/api/anil/control-plane',superTeam:'/api/anil/super-team',kernel:'/api/anil/capability-kernel'}
