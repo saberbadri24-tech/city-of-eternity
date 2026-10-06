@@ -13,9 +13,9 @@ jobs:
       - name: Warm and verify Render
         run: |
           set -euo pipefail
-          curl -fsSL --max-time 20 https://city-of-eternity.onrender.com/api/health >/dev/null
+          curl -fsSL --max-time 20 https://anil-x-live.onrender.com/api/health >/dev/null
           TOKEN=$(curl -fsSL -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x" | python -c "import sys,json; print(json.load(sys.stdin)['value'])")
-          curl -fsSL --max-time 20 -H "Authorization: Bearer $TOKEN" https://city-of-eternity.onrender.com/api/revenue/fleet >/tmp/fleet.json
+          curl -fsSL --max-time 20 -H "Authorization: Bearer $TOKEN" https://anil-x-live.onrender.com/api/revenue/fleet >/tmp/fleet.json
           python - <<'PY'
           import json
           d=json.load(open('/tmp/fleet.json'))
@@ -27,7 +27,7 @@ jobs:
         run: |
           set -euo pipefail
           TOKEN=$(curl -fsSL             -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN"             "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x"             | python -c "import sys,json; print(json.load(sys.stdin)['value'])")
-          curl -fsSL -X POST             -H "content-type: application/json"             -H "Authorization: Bearer $TOKEN"             --data '{"source":"github-actions","scheduled":true}'             https://city-of-eternity.onrender.com/api/revenue/fleet/run             >/tmp/cycle.json
+          curl -fsSL -X POST             -H "content-type: application/json"             -H "Authorization: Bearer $TOKEN"             --data '{"source":"github-actions","scheduled":true}'             https://anil-x-live.onrender.com/api/revenue/fleet/run             >/tmp/cycle.json
           python - <<'PY'
           import json
           d=json.load(open('/tmp/cycle.json'))
@@ -41,8 +41,8 @@ jobs:
       - name: Public uptime and revenue-path check
         run: |
           set -euo pipefail
-          curl -fsSL --max-time 20 https://city-of-eternity.onrender.com/api/health >/tmp/health.json
-          curl -fsSL --max-time 20 https://city-of-eternity.onrender.com/api/revenue/customer-ready >/tmp/customer.json
+          curl -fsSL --max-time 20 https://anil-x-live.onrender.com/api/health >/tmp/health.json
+          curl -fsSL --max-time 20 https://anil-x-live.onrender.com/api/revenue/customer-ready >/tmp/customer.json
           python - <<'PY'
           import json
           h=json.load(open('/tmp/health.json')); c=json.load(open('/tmp/customer.json'))
