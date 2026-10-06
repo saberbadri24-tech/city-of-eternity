@@ -140,6 +140,27 @@ const server=http.createServer(async(req,res)=>{
       const rr=await adminLogin(request,env);
       res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
     }
+    // Owner-private ANIL X surfaces: Guard, personal revenue engines, and settlement data never render publicly.
+    const ownerPrivateHtml=new Map([['/guard.html','guard'],['/revenue-engine.html','revenue'],['/settlement.html','finance']]);
+    const ownerPrivateAsset=/^\/(?:guard-[^/]+\.json|revenue-[^/]+\.json)$/.test(u.pathname);
+    const ownerPrivateApi=u.pathname.startsWith('/api/guard/') ||
+      ['/api/revenue/fleet','/api/revenue/fleet/run','/api/revenue/programs','/api/revenue/engines','/api/revenue/summary','/api/revenue/settlement'].includes(u.pathname);
+    if(ownerPrivateApi){
+      const {adminAuth}=await import('./functions/api/admin-auth.mjs');
+      if(!(await adminAuth(toWebRequest(req,origin),env))){
+        res.statusCode=401;res.setHeader('content-type','application/json; charset=utf-8');res.setHeader('cache-control','no-store');
+        res.end(JSON.stringify({ok:false,error:'owner_auth_required'}));return;
+      }
+    }
+    if(ownerPrivateHtml.has(u.pathname)||ownerPrivateAsset){
+      const {adminAuth}=await import('./functions/api/admin-auth.mjs');
+      if(!(await adminAuth(toWebRequest(req,origin),env))){
+        if(ownerPrivateHtml.has(u.pathname)){
+          res.statusCode=302;res.setHeader('location','/admin.html?view='+ownerPrivateHtml.get(u.pathname));res.setHeader('cache-control','no-store');res.end();return;
+        }
+        res.statusCode=404;res.setHeader('cache-control','no-store');res.end('Not Found');return;
+      }
+    }
     if((req.method==='GET'||req.method==='HEAD')&&!u.pathname.startsWith('/api/')){
       const rel=decodeURIComponent(u.pathname).replace(/^\/+/, '')||'index.html';
       const safe=publicPath(rel);
