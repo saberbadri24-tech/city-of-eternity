@@ -1,7 +1,7 @@
 import { chromium } from "playwright";
 import fs from "node:fs";
 
-const base = process.env.ANIL_BASE_URL || "https://city-of-eternity.onrender.com";
+const base = process.env.ANIL_BASE_URL || "https://anil-x-live.onrender.com";
 const origin = new URL(base).origin;
 const risk = /pay|payment|wallet|connect|ton|claim|transfer|admin|login|checkout|buy|purchase|خرید|پرداخت|کیف|برداشت|ادمین|ورود/i;
 
