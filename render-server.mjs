@@ -72,26 +72,6 @@ const server=http.createServer(async(req,res)=>{
       const rr=await handleGuardLive(new Request(origin+(req.url||'/'),{method:'GET',headers:req.headers}),env);
       res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
     }
-    if(u.pathname==='/api/anil/super-team'&&req.method==='GET'){
-      const {adminAuth}=await import('./functions/api/admin-auth.mjs');
-      if(!(await adminAuth(toWebRequest(req,origin),env))){res.statusCode=401;res.setHeader('content-type','application/json; charset=utf-8');res.setHeader('cache-control','no-store');res.end(JSON.stringify({ok:false,error:'admin_auth_required'}));return;}
-      const body={ok:true,engine:'ANIL-SUPER-TEAM',version:'2.0.0-frontier-aware',generatedAt:new Date().toISOString(),task:'read-only live QA snapshot',chain:['ANIL','Astra','Claude','Gemini','Guard','Revenue Fleet','QA Sentinel'],executionMode:'local-safe',evidence:{providerKeys:{astra:Boolean(env.OPENAI_API_KEY||env.OPENAI_KEY),claude:Boolean(env.ANTHROPIC_API_KEY||env.ANTHROPIC_KEY),gemini:Boolean(env.GEMINI_API_KEY||env.GOOGLE_GEMINI_API_KEY||env.GOOGLE_API_KEY)}},safety:{finalCommand:'ANIL',irreversibleActions:'OWNER_APPROVAL',moneyMovement:'OWNER_APPROVAL',privateKeys:false,seedPhrases:false,autoSigning:false,captchaBypass:false,kycBypass:false},truth:{revenueCountsOnlyWhenSettled:true,providerConfigurationIsNotRuntimeProof:true,modelCatalogIsNotRuntimeProof:true}};
-      res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');res.setHeader('cache-control','no-store');res.end(JSON.stringify(body));return;
-    }
-    if(u.pathname==='/api/anil/super-team'&&req.method==='POST'){
-      const {adminAuth}=await import('./functions/api/admin-auth.mjs');
-      if(!(await adminAuth(toWebRequest(req,origin),env))){res.statusCode=401;res.setHeader('content-type','application/json; charset=utf-8');res.end(JSON.stringify({ok:false,error:'admin_auth_required'}));return;}
-      const hasProvider=Boolean(env.OPENAI_API_KEY||env.OPENAI_KEY||env.ANTHROPIC_API_KEY||env.ANTHROPIC_KEY||env.GEMINI_API_KEY||env.GOOGLE_GEMINI_API_KEY||env.GOOGLE_API_KEY);
-      if(!hasProvider){
-        const body={ok:true,engine:'ANIL-SUPER-TEAM',version:'2.0.0-frontier-aware',generatedAt:new Date().toISOString(),executionMode:'local-safe',command:'DISCOVER -> VERIFY -> SCORE -> QUALIFY -> TEST -> SHIP -> MEASURE -> LEARN -> IMPROVE',providers:{astra:{live:false,reason:'runtime_secret_missing'},claude:{live:false,reason:'runtime_secret_missing'},gemini:{live:false,reason:'runtime_secret_missing'}},safety:{finalCommand:'ANIL',irreversibleActions:'OWNER_APPROVAL',moneyMovement:'OWNER_APPROVAL',privateKeys:false,seedPhrases:false,autoSigning:false},truth:{noFakeExecution:true,noFakeRevenue:true}};
-        res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');res.setHeader('cache-control','no-store');res.end(JSON.stringify(body));return;
-      }
-      const body=await readBody(req);
-      const request=new Request(origin+(req.url||'/'),{method:'POST',headers:req.headers,body});
-      const {handleSuperTeam}=await import('./functions/api/anil-super-team.mjs');
-      const rr=await handleSuperTeam(request,env,{});
-      res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
-    }
     if(u.pathname==='/api/anil/capability-kernel'&&(req.method==='GET'||req.method==='POST')){
       const {adminAuth}=await import('./functions/api/admin-auth.mjs');
       if(!(await adminAuth(toWebRequest(req,origin),env))){res.statusCode=401;res.setHeader('content-type','application/json; charset=utf-8');res.end(JSON.stringify({ok:false,error:'admin_auth_required'}));return;}
