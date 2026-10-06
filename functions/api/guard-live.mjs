@@ -21,6 +21,10 @@ async function readLocal(env,name,req){
     return await r.json();
   }catch{return null}
 }
+async function readPrivate(env,key){
+  if(!env?.PAYMENTS)return null;
+  try{return await env.PAYMENTS.get('guard/private/'+key,'json')}catch{return null}
+}
 async function readRemote(name){
   try{
     const r=await fetch(REMOTE+name+'?v='+Math.floor(Date.now()/60000),{headers:{accept:'application/json','cache-control':'no-cache'}});
@@ -33,8 +37,10 @@ async function readCatchQueue(env){
   try{const q=await env.PAYMENTS.list({prefix:'guard/catch/'});const keys=(q?.keys||[]).slice(-100);return (await Promise.all(keys.map(k=>env.PAYMENTS.get(k.name,'json').catch(()=>null)))).filter(Boolean)}catch{return []}
 }
 async function read(env,key,req){
+  const privateData=await readPrivate(env,key);
+  if(privateData)return {data:privateData,source:'owner-private-redis'};
   const local=await readLocal(env,LOCAL[key],req);
-  return {data:local,source:local?'anilx-local':'unavailable'};
+  return {data:local,source:local?'legacy-local':'unavailable'};
 }
 function outdatedMinutes(value,now){const t=Date.parse(String(value||''));return Number.isFinite(t)?Math.max(0,Math.round((now-t)/60000)):null}
 export async function handleGuardLive(req,env){
