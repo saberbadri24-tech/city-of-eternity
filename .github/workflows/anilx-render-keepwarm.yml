@@ -9,4 +9,4 @@ jobs:
     steps:
       - name: Warm ANIL X worker path
         run: |
-          curl --fail --silent --show-error --max-time 20 https://city-of-eternity.onrender.com/api/payment-config
+          curl --fail --silent --show-error --max-time 20 https://anil-x-live.onrender.com/api/payment-config
