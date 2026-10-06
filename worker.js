@@ -628,7 +628,7 @@ if(p==='/api/payment-config'){
     for(const key of allowed){if(b[key]&&typeof b[key]==='object')payload[key]=b[key];}
     payload.updatedAt=now();
     if(!env.PAYMENTS)return rjson({ok:false,error:'private_storage_unavailable'},503);
-    for(const [key,value] of Object.entries(payload))await env.PAYMENTS.set('guard/private/'+key,JSON.stringify(value));
+    for(const [key,value] of Object.entries(payload))await env.PAYMENTS.put('guard/private/'+key,JSON.stringify(value));
     return rjson({ok:true,stored:Object.keys(payload),updatedAt:payload.updatedAt});
   }
   if(p==='/api/guard/approval'){
