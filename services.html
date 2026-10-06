@@ -38,7 +38,7 @@ form{display:grid;gap:12px}.row{display:grid;grid-template-columns:1fr 1fr;gap:1
 (()=>{const form=document.getElementById('leadForm'),status=document.getElementById('status'),service=document.getElementById('service'),request=document.getElementById('request'),email=document.getElementById('email'),country=document.getElementById('country');
 document.querySelectorAll('[data-service]').forEach(b=>b.onclick=()=>{service.value=b.dataset.service;request.focus();document.getElementById('start').scrollIntoView({behavior:'smooth',block:'center'});});
 form.addEventListener('submit',async e=>{e.preventDefault();status.className='status';status.textContent='Building your customer path…';try{
-const leadRes=await fetch('/api/revenue/hunt',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({request:request.value,email:email.value,country:country.value||'International',market:country.value||'International',source:'services-page'})});
+const leadRes=await fetch('/api/revenue/lead',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({request:request.value,email:email.value,source:'services-page'})});
 const leadData=await leadRes.json();if(!leadRes.ok||!leadData.ok)throw Error(leadData.error||'lead_failed');
 const lead=leadData.lead;const chosen=service.value||lead.recommendedService;
 const checkout=await fetch('/api/revenue/checkout',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({leadId:lead.id,email:email.value,service:chosen,description:request.value})});
