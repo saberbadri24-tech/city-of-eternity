@@ -27,7 +27,7 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Run live site and API smoke
         env:
-          BASE_URL: https://city-of-eternity.onrender.com
+          BASE_URL: https://anil-x-live.onrender.com
         run: |
           cat > ./anil-live-qa.mjs <<'EOF'
           import { chromium } from 'playwright';
@@ -59,13 +59,11 @@ jobs:
             const readiness=await page.request.get(base+'/api/execution-readiness');
             check(readiness.status()===401,'execution readiness remains owner-gated');
             const gd=await page.request.get(base+'/api/guard/live?t='+Date.now());
-            check(gd.ok(),'GET /api/guard/live');
+            check(gd.status()===401,'Guard remains owner-gated');
             const sd=await page.request.get(base+'/api/anil/super-team');
-            check(sd.ok(),'GET /api/anil/super-team');
-            const sjson=await sd.json();
-            check(sjson.engine==='ANIL-SUPER-TEAM','super-team engine identity');
-            check(sjson.safety?.finalCommand==='ANIL','ANIL final command boundary');
-            check(sjson.safety?.autoSigning===false,'auto-signing disabled');
+            check(sd.status()===401,'Super Team remains owner-gated');
+            const revenue=await page.request.get(base+'/api/revenue/fleet');
+            check(revenue.status()===401,'Revenue Fleet remains owner-gated');
             const bad=await page.request.post(base+'/api/admin/password/login',{data:{password:'__ANIL_QA_INVALID_PASSWORD_2026__'}});
             check(bad.status()===401,'wrong admin password rejected');
             await page.goto(base+'/',{waitUntil:'domcontentloaded'});
