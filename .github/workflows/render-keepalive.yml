@@ -9,5 +9,5 @@ jobs:
     steps:
       - name: Ping production health
         run: |
-          curl --fail --silent --show-error --max-time 20 https://city-of-eternity.onrender.com/api/health >/dev/null
-          curl --fail --silent --show-error --max-time 20 https://city-of-eternity.onrender.com/ >/dev/null
+          curl --fail --silent --show-error --max-time 20 https://anil-x-live.onrender.com/api/health >/dev/null
+          curl --fail --silent --show-error --max-time 20 https://anil-x-live.onrender.com/ >/dev/null
