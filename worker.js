@@ -42,6 +42,27 @@ const getVarizaWebhookSecret=env=>firstEnv(env,['VARIZA_WEBHOOK_SECRET','VARIA_W
 const getAiConfig=env=>({openai:firstEnv(env,['OPENAI_API_KEY','OPENAI_KEY']),anthropic:firstEnv(env,['ANTHROPIC_API_KEY','ANTHROPIC_KEY']),gemini:firstEnv(env,['GEMINI_API_KEY','GOOGLE_GEMINI_API_KEY','GOOGLE_API_KEY'])});
 const getUsdTomanRate=env=>Number(firstEnv(env,['USD_TOMAN_RATE','USD_TO_TOMAN','USD_TOMAN','USD_IRR_RATE'])||0);
 const REVENUE_FLEET=[
+{id:'b2b-lead-hunter',name:'B2B Lead Hunter',mode:'hunter',status:'ACTIVE',monetization:'qualified-lead+project',prereq:'compliant prospecting channels'},
+{id:'business-auditor',name:'Business Auditor',mode:'audit',status:'ACTIVE',monetization:'audit+project',prereq:'ANIL-X lead/order/payment'},
+{id:'sales-agent',name:'Sales Agent',mode:'sales',status:'ACTIVE',monetization:'conversion+commission',prereq:'qualified lead+owner policy'},
+{id:'service-fulfillment',name:'Service Fulfillment',mode:'delivery',status:'ACTIVE',monetization:'delivery+retainer',prereq:'paid order+delivery workflow'},
+{id:'recurring-revenue',name:'Recurring Revenue Engine',mode:'recurring',status:'ACTIVE',monetization:'subscription+retainer',prereq:'customer+real recurring offer'},
+{id:'affiliate-partner',name:'Affiliate / Partner Engine',mode:'affiliate',status:'PARTNER_REQUIRED',monetization:'commission',prereq:'approved partner program'},
+{id:'revenue-optimizer',name:'Revenue Optimizer',mode:'optimization',status:'ACTIVE',monetization:'conversion+retention',prereq:'real business data'},
+{id:'market-intelligence',name:'Market Intelligence',mode:'intelligence',status:'ACTIVE',monetization:'research+decision support',prereq:'evidence sources'},
+{id:'venture-brain',name:'Venture Brain',mode:'strategy',status:'ACTIVE',monetization:'product/opportunity selection',prereq:'verified market evidence'},
+{id:'product-factory',name:'Product Factory',mode:'product',status:'PRODUCT_REQUIRED',monetization:'digital product+SaaS',prereq:'verified product asset'},
+{id:'revenue-network',name:'Revenue Network',mode:'network',status:'ACTIVE',monetization:'multi-channel revenue',prereq:'approved channels'},
+{id:'agent-workforce',name:'Agent Workforce',mode:'agent',status:'ACTIVE',monetization:'agent execution+service',prereq:'safe tool permissions'},
+{id:'autonomous-operations',name:'Autonomous Operations',mode:'ops',status:'ACTIVE',monetization:'operational efficiency',prereq:'owner-approved automation'},
+{id:'learning-layer',name:'Learning Layer',mode:'learning',status:'ACTIVE',monetization:'optimization',prereq:'measurable outcomes'},
+{id:'grant-hackathon-hunter',name:'Grant / Hackathon Hunter',mode:'hunter',status:'ACCOUNT_REQUIRED',monetization:'grant+prize',prereq:'eligible program account'},
+{id:'bounty-hunter',name:'Legitimate Bounty Hunter',mode:'bounty',status:'ACCOUNT_REQUIRED',monetization:'accepted bounty',prereq:'authorized scope+platform account'},
+{id:'digital-deal-intelligence',name:'Digital Deal Intelligence',mode:'intelligence',status:'ACTIVE',monetization:'deal sourcing',prereq:'verified sources'},
+{id:'market-gap-hunter',name:'Market-Gap Hunter',mode:'hunter',status:'ACTIVE',monetization:'product/service discovery',prereq:'verified market evidence'},
+{id:'digital-asset-licensing',name:'Digital Asset Licensing',mode:'license',status:'PRODUCT_REQUIRED',monetization:'license+subscription',prereq:'licensable asset'},
+{id:'research-data-products',name:'Research / Data Products',mode:'product',status:'PRODUCT_REQUIRED',monetization:'report+subscription',prereq:'verified research asset'},
+{id:'proof-to-payment',name:'Proof-to-Payment',mode:'conversion',status:'ACTIVE',monetization:'evidence→offer→payment',prereq:'qualified lead+real checkout'},
 {id:'ai-automation-agency',name:'AI Automation Agency',mode:'service',status:'ACTIVE',monetization:'project+retainer',prereq:'ANIL-X lead/order/payment'},
 {id:'ai-integration-agents',name:'AI Integration & Agents',mode:'service',status:'ACTIVE',monetization:'project+maintenance',prereq:'ANIL-X lead/order/payment'},
 {id:'ai-ugc-video-studio',name:'AI UGC / Video Studio',mode:'service',status:'ACTIVE',monetization:'per-project+retainer',prereq:'ANIL-X lead/order/payment'},
@@ -138,6 +159,9 @@ async function revenueFleetState(env){
 }
 
 const REVENUE_PROGRAMS=[
+{id:'owner-control-plane',name:'Owner Control Plane',type:'private',status:'LIVE',description:'Private command, approvals, accounting and irreversible-action gate for owner operations.',engine:'owner-control'},
+{id:'super-radar',name:'Super Radar / Intelligence',type:'private',status:'LIVE',description:'Private evidence-first opportunity discovery and verification.',engine:'immortal-guard'},
+{id:'free-real-token-hunter',name:'Free Real Token Hunter',type:'private',status:'OWNER_GATED',description:'Opportunity discovery only; no automatic claim, signing or transfer.',engine:'immortal-guard'},
 {id:'ai-service-studio',name:'AI Service Studio',type:'service',status:'LIVE',description:'فروش ساخت سایت، رفع مشکل، رشد، اتوماسیون و اتصال AI Agent با سفارش و پرداخت واقعی.',engine:'sales-conversion'},
 {id:'ai-automation',name:'AI Automation & Agents',type:'service',status:'LIVE',description:'پیاده‌سازی اتوماسیون، workflow و AI agent برای کسب‌وکارها.',engine:'business-automation'},
 {id:'seo-growth-retainer',name:'SEO + Growth Retainer',type:'recurring',status:'LIVE',description:'ممیزی، بهبود و نگهداری رشد با پیشنهادهای دوره‌ای و فروش مجدد.',engine:'growth-seo'},
@@ -249,6 +273,13 @@ async function runtimeRoutes(req,env,u){
   if(p==='/api/anil/capability-kernel')return handleCapabilityKernel(req,env);
   if(p==='/api/anil/tools'){if(req.method==='POST'&&!(await githubActionsAuth(req,env))&&!(await adminAuth(req,env)))return rjson({ok:false,error:'owner_or_github_actions_auth_required'},401);return anilTool(req,env);}
   if(p==='/api/anil/automation/queue')return anilChangeRequest(req,env);
+  const PRIVATE_OWNER_PATHS=new Set([
+    '/api/revenue/fleet','/api/revenue/programs','/api/revenue/customer-ready',
+    '/api/revenue/settlement','/api/revenue/engines','/api/revenue/hunt','/api/revenue/offer',
+    '/api/analytics','/api/retention','/api/evolution','/api/revenue/summary',
+    '/api/guard/state','/api/guard/report'
+  ]);
+  if(PRIVATE_OWNER_PATHS.has(p)&&!(await adminAuth(req,env)))return rjson({ok:false,error:'admin_auth_required'},401);
   const v90=await v90AdminRoutes(req,env,u);if(v90)return v90;
   if(p==='/api/account'){
     if(!['GET','POST'].includes(req.method))return rjson({ok:false,error:'method_not_allowed'},405);
@@ -532,7 +563,7 @@ if(p==='/api/payment-config'){
   if(p==='/api/guard/catches'&&req.method==='GET'){
     if(!(await adminAuth(req,env)))return rjson({ok:false,error:'owner_auth_required'},401);
     const items=await kvList(env,'guard/catch/',200);
-    return rjson({ok:true,items:items.sort((a,b)=>String(b.createdAt||'').localeCompare(String(a.createdAt||''))),mainWalletConfigured:validTonAddress(getMainTonAddress(env)),temporaryWalletIsPanel:true,policy:'این صف «کیف موقت» نیست؛ محل نگهداری منطقی شکارها تا تأیید مالک است.'});
+    return rjson({ok:true,items:items.sort((a,b)=>String(b.createdAt||'').localeCompare(String(a.createdAt||''))),mainWalletConfigured:validTonAddress(getMainTonAddress(env)),temporaryWalletUsed:false,policy:'این صف کیف موقت نیست؛ محل نگهداری منطقی شکارها تا تأیید مالک است.'});
   }
   if(p==='/api/guard/catches'&&req.method==='POST'){
     if(!(await adminAuth(req,env)))return rjson({ok:false,error:'owner_auth_required'},401);
@@ -686,7 +717,7 @@ async function secretary(req,env){
     return json({ok:false,error:'secretary_runtime_error',message:String(e?.message||e).slice(0,300)},502);
   }
 }
-export default{async fetch(req,env,ctx){const u=new URL(req.url);if(u.pathname==='/api/guard/live'&&req.method==='GET')return handleGuardLive(req,env);if(u.pathname==='/api/health'||u.pathname==='/api/_healthcheck'){const adminReady=adminConfigured(env);return json({ok:true,ready:adminReady,service:'ANIL X',runtime:'unified-worker',configured:{admin:adminReady,openai:!!(getAiConfig(env).openai),anthropic:!!(getAiConfig(env).anthropic),gemini:!!(getAiConfig(env).gemini),variza:!!getVarizaApiKey(env),payments:!!env.PAYMENTS,assets:!!env.ASSETS},routes:['/api/plan','/api/analyze','/api/vision','/api/voice','/api/ton/account','/api/ton/transactions','/api/javidan/trinity','/api/account','/api/memory','/api/order','/api/fx','/api/discovery','/api/free-request','/api/free-admin','/api/payment-status','/api/worker','/api/pay','/api/variza-webhook','/api/revenue/fleet','/api/revenue/fleet/run','/api/revenue/programs','/api/guard/live'],revenue:{persistence:!!env.PAYMENTS,variza:!!getVarizaApiKey(env),ton:validTonAddress(getMainTonAddress(env)),guardCatchQueue:!!env.PAYMENTS}},200);}const runtime=await runtimeRoutes(req,env,u);if(runtime)return runtime;if(u.pathname==='/api/analyze')return analyze(req,env);if(u.pathname==='/api/vision')return vision(req,env);if(u.pathname==='/api/voice')return voice(req,env);if(u.pathname==='/api/ton/account'||u.pathname==='/api/ton/transactions')return tonApi(req);if(u.pathname==='/api/anil/execution-readiness')return handleExecutionReadiness(req,env);if(u.pathname==='/api/plan')return handlePlan(req,env);if(u.pathname==='/api/anil/super-team'){if(req.method==='POST'&&!(await githubActionsAuth(req,env)))return json({ok:false,error:'github_actions_auth_required'},401);return handleSuperTeam(req,env,{guardHandler:handleGuardLive});}if(u.pathname==='/api/javidan/trinity')return handleJavidan(req,env);if(u.pathname==='/api/admin/password/login')return adminLogin(req,env);if(u.pathname==='/api/admin/password/logout'&&req.method==='POST')return json({ok:true},200,{'set-cookie':'session=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0'});
+export default{async fetch(req,env,ctx){const u=new URL(req.url);if(u.pathname==='/api/guard/live'&&req.method==='GET'){if(!(await adminAuth(req,env)))return json({ok:false,error:'admin_auth_required'},401);return handleGuardLive(req,env);}if(u.pathname==='/api/health'||u.pathname==='/api/_healthcheck'){const adminReady=adminConfigured(env);return json({ok:true,ready:adminReady,service:'ANIL X',runtime:'unified-worker',configured:{admin:adminReady,openai:!!(getAiConfig(env).openai),anthropic:!!(getAiConfig(env).anthropic),gemini:!!(getAiConfig(env).gemini),variza:!!getVarizaApiKey(env),payments:!!env.PAYMENTS,assets:!!env.ASSETS},routes:['/api/plan','/api/analyze','/api/vision','/api/voice','/api/ton/account','/api/ton/transactions','/api/javidan/trinity','/api/account','/api/memory','/api/order','/api/fx','/api/discovery','/api/free-request','/api/free-admin','/api/payment-status','/api/worker','/api/pay','/api/variza-webhook','/api/revenue/fleet','/api/revenue/fleet/run','/api/revenue/programs','/api/guard/live'],revenue:{persistence:!!env.PAYMENTS,variza:!!getVarizaApiKey(env),ton:validTonAddress(getMainTonAddress(env)),guardCatchQueue:!!env.PAYMENTS}},200);}const runtime=await runtimeRoutes(req,env,u);if(runtime)return runtime;if(u.pathname==='/api/analyze')return analyze(req,env);if(u.pathname==='/api/vision')return vision(req,env);if(u.pathname==='/api/voice')return voice(req,env);if(u.pathname==='/api/ton/account'||u.pathname==='/api/ton/transactions')return tonApi(req);if(u.pathname==='/api/anil/execution-readiness')return handleExecutionReadiness(req,env);if(u.pathname==='/api/plan')return handlePlan(req,env);if(u.pathname==='/api/anil/super-team'){if(req.method==='POST'&&!(await githubActionsAuth(req,env)))return json({ok:false,error:'github_actions_auth_required'},401);return handleSuperTeam(req,env,{guardHandler:handleGuardLive});}if(u.pathname==='/api/javidan/trinity')return handleJavidan(req,env);if(u.pathname==='/api/admin/password/login')return adminLogin(req,env);if(u.pathname==='/api/admin/password/logout'&&req.method==='POST')return json({ok:true},200,{'set-cookie':'session=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0'});
   if(u.pathname==='/api/admin/auth-self-test'&&req.method==='GET'){
     if(!(await githubActionsAuth(req,env)))return json({ok:false,error:'github_actions_auth_required'},401);
     try{return json(await adminSelfTest(env))}catch(e){return json({ok:false,error:'admin_self_test_failed',detail:String(e?.message||e).slice(0,180)},500)}
