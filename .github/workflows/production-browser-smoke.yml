@@ -30,12 +30,12 @@ jobs:
 
       - name: Production contract smoke
         env:
-          ANIL_BASE_URL: https://city-of-eternity.onrender.com
+          ANIL_BASE_URL: https://anil-x-live.onrender.com
         run: node scripts/production-contract-smoke.mjs
 
       - name: Deep production interaction QA
         env:
-          ANIL_BASE_URL: https://city-of-eternity.onrender.com
+          ANIL_BASE_URL: https://anil-x-live.onrender.com
         run: |
           set -euo pipefail
           ID_TOKEN=$(curl -fsSL -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x" | jq -r '.value')
@@ -44,7 +44,7 @@ jobs:
 
       - name: Full production browser QA
         env:
-          ANIL_BASE_URL: https://city-of-eternity.onrender.com
+          ANIL_BASE_URL: https://anil-x-live.onrender.com
         run: node scripts/production-browser-smoke.mjs
 
       - name: Upload QA report and screenshot
