@@ -245,7 +245,8 @@ async function runtimeRoutes(req,env,u){
   const p=u.pathname;
   if(p==='/api/translate')return translateOnline(req);
   if(p==='/api/autopilot'){if(req.method==='POST'&&!(await githubActionsAuth(req,env)))return rjson({ok:false,error:'github_actions_auth_required'},401);return autopilot(req,env)}
-  if(p==='/api/anil/capabilities')return handleAnilCapabilities(req,env);\n  if(p==='/api/anil/capability-kernel')return handleCapabilityKernel(req,env);
+  if(p==='/api/anil/capabilities')return handleAnilCapabilities(req,env);
+  if(p==='/api/anil/capability-kernel')return handleCapabilityKernel(req,env);
   if(p==='/api/anil/tools'){if(req.method==='POST'&&!(await githubActionsAuth(req,env))&&!(await adminAuth(req,env)))return rjson({ok:false,error:'owner_or_github_actions_auth_required'},401);return anilTool(req,env);}
   if(p==='/api/anil/automation/queue')return anilChangeRequest(req,env);
   const v90=await v90AdminRoutes(req,env,u);if(v90)return v90;
