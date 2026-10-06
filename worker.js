@@ -549,7 +549,7 @@ if(p==='/api/payment-config'){
     return rjson({ok:false,error:'method_not_allowed'},405);
   }
   if(p==='/api/guard/state'){
-    const readAsset=async name=>{try{const resp=await env.ASSETS.fetch(new Request(new URL('/'+name,req.url)));return await resp.json()}catch{return null}};
+    const readAsset=async name=>{try{const resp=await env.ASSETS.fetch(new Request(new URL('/'+name,req.url),{headers:{'x-anil-internal':'guard-runtime'}}));return await resp.json()}catch{return null}};
     const official=await readAsset('guard-official-discovery.json'), high=await readAsset('guard-high-value.json'), receipts=await readAsset('guard-receipts.json');
     const approvals=[...state.queue.values()].filter(x=>x.type==='guard_approval').slice(-50);
     return rjson({ok:true,updatedAt:now(),pipeline:['DISCOVERED','OFFICIAL_VERIFIED','ELIGIBILITY_CHECKED','ACTIONABLE','OWNER_APPROVAL','CLAIM_SUBMITTED','RECEIPT_VERIFIED','SETTLED'],official:official||{items:[]},highValue:high||{items:[]},receipts:receipts||{},approvals,safety:{autoSign:false,privateKeys:false,seedPhrases:false,kycBypass:false,captchaBypass:false}});
