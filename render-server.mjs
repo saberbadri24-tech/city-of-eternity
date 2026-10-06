@@ -11,14 +11,15 @@ const getWorker=()=>workerPromise||(workerPromise=import('./worker.js').then(m=>
 const MAX_BODY_BYTES=512*1024;
 const PRIVATE_ROOTS=new Set(['.git','.github','app','mobile','ui','netlify','functions','scripts']);
 const PRIVATE_FILES=new Set(['package.json','package-lock.json','render-server.mjs','worker.js','_worker.js','wrangler.json','netlify.toml','_headers','.env','.env.local']);
-const publicPath=rel=>{const clean=String(rel||'').replace(/^\/+/, '');if(!clean||clean.includes('..'))return false;const first=clean.split('/')[0];if(first.startsWith('.')&&first!=='.well-known')return false;if(PRIVATE_ROOTS.has(first)||PRIVATE_FILES.has(clean)||PRIVATE_FILES.has(path.basename(clean)))return false;return true;};
+const publicPath=(rel,internal=false)=>{const clean=String(rel||'').replace(/^\/+/, '');if(!clean||clean.includes('..'))return false;const first=clean.split('/')[0];if(first.startsWith('.')&&first!=='.well-known')return false;if(!internal&&(first.startsWith('guard-')||clean==='guard-live-summary.json'||clean==='guard-status.json'))return false;if(PRIVATE_ROOTS.has(first)||PRIVATE_FILES.has(clean)||PRIVATE_FILES.has(path.basename(clean)))return false;return true;};
 const toWebRequest=(req,origin)=>{const headers=new Headers();for(const [k,v] of Object.entries(req.headers||{})){if(Array.isArray(v))headers.set(k,v.join(', '));else if(v!=null)headers.set(k,String(v));}return new Request(origin+(req.url||'/'),{method:req.method||'GET',headers});};
 const readBody=async(req,limit=MAX_BODY_BYTES)=>{let total=0;const chunks=[];for await(const chunk of req){total+=chunk.length;if(total>limit)throw Object.assign(new Error('request_body_too_large'),{statusCode:413});chunks.push(chunk)}return chunks.length?Buffer.concat(chunks):undefined};
 
 async function assetsFetch(request){
   const u=new URL(request.url);
+  const internal=request.headers.get('x-anil-internal')==='guard-runtime';
   let rel=decodeURIComponent(u.pathname).replace(/^\/+/, '')||'index.html';
-  if(!publicPath(rel))return new Response('Not Found',{status:404});
+  if(!publicPath(rel,internal))return new Response('Not Found',{status:404});
   let file=path.join(root,rel);
   if(!path.extname(file))file=path.join(root,'index.html');
   try{
