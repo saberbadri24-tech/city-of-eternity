@@ -372,6 +372,7 @@ async function runtimeRoutes(req,env,u){
   }
   if(p==='/api/revenue/fleet'&&req.method==='GET')return rjson({...await revenueFleetStatus(env),state:await revenueFleetState(env)});
   if(p==='/api/revenue/opportunities'&&req.method==='GET'){
+    if(!(await adminAuth(req,env)))return rjson({ok:false,error:'admin_auth_required'},401);
     const items=await kvList(env,'revenue-opportunity/',200);
     return rjson({ok:true,count:items.length,items:items.sort((a,b)=>(Number(b.officialVerified)-Number(a.officialVerified))||(Number(b.score||0)-Number(a.score||0))),policy:'Owner-only opportunity radar. Discovery is not revenue; settlement is the only revenue truth.'});
   }
