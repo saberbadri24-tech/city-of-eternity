@@ -17,7 +17,7 @@ jobs:
       - name: Fetch one owner-approved change request
         id: request
         env:
-          ANIL_API_URL: https://city-of-eternity.onrender.com
+          ANIL_API_URL: https://anil-x-live.onrender.com
         run: |
           TOKEN="$(curl -fsSL -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN"             "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x" | python -c 'import sys,json; print(json.load(sys.stdin)["value"])')"
           curl --fail --silent --show-error             -H "Authorization: Bearer $TOKEN"             "$ANIL_API_URL/api/anil/automation/queue" > /tmp/request.json
@@ -67,7 +67,7 @@ jobs:
       - name: Production browser smoke
         if: env.ANIL_REQUEST_ID != ''
         env:
-          ANIL_BASE_URL: https://city-of-eternity.onrender.com
+          ANIL_BASE_URL: https://anil-x-live.onrender.com
         run: |
           npm install --no-save playwright@1.55.0
           npx playwright install --with-deps chromium
@@ -91,7 +91,7 @@ jobs:
       - name: Mark controlled request processed
         if: env.ANIL_REQUEST_ID != ''
         env:
-          ANIL_API_URL: https://city-of-eternity.onrender.com
+          ANIL_API_URL: https://anil-x-live.onrender.com
         run: |
           TOKEN="$(curl -fsSL -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
             "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x" | python -c 'import sys,json; print(json.load(sys.stdin)["value"])')"
