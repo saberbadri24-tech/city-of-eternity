@@ -707,10 +707,24 @@ async function secretary(req,env){
         return json({ok:true,changed:false,action:'change_not_queued',text:'تغییر اجرا نشد؛ مرز ایمنی یا دسترسی لازم مانع ثبت آن شد.',data:op});
       }catch(e){return json({ok:false,error:'operator_change_failed',message:String(e?.message||e)},502)}
     }
+    const history=Array.isArray(b.messages)?b.messages.slice(-12).map(x=>({role:x?.role==='assistant'?'assistant':'user',content:String(x?.content||'').slice(0,4000)})).filter(x=>x.content):[];
+    const configuredAi=Object.values(getAiConfig(env)).filter(Boolean).length>0;
+    if(configuredAi){
+      try{
+        const teamResp=await handleSuperTeam(new Request(new URL('/api/anil/super-team',req.url),{method:'POST',headers:{cookie:req.headers.get('cookie')||'','content-type':'application/json'},body:JSON.stringify({task:command,history})}),env,{guardHandler:handleGuardLive});
+        const team=await teamResp.json().catch(()=>({}));
+        const answer=team?.command?.answer||team?.command?.response;
+        if(team?.ok&&answer){
+          return json({ok:true,text:String(answer),action:'super_team_live',provider:team.evidence?.liveProviders?.join('+')||'super-team',live:true,data:{team}});
+        }
+      }catch{}
+    }
     const ai=getAiConfig(env).openai;
-    if(ai){
-      const r=await fetch('https://api.openai.com/v1/chat/completions',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+ai},body:JSON.stringify({model:env.ASTRA_MODEL||'gpt-5-mini',messages:[{role:'system',content:'You are Badrkhan, the live private executive assistant inside ANIL X. Answer the owner directly. Use only evidence supplied by runtime tools. Never claim execution without evidence. Never ask for seed phrases or private keys. Sensitive money/security actions remain owner-gated.'},{role:'user',content:command}],temperature:.15})});
-      if(r.ok){const d=await r.json();return json({ok:true,text:d?.choices?.[0]?.message?.content||'—',action:'live_ai',provider:'openai',live:true});}
+    const openAiModel=env.ASTRA_MODEL||env.ANIL_OPENAI_MODEL;
+    if(ai&&openAiModel){
+      const input=[...history,{role:'user',content:command}];
+      const r=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+ai},body:JSON.stringify({model:openAiModel,instructions:'You are Badrkhan, the live private executive assistant inside ANIL X. Answer the owner directly. Use only evidence supplied by runtime tools. Never claim execution without evidence. Never ask for seed phrases or private keys. Sensitive money/security actions remain owner-gated.',input})});
+      if(r.ok){const d=await r.json();return json({ok:true,text:d?.output_text||'—',action:'live_ai',provider:'openai',live:true});}
     }
     const k=await handleCapabilityKernel(new Request(new URL('/api/anil/capability-kernel',req.url),{method:'GET'}),env).then(x=>x.json());
     const fa=b.language==='fa';
