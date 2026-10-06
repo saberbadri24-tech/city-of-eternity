@@ -43,7 +43,7 @@ jobs:
         id: live
         continue-on-error: true
         env:
-          ANILX_LIVE_URL: https://city-of-eternity.onrender.com
+          ANILX_LIVE_URL: https://anil-x-live.onrender.com
         run: node scripts/live-qa.mjs
       - name: Retry failed workflow jobs once
         if: steps.local.outcome == 'failure' || steps.live.outcome == 'failure'
