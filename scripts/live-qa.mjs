@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const base=(process.env.ANILX_LIVE_URL||'https://city-of-eternity.onrender.com').replace(/\/$/,'');
+const base=(process.env.ANILX_LIVE_URL||'https://anil-x-live.onrender.com').replace(/\/$/,'');
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function get(path,headers={}){
   const r=await fetch(base+path,{headers,cache:'no-store'});
