@@ -106,6 +106,13 @@ const server=http.createServer(async(req,res)=>{
       const rr=await handleSuperTeam(request,env,{});
       res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
     }
+    if(u.pathname==='/api/anil/capability-kernel'&&(req.method==='GET'||req.method==='POST')){
+      const {handleCapabilityKernel}=await import('./functions/api/anil-capability-kernel.mjs');
+      const body=req.method==='POST'?await readBody(req):undefined;
+      const request=new Request(origin+(req.url||'/'),{method:req.method,headers:req.headers,body});
+      const rr=await handleCapabilityKernel(request,env);
+      res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
+    }
     if(u.pathname==='/api/anil/control-plane'&&(req.method==='GET'||req.method==='POST')){
       const {handleControlPlane}=await import('./functions/api/anil-control-plane.mjs');
       const rr=await handleControlPlane(new Request(origin+(req.url||'/'),{method:req.method,headers:req.headers}),env);
