@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 
-const base = new URL(process.env.ANIL_BASE_URL || "https://city-of-eternity.onrender.com");
+const base = new URL(process.env.ANIL_BASE_URL || "https://anil-x-live.onrender.com");
 const paths = [
   "/",
   "/en.html",
