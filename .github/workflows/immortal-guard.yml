@@ -4,14 +4,12 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths-ignore:
-      - "guard-*.json"
-      - "rewards.json"
   schedule:
     - cron: "*/5 * * * *"
 
 permissions:
-  contents: write
+  contents: read
+  id-token: write
 
 concurrency:
   group: immortal-guard-radar
@@ -26,7 +24,7 @@ jobs:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TONCENTER_API_KEY: ${{ secrets.TONCENTER_API_KEY }}
-      TON_MAIN_WALLET: ${{ secrets.TON_MAIN_WALLET || 'UQA-G0xsCW5MaWtE4JC16Y2Mj_y6u9f6MHOSK2UDgJ5N6ciW' }}
+      TON_MAIN_WALLET: ${{ secrets.TON_MAIN_WALLET }}
       GUARD_RUNTIME_FINAL: "1"
 
     steps:
@@ -115,7 +113,9 @@ jobs:
           print(f"Guard freshness PASS: {age:.1f} minutes")
           PY
 
-      - name: Build lightweight live summary for Render
+      - name: Prepare private Guard snapshot
+        env:
+          ANIL_X_RENDER_URL: https://anil-x-live.onrender.com
         run: |
           python - <<'PY'
           import json
@@ -123,57 +123,24 @@ jobs:
           def read(name):
               try: return json.loads(Path(name).read_text(encoding='utf-8'))
               except Exception: return {}
-          status=read('guard-status.json')
-          radar=read('guard-super-radar.json')
-          ledger=read('guard-evidence-ledger.json')
-          summary={
-            'updatedAt': status.get('updatedAt') or status.get('lastScan') or radar.get('generatedAt'),
-            'heartbeatAt': __import__('datetime').datetime.now(__import__('datetime').timezone.utc).isoformat(),
-            'status': {
-              'guard': status.get('guard','ANIL X Immortal Guard'),
-              'engine': status.get('engine','Airdrop+ X'),
-              'version': status.get('version'),
-              'lastScan': status.get('lastScan') or status.get('updatedAt'),
-              'sourcesScanned': status.get('sourcesScanned',0),
-              'sourcesReachable': status.get('sourcesReachable',0),
-              'waitingOwner': status.get('waitingOwner',0),
-              'highValueCandidates': status.get('highValueCandidates',0),
-              'claimPathsDetected': status.get('claimPathsDetected',0),
-              'mode': status.get('mode','discover -> inspect -> triage -> queue'),
-              'financialActions': 'no automated claim/transfer; owner approval required'
-            },
-            'radar': {
-              'totalCandidates': radar.get('summary',{}).get('totalCandidates',0),
-              'officialCandidates': radar.get('summary',{}).get('officialCandidates',0),
-              'actionableOfficial': radar.get('summary',{}).get('actionableOfficial',0),
-              'highPriority': radar.get('summary',{}).get('highPriority',0)
-            },
-            'ledger': {
-              'confirmedIncome': ledger.get('confirmedIncome', ledger.get('totalReceived',0)),
-              'status': ledger.get('status','UNCONFIRMED')
-            }
+          payload={
+            'status':read('guard-status.json'),
+            'opportunities':read('guard-opportunities.json'),
+            'highValue':read('guard-high-value.json'),
+            'sourceHealth':read('guard-source-health.json'),
+            'capabilities':read('guard-capabilities.json'),
+            'radar':read('guard-super-radar.json'),
+            'receipts':read('guard-receipts.json'),
+            'official':read('guard-official-discovery.json')
           }
-          Path('guard-live-summary.json').write_text(json.dumps(summary,separators=(',',':')),encoding='utf-8')
+          Path('/tmp/anil-guard-ingest.json').write_text(json.dumps(payload,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
           PY
+          OIDC_TOKEN="$(curl -sSf -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x" | python -c "import sys,json; print(json.load(sys.stdin)['value'])")"
+          curl -sSf --fail-with-body -X POST "$ANIL_X_RENDER_URL/api/guard/ingest" \
+            -H "Authorization: Bearer $OIDC_TOKEN" \
+            -H "Content-Type: application/json" \
+            --data-binary @/tmp/anil-guard-ingest.json
+          rm -f /tmp/anil-guard-ingest.json
 
-      - name: Commit fresh Guard state
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add guard-*.json rewards.json
-          # Evidence ledger is intentionally local/artifact-backed; never push an unbounded raw ledger into Git.
-          git restore --staged guard-evidence-ledger.json 2>/dev/null || true
-          if git diff --cached --quiet; then
-            echo "No Guard state changes."
-            exit 0
-          fi
-          git fetch origin main
-          git reset --mixed origin/main
-          git add guard-*.json rewards.json
-          git restore --staged guard-evidence-ledger.json 2>/dev/null || true
-          if git diff --cached --quiet; then
-            echo "No Guard state changes after sync."
-            exit 0
-          fi
-          git commit -m "chore: refresh immortal guard state [skip render]"
-          git push origin HEAD:main
+      - name: Confirm no public Guard state is committed
+        run: echo "Guard detailed state stays in private Render Owner storage; GitHub receives no Guard JSON state."
