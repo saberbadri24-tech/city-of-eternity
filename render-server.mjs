@@ -65,31 +65,12 @@ const server=http.createServer(async(req,res)=>{
       return res.end(await (async()=>{const mainTon=process.env.TON_MAIN_WALLET||process.env.TON_MAIN_WALLET_ADDRESS||process.env.TON_PERMANENT_WALLET_ADDRESS;const validTon=typeof mainTon==='string'&&/^(?:EQ|UQ)[A-Za-z0-9_-]{46}$/.test(mainTon);const {adminConfigured}=await import('./functions/api/admin-auth.mjs');
       const out={ok:true,ready:adminConfigured(env),service:'ANIL X',runtime:'render-static-gateway',configured:{admin:adminConfigured(env),openai:Boolean(process.env.OPENAI_API_KEY),anthropic:Boolean(process.env.ANTHROPIC_API_KEY),gemini:Boolean(process.env.GEMINI_API_KEY),variza:Boolean(process.env.VARIZA_API_KEY||process.env.VARIA_API_KEY||process.env.VARIZA_TOKEN||process.env.VARIZA_KEY||process.env.VARIZA_API||process.env.VARIZA_ACCESS_TOKEN||process.env.VARIZA_BEARER_TOKEN),payments:Boolean(process.env.PAYMENTS||process.env.REDIS_URL),assets:true},revenue:{storageConfigured:Boolean(process.env.REDIS_URL),durableAccounting:String(process.env.PAYMENTS_DURABLE||'false').toLowerCase()==='true',variza:Boolean(process.env.VARIZA_API_KEY||process.env.VARIA_API_KEY||process.env.VARIZA_TOKEN||process.env.VARIZA_KEY),ton:validTon,guardCatchQueue:true,temporaryWalletUsed:false}};res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');return JSON.stringify(out)})());
     }
-    if(u.pathname==='/api/guard/live'&&req.method==='GET'){const {adminAuth}=await import('./functions/api/admin-auth.mjs');if(!(await adminAuth(toWebRequest(req,origin),env))){res.statusCode=401;res.setHeader('content-type','application/json; charset=utf-8');res.end(JSON.stringify({ok:false,error:'admin_auth_required'}));return;}
-      let snap={};
-      // Guard runs every 5 minutes and intentionally publishes state with [skip render].
-      // Read the public GitHub snapshot here so Render does not need a full deploy for every heartbeat.
-      const guardRemote='https://raw.githubusercontent.com/saberbadri24-tech/city-of-eternity/main/guard-live-summary.json';
-      const guardCache=globalThis.__anilxGuardRemoteCache||{at:0,snap:null};
-      if(guardCache.snap&&Date.now()-guardCache.at<60000) snap=guardCache.snap;
-      if(!snap.updatedAt){
-        try{
-          const ac=new AbortController();const timer=setTimeout(()=>ac.abort(),5000);
-          const rr=await fetch(guardRemote+'?v='+Math.floor(Date.now()/60000),{headers:{accept:'application/json','cache-control':'no-cache'},signal:ac.signal});
-          clearTimeout(timer);
-          if(rr.ok){const remoteSnap=await rr.json();if(remoteSnap&&typeof remoteSnap==='object'){snap=remoteSnap;guardCache.at=Date.now();guardCache.snap=remoteSnap;globalThis.__anilxGuardRemoteCache=guardCache;}}
-        }catch{}
-      }
-      if(!snap.updatedAt){try{snap=JSON.parse(await fs.readFile(path.join(root,'guard-live-summary.json'),'utf8'))}catch{}}
-      if(!snap.updatedAt){try{snap={status:JSON.parse(await fs.readFile(path.join(root,'guard-status.json'),'utf8')),radar:{},ledger:{}}}catch{}}
-      const status=snap.status||{},radar=snap.radar||{},ledger=snap.ledger||{};
-      const scanUpdatedAt=snap.updatedAt||status.updatedAt||status.lastScan||null;
-      const heartbeatAt=snap.heartbeatAt||scanUpdatedAt;
-      const ageMs=Date.parse(String(heartbeatAt||''));
-      const minutesSinceUpdate=Number.isFinite(ageMs)?Math.max(0,Math.round((Date.now()-ageMs)/60000)):null;
-      const body={ok:true,source:'ANIL-X-lightweight-guard-summary',updatedAt:heartbeatAt,scanUpdatedAt,freshness:{minutesSinceUpdate,stale:minutesSinceUpdate===null||minutesSinceUpdate>15,requiredMaxMinutes:15},guard:{status:String(status.status||status.mode||'NORMAL'),discoveryCount:Number(status.discoveryCount||status.counts?.opportunities||0),sourcesScanned:Number(status.sourcesScanned||0),sourcesReachable:Number(status.sourcesReachable||0),waitingOwner:Number(status.waitingOwner||0),highValueCandidates:Number(status.highValueCandidates||status.counts?.incomePriority||0)},radar:{available:true,candidates:Number(radar.totalCandidates||0),officialCandidates:Number(radar.officialCandidates||0),actionableOfficial:Number(radar.actionableOfficial||0),highPriority:Number(radar.highPriority||0)},revenue:{confirmedIncome:Number(ledger.confirmedIncome||0),status:String(ledger.status||'UNCONFIRMED')},transfer:{status:'OWNER_APPROVAL_REQUIRED',temporaryWalletUsed:false},safety:{autoClaim:false,autoSigning:false,autoTransfer:false,secretStorage:false,ownerApprovalRequired:true}};
-      res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');res.setHeader('cache-control','no-store');res.end(JSON.stringify(body));
-      return;
+    if(u.pathname==='/api/guard/live'&&req.method==='GET'){
+      const {adminAuth}=await import('./functions/api/admin-auth.mjs');
+      if(!(await adminAuth(toWebRequest(req,origin),env))){res.statusCode=401;res.setHeader('content-type','application/json; charset=utf-8');res.end(JSON.stringify({ok:false,error:'admin_auth_required'}));return;}
+      const {handleGuardLive}=await import('./functions/api/guard-live.mjs');
+      const rr=await handleGuardLive(new Request(origin+(req.url||'/'),{method:'GET',headers:req.headers}),env);
+      res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
     }
     if(u.pathname==='/api/anil/super-team'&&req.method==='GET'){
       const {adminAuth}=await import('./functions/api/admin-auth.mjs');
