@@ -116,6 +116,9 @@ storageConfigured:configured.persistence,
  };
 }async function readAssetJson(env,name){
   try{
+    const key=name.replace(/\.json$/,'');
+    const privateData=env?.PAYMENTS?await env.PAYMENTS.get('guard/private/'+key,'json').catch(()=>null):null;
+    if(privateData)return privateData;
     if(!env?.ASSETS?.fetch)return null;
     const r=await env.ASSETS.fetch(new Request(new URL('/'+name,'https://anil-x.internal/'),{headers:{accept:'application/json','x-anil-internal':'revenue-fleet'}}));
     return r.ok?await r.json():null;
