@@ -114,9 +114,66 @@ storageConfigured:configured.persistence,
    })),
    policy:'فقط پرداخت تسویه‌شده درآمد واقعی است؛ وجود موتور، لید یا پیشنهاد فروش درآمد محسوب نمی‌شود.'
  };
-}async function runRevenueFleet(env){
+}async function readAssetJson(env,name){
+  try{
+    if(!env?.ASSETS?.fetch)return null;
+    const r=await env.ASSETS.fetch(new Request(new URL('/'+name,'https://anil-x.internal/'),{headers:{accept:'application/json','x-anil-internal':'revenue-fleet'}}));
+    return r.ok?await r.json():null;
+  }catch{return null}
+}
+function revenueLaneForOpportunity(x){
+  const s=(String(x?.title||x?.name||'')+' '+String(x?.source||x?.category||x?.type||'')).toLowerCase();
+  if(/bounty|bug bounty|security/.test(s))return 'bounty-hunter';
+  if(/grant|hackathon|prize|competition/.test(s))return 'grant-hackathon-hunter';
+  if(/affiliate|referral|partner|commission/.test(s))return 'affiliate-partner';
+  if(/lead|client|business|b2b|agency|service/.test(s))return 'b2b-lead-hunter';
+  if(/research|dataset|data|report/.test(s))return 'research-data-products';
+  if(/market|gap|product|saas|api/.test(s))return 'market-gap-hunter';
+  return 'digital-deal-intelligence';
+}
+async function discoverRevenueOpportunities(env){
+  const [opp,high,radar]=await Promise.all([
+    readAssetJson(env,'guard-opportunities.json'),
+    readAssetJson(env,'guard-high-value.json'),
+    readAssetJson(env,'guard-super-radar.json')
+  ]);
+  const sourceItems=[
+    ...(Array.isArray(opp?.opportunities)?opp.opportunities:[]),
+    ...(Array.isArray(high?.ranked)?high.ranked:[]),
+    ...(Array.isArray(radar?.candidates)?radar.candidates:[]),
+    ...(Array.isArray(radar?.items)?radar.items:[])
+  ];
+  const seen=new Set(),items=[];
+  for(const x of sourceItems){
+    const id=String(x?.id||x?.opportunityId||x?.url||x?.title||x?.name||'').trim();
+    if(!id||seen.has(id))continue; seen.add(id);
+    const official=Boolean(x?.officialVerified||x?.official||x?.verified||x?.verification==='VERIFIED');
+    const value=Number(x?.verifiedValueUsd||x?.rewardUsd||x?.estimatedValueUsd||x?.value||0)||0;
+    const score=Number(x?.score||x?.priorityScore||0)||0;
+    const lane=revenueLaneForOpportunity(x);
+    const record={
+      id:id.slice(0,180),
+      title:String(x?.title||x?.name||'Revenue opportunity').slice(0,180),
+      source:String(x?.source||x?.resolvedDomain||x?.url||'').slice(0,500),
+      url:String(x?.url||'').slice(0,1000),
+      lane,
+      officialVerified:official,
+      estimatedValueUsd:value,
+      score,
+      status:official?'OWNER_REVIEW_REQUIRED':'VERIFY_SOURCE_FIRST',
+      discoveredAt:now(),
+      policy:'No automatic outreach, claim, signing, transfer or payment.'
+    };
+    items.push(record);
+    await kvPut(env,'revenue-opportunity/'+record.id,record);
+  }
+  items.sort((a,b)=>(Number(b.officialVerified)-Number(a.officialVerified))||(b.score-a.score)||(b.estimatedValueUsd-a.estimatedValueUsd));
+  return {items:items.slice(0,200),sourceCount:sourceItems.length,uniqueCount:items.length};
+}
+async function runRevenueFleet(env){
   const started=now();
   const autopilotCycle=await runAutopilotSafe(env);
+  const opportunityDiscovery=await discoverRevenueOpportunities(env);
   const persistedLeads=await kvList(env,'lead/',500);
   const revenueLeads=await kvList(env,'revenue-leads/',500);
   const leadCount=new Set([...persistedLeads,...revenueLeads].map(x=>x?.id).filter(Boolean)).size;
@@ -133,10 +190,10 @@ storageConfigured:configured.persistence,
     if(engine.status==='PARTNER_REQUIRED') nextAction='connect_approved_partner_program';
     if(engine.status==='PRODUCT_REQUIRED') nextAction='attach_verified_product_asset';
     if(engine.status==='OWNER_GATED') nextAction='verify_then_queue_owner_approval';
-    states.push({id:engine.id,status:engine.status,operational,prereq:engine.prereq,nextAction,lastRun:started,kpi:{leads:leadCount,paidOrders:paidOrders.length}});
+    states.push({id:engine.id,status:engine.status,operational,prereq:engine.prereq,nextAction,lastRun:started,kpi:{leads:leadCount,paidOrders:paidOrders.length,opportunities:opportunityDiscovery.items.filter(x=>x.lane===engine.id).length}});
     await kvPut(env,'revenue-engine/'+engine.id,{id:engine.id,status:engine.status,operational,nextAction,lastRun:started,kpi:{leads:leadCount,paidOrders:paidOrders.length}});
   }
-  const report={ok:true,startedAt:started,finishedAt:now(),cycle:autopilotCycle,engines:states,treasury:{tonConfigured:configured.ton,varizaConfigured:configured.variza},accounting:{paidOrders:paidOrders.length,rule:'only settled/paid orders count as revenue'},safety:{no_bulk_spam:true,no_credentials_or_seeds:true,no_captcha_or_kyc_bypass:true,no_sensitive_actions:true,owner_approval_for_irreversible:true}};
+  const report={ok:true,startedAt:started,finishedAt:now(),cycle:autopilotCycle,opportunityDiscovery,engines:states,treasury:{tonConfigured:configured.ton,varizaConfigured:configured.variza},accounting:{paidOrders:paidOrders.length,rule:'only settled/paid orders count as revenue'},safety:{no_bulk_spam:true,no_credentials_or_seeds:true,no_captcha_or_kyc_bypass:true,no_sensitive_actions:true,owner_approval_for_irreversible:true}};
   await kvPut(env,'revenue-fleet/latest',report);
   return report;
 }
@@ -274,7 +331,7 @@ async function runtimeRoutes(req,env,u){
   if(p==='/api/anil/tools'){if(req.method==='POST'&&!(await githubActionsAuth(req,env))&&!(await adminAuth(req,env)))return rjson({ok:false,error:'owner_or_github_actions_auth_required'},401);return anilTool(req,env);}
   if(p==='/api/anil/automation/queue')return anilChangeRequest(req,env);
   const PRIVATE_OWNER_PATHS=new Set([
-    '/api/revenue/fleet','/api/revenue/programs',
+    '/api/revenue/fleet','/api/revenue/opportunities','/api/revenue/programs',
     '/api/revenue/settlement','/api/revenue/engines','/api/revenue/hunt','/api/revenue/offer',
     '/api/analytics','/api/retention','/api/evolution','/api/revenue/summary',
     '/api/guard/state','/api/guard/report'
@@ -314,6 +371,10 @@ async function runtimeRoutes(req,env,u){
     return rjson({ok:true,from:'USD',to:'IRR',rate,source:'environment',tomanRate:rate/10});
   }
   if(p==='/api/revenue/fleet'&&req.method==='GET')return rjson({...await revenueFleetStatus(env),state:await revenueFleetState(env)});
+  if(p==='/api/revenue/opportunities'&&req.method==='GET'){
+    const items=await kvList(env,'revenue-opportunity/',200);
+    return rjson({ok:true,count:items.length,items:items.sort((a,b)=>(Number(b.officialVerified)-Number(a.officialVerified))||(Number(b.score||0)-Number(a.score||0))),policy:'Owner-only opportunity radar. Discovery is not revenue; settlement is the only revenue truth.'});
+  }
   if(p==='/api/revenue/fleet/run'&&req.method==='POST'){
     if(!(await githubActionsAuth(req,env)))return rjson({ok:false,error:'github_actions_auth_required'},401);
     const result=await runRevenueFleet(env);
