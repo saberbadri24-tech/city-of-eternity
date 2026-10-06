@@ -274,7 +274,7 @@ async function runtimeRoutes(req,env,u){
   if(p==='/api/anil/tools'){if(req.method==='POST'&&!(await githubActionsAuth(req,env))&&!(await adminAuth(req,env)))return rjson({ok:false,error:'owner_or_github_actions_auth_required'},401);return anilTool(req,env);}
   if(p==='/api/anil/automation/queue')return anilChangeRequest(req,env);
   const PRIVATE_OWNER_PATHS=new Set([
-    '/api/revenue/fleet','/api/revenue/programs','/api/revenue/customer-ready',
+    '/api/revenue/fleet','/api/revenue/programs',
     '/api/revenue/settlement','/api/revenue/engines','/api/revenue/hunt','/api/revenue/offer',
     '/api/analytics','/api/retention','/api/evolution','/api/revenue/summary',
     '/api/guard/state','/api/guard/report'
