@@ -13,7 +13,7 @@ jobs:
       - name: Verify public health
         run: |
           set -euo pipefail
-          curl -fsSL --max-time 20 https://city-of-eternity.onrender.com/api/health >/tmp/health.json
+          curl -fsSL --max-time 20 https://anil-x-live.onrender.com/api/health >/tmp/health.json
           python - <<'PY'
           import json
           d=json.load(open('/tmp/health.json'))
@@ -32,7 +32,7 @@ jobs:
           ANIL_OIDC_TOKEN: ${{ steps.oidc.outputs.token }}
         run: |
           set -euo pipefail
-          curl -fsSL --max-time 60 -X POST             -H "content-type: application/json"             -H "authorization: Bearer ${ANIL_OIDC_TOKEN}"             --data '{"task":"Run the ANIL X central council cycle: verify live state, consult specialists, protect revenue integrity, identify the highest-value reversible improvement, and stop on regression."}'             https://city-of-eternity.onrender.com/api/anil/super-team >/tmp/team.json
+          curl -fsSL --max-time 60 -X POST             -H "content-type: application/json"             -H "authorization: Bearer ${ANIL_OIDC_TOKEN}"             --data '{"task":"Run the ANIL X central council cycle: verify live state, consult specialists, protect revenue integrity, identify the highest-value reversible improvement, and stop on regression."}'             https://anil-x-live.onrender.com/api/anil/super-team >/tmp/team.json
           python - <<'PY'
           import json
           d=json.load(open('/tmp/team.json'))
