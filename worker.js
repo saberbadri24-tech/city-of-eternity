@@ -4,7 +4,7 @@ import {handlePlan} from './functions/api/plan.mjs';
 import analyze from './netlify/functions/analyze.mjs';
 import vision from './functions/api/vision.mjs';
 import voice from './functions/api/voice.mjs';import tonApi from './functions/api/ton.mjs';import {handleJavidan} from './functions/api/javidan-trinity.mjs';
-import {handleAnilCapabilities} from './functions/api/anil-capabilities.mjs';
+import {handleAnilCapabilities} from './functions/api/anil-capabilities.mjs';import {handleCapabilityKernel} from './functions/api/anil-capability-kernel.mjs';
 import {handleExecutionReadiness} from './functions/api/execution-readiness.mjs';import {handleGuardLive} from './functions/api/guard-live.mjs';
 import {anilTool} from './functions/api/anil-tools.mjs';import {handleSuperTeam} from './functions/api/anil-super-team.mjs';import {adminLogin,adminAuth,adminConfigured,adminSelfTest} from './functions/api/admin-auth.mjs';import {onRequestPost as pay} from './functions/api/pay.js';import {onRequestPost as webhook} from './functions/api/variza-webhook.js';
 const json=(d,s=200,h={})=>new Response(JSON.stringify(d),{status:s,headers:{'content-type':'application/json','cache-control':'no-store',...h}});
@@ -245,7 +245,7 @@ async function runtimeRoutes(req,env,u){
   const p=u.pathname;
   if(p==='/api/translate')return translateOnline(req);
   if(p==='/api/autopilot'){if(req.method==='POST'&&!(await githubActionsAuth(req,env)))return rjson({ok:false,error:'github_actions_auth_required'},401);return autopilot(req,env)}
-  if(p==='/api/anil/capabilities')return handleAnilCapabilities(req,env);
+  if(p==='/api/anil/capabilities')return handleAnilCapabilities(req,env);\n  if(p==='/api/anil/capability-kernel')return handleCapabilityKernel(req,env);
   if(p==='/api/anil/tools'){if(req.method==='POST'&&!(await githubActionsAuth(req,env))&&!(await adminAuth(req,env)))return rjson({ok:false,error:'owner_or_github_actions_auth_required'},401);return anilTool(req,env);}
   if(p==='/api/anil/automation/queue')return anilChangeRequest(req,env);
   const v90=await v90AdminRoutes(req,env,u);if(v90)return v90;
@@ -635,30 +635,57 @@ async function anilOperatorChange(req,env,command){
 async function secretary(req,env){
   if(!(await adminAuth(req,env)))return json({ok:false,error:'unauthorized'},401);
   const b=await req.json().catch(()=>({})),command=String(b.command||'').slice(0,12000),q=command.toLowerCase();
-  if(/گارد|guard/.test(q)&&/وضعیت|state|صف|approval/.test(q)){
-    const u=new URL(req.url);u.pathname='/api/guard/state';const rr=await runtimeRoutes(new Request(u,{method:'GET',headers:{cookie:req.headers.get('cookie')||''}}),env,u);
-    if(rr){const d=await rr.json();return json({ok:true,changed:false,action:'guard_state',text:'وضعیت زنده Guard:\n'+JSON.stringify(d,null,2),data:d});}
+  const live=async(path,method='GET',body=null)=>{
+    const u=new URL(req.url);u.pathname=path;u.search='';
+    const headers=new Headers({cookie:req.headers.get('cookie')||''});
+    if(body)headers.set('content-type','application/json');
+    const rr=await runtimeRoutes(new Request(u,{method,headers,body:body?JSON.stringify(body):undefined}),env,u);
+    if(!rr)throw Error('route_unavailable');
+    const data=await rr.json().catch(()=>({}));
+    return {status:rr.status,data};
+  };
+  try{
+    if(/وضعیت|status|سلامت|health|runtime|سیستم/.test(q)){
+      const h=await live('/api/health');
+      const k=await handleCapabilityKernel(new Request(new URL('/api/anil/capability-kernel',req.url),{method:'GET'}),env).then(x=>x.json());
+      return json({ok:true,action:'live_system_status',text:(b.language==='fa'?'وضعیت واقعی ANIL X در همین لحظه:\n':'Live ANIL X status right now:\n')+JSON.stringify({health:h.data,capabilityLevel:k.capabilityLevel,adapters:k.capabilities?.adapters,truth:k.truth},null,2),data:{health:h.data,capability:k}});
+    }
+    if(/گارد|guard|ایردراپ|airdrop|شکار|فرصت/.test(q)){
+      const g=await live('/api/guard/live');
+      return json({ok:true,action:'guard_live_status',text:(b.language==='fa'?'وضعیت زنده گارد جاویدان:\n':'Immortal Guard live status:\n')+JSON.stringify(g.data,null,2),data:g.data});
+    }
+    if(/درآمد|revenue|سفارش|order|فروش|لید|lead|مشتری|customer|پرداخت/.test(q)){
+      const [o,f,a]=await Promise.all([live('/api/admin/overview','POST'),live('/api/revenue/fleet'),live('/api/analytics')]);
+      return json({ok:true,action:'live_business_status',text:(b.language==='fa'?'وضعیت واقعی کسب‌وکار، سفارش و درآمد:\n':'Live business, orders and revenue status:\n')+JSON.stringify({overview:o.data,fleet:f.data,analytics:a.data},null,2),data:{overview:o.data,fleet:f.data,analytics:a.data}});
+    }
+    if(/قابلیت|توان|ابزار|capabilit|tool/.test(q)){
+      const k=await handleCapabilityKernel(new Request(new URL('/api/anil/capability-kernel',req.url),{method:'GET'}),env).then(x=>x.json());
+      return json({ok:true,action:'capability_report',text:(b.language==='fa'?'قابلیت‌های واقعی فعلی Anil:\n':'ANIL current verified capabilities:\n')+JSON.stringify(k,null,2),data:k});
+    }
+    if(/موتور درآمد|revenue engine|fleet|برنامه درآمد/.test(q)){
+      const [e,p]=await Promise.all([live('/api/revenue/engines'),live('/api/revenue/programs')]);
+      return json({ok:true,action:'revenue_engines',text:(b.language==='fa'?'موتورهای درآمدی زنده:\n':'Live revenue engines:\n')+JSON.stringify({engines:e.data,programs:p.data},null,2),data:{engines:e.data,programs:p.data}});
+    }
+    if(/اصلاح|درست|تغییر|بهبود|آپدیت|update|fix|improve|change|repair/.test(q)&&/(سایت|کد|دکمه|صفحه|گارد|guard|anil|site|code)/.test(q)){
+      try{
+        const op=await anilOperatorChange(req,env,command);
+        if(op?.ok)return json({ok:true,changed:false,action:'controlled_change_queued',text:'تغییر کنترل‌شده ساخته و برای تست/صف اجرا ثبت شد؛ تا عبور از تست و انتشار، انجام‌شده محسوب نمی‌شود.',data:op});
+        return json({ok:true,changed:false,action:'change_not_queued',text:'تغییر اجرا نشد؛ مرز ایمنی یا دسترسی لازم مانع ثبت آن شد.',data:op});
+      }catch(e){return json({ok:false,error:'operator_change_failed',message:String(e?.message||e)},502)}
+    }
+    const ai=getAiConfig(env).openai;
+    if(ai){
+      const r=await fetch('https://api.openai.com/v1/chat/completions',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+ai},body:JSON.stringify({model:env.ASTRA_MODEL||'gpt-5-mini',messages:[{role:'system',content:'You are Badrkhan, the live private executive assistant inside ANIL X. Answer the owner directly. Use only evidence supplied by runtime tools. Never claim execution without evidence. Never ask for seed phrases or private keys. Sensitive money/security actions remain owner-gated.'},{role:'user',content:command}],temperature:.15})});
+      if(r.ok){const d=await r.json();return json({ok:true,text:d?.choices?.[0]?.message?.content||'—',action:'live_ai',provider:'openai',live:true});}
+    }
+    const k=await handleCapabilityKernel(new Request(new URL('/api/anil/capability-kernel',req.url),{method:'GET'}),env).then(x=>x.json());
+    const fa=b.language==='fa';
+    return json({ok:true,action:'runtime_online_ai_not_configured',live:false,text:fa?'Runtime آنیل آنلاین است، اما AI خارجی هنوز در Render تنظیم نشده؛ بنابراین پاسخ ساختگی نمی‌دهم. من همین الان وضعیت واقعی ابزارها را می‌خوانم. Providerهای AI فعلی: '+JSON.stringify(k.capabilities?.adapters?.ai?.providers||{})+'\nبرای اجرای واقعیِ دستورات آزاد، باید یک Provider AI در Runtime تنظیم شود.':'ANIL runtime is online, but no external AI provider is configured in Render, so I will not fake a live model response. The runtime capability state is available now. Current AI providers: '+JSON.stringify(k.capabilities?.adapters?.ai?.providers||{})+'\nFree-form live execution requires a configured AI provider.',data:k});
+  }catch(e){
+    return json({ok:false,error:'secretary_runtime_error',message:String(e?.message||e).slice(0,300)},502);
   }
-  if(/گزارش گارد|guard report/.test(q)){
-    const u=new URL(req.url);u.pathname='/api/guard/report';const rr=await runtimeRoutes(new Request(u,{method:'GET',headers:{cookie:req.headers.get('cookie')||''}}),env,u);
-    if(rr){const d=await rr.json();return json({ok:true,changed:false,action:'guard_report',text:'گزارش زنده Guard:\n'+JSON.stringify(d,null,2),data:d});}
-  }
-  if(/(?:درست|اصلاح|تغییر|بهبود|آپدیت|update|fix|improve|change|repair)/.test(q)&&/(?:سایت|کد|دکمه|صفحه|گارد|guard|جاویدان|anil|site|code)/.test(q)){
-    try{
-      const op=await anilOperatorChange(req,env,command);
-      if(op?.ok)return json({ok:true,changed:false,action:'controlled_change_queued',text:'تغییر کنترل‌شده ساخته و برای اجرای خودکار وارد صف شد. ابتدا تست و امنیت اجرا می‌شود و فقط در صورت عبور، انتشار انجام می‌شود.',data:op});
-      return json({ok:true,changed:false,action:'change_not_queued',text:'تغییر به دلیل کنترل ایمنی وارد صف نشد.',data:op});
-    }catch(e){return json({ok:false,error:'operator_change_failed',message:String(e?.message||e)},502)}
-  }
-  if(/سفارش|order/.test(q)){
-    const u=new URL(req.url);u.pathname='/api/order';const rr=await runtimeRoutes(new Request(u,{method:'GET',headers:{cookie:req.headers.get('cookie')||''}}),env,u);
-    if(rr){const d=await rr.json();return json({ok:true,changed:false,action:'orders',text:'سفارش جاری:\n'+JSON.stringify(d,null,2),data:d});}
-  }
-  const councilReq=new Request(new URL('/api/plan',req.url),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({prompt:command,profile:{role:'admin'},turns:b.messages||[]})});try{const rr=await handlePlan(councilReq,env);const cd=await rr.json();if(cd.ok)return json({ok:true,text:cd.reply||'بررسی شورای مدیر انجام شد.',action:'admin_council',council:cd});}catch(e){}
-  const r=await fetch('https://api.openai.com/v1/chat/completions',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+(getAiConfig(env).openai)},body:JSON.stringify({model:env.ASTRA_MODEL||'gpt-5-mini',messages:[{role:'system',content:'تو بدرخان، دستیار اجرایی خصوصی ANIL X هستی. فارسی پاسخ بده. هرگز اجرای واقعی را بدون نتیجه ابزار ادعا نکن. برای گارد جاویدان هرگز seed/private key نخواه و برای امضای تراکنش تأیید مالک لازم است. اگر ابزار مستقیم در دسترس نیست، فقط برنامه اقدام و وضعیت قابل اثبات را گزارش کن.'},{role:'user',content:command}],temperature:.15})});if(!r.ok)return json({ok:false,error:'assistant_provider_'+r.status},502);
-  const d=await r.json();return json({ok:true,text:d?.choices?.[0]?.message?.content||'بررسی انجام شد.',action:'گزارش'});
 }
-export default{async fetch(req,env,ctx){const u=new URL(req.url);if(u.pathname==='/api/guard/live'&&req.method==='GET')return handleGuardLive(req,env);if(u.pathname==='/api/health'||u.pathname==='/api/_healthcheck'){const adminReady=adminConfigured(env);return json({ok:true,ready:adminReady,service:'ANIL X',runtime:'unified-worker',configured:{admin:adminReady,openai:!!(getAiConfig(env).openai),anthropic:!!(getAiConfig(env).anthropic),gemini:!!(getAiConfig(env).gemini),variza:!!getVarizaApiKey(env),payments:!!env.PAYMENTS,assets:!!env.ASSETS},routes:['/api/plan','/api/analyze','/api/vision','/api/voice','/api/ton/account','/api/ton/transactions','/api/javidan/trinity','/api/account','/api/memory','/api/order','/api/fx','/api/discovery','/api/free-request','/api/free-admin','/api/payment-status','/api/worker','/api/pay','/api/variza-webhook','/api/revenue/fleet','/api/revenue/fleet/run','/api/revenue/programs','/api/guard/live'],revenue:{persistence:!!env.PAYMENTS,variza:!!getVarizaApiKey(env),ton:validTonAddress(getMainTonAddress(env)),guardCatchQueue:!!env.PAYMENTS}},200);}const runtime=await runtimeRoutes(req,env,u);if(runtime)return runtime;if(u.pathname==='/api/analyze')return analyze(req,env);if(u.pathname==='/api/vision')return vision(req,env);if(u.pathname==='/api/voice')return voice(req,env);if(u.pathname==='/api/ton/account'||u.pathname==='/api/ton/transactions')return tonApi(req);if(u.pathname==='/api/anil/execution-readiness')return handleExecutionReadiness(req,env);if(u.pathname==='/api/plan')return handlePlan(req,env);if(u.pathname==='/api/anil/super-team'){if(req.method==='POST'&&!(await githubActionsAuth(req,env)))return json({ok:false,error:'github_actions_auth_required'},401);return handleSuperTeam(req,env,{guardHandler:handleGuardLive});}if(u.pathname==='/api/javidan/trinity')return handleJavidan(req,env);if(u.pathname==='/api/admin/password/login')return adminLogin(req,env);
+export default{async fetch(req,env,ctx){const u=new URL(req.url);if(u.pathname==='/api/guard/live'&&req.method==='GET')return handleGuardLive(req,env);if(u.pathname==='/api/health'||u.pathname==='/api/_healthcheck'){const adminReady=adminConfigured(env);return json({ok:true,ready:adminReady,service:'ANIL X',runtime:'unified-worker',configured:{admin:adminReady,openai:!!(getAiConfig(env).openai),anthropic:!!(getAiConfig(env).anthropic),gemini:!!(getAiConfig(env).gemini),variza:!!getVarizaApiKey(env),payments:!!env.PAYMENTS,assets:!!env.ASSETS},routes:['/api/plan','/api/analyze','/api/vision','/api/voice','/api/ton/account','/api/ton/transactions','/api/javidan/trinity','/api/account','/api/memory','/api/order','/api/fx','/api/discovery','/api/free-request','/api/free-admin','/api/payment-status','/api/worker','/api/pay','/api/variza-webhook','/api/revenue/fleet','/api/revenue/fleet/run','/api/revenue/programs','/api/guard/live'],revenue:{persistence:!!env.PAYMENTS,variza:!!getVarizaApiKey(env),ton:validTonAddress(getMainTonAddress(env)),guardCatchQueue:!!env.PAYMENTS}},200);}const runtime=await runtimeRoutes(req,env,u);if(runtime)return runtime;if(u.pathname==='/api/analyze')return analyze(req,env);if(u.pathname==='/api/vision')return vision(req,env);if(u.pathname==='/api/voice')return voice(req,env);if(u.pathname==='/api/ton/account'||u.pathname==='/api/ton/transactions')return tonApi(req);if(u.pathname==='/api/anil/execution-readiness')return handleExecutionReadiness(req,env);if(u.pathname==='/api/plan')return handlePlan(req,env);if(u.pathname==='/api/anil/super-team'){if(req.method==='POST'&&!(await githubActionsAuth(req,env)))return json({ok:false,error:'github_actions_auth_required'},401);return handleSuperTeam(req,env,{guardHandler:handleGuardLive});}if(u.pathname==='/api/javidan/trinity')return handleJavidan(req,env);if(u.pathname==='/api/admin/password/login')return adminLogin(req,env);if(u.pathname==='/api/admin/password/logout'&&req.method==='POST')return json({ok:true},200,{'set-cookie':'session=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0'});
   if(u.pathname==='/api/admin/auth-self-test'&&req.method==='GET'){
     if(!(await githubActionsAuth(req,env)))return json({ok:false,error:'github_actions_auth_required'},401);
     try{return json(await adminSelfTest(env))}catch(e){return json({ok:false,error:'admin_self_test_failed',detail:String(e?.message||e).slice(0,180)},500)}
