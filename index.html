@@ -33,7 +33,7 @@
 <header class="topbar">
   <a class="brand" href="#top" aria-label="ANIL X home"><span class="brand-mark">AX</span><span>ANIL <b>X</b></span></a>
   <nav class="nav" aria-label="Primary">
-    <a href="#assistant">Anil</a><a href="#guard">Guard</a><a href="#payments">Business</a><a href="services.html">Services</a>
+    <a href="#assistant">Anil</a><a href="#payments">Business</a><a href="services.html">Services</a>
   </nav>
   <div class="top-actions">
     <button id="profileBtn" class="profile-pill" type="button">Profile</button>
@@ -83,7 +83,7 @@
     <button type="button" data-request="Help me get more customers">Get more customers</button>
     <button type="button" data-request="Research this idea and compare the options">Research</button>
     <button type="button" data-request="Analyze this file or image">Analyze a file</button>
-    <button type="button" data-request="Check the current Immortal Guard state">Guard</button>
+    
   </div>
 </section>
 
@@ -99,17 +99,7 @@
   </div>
 </section>
 
-<section id="guard" class="section guard-section">
-  <div class="section-head"><span class="eyebrow">IMMORTAL GUARD · AIRDROP+</span><h2>Opportunity intelligence inside ANIL X.</h2><p>Discovery, verification, evidence, owner approvals and a main-treasury owner-approval gate. No seed phrase or private key handling.</p></div>
-  <div class="guard-live">
-    <div id="axGuardMetrics" class="guard-metrics"><div><b>—</b><small>Radar</small></div><div><b>—</b><small>Reviewed</small></div><div><b>—</b><small>Aligned</small></div><div><b>—</b><small>Owner queue</small></div></div>
-    <div class="guard-grid">
-      <article><span>AI Council</span><strong id="axGuardAI">Reading live state…</strong><p id="axGuardState">Checking Guard status.</p></article>
-      <article><span>Priority opportunities</span><div id="axGuardOpps" class="guard-opps"><p>Loading verified state…</p></div></article>
-    </div>
-    <div class="guard-links"><a href="admin.html#guardPanel">Radar</a><a href="admin.html#guardPanel">Main treasury</a><a href="admin.html#approvalGrid">Owner approval</a><a href="admin.html#approvalGrid">Approval queue</a></div>
-  </div>
-</section>
+
 
 <section id="council" class="section">
   <div class="section-head"><span class="eyebrow">ANIL X · CORE ENGINE</span><h2>One router, several specialists.</h2><p>The public interface stays one conversation while specialist roles handle different classes of work.</p></div>
@@ -151,7 +141,7 @@
 if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 const idle=window.requestIdleCallback||((f)=>setTimeout(f,900));
 const load=src=>{const s=document.createElement('script');s.src=src;s.defer=true;document.head.appendChild(s)};
-idle(()=>{['experience-dna.js?v=20260927-2','adaptive-shell.js?v=20260918-2','site-guard-center.js?v=20260927-1'].forEach(load)}, {timeout:1800});
+idle(()=>{['experience-dna.js?v=20260927-2','adaptive-shell.js?v=20260918-2'].forEach(load)}, {timeout:1800});
 setTimeout(()=>load('experience-layer.js?v=20261003-perf2'),1600);
 setTimeout(()=>load('webmcp.js?v=20260918-1'),2400);
 setTimeout(()=>load('anilx-enhance.js?v=20260918-2'),3400);
