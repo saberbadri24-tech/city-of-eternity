@@ -52,5 +52,5 @@ jobs:
           package-manager-cache: false
       - name: Run live Render QA
         env:
-          ANILX_LIVE_URL: https://city-of-eternity.onrender.com
+          ANILX_LIVE_URL: https://anil-x-live.onrender.com
         run: node scripts/live-qa.mjs
