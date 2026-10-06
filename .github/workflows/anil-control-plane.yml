@@ -19,11 +19,12 @@ jobs:
         with:
           node-version: 24
       - run: npm install
-      - name: Syntax dependency contract gate
-        run: |
-          npm audit --omit=dev --audit-level=high
-          node scripts/verify-syntax.mjs
-          node scripts/anil-final-contract-smoke.mjs
+      - name: Dependency audit gate
+        run: npm audit --omit=dev --audit-level=high
+      - name: Syntax gate
+        run: node scripts/verify-syntax.mjs
+      - name: Final contract smoke gate
+        run: node scripts/anil-final-contract-smoke.mjs
       - name: Production browser QA
         env:
           ANIL_BASE_URL: https://anil-x-live.onrender.com
