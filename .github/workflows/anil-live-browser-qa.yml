@@ -97,8 +97,8 @@ jobs:
             await page.locator('#requestForm').evaluate(form=>form.requestSubmit());
             await page.waitForTimeout(900);
             check(await page.locator('#chat .msg').count()>=3,'main chat sends and renders a response');
-            await page.locator('#voiceBtn').click().catch(()=>{});
-            await page.waitForTimeout(250);
+            check(await page.locator('#voiceBtn').isVisible(),'voice control visible');
+            check(await page.locator('#imageInput').isVisible(),'image input visible');
             check(errors.length===0,'no browser page errors during public smoke');
             await page.goto(base+'/admin.html',{waitUntil:'domcontentloaded'});
             await page.waitForTimeout(600);
