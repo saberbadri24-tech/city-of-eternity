@@ -30,7 +30,7 @@ jobs:
           done
       - name: Production API contract smoke
         env:
-          ANIL_BASE_URL: https://city-of-eternity.onrender.com
+          ANIL_BASE_URL: https://anil-x-live.onrender.com
         run: node scripts/anil-final-contract-smoke.mjs
       - name: Dependency audit
         run: npm audit --omit=dev --audit-level=high
