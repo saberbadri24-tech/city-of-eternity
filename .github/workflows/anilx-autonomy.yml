@@ -32,7 +32,7 @@ jobs:
         run: |
           set -euo pipefail
           curl --fail --silent --show-error --max-time 45 -X POST \
-            "https://city-of-eternity.onrender.com/api/revenue/fleet/run" \
+            "https://anil-x-live.onrender.com/api/revenue/fleet/run" \
             -H "content-type: application/json" \
             -H "authorization: Bearer ${ANIL_OIDC_TOKEN}" \
             -d '{}' \
