@@ -1,6 +1,6 @@
 {
   "guard": "ANIL X Immortal Guard",
-  "updatedAt": "2026-10-06T10:10:48.881832+00:00",
+  "updatedAt": "2026-10-06T12:55:26.891438+00:00",
   "status": "healthy",
   "sourceCount": 51,
   "validHttpsSourceCount": 51,
@@ -20,44 +20,44 @@
     "research": 1,
     "airdrop-discovery": 1
   },
-  "discoveryCandidateCount": 1886,
-  "uniqueNewsPublishers": 551,
+  "discoveryCandidateCount": 1871,
+  "uniqueNewsPublishers": 547,
   "topPublishers": [
     {
       "publisher": "Binance",
-      "count": 123
+      "count": 118
     },
     {
       "publisher": "Immunefi",
-      "count": 88
+      "count": 87
     },
     {
       "publisher": "CoinMarketCap",
-      "count": 72
+      "count": 78
     },
     {
-      "publisher": "HackerOne",
+      "publisher": "hackerone.com",
       "count": 69
     },
     {
       "publisher": "x.com",
-      "count": 63
-    },
-    {
-      "publisher": "Reddit",
-      "count": 54
+      "count": 66
     },
     {
       "publisher": "Yelp",
-      "count": 52
+      "count": 50
     },
     {
-      "publisher": "Coin Gabbar",
+      "publisher": "reddit.com",
       "count": 45
     },
     {
+      "publisher": "Coin Gabbar",
+      "count": 44
+    },
+    {
       "publisher": "RootData",
-      "count": 41
+      "count": 44
     },
     {
       "publisher": "GitHub",
@@ -65,15 +65,11 @@
     },
     {
       "publisher": "AirdropAlert",
-      "count": 32
+      "count": 34
     },
     {
-      "publisher": "bitdegree.org",
-      "count": 31
-    },
-    {
-      "publisher": "Phemex",
-      "count": 31
+      "publisher": "BitDegree",
+      "count": 30
     },
     {
       "publisher": "polygonscan.com",
@@ -81,15 +77,19 @@
     },
     {
       "publisher": "CCN.com",
-      "count": 27
+      "count": 26
+    },
+    {
+      "publisher": "phemex.com",
+      "count": 26
     },
     {
       "publisher": "facebook.com",
-      "count": 24
+      "count": 25
     },
     {
-      "publisher": "Bitget",
-      "count": 21
+      "publisher": "LinkedIn",
+      "count": 22
     },
     {
       "publisher": "TradingView",
@@ -97,10 +97,10 @@
     },
     {
       "publisher": "Medium",
-      "count": 18
+      "count": 19
     },
     {
-      "publisher": "LinkedIn",
+      "publisher": "Bybit",
       "count": 18
     }
   ],
