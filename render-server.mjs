@@ -112,6 +112,8 @@ const server=http.createServer(async(req,res)=>{
       res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
     }
     if(u.pathname==='/api/anil/capability-kernel'&&(req.method==='GET'||req.method==='POST')){
+      const {adminAuth}=await import('./functions/api/admin-auth.mjs');
+      if(!(await adminAuth(toWebRequest(req,origin),env))){res.statusCode=401;res.setHeader('content-type','application/json; charset=utf-8');res.end(JSON.stringify({ok:false,error:'admin_auth_required'}));return;}
       const {handleCapabilityKernel}=await import('./functions/api/anil-capability-kernel.mjs');
       const body=req.method==='POST'?await readBody(req):undefined;
       const request=new Request(origin+(req.url||'/'),{method:req.method,headers:req.headers,body});
@@ -119,6 +121,8 @@ const server=http.createServer(async(req,res)=>{
       res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
     }
     if(u.pathname==='/api/anil/control-plane'&&(req.method==='GET'||req.method==='POST')){
+      const {adminAuth}=await import('./functions/api/admin-auth.mjs');
+      if(!(await adminAuth(toWebRequest(req,origin),env))){res.statusCode=401;res.setHeader('content-type','application/json; charset=utf-8');res.end(JSON.stringify({ok:false,error:'admin_auth_required'}));return;}
       const {handleControlPlane}=await import('./functions/api/anil-control-plane.mjs');
       const rr=await handleControlPlane(new Request(origin+(req.url||'/'),{method:req.method,headers:req.headers}),env);
       res.statusCode=rr.status;rr.headers.forEach((v,k)=>res.setHeader(k,v));res.end(Buffer.from(await rr.arrayBuffer()));return;
