@@ -549,6 +549,7 @@ if(p==='/api/payment-config'){
     return rjson({ok:false,error:'method_not_allowed'},405);
   }
   if(p==='/api/guard/state'){
+    if(!(await adminAuth(req,env)))return rjson({ok:false,error:'owner_auth_required'},401);
     const readAsset=async name=>{try{const resp=await env.ASSETS.fetch(new Request(new URL('/'+name,req.url),{headers:{'x-anil-internal':'guard-runtime'}}));return await resp.json()}catch{return null}};
     const official=await readAsset('guard-official-discovery.json'), high=await readAsset('guard-high-value.json'), receipts=await readAsset('guard-receipts.json');
     const approvals=[...state.queue.values()].filter(x=>x.type==='guard_approval').slice(-50);
@@ -613,6 +614,7 @@ if(p==='/api/payment-config'){
     return rjson({ok:true,item});
   }
   if(p==='/api/guard/report'){
+    if(!(await adminAuth(req,env)))return rjson({ok:false,error:'owner_auth_required'},401);
     const approvals=[...state.queue.values()].filter(x=>x.type==='guard_approval');
     return rjson({ok:true,generatedAt:now(),counts:{approvals:approvals.length,queued:[...state.queue.values()].filter(x=>x.status==='queued').length},safety:{autoSign:false,autoTransfer:false,ownerApprovalRequired:true}});
   }
