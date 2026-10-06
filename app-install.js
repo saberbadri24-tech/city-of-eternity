@@ -1,0 +1,12 @@
+(()=>{"use strict";
+let deferred=null;
+const isStandalone=()=>window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;
+const install=()=>{if(deferred){deferred.prompt();deferred.userChoice.finally(()=>{deferred=null;hide()})}else{alert("برای نصب ANIL X: از منوی مرورگر گزینه Add to Home screen / نصب برنامه را بزنید.")}};
+const hide=()=>{const b=document.getElementById("anilxInstall");if(b)b.remove()};
+const make=()=>{if(isStandalone()||document.getElementById("anilxInstall"))return;const b=document.createElement("button");b.id="anilxInstall";b.type="button";b.textContent="＋ نصب ANIL X";Object.assign(b.style,{position:"fixed",bottom:"18px",right:"18px",zIndex:"9999",padding:"12px 16px",border:"1px solid rgba(202,163,74,.65)",borderRadius:"999px",background:"rgba(7,17,28,.96)",color:"#f4d889",font:"600 14px system-ui",boxShadow:"0 10px 30px rgba(0,0,0,.35)",backdropFilter:"blur(12px)",cursor:"pointer"});b.onclick=install;document.body.appendChild(b)};
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e;make()});
+window.addEventListener("appinstalled",hide);
+window.addEventListener("load",()=>setTimeout(make,1800));
+window.anilxInstallApp=install;
+window.anilxShare=async()=>{const data={title:"ANIL X",text:"ANIL X — Intelligent Business Engine",url:location.origin+"/"};if(navigator.share)try{await navigator.share(data)}catch{}else if(navigator.clipboard){await navigator.clipboard.writeText(data.url);alert("لینک ANIL X کپی شد.")}};
+})();
