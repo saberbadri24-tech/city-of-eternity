@@ -131,7 +131,8 @@ jobs:
             'capabilities':read('guard-capabilities.json'),
             'radar':read('guard-super-radar.json'),
             'receipts':read('guard-receipts.json'),
-            'official':read('guard-official-discovery.json')
+            'official':read('guard-official-discovery.json'),
+            'ledger':read('guard-evidence-ledger.json')
           }
           Path('/tmp/anil-guard-ingest.json').write_text(json.dumps(payload,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
           PY
