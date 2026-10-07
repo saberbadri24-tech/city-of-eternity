@@ -47,7 +47,7 @@ async function directGitHub(env,operation,body){
 }
 async function directRender(env,operation){
  const token=first(env,['RENDER_API_KEY','RENDER_TOKEN']); if(!token)return {configured:false,mode:'render-health-via-runtime'};
- const service='srv-dargiel9fdbs739gsnug';
+ const service=env.ANIL_RENDER_SERVICE_ID||'srv-db20k7ss728c73akptsg';
  const headers={accept:'application/json',authorization:'Bearer '+token};
  const path=operation==='read_render_logs'?'/v1/services/'+service+'/events?limit=20':'/v1/services/'+service;
  const r=await timedFetch('https://api.render.com'+path,{headers});
