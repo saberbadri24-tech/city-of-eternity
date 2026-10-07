@@ -21,25 +21,21 @@ jobs:
       - name: Check Guard heartbeat and recover stale cycle
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ANIL_X_RENDER_URL: https://anil-x-live.onrender.com
         run: |
           set -euo pipefail
+          TOKEN="$(curl -sSf -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x" | python -c "import sys,json; print(json.load(sys.stdin)['value'])")"
+          curl -sSf --fail-with-body --max-time 20             -H "Authorization: Bearer $TOKEN"             "$ANIL_X_RENDER_URL/api/guard/watchdog" >/tmp/guard-watchdog.json
           python - <<'PY'
-          import json, urllib.request, datetime, os
-          repo=os.environ["GITHUB_REPOSITORY"]
-          url=f"https://raw.githubusercontent.com/{repo}/main/guard-status.json?ts={int(datetime.datetime.now().timestamp())}"
-          try:
-              req=urllib.request.Request(url,headers={"Cache-Control":"no-cache"})
-              with urllib.request.urlopen(req,timeout=10) as r: data=json.load(r)
-              ts=data.get("lastScan") or data.get("updatedAt") or data.get("heartbeatAt")
-              if not ts: raise RuntimeError("missing_guard_timestamp")
-              t=datetime.datetime.fromisoformat(ts.replace("Z","+00:00"))
-              age=(datetime.datetime.now(datetime.timezone.utc)-t).total_seconds()/60
-              print(f"Guard heartbeat age: {age:.1f} minutes")
-              if age <= 8:
-                  print("WATCHDOG=PASS")
-                  raise SystemExit(0)
-          except Exception as e:
-              print("Guard heartbeat unavailable/stale:",e)
+          import json
+          d=json.load(open('/tmp/guard-watchdog.json'))
+          if not d.get("ok"): raise SystemExit("Guard watchdog endpoint returned not-ok")
+          age=d.get("freshness",{}).get("minutesSinceUpdate")
+          stale=d.get("freshness",{}).get("stale")
+          print("Guard heartbeat age:", age, "minutes; stale:", stale)
+          if age is not None and not stale:
+              print("WATCHDOG=PASS")
+              raise SystemExit(0)
           print("WATCHDOG=RECOVERY_REQUEST")
           PY
           gh workflow run "immortal-guard.yml" --repo "$GITHUB_REPOSITORY" --ref main
