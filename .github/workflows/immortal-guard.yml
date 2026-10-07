@@ -222,12 +222,14 @@ jobs:
           )
           PY
           OIDC_TOKEN="$(curl -sSf -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x" | python -c "import sys,json; print(json.load(sys.stdin)['value'])")"
-          curl -sSf -X POST "$ANIL_X_RENDER_URL/api/guard/ingest" \
+          HTTP_CODE="$(curl -sS -o /tmp/anil-guard-ingest-response.json -w "%{http_code}" -X POST "$ANIL_X_RENDER_URL/api/guard/ingest" \
             -H "Authorization: Bearer $OIDC_TOKEN" \
             -H "X-ANIL-OIDC-Audience: anil-x" \
             -H "Content-Type: application/json" \
-            --data-binary @/tmp/anil-guard-ingest.json
-          rm -f /tmp/anil-guard-ingest.json
+            --data-binary @/tmp/anil-guard-ingest.json)"
+          cat /tmp/anil-guard-ingest-response.json
+          test "$HTTP_CODE" = "200"
+          rm -f /tmp/anil-guard-ingest.json /tmp/anil-guard-ingest-response.json
 
       - name: Confirm no public Guard state is committed
         run: echo "Guard detailed state stays in private Render Owner storage; GitHub receives no Guard JSON state."
