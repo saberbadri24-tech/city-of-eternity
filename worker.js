@@ -713,8 +713,15 @@ async function githubActionsAuth(req,env){
     if(header.alg!=='RS256'||payload.iss!=='https://token.actions.githubusercontent.com'||payload.aud!=='anil-x')return false;
     if(payload.exp&&Number(payload.exp)*1000<Date.now())return false;
     if(payload.repository!=='saberbadri24-tech/city-of-eternity'||payload.ref!=='refs/heads/main')return false;
-    const jwks=globalThis.__ANILX_GH_JWKS||(globalThis.__ANILX_GH_JWKS=await fetch('https://token.actions.githubusercontent.com/.well-known/jwks').then(r=>r.json()).catch(()=>null));
-    const jwk=jwks?.keys?.find(k=>k.kid===header.kid);
+    const fetchJwks=async()=>fetch('https://token.actions.githubusercontent.com/.well-known/jwks',{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null);
+    let jwks=await fetchJwks();
+    let jwk=jwks?.keys?.find(k=>k.kid===header.kid);
+    if(!jwk){
+      // GitHub rotates signing keys; retry against a fresh JWKS set rather than
+      // trusting a process-lifetime cache that may contain an old kid.
+      jwks=await fetchJwks();
+      jwk=jwks?.keys?.find(k=>k.kid===header.kid);
+    }
     if(!jwk)return false;
     const key=await crypto.subtle.importKey('jwk',jwk,{name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'},false,['verify']);
     const data=new TextEncoder().encode(parts[0]+'.'+parts[1]);
