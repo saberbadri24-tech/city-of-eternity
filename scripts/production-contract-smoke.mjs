@@ -13,7 +13,9 @@ const paths = [
   "/api/revenue/customer-ready",
 ];
 
-const oidc = process.env.ANIL_OIDC_TOKEN || "";\nconst headers = oidc ? { authorization: `Bearer ${oidc}` } : {};\nconst results = [];
+const oidc = process.env.ANIL_OIDC_TOKEN || "";
+const headers = oidc ? { authorization: `Bearer ${oidc}` } : {};
+const results = [];
 for (const path of paths) {
   const url = new URL(path, base);
   const res = await fetch(url, { redirect: "follow", headers });
