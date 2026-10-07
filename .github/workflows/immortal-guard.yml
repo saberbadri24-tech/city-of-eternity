@@ -192,7 +192,34 @@ jobs:
             'official':read('guard-official-discovery.json'),
             'ledger':read('guard-evidence-ledger.json')
           }
-          Path('/tmp/anil-guard-ingest.json').write_text(json.dumps(payload,ensure_ascii=False,separators=(',',':'))[:180000],encoding='utf-8')
+          # Bound each document as valid JSON; never truncate the serialized
+          # aggregate, which could cut a JSON token and make the ingest body invalid.
+          def bounded(value, limit=24000):
+              raw=json.dumps(value,ensure_ascii=False,separators=(',',':'))
+              if len(raw)<=limit:
+                  return value
+              if isinstance(value,dict):
+                  out={}
+                  for k,v in value.items():
+                      candidate=dict(out)
+                      candidate[k]=bounded(v,max(512,limit//4))
+                      if len(json.dumps(candidate,ensure_ascii=False,separators=(',',':')))<=limit:
+                          out=candidate
+                  return out
+              if isinstance(value,list):
+                  out=[]
+                  for item in value:
+                      candidate=out+[item]
+                      if len(json.dumps(candidate,ensure_ascii=False,separators=(',',':'))) > limit:
+                          break
+                      out=candidate
+                  return out
+              return str(value)[:max(0,limit-64)]
+          payload={k:bounded(v) for k,v in payload.items()}
+          Path('/tmp/anil-guard-ingest.json').write_text(
+              json.dumps(payload,ensure_ascii=False,separators=(',',':')),
+              encoding='utf-8'
+          )
           PY
           OIDC_TOKEN="$(curl -sSf -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x" | python -c "import sys,json; print(json.load(sys.stdin)['value'])")"
           curl -sSf -X POST "$ANIL_X_RENDER_URL/api/guard/ingest" \
