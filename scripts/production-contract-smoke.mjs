@@ -23,12 +23,17 @@ for (const path of paths) {
   const type = res.headers.get("content-type") || "";
   const row = { path, status: res.status, type, bytes: text.length, finalUrl: res.url };
   results.push(row);
-  assert.ok(res.ok, `${path} returned HTTP ${res.status}`);
+  const ownerPrivate = path === "/api/revenue/fleet";
+  if (ownerPrivate) {
+    assert.equal(res.status, 401, `${path} must remain owner-gated`);
+  } else {
+    assert.ok(res.ok, `${path} returned HTTP ${res.status}`);
+  }
   assert.ok(text.length > 0, `${path} returned an empty body`);
   if (path.startsWith("/api/")) {
     assert.match(type, /json/i, `${path} is not JSON`);
     const data = JSON.parse(text);
-    assert.equal(data.ok, true, `${path} did not report ok=true`);
+    if (!ownerPrivate) assert.equal(data.ok, true, `${path} did not report ok=true`);
   } else {
     assert.match(type, /html/i, `${path} is not HTML`);
   }
