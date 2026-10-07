@@ -28,7 +28,44 @@ async function health(){try{const h=await api('/api/health');const ai=!!(h.confi
 function businessRows(b){const el=$('#businessConfig');if(!el)return;const r=[['FIX',b?.pricesUsd?.FIX],['START',b?.pricesUsd?.START],['BUILD',b?.pricesUsd?.BUILD],['GROW',b?.pricesUsd?.GROW],['Auto reports',b?.permissions?.autoReports],['Auto messaging',b?.permissions?.autoMessaging],['Auto SEO',b?.permissions?.autoSeo]];el.innerHTML=r.map(x=>'<div class="row"><b>'+esc(x[0])+'</b><span class="tag '+(typeof x[1]==='boolean'?(x[1]?'ok':'red'):'gold')+'">'+esc(typeof x[1]==='boolean'?(x[1]?'ON':'OFF'):(x[1]??'—'))+(typeof x[1]==='number'?' USD':'')+'</span></div>').join('')}
 function approvals(rows){const a=rows||[];const html=a.length?a.map(x=>'<div class="row"><div><b>'+esc(x.name||'Approval')+'</b><small>'+esc(x.reason||x.category||'Owner approval required')+'</small></div><span class="tag gold">PENDING</span></div>').join(''):'<div class="empty">No pending approvals.</div>';if($('#securityApprovals'))$('#securityApprovals').innerHTML=html;if($('#approvalList'))$('#approvalList').innerHTML=html}
 async function overview(){const d=await api('/api/admin/overview',{method:'POST'});const c=d.counts||{},v=d.revenue||{};[['cLeads',c.leads],['cOrders',c.orders],['cPaid',c.paidOrders],['cPending',c.pendingOrders],['rLeads',c.leads],['rOrders',c.orders],['rPaid',c.paidOrders]].forEach(x=>{if($('#'+x[0]))$('#'+x[0]).textContent=Number(x[1]||0).toLocaleString()});$('#rRevenue').textContent='$'+Number(v.sourceUsd||0).toLocaleString();businessRows(d.business||{});approvals(d.approvals||[]);return d}
-async function guard(){try{const [d,state]=await Promise.all([api('/api/guard/live'),api('/api/guard/state')]),g=d.guard||{},f=d.freshness||{},raw=state.official?.items||state.highValue?.items||[],items=Array.isArray(raw)?raw:[];$('#gDiscoveries').textContent=Number(g.discoveryCount||state.official?.count||0);$('#gSources').textContent=Number(g.sourcesScanned||0);$('#gOwner').textContent=Number(g.waitingOwner||state.approvals?.length||0);$('#gFresh').textContent=f.stale?'STALE':'FRESH';$('#guardOpps').innerHTML=items.length?items.slice(0,20).map(x=>'<div class="row"><div><b>'+esc(x.title||x.name||'Opportunity')+'</b><small>'+esc(x.source||x.domain||'—')+' · '+esc(x.status||x.action||'discovered')+'</small></div><span class="tag '+(String(x.status||x.action||'').includes('OWNER')?'gold':'ok')+'">'+esc(x.value||x.score||'—')+'</span></div>').join(''):'<div class="empty">No verified opportunity is currently in the live queue.</div>';const c=await api('/api/guard/catches');const ci=c.items||[];$('#catchQueue').innerHTML=ci.length?ci.slice(0,30).map(x=>'<div class="row"><div><b>'+esc(x.title||'Guard catch')+'</b><small>'+esc(x.source||'—')+' · '+esc(x.currency||'')+' '+esc(x.verifiedValue||x.estimatedValue||'—')+'</small></div><span class="tag gold">'+esc(x.status||'—')+'</span></div>').join(''):'<div class="empty">No catches waiting.</div>';const a=await api('/api/guard/state');approvals((a.approvals||[]).filter(x=>x.status==='OWNER_APPROVAL'||x.requiresOwnerApproval));return d}catch(e){$('#guardOpps').innerHTML='<div class="empty">Guard unavailable: '+esc(e.message)+'</div>'}}
+let tonUI=null,tonWallet=null,tonWalletInitializing=false;
+async function initOwnerTonWallet(){
+ if(tonUI||tonWalletInitializing)return tonUI;
+ tonWalletInitializing=true;
+ try{
+  if(!window.TON_CONNECT_UI)throw new Error('TON Connect UI unavailable');
+  tonUI=new window.TON_CONNECT_UI.TonConnectUI({manifestUrl:location.origin+'/render-tonconnect-manifest.json',buttonRootId:'ton-connect',analytics:{mode:'off'}});
+  tonUI.setConnectionNetwork?.('-239');
+  tonUI.onStatusChange(w=>{
+   tonWallet=w||null;
+   const el=$('#walletState');
+   if(el)el.textContent=w?'TON connected · '+String(w.account?.address||'').slice(0,12)+'…':'Wallet not connected';
+  });
+  if(tonUI.wallet)tonWallet=tonUI.wallet;
+  return tonUI;
+ }catch(e){
+  tonUI=null;tonWallet=null;
+  const el=$('#walletState');if(el)el.textContent='TON wallet unavailable';
+  return null;
+ }finally{tonWalletInitializing=false}
+}
+async function decideGuardCatch(id,decision,btn){
+ if(!id)return;
+ btn.disabled=true;
+ try{
+  const d=await api('/api/guard/catches/decision',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({id,decision})});
+  if(!d.ok)throw new Error(d.error||'decision_failed');
+  await guard();
+ }catch(e){btn.disabled=false;btn.textContent=S.lang==='fa'?'خطا؛ دوباره':'Retry';}
+}
+async function guard(){try{const [d,state]=await Promise.all([api('/api/guard/live'),api('/api/guard/state')]),g=d.guard||{},f=d.freshness||{},raw=state.official?.items||state.highValue?.items||[],items=Array.isArray(raw)?raw:[];$('#gDiscoveries').textContent=Number(g.discoveryCount||state.official?.count||0);$('#gSources').textContent=Number(g.sourcesScanned||0);$('#gOwner').textContent=Number(g.waitingOwner||state.approvals?.length||0);$('#gFresh').textContent=f.stale?'STALE':'FRESH';$('#guardOpps').innerHTML=items.length?items.slice(0,20).map(x=>'<div class="row"><div><b>'+esc(x.title||x.name||'Opportunity')+'</b><small>'+esc(x.source||x.domain||'—')+' · '+esc(x.status||x.action||'discovered')+'</small></div><span class="tag '+(String(x.status||x.action||'').includes('OWNER')?'gold':'ok')+'">'+esc(x.value||x.score||'—')+'</span></div>').join(''):'<div class="empty">No verified opportunity is currently in the live queue.</div>';const c=await api('/api/guard/catches');const ci=c.items||[];$('#catchQueue').innerHTML=ci.length?ci.slice(0,30).map(x=>{
+ const pending=String(x.status||'')==='PENDING_OWNER';
+ return '<div class="row"><div><b>'+esc(x.title||'Guard catch')+'</b><small>'+esc(x.source||'—')+' · '+esc(x.currency||'')+' '+esc(x.verifiedValue||x.estimatedValue||'—')+'</small></div><span class="tag gold">'+esc(x.status||'—')+'</span>'+(pending?'<div class="row-actions"><button type="button" data-catch-approve="'+esc(x.id)+'">Approve</button><button type="button" data-catch-reject="'+esc(x.id)+'">Reject</button></div>':'')+'</div>';
+ }).join(''):'<div class="empty">No catches waiting.</div>';
+ $('#catchQueue').querySelectorAll('[data-catch-approve]').forEach(b=>b.onclick=()=>decideGuardCatch(b.dataset.catchApprove,'approved',b));
+ $('#catchQueue').querySelectorAll('[data-catch-reject]').forEach(b=>b.onclick=()=>decideGuardCatch(b.dataset.catchReject,'rejected',b));
+ await initOwnerTonWallet();
+const a=await api('/api/guard/state');approvals((a.approvals||[]).filter(x=>x.status==='OWNER_APPROVAL'||x.requiresOwnerApproval));return d}catch(e){$('#guardOpps').innerHTML='<div class="empty">Guard unavailable: '+esc(e.message)+'</div>'}}
 async function revenue(){try{const [f,p,e,a,o]=await Promise.all([api('/api/revenue/fleet'),api('/api/revenue/programs'),api('/api/revenue/engines'),api('/api/analytics'),api('/api/revenue/opportunities')]);const m=a.metrics||{};$('#rLeads').textContent=Number(m.leads||0).toLocaleString();$('#rOrders').textContent=Number(m.orders||0).toLocaleString();$('#rPaid').textContent=Number(m.paid||0).toLocaleString();$('#rRevenue').textContent='$'+Number(m.revenueUsd||0).toLocaleString();$('#revenueNotice').textContent='Variza: '+(f.truth?.paymentReady?'READY':'CHECK')+' · accounting: '+(f.truth?.persistentAccounting?'DURABLE':'CHECK')+' · TON: '+(f.truth?.tonReady?'READY':'CHECK');$('#revenueEngines').innerHTML=(e.engines||[]).map(x=>'<div class="row"><div><b>'+esc(x.name)+'</b><small>'+esc(x.monetization||x.mode||'engine')+'</small></div><span class="tag '+(x.status==='ACTIVE'?'ok':'gold')+'">'+esc(x.status||x.mode||'—')+'</span></div>').join('');$('#revenuePrograms').innerHTML=(p.programs||[]).slice(0,40).map(x=>'<div class="row"><div><b>'+esc(x.name||x.id)+'</b><small>'+esc(x.status||'—')+' · '+esc(x.prereq||'')+'</small></div><span class="tag '+(x.operational?'ok':'gold')+'">'+(x.operational?'LIVE':'CHECK')+'</span></div>').join('')}catch(e){$('#revenueNotice').textContent='Revenue unavailable: '+e.message}}
 async function finance(){try{const d=await api('/api/revenue/settlement');$('#fVariza').textContent=d.providers?.variza?'READY':'OFF';$('#fTon').textContent=d.providers?.ton?'READY':'OFF';$('#fAccounting').textContent=d.providers?.accounting?'DURABLE':'CHECK';$('#fSettlement').textContent=d.policy?.paidOnly?'PAID ONLY':'CHECK'}catch(e){}}
 async function qa(){try{const [h,k,e]=await Promise.all([api('/api/health'),api('/api/anil/capability-kernel'),api('/api/execution-readiness')]);$('#qHealth').textContent=h.ok?'OK':'FAIL';$('#qCap').textContent=(k.capabilityLevel?.configured??'—')+'%';$('#qTarget').textContent=(k.capabilityLevel?.target??100)+'%';$('#qaDetails').textContent='Configured capability: '+(k.capabilityLevel?.configured??'—')+'%. Runtime verification is reported separately; configuration is not proof of live provider access. Execution readiness: '+JSON.stringify(e)}catch(e){$('#qaDetails').textContent='QA error: '+e.message}}
