@@ -143,6 +143,17 @@ jobs:
             "targetGapUsd":0
           },ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
           PY
+      - name: Materialize Guard future-signals state
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          Path("guard-future-signals.json").write_text(json.dumps({
+            "items":[],
+            "action":"never-auto-claim",
+            "executionGate":"OWNER_APPROVAL_REQUIRED"
+          },ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          PY
       - name: Final fail-closed preflight
         run: python scripts/guard_final_preflight.py
 
