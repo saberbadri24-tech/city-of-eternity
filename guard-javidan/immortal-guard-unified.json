@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 1,
+  "name": "Immortal Guard Unified / Super Airdrop",
+  "purpose": "Canonical registry joining every Guard radar, evidence, intelligence, safety, learning, revenue and monitoring engine created across the project.",
+  "pipeline": [
+    "heartbeat",
+    "global_discovery",
+    "official_discovery",
+    "discovery_verification",
+    "strict_free_real_token_hunter",
+    "airdrop_plus_ai_consensus",
+    "source_health",
+    "opportunity_intelligence",
+    "high_value_opportunity",
+    "ton_receipts",
+    "threat",
+    "evidence_ledger",
+    "anomaly",
+    "replay",
+    "workflow_security",
+    "agent_contract",
+    "evolution",
+    "horizon",
+    "modular_core",
+    "leverage_engines",
+    "super_radar_fusion",
+    "final_preflight",
+    "private_owner_ingest"
+  ],
+  "intelligence": {
+    "owner": "ANIL",
+    "strategist": "Astra / OpenAI",
+    "adversarial_reviewer": "Claude / Anthropic",
+    "verifier": "Gemini / Google",
+    "deterministic_core": "Guard local engines",
+    "coordination": "ANIL -> Guard -> evidence -> ranked opportunity -> owner queue -> approval boundary"
+  },
+  "engines": [
+    [
+      "global_opportunity_discovery.py",
+      "global discovery"
+    ],
+    [
+      "official_discovery.py",
+      "official-source discovery"
+    ],
+    [
+      "verify_global_discovery.py",
+      "discovery verification"
+    ],
+    [
+      "free_real_token_engine.py",
+      "strict free-real-token lane"
+    ],
+    [
+      "airdrop_guard.py",
+      "Airdrop+ multi-model review"
+    ],
+    [
+      "guard_source_health.py",
+      "source health and coverage"
+    ],
+    [
+      "opportunity_intelligence.py",
+      "opportunity intelligence"
+    ],
+    [
+      "high_value_opportunity_engine.py",
+      "high-value ranking"
+    ],
+    [
+      "guard_ton_receipts.py",
+      "read-only TON receipt monitor"
+    ],
+    [
+      "guard_threat_engine.py",
+      "adversarial threat gate"
+    ],
+    [
+      "guard_evidence_ledger.py",
+      "claim/evidence provenance"
+    ],
+    [
+      "guard_anomaly_engine.py",
+      "anomaly detection"
+    ],
+    [
+      "guard_replay_engine.py",
+      "replay/idempotency checks"
+    ],
+    [
+      "guard_workflow_security.py",
+      "workflow supply-chain security"
+    ],
+    [
+      "guard_agent_contract.py",
+      "agent policy contract"
+    ],
+    [
+      "guard_evolution_engine.py",
+      "bounded evolution"
+    ],
+    [
+      "guard_horizon_engine.py",
+      "long-horizon design"
+    ],
+    [
+      "guard_modular_core.py",
+      "canonical modular orchestration"
+    ],
+    [
+      "guard_opportunity_graph.py",
+      "information-leverage graph"
+    ],
+    [
+      "guard_novelty_engine.py",
+      "novel opportunity intelligence"
+    ],
+    [
+      "guard_action_planner.py",
+      "next-action planning"
+    ],
+    [
+      "guard_unlock_value_engine.py",
+      "verification leverage ranking"
+    ],
+    [
+      "guard_super_radar.py",
+      "Super Airdrop fusion radar"
+    ],
+    [
+      "guard_final_preflight.py",
+      "fail-closed release gate"
+    ]
+  ],
+  "monitors": [
+    [
+      "immortal-guard.yml",
+      "5-minute continuous radar"
+    ],
+    [
+      "immortal-guard-watchdog.yml",
+      "independent 5-minute freshness watchdog/recovery"
+    ],
+    [
+      "functions/api/guard-live.mjs",
+      "live Guard owner/public summary adapter"
+    ]
+  ],
+  "safety": {
+    "privateKeys": false,
+    "seedPhrases": false,
+    "kycBypass": false,
+    "captchaBypass": false,
+    "automaticSigning": false,
+    "automaticTransfer": false,
+    "mainWalletFinalBoundary": true,
+    "revenueTruth": "only settled/paid evidence is confirmed revenue"
+  },
+  "historicalRoots": {
+    "firstRadar": "157be78ec9",
+    "officialDiscovery": "1acc7b4b5d",
+    "superAirdropFusion": "90a6c3ef4c",
+    "superRadarEvidence": "9ce12e62a",
+    "watchdog": "111e3fa9f5",
+    "privateRuntimeState": "55190840ed",
+    "latestGuardSecurity": "0c1e47b37b"
+  }
+}
