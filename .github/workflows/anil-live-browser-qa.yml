@@ -98,11 +98,11 @@ jobs:
             await page.waitForTimeout(900);
             check(await page.locator('#chat .msg').count()>=3,'main chat sends and renders a response');
             check(await page.locator('#voiceBtn').isVisible(),'voice control visible');
-            check(await page.locator('#imageInput').isVisible(),'image input visible');
+            check(await page.locator('label[for="imageInput"]').isVisible(),'file/image control visible');
             check(errors.length===0,'no browser page errors during public smoke');
             await page.goto(base+'/admin.html',{waitUntil:'domcontentloaded'});
             await page.waitForTimeout(600);
-            check(await page.locator('#p1').count()===1,'admin password field exists');
+            check(await page.locator('#password').count()===1,'admin password field exists');
             check(await page.locator('#loginBtn').count()===1,'admin login button exists');
           }finally{
             await browser.close();
