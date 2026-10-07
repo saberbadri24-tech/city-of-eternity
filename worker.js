@@ -691,6 +691,10 @@ if(p==='/api/payment-config'){
     await kvPut(env,'guard/catch/'+cid,item);
     return rjson({ok:true,item});
   }
+  if(p==='/api/guard/watchdog'&&req.method==='GET'){
+    if(!(await githubActionsAuth(req,env)))return rjson({ok:false,error:'github_actions_auth_required'},401);
+    return handleGuardLive(req,env);
+  }
   if(p==='/api/guard/report'){
     if(!(await adminAuth(req,env)))return rjson({ok:false,error:'owner_auth_required'},401);
     const approvals=[...state.queue.values()].filter(x=>x.type==='guard_approval');
