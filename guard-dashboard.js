@@ -30,7 +30,14 @@ async function loadJson(path){
  return r.json();
 }
 async function loadGuardWalletConfig(){
- try{const d=await loadJson('guard-wallet.json');temporaryWalletAddress=String(d.temporaryWalletAddress||'');renderWallet();updateTransferState()}catch(_){}
+ try{
+  const d=await fetch(API_BASE+'/api/payment-config',{cache:'no-store'}).then(r=>r.json());
+  temporaryWalletAddress='';
+  const configured=Boolean(d?.guard?.catchQueueConfigured);
+  const note=configured?'صف شکار خصوصی روی Runtime فعال است؛ آدرس کیف موقت فقط در مسیر مالک نگهداری می‌شود.':'صف خصوصی Guard هنوز روی Runtime پیکربندی نشده است.';
+  if($('#tempAddress'))$('#tempAddress').textContent=note;
+  renderWallet();updateTransferState();
+ }catch(_){}
 }
 async function api(kind,address){
  const r=await fetch(API_BASE+'/api/ton/'+kind+'?address='+encodeURIComponent(address),{cache:'no-store'});
@@ -86,17 +93,28 @@ function renderMetrics(){
  if($('#gSecurity'))$('#gSecurity').textContent=(a.automaticSigning||a.automaticTransfer||a.privateKeyStorage)?'هشدار امنیتی':'مرز مالک فعال · بدون امضای خودکار';
 }
 async function loadStatus(){
- try{guardStatus=await loadJson('guard-status.json');renderMetrics()}catch(e){if($('#gBlockers'))$('#gBlockers').textContent='وضعیت Guard در دسترس نیست.'}
+ try{
+  const d=await fetch(API_BASE+'/api/guard/live',{cache:'no-store'}).then(r=>r.json());
+  guardStatus=d?.guard?{...d.guard,automation:d.ai,counts:{opportunities:d.guard.discoveryCount,verificationChecked:d.radar?.candidates||0,verificationReachableAligned:d.radar?.actionableOfficial||0}}:d;
+  guardStatus.updatedAt=d?.updatedAt||null;
+  guardStatus.freshness=d?.freshness||{};
+  guardStatus.revenue=d?.revenue||{};
+  renderMetrics();
+  if($('#gBlockers'))$('#gBlockers').textContent=guardStatus.freshness?.stale?'داده Guard قدیمی است؛ چرخه بعدی باید تازه‌سازی شود.':'بدون blocker ثبت‌شده';
+ }catch(e){if($('#gBlockers'))$('#gBlockers').textContent='وضعیت زنده Guard در دسترس نیست.'}
 }
 async function loadOpp(){
  try{
-  const sources=['guard-opportunities.json','guard-high-value.json','guard-discovery.json'];
-  let best=null;
-  for(const p of sources){try{const d=await loadJson(p);if(Array.isArray(d.items)&&d.items.length){best=d;break}if(Array.isArray(d.ranked)&&d.ranked.length){best=d;break}}catch(_){}}
-  const rows=Array.isArray(best?.items)?best.items:Array.isArray(best?.ranked)?best.ranked:[];
-  opportunities=rows.slice().sort((a,b)=>Number(b.score||0)-Number(a.score||0));
+  const d=await fetch(API_BASE+'/api/guard/live',{cache:'no-store'}).then(r=>r.json());
+  opportunities=Array.isArray(d?.opportunities?.items)?d.opportunities.items:[];
+  const high=Array.isArray(d?.valueHunter?.items)?d.valueHunter.items:[];
+  opportunities=[...opportunities,...high].reduce((a,x)=>{
+   const k=String(x.id||x.opportunityId||x.url||x.title||'');
+   if(!a.some(y=>String(y.id||y.opportunityId||y.url||y.title||'')===k))a.push(x);
+   return a;
+  },[]).sort((a,b)=>Number(b.score||0)-Number(a.score||0));
   renderOpp();renderMetrics();
- }catch(e){if($('#opportunityRows'))$('#opportunityRows').innerHTML='<div class="err">داده Guard خوانده نشد: '+esc(e.message)+'</div>'}
+ }catch(e){if($('#opportunityRows'))$('#opportunityRows').innerHTML='<div class="err">داده زنده Guard خوانده نشد: '+esc(e.message)+'</div>'}
 }
 function oppCard(x,i){
  const link=x.resolvedUrl||x.officialUrl||x.url||x.sourceUrl||'';
