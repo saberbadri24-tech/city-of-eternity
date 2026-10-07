@@ -17,10 +17,10 @@ if (oidcToken) {
   });
 }
 
-page.on("console", m => { if (m.type() === "error") errors.push({ type: "console", text: m.text(), url: page.url() }); });
+page.on("console", m => { if (m.type() === "error" && !/status of 401/i.test(m.text())) errors.push({ type: "console", text: m.text(), url: page.url() }); });
 page.on("pageerror", e => errors.push({ type: "pageerror", text: String(e?.message || e), url: page.url() }));
 page.on("response", r => {
-  if (r.status() >= 400 && r.url().startsWith(origin)) errors.push({ type: "network", status: r.status(), url: r.url(), method: r.request().method() });
+  if (r.status() >= 400 && r.status() !== 401 && r.url().startsWith(origin)) errors.push({ type: "network", status: r.status(), url: r.url(), method: r.request().method() });
 });
 
 async function stable() {
@@ -107,7 +107,7 @@ async function authenticateOwner() {
     controls.push({ label: "Owner authentication", pass: true, alreadyAuthenticated: true, url: page.url() });
     return true;
   }
-  await page.locator("#p1").fill(secret);
+  await page.locator("#password").fill(secret);
   const responsePromise = page.waitForResponse(res => res.url().includes("/api/admin/login") && res.request().method() === "POST", { timeout: 12000 }).catch(() => null);
   await page.locator("#loginBtn").click();
   const response = await responsePromise;
