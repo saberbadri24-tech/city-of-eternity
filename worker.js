@@ -723,26 +723,14 @@ async function githubActionsAuth(req,env){
       jwk=jwks?.keys?.find(k=>k.kid===header.kid);
     }
     if(!jwk)return false;
-    const verifyJwk={...jwk,alg:'RS256',use:'sig',key_ops:['verify'],ext:true};
-    // Render production runs on Node; use its native RSA verifier first, then
-    // retain WebCrypto as a portable fallback for Worker-compatible runtimes.
-    try{
-      const {createPublicKey,createVerify}=await import('node:crypto');
-      const key=createPublicKey({key:verifyJwk,format:'jwk'});
-      const verifier=createVerify('RSA-SHA256');
-      verifier.update(parts[0]+'.'+parts[1]);
-      verifier.end();
-      const verified=verifier.verify(key,Buffer.from(parts[2],'base64url'));
-      console.log('[ANIL-OIDC] native',JSON.stringify({kid:header.kid,verified}));
-      return verified;
-    }catch(error){
-      console.log('[ANIL-OIDC] native-error',JSON.stringify({kid:header.kid,message:String(error?.message||error)}));
-      const key=await crypto.subtle.importKey('jwk',verifyJwk,{name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'},false,['verify']);
-      const data=new TextEncoder().encode(parts[0]+'.'+parts[1]);
-      const sig=Uint8Array.from(atob(b64u(parts[2])),ch=>ch.charCodeAt(0));
-      return await crypto.subtle.verify('RSASSA-PKCS1-v1_5',key,sig,data);
-    }
-  }catch{return false}
+    const key=await crypto.subtle.importKey('jwk',{
+      kty:jwk.kty,n:jwk.n,e:jwk.e,alg:'RS256',use:'sig',key_ops:['verify'],ext:true
+    },{name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'},false,['verify']);
+    const data=new TextEncoder().encode(parts[0]+'.'+parts[1]);
+    const sig=Uint8Array.from(atob(b64u(parts[2])),ch=>ch.charCodeAt(0));
+    const verified=await crypto.subtle.verify('RSASSA-PKCS1-v1_5',key,sig,data);
+    console.log('[ANIL-OIDC] webcrypto',JSON.stringify({kid:header.kid,verified}));
+    return verified;  }catch{return false}
 }
 async function anilOperatorChange(req,env,command){
   const rawBase='https://raw.githubusercontent.com/saberbadri24-tech/city-of-eternity/main/';
