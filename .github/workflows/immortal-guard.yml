@@ -248,7 +248,7 @@ jobs:
           print('GitHub OIDC RSA signature PASS')
           PY
           HTTP_CODE="$(curl -sS -o /tmp/anil-guard-ingest-response.json -w "%{http_code}" -X POST "$ANIL_X_RENDER_URL/api/guard/ingest" \
-            -H "Authorization: Bearer $OIDC_TOKEN" \
+            -H "X-ANIL-OIDC-Token: $OIDC_TOKEN" \
             -H "X-ANIL-OIDC-Audience: anil-x" \
             -H "Content-Type: application/json" \
             --data-binary @/tmp/anil-guard-ingest.json)"
