@@ -7,6 +7,9 @@ const json = (data, status = 200) => new Response(JSON.stringify(data), {
 const id = () => crypto.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
 export async function onRequestPost({ request, env }) {
+  const durableAccounting = !!env.PAYMENTS && String(env.PAYMENTS_DURABLE || "false").toLowerCase() === "true";
+  if (!durableAccounting) return json({ ok: false, error: "durable_payment_storage_required" }, 503);
+
   const apiKey = env.VARIZA_API_KEY || env.VARIA_API_KEY || env.VARIZA_TOKEN || env.VARIZA_KEY || env.VARIZA_API_TOKEN || env.VARIZA_SECRET;
   if (!apiKey) return json({ ok: false, error: "payment_not_configured" }, 503);
 
