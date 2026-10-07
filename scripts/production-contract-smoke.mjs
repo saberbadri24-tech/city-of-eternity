@@ -13,10 +13,10 @@ const paths = [
   "/api/revenue/customer-ready",
 ];
 
-const results = [];
+const oidc = process.env.ANIL_OIDC_TOKEN || "";\nconst headers = oidc ? { authorization: `Bearer ${oidc}` } : {};\nconst results = [];
 for (const path of paths) {
   const url = new URL(path, base);
-  const res = await fetch(url, { redirect: "follow" });
+  const res = await fetch(url, { redirect: "follow", headers });
   const text = await res.text();
   const type = res.headers.get("content-type") || "";
   const row = { path, status: res.status, type, bytes: text.length, finalUrl: res.url };
