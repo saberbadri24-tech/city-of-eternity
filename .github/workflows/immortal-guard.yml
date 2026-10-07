@@ -90,6 +90,8 @@ jobs:
         run: python scripts/guard_modular_core.py
       - name: Action planner
         run: python scripts/guard_action_planner.py
+      - name: Unified Immortal Guard orchestration
+        run: python scripts/guard_unified_orchestrator.py
       - name: Super Radar regression
         run: |
           python -m py_compile scripts/guard_super_radar.py scripts/test_guard_super_radar.py
