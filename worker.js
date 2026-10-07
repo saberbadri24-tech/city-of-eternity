@@ -757,8 +757,10 @@ async function runOwnerAgent(req,env,command,history){
     {type:'function',name:'calculate',description:'Calculate a numeric expression.',parameters:{type:'object',properties:{expression:{type:'string'}},required:['expression']}},
     {type:'function',name:'github',description:'Read-only GitHub inspection.',parameters:{type:'object',properties:{path:{type:'string'}},required:['path']}},
     {type:'function',name:'capabilities',description:'Read current ANIL capabilities.',parameters:{type:'object',properties:{},required:[]}},
+    {type:'function',name:'guard_live',description:'Read the current Immortal Guard private/live opportunity radar state. Use this for Guard freshness, candidates, approvals and evidence status.',parameters:{type:'object',properties:{},required:[]}},
+    {type:'function',name:'revenue_fleet',description:'Read the current Revenue Fleet state and verified paid-order accounting.',parameters:{type:'object',properties:{},required:[]}},
     {type:'function',name:'control_plane',description:'Inspect/plan ANIL operations. Sensitive mutations remain owner-gated.',parameters:{type:'object',properties:{operation:{type:'string'},body:{type:'object'}},required:['operation']}}];
-  const instructions=`You are Badrkhan, the live owner operating agent inside ANIL X. Reason, research, inspect, calculate and use tools as needed. Continue multi-step work until the task is answered or a real boundary blocks it. Never claim execution without evidence. Code changes must use the existing controlled-change queue and QA gates. Money, crypto, wallet signing/transfers, withdrawals, settlement, private keys, seed phrases, KYC and irreversible security actions are never executed autonomously: prepare/verify them and leave them at the owner-approval boundary. The main wallet is the final treasury boundary. Never request or expose its private key/seed. Return verified facts and next action.`;
+  const instructions=`You are ANIL, the internal owner assistant and operational commander inside ANIL X. Badrkhan is the separate public visitor/customer assistant. Never expose owner tools, private admin context, Guard controls, deployment controls, or owner data to Badrkhan. Reason, research, inspect, calculate and use tools as needed. Continue multi-step work until the task is answered or a real boundary blocks it. Never claim execution without evidence. Code changes must use the existing controlled-change queue and QA gates. Money, crypto, wallet signing/transfers, withdrawals, settlement, private keys, seed phrases, KYC and irreversible security actions are never executed autonomously: prepare/verify them and leave them at the owner-approval boundary. The main wallet is the final treasury boundary. Never request or expose its private key/seed. Return verified facts and next action.`;
   let input=[...history,{role:'user',content:command}];
   for(let round=0;round<8;round++){
     const r=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+key},body:JSON.stringify({model,input,instructions,tools,tool_choice:'auto',parallel_tool_calls:true,max_output_tokens:1800})});
@@ -770,7 +772,11 @@ async function runOwnerAgent(req,env,command,history){
       let args={};try{args=JSON.parse(call.arguments||'{}')}catch{}
       let result;
       try{
-        if(call.name==='control_plane'){
+        if(call.name==='guard_live'){
+          const rr=await handleGuardLive(req,env); result=await rr.json();
+        }else if(call.name==='revenue_fleet'){
+          const u=new URL('/api/revenue/fleet',req.url); const rr=await runtimeRoutes(new Request(u,{method:'GET',headers:{cookie:req.headers.get('cookie')||''}}),env,u); result=rr?await rr.json():{ok:false,error:'revenue_route_unavailable'};
+        }else if(call.name==='control_plane'){
           const u=new URL('/api/anil/control-plane',req.url);
           const rr=await handleControlPlane(new Request(u,{method:'POST',headers:{cookie:req.headers.get('cookie')||'','content-type':'application/json'},body:JSON.stringify({operation:String(args.operation||'read_live_state'),...(args.body||{})})}),env);
           result=await rr.json();
@@ -840,7 +846,7 @@ async function secretary(req,env){
     const openAiModel=env.ASTRA_MODEL||env.ANIL_OPENAI_MODEL;
     if(ai&&openAiModel){
       const input=[...history,{role:'user',content:command}];
-      const r=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+ai},body:JSON.stringify({model:openAiModel,instructions:'You are Badrkhan, the live private executive assistant inside ANIL X. Answer the owner directly. Use only evidence supplied by runtime tools. Never claim execution without evidence. Never ask for seed phrases or private keys. Sensitive money/security actions remain owner-gated.',input})});
+      const r=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+ai},body:JSON.stringify({model:openAiModel,instructions:'You are ANIL, the live private manager assistant inside ANIL X. Badrkhan is the separate public customer assistant. Answer the owner directly and coordinate Guard, specialist agents, QA, revenue and controlled site operations. Use only evidence supplied by runtime tools. Never claim execution without evidence. Never ask for seed phrases or private keys. Sensitive money/security actions remain owner-gated.',input})});
       if(r.ok){const d=await r.json();return json({ok:true,text:d?.output_text||'—',action:'live_ai',provider:'openai',live:true});}
     }
     const k=await handleCapabilityKernel(new Request(new URL('/api/anil/capability-kernel',req.url),{method:'GET'}),env).then(x=>x.json());
