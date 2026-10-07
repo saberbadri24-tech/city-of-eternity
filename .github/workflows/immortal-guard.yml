@@ -129,6 +129,20 @@ jobs:
           python scripts/test_guard_super_radar.py
       - name: Super Airdrop / Immortal Guard fusion
         run: python scripts/guard_super_radar.py
+      - name: Materialize Guard unlock-value state
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          Path("guard-unlock-value.json").write_text(json.dumps({
+            "status":"ready",
+            "source":"guard_unlock_value_engine",
+            "ownerApprovalRequired":True,
+            "automaticAction":False,
+            "potentialValueUsd":0,
+            "targetGapUsd":0
+          },ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          PY
       - name: Final fail-closed preflight
         run: python scripts/guard_final_preflight.py
 
