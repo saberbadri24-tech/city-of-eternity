@@ -751,7 +751,8 @@ async function anilOperatorChange(req,env,command){
 async function runOwnerAgent(req,env,command,history){
   const key=getAiConfig(env).openai;if(!key)return null;
   const model=env.ASTRA_MODEL||env.ANIL_OPENAI_MODEL||'gpt-6-astra';
-  const tools=[{type:'function',name:'fetch_url',description:'Fetch public evidence.',parameters:{type:'object',properties:{url:{type:'string'}},required:['url']}},
+  const tools=[{type:'web_search'},
+    {type:'function',name:'fetch_url',description:'Fetch public evidence.',parameters:{type:'object',properties:{url:{type:'string'}},required:['url']}},
     {type:'function',name:'web_search',description:'Search the public web.',parameters:{type:'object',properties:{query:{type:'string'}},required:['query']}},
     {type:'function',name:'calculate',description:'Calculate a numeric expression.',parameters:{type:'object',properties:{expression:{type:'string'}},required:['expression']}},
     {type:'function',name:'github',description:'Read-only GitHub inspection.',parameters:{type:'object',properties:{path:{type:'string'}},required:['path']}},
