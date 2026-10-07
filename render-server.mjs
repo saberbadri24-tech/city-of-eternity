@@ -82,7 +82,9 @@ const createSupabasePaymentsStore=()=>{
     }
   };
 };
-const getPaymentsStore=()=>paymentsStorePromise||(paymentsStorePromise=createSupabasePaymentsStore()||(process.env.REDIS_URL?import('./functions/api/render-payments-store.mjs').then(m=>m.createPaymentsStore(process.env.REDIS_URL)):Promise.resolve(null)));
+const getPaymentsStore=()=>paymentsStorePromise||(paymentsStorePromise=(process.env.REDIS_URL
+  ? import('./functions/api/render-payments-store.mjs').then(m=>m.createPaymentsStore(process.env.REDIS_URL))
+  : createSupabasePaymentsStore()));
 const env={...process.env,ASSETS:{fetch:assetsFetch},PAYMENTS:null};
 const server=http.createServer(async(req,res)=>{
   try{
