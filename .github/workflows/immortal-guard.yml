@@ -70,6 +70,8 @@ jobs:
         run: python scripts/high_value_opportunity_engine.py
       - name: TON receipt monitor
         run: python scripts/guard_ton_receipts.py
+      - name: Materialize Guard wallet policy state
+        run: python scripts/guard_wallet_runtime.py
       - name: Threat engine
         run: python scripts/guard_threat_engine.py
       - name: Evidence ledger
