@@ -53,7 +53,33 @@ async function assetsFetch(request){
 
 // Admin authentication is implemented once in functions/api/admin-auth.mjs.
 let paymentsStorePromise=null;
-const getPaymentsStore=()=>paymentsStorePromise||(paymentsStorePromise=process.env.REDIS_URL?import('./functions/api/render-payments-store.mjs').then(m=>m.createPaymentsStore(process.env.REDIS_URL)):Promise.resolve(null));
+const createSupabasePaymentsStore=()=>{
+  const base=String(process.env.ANIL_DURABLE_STORE_URL||'').replace(/\\/$/,'');
+  const token=String(process.env.ANIL_DURABLE_STORE_TOKEN||'');
+  if(!base||!token)return null;
+  const call=async(body)=>{
+    const rr=await fetch(base,{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+token},body:JSON.stringify(body),signal:AbortSignal.timeout(8000)});
+    const d=await rr.json().catch(()=>({}));
+    if(!rr.ok||d?.ok===false)throw new Error(d?.error||'durable_store_error');
+    return d;
+  };
+  return {
+    async get(key,type='text'){
+      const d=await call({op:'get',key});
+      const v=d.value;
+      if(v===null||v===undefined)return null;
+      return type==='json'?(typeof v==='string'?JSON.parse(v):v):String(v);
+    },
+    async put(key,value){
+      return call({op:'put',key,value:typeof value==='string'?(JSON.parse(value)||value):value});
+    },
+    async list({prefix}={}){
+      const d=await call({op:'list',key:'_',prefix:String(prefix||''),limit:500});
+      return {keys:(d.items||[]).map((value,i)=>({name:String(value?.id||value?.key||i),value}))};
+    }
+  };
+};
+const getPaymentsStore=()=>paymentsStorePromise||(paymentsStorePromise=createSupabasePaymentsStore()||(process.env.REDIS_URL?import('./functions/api/render-payments-store.mjs').then(m=>m.createPaymentsStore(process.env.REDIS_URL)):Promise.resolve(null)));
 const env={...process.env,ASSETS:{fetch:assetsFetch},PAYMENTS:null};
 const server=http.createServer(async(req,res)=>{
   try{
@@ -63,7 +89,7 @@ const server=http.createServer(async(req,res)=>{
 
     if((u.pathname==='/healthz'||u.pathname==='/api/health')&&req.method==='GET'){
       return res.end(await (async()=>{const mainTon=process.env.TON_MAIN_WALLET||process.env.TON_MAIN_WALLET_ADDRESS||process.env.TON_PERMANENT_WALLET_ADDRESS;const validTon=typeof mainTon==='string'&&/^(?:EQ|UQ)[A-Za-z0-9_-]{46}$/.test(mainTon);const {adminConfigured}=await import('./functions/api/admin-auth.mjs');
-      const out={ok:true,ready:adminConfigured(env),service:'ANIL X',runtime:'render-static-gateway',configured:{admin:adminConfigured(env),openai:Boolean(process.env.OPENAI_API_KEY),anthropic:Boolean(process.env.ANTHROPIC_API_KEY),gemini:Boolean(process.env.GEMINI_API_KEY),variza:Boolean(process.env.VARIZA_API_KEY||process.env.VARIA_API_KEY||process.env.VARIZA_TOKEN||process.env.VARIZA_KEY||process.env.VARIZA_API||process.env.VARIZA_ACCESS_TOKEN||process.env.VARIZA_BEARER_TOKEN),payments:Boolean(process.env.PAYMENTS||process.env.REDIS_URL),assets:true},revenue:{storageConfigured:Boolean(process.env.REDIS_URL),durableAccounting:String(process.env.PAYMENTS_DURABLE||'false').toLowerCase()==='true',variza:Boolean(process.env.VARIZA_API_KEY||process.env.VARIA_API_KEY||process.env.VARIZA_TOKEN||process.env.VARIZA_KEY),ton:validTon,guardCatchQueue:true,temporaryWalletUsed:false}};res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');return JSON.stringify(out)})());
+      const out={ok:true,ready:adminConfigured(env),service:'ANIL X',runtime:'render-static-gateway',configured:{admin:adminConfigured(env),openai:Boolean(process.env.OPENAI_API_KEY),anthropic:Boolean(process.env.ANTHROPIC_API_KEY),gemini:Boolean(process.env.GEMINI_API_KEY),variza:Boolean(process.env.VARIZA_API_KEY||process.env.VARIA_API_KEY||process.env.VARIZA_TOKEN||process.env.VARIZA_KEY||process.env.VARIZA_API||process.env.VARIZA_ACCESS_TOKEN||process.env.VARIZA_BEARER_TOKEN),payments:Boolean(process.env.ANIL_DURABLE_STORE_URL||process.env.REDIS_URL),assets:true},revenue:{storageConfigured:Boolean(process.env.ANIL_DURABLE_STORE_URL||process.env.REDIS_URL),durableAccounting:String(process.env.PAYMENTS_DURABLE||'false').toLowerCase()==='true',variza:Boolean(process.env.VARIZA_API_KEY||process.env.VARIA_API_KEY||process.env.VARIZA_TOKEN||process.env.VARIZA_KEY),ton:validTon,guardCatchQueue:true,temporaryWalletUsed:false}};res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');return JSON.stringify(out)})());
     }
     if(u.pathname==='/api/guard/live'&&req.method==='GET'){
       const {adminAuth}=await import('./functions/api/admin-auth.mjs');
