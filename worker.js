@@ -703,7 +703,7 @@ if(p==='/api/payment-config'){
   return null;
 }
 async function githubActionsAuth(req,env){
-  const auth=req.headers.get('authorization')||'';
+  const auth=req.headers.get('x-anil-oidc-token')||req.headers.get('authorization')||'';
   if(!auth.startsWith('Bearer '))return false;
   const token=auth.slice(7).trim(),parts=token.split('.');
   if(parts.length!==3)return false;
