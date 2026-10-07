@@ -12,7 +12,7 @@ def main():
     for ref in refs:
         if "@" not in ref or not re.fullmatch(r"[0-9a-f]{40}",ref.split("@",1)[1]):
             violations.append("ACTION_NOT_FULL_SHA:"+ref)
-    if not re.search(r"permissions:\\s*contents:\\s*(read|write)",s): violations.append("MISSING_EXPLICIT_CONTENTS_PERMISSION")
+    if not re.search(r"permissions:\s*contents:\s*(read|write)",s): violations.append("MISSING_EXPLICIT_CONTENTS_PERMISSION")
     if "pull_request_target:" in s: violations.append("FORBIDDEN_PULL_REQUEST_TARGET")
     if re.search(r"(?i)\b(curl|wget)\b[^\n]*\|\s*(sh|bash)",s): violations.append("REMOTE_SCRIPT_PIPE")
     if re.search(r"(?m)^\s*set\s+-x\s*$",s): violations.append("SHELL_TRACE_ENABLED")
