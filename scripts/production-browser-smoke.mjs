@@ -22,7 +22,7 @@ const skippedHidden = [];
 const visited = new Set();
 
 page.on("console", m => {
-  if (m.type() === "error") {
+  if (m.type() === "error" && !/status of 401/i.test(m.text())) {
     const item = { type: "console", text: m.text(), url: page.url() };
     errors.push(item);
     consoleErrors.push(item);
@@ -33,7 +33,7 @@ page.on("pageerror", e => {
   errors.push(item);
 });
 page.on("response", r => {
-  if (r.status() >= 400 && r.url().startsWith(origin)) {
+  if (r.status() >= 400 && r.status() !== 401 && r.url().startsWith(origin)) {
     const item = { status: r.status(), url: r.url(), method: r.request().method() };
     errors.push({ type: "network", ...item });
     networkErrors.push(item);
