@@ -732,8 +732,11 @@ async function githubActionsAuth(req,env){
       const verifier=createVerify('RSA-SHA256');
       verifier.update(parts[0]+'.'+parts[1]);
       verifier.end();
-      return verifier.verify(key,Buffer.from(parts[2],'base64url'));
-    }catch{
+      const verified=verifier.verify(key,Buffer.from(parts[2],'base64url'));
+      console.log('[ANIL-OIDC] native',JSON.stringify({kid:header.kid,verified}));
+      return verified;
+    }catch(error){
+      console.log('[ANIL-OIDC] native-error',JSON.stringify({kid:header.kid,message:String(error?.message||error)}));
       const key=await crypto.subtle.importKey('jwk',verifyJwk,{name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'},false,['verify']);
       const data=new TextEncoder().encode(parts[0]+'.'+parts[1]);
       const sig=Uint8Array.from(atob(b64u(parts[2])),ch=>ch.charCodeAt(0));
