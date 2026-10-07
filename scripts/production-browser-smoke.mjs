@@ -116,6 +116,7 @@ async function inventory(url) {
         }
         const before = await page.locator("body").innerText().catch(() => "");
         const beforeUrl = page.url();
+        const beforeService = await page.locator("#service").inputValue().catch(() => "");
         let planRequestSeen = false;
         const planRequestPromise = b.request
           ? page.waitForRequest(req => req.url().includes("/api/plan") && req.method() === "POST", { timeout: 12000 }).catch(() => null)
@@ -125,12 +126,14 @@ async function inventory(url) {
         await page.waitForTimeout(1000);
         const after = await page.locator("body").innerText().catch(() => "");
         const afterUrl = page.url();
-        const changed = before !== after || beforeUrl !== afterUrl;
+        const afterService = await page.locator("#service").inputValue().catch(() => "");
+        const changed = before !== after || beforeUrl !== afterUrl || beforeService !== afterService;
+        const serviceSelectionOk = Boolean(afterService && afterService !== beforeService);
         const planOk = planRequestSeen && !networkErrors.some(x => x.url.includes("/api/plan") && x.status >= 400);
         buttonResults.push({
           url,
           text: b.text,
-          pass: changed || planOk || /^(send|ارسال)/i.test(b.text),
+          pass: changed || planOk || serviceSelectionOk || /^(send|ارسال)/i.test(b.text),
           urlChanged: beforeUrl !== afterUrl,
           stateChanged: before !== after,
           afterUrl,
