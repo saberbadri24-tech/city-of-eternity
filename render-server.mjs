@@ -55,7 +55,7 @@ async function assetsFetch(request){
 let paymentsStorePromise=null;
 const createSupabasePaymentsStore=()=>{
   const base=String(process.env.ANIL_DURABLE_STORE_URL||'').replace(/\/+$/,'');
-  const token=String(process.env.ANIL_DURABLE_STORE_TOKEN||'eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5a2pvYXd3YmlzZHZzYmNscXVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEzODU2OTcsImV4cCI6MjEwNjk2MTY5N30.XUO7h6DM3Riq9FsaOZ_qbyalz9A8-TSk3-0zabwItUg');
+  const token=String(process.env.ANIL_DURABLE_STORE_TOKEN||'');
   if(!base||!token)return null;
   const call=async(body)=>{
     const rr=await fetch(base,{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+token},body:JSON.stringify(body),signal:AbortSignal.timeout(8000)});
