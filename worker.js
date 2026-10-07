@@ -723,11 +723,22 @@ async function githubActionsAuth(req,env){
       jwk=jwks?.keys?.find(k=>k.kid===header.kid);
     }
     if(!jwk)return false;
-    const verifyJwk={...jwk,alg:'RS256',use:'sig',key_ops:['verify']};
-    const key=await crypto.subtle.importKey('jwk',verifyJwk,{name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'},false,['verify']);
-    const data=new TextEncoder().encode(parts[0]+'.'+parts[1]);
-    const sig=Uint8Array.from(atob(b64u(parts[2])),ch=>ch.charCodeAt(0));
-    return await crypto.subtle.verify('RSASSA-PKCS1-v1_5',key,sig.buffer,data);
+    const verifyJwk={...jwk,alg:'RS256',use:'sig',key_ops:['verify'],ext:true};
+    // Render production runs on Node; use its native RSA verifier first, then
+    // retain WebCrypto as a portable fallback for Worker-compatible runtimes.
+    try{
+      const {createPublicKey,createVerify}=await import('node:crypto');
+      const key=createPublicKey({key:verifyJwk,format:'jwk'});
+      const verifier=createVerify('RSA-SHA256');
+      verifier.update(parts[0]+'.'+parts[1]);
+      verifier.end();
+      return verifier.verify(key,Buffer.from(parts[2],'base64url'));
+    }catch{
+      const key=await crypto.subtle.importKey('jwk',verifyJwk,{name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'},false,['verify']);
+      const data=new TextEncoder().encode(parts[0]+'.'+parts[1]);
+      const sig=Uint8Array.from(atob(b64u(parts[2])),ch=>ch.charCodeAt(0));
+      return await crypto.subtle.verify('RSASSA-PKCS1-v1_5',key,sig,data);
+    }
   }catch{return false}
 }
 async function anilOperatorChange(req,env,command){
