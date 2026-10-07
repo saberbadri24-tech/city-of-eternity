@@ -40,7 +40,7 @@ const getMainTonAddress=env=>firstEnv(env,['TON_MAIN_WALLET','TON_MAIN_WALLET_AD
 const getVarizaApiKey=env=>firstEnv(env,['VARIZA_API_KEY','VARIA_API_KEY','VARIZA_TOKEN','VARIZA_KEY','VARIZA_API_TOKEN','VARIZA_SECRET','VARIZA_API','VARIZA_ACCESS_TOKEN','VARIZA_BEARER_TOKEN']);
 const getVarizaWebhookSecret=env=>firstEnv(env,['VARIZA_WEBHOOK_SECRET','VARIA_WEBHOOK_SECRET','VARIZA_WEBHOOK_TOKEN','VARIZA_WEBHOOK_KEY','VARIZA_SECRET']);
 const getAiConfig=env=>({openai:firstEnv(env,['OPENAI_API_KEY','OPENAI_KEY']),anthropic:firstEnv(env,['ANTHROPIC_API_KEY','ANTHROPIC_KEY']),gemini:firstEnv(env,['GEMINI_API_KEY','GOOGLE_GEMINI_API_KEY','GOOGLE_API_KEY'])});
-const getUsdTomanRate=env=>Number(firstEnv(env,['USD_TOMAN_RATE','USD_TO_TOMAN','USD_TOMAN','USD_IRR_RATE'])||0);
+const getUsdTomanRate=env=>{const configured=Number(firstEnv(env,['USD_TOMAN_RATE','USD_TO_TOMAN','USD_TOMAN','USD_IRR_RATE'])||0);return Number.isFinite(configured)&&configured>0?configured:2687600;};
 const REVENUE_FLEET=[
 {id:'b2b-lead-hunter',name:'B2B Lead Hunter',mode:'hunter',status:'ACTIVE',monetization:'qualified-lead+project',prereq:'compliant prospecting channels'},
 {id:'business-auditor',name:'Business Auditor',mode:'audit',status:'ACTIVE',monetization:'audit+project',prereq:'ANIL-X lead/order/payment'},
