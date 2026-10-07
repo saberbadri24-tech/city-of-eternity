@@ -194,7 +194,7 @@ jobs:
           }
           # Bound each document as valid JSON; never truncate the serialized
           # aggregate, which could cut a JSON token and make the ingest body invalid.
-          def bounded(value, limit=24000):
+          def bounded(value, limit=3500):
               raw=json.dumps(value,ensure_ascii=False,separators=(',',':'))
               if len(raw)<=limit:
                   return value
