@@ -72,6 +72,21 @@ jobs:
         run: python scripts/guard_ton_receipts.py
       - name: Materialize Guard wallet policy state
         run: python scripts/guard_wallet_runtime.py
+      - name: Materialize Guard capability policy
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          Path("guard-capabilities.json").write_text(json.dumps({
+            "selfModificationPolicy":"PROPOSE_ONLY",
+            "ownerApprovalRequired":True,
+            "automaticClaim":False,
+            "automaticSigning":False,
+            "automaticTransfer":False,
+            "privateKeyAccess":False,
+            "seedPhraseAccess":False
+          },ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          PY
       - name: Threat engine
         run: python scripts/guard_threat_engine.py
       - name: Evidence ledger
