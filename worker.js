@@ -723,10 +723,11 @@ async function githubActionsAuth(req,env){
       jwk=jwks?.keys?.find(k=>k.kid===header.kid);
     }
     if(!jwk)return false;
-    const key=await crypto.subtle.importKey('jwk',jwk,{name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'},false,['verify']);
+    const verifyJwk={...jwk,alg:'RS256',use:'sig',key_ops:['verify']};
+    const key=await crypto.subtle.importKey('jwk',verifyJwk,{name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'},false,['verify']);
     const data=new TextEncoder().encode(parts[0]+'.'+parts[1]);
     const sig=Uint8Array.from(atob(b64u(parts[2])),ch=>ch.charCodeAt(0));
-    return await crypto.subtle.verify({name:'RSASSA-PKCS1-v1_5'},key,sig,data);
+    return await crypto.subtle.verify('RSASSA-PKCS1-v1_5',key,sig.buffer,data);
   }catch{return false}
 }
 async function anilOperatorChange(req,env,command){
