@@ -748,6 +748,42 @@ async function anilOperatorChange(req,env,command){
   const queued=await anilChangeRequest(body,env);const qd=await queued.json();
   return {...qd,operator:true,verification:Array.isArray(change?.verification)?change.verification.slice(0,8):[]};
 }
+async function runOwnerAgent(req,env,command,history){
+  const key=getAiConfig(env).openai;if(!key)return null;
+  const model=env.ASTRA_MODEL||env.ANIL_OPENAI_MODEL||'gpt-6-astra';
+  const tools=[{type:'function',name:'fetch_url',description:'Fetch public evidence.',parameters:{type:'object',properties:{url:{type:'string'}},required:['url']}},
+    {type:'function',name:'web_search',description:'Search the public web.',parameters:{type:'object',properties:{query:{type:'string'}},required:['query']}},
+    {type:'function',name:'calculate',description:'Calculate a numeric expression.',parameters:{type:'object',properties:{expression:{type:'string'}},required:['expression']}},
+    {type:'function',name:'github',description:'Read-only GitHub inspection.',parameters:{type:'object',properties:{path:{type:'string'}},required:['path']}},
+    {type:'function',name:'capabilities',description:'Read current ANIL capabilities.',parameters:{type:'object',properties:{},required:[]}},
+    {type:'function',name:'control_plane',description:'Inspect/plan ANIL operations. Sensitive mutations remain owner-gated.',parameters:{type:'object',properties:{operation:{type:'string'},body:{type:'object'}},required:['operation']}}];
+  const instructions=`You are Badrkhan, the live owner operating agent inside ANIL X. Reason, research, inspect, calculate and use tools as needed. Continue multi-step work until the task is answered or a real boundary blocks it. Never claim execution without evidence. Code changes must use the existing controlled-change queue and QA gates. Money, crypto, wallet signing/transfers, withdrawals, settlement, private keys, seed phrases, KYC and irreversible security actions are never executed autonomously: prepare/verify them and leave them at the owner-approval boundary. The main wallet is the final treasury boundary. Never request or expose its private key/seed. Return verified facts and next action.`;
+  let input=[...history,{role:'user',content:command}];
+  for(let round=0;round<8;round++){
+    const r=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+key},body:JSON.stringify({model,input,instructions,tools,tool_choice:'auto',parallel_tool_calls:true,max_output_tokens:1800})});
+    if(!r.ok)return {ok:false,reason:'openai_'+r.status};
+    const d=await r.json();const calls=Array.isArray(d.output)?d.output.filter(x=>x?.type==='function_call'):[];
+    if(!calls.length)return {ok:true,text:d.output_text||'—',provider:'openai',model,rounds:round+1};
+    input.push(...calls);
+    for(const call of calls){
+      let args={};try{args=JSON.parse(call.arguments||'{}')}catch{}
+      let result;
+      try{
+        if(call.name==='control_plane'){
+          const u=new URL('/api/anil/control-plane',req.url);
+          const rr=await handleControlPlane(new Request(u,{method:'POST',headers:{cookie:req.headers.get('cookie')||'','content-type':'application/json'},body:JSON.stringify({operation:String(args.operation||'read_live_state'),...(args.body||{})})}),env);
+          result=await rr.json();
+        }else{
+          const rr=await anilTool(new Request(new URL('/api/anil/tool',req.url),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool:call.name,...args})}),env);
+          result=await rr.json();
+        }
+      }catch(e){result={ok:false,error:String(e?.message||e)}}
+      input.push({type:'function_call_output',call_id:call.call_id,output:JSON.stringify(result).slice(0,20000)});
+    }
+  }
+  return {ok:true,text:'Agent reached the bounded tool-loop limit before a final response.',provider:'openai',model,rounds:8};
+}
+
 async function secretary(req,env){
   if(!(await adminAuth(req,env)))return json({ok:false,error:'unauthorized'},401);
   const b=await req.json().catch(()=>({})),command=String(b.command||'').slice(0,12000),q=command.toLowerCase();
@@ -792,13 +828,11 @@ async function secretary(req,env){
     const history=Array.isArray(b.messages)?b.messages.slice(-12).map(x=>({role:x?.role==='assistant'?'assistant':'user',content:String(x?.content||'').slice(0,4000)})).filter(x=>x.content):[];
     const configuredAi=Object.values(getAiConfig(env)).filter(Boolean).length>0;
     if(configuredAi){
+      try{const agent=await runOwnerAgent(req,env,command,history);if(agent?.ok)return json({ok:true,text:String(agent.text||'—'),action:'agentic_tool_loop',provider:agent.provider||'openai',live:true,data:{agent}})}catch{}
       try{
         const teamResp=await handleSuperTeam(new Request(new URL('/api/anil/super-team',req.url),{method:'POST',headers:{cookie:req.headers.get('cookie')||'','content-type':'application/json'},body:JSON.stringify({task:command,history})}),env,{guardHandler:handleGuardLive});
-        const team=await teamResp.json().catch(()=>({}));
-        const answer=team?.command?.answer||team?.command?.response;
-        if(team?.ok&&answer){
-          return json({ok:true,text:String(answer),action:'super_team_live',provider:team.evidence?.liveProviders?.join('+')||'super-team',live:true,data:{team}});
-        }
+        const team=await teamResp.json().catch(()=>({}));const answer=team?.command?.answer||team?.command?.response;
+        if(team?.ok&&answer)return json({ok:true,text:String(answer),action:'super_team_live',provider:team.evidence?.liveProviders?.join('+')||'super-team',live:true,data:{team}});
       }catch{}
     }
     const ai=getAiConfig(env).openai;
