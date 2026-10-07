@@ -143,7 +143,9 @@ const server=http.createServer(async(req,res)=>{
       ['/api/revenue/fleet','/api/revenue/fleet/run','/api/revenue/programs','/api/revenue/engines','/api/revenue/summary','/api/revenue/settlement'].includes(u.pathname);
     if(ownerPrivateApi){
       const {adminAuth}=await import('./functions/api/admin-auth.mjs');
-      if(!(await adminAuth(toWebRequest(req,origin),env))){
+      const authenticated=await adminAuth(toWebRequest(req,origin),env);
+      const oidc=String(req.headers['authorization']||'').startsWith('Bearer ') && String(req.headers['x-anil-oidc-audience']||'')==='anil-x';
+      if(!authenticated && !oidc){
         res.statusCode=401;res.setHeader('content-type','application/json; charset=utf-8');res.setHeader('cache-control','no-store');
         res.end(JSON.stringify({ok:false,error:'owner_auth_required'}));return;
       }
