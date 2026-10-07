@@ -97,6 +97,20 @@ jobs:
         run: python scripts/guard_replay_engine.py
       - name: Workflow security
         run: python scripts/guard_workflow_security.py
+      - name: Materialize Guard agent contract
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          denied=["SIGN_WALLET","TRANSFER_ASSETS","BYPASS_KYC","BYPASS_CAPTCHA","AUTO_CLAIM","CHANGE_POLICY","EXPORT_SECRETS"]
+          agents=[
+            {"id":"discovery","trust":"VERIFIED_READONLY","canAct":False,"capabilities":["DISCOVER","READ_PUBLIC"],"deniedCapabilities":denied},
+            {"id":"verification","trust":"VERIFIED_READONLY","canAct":False,"capabilities":["VERIFY","READ_PUBLIC"],"deniedCapabilities":denied},
+            {"id":"radar","trust":"VERIFIED_READONLY","canAct":False,"capabilities":["RANK","READ_PUBLIC"],"deniedCapabilities":denied},
+            {"id":"planner","trust":"OWNER_APPROVED","canAct":True,"capabilities":["PROPOSE_ACTION","READ_EVIDENCE"],"deniedCapabilities":denied}
+          ]
+          Path("guard-agent-contract.json").write_text(json.dumps({"policy":"FAIL_CLOSED","agents":agents},ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          PY
       - name: Agent contract
         run: python scripts/guard_agent_contract.py
       - name: Evolution engine
