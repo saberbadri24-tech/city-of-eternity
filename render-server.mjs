@@ -71,7 +71,10 @@ const createSupabasePaymentsStore=()=>{
       return type==='json'?(typeof v==='string'?JSON.parse(v):v):String(v);
     },
     async put(key,value){
-      return call({op:'put',key,value:typeof value==='string'?(JSON.parse(value)||value):value});
+      // Durable storage is JSON-aware on read; keep writes as JSON text so
+      // large/nested Guard snapshots never depend on provider object coercion.
+      const serialized=typeof value==='string'?value:JSON.stringify(value);
+      return call({op:'put',key,value:serialized});
     },
     async list({prefix}={}){
       const d=await call({op:'list',key:'_',prefix:String(prefix||''),limit:500});
