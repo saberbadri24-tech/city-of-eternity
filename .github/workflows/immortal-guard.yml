@@ -232,6 +232,7 @@ jobs:
           jwks=json.load(urllib.request.urlopen('https://token.actions.githubusercontent.com/.well-known/jwks',timeout=20))
           assert any(k.get('kid')==header.get('kid') for k in jwks.get('keys',[])), 'GitHub OIDC signing key not published'
           PY
+          python -m pip install -q cryptography
           python - "$OIDC_TOKEN" <<'PY'
           import base64,json,sys,urllib.request
           from cryptography.hazmat.primitives.asymmetric import rsa,padding
