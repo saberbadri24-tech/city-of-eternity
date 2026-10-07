@@ -195,7 +195,7 @@ jobs:
           Path('/tmp/anil-guard-ingest.json').write_text(json.dumps(payload,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
           PY
           OIDC_TOKEN="$(curl -sSf -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x" | python -c "import sys,json; print(json.load(sys.stdin)['value'])")"
-          curl -sSf -f -X POST "$ANIL_X_RENDER_URL/api/guard/ingest" \
+          curl -sSf -X POST "$ANIL_X_RENDER_URL/api/guard/ingest" \
             -H "Authorization: Bearer $OIDC_TOKEN" \
             -H "Content-Type: application/json" \
             --data-binary @/tmp/anil-guard-ingest.json
