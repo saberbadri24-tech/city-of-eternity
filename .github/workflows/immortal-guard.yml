@@ -232,6 +232,20 @@ jobs:
           jwks=json.load(urllib.request.urlopen('https://token.actions.githubusercontent.com/.well-known/jwks',timeout=20))
           assert any(k.get('kid')==header.get('kid') for k in jwks.get('keys',[])), 'GitHub OIDC signing key not published'
           PY
+          python - "$OIDC_TOKEN" <<'PY'
+          import base64,json,sys,urllib.request
+          from cryptography.hazmat.primitives.asymmetric import rsa,padding
+          from cryptography.hazmat.primitives import hashes
+          token=sys.argv[1]; h,p,s=token.split('.')
+          dec=lambda x:base64.urlsafe_b64decode(x+'='*((4-len(x)%4)%4))
+          header=json.loads(dec(h))
+          jwks=json.load(urllib.request.urlopen('https://token.actions.githubusercontent.com/.well-known/jwks',timeout=20))
+          jwk=next(k for k in jwks['keys'] if k['kid']==header['kid'])
+          n=int.from_bytes(dec(jwk['n']),'big'); e=int.from_bytes(dec(jwk['e']),'big')
+          key=rsa.RSAPublicNumbers(e,n).public_key()
+          key.verify(dec(s),(h+'.'+p).encode(),padding.PKCS1v15(),hashes.SHA256())
+          print('GitHub OIDC RSA signature PASS')
+          PY
           HTTP_CODE="$(curl -sS -o /tmp/anil-guard-ingest-response.json -w "%{http_code}" -X POST "$ANIL_X_RENDER_URL/api/guard/ingest" \
             -H "Authorization: Bearer $OIDC_TOKEN" \
             -H "X-ANIL-OIDC-Audience: anil-x" \
