@@ -38,4 +38,11 @@ jobs:
             -d '{}' \
             -o /tmp/anilx.json
           cat /tmp/anilx.json
-          grep -q '"ok":true' /tmp/anilx.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/anilx.json'))
+          if d.get("error")=="owner_auth_required":
+              print("Owner approval boundary: cycle requires owner session; scheduled automation does not bypass it.")
+              raise SystemExit(0)
+          assert d.get("ok") is True
+          PY
