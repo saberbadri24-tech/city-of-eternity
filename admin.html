@@ -20,8 +20,8 @@ html,body{min-height:100%;overflow-x:hidden}body{background:radial-gradient(circ
       <span class="corner-icon">🛡️</span>
       <span class="corner-title">گارد جاویدان</span>
       <span class="corner-sub">رادار · فرصت‌ها · شکارها · تأیید مالک</span>
-      <span class="corner-status"><i></i><b id="guardCardStatus">READY</b><em id="gFresh">—</em></span>
-      <span class="corner-value"><b id="gDiscoveries">—</b><small>کشف زنده</small></span>
+      <span class="corner-status"><i></i><b id="guardCardStatus">READY</b><em id="homeGuardFresh">—</em></span>
+      <span class="corner-value"><b id="homeGuardDiscoveries">—</b><small>کشف زنده</small></span>
     </button>
 
     <button class="corner-card revenue-card" data-view="revenue" type="button">
@@ -29,7 +29,7 @@ html,body{min-height:100%;overflow-x:hidden}body{background:radial-gradient(circ
       <span class="corner-title">Revenue Fleet</span>
       <span class="corner-sub">لید · سفارش · پرداخت · درآمد واقعی</span>
       <span class="corner-status"><i></i><b>CONTROLLED</b><em>owner gate</em></span>
-      <span class="corner-value"><b id="rRevenue">$0</b><small>درآمد ثبت‌شده</small></span>
+      <span class="corner-value"><b id="homeRevenue">$0</b><small>درآمد ثبت‌شده</small></span>
     </button>
 
     <div class="core-chat">
@@ -60,7 +60,7 @@ html,body{min-height:100%;overflow-x:hidden}body{background:radial-gradient(circ
       <span class="corner-title">کیف پول · پرداخت · تسویه</span>
       <span class="corner-sub">TON · Variza · حسابداری · تسویه</span>
       <span class="corner-status"><i></i><b id="financeCardStatus">CHECK</b><em>owner controlled</em></span>
-      <span class="corner-value"><b id="fTon">—</b><small>TON</small></span>
+      <span class="corner-value"><b id="homeTon">—</b><small>TON</small></span>
     </button>
 
     <button class="corner-card ops-card" data-view="qa" type="button">
@@ -68,7 +68,7 @@ html,body{min-height:100%;overflow-x:hidden}body{background:radial-gradient(circ
       <span class="corner-title">عملیات · QA · سایت</span>
       <span class="corner-sub">سلامت · استقرار · مشتری · کنترل خطا</span>
       <span class="corner-status"><i></i><b id="opsCardStatus">CHECK</b><em>QA gate</em></span>
-      <span class="corner-value"><b id="qHealth">—</b><small>سلامت Runtime</small></span>
+      <span class="corner-value"><b id="homeHealth">—</b><small>سلامت Runtime</small></span>
     </button>
   </div>
 
@@ -81,18 +81,8 @@ html,body{min-height:100%;overflow-x:hidden}body{background:radial-gradient(circ
     <button type="button" data-view="rewards">بازخورد و تجربه</button>
   </div>
 
-  <div class="status-sinks" aria-hidden="true">
-    <span id="runtimePill">Runtime…</span><span id="guardPill">Guard…</span><span id="paymentPill">Payments…</span><span id="aiPill">AI…</span>
-    <span id="anilRuntime">—</span><span id="anilProvider">—</span><span id="anilTools">—</span><span id="anilTruth">—</span>
-    <span id="gSources">—</span><span id="gOwner">—</span><span id="catchQueue"></span>
-    <span id="rLeads">0</span><span id="rOrders">0</span><span id="rPaid">0</span>
-    <span id="fVariza">—</span><span id="fAccounting">—</span><span id="fSettlement">—</span>
-    <span id="businessConfig"></span><span id="securityApprovals"></span><span id="approvalList"></span>
-    <span id="qaDetails"></span><span id="qCap">—</span><span id="qTarget">100%</span>
-    <span id="pAge">—</span><span id="pGoal">—</span><span id="pXp">0</span><span id="xpValue">0</span><span id="pTurns">0</span>
-  </div>
+  <div class="status-sinks" aria-hidden="true"><span id="runtimePill">Runtime…</span><span id="guardPill">Guard…</span><span id="paymentPill">Payments…</span><span id="aiPill">AI…</span></div>
 </section>
-<section id="anilView" class="view"><div class="head"><div><span class="eyebrow">ANIL · LIVE OPERATOR</span><h2>Anil Executive Assistant</h2></div><button class="back" data-home>← <span data-i18n="back">Back to dashboards</span></button></div><div class="panel"><div class="kpis"><div class="kpi"><small>Runtime</small><b id="anilRuntime">—</b></div><div class="kpi"><small>AI provider</small><b id="anilProvider">—</b></div><div class="kpi"><small>Tools</small><b id="anilTools">—</b></div><div class="kpi"><small>Truth</small><b id="anilTruth">—</b></div></div></div><div class="panel"><div id="adminChat" class="chat"></div><div class="composer"><textarea id="adminInput" rows="2" placeholder="Tell Anil the outcome you want…"></textarea><button class="send" id="adminSend">Send</button></div><div class="actions"><button class="action" data-command="وضعیت کامل ANIL X را از روی Runtime بررسی کن و فقط وضعیت واقعی را بگو.">Live status</button><button class="action" data-command="وضعیت زنده گارد جاویدان و فرصت‌های تأییدشده را بررسی کن.">Guard</button><button class="action" data-command="وضعیت درآمد، سفارش‌ها و پرداخت‌های واقعی ANIL X را بررسی کن.">Revenue</button><button class="action" data-command="قابلیت‌های واقعی و محدودیت‌های فعلی Anil را بررسی کن.">Capabilities</button></div></div></section>
 <section id="guardView" class="view"><div class="head"><div><span class="eyebrow">IMMORTAL GUARD · SUPER AIRDROP</span><h2>Guard Control</h2></div><button class="back" data-home>← <span data-i18n="back">Back to dashboards</span></button></div><div class="panel"><div class="kpis"><div class="kpi"><small>Discoveries</small><b id="gDiscoveries">—</b></div><div class="kpi"><small>Sources</small><b id="gSources">—</b></div><div class="kpi"><small>Owner queue</small><b id="gOwner">—</b></div><div class="kpi green"><small>Freshness</small><b id="gFresh">—</b></div></div></div><div class="panel"><h3>Verified opportunities</h3><div id="guardOpps" class="list"></div></div><div class="panel"><h3>Catch queue</h3><div id="catchQueue" class="list"></div></div><div class="panel"><h3>Owner approvals</h3><div id="approvalList" class="list"></div></div><div class="panel"><div class="wallet"><div><b>TON wallet</b><small id="walletState" style="display:block;color:var(--m)">Not connected</small></div><div id="ton-connect"></div></div></div></section>
 <section id="revenueView" class="view"><div class="head"><div><span class="eyebrow">REVENUE FLEET</span><h2>Revenue Control</h2></div><button class="back" data-home>← <span data-i18n="back">Back to dashboards</span></button></div><div class="panel"><div class="kpis"><div class="kpi"><small>Leads</small><b id="rLeads">—</b></div><div class="kpi"><small>Orders</small><b id="rOrders">—</b></div><div class="kpi"><small>Paid</small><b id="rPaid">—</b></div><div class="kpi gold"><small>Verified revenue</small><b id="rRevenue">$0</b></div></div><div class="actions"><button class="action" id="refreshRevenue">Refresh</button><button class="action gold" id="runRevenue">Run revenue cycle</button><a class="action" href="admin.html?view=revenue">Full dashboard ↗</a></div><div id="revenueNotice" class="notice" style="margin-top:9px">—</div></div><div class="panel"><h3>Revenue engines</h3><div id="revenueEngines" class="list"></div></div><div class="panel"><h3>Programs</h3><div id="revenuePrograms" class="list"></div></div><div class="panel"><h3>Revenue Opportunity Radar</h3><div id="revenueOpportunities" class="list"></div><div class="notice" style="margin-top:9px">Guard evidence can feed Revenue Fleet for owner review. Discovery, leads and estimated value are never counted as revenue until a real settled receipt exists.</div></div></section>
 <section id="financeView" class="view"><div class="head"><div><span class="eyebrow">FINANCE</span><h2>Wallet · Payments · Settlement</h2></div><button class="back" data-home>← <span data-i18n="back">Back to dashboards</span></button></div><div class="panel"><div class="kpis"><div class="kpi"><small>Variza</small><b id="fVariza">—</b></div><div class="kpi"><small>TON</small><b id="fTon">—</b></div><div class="kpi"><small>Accounting</small><b id="fAccounting">—</b></div><div class="kpi"><small>Settlement</small><b id="fSettlement">—</b></div></div><div class="actions"><a class="action" href="admin.html?view=finance">Settlement Hub ↗</a><a class="action" href="payment.html">Payment page ↗</a></div></div><div class="panel"><div class="notice">Only confirmed/settled payments count as revenue. ANIL X never asks for Seed Phrase or Private Key.</div></div></section>
