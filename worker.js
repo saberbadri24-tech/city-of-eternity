@@ -331,7 +331,7 @@ async function runtimeRoutes(req,env,u){
   if(p==='/api/autopilot'){if(req.method==='POST'&&!(await githubActionsAuth(req,env)))return rjson({ok:false,error:'github_actions_auth_required'},401);return autopilot(req,env)}
   if(p==='/api/anil/capabilities')return handleAnilCapabilities(req,env);
   if(p==='/api/anil/capability-kernel')return handleCapabilityKernel(req,env);
-  if(p==='/api/anil/tools'){if(req.method==='POST'&&!(await githubActionsAuth(req,env))&&!(await adminAuth(req,env)))return rjson({ok:false,error:'owner_or_github_actions_auth_required'},401);return anilTool(req,env);}
+  if(p==='/api/anil/toolss'){if(req.method==='POST'&&!(await githubActionsAuth(req,env))&&!(await adminAuth(req,env)))return rjson({ok:false,error:'owner_or_github_actions_auth_required'},401);return anilTool(req,env);}
   if(p==='/api/anil/automation/queue')return anilChangeRequest(req,env);
   const PRIVATE_OWNER_PATHS=new Set([
     '/api/revenue/fleet','/api/revenue/opportunities','/api/revenue/programs',
@@ -815,7 +815,7 @@ async function runOwnerAgent(req,env,command,history){
       let args={};try{args=JSON.parse(call.arguments||'{}')}catch{}
       let result;
       try{
-        if(call.name==='external_web_search'){const rr=await anilTool(new Request(new URL('/api/anil/tool',req.url),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool:'web_search',...args})}),env); result=await rr.json();
+        if(call.name==='external_web_search'){const rr=await anilTool(new Request(new URL('/api/anil/tools',req.url),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool:'web_search',...args})}),env); result=await rr.json();
         }else if(call.name==='guard_live'){
           const rr=await handleGuardLive(req,env); result=await rr.json();
         }else if(call.name==='revenue_fleet'){
@@ -825,7 +825,7 @@ async function runOwnerAgent(req,env,command,history){
           const rr=await handleControlPlane(new Request(u,{method:'POST',headers:{cookie:req.headers.get('cookie')||'','content-type':'application/json'},body:JSON.stringify({operation:String(args.operation||'read_live_state'),...(args.body||{})})}),env);
           result=await rr.json();
         }else{
-          const rr=await anilTool(new Request(new URL('/api/anil/tool',req.url),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool:call.name,...args})}),env);
+          const rr=await anilTool(new Request(new URL('/api/anil/tools',req.url),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool:call.name,...args})}),env);
           result=await rr.json();
         }
       }catch(e){result={ok:false,error:String(e?.message||e)}}
