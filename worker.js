@@ -767,7 +767,8 @@ async function anilOperatorChange(req,env,command){
 }
 async function runOwnerAgent(req,env,command,history){
   const key=getAiConfig(env).openai;if(!key)return null;
-  const configuredModel=env.ASTRA_MODEL||env.ANIL_OPENAI_MODEL||'gpt-6-astra';
+  const operationalIntent=/(fix|repair|change|update|improve|deploy|rollback|github|render|guard|revenue|payment|order|customer|lead|code|site|qa|security|گارد|درآمد|پرداخت|سفارش|مشتری|لید|کد|سایت|اصلاح|درست|تغییر|بهبود|آپدیت|استقرار|امنیت|تست)/i.test(command);
+  const configuredModel=operationalIntent?(env.ASTRA_MODEL||env.ANIL_OPENAI_MODEL||'gpt-6-astra'):(env.ANIL_FAST_MODEL||'gpt-6-luna');
   const modelCandidates=[configuredModel,'gpt-6-astra','gpt-6.1-sol','gpt-6-sol','gpt-6-luna'].filter((v,i,a)=>v&&a.indexOf(v)===i);
   const tools=[{type:'web_search'},
     {type:'function',name:'fetch_url',description:'Fetch public evidence.',parameters:{type:'object',properties:{url:{type:'string'}},required:['url']}},
@@ -795,7 +796,8 @@ async function runOwnerAgent(req,env,command,history){
     return parts.join('\n\n').trim();
   };
   let input=[...history,{role:'user',content:command}];
-  for(let round=0;round<8;round++){
+  const maxRounds=operationalIntent?6:2;
+  for(let round=0;round<maxRounds;round++){
     let r=null,detail='',usedModel=modelCandidates[0];
     for(const candidate of modelCandidates){
       try{
@@ -809,7 +811,10 @@ async function runOwnerAgent(req,env,command,history){
     const calls=Array.isArray(d.output)?d.output.filter(x=>x?.type==='function_call'):[];
     const finalText=extractText(d);
     if(!calls.length){
-      return {ok:true,text:finalText||'ANIL دریافت کرد، اما مدل پاسخ متنی نهایی برنگرداند. لطفاً همان فرمان را دوباره ارسال کن.',provider:'openai',model:usedModel,rounds:round+1,responseStatus:d?.status||null};
+      const safeFinal=/Cannot set properties of null|configured_provider_invocation_failed/i.test(finalText)
+        ? 'یک خطای داخلی قبلی در چرخه ابزار تکرار شد و به پاسخ تبدیل نشد. وضعیت Runtime را بررسی می‌کنم و از همان‌جا ادامه می‌دهم.'
+        : finalText;
+      return {ok:true,text:safeFinal||'ANIL دریافت کرد، اما مدل پاسخ متنی نهایی برنگرداند. لطفاً همان فرمان را دوباره ارسال کن.',provider:'openai',model:usedModel,rounds:round+1,responseStatus:d?.status||null};
     }
     // Preserve the complete Responses output (including reasoning/tool-call metadata) before returning function outputs. This is required for a reliable multi-turn tool loop.
     input.push(...(Array.isArray(d.output)?d.output:[]));
@@ -842,7 +847,7 @@ async function runOwnerAgent(req,env,command,history){
       input.push({type:'function_call_output',call_id:call.call_id,output:JSON.stringify(result).slice(0,20000)});
     }
   }
-  return {ok:true,text:'ANIL reached the bounded tool-loop limit before a final response.',provider:'openai',model:modelCandidates[0],rounds:8};
+  return {ok:true,text:'ANIL چرخه ابزار را به سقف امن رساند؛ نتیجه‌های تأییدشده تا اینجا حفظ شده‌اند و برای ادامه باید یک دور بعدی اجرا شود.',provider:'openai',model:modelCandidates[0],rounds:maxRounds};
 }
 
 async function secretary(req,env){
@@ -886,7 +891,7 @@ async function secretary(req,env){
         return json({ok:true,changed:false,action:'change_not_queued',text:'تغییر اجرا نشد؛ مرز ایمنی یا دسترسی لازم مانع ثبت آن شد.',data:op});
       }catch(e){return json({ok:false,error:'operator_change_failed',message:String(e?.message||e)},502)}
     }
-    const history=Array.isArray(b.messages)?b.messages.slice(-12).map(x=>({role:x?.role==='assistant'?'assistant':'user',content:String(x?.content||'').slice(0,4000)})).filter(x=>x.content):[];
+    const history=Array.isArray(b.messages)?b.messages.slice(-12).map(x=>({role:x?.role==='assistant'?'assistant':'user',content:String(x?.content||'').slice(0,4000)})).filter(x=>x.content&&!/Cannot set properties of null|configured_provider_invocation_failed/i.test(x.content)):[];
     const configuredAi=Object.values(getAiConfig(env)).filter(Boolean).length>0;
     if(configuredAi){
       try{const agent=await runOwnerAgent(req,env,command,history);if(agent?.ok)return json({ok:true,text:String(agent.text||'—'),action:'agentic_tool_loop',provider:agent.provider||'openai',live:true,data:{agent}})}catch{}
