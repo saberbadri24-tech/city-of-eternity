@@ -37,9 +37,12 @@ jobs:
           BASE_URL: https://anil-x-live.onrender.com
         run: |
           set -euo pipefail
-          curl -fsSL --max-time 30 "$BASE_URL/api/health" >/tmp/health.json
-          curl -fsSL --max-time 30 "$BASE_URL/api/guard/live?t=$(date +%s)" >/tmp/guard.json
-          curl -fsSL --max-time 30 "$BASE_URL/api/anil/super-team" >/tmp/team.json
+          curl -sS --max-time 30 "$BASE_URL/api/health" -o /tmp/health.json || true
+          curl -sS --max-time 30 "$BASE_URL/api/guard/live?t=$(date +%s)" -o /tmp/guard.json || true
+          curl -sS --max-time 30 "$BASE_URL/api/anil/super-team" -o /tmp/team.json || true
+          echo '--- CONTROL PLANE HEALTH ---'; cat /tmp/health.json || true
+          echo '--- CONTROL PLANE GUARD ---'; cat /tmp/guard.json || true
+          echo '--- CONTROL PLANE SUPER TEAM ---'; cat /tmp/team.json || true
           python - <<'PY'
           import json
           h=json.load(open('/tmp/health.json')); g=json.load(open('/tmp/guard.json')); t=json.load(open('/tmp/team.json'))
