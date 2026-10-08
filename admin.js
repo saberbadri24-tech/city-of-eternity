@@ -28,11 +28,13 @@ async function health(){try{const h=await api('/api/health');const ai=!!(h.confi
 function businessRows(b){const el=$('#businessConfig');if(!el)return;const r=[['FIX',b?.pricesUsd?.FIX],['START',b?.pricesUsd?.START],['BUILD',b?.pricesUsd?.BUILD],['GROW',b?.pricesUsd?.GROW],['Auto reports',b?.permissions?.autoReports],['Auto messaging',b?.permissions?.autoMessaging],['Auto SEO',b?.permissions?.autoSeo]];el.innerHTML=r.map(x=>'<div class="row"><b>'+esc(x[0])+'</b><span class="tag '+(typeof x[1]==='boolean'?(x[1]?'ok':'red'):'gold')+'">'+esc(typeof x[1]==='boolean'?(x[1]?'ON':'OFF'):(x[1]??'—'))+(typeof x[1]==='number'?' USD':'')+'</span></div>').join('')}
 function approvals(rows){const a=rows||[];const html=a.length?a.map(x=>'<div class="row"><div><b>'+esc(x.name||'Approval')+'</b><small>'+esc(x.reason||x.category||'Owner approval required')+'</small></div><span class="tag gold">PENDING</span></div>').join(''):'<div class="empty">No pending approvals.</div>';if($('#securityApprovals'))$('#securityApprovals').innerHTML=html;if($('#approvalList'))$('#approvalList').innerHTML=html}
 async function overview(){const d=await api('/api/admin/overview',{method:'POST'});const c=d.counts||{},v=d.revenue||{};[['cLeads',c.leads],['cOrders',c.orders],['cPaid',c.paidOrders],['cPending',c.pendingOrders],['rLeads',c.leads],['rOrders',c.orders],['rPaid',c.paidOrders]].forEach(x=>{if($('#'+x[0]))$('#'+x[0]).textContent=Number(x[1]||0).toLocaleString()});$('#rRevenue').textContent='$'+Number(v.sourceUsd||0).toLocaleString();businessRows(d.business||{});approvals(d.approvals||[]);return d}
-let tonUI=null,tonWallet=null,tonWalletInitializing=false;
+let tonUI=null,tonWallet=null,tonWalletInitializing=false,tonScriptPromise=null;
+function loadTonConnect(){if(window.TON_CONNECT_UI)return Promise.resolve(true);if(tonScriptPromise)return tonScriptPromise;tonScriptPromise=new Promise((resolve,reject)=>{const s=document.createElement('script');s.src='https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js';s.async=true;s.onload=()=>resolve(true);s.onerror=()=>reject(new Error('TON Connect UI unavailable'));document.head.appendChild(s)});return tonScriptPromise;}
 async function initOwnerTonWallet(){
  if(tonUI||tonWalletInitializing)return tonUI;
  tonWalletInitializing=true;
  try{
+  await loadTonConnect();
   if(!window.TON_CONNECT_UI)throw new Error('TON Connect UI unavailable');
   tonUI=new window.TON_CONNECT_UI.TonConnectUI({manifestUrl:location.origin+'/render-tonconnect-manifest.json',buttonRootId:'ton-connect',analytics:{mode:'off'}});
   tonUI.setConnectionNetwork?.('-239');
