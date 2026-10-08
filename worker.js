@@ -779,19 +779,36 @@ async function runOwnerAgent(req,env,command,history){
     {type:'function',name:'revenue_fleet',description:'Read the current Revenue Fleet state and verified paid-order accounting.',parameters:{type:'object',properties:{},required:[]}},
     {type:'function',name:'control_plane',description:'Inspect/plan ANIL operations. Sensitive mutations remain owner-gated.',parameters:{type:'object',properties:{operation:{type:'string'},body:{type:'object'}},required:['operation']}}];
   const instructions=`You are ANIL, the internal owner assistant and operational commander inside ANIL X. Badrkhan is the separate public visitor/customer assistant. Never expose owner tools, private admin context, Guard controls, deployment controls, or owner data to Badrkhan. Reason, research, inspect, calculate and use tools as needed. Continue multi-step work until the task is answered or a real boundary blocks it. Never claim execution without evidence. Code changes must use the existing controlled-change queue and QA gates. Money, crypto, wallet signing/transfers, withdrawals, settlement, private keys, seed phrases, KYC and irreversible security actions are never executed autonomously: prepare/verify them and leave them at the owner-approval boundary. The main wallet is the final treasury boundary. Never request or expose its private key/seed. Return verified facts and next action.`;
+  const extractText=(d)=>{
+    if(typeof d?.output_text==='string'&&d.output_text.trim())return d.output_text.trim();
+    const parts=[];
+    for(const item of Array.isArray(d?.output)?d.output:[]){
+      if(item?.type==='message'&&Array.isArray(item.content)){
+        for(const c of item.content){
+          if(typeof c?.text==='string'&&c.text.trim())parts.push(c.text);
+          else if(typeof c?.text?.value==='string'&&c.text.value.trim())parts.push(c.text.value);
+        }
+      }
+    }
+    return parts.join('\n\n').trim();
+  };
   let input=[...history,{role:'user',content:command}];
   for(let round=0;round<8;round++){
-    let r=null,detail='';
+    let r=null,detail='',usedModel=modelCandidates[0];
     for(const candidate of modelCandidates){
       try{
         r=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+key},body:JSON.stringify({model:candidate,input,instructions,tools,tool_choice:'auto',parallel_tool_calls:true,max_output_tokens:1800})});
-        if(r.ok){modelCandidates.splice(0,modelCandidates.length,candidate,...modelCandidates.filter(x=>x!==candidate));break;}
-        detail=(await r.text().catch(()=>"")).slice(0,600);
+        if(r.ok){usedModel=candidate;modelCandidates.splice(0,modelCandidates.length,candidate,...modelCandidates.filter(x=>x!==candidate));break;}
+        detail=(await r.text().catch(()=>'' )).slice(0,600);
       }catch(e){detail=String(e?.message||e).slice(0,600);}
     }
     if(!r?.ok)return {ok:false,reason:'openai_invocation_failed',detail,modelsTried:modelCandidates.slice(0,4)};
-    const d=await r.json();const calls=Array.isArray(d.output)?d.output.filter(x=>x?.type==='function_call'):[];
-    if(!calls.length)return {ok:true,text:d.output_text||'—',provider:'openai',model:modelCandidates[0],rounds:round+1};
+    const d=await r.json();
+    const calls=Array.isArray(d.output)?d.output.filter(x=>x?.type==='function_call'):[];
+    const finalText=extractText(d);
+    if(!calls.length){
+      return {ok:true,text:finalText||'ANIL دریافت کرد، اما مدل پاسخ متنی نهایی برنگرداند. لطفاً همان فرمان را دوباره ارسال کن.',provider:'openai',model:usedModel,rounds:round+1,responseStatus:d?.status||null};
+    }
     input.push(...calls);
     for(const call of calls){
       let args={};try{args=JSON.parse(call.arguments||'{}')}catch{}
@@ -813,7 +830,7 @@ async function runOwnerAgent(req,env,command,history){
       input.push({type:'function_call_output',call_id:call.call_id,output:JSON.stringify(result).slice(0,20000)});
     }
   }
-  return {ok:true,text:'Agent reached the bounded tool-loop limit before a final response.',provider:'openai',model,rounds:8};
+  return {ok:true,text:'ANIL reached the bounded tool-loop limit before a final response.',provider:'openai',model:modelCandidates[0],rounds:8};
 }
 
 async function secretary(req,env){
