@@ -40,19 +40,18 @@ jobs:
           ID_TOKEN=$(curl -fsSL -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x" | jq -r '.value')
           test -n "$ID_TOKEN" && test "$ID_TOKEN" != "null"
           curl -sS --max-time 30 -H "Authorization: Bearer $ID_TOKEN" "$BASE_URL/api/health" -o /tmp/health.json || true
-          curl -sS --max-time 30 -H "Authorization: Bearer $ID_TOKEN" "$BASE_URL/api/guard/live?t=$(date +%s)" -o /tmp/guard.json || true
           curl -sS --max-time 30 -H "Authorization: Bearer $ID_TOKEN" "$BASE_URL/api/anil/super-team" -o /tmp/team.json || true
           echo '--- CONTROL PLANE HEALTH ---'; cat /tmp/health.json || true
-          echo '--- CONTROL PLANE GUARD ---'; cat /tmp/guard.json || true
           echo '--- CONTROL PLANE SUPER TEAM ---'; cat /tmp/team.json || true
           python - <<'PY'
           import json
-          h=json.load(open('/tmp/health.json')); g=json.load(open('/tmp/guard.json')); t=json.load(open('/tmp/team.json'))
+          h=json.load(open('/tmp/health.json')); t=json.load(open('/tmp/team.json'))
           assert h.get('ok') is True
-          assert g.get('ok') is True
           assert t.get('ok') is True and t.get('safety',{}).get('finalCommand')=='ANIL'
           assert t.get('safety',{}).get('autoSigning') is False
-          # Guard freshness is enforced by the dedicated Guard workflow; the ANIL control gate only requires a valid Guard snapshot.
-          print('Guard freshness:', g.get('freshness',{}))
+          assert t.get('evidence',{}).get('guardFresh') is True
+          assert t.get('evidence',{}).get('guardAvailable') is True
+          print('Guard freshness:', t.get('evidence',{}).get('guardFresh'))
+          print('Guard available:', t.get('evidence',{}).get('guardAvailable'))
           print('ANIL CONTROL PLANE GATE PASS')
           PY
