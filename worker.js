@@ -767,7 +767,8 @@ async function anilOperatorChange(req,env,command){
 }
 async function runOwnerAgent(req,env,command,history){
   const key=getAiConfig(env).openai;if(!key)return null;
-  const model=env.ASTRA_MODEL||env.ANIL_OPENAI_MODEL||'gpt-6-astra';
+  const configuredModel=env.ASTRA_MODEL||env.ANIL_OPENAI_MODEL||'gpt-6-astra';
+  const modelCandidates=[configuredModel,'gpt-6-astra','gpt-6-sol','gpt-6-luna'].filter((v,i,a)=>v&&a.indexOf(v)===i);
   const tools=[{type:'web_search'},
     {type:'function',name:'fetch_url',description:'Fetch public evidence.',parameters:{type:'object',properties:{url:{type:'string'}},required:['url']}},
     {type:'function',name:'web_search',description:'Search the public web.',parameters:{type:'object',properties:{query:{type:'string'}},required:['query']}},
@@ -780,10 +781,17 @@ async function runOwnerAgent(req,env,command,history){
   const instructions=`You are ANIL, the internal owner assistant and operational commander inside ANIL X. Badrkhan is the separate public visitor/customer assistant. Never expose owner tools, private admin context, Guard controls, deployment controls, or owner data to Badrkhan. Reason, research, inspect, calculate and use tools as needed. Continue multi-step work until the task is answered or a real boundary blocks it. Never claim execution without evidence. Code changes must use the existing controlled-change queue and QA gates. Money, crypto, wallet signing/transfers, withdrawals, settlement, private keys, seed phrases, KYC and irreversible security actions are never executed autonomously: prepare/verify them and leave them at the owner-approval boundary. The main wallet is the final treasury boundary. Never request or expose its private key/seed. Return verified facts and next action.`;
   let input=[...history,{role:'user',content:command}];
   for(let round=0;round<8;round++){
-    const r=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+key},body:JSON.stringify({model,input,instructions,tools,tool_choice:'auto',parallel_tool_calls:true,max_output_tokens:1800})});
-    if(!r.ok){const detail=await r.text().catch(()=>"");return {ok:false,reason:'openai_'+r.status,detail:detail.slice(0,600)};}
+    let r=null,detail='';
+    for(const candidate of modelCandidates){
+      try{
+        r=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+key},body:JSON.stringify({model:candidate,input,instructions,tools,tool_choice:'auto',parallel_tool_calls:true,max_output_tokens:1800})});
+        if(r.ok){modelCandidates.splice(0,modelCandidates.length,candidate,...modelCandidates.filter(x=>x!==candidate));break;}
+        detail=(await r.text().catch(()=>"")).slice(0,600);
+      }catch(e){detail=String(e?.message||e).slice(0,600);}
+    }
+    if(!r?.ok)return {ok:false,reason:'openai_invocation_failed',detail,modelsTried:modelCandidates.slice(0,4)};
     const d=await r.json();const calls=Array.isArray(d.output)?d.output.filter(x=>x?.type==='function_call'):[];
-    if(!calls.length)return {ok:true,text:d.output_text||'—',provider:'openai',model,rounds:round+1};
+    if(!calls.length)return {ok:true,text:d.output_text||'—',provider:'openai',model:modelCandidates[0],rounds:round+1};
     input.push(...calls);
     for(const call of calls){
       let args={};try{args=JSON.parse(call.arguments||'{}')}catch{}
