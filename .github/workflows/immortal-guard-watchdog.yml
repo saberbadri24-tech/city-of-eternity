@@ -26,7 +26,7 @@ jobs:
         run: |
           set -euo pipefail
           TOKEN="$(curl -sSf -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x" | python -c "import sys,json; print(json.load(sys.stdin)['value'])")"
-          curl -sSf --fail-with-body --max-time 20             -H "Authorization: Bearer $TOKEN"             "$ANIL_X_RENDER_URL/api/guard/watchdog" >/tmp/guard-watchdog.json
+          curl -sSf --max-time 20             -H "Authorization: Bearer $TOKEN"             "$ANIL_X_RENDER_URL/api/guard/watchdog" >/tmp/guard-watchdog.json
           python - <<'PY'
           import json
           d=json.load(open('/tmp/guard-watchdog.json'))
