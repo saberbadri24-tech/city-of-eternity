@@ -1,4 +1,5 @@
 name: Immortal Guard — Continuous Radar
+# Durable store authentication is delegated to the Supabase JWT gate.
 
 on:
   workflow_dispatch:
