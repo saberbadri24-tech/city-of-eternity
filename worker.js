@@ -768,10 +768,10 @@ async function anilOperatorChange(req,env,command){
 async function runOwnerAgent(req,env,command,history){
   const key=getAiConfig(env).openai;if(!key)return null;
   const configuredModel=env.ASTRA_MODEL||env.ANIL_OPENAI_MODEL||'gpt-6-astra';
-  const modelCandidates=[configuredModel,'gpt-6-astra','gpt-6-sol','gpt-6-luna'].filter((v,i,a)=>v&&a.indexOf(v)===i);
+  const modelCandidates=[configuredModel,'gpt-6-astra','gpt-6.1-sol','gpt-6-sol','gpt-6-luna'].filter((v,i,a)=>v&&a.indexOf(v)===i);
   const tools=[{type:'web_search'},
     {type:'function',name:'fetch_url',description:'Fetch public evidence.',parameters:{type:'object',properties:{url:{type:'string'}},required:['url']}},
-    {type:'function',name:'web_search',description:'Search the public web.',parameters:{type:'object',properties:{query:{type:'string'}},required:['query']}},
+    {type:'function',name:'external_web_search',description:'Search the public web through configured external search providers when built-in web search is unavailable.',parameters:{type:'object',properties:{query:{type:'string'}},required:['query']}},
     {type:'function',name:'calculate',description:'Calculate a numeric expression.',parameters:{type:'object',properties:{expression:{type:'string'}},required:['expression']}},
     {type:'function',name:'github',description:'Read-only GitHub inspection.',parameters:{type:'object',properties:{path:{type:'string'}},required:['path']}},
     {type:'function',name:'capabilities',description:'Read current ANIL capabilities.',parameters:{type:'object',properties:{},required:[]}},
@@ -815,7 +815,8 @@ async function runOwnerAgent(req,env,command,history){
       let args={};try{args=JSON.parse(call.arguments||'{}')}catch{}
       let result;
       try{
-        if(call.name==='guard_live'){
+        if(call.name==='external_web_search'){const rr=await anilTool(new Request(new URL('/api/anil/tool',req.url),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool:'web_search',...args})}),env); result=await rr.json();
+        }else if(call.name==='guard_live'){
           const rr=await handleGuardLive(req,env); result=await rr.json();
         }else if(call.name==='revenue_fleet'){
           const u=new URL('/api/revenue/fleet',req.url); const rr=await runtimeRoutes(new Request(u,{method:'GET',headers:{cookie:req.headers.get('cookie')||''}}),env,u); result=rr?await rr.json():{ok:false,error:'revenue_route_unavailable'};
