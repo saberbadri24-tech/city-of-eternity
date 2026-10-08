@@ -84,6 +84,7 @@ async function inventory(url) {
         i,
         text: (b.innerText || b.getAttribute("aria-label") || "").trim().replace(/\s+/g, " ").slice(0, 120),
         request: b.getAttribute("data-request") || "",
+        service: b.getAttribute("data-service") || "",
         disabled: b.disabled,
         type: b.type || "button",
       })),
@@ -132,8 +133,9 @@ async function inventory(url) {
         const after = await page.locator("body").innerText().catch(() => "");
         const afterUrl = page.url();
         const afterService = await page.locator("#service").inputValue().catch(() => "");
+        const activeElementId = await page.evaluate(() => document.activeElement?.id || "");
         const changed = before !== after || beforeUrl !== afterUrl || beforeService !== afterService;
-        const serviceSelectionOk = Boolean(afterService && afterService !== beforeService);
+        const serviceSelectionOk = Boolean(b.service && afterService === b.service && (afterService !== beforeService || activeElementId === "request"));
         const planOk = planRequestSeen && !networkErrors.some(x => x.url.includes("/api/plan") && x.status >= 400);
         buttonResults.push({
           url,
@@ -142,6 +144,7 @@ async function inventory(url) {
           urlChanged: beforeUrl !== afterUrl,
           stateChanged: before !== after,
           afterUrl,
+          activeElementId,
         });
         if (afterUrl !== url) await gotoWithRetry(url).catch(() => {});
       } catch (e) {
