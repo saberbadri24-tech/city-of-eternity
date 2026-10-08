@@ -781,7 +781,7 @@ async function runOwnerAgent(req,env,command,history){
   let input=[...history,{role:'user',content:command}];
   for(let round=0;round<8;round++){
     const r=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+key},body:JSON.stringify({model,input,instructions,tools,tool_choice:'auto',parallel_tool_calls:true,max_output_tokens:1800})});
-    if(!r.ok)return {ok:false,reason:'openai_'+r.status};
+    if(!r.ok){const detail=await r.text().catch(()=>"");return {ok:false,reason:'openai_'+r.status,detail:detail.slice(0,600)};}
     const d=await r.json();const calls=Array.isArray(d.output)?d.output.filter(x=>x?.type==='function_call'):[];
     if(!calls.length)return {ok:true,text:d.output_text||'—',provider:'openai',model,rounds:round+1};
     input.push(...calls);
@@ -868,7 +868,10 @@ async function secretary(req,env){
     }
     const k=await handleCapabilityKernel(new Request(new URL('/api/anil/capability-kernel',req.url),{method:'GET'}),env).then(x=>x.json());
     const fa=b.language==='fa';
-    return json({ok:true,action:'runtime_online_ai_not_configured',live:false,text:fa?'Runtime آنیل آنلاین است، اما AI خارجی هنوز در Render تنظیم نشده؛ بنابراین پاسخ ساختگی نمی‌دهم. من همین الان وضعیت واقعی ابزارها را می‌خوانم. Providerهای AI فعلی: '+JSON.stringify(k.capabilities?.adapters?.ai?.providers||{})+'\nبرای اجرای واقعیِ دستورات آزاد، باید یک Provider AI در Runtime تنظیم شود.':'ANIL runtime is online, but no external AI provider is configured in Render, so I will not fake a live model response. The runtime capability state is available now. Current AI providers: '+JSON.stringify(k.capabilities?.adapters?.ai?.providers||{})+'\nFree-form live execution requires a configured AI provider.',data:k});
+    const providers=k.capabilities?.adapters?.ai?.providers||{};
+    const configured=Object.values(providers).some(Boolean);
+    const action=configured?'configured_provider_invocation_failed':'no_provider_configured';
+    return json({ok:true,action,live:false,text:fa?'Runtime آنیل آنلاین است، اما AI خارجی هنوز در Render تنظیم نشده؛ بنابراین پاسخ ساختگی نمی‌دهم. من همین الان وضعیت واقعی ابزارها را می‌خوانم. Providerهای AI فعلی: '+JSON.stringify(k.capabilities?.adapters?.ai?.providers||{})+'\nبرای اجرای واقعیِ دستورات آزاد، باید یک Provider AI در Runtime تنظیم شود.':'ANIL runtime is online, but no external AI provider is configured in Render, so I will not fake a live model response. The runtime capability state is available now. Current AI providers: '+JSON.stringify(k.capabilities?.adapters?.ai?.providers||{})+'\nFree-form live execution requires a configured AI provider.',data:{capability:k,providerState:{configured,providers}}});
   }catch(e){
     return json({ok:false,error:'secretary_runtime_error',message:String(e?.message||e).slice(0,300)},502);
   }
