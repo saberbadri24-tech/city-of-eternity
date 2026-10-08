@@ -37,9 +37,11 @@ jobs:
           BASE_URL: https://anil-x-live.onrender.com
         run: |
           set -euo pipefail
-          curl -sS --max-time 30 "$BASE_URL/api/health" -o /tmp/health.json || true
-          curl -sS --max-time 30 "$BASE_URL/api/guard/live?t=$(date +%s)" -o /tmp/guard.json || true
-          curl -sS --max-time 30 "$BASE_URL/api/anil/super-team" -o /tmp/team.json || true
+          ID_TOKEN=$(curl -fsSL -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=anil-x" | jq -r '.value')
+          test -n "$ID_TOKEN" && test "$ID_TOKEN" != "null"
+          curl -sS --max-time 30 -H "Authorization: Bearer $ID_TOKEN" "$BASE_URL/api/health" -o /tmp/health.json || true
+          curl -sS --max-time 30 -H "Authorization: Bearer $ID_TOKEN" "$BASE_URL/api/guard/live?t=$(date +%s)" -o /tmp/guard.json || true
+          curl -sS --max-time 30 -H "Authorization: Bearer $ID_TOKEN" "$BASE_URL/api/anil/super-team" -o /tmp/team.json || true
           echo '--- CONTROL PLANE HEALTH ---'; cat /tmp/health.json || true
           echo '--- CONTROL PLANE GUARD ---'; cat /tmp/guard.json || true
           echo '--- CONTROL PLANE SUPER TEAM ---'; cat /tmp/team.json || true
