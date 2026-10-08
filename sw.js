@@ -1,4 +1,4 @@
-const CACHE='anilx-v18-nonblocking';
+const CACHE='anilx-v19-nonblocking';
 
 self.addEventListener('install',event=>{event.waitUntil(self.skipWaiting());});
 
