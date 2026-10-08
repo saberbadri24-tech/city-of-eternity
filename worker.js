@@ -809,7 +809,8 @@ async function runOwnerAgent(req,env,command,history){
     if(!calls.length){
       return {ok:true,text:finalText||'ANIL دریافت کرد، اما مدل پاسخ متنی نهایی برنگرداند. لطفاً همان فرمان را دوباره ارسال کن.',provider:'openai',model:usedModel,rounds:round+1,responseStatus:d?.status||null};
     }
-    input.push(...calls);
+    // Preserve the complete Responses output (including reasoning/tool-call metadata) before returning function outputs. This is required for a reliable multi-turn tool loop.
+    input.push(...(Array.isArray(d.output)?d.output:[]));
     for(const call of calls){
       let args={};try{args=JSON.parse(call.arguments||'{}')}catch{}
       let result;
