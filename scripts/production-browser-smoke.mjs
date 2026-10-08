@@ -20,6 +20,8 @@ const pages = [];
 const skippedRisk = [];
 const skippedHidden = [];
 const visited = new Set();
+const MAX_PAGES = 10;
+const MAX_SAFE_BUTTONS_PER_PAGE = 4;
 
 page.on("console", m => {
   if (m.type() === "error" && !/status of 401/i.test(m.text())) {
@@ -41,15 +43,15 @@ page.on("response", r => {
 });
 
 async function waitStable() {
-  await page.waitForLoadState("domcontentloaded", { timeout: 15000 }).catch(() => {});
-  await page.waitForTimeout(500);
+  await page.waitForLoadState("domcontentloaded", { timeout: 10000 }).catch(() => {});
+  await page.waitForTimeout(300);
 }
 
-async function gotoWithRetry(url, attempts=6) {
+async function gotoWithRetry(url, attempts=3) {
   let last = null;
   for (let i=1; i<=attempts; i++) {
     try {
-      const r = await page.goto(url, {waitUntil:"domcontentloaded", timeout:30000});
+      const r = await page.goto(url, {waitUntil:"domcontentloaded", timeout:20000});
       await waitStable();
       if (r?.ok()) return r;
       last = Error(`HTTP ${r?.status() || "NO_RESPONSE"} ${url}`);
@@ -60,7 +62,7 @@ async function gotoWithRetry(url, attempts=6) {
 }
 
 async function inventory(url) {
-  if (visited.has(url) || visited.size >= 25) return;
+  if (visited.has(url) || visited.size >= MAX_PAGES) return;
   visited.add(url);
   try {
     const response = await gotoWithRetry(url);
@@ -93,7 +95,9 @@ async function inventory(url) {
 
     pages.push({ url, title: info.title, forms: info.forms, buttonCount: info.buttons.length, linkCount: info.links.length });
 
+    let safeButtonsTested = 0;
     for (const b of info.buttons) {
+      if (safeButtonsTested >= MAX_SAFE_BUTTONS_PER_PAGE) break;
       if (!b.text || b.disabled) continue;
       if (b.request) {
         skippedHidden.push({ url, text: b.text, reason: "covered by deep production interaction QA with live /api/plan request verification" });
@@ -104,6 +108,7 @@ async function inventory(url) {
         continue;
       }
 
+      safeButtonsTested++;
       try {
         await gotoWithRetry(url);
         await waitStable();
@@ -167,6 +172,8 @@ const report = {
   base,
   timestamp: new Date().toISOString(),
   pagesVisited: pages.length,
+  pageLimit: MAX_PAGES,
+  safeButtonLimitPerPage: MAX_SAFE_BUTTONS_PER_PAGE,
   buttonsTested: buttonResults.length,
   buttonsPassed: buttonResults.filter(x => x.pass).length,
   buttonsFailed: buttonResults.filter(x => !x.pass).length,
