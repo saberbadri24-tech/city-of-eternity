@@ -15,6 +15,25 @@ const publicPath=(rel,internal=false)=>{const clean=String(rel||'').replace(/^\/
 const toWebRequest=(req,origin)=>{const headers=new Headers();for(const [k,v] of Object.entries(req.headers||{})){if(Array.isArray(v))headers.set(k,v.join(', '));else if(v!=null)headers.set(k,String(v));}return new Request(origin+(req.url||'/'),{method:req.method||'GET',headers});};
 const readBody=async(req,limit=MAX_BODY_BYTES)=>{let total=0;const chunks=[];for await(const chunk of req){total+=chunk.length;if(total>limit)throw Object.assign(new Error('request_body_too_large'),{statusCode:413});chunks.push(chunk)}return chunks.length?Buffer.concat(chunks):undefined};
 
+async function verifyGuardOidc(req){
+  const raw=req.headers['x-anil-oidc-token']||req.headers.authorization||'';
+  const token=String(raw).replace(/^Bearer\\s+/i,'').trim();
+  const parts=token.split('.');
+  if(parts.length!==3)return false;
+  try{
+    const dec=s=>Buffer.from(s.replace(/-/g,'+').replace(/_/g,'/'),'base64').toString('utf8');
+    const header=JSON.parse(dec(parts[0])),claims=JSON.parse(dec(parts[1]));
+    if(header.alg!=='RS256'||claims.iss!=='https://token.actions.githubusercontent.com'||claims.aud!=='anil-x')return false;
+    if(Number(claims.exp||0)*1000<Date.now())return false;
+    if(claims.repository!=='saberbadri24-tech/city-of-eternity'||claims.ref!=='refs/heads/main')return false;
+    const jwks=await fetch('https://token.actions.githubusercontent.com/.well-known/jwks',{cache:'no-store'}).then(r=>r.ok?r.json():null);
+    const jwk=jwks?.keys?.find(k=>k.kid===header.kid); if(!jwk)return false;
+    const key=await crypto.subtle.importKey('jwk',{kty:jwk.kty,n:jwk.n,e:jwk.e,alg:'RS256',use:'sig',key_ops:['verify']},{name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'},false,['verify']);
+    const sig=Buffer.from(parts[2].replace(/-/g,'+').replace(/_/g,'/'),'base64');
+    return await crypto.subtle.verify('RSASSA-PKCS1-v1_5',key,sig,Buffer.from(parts[0]+'.'+parts[1]));
+  }catch{return false}
+}
+
 async function assetsFetch(request){
   const u=new URL(request.url);
   const internal=request.headers.get('x-anil-internal')==='guard-runtime';
@@ -187,6 +206,32 @@ const server=http.createServer(async(req,res)=>{
       res.statusCode=response.status;response.headers.forEach((v,k)=>res.setHeader(k,v));
       if(req.method==='HEAD'){res.end();return}
       const buf=Buffer.from(await response.arrayBuffer());res.setHeader('content-length',String(buf.length));res.end(buf);return;
+    }
+
+    if(u.pathname==='/api/guard/ingest'&&req.method==='POST'){
+      if(!(await verifyGuardOidc(req))){res.statusCode=401;res.setHeader('content-type','application/json');res.end(JSON.stringify({ok:false,error:'github_actions_auth_required'}));return;}
+      const body=await readBody(req);
+      const b=JSON.parse(body?.toString('utf8')||'{}');
+      const allowed=['status','opportunities','highValue','sourceHealth','capabilities','radar','receipts','official','ledger'];
+      const payload={};
+      const bound=v=>{
+        const raw=JSON.stringify(v);
+        if(raw.length<=3500)return v;
+        if(Array.isArray(v))return v.slice(0,Math.max(1,Math.floor(v.length/2))).map(bound);
+        if(v&&typeof v==='object'){const o={};for(const [k,x] of Object.entries(v)){if(JSON.stringify(o).length>3300)break;o[k]=bound(x)}return o}
+        return String(v).slice(0,3400);
+      };
+      for(const key of allowed)if(b[key]&&typeof b[key]==='object')payload[key]=bound(b[key]);
+      payload.updatedAt=new Date().toISOString();
+      env.PAYMENTS=await getPaymentsStore();
+      if(!env.PAYMENTS){res.statusCode=503;res.setHeader('content-type','application/json');res.end(JSON.stringify({ok:false,error:'private_storage_unavailable'}));return;}
+      try{
+        for(const [key,value] of Object.entries(payload))await env.PAYMENTS.put('guard/private/'+key,JSON.stringify(value));
+      }catch(error){
+        console.error('[GUARD-INGEST-GATE]',String(error?.message||error));
+        res.statusCode=503;res.setHeader('content-type','application/json');res.end(JSON.stringify({ok:false,error:'private_storage_write_failed',message:String(error?.message||error)}));return;
+      }
+      res.statusCode=200;res.setHeader('content-type','application/json');res.end(JSON.stringify({ok:true,stored:Object.keys(payload),updatedAt:payload.updatedAt}));return;
     }
 
     const body=await readBody(req);
