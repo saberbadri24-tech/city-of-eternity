@@ -777,8 +777,10 @@ async function runOwnerAgent(req,env,command,history){
     {type:'function',name:'capabilities',description:'Read current ANIL capabilities.',parameters:{type:'object',properties:{},required:[]}},
     {type:'function',name:'guard_live',description:'Read the current Immortal Guard private/live opportunity radar state. Use this for Guard freshness, candidates, approvals and evidence status.',parameters:{type:'object',properties:{},required:[]}},
     {type:'function',name:'revenue_fleet',description:'Read the current Revenue Fleet state and verified paid-order accounting.',parameters:{type:'object',properties:{},required:[]}},
-    {type:'function',name:'control_plane',description:'Inspect/plan ANIL operations. Sensitive mutations remain owner-gated.',parameters:{type:'object',properties:{operation:{type:'string'},body:{type:'object'}},required:['operation']}}];
-  const instructions=`You are ANIL, the internal owner assistant and operational commander inside ANIL X. Badrkhan is the separate public visitor/customer assistant. Never expose owner tools, private admin context, Guard controls, deployment controls, or owner data to Badrkhan. Reason, research, inspect, calculate and use tools as needed. Continue multi-step work until the task is answered or a real boundary blocks it. Never claim execution without evidence. Code changes must use the existing controlled-change queue and QA gates. Money, crypto, wallet signing/transfers, withdrawals, settlement, private keys, seed phrases, KYC and irreversible security actions are never executed autonomously: prepare/verify them and leave them at the owner-approval boundary. The main wallet is the final treasury boundary. Never request or expose its private key/seed. Return verified facts and next action.`;
+    {type:'function',name:'control_plane',description:'Inspect/plan ANIL operations. Sensitive mutations remain owner-gated.',parameters:{type:'object',properties:{operation:{type:'string'},body:{type:'object'}},required:['operation']}},
+    {type:'function',name:'controlled_change',description:'Create a bounded ANIL code change request through the existing owner-approved change queue. Never bypasses QA, approval, or deployment gates.',parameters:{type:'object',properties:{request:{type:'string'},path:{type:'string'}},required:['request']}},
+    {type:'function',name:'live_health',description:'Read live ANIL X health, readiness and truthful provider configuration.',parameters:{type:'object',properties:{},required:[]}}];
+  const instructions=`You are ANIL, the internal owner assistant and operational commander inside ANIL X. Badrkhan is the separate public visitor/customer assistant. Never expose owner tools, private admin context, Guard controls, deployment controls, or owner data to Badrkhan. Act like a senior operator: understand the goal, inspect evidence, choose the smallest effective action, execute through the available controlled tool, verify the result, and report exactly what happened. Use live health, Guard, Revenue, web research and code inspection when relevant. When a code/site defect is identified and the owner has clearly asked to fix it, use controlled_change rather than merely explaining how to fix it; the queue still enforces QA/approval/deployment gates. Do not stop at the first useful observation when the task explicitly asks for completion: continue until verified completion or a concrete external boundary. Never claim execution without evidence. Money, crypto, wallet signing/transfers, withdrawals, settlement, private keys, seed phrases, KYC and irreversible security actions are never executed autonomously: prepare/verify them and leave them at the owner-approval boundary. The main wallet is the final treasury boundary. Never request or expose its private key/seed. Return verified facts, completed actions, blockers and next action.`;
   const extractText=(d)=>{
     if(typeof d?.output_text==='string'&&d.output_text.trim())return d.output_text.trim();
     const parts=[];
@@ -815,7 +817,15 @@ async function runOwnerAgent(req,env,command,history){
       let args={};try{args=JSON.parse(call.arguments||'{}')}catch{}
       let result;
       try{
-        if(call.name==='external_web_search'){const rr=await anilTool(new Request(new URL('/api/anil/tools',req.url),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool:'web_search',...args})}),env); result=await rr.json();
+        if(call.name==='controlled_change'){
+          const reqText=String(args.request||command).slice(0,12000);
+          const changeReq=new Request(new URL('/api/anil/automation/queue',req.url),{method:'POST',headers:{'content-type':'application/json',cookie:req.headers.get('cookie')||''},body:JSON.stringify({request:reqText,path:args.path||undefined})});
+          const rr=await anilOperatorChange(changeReq,env,reqText);
+          result=rr;
+        }else if(call.name==='live_health'){
+          const rr=await runtimeRoutes(new Request(new URL('/api/health',req.url),{method:'GET',headers:{cookie:req.headers.get('cookie')||''}}),env,new URL('/api/health',req.url));
+          result=rr?await rr.json():{ok:false,error:'health_route_unavailable'};
+        }else if(call.name==='external_web_search'){const rr=await anilTool(new Request(new URL('/api/anil/tools',req.url),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool:'web_search',...args})}),env); result=await rr.json();
         }else if(call.name==='guard_live'){
           const rr=await handleGuardLive(req,env); result=await rr.json();
         }else if(call.name==='revenue_fleet'){
