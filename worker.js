@@ -902,19 +902,40 @@ async function secretary(req,env){
         if(team?.ok&&answer)return json({ok:true,text:String(answer),action:'super_team_live',provider:team.evidence?.liveProviders?.join('+')||'super-team',live:true,data:{team}});
       }catch{}
     }
+    const providerFailures=[];
     const ai=getAiConfig(env).openai;
-    const openAiModel=env.ASTRA_MODEL||env.ANIL_OPENAI_MODEL;
-    if(ai&&openAiModel){
+    const openAiModels=[env.ASTRA_MODEL,env.ANIL_OPENAI_MODEL,'gpt-6-astra','gpt-6.1-sol','gpt-6-sol','gpt-6-luna'].filter((v,i,a)=>v&&a.indexOf(v)===i);
+    if(ai){
       const input=[...history,{role:'user',content:command}];
-      const r=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+ai},body:JSON.stringify({model:openAiModel,instructions:'You are ANIL, the live private manager assistant inside ANIL X. Badrkhan is the separate public customer assistant. Answer the owner directly and coordinate Guard, specialist agents, QA, revenue and controlled site operations. Use only evidence supplied by runtime tools. Never claim execution without evidence. Never ask for seed phrases or private keys. Sensitive money/security actions remain owner-gated.',input})});
-      if(r.ok){const d=await r.json();return json({ok:true,text:d?.output_text||'—',action:'live_ai',provider:'openai',live:true});}
+      for(const model of openAiModels){
+        try{
+          const rr=await fetch('https://api.openai.com/v1/responses',{method:'POST',signal:AbortSignal.timeout(6500),headers:{'content-type':'application/json',authorization:'Bearer '+ai},body:JSON.stringify({model,instructions:'You are ANIL, the live private manager assistant inside ANIL X. Badrkhan is the separate public customer assistant. Answer the owner directly and coordinate Guard, specialist agents, QA, revenue and controlled site operations. Use only evidence supplied by runtime tools. Never claim execution without evidence. Never ask for seed phrases or private keys. Sensitive money/security actions remain owner-gated.',input,max_output_tokens:1600})});
+          if(rr.ok){const d=await rr.json();const out=String(d?.output_text||'').trim();if(out)return json({ok:true,text:out,action:'live_ai',provider:'openai',live:true,model});}
+          providerFailures.push({provider:'openai',model,status:rr.status,detail:(await rr.text().catch(()=>'' )).slice(0,300)});
+        }catch(e){providerFailures.push({provider:'openai',model,status:0,detail:String(e?.message||e).slice(0,300)})}
+      }
+    }
+    const anthropic=getAiConfig(env).anthropic;
+    if(anthropic){
+      const model=env.CLAUDE_MODEL||env.ANIL_ANTHROPIC_MODEL||'claude-haiku-5-5';
+      try{
+        const rr=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',signal:AbortSignal.timeout(6500),headers:{'content-type':'application/json','x-api-key':anthropic,'anthropic-version':'2023-06-01'},body:JSON.stringify({model,max_tokens:1400,system:'You are ANIL, the private owner assistant inside ANIL X. Respond directly to the owner in Persian when the request is Persian. Do not expose secrets. Do not claim a code change, deployment, payment, wallet action, or other execution unless evidence is supplied by the runtime. For operational requests, give the concrete next verified action rather than repeating a generic provider-not-configured message.',messages:[...history,{role:'user',content:command}]})});
+        const d=await rr.json().catch(()=>({}));
+        if(rr.ok){const out=String((d?.content||[]).map(x=>x?.text||'').join('\n')).trim();if(out)return json({ok:true,text:out,action:'live_ai_fallback',provider:'anthropic',live:true,model});}
+        providerFailures.push({provider:'anthropic',model,status:rr.status,detail:JSON.stringify(d).slice(0,300)});
+      }catch(e){providerFailures.push({provider:'anthropic',model,status:0,detail:String(e?.message||e).slice(0,300)})}
     }
     const k=await handleCapabilityKernel(new Request(new URL('/api/anil/capability-kernel',req.url),{method:'GET'}),env).then(x=>x.json());
     const fa=b.language==='fa';
     const providers=k.capabilities?.adapters?.ai?.providers||{};
     const configured=Object.values(providers).some(Boolean);
     const action=configured?'configured_provider_invocation_failed':'no_provider_configured';
-    return json({ok:true,action,live:false,text:fa?'Runtime آنیل آنلاین است، اما AI خارجی هنوز در Render تنظیم نشده؛ بنابراین پاسخ ساختگی نمی‌دهم. من همین الان وضعیت واقعی ابزارها را می‌خوانم. Providerهای AI فعلی: '+JSON.stringify(k.capabilities?.adapters?.ai?.providers||{})+'\nبرای اجرای واقعیِ دستورات آزاد، باید یک Provider AI در Runtime تنظیم شود.':'ANIL runtime is online, but no external AI provider is configured in Render, so I will not fake a live model response. The runtime capability state is available now. Current AI providers: '+JSON.stringify(k.capabilities?.adapters?.ai?.providers||{})+'\nFree-form live execution requires a configured AI provider.',data:{capability:k,providerState:{configured,providers}}});
+    const failureText=providerFailures.length?JSON.stringify(providerFailures):'no_provider_attempted';
+    return json({ok:true,action,live:false,text:fa
+      ? (configured?'اتصال Provider در Render وجود دارد اما فراخوانی واقعی شکست خورد. ANIL اجرای ساختگی اعلام نمی‌کند. خطای واقعی ثبت‌شده: '+failureText:'هیچ Provider هوش مصنوعی در Runtime تنظیم نشده است.')
+      : (configured?'AI provider credentials are configured, but every live invocation failed. No fake execution will be claimed. Provider diagnostics: '+failureText:'No AI provider is configured in the Runtime.'),
+      data:{capability:k,providerState:{configured,providers},providerFailures}});
+
   }catch(e){
     return json({ok:false,error:'secretary_runtime_error',message:String(e?.message||e).slice(0,300)},502);
   }
