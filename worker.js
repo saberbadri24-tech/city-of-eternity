@@ -5,7 +5,7 @@ import analyze from './netlify/functions/analyze.mjs';
 import vision from './functions/api/vision.mjs';
 import voice from './functions/api/voice.mjs';import tonApi from './functions/api/ton.mjs';import {handleJavidan} from './functions/api/javidan-trinity.mjs';
 import {handleAnilCapabilities} from './functions/api/anil-capabilities.mjs';import {handleCapabilityKernel} from './functions/api/anil-capability-kernel.mjs';
-import {handleExecutionReadiness} from './functions/api/execution-readiness.mjs';import {handleGuardLive} from './functions/api/guard-live.mjs';
+import {handleExecutionReadiness} from './functions/api/execution-readiness.mjs';import {handleGuardLive} from './functions/api/guard-live.mjs';import {handlePermanentCore} from './functions/api/permanent-core.mjs';
 import {anilTool} from './functions/api/anil-tools.mjs';import {handleSuperTeam} from './functions/api/anil-super-team.mjs';import {adminLogin,adminAuth,adminConfigured,adminSelfTest} from './functions/api/admin-auth.mjs';import {onRequestPost as pay} from './functions/api/pay.js';import {onRequestPost as webhook} from './functions/api/variza-webhook.js';
 const json=(d,s=200,h={})=>new Response(JSON.stringify(d),{status:s,headers:{'content-type':'application/json','cache-control':'no-store',...h}});
 const translateCache=new Map();
@@ -331,6 +331,7 @@ async function runtimeRoutes(req,env,u){
   if(p==='/api/autopilot'){if(req.method==='POST'&&!(await githubActionsAuth(req,env)))return rjson({ok:false,error:'github_actions_auth_required'},401);return autopilot(req,env)}
   if(p==='/api/anil/capabilities')return handleAnilCapabilities(req,env);
   if(p==='/api/anil/capability-kernel')return handleCapabilityKernel(req,env);
+  if(p==='/api/anil/permanent-core')return handlePermanentCore(req,env);
   if(p==='/api/anil/toolss'){if(req.method==='POST'&&!(await githubActionsAuth(req,env))&&!(await adminAuth(req,env)))return rjson({ok:false,error:'owner_or_github_actions_auth_required'},401);return anilTool(req,env);}
   if(p==='/api/anil/automation/queue')return anilChangeRequest(req,env);
   const PRIVATE_OWNER_PATHS=new Set([
