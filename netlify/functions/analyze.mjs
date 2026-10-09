@@ -11,7 +11,7 @@ const routes=[
 const fallback={id:"custom",title:"Adaptive ANIL X path",desc:"ANIL X turns the desired outcome into an executable path.",steps:["Understand outcome","Discover related needs","Build the path","Preview","Execute","Continue and grow"]};
 const parseJSON=parseModelJson;
 const getEnv=(env,key)=>String((env||process.env)[key]||"").trim();
-const timeoutFetch=async(url,options={},ms=1650)=>{
+const timeoutFetch=async(url,options={},ms=4500)=>{
   const controller=new AbortController();
   const timer=setTimeout(()=>controller.abort(),ms);
   try{return await fetch(url,{...options,signal:controller.signal});}
@@ -51,6 +51,7 @@ async function providerOpenRouter(prompt,env){
   if(!out||typeof out!=="object")throw Error("openrouter_invalid_json"); return out;
 }
 const PROVIDERS={openai:providerOpenAI,gemini:providerGemini,claude:providerClaude,openrouter:providerOpenRouter};
+const providerCooldowns=new Map();
 function providerOrder(env){
   const configured=getEnv(env,"ANIL_PROVIDER_ORDER");
   const requested=(configured||"openai,gemini,claude,openrouter").split(",").map(x=>x.trim().toLowerCase()).filter(x=>PROVIDERS[x]);
@@ -77,17 +78,26 @@ export default async (req,env)=>{
     let result=localResult,providerUsed="ANIL-Core";
     const attempts=[];
     // Bounded sequential rotation: a failed/empty/quota-limited provider never blocks the local engine.
-    const started=Date.now(),budgetMs=6500;
+    const started=Date.now(),budgetMs=9000;
     for(const name of providerOrder(env)){
       if(Date.now()-started>=budgetMs)break;
+      const coolingUntil=providerCooldowns.get(name)||0;
+      if(coolingUntil>Date.now()){
+        attempts.push({provider:name,status:"cooldown",retryAfterMs:coolingUntil-Date.now()});
+        continue;
+      }
       try{
         const candidate=await PROVIDERS[name](prompt,env);
-        if(candidate){result=validModelResult(candidate,localResult);providerUsed=name;attempts.push({provider:name,status:"ok"});break;}
+        if(candidate){result=validModelResult(candidate,localResult);providerUsed=name;attempts.push({provider:name,status:"ok"});providerCooldowns.delete(name);break;}
         attempts.push({provider:name,status:"not_configured"});
       }catch(error){
         const message=String(error?.message||error);
         const match=message.match(/_(401|402|403|404|408|413|429|500|502|503|504)$/);
         const status=match?Number(match[1]):0;
+        if(status===402)providerCooldowns.set(name,Date.now()+24*60*60*1000);
+        else if(status===429)providerCooldowns.set(name,Date.now()+10*60*1000);
+        else if(status===401||status===403)providerCooldowns.set(name,Date.now()+60*60*1000);
+        else if(!status)providerCooldowns.set(name,Date.now()+30*1000);
         attempts.push({provider:name,status:status===429?"rate_limited":status===402?"credits_exhausted":status===401||status===403?"auth_or_access_error":status?"http_error":"timeout_or_invalid",httpStatus:status||undefined});
       }
     }
