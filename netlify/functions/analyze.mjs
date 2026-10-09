@@ -11,7 +11,7 @@ const routes=[
 const fallback={id:"custom",title:"Adaptive ANIL X path",desc:"ANIL X turns the desired outcome into an executable path.",steps:["Understand outcome","Discover related needs","Build the path","Preview","Execute","Continue and grow"]};
 const parseJSON=parseModelJson;
 const getEnv=(env,key)=>String((env||process.env)[key]||"").trim();
-const timeoutFetch=async(url,options={},ms=4500)=>{
+const timeoutFetch=async(url,options={},ms=7500)=>{
   const controller=new AbortController();
   const timer=setTimeout(()=>controller.abort(),ms);
   try{return await fetch(url,{...options,signal:controller.signal});}
