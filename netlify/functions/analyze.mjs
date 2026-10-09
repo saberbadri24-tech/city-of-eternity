@@ -50,11 +50,26 @@ async function providerOpenRouter(prompt,env){
   const d=await r.json(); const out=parseJSON(d?.choices?.[0]?.message?.content);
   if(!out||typeof out!=="object")throw Error("openrouter_invalid_json"); return out;
 }
-const PROVIDERS={openai:providerOpenAI,gemini:providerGemini,claude:providerClaude,openrouter:providerOpenRouter};
+async function providerCompatible(prompt,env,cfg){
+  const key=cfg.keys.map(k=>getEnv(env,k)).find(Boolean);if(!key)return null;
+  const model=cfg.modelKeys.map(k=>getEnv(env,k)).find(Boolean)||cfg.defaultModel;
+  const r=await timeoutFetch(cfg.endpoint,{method:"POST",headers:{"content-type":"application/json",authorization:"Bearer "+key,...(cfg.headers||{})},body:JSON.stringify({model,messages:[{role:"system",content:systemPrompt},{role:"user",content:prompt}],temperature:.2})},3500);
+  if(!r.ok)throw Error(cfg.name+"_"+r.status);
+  const d=await r.json(),out=parseJSON(d?.choices?.[0]?.message?.content);if(!out||typeof out!=="object")throw Error(cfg.name+"_invalid_json");return out;
+}
+const providerGroq=(p,e)=>providerCompatible(p,e,{name:"groq",keys:["GROQ_API_KEY"],endpoint:"https://api.groq.com/openai/v1/chat/completions",modelKeys:["GROQ_MODEL"],defaultModel:"openai/gpt-oss-120b"});
+const providerCerebras=(p,e)=>providerCompatible(p,e,{name:"cerebras",keys:["CEREBRAS_API_KEY"],endpoint:"https://api.cerebras.ai/v1/chat/completions",modelKeys:["CEREBRAS_MODEL"],defaultModel:"gpt-oss-120b"});
+const providerMistral=(p,e)=>providerCompatible(p,e,{name:"mistral",keys:["MISTRAL_API_KEY"],endpoint:"https://api.mistral.ai/v1/chat/completions",modelKeys:["MISTRAL_MODEL"],defaultModel:"mistral-small-latest"});
+const providerDeepSeek=(p,e)=>providerCompatible(p,e,{name:"deepseek",keys:["DEEPSEEK_API_KEY"],endpoint:"https://api.deepseek.com/chat/completions",modelKeys:["DEEPSEEK_MODEL"],defaultModel:"deepseek-chat"});
+const providerTogether=(p,e)=>providerCompatible(p,e,{name:"together",keys:["TOGETHER_API_KEY"],endpoint:"https://api.together.xyz/v1/chat/completions",modelKeys:["TOGETHER_MODEL"],defaultModel:"meta-llama/Llama-3.3-70B-Instruct-Turbo"});
+const providerFireworks=(p,e)=>providerCompatible(p,e,{name:"fireworks",keys:["FIREWORKS_API_KEY"],endpoint:"https://api.fireworks.ai/inference/v1/chat/completions",modelKeys:["FIREWORKS_MODEL"],defaultModel:"accounts/fireworks/models/llama-v3p3-70b-instruct"});
+const providerSambaNova=(p,e)=>providerCompatible(p,e,{name:"sambanova",keys:["SAMBANOVA_API_KEY"],endpoint:"https://api.sambanova.ai/v1/chat/completions",modelKeys:["SAMBANOVA_MODEL"],defaultModel:"Meta-Llama-3.3-70B-Instruct"});
+const providerXAI=(p,e)=>providerCompatible(p,e,{name:"xai",keys:["XAI_API_KEY"],endpoint:"https://api.x.ai/v1/chat/completions",modelKeys:["XAI_MODEL"],defaultModel:"grok-3-mini"});
+const PROVIDERS={openai:providerOpenAI,groq:providerGroq,cerebras:providerCerebras,gemini:providerGemini,claude:providerClaude,openrouter:providerOpenRouter,deepseek:providerDeepSeek,mistral:providerMistral,together:providerTogether,fireworks:providerFireworks,sambanova:providerSambaNova,xai:providerXAI};
 const providerCooldowns=new Map();
 function providerOrder(env){
   const configured=getEnv(env,"ANIL_PROVIDER_ORDER");
-  const requested=(configured||"openai,gemini,claude,openrouter").split(",").map(x=>x.trim().toLowerCase()).filter(x=>PROVIDERS[x]);
+  const requested=(configured||"openai,groq,cerebras,gemini,claude,openrouter,deepseek,mistral,together,fireworks,sambanova,xai").split(",").map(x=>x.trim().toLowerCase()).filter(x=>PROVIDERS[x]);
   return [...new Set([...requested,...Object.keys(PROVIDERS)])];
 }
 function validModelResult(value,local){
@@ -92,13 +107,14 @@ export default async (req,env)=>{
         attempts.push({provider:name,status:"not_configured"});
       }catch(error){
         const message=String(error?.message||error);
-        const match=message.match(/_(401|402|403|404|408|413|429|500|502|503|504)$/);
+        const match=message.match(/_(400|401|402|403|404|408|413|429|500|502|503|504)$/);
         const status=match?Number(match[1]):0;
         if(status===402)providerCooldowns.set(name,Date.now()+24*60*60*1000);
         else if(status===429)providerCooldowns.set(name,Date.now()+10*60*1000);
+        else if(status===400)providerCooldowns.set(name,Date.now()+60*60*1000);
         else if(status===401||status===403)providerCooldowns.set(name,Date.now()+60*60*1000);
         else if(!status)providerCooldowns.set(name,Date.now()+30*1000);
-        attempts.push({provider:name,status:status===429?"rate_limited":status===402?"credits_exhausted":status===401||status===403?"auth_or_access_error":status?"http_error":"timeout_or_invalid",httpStatus:status||undefined});
+        attempts.push({provider:name,status:status===429?"rate_limited":status===402?"credits_exhausted":status===400?"invalid_request_or_model":status===401||status===403?"auth_or_access_error":status?"http_error":"timeout_or_invalid",httpStatus:status||undefined});
       }
     }
     // Optional council verification only when explicitly requested; never slow down every normal chat turn.
