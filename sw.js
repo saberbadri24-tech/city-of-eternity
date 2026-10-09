@@ -1,4 +1,4 @@
-const CACHE='anilx-v19-nonblocking';
+const CACHE='anilx-v20-chat-responsive';
 
 self.addEventListener('install',event=>{event.waitUntil(self.skipWaiting());});
 
