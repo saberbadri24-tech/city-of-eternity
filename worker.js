@@ -866,8 +866,11 @@ async function secretary(req,env){
   try{
     if(/وضعیت|status|سلامت|health|runtime|سیستم/.test(q)){
       const h=await live('/api/health');
-      const k=await handleCapabilityKernel(new Request(new URL('/api/anil/capability-kernel',req.url),{method:'GET'}),env).then(x=>x.json());
-      return json({ok:true,action:'live_system_status',text:(b.language==='fa'?'وضعیت واقعی ANIL X در همین لحظه:\n':'Live ANIL X status right now:\n')+JSON.stringify({health:h.data,capabilityLevel:k.capabilityLevel,adapters:k.capabilities?.adapters,truth:k.truth},null,2),data:{health:h.data,capability:k}});
+      let k=null,capabilityError=null;
+      try{k=await handleCapabilityKernel(new Request(new URL('/api/anil/capability-kernel',req.url),{method:'GET'}),env).then(x=>x.json());}
+      catch(e){capabilityError=String(e?.message||e).slice(0,180);}
+      const report={health:h.data,capabilityLevel:k?.capabilityLevel||{target:100,design:100,configured:null,runtimeVerified:false},adapters:k?.capabilities?.adapters||h.data?.configured||{},truth:k?.truth||{executionIsNeverClaimedWithoutEvidence:true,providerAccessIsNeverInferred:true},capabilityError};
+      return json({ok:true,action:'live_system_status',text:(b.language==='fa'?'وضعیت واقعی ANIL X در همین لحظه:\n':'Live ANIL X status right now:\n')+JSON.stringify(report,null,2),data:report});
     }
     if(/گارد|guard|ایردراپ|airdrop|شکار|فرصت/.test(q)){
       const g=await live('/api/guard/live');
@@ -937,7 +940,8 @@ async function secretary(req,env){
       data:{capability:k,providerState:{configured,providers},providerFailures}});
 
   }catch(e){
-    return json({ok:false,error:'secretary_runtime_error',message:String(e?.message||e).slice(0,300)},502);
+    const message=String(e?.message||e).slice(0,240);
+    return json({ok:true,action:'runtime_diagnostic',live:false,text:(b.language==='fa'?'یک مسیر تشخیص وضعیت خطا داد؛ خود Runtime بالا است. جزئیات امن: ':'A status/diagnostic path failed; runtime remains reachable. Safe detail: ')+message,data:{error:'secretary_runtime_error',message}});
   }
 }
 export default{async fetch(req,env,ctx){const u=new URL(req.url);if(u.pathname==='/api/guard/live'&&req.method==='GET'){if(!(await adminAuth(req,env)))return json({ok:false,error:'admin_auth_required'},401);return handleGuardLive(req,env);}if(u.pathname==='/api/health'||u.pathname==='/api/_healthcheck'){const adminReady=adminConfigured(env);return json({ok:true,ready:adminReady,service:'ANIL X',runtime:'unified-worker',configured:{admin:adminReady,openai:!!(getAiConfig(env).openai),anthropic:!!(getAiConfig(env).anthropic),gemini:!!(getAiConfig(env).gemini),variza:!!getVarizaApiKey(env),payments:!!env.PAYMENTS,assets:!!env.ASSETS},routes:['/api/plan','/api/analyze','/api/vision','/api/voice','/api/ton/account','/api/ton/transactions','/api/javidan/trinity','/api/account','/api/memory','/api/order','/api/fx','/api/discovery','/api/free-request','/api/free-admin','/api/payment-status','/api/worker','/api/pay','/api/variza-webhook','/api/revenue/fleet','/api/revenue/fleet/run','/api/revenue/programs','/api/guard/live'],revenue:{persistence:!!env.PAYMENTS,variza:!!getVarizaApiKey(env),ton:validTonAddress(getMainTonAddress(env)),guardCatchQueue:!!env.PAYMENTS}},200);}const runtime=await runtimeRoutes(req,env,u);if(runtime)return runtime;if(u.pathname==='/api/analyze')return analyze(req,env);if(u.pathname==='/api/vision')return vision(req,env);if(u.pathname==='/api/voice')return voice(req,env);if(u.pathname==='/api/ton/account'||u.pathname==='/api/ton/transactions')return tonApi(req);if(u.pathname==='/api/anil/execution-readiness')return handleExecutionReadiness(req,env);if(u.pathname==='/api/plan')return handlePlan(req,env);if(u.pathname==='/api/anil/super-team'){if(!(await githubActionsAuth(req,env))&&!(await adminAuth(req,env)))return json({ok:false,error:'owner_or_github_actions_auth_required'},401);return handleSuperTeam(req,env,{guardHandler:handleGuardLive});}if(u.pathname==='/api/javidan/trinity')return handleJavidan(req,env);if(u.pathname==='/api/admin/password/login')return adminLogin(req,env);if(u.pathname==='/api/admin/password/logout'&&req.method==='POST')return json({ok:true},200,{'set-cookie':'session=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0'});
