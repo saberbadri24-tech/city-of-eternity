@@ -802,7 +802,7 @@ async function runOwnerAgent(req,env,command,history){
     let r=null,detail='',usedModel=modelCandidates[0];
     for(const candidate of modelCandidates){
       try{
-        r=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+key},body:JSON.stringify({model:candidate,input,instructions,tools,tool_choice:'auto',parallel_tool_calls:true,max_output_tokens:1800})});
+        r=await fetch('https://api.openai.com/v1/responses',{method:'POST',signal:AbortSignal.timeout(6500),headers:{'content-type':'application/json',authorization:'Bearer '+key},body:JSON.stringify({model:candidate,input,instructions,tools,tool_choice:'auto',parallel_tool_calls:true,max_output_tokens:1800})});
         if(r.ok){usedModel=candidate;modelCandidates.splice(0,modelCandidates.length,candidate,...modelCandidates.filter(x=>x!==candidate));break;}
         detail=(await r.text().catch(()=>'' )).slice(0,600);
       }catch(e){detail=String(e?.message||e).slice(0,600);}
