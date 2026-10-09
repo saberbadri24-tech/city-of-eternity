@@ -811,14 +811,65 @@ async function runOwnerAgent(req,env,command,history){
       }catch(e){detail=String(e?.message||e).slice(0,600);}
     }
     if(!r?.ok&&openrouter){
+      // OpenAI-compatible free-model router. Preserve the same bounded owner tools
+      // instead of degrading to a text-only answer when the primary provider is down.
       try{
         const model=env.ANIL_OPENROUTER_MODEL||'openrouter/free';
-        const messages=[{role:'system',content:instructions+' Answer directly. If tools are unavailable in this fallback route, be explicit and never claim you performed external actions.'},...history.slice(-8).map(x=>({role:x.role==='assistant'?'assistant':'user',content:String(x.content||'').slice(0,2500)})),{role:'user',content:command}];
-        const rr=await fetch('https://openrouter.ai/api/v1/chat/completions',{method:'POST',signal:AbortSignal.timeout(9000),headers:{'content-type':'application/json',authorization:'Bearer '+openrouter,'http-referer':'https://anil-x-live.onrender.com','x-title':'ANIL X Owner Core'},body:JSON.stringify({model,messages,temperature:0.3,max_tokens:1400})});
-        const dd=await rr.json().catch(()=>({}));
-        const out=String(dd?.choices?.[0]?.message?.content||'').trim();
-        if(rr.ok&&out)return {ok:true,text:out,provider:'openrouter',model,rounds:round+1,toolsAvailable:false};
-        detail='OpenRouter '+rr.status+': '+JSON.stringify(dd?.error||dd).slice(0,500);
+        const chatTools=tools.filter(t=>t.type==='function').map(t=>({type:'function',function:{name:t.name,description:t.description,parameters:t.parameters}}));
+        const messages=[
+          {role:'system',content:instructions+' You have access to the listed ANIL tools. Use them when needed, inspect their returned evidence, and never claim an action succeeded unless the tool confirms it. Sensitive money/security actions remain owner-gated.'},
+          ...history.slice(-8).map(x=>({role:x.role==='assistant'?'assistant':'user',content:String(x.content||'').slice(0,2500)})),
+          {role:'user',content:command}
+        ];
+        let routerDone=false,routerText='',routerRounds=0;
+        for(let routerRound=0;routerRound<(operationalIntent?5:2);routerRound++){
+          routerRounds=routerRound+1;
+          const rr=await fetch('https://openrouter.ai/api/v1/chat/completions',{
+            method:'POST',signal:AbortSignal.timeout(12000),
+            headers:{'content-type':'application/json',authorization:'Bearer '+openrouter,'http-referer':'https://anil-x-live.onrender.com','x-title':'ANIL X Owner Core'},
+            body:JSON.stringify({model,messages,tools:chatTools,tool_choice:'auto',parallel_tool_calls:false,temperature:0.2,max_tokens:1600})
+          });
+          const dd=await rr.json().catch(()=>({}));
+          if(!rr.ok){detail='OpenRouter '+rr.status+': '+JSON.stringify(dd?.error||dd).slice(0,500);break;}
+          const msg=dd?.choices?.[0]?.message;
+          if(!msg){detail='OpenRouter returned no message';break;}
+          messages.push(msg);
+          const calls=Array.isArray(msg.tool_calls)?msg.tool_calls:[];
+          if(!calls.length){routerText=String(msg.content||'').trim();routerDone=!!routerText;break;}
+          for(const call of calls){
+            const name=String(call?.function?.name||'');
+            let args={};try{args=JSON.parse(call?.function?.arguments||'{}')}catch{}
+            let result;
+            try{
+              if(name==='controlled_change'){
+                const reqText=String(args.request||command).slice(0,12000);
+                const changeReq=new Request(new URL('/api/anil/automation/queue',req.url),{method:'POST',headers:{'content-type':'application/json',cookie:req.headers.get('cookie')||''},body:JSON.stringify({request:reqText,path:args.path||undefined})});
+                result=await anilOperatorChange(changeReq,env,reqText);
+              }else if(name==='live_health'){
+                const hu=new URL('/api/health',req.url);
+                const hr=await runtimeRoutes(new Request(hu,{method:'GET',headers:{cookie:req.headers.get('cookie')||''}}),env,hu);
+                result=hr?await hr.json():{ok:false,error:'health_route_unavailable'};
+              }else if(name==='guard_live'){
+                const gr=await handleGuardLive(req,env);result=await gr.json();
+              }else if(name==='revenue_fleet'){
+                const ru=new URL('/api/revenue/fleet',req.url);
+                const rresp=await runtimeRoutes(new Request(ru,{method:'GET',headers:{cookie:req.headers.get('cookie')||''}}),env,ru);
+                result=rresp?await rresp.json():{ok:false,error:'revenue_route_unavailable'};
+              }else if(name==='control_plane'){
+                const cu=new URL('/api/anil/control-plane',req.url);
+                const cr=await handleControlPlane(new Request(cu,{method:'POST',headers:{cookie:req.headers.get('cookie')||'','content-type':'application/json'},body:JSON.stringify({operation:String(args.operation||'read_live_state'),...(args.body||{})})}),env);
+                result=await cr.json();
+              }else{
+                const toolName=name==='external_web_search'?'web_search':name;
+                const tr=await anilTool(new Request(new URL('/api/anil/tools',req.url),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool:toolName,...args})}),env);
+                result=await tr.json();
+              }
+            }catch(e){result={ok:false,error:String(e?.message||e).slice(0,300)}}
+            messages.push({role:'tool',tool_call_id:call.id,content:JSON.stringify(result).slice(0,12000)});
+          }
+        }
+        if(routerDone)return {ok:true,text:routerText,provider:'openrouter',model,rounds:routerRounds,toolsAvailable:true};
+        if(!detail)detail='OpenRouter tool loop reached its safe round limit without a final answer';
       }catch(e){detail='OpenRouter: '+String(e?.message||e).slice(0,400);}
     }
     if(!r?.ok)return {ok:false,reason:'openai_invocation_failed',detail,modelsTried:modelCandidates.slice(0,4)};
