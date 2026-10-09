@@ -805,6 +805,9 @@ async function runOwnerAgent(req,env,command,history){
         r=await fetch('https://api.openai.com/v1/responses',{method:'POST',signal:AbortSignal.timeout(6500),headers:{'content-type':'application/json',authorization:'Bearer '+key},body:JSON.stringify({model:candidate,input,instructions,tools,tool_choice:'auto',parallel_tool_calls:true,max_output_tokens:1800})});
         if(r.ok){usedModel=candidate;modelCandidates.splice(0,modelCandidates.length,candidate,...modelCandidates.filter(x=>x!==candidate));break;}
         detail=(await r.text().catch(()=>'' )).slice(0,600);
+        // A depleted account quota is shared across models: stop immediately instead of
+        // retrying the same exhausted account against every model and making chat feel hung.
+        if(r.status===429&&/credit_balance_exhausted|insufficient_quota|no credits remaining|credit balance is too low/i.test(detail))break;
       }catch(e){detail=String(e?.message||e).slice(0,600);}
     }
     if(!r?.ok)return {ok:false,reason:'openai_invocation_failed',detail,modelsTried:modelCandidates.slice(0,4)};
@@ -898,7 +901,22 @@ async function secretary(req,env){
     const history=Array.isArray(b.messages)?b.messages.slice(-12).map(x=>({role:x?.role==='assistant'?'assistant':'user',content:String(x?.content||'').slice(0,4000)})).filter(x=>x.content&&!/Cannot set properties of null|configured_provider_invocation_failed/i.test(x.content)):[];
     const configuredAi=Object.values(getAiConfig(env)).filter(Boolean).length>0;
     if(configuredAi){
-      try{const agent=await runOwnerAgent(req,env,command,history);if(agent?.ok)return json({ok:true,text:String(agent.text||'—'),action:'agentic_tool_loop',provider:agent.provider||'openai',live:true,data:{agent}})}catch{}
+      let agent=null;
+      try{
+        agent=await runOwnerAgent(req,env,command,history);
+        if(agent?.ok)return json({ok:true,text:String(agent.text||'—'),action:'agentic_tool_loop',provider:agent.provider||'openai',live:true,data:{agent}});
+      }catch{}
+      // Do not fan out into the Super Team and repeat provider calls when the shared
+      // account quota is known to be exhausted. Return one short, actionable diagnosis.
+      if(agent?.reason==='openai_invocation_failed'&&/credit_balance_exhausted|insufficient_quota|no credits remaining|credit balance is too low/i.test(String(agent.detail||''))){
+        const fa=b.language==='fa';
+        const detail=String(agent.detail||'').slice(0,420);
+        return json({ok:true,action:'ai_provider_blocked',live:false,
+          text:fa
+            ? 'پاسخ‌گویی هوشمند زنده فعلاً به‌دلیل تمام‌شدن اعتبار API متوقف است؛ اتصال سرور برقرار است، اما این مشکل با تکرار درخواست یا عوض‌کردن مدل حل نمی‌شود. برای فعال‌شدن دوبارهٔ پاسخ‌گویی، در حساب ارائه‌دهنده اعتبار API را شارژ کن یا یک Provider دارای اعتبار در تنظیمات امن Render وصل کن. تا آن زمان، گزارش‌های وضعیت، سلامت، Guard و کسب‌وکار که مسیر داخلی دارند جداگانه قابل بررسی‌اند.'
+            : 'Live AI replies are blocked because the provider API account has exhausted its credits. The server is reachable, but retrying models will not fix this. Add API credit or configure another funded provider in Render. Internal status, health, Guard, and business reports remain separate routes.',
+          data:{provider:'openai',reason:'quota_exhausted',detail}});
+      }
       try{
         const teamResp=await handleSuperTeam(new Request(new URL('/api/anil/super-team',req.url),{method:'POST',headers:{cookie:req.headers.get('cookie')||'','content-type':'application/json'},body:JSON.stringify({task:command,history})}),env,{guardHandler:handleGuardLive});
         const team=await teamResp.json().catch(()=>({}));const answer=team?.command?.answer||team?.command?.response;
