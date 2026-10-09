@@ -39,7 +39,7 @@ const firstEnv=(env,keys)=>keys.map(k=>env[k]).find(v=>typeof v==='string'&&v.tr
 const getMainTonAddress=env=>firstEnv(env,['TON_MAIN_WALLET','TON_MAIN_WALLET_ADDRESS','TON_PERMANENT_WALLET_ADDRESS','TON_MAIN_ADDRESS','TON_WALLET_ADDRESS','MAIN_TON_WALLET','MAIN_WALLET_ADDRESS','PERMANENT_WALLET_ADDRESS']);
 const getVarizaApiKey=env=>firstEnv(env,['VARIZA_API_KEY','VARIA_API_KEY','VARIZA_TOKEN','VARIZA_KEY','VARIZA_API_TOKEN','VARIZA_SECRET','VARIZA_API','VARIZA_ACCESS_TOKEN','VARIZA_BEARER_TOKEN']);
 const getVarizaWebhookSecret=env=>firstEnv(env,['VARIZA_WEBHOOK_SECRET','VARIA_WEBHOOK_SECRET','VARIZA_WEBHOOK_TOKEN','VARIZA_WEBHOOK_KEY','VARIZA_SECRET']);
-const getAiConfig=env=>({openai:firstEnv(env,['OPENAI_API_KEY','OPENAI_KEY']),anthropic:firstEnv(env,['ANTHROPIC_API_KEY','ANTHROPIC_KEY']),gemini:firstEnv(env,['GEMINI_API_KEY','GOOGLE_GEMINI_API_KEY','GOOGLE_API_KEY'])});
+const getAiConfig=env=>({openai:firstEnv(env,['OPENAI_API_KEY','OPENAI_KEY']),anthropic:firstEnv(env,['ANTHROPIC_API_KEY','ANTHROPIC_KEY']),gemini:firstEnv(env,['GEMINI_API_KEY','GOOGLE_GEMINI_API_KEY','GOOGLE_API_KEY']),openrouter:firstEnv(env,['ANIL_OPENROUTER_API_KEY','OPENROUTER_API_KEY'])});
 const getUsdTomanRate=env=>{const configured=Number(firstEnv(env,['USD_TOMAN_RATE','USD_TO_TOMAN','USD_TOMAN','USD_IRR_RATE'])||0);return Number.isFinite(configured)&&configured>0?configured:2687600;};
 const REVENUE_FLEET=[
 {id:'b2b-lead-hunter',name:'B2B Lead Hunter',mode:'hunter',status:'ACTIVE',monetization:'qualified-lead+project',prereq:'compliant prospecting channels'},
@@ -767,7 +767,7 @@ async function anilOperatorChange(req,env,command){
   return {...qd,operator:true,verification:Array.isArray(change?.verification)?change.verification.slice(0,8):[]};
 }
 async function runOwnerAgent(req,env,command,history){
-  const key=getAiConfig(env).openai;if(!key)return null;
+  const aiConfig=getAiConfig(env),key=aiConfig.openai,openrouter=aiConfig.openrouter;if(!key&&!openrouter)return null;
   const operationalIntent=/(fix|repair|change|update|improve|deploy|rollback|github|render|guard|revenue|payment|order|customer|lead|code|site|qa|security|گارد|درآمد|پرداخت|سفارش|مشتری|لید|کد|سایت|اصلاح|درست|تغییر|بهبود|آپدیت|استقرار|امنیت|تست)/i.test(command);
   const configuredModel=operationalIntent?(env.ASTRA_MODEL||env.ANIL_OPENAI_MODEL||'gpt-6-astra'):(env.ANIL_FAST_MODEL||'gpt-6-luna');
   const modelCandidates=[configuredModel,'gpt-6-astra','gpt-6.1-sol','gpt-6-sol','gpt-6-luna'].filter((v,i,a)=>v&&a.indexOf(v)===i);
@@ -800,7 +800,7 @@ async function runOwnerAgent(req,env,command,history){
   const maxRounds=operationalIntent?6:2;
   for(let round=0;round<maxRounds;round++){
     let r=null,detail='',usedModel=modelCandidates[0];
-    for(const candidate of modelCandidates){
+    if(key)for(const candidate of modelCandidates){
       try{
         r=await fetch('https://api.openai.com/v1/responses',{method:'POST',signal:AbortSignal.timeout(6500),headers:{'content-type':'application/json',authorization:'Bearer '+key},body:JSON.stringify({model:candidate,input,instructions,tools,tool_choice:'auto',parallel_tool_calls:true,max_output_tokens:1800})});
         if(r.ok){usedModel=candidate;modelCandidates.splice(0,modelCandidates.length,candidate,...modelCandidates.filter(x=>x!==candidate));break;}
@@ -809,6 +809,17 @@ async function runOwnerAgent(req,env,command,history){
         // retrying the same exhausted account against every model and making chat feel hung.
         if(r.status===429&&/credit_balance_exhausted|insufficient_quota|no credits remaining|credit balance is too low/i.test(detail))break;
       }catch(e){detail=String(e?.message||e).slice(0,600);}
+    }
+    if(!r?.ok&&openrouter){
+      try{
+        const model=env.ANIL_OPENROUTER_MODEL||'openrouter/free';
+        const messages=[{role:'system',content:instructions+' Answer directly. If tools are unavailable in this fallback route, be explicit and never claim you performed external actions.'},...history.slice(-8).map(x=>({role:x.role==='assistant'?'assistant':'user',content:String(x.content||'').slice(0,2500)})),{role:'user',content:command}];
+        const rr=await fetch('https://openrouter.ai/api/v1/chat/completions',{method:'POST',signal:AbortSignal.timeout(9000),headers:{'content-type':'application/json',authorization:'Bearer '+openrouter,'http-referer':'https://anil-x-live.onrender.com','x-title':'ANIL X Owner Core'},body:JSON.stringify({model,messages,temperature:0.3,max_tokens:1400})});
+        const dd=await rr.json().catch(()=>({}));
+        const out=String(dd?.choices?.[0]?.message?.content||'').trim();
+        if(rr.ok&&out)return {ok:true,text:out,provider:'openrouter',model,rounds:round+1,toolsAvailable:false};
+        detail='OpenRouter '+rr.status+': '+JSON.stringify(dd?.error||dd).slice(0,500);
+      }catch(e){detail='OpenRouter: '+String(e?.message||e).slice(0,400);}
     }
     if(!r?.ok)return {ok:false,reason:'openai_invocation_failed',detail,modelsTried:modelCandidates.slice(0,4)};
     const d=await r.json();
