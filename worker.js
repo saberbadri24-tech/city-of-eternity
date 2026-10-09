@@ -769,8 +769,8 @@ async function anilOperatorChange(req,env,command){
 async function runOwnerAgent(req,env,command,history){
   const aiConfig=getAiConfig(env),key=aiConfig.openai,openrouter=aiConfig.openrouter;if(!key&&!openrouter)return null;
   const operationalIntent=/(fix|repair|change|update|improve|deploy|rollback|github|render|guard|revenue|payment|order|customer|lead|code|site|qa|security|گارد|درآمد|پرداخت|سفارش|مشتری|لید|کد|سایت|اصلاح|درست|تغییر|بهبود|آپدیت|استقرار|امنیت|تست)/i.test(command);
-  const configuredModel=operationalIntent?(env.ASTRA_MODEL||env.ANIL_OPENAI_MODEL||'gpt-6-astra'):(env.ANIL_FAST_MODEL||'gpt-6-luna');
-  const modelCandidates=[configuredModel,'gpt-6-astra','gpt-6.1-sol','gpt-6-sol','gpt-6-luna'].filter((v,i,a)=>v&&a.indexOf(v)===i);
+  const configuredModel=operationalIntent?(env.ASTRA_MODEL||env.ANIL_OPENAI_MODEL||'gpt-5-mini'):(env.ANIL_FAST_MODEL||'gpt-5-mini');
+  const modelCandidates=[configuredModel,'gpt-5-mini','gpt-5','gpt-4.1-mini'].filter((v,i,a)=>v&&a.indexOf(v)===i);
   const tools=[{type:'web_search'},
     {type:'function',name:'fetch_url',description:'Fetch public evidence.',parameters:{type:'object',properties:{url:{type:'string'}},required:['url']}},
     {type:'function',name:'external_web_search',description:'Search the public web through configured external search providers when built-in web search is unavailable.',parameters:{type:'object',properties:{query:{type:'string'}},required:['query']}},
@@ -987,7 +987,7 @@ async function secretary(req,env){
     }
     const providerFailures=[];
     const ai=getAiConfig(env).openai;
-    const openAiModels=[env.ASTRA_MODEL,env.ANIL_OPENAI_MODEL,'gpt-6-astra','gpt-6.1-sol','gpt-6-sol','gpt-6-luna'].filter((v,i,a)=>v&&a.indexOf(v)===i);
+    const openAiModels=[env.ASTRA_MODEL,env.ANIL_OPENAI_MODEL,'gpt-5-mini','gpt-5','gpt-4.1-mini'].filter((v,i,a)=>v&&a.indexOf(v)===i);
     if(ai){
       const input=[...history,{role:'user',content:command}];
       for(const model of openAiModels){
@@ -1000,7 +1000,7 @@ async function secretary(req,env){
     }
     const anthropic=getAiConfig(env).anthropic;
     if(anthropic){
-      const model=env.CLAUDE_MODEL||env.ANIL_ANTHROPIC_MODEL||'claude-haiku-5-5';
+      const model=env.CLAUDE_MODEL||env.ANIL_ANTHROPIC_MODEL||'claude-haiku-4-5';
       try{
         const rr=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',signal:AbortSignal.timeout(6500),headers:{'content-type':'application/json','x-api-key':anthropic,'anthropic-version':'2023-06-01'},body:JSON.stringify({model,max_tokens:1400,system:'You are ANIL, the private owner assistant inside ANIL X. Respond directly to the owner in Persian when the request is Persian. Do not expose secrets. Do not claim a code change, deployment, payment, wallet action, or other execution unless evidence is supplied by the runtime. For operational requests, give the concrete next verified action rather than repeating a generic provider-not-configured message.',messages:[...history,{role:'user',content:command}]})});
         const d=await rr.json().catch(()=>({}));
