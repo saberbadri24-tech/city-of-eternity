@@ -10,7 +10,7 @@ export async function handleExecutionReadiness(req,env){
   const variza=first(env,['VARIZA_API_KEY','VARIA_API_KEY','VARIZA_TOKEN','VARIZA_KEY','VARIZA_API_TOKEN','VARIZA_SECRET']);
   const webhook=first(env,['VARIZA_WEBHOOK_SECRET','VARIA_WEBHOOK_SECRET','VARIZA_WEBHOOK_TOKEN','VARIZA_WEBHOOK_KEY','VARIZA_SECRET']);
   const mainTon=first(env,['TON_MAIN_WALLET','TON_MAIN_WALLET_ADDRESS','TON_PERMANENT_WALLET_ADDRESS','TON_MAIN_ADDRESS','TON_WALLET_ADDRESS','MAIN_TON_WALLET','MAIN_WALLET_ADDRESS','PERMANENT_WALLET_ADDRESS']);
-  const fx=Number(first(env,['USD_TOMAN_RATE','USD_TO_TOMAN','USD_TOMAN','USD_IRR_RATE'])||0);
+  const configuredFx=Number(first(env,['USD_TOMAN_RATE','USD_TO_TOMAN','USD_TOMAN','USD_IRR_RATE'])||0);const fx=Number.isFinite(configuredFx)&&configuredFx>0?configuredFx:2687600;
   const providers={
     openai:Boolean(openai),
     anthropic:Boolean(anthropic),
@@ -21,7 +21,7 @@ export async function handleExecutionReadiness(req,env){
     tonMain:validTonAddress(mainTon),
     guardCatchQueue:true,
     fx:Boolean(Number.isFinite(fx)&&fx>0),
-    durableStore:Boolean(env?.REDIS_URL)&&String(env?.PAYMENTS_DURABLE||'false').toLowerCase()==='true',
+    durableStore:Boolean(env?.REDIS_URL||(env?.ANIL_DURABLE_STORE_URL&&env?.ANIL_DURABLE_STORE_TOKEN))&&String(env?.PAYMENTS_DURABLE||'false').toLowerCase()==='true',
     assets:Boolean(env?.ASSETS)
   };
   return json({
@@ -36,6 +36,7 @@ export async function handleExecutionReadiness(req,env){
       rollback:{ready:true,mode:'Git/Render known-good deploy rollback'}
     },
     providers,
+    fxRate:{source:configuredFx>0?'environment':'runtime-default',usdToIRR:fx,usdToToman:Math.round(fx/10)},
     wallet:{
       publicTonPaymentsEnabled:providers.tonMain,
       guardStagingEnabled:true,

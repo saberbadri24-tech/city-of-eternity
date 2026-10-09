@@ -19,6 +19,19 @@ const hasSensitiveIntent = text => includesAny(text, ["پرداخت","برداش
 const hasDeploymentIntent = text => includesAny(text, ["دیپلوی","انتشار","deploy","publish","production","پروداکشن"]);
 const isPersian = text => /[\u0600-\u06ff]/.test(text);
 
+function buildReply(routeId,language,raw,steps){
+  const fa=language==="fa",path=steps.slice(0,4).join(fa?" ← ":" → ");
+  const replies={
+    website:fa?"حتماً؛ فروشگاه خدمات را قدم‌به‌قدم جلو می‌بریم. برای اینکه مسیر دقیق باشد، این سه مورد را بگو: ۱) چه خدماتی می‌فروشی؟ ۲) مشتری‌ها بیشتر در کدام کشورها هستند؟ ۳) پرداخت بین‌المللی می‌خواهی، ریالی یا هر دو؟ مسیر شروع: "+path+".":"Absolutely. We can shape the service store step by step. First, tell me: 1) Which services are you selling? 2) Which countries are your customers in? 3) Do you need international cards, local payments, or both? Starting path: "+path+".",
+    debug:fa?"بیایید علت اصلی را پیدا کنیم، نه اینکه حدس بزنیم. لینک صفحه یا متن دقیق خطا، کاری که قبل از خطا انجام دادی و نتیجه‌ای که انتظار داشتی را بفرست. مسیر بررسی: "+path+".":"Let’s identify the root cause rather than guess. Send the page URL or exact error, what you did just before it happened, and the expected result. Diagnostic path: "+path+".",
+    business:fa?"برای رشد واقعی، اول هدف و مشتری را مشخص می‌کنیم. بگو می‌خواهی در ۳۰ روز آینده چه نتیجه‌ای بگیری، چه خدمتی می‌فروشی و مشتری ایده‌آلت کیست. بعد پیشنهاد، کانال جذب و معیار اندازه‌گیری را می‌چینیم: "+path+".":"For measurable growth, tell me the outcome you want in the next 30 days, what you sell, and who the ideal customer is. Then we can shape the offer, acquisition channel, and success metric: "+path+".",
+    code:fa?"می‌توانم مسیر فنی را طراحی و کد را بررسی کنم. نام مخزن یا فایل، رفتار فعلی، رفتار مورد انتظار و پیام خطا را بفرست. کار را به تغییرهای کوچک و قابل‌آزمایش تقسیم می‌کنیم: "+path+".":"I can structure the engineering work and review code. Share the repository or file, current behavior, expected behavior, and any error message. We’ll break the work into small, testable changes: "+path+".",
+    research:fa?"برای تحقیق قابل اتکا، سؤال و محدوده را دقیق می‌کنیم. بگو تصمیم نهایی چیست، چه بازار یا بازه زمانی مهم است و چه منابعی را باید در اولویت بگذارم. سپس ادعاها را با شواهد بررسی می‌کنیم: "+path+".":"For useful research, define the question and scope. Tell me the decision you need to make, the market or time range, and any preferred sources. Then we can verify claims against evidence: "+path+".",
+    automation:fa?"برای اتوماسیون امن، بگو چه چیزی فرایند را شروع می‌کند، چه ورودی و خروجی‌ای دارد، و کدام مرحله نیاز به تأیید تو دارد. بعد اجرای آزمایشی، ثبت رویداد و مسیر بازگشت را تعریف می‌کنیم: "+path+".":"For safe automation, define what triggers the workflow, its inputs and outputs, and which steps need your approval. Then we can add a dry run, audit trail, and rollback path: "+path+".",
+    general:fa?"متوجه‌ام که نتیجه می‌خواهی، نه فقط توضیح. خروجی نهایی را در یک جمله بگو و هر محدودیت مهمی مثل زمان، بودجه یا ابزار را اضافه کن. من مسئله را به قدم‌های قابل‌آزمایش تقسیم می‌کنم: "+path+".":"I understand you want an outcome, not just an explanation. Describe the final result in one sentence and include any time, budget, or tool constraints. I’ll break the work into testable next steps: "+path+"."
+  };return replies[routeId]||replies.general;
+}
+
 export function buildCorePlan(input, body = {}) {
   const raw = String(input ?? "").trim().slice(0, 4000);
   const text = norm(raw);
@@ -31,9 +44,7 @@ export function buildCorePlan(input, body = {}) {
   const profile = body?.profile && typeof body.profile === "object" ? body.profile : {};
   const steps = language === "fa" ? route.stepsFa : route.stepsEn;
   const title = language === "fa" ? route.titleFa : route.titleEn;
-  const reply = language === "fa"
-    ? `درخواستت را به مسیر «${title}» تبدیل کردم. قدم بعدی: ${steps[0]}. این برنامه محلی و فوری است؛ اجرای واقعی هر مرحله جداگانه باید تأیید شود.`
-    : `I mapped your request to “${title}”. Next step: ${steps[0]}. This plan is generated locally; real execution must be verified separately.`;
+  const reply = buildReply(route.id, language, raw, steps);
   return {
     title, desc: language === "fa" ? "برنامه‌ریز داخلی ANIL X؛ بدون نیاز به سرویس مدل خارجی برای ساخت برنامه اولیه." : "ANIL X internal planner; no external model required for the initial plan.",
     steps, reply, confidence: ranked[0]?.score ? Math.min(0.78, 0.55 + ranked[0].score * 0.05) : 0.42,
