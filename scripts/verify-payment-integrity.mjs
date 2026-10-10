@@ -35,7 +35,7 @@ const checks = [
   ['payment readiness does not treat the fallback FX estimate as configured', getUsdTomanConfig({}).source === 'runtime-default' && getUsdTomanConfig({USD_IRR_RATE:'2687600'}).source !== 'runtime-default'],
   ['live FX source requires a fresh non-stale market quote', files.currency.includes('https://nerkhara.com/rates.json') && files.currency.includes('quote?.stale') && files.currency.includes('ageMs > 6 * 60 * 60_000')],
   ['checkout and payment-config use the same validated live FX helper', files.pay.includes('await getLiveUsdTomanConfig(env)') && files.worker.includes('const fx=await getLiveUsdTomanConfig(env)')],
-  ['checkout and readiness fail closed without configured FX', files.worker.includes("fx.source==='runtime-default'") && files.pay.includes("getUsdTomanConfig(env).source === 'runtime-default'") && files.readiness.includes("fx:fxConfig.source!=='runtime-default'")]
+  ['checkout and readiness fail closed without configured FX', files.worker.includes("fx.source==='runtime-default'") && files.pay.includes("fxConfig.source === 'runtime-default'") && files.readiness.includes("fx:fxConfig.source!=='runtime-default'")]
 ];
 const mockData = new Map();
 const mockPayments = {
@@ -178,13 +178,17 @@ try {
   });
   const webhookResult = await webhookResponse.json();
   const settledOrder = mockData.get('orders/order-integration');
-  checks.push([
-    'signed Variza webhook accepts documented base_amount despite payment suffix',
-    webhookResponse.status === 200 && webhookResult.status === 'paid' &&
-      settledOrder?.status === 'paid' &&
-      settledOrder?.providerBaseAmount === expectedToman &&
-      settledOrder?.providerAmount === expectedToman + 128
-  ]);
+  const webhookOk = webhookResponse.status === 200 && webhookResult.status === 'paid' &&
+    settledOrder?.status === 'paid' &&
+    settledOrder?.providerBaseAmount === expectedToman &&
+    settledOrder?.providerAmount === expectedToman + 128;
+  if (!webhookOk) console.log('DIAG Variza webhook', JSON.stringify({
+    status:webhookResponse.status,resultStatus:webhookResult.status,
+    orderStatus:settledOrder?.status,expectedToman,
+    providerBaseAmount:settledOrder?.providerBaseAmount,
+    providerAmount:settledOrder?.providerAmount
+  }));
+  checks.push(['signed Variza webhook accepts documented base_amount despite payment suffix', webhookOk]);
 
   const badSignatureResponse = await handleVarizaWebhook({
     request: new Request('https://anil-x-live.onrender.com/api/variza-webhook', {
