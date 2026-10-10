@@ -956,19 +956,21 @@ async function secretary(req,env){
       const [o,f,a]=await Promise.all([live('/api/admin/overview','POST'),live('/api/revenue/fleet'),live('/api/analytics')]);
       return json({ok:true,action:'live_business_status',text:(b.language==='fa'?'وضعیت واقعی کسب‌وکار، سفارش و درآمد:\n':'Live business, orders and revenue status:\n')+JSON.stringify({overview:o.data,fleet:f.data,analytics:a.data},null,2),data:{overview:o.data,fleet:f.data,analytics:a.data}});
     }
-    if(/قابلیت|توان|ابزار|capabilit|tool/.test(q)){
-      const fa=b.language==='fa';
-    return json({
-      ok:true,
-      action:'independent_council_fallback',
-      live:false,
-      provider:'internal-engines',
-      text:fa
-        ? 'موتورهای مستقل ANIL فعال‌اند. برای این درخواست، نتیجهٔ قابل‌تأیید اجرایی ثبت نشد؛ بنابراین هیچ تغییر، پرداخت یا استقراری انجام‌شده اعلام نمی‌شود.'
-        : 'ANIL independent engines are active. No verified execution result was recorded for this request, so no code change, payment, or deployment is claimed.',
-      data:{source:'anil-independent-specialist-council',execution:{performed:false,status:'not_executed'}}
-    });
-
+    // Internal-first owner chat: use the first-party specialist council before any hosted LLM.
+    const planResponse=await handlePlan(new Request('https://anilx.internal/api/plan',{
+      method:'POST',headers:{'content-type':'application/json'},
+      body:JSON.stringify({text:command,language:b.language||'fa'})
+    }),env);
+    const planData=await planResponse.json().catch(()=>({}));
+    if(planResponse.ok&&planData.ok){
+      return json({ok:true,action:'independent_council_primary',live:true,provider:'internal-engines',externalModelsCalled:false,
+        text:planData.reply||planData.text||planData.answer||'ANIL آماده است؛ درخواست تحلیل شد.',
+        data:{...planData,execution:planData.execution||{performed:false,status:'not_executed'}}});
+    }
+    return json({ok:false,action:'independent_council_unavailable',live:false,provider:'internal-engines',externalModelsCalled:false,
+      text:b.language==='fa'?'موتور مستقل برای این درخواست پاسخ معتبر نساخت؛ هیچ اقدامی انجام نشده است.':'The first-party council did not return a valid plan; no action was executed.',
+      data:{error:planData.error||'plan_unavailable',execution:{performed:false,status:'not_executed'}}},503);
+    }
   }catch(e){
     const message=String(e?.message||e).slice(0,240);
     return json({ok:true,action:'runtime_diagnostic',live:false,text:(b.language==='fa'?'یک مسیر تشخیص وضعیت خطا داد؛ خود Runtime بالا است. جزئیات امن: ':'A status/diagnostic path failed; runtime remains reachable. Safe detail: ')+message,data:{error:'secretary_runtime_error',message}});
