@@ -15,14 +15,14 @@ const READ_ONLY=new Set(['read_live_state','inspect_github','search_code','read_
 const MUTATING=new Set(['change_files','create_files','change_plan','commit','test','deploy','rollback','write_audit_event','request_owner_approval']);
 
 function capabilities(env){
- const providers={openai:has(env.OPENAI_API_KEY)||has(env.OPENAI_KEY),anthropic:has(env.ANTHROPIC_API_KEY)||has(env.ANTHROPIC_KEY),gemini:has(env.GEMINI_API_KEY)||has(env.GOOGLE_GEMINI_API_KEY)||has(env.GOOGLE_API_KEY),openrouter:has(env.ANIL_OPENROUTER_API_KEY)||has(env.OPENROUTER_API_KEY)};
+ const providers={openaiOptional:has(env.OPENAI_API_KEY)||has(env.OPENAI_KEY),openrouterOptional:has(env.ANIL_OPENROUTER_API_KEY)||has(env.OPENROUTER_API_KEY),localEngines:true};
  const adapters={
   github:{configured:has(env.GITHUB_TOKEN)||has(env.GH_TOKEN),fallback:'github-actions'},
   render:{configured:has(env.RENDER_API_KEY)||has(env.RENDER_TOKEN),fallback:'runtime-health'},
   appdeploy:{configured:has(env.APPDEPLOY_TOKEN)||has(env.APPDEPLOY_API_KEY),fallback:'manual-provider-boundary'},
   variza:{configured:has(env.VARIZA_API_KEY)||has(env.VARIA_API_KEY)||has(env.VARIZA_TOKEN)||has(env.VARIZA_KEY),mode:'provider-webhook'},
   browser:{configured:has(env.TINYFISH_API_KEY)||has(env.BROWSER_AUTOMATION_KEY),fallback:'owner/browser-connector'},
-  ai:{providers,liveCount:Object.values(providers).filter(Boolean).length}
+  ai:{providers,localEngineActive:true,externalProviderCount:[providers.openaiOptional,providers.openrouterOptional].filter(Boolean).length}
  };
  return {adapters,domains:DOMAINS,readOnly:[...READ_ONLY],mutating:[...MUTATING]};
 }
