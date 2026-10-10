@@ -966,7 +966,7 @@ async function secretary(req,env){
         : 'ANIL independent engines are active. No verified execution result was recorded for this request, so no code change, payment, or deployment is claimed.',
       data:{source:'anil-independent-specialist-council',execution:{performed:false,status:'not_executed'}}
     });
-
+    }
   }catch(e){
     const message=String(e?.message||e).slice(0,240);
     return json({ok:true,action:'runtime_diagnostic',live:false,text:(b.language==='fa'?'یک مسیر تشخیص وضعیت خطا داد؛ خود Runtime بالا است. جزئیات امن: ':'A status/diagnostic path failed; runtime remains reachable. Safe detail: ')+message,data:{error:'secretary_runtime_error',message}});
