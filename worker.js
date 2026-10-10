@@ -1008,6 +1008,42 @@ async function secretary(req,env){
         providerFailures.push({provider:'anthropic',model,status:rr.status,detail:JSON.stringify(d).slice(0,300)});
       }catch(e){providerFailures.push({provider:'anthropic',model,status:0,detail:String(e?.message||e).slice(0,300)})}
     }
+    // The owner chat must remain useful when external model quotas or provider keys fail.
+    // Route the final fallback through the first-party specialist council and its bounded read-only research tools.
+    try {
+      const planResponse = await handlePlan(new Request('https://anilx.internal/api/plan', {
+        method:'POST',
+        headers:{'content-type':'application/json'},
+        body:JSON.stringify({text:command,language:b.language==='fa'?'fa':'en'})
+      }), env);
+      const planData = await planResponse.json().catch(()=>({}));
+      if (planResponse.ok && planData?.ok) {
+        const fa = b.language === 'fa';
+        const providerNote = fa
+          ? 'مدل بیرونی در این نوبت پاسخ قابل‌استفاده نداد؛ زنجیره تخصصی مستقل فعال شد. این خروجی برنامه‌ریزی و تحقیق خواندنی است، نه ادعای اجرای تغییر، پرداخت یا استقرار.'
+          : 'No usable external-model response was available for this turn; the independent specialist council handled the request. This is planning/read-only research, not a claim of code changes, payments, or deployment.';
+        return json({
+          ok:true,
+          action:'independent_council_fallback',
+          live:false,
+          provider:'independent-council',
+          text:String(planData.reply||planData.text||planData.answer||providerNote)+'\\n\\n'+providerNote,
+          data:{
+            source:planData.source||'anil-independent-specialist-council',
+            engine:planData.engine||'ANIL-INDEPENDENT-ENGINE-COUNCIL',
+            version:planData.version||null,
+            specialists:planData.council||planData.specialists||null,
+            plan:planData.plan||null,
+            evidence:planData.evidence||[],
+            execution:planData.execution||{performed:false,status:'not_executed'},
+            orchestration:planData.orchestration||null,
+            providerFailures:providerFailures.slice(0,8)
+          }
+        });
+      }
+    } catch (fallbackError) {
+      providerFailures.push({provider:'independent-council',status:0,detail:String(fallbackError?.message||fallbackError).slice(0,240)});
+    }
     const k=await handleCapabilityKernel(new Request(new URL('/api/anil/capability-kernel',req.url),{method:'GET'}),env).then(x=>x.json());
     const fa=b.language==='fa';
     const providers=k.capabilities?.adapters?.ai?.providers||{};
