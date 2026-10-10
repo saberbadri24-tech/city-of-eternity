@@ -1,4 +1,5 @@
 import {json} from './runtime-state.mjs';
+import {getUsdTomanConfig} from './currency.mjs';
 
 const first=(env,keys)=>keys.map(k=>env?.[k]).find(v=>v!==undefined&&v!==null&&String(v).trim()!=='')||'';const validTonAddress=a=>/^(?:EQ|UQ)[A-Za-z0-9_-]{46}$/.test(String(a||''));
 
@@ -10,7 +11,7 @@ export async function handleExecutionReadiness(req,env){
   const variza=first(env,['VARIZA_API_KEY','VARIA_API_KEY','VARIZA_TOKEN','VARIZA_KEY','VARIZA_API_TOKEN','VARIZA_SECRET','VARIZA_API','VARIZA_ACCESS_TOKEN','VARIZA_BEARER_TOKEN']);
   const webhook=first(env,['VARIZA_WEBHOOK_SECRET','VARIA_WEBHOOK_SECRET','VARIZA_WEBHOOK_TOKEN','VARIZA_WEBHOOK_KEY','VARIZA_SECRET']);
   const mainTon=first(env,['TON_MAIN_WALLET','TON_MAIN_WALLET_ADDRESS','TON_PERMANENT_WALLET_ADDRESS','TON_MAIN_ADDRESS','TON_WALLET_ADDRESS','MAIN_TON_WALLET','MAIN_WALLET_ADDRESS','PERMANENT_WALLET_ADDRESS']);
-  const configuredFx=Number(first(env,['USD_TOMAN_RATE','USD_TO_TOMAN','USD_TOMAN','USD_IRR_RATE'])||0);const fx=Number.isFinite(configuredFx)&&configuredFx>0?configuredFx:2687600;
+  const fxConfig=getUsdTomanConfig(env);const tomanRate=fxConfig.rate;const fx=Math.round(tomanRate*10);
   const providers={
     openai:Boolean(openai),
     anthropic:Boolean(anthropic),
@@ -20,7 +21,7 @@ export async function handleExecutionReadiness(req,env){
     varizaWebhook:Boolean(webhook),
     tonMain:validTonAddress(mainTon),
     guardCatchQueue:true,
-    fx:Boolean(Number.isFinite(fx)&&fx>0),
+    fx:Boolean(Number.isFinite(tomanRate)&&tomanRate>0),
     durableStore:Boolean(env?.REDIS_URL||(env?.ANIL_DURABLE_STORE_URL&&env?.ANIL_DURABLE_STORE_TOKEN))&&String(env?.PAYMENTS_DURABLE||'false').toLowerCase()==='true',
     assets:Boolean(env?.ASSETS)
   };
@@ -36,7 +37,7 @@ export async function handleExecutionReadiness(req,env){
       rollback:{ready:true,mode:'Git/Render known-good deploy rollback'}
     },
     providers,
-    fxRate:{source:configuredFx>0?'environment':'runtime-default',usdToIRR:fx,usdToToman:Math.round(fx/10)},
+    fxRate:{source:fxConfig.source,usdToIRR:fx,usdToToman:tomanRate,unit:'toman'},
     wallet:{
       publicTonPaymentsEnabled:providers.tonMain,
       guardStagingEnabled:true,

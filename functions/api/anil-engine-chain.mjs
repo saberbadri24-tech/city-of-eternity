@@ -1,5 +1,8 @@
 const clean = value => String(value ?? '').trim();
-const has = (text, words) => words.some(word => text.includes(word));
+const normalize = value => clean(value).toLowerCase().normalize('NFKC')
+  .replace(/[يى]/g,'ی').replace(/ك/g,'ک').replace(/[\u200c\u200d]/g,' ')
+  .replace(/\s+/g,' ').trim();
+const has = (text, words) => words.some(word => text.includes(normalize(word)));
 
 const ENGINES = [
   {
@@ -46,7 +49,7 @@ const ENGINES = [
   },
   {
     id: 'website-operations', name: 'Website UX & Operations Engine', weight: 80,
-    keywords: ['website','site','ui','admin','dashboard','page','button','سایت','وب‌سایت','پنل','داشبورد','صفحه','دکمه'],
+    keywords: ['website','site','ui','admin','dashboard','page','button','anil','anil x','بهبود','ارتقا','ارتقاء','بهینه‌سازی','بهینه سازی','عملکرد','کارکرد','پنل مدیریت','دستیار مدیر','چت مدیر','آنیل','انیل','سایت','وب‌سایت','پنل','داشبورد','صفحه','دکمه'],
     title: 'عملیات سایت و تجربه کاربری',
     desc: 'مسیر کاربر، رفتار دکمه‌ها، API، زبان، موبایل و خطاهای رابط باید قابل آزمون باشند.',
     moves: ['تعریف مسیر و نتیجه مورد انتظار کاربر','بررسی فارسی و انگلیسی به‌صورت مستقل','آزمون دکمه‌ها، API، ورود و ذخیره‌سازی','بررسی موبایل و خطاهای کنسول','تأیید فقط با آزمون قابل تکرار']
@@ -102,14 +105,14 @@ const DEFAULT_ENGINE = {
   moves: ['تعریف نتیجه مطلوب و معیار موفقیت','تفکیک واقعیت از فرضیه و مجهول','اولویت‌بندی اقدام‌های کم‌خطر','بررسی نتیجه و اصلاح مسیر','گزارش دقیق وضعیت و گام بعدی']
 };
 
-const IRREVERSIBLE = /\b(delete|transfer|withdraw|sign|claim|purchase|charge|send to all|production deploy)\b|حذف دائمی|انتقال وجه|برداشت|امضای تراکنش|مطالبه خودکار|ارسال انبوه|انتشار نهایی/i;
+const IRREVERSIBLE = /\b(delete|transfer|withdraw|sign|claim|purchase|charge|send to all|production deploy)\b|حذف دائمی|انتقال(?:\s+وجه)?|برداشت|امضا(?:ی)?(?:\s+تراکنش)?|مطالبه(?:\s+خودکار)?|پرداخت واقعی|تسویه واقعی|ارسال وجه|ارسال انبوه|انتشار نهایی/i;
 
 export function runLocalEngineChain(request) {
   const original = clean(request);
-  const normalized = original.toLowerCase();
+  const normalized = normalize(original);
   const scored = ENGINES.map(engine => ({
     engine,
-    score: engine.weight * engine.keywords.filter(word => normalized.includes(word)).length
+    score: engine.weight * engine.keywords.filter(word => normalized.includes(normalize(word))).length
   })).filter(item => item.score > 0).sort((a,b) => b.score - a.score);
   const selected = scored[0]?.engine || DEFAULT_ENGINE;
   const matched = scored.map(item => item.engine);

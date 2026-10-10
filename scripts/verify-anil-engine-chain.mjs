@@ -14,7 +14,11 @@ const cases = [
   {input:'Create an automation workflow', expected:'workflow-automation'},
   {input:'Help with customer support FAQ', expected:'customer-support'},
   {input:'Explain a concept step by step', expected:'learning-explanation'},
-  {input:'Create a marketing content strategy', expected:'content-strategy'}
+  {input:'Create a marketing content strategy', expected:'content-strategy'},
+  {input:'سلام، برای بهبود ANIL X برنامه بده', expected:'website-operations'},
+  {input:'برنامه برای بهبود پنل مديريت آنيل', expected:'website-operations'},
+  {input:'واريزا و پرداخت كيف پول را بررسي کن', expected:'payment-integrity'},
+  {input:'گارد جاویدان فرصت ایردراپ را بررسی کن', expected:'guard-security'}
 ];
 const results = cases.map(item => {
   const out = runLocalEngineChain(item.input);
@@ -31,6 +35,11 @@ const sensitive = runLocalEngineChain('انتقال وجه از کیف پول ر
 results.push({
   name:'sensitive wallet actions require owner approval',
   ok:sensitive.requiresOwnerApproval===true && sensitive.execution.performed===false
+});
+const arabicWallet = runLocalEngineChain('انتقال از کیف پول اصلی را انجام بده');
+results.push({
+  name:'Persian transfer synonyms remain owner-gated',
+  ok:arabicWallet.requiresOwnerApproval===true && arabicWallet.execution.performed===false
 });
 const unknown = runLocalEngineChain('Please help me solve a problem');
 results.push({
