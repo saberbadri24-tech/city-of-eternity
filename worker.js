@@ -16,7 +16,7 @@ async function translateOnline(req){
   if(req.method==='POST'){const b=await req.json().catch(()=>({}));textValue=String(b.text||'').slice(0,2500);target=String(b.target||'en').slice(0,12)}
   else {const u=new URL(req.url);textValue=String(u.searchParams.get('text')||'').slice(0,2500);target=String(u.searchParams.get('target')||'en').slice(0,12)}
   if(!textValue)return json({ok:true,text:''});
-  if(!/^[a-zA-Z-]{2,12}$/.test(target))return json({ok:false,error:'invalid_language'},400);
+  if(!/^[a-zA-Z-]{2,12}$/.test(target))return json({ok:true,text:textValue,source:'fallback-invalid-language'});
   if(target==='en'&&!/[\u0600-\u06ff]/.test(textValue))return json({ok:true,text:textValue,source:'identity'});
   const key=target+'|'+textValue;const cached=translateCache.get(key);if(cached)return json({ok:true,text:cached,source:'cache'});
   try{
