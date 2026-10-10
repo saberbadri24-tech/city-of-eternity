@@ -20,8 +20,8 @@ const pages = [];
 const skippedRisk = [];
 const skippedHidden = [];
 const visited = new Set();
-const MAX_PAGES = 10;
-const MAX_SAFE_BUTTONS_PER_PAGE = 4;
+const MAX_PAGES = 7;
+const MAX_SAFE_BUTTONS_PER_PAGE = 2;
 
 page.on("console", m => {
   if (m.type() === "error" && !/status of 401/i.test(m.text())) {
@@ -47,16 +47,16 @@ async function waitStable() {
   await page.waitForTimeout(300);
 }
 
-async function gotoWithRetry(url, attempts=3) {
+async function gotoWithRetry(url, attempts=2) {
   let last = null;
   for (let i=1; i<=attempts; i++) {
     try {
-      const r = await page.goto(url, {waitUntil:"domcontentloaded", timeout:20000});
+      const r = await page.goto(url, {waitUntil:"domcontentloaded", timeout:12000});
       await waitStable();
       if (r?.ok()) return r;
       last = Error(`HTTP ${r?.status() || "NO_RESPONSE"} ${url}`);
     } catch (e) { last = e; }
-    await page.waitForTimeout(Math.min(2500*i,10000));
+    await page.waitForTimeout(Math.min(1000*i,2500));
   }
   throw last || Error(`NO_RESPONSE ${url}`);
 }
@@ -129,7 +129,7 @@ async function inventory(url) {
           : null;
         await page.locator("button").nth(b.i).click({ timeout: 3000 });
         if (planRequestPromise) planRequestSeen = Boolean(await planRequestPromise);
-        await page.waitForTimeout(1000);
+        await page.waitForTimeout(500);
         const after = await page.locator("body").innerText().catch(() => "");
         const afterUrl = page.url();
         const afterService = await page.locator("#service").inputValue().catch(() => "");
