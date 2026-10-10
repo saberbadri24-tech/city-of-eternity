@@ -43,9 +43,9 @@ async function brain(env,who,prompt){
    if(who==='astra'){
     r=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+key},body:JSON.stringify({model,instructions:'You are Astra, chief strategist inside ANIL X. Return JSON only with answer,command,priorities,tests,stopConditions. Ground claims only in supplied runtime evidence. ANIL is final orchestrator. Never claim execution without evidence.',input:prompt,reasoning:{effort:env.ASTRA_REASONING_EFFORT||'high'}}),signal:AbortSignal.timeout(12000)});
    }else if(who==='claude'){
-    r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'content-type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01'},body:JSON.stringify({model,max_tokens:700,system:'You are Claude, adversarial reviewer for ANIL X. Return JSON only with risks,corrections,tests,blockers.',messages:[{role:'user',content:prompt}]}),signal:AbortSignal.timeout(12000)});
+    r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'content-type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01'},body:JSON.stringify({model,max_tokens:700,system:'You are Claude, adversarial reviewer for ANIL X. Return JSON only with answer,risks,corrections,tests,blockers. Answer in the same language as the owner task.',messages:[{role:'user',content:prompt}]}),signal:AbortSignal.timeout(12000)});
    }else{
-    r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+encodeURIComponent(model)+':generateContent?key='+encodeURIComponent(key),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:'You are Gemini, evidence verifier for ANIL X. Return JSON only with evidence,unknowns,tests,corrections. '+prompt}]}],generationConfig:{responseMimeType:'application/json',temperature:0.2}}),signal:AbortSignal.timeout(12000)});
+    r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+encodeURIComponent(model)+':generateContent?key='+encodeURIComponent(key),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:'You are Gemini, evidence verifier for ANIL X. Return JSON only with answer,evidence,unknowns,tests,corrections. Answer in the same language as the owner task. '+prompt}]}],generationConfig:{responseMimeType:'application/json',temperature:0.2}}),signal:AbortSignal.timeout(12000)});
    }
    d=await r.json().catch(()=>({}));
    if(!r.ok){
@@ -69,6 +69,18 @@ async function brain(env,who,prompt){
  }
  return last;
 }
+export function synthesizeSpecialistAnswer(providers,language='en'){
+ const rows=Object.entries(providers||{}).filter(([,v])=>v?.live&&v?.output&&typeof v.output==='object');
+ if(!rows.length)return null;
+ const parts=rows.map(([name,v])=>{
+  const output=v.output;
+  const answer=output.answer||output.response||output.summary;
+  const detail=typeof answer==='string'?answer:JSON.stringify(output);
+  return name.toUpperCase()+': '+String(detail||'Review completed; no concise answer field returned.').slice(0,1800);
+ });
+ const heading=language==='fa'?'جمع‌بندی آنیل از موتورهای تخصصی زنده (بدون ادعای اجرای عملیات):':'ANIL synthesis from live specialist engines (no execution claim):';
+ return heading+'\\n\\n'+parts.join('\\n\\n');
+}
 function localCommand(state,guard,task){
  const blockers=[]; if(guard?.freshness?.stale)blockers.push('guard_state_stale'); if(!state.providers.astra.live)blockers.push('astra_runtime_not_ready');
  return {command:'DISCOVER -> VERIFY -> SCORE -> QUALIFY -> TEST -> SHIP -> MEASURE -> LEARN -> IMPROVE',priorities:['verify_live_state','protect_revenue_integrity','improve_highest_value_engine','run_regression_tests','only_then_ship_reversible_change'],tests:['health','execution-readiness','guard-freshness','revenue-contract','browser-smoke'],stopConditions:['regression','unverified_revenue','security_boundary_violation','missing_evidence'],blockers,task};
@@ -81,10 +93,12 @@ export async function handleSuperTeam(req,env,{guardHandler}={}){
  const models=Object.fromEntries(Object.entries(modelKey).map(([k,v])=>[k,firstEnv(env,v)||null]));
  const state={providers:{astra:{live:false},claude:{live:false},gemini:{live:false}}}; let guard=null;
  if(typeof guardHandler==='function'){try{const r=await guardHandler(new Request(new URL('/api/guard/live',req.url),{method:'GET'}),env);guard=await r.json()}catch{}}
- const prompt=JSON.stringify({task,guard,team:roles,principles:['ANIL has final command','specialists advise within role','agents may collaborate when dependency exists','irreversible money/security actions remain owner-gated','no fake execution','no fake revenue','every mutation requires test','model catalog presence is not runtime proof']});
+ const language=body.language==='fa'||/[\\u0600-\\u06FF]/.test(task)?'fa':'en';
+ const prompt=JSON.stringify({task,language,guard,team:roles,principles:['ANIL has final command','specialists advise within role','agents may collaborate when dependency exists','irreversible money/security actions remain owner-gated','no fake execution','no fake revenue','every mutation requires test','model catalog presence is not runtime proof']});
  const [a,c,g]=await Promise.all([brain(env,'astra',prompt),brain(env,'claude',prompt),brain(env,'gemini',prompt)]);
  state.providers.astra=a;state.providers.claude=c;state.providers.gemini=g;
  const command=a.live&&a.output?.command?{...a.output,source:'astra'}:localCommand(state,guard,task);
+ if(!command.answer&&!command.response){const synthesized=synthesizeSpecialistAnswer(state.providers,language);if(synthesized)command.answer=synthesized;}
  const evidence={guardFresh:guard?.freshness?.stale===false,guardAvailable:Boolean(guard?.ok),providerKeys:keys,configuredModels:models,liveProviders:[a,c,g].filter(x=>x.live).map(x=>x.provider)};
  const council=buildComplementaryCouncil({task,guard,providers:{astra:a,claude:c,gemini:g},command,evidence,roles});
  return json({ok:true,engine:'ANIL-SUPER-TEAM',version:'3.0.0-complementary-council',generatedAt:new Date().toISOString(),task,chain:council.chain,team:council.team,command:council.command,evidence,council:council.collaboration,qualityGates:council.qualityGates,guard:{freshness:guard?.freshness||null,snapshot:guard?.guard||null,radar:guard?.radar||null},safety:{finalCommand:'ANIL',irreversibleActions:'OWNER_APPROVAL',moneyMovement:'OWNER_APPROVAL',privateKeys:false,seedPhrases:false,autoSigning:false,captchaBypass:false,kycBypass:false},truth:{revenueCountsOnlyWhenSettled:true,providerConfigurationIsNotRuntimeProof:true,modelCatalogIsNotRuntimeProof:true,executionRequiresRuntimeEvidence:true,localFallbackIsNotEquivalentToFullLLM:true}});
