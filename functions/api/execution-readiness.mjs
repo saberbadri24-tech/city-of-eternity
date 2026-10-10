@@ -1,21 +1,18 @@
 import {json} from './runtime-state.mjs';
-import {getUsdTomanConfig} from './currency.mjs';
+import {getLiveUsdTomanConfig} from './currency.mjs';
 
 const first=(env,keys)=>keys.map(k=>env?.[k]).find(v=>v!==undefined&&v!==null&&String(v).trim()!=='')||'';const validTonAddress=a=>/^(?:EQ|UQ)[A-Za-z0-9_-]{46}$/.test(String(a||''));
 
 export async function handleExecutionReadiness(req,env){
   if(req.method!=='GET') return json({ok:false,error:'method_not_allowed'},405);
   const openai=first(env,['OPENAI_API_KEY','OPENAI_KEY']);
-  const anthropic=first(env,['ANTHROPIC_API_KEY','ANTHROPIC_KEY']);
-  const gemini=first(env,['GEMINI_API_KEY','GOOGLE_GEMINI_API_KEY','GOOGLE_API_KEY']);
   const variza=first(env,['VARIZA_API_KEY','VARIA_API_KEY','VARIZA_TOKEN','VARIZA_KEY','VARIZA_API_TOKEN','VARIZA_SECRET','VARIZA_API','VARIZA_ACCESS_TOKEN','VARIZA_BEARER_TOKEN']);
   const webhook=first(env,['VARIZA_WEBHOOK_SECRET','VARIA_WEBHOOK_SECRET','VARIZA_WEBHOOK_TOKEN','VARIZA_WEBHOOK_KEY','VARIZA_SECRET']);
   const mainTon=first(env,['TON_MAIN_WALLET','TON_MAIN_WALLET_ADDRESS','TON_PERMANENT_WALLET_ADDRESS','TON_MAIN_ADDRESS','TON_WALLET_ADDRESS','MAIN_TON_WALLET','MAIN_WALLET_ADDRESS','PERMANENT_WALLET_ADDRESS']);
-  const fxConfig=getUsdTomanConfig(env);const tomanRate=fxConfig.rate;const fx=Math.round(tomanRate*10);
+  const fxConfig=await getLiveUsdTomanConfig(env);const tomanRate=fxConfig.rate;const fx=Math.round(tomanRate*10);
   const providers={
     openai:Boolean(openai),
-    anthropic:Boolean(anthropic),
-    gemini:Boolean(gemini),
+    localEngines:true,
     webSearch:Boolean(env?.TAVILY_API_KEY||env?.BRAVE_SEARCH_API_KEY),
     variza:Boolean(variza),
     varizaWebhook:Boolean(webhook),
@@ -37,7 +34,7 @@ export async function handleExecutionReadiness(req,env){
       rollback:{ready:true,mode:'Git/Render known-good deploy rollback'}
     },
     providers,
-    fxRate:{source:fxConfig.source,usdToIRR:fx,usdToToman:tomanRate,unit:'toman'},
+    fxRate:{source:fxConfig.source,configured:fxConfig.source!=='runtime-default',observedAt:fxConfig.observedAt||null,usdToIRR:fx,usdToToman:fxConfig.source!=='runtime-default'?tomanRate:null,unit:'toman'},
     wallet:{
       publicTonPaymentsEnabled:providers.tonMain,
       guardStagingEnabled:true,
