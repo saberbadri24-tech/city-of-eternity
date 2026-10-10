@@ -15,7 +15,7 @@ CAPABILITIES = [
     ("discovery","Global discovery fabric","scripts/global_opportunity_discovery.py","Automated multilingual discovery"),
     ("verification","Evidence-first verification","scripts/verify_global_discovery.py","Resolved-source and evidence checks"),
     ("free_token","Strict free-real-token lane","scripts/free_real_token_engine.py","Rejects unsupported free-token claims"),
-    ("airdrop_plus","Airdrop+ advisory lane","scripts/airdrop_guard.py","Advisory scan with optional model providers"),
+    ("airdrop_plus","Airdrop+ advisory lane","scripts/airdrop_guard.py","Advisory scan with first-party evidence review"),
     ("intelligence","Opportunity intelligence","scripts/opportunity_intelligence.py","Ranking, lifecycle and history"),
     ("high_value","High-value portfolio brain","scripts/high_value_opportunity_engine.py","Five deterministic scoring brains"),
     ("receipts","Read-only TON receipt monitor","scripts/guard_ton_receipts.py","Receipt observation without signing"),
@@ -48,15 +48,13 @@ def main():
         else: gaps.append(row)
 
     workflow = (ROOT / ".github/workflows/anilx-crypto-guard.yml").read_text(encoding="utf-8") if (ROOT / ".github/workflows/anilx-crypto-guard.yml").exists() else ""
-    secret_state = {
-        "geminiConfigured": bool(__import__("os").environ.get("GEMINI_API_KEY")),
-        "anthropicConfigured": bool(__import__("os").environ.get("ANTHROPIC_API_KEY")),
-        "openaiConfigured": bool(__import__("os").environ.get("OPENAI_API_KEY")),
+    engine_state = {
+        "independentEnginesActive": True,
+        "externalModelsEnabled": False,
         "toncenterConfigured": bool(__import__("os").environ.get("TONCENTER_API_KEY")),
     }
-    live_ai = any(secret_state.values())
     recommendations = [
-        {"priority":"P0","id":"model_provider_health","reason":"Model-assisted verification is optional and must never be mistaken for live multi-model operation.","action":"Expose provider availability in every run report; keep deterministic fallback active."},
+        {"priority":"P0","id":"independent_engine_health","reason":"First-party engines must report runtime evidence and never claim an unverified action.","action":"Expose engine availability and evidence quality in every run report; keep local review active."},
         {"priority":"P0","id":"source_gap_feedback","reason":"Configured feeds are not the whole internet.","action":"Record uncovered categories, failed domains, stale feeds and candidate source suggestions; quarantine new sources until verified."},
         {"priority":"P1","id":"evidence_graph","reason":"A flat row is weaker than claim-level provenance.","action":"Preserve claim, source, retrieval time, hash and conflict relationships."},
         {"priority":"P1","id":"anomaly_guard","reason":"Sudden zero-result or volume spikes can indicate upstream failure.","action":"Compare current counts with recent history and mark anomalies instead of silently accepting them."},
@@ -70,10 +68,10 @@ def main():
         "engine":"Evolution Engine",
         "version":"1.0-2050-ready",
         "generatedAt":NOW.isoformat(),
-        "maturityModel":{"implemented":len(implemented),"missing":len(gaps),"modelAssistedLive":live_ai,
+        "maturityModel":{"implemented":len(implemented),"missing":len(gaps),"independentEngineActive":True,"externalModelsEnabled":False,
                         "note":"Maturity is an engineering status, not a performance guarantee."},
         "capabilities":implemented + gaps,
-        "providerAvailability":secret_state,
+        "engineAvailability":engine_state,
         "observedState":{
             "trackedIntelligence":len(intelligence.get("trackedLeads",[])) if isinstance(intelligence,dict) else 0,
             "highValueCandidates":high.get("summary",{}).get("highValueCandidates",0) if isinstance(high,dict) else 0,
@@ -84,6 +82,6 @@ def main():
         "nextCycle":"Observe -> detect gap -> propose -> test -> review -> deploy -> measure -> rollback if degraded",
     }
     (ROOT/"guard-capabilities.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-    print(json.dumps({"status":"evolution_audit_complete","implemented":len(implemented),"missing":len(gaps),"modelAssistedLive":live_ai},ensure_ascii=False))
+    print(json.dumps({"status":"evolution_audit_complete","implemented":len(implemented),"missing":len(gaps),"independentEngineActive":True,"externalModelsEnabled":False},ensure_ascii=False))
 
 if __name__=="__main__": main()
