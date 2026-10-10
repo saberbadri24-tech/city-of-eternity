@@ -58,8 +58,8 @@ const originalFetch = globalThis.fetch;
 let providerCalls = 0;
 try {
   globalThis.fetch = async (url, options) => {
-    if (String(url).includes('nerkh.jahankhahan.shop/data/live.json')) {
-      throw new Error('FX feed intentionally unavailable in deterministic payment test');
+    if (!String(url).includes('variza.ir/api/v1/pay')) {
+      throw new Error('Non-Variza network disabled in deterministic payment test');
     }
     providerCalls++;
     const sent = JSON.parse(options.body);
