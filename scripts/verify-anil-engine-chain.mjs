@@ -44,6 +44,14 @@ results.push({
   ok:!(/\bopenai\s*\(|\bclaude\s*\(|\bgemini\s*\(/i.test(planSource)) &&
     planSource.includes('externalModelsCalled:false')
 });
+const workerSource = fs.readFileSync(new URL('../worker.js', import.meta.url), 'utf8');
+results.push({
+  name:'owner chat routes to independent council when external providers fail',
+  ok:workerSource.includes("if(u.pathname==='/api/admin/secretary')return secretary(req,env)") &&
+    workerSource.includes("handlePlan(new Request('https://anilx.internal/api/plan'") &&
+    workerSource.includes("action:'independent_council_fallback'") &&
+    workerSource.includes("execution:planData.execution||{performed:false,status:'not_executed'}")
+});
 const failed = results.filter(item => !item.ok);
 for (const result of results) console.log((result.ok?'PASS ':'FAIL ')+result.name);
 if (failed.length) process.exit(1);
