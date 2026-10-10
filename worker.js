@@ -987,7 +987,7 @@ async function secretary(req,env){
               : 'The provider API quota is exhausted, so ANIL skipped repeated model calls and used the independent specialist council. This is planning/read-only research, not external execution.';
             return json({
               ok:true,action:'independent_council_fallback',live:false,provider:'independent-council',
-              text:String(planData.reply||planData.text||planData.answer||note)+'\\n\\n'+note,
+              text:String(planData.reply||planData.text||planData.answer||note)+'\n\n'+note,
               data:{
                 source:planData.source||'anil-independent-specialist-council',
                 engine:planData.engine||'ANIL-INDEPENDENT-ENGINE-COUNCIL',
