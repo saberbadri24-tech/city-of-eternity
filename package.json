@@ -9,7 +9,7 @@
     "ioredis": "^6.0.0"
   },
   "scripts": {
-    "verify:syntax": "node scripts/verify-syntax.mjs && node scripts/verify-payment-integrity.mjs",
+    "verify:syntax": "node scripts/verify-syntax.mjs && node scripts/verify-payment-integrity.mjs && node scripts/verify-anil-engine-chain.mjs",
     "postinstall": "node scripts/verify-syntax.mjs && node scripts/verify-payment-integrity.mjs"
   }
 }
