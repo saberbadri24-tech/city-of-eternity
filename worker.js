@@ -242,7 +242,7 @@ const REVENUE_PROGRAMS=[
 {id:'airdrop-intelligence',name:'Airdrop Intelligence Report',type:'research',status:'LIVE',description:'گزارش فرصت‌ها، رقبا، eligibility و ریسک برای پروژه‌ها و کاربران حرفه‌ای.',engine:'immortal-guard'},
 {id:'recurring-maintenance',name:'Maintenance & Support Retainer',type:'recurring',status:'LIVE',description:'قرارداد نگهداری، مانیتورینگ و رفع مشکل دوره‌ای پس از سفارش.',engine:'retention'}
 ];
-async function getV90Config(env){const x=await kvGet(env,'admin/config',null);return {pricesUsd:{...V90_DEFAULTS.pricesUsd,...(x?.pricesUsd||{})},permissions:{...V90_DEFAULTS.permissions,...(x?.permissions||{})},updatedAt:x?.updatedAt||new Date(0).toISOString()}}
+async function getV90Config(env){const x=await kvGet(env,'admin/config',null);return {pricesUsd:{...V90_DEFAULTS.pricesUsd,...(x?.pricesUsd||{})},permissions:{...V90_DEFAULTS.permissions,...(x?.permissions||{})},updatedAt:x?.updatedAt||null}}
 async function saveV90Config(env,next){const x={pricesUsd:next.pricesUsd,permissions:next.permissions,updatedAt:new Date().toISOString()};await kvPut(env,'admin/config',x);return x}
 async function v90Approval(env,title,category,details){const rec={id:id(),title:String(title).slice(0,180),category:String(category).slice(0,80),details:String(details||'').slice(0,1500),status:'pending',createdAt:now()};await kvPut(env,'admin/approval/'+rec.id,rec);return rec}
 async function v90Audit(env,action,success,details=''){await kvPut(env,'admin/action/'+id(),{action,success,details:String(details).slice(0,1000),createdAt:now()})}
