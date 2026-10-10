@@ -16,12 +16,12 @@ async function translateBatch(items,target){if(!items.length)return;const fresh=
 async function apply(target){
  remember();restore();document.documentElement.lang=target;document.documentElement.dir=LANGS[target][1];window.ANILX_LANGUAGE=target;
  if(target==='en')return;
- const all=nodes(),pending=[],refs=[],seen=new Set();
- // Apply curated Persian translations first; send every remaining string to the translation API.
- for(const n of all){
-  const raw=original.get(n)||n.nodeValue;const t=raw.trim();if(!t)continue;
+ const groups=new Map();
+ const add=(text,ref)=>{if(!groups.has(text))groups.set(text,[]);groups.get(text).push(ref)};
+ for(const n of nodes()){
+  const raw=original.get(n)||n.nodeValue,t=raw.trim();if(!t)continue;
   if(target==='fa'&&FA_MAP[t]){n.nodeValue=raw.replace(t,FA_MAP[t]);continue}
-  if(seen.has(t))continue;seen.add(t);pending.push(t);refs.push({node:n,raw,text:t,kind:'text'});
+  add(t,{node:n,raw,text:t,kind:'text'});
  }
  const attrSelectors='input[placeholder],textarea[placeholder],input[aria-label],button[aria-label],[title],[alt]';
  document.querySelectorAll(attrSelectors).forEach(el=>{
@@ -29,18 +29,21 @@ async function apply(target){
    if(!el.hasAttribute(attr))return;
    const raw=el.getAttribute(attr)||'',t=raw.trim();if(!t)return;
    if(target==='fa'&&FA_MAP[t]){el.setAttribute(attr,FA_MAP[t]);return}
-   if(seen.has(t))return;seen.add(t);pending.push(t);refs.push({node:el,raw,text:t,kind:attr});
+   add(t,{node:el,raw,text:t,kind:attr});
   });
  });
- // Translate the whole document in small batches instead of the previous first 10–14 visible strings.
+ const pending=[...groups.keys()];
+ // Process the complete document, not only the first few visible labels; translate repeated labels together.
  for(let offset=0;offset<pending.length;offset+=10){
   const batch=pending.slice(offset,offset+10);
   try{await translateBatch(batch,target)}catch(err){console.warn('ANIL X translation batch failed',target,offset,err)}
-  for(let i=offset;i<Math.min(offset+10,refs.length);i++){
-   const item=refs[i],value=translated.get(target+'|'+item.text);
-   if(!value||value===item.text)continue;
-   if(item.kind==='text'&&item.node?.isConnected)item.node.nodeValue=item.raw.replace(item.text,value);
-   else if(item.node?.isConnected)item.node.setAttribute(item.kind,value);
+  for(const text of batch){
+   const value=translated.get(target+'|'+text);if(!value||value===text)continue;
+   for(const item of groups.get(text)||[]){
+    if(!item.node?.isConnected)continue;
+    if(item.kind==='text')item.node.nodeValue=item.raw.replace(item.text,value);
+    else item.node.setAttribute(item.kind,value);
+   }
   }
  }
 }
