@@ -37,7 +37,7 @@ form{display:grid;gap:12px}.row{display:grid;grid-template-columns:1fr 1fr;gap:1
 <script>
 (()=>{const form=document.getElementById('leadForm'),status=document.getElementById('status'),service=document.getElementById('service'),request=document.getElementById('request'),email=document.getElementById('email'),country=document.getElementById('country');
 document.querySelectorAll('[data-service]').forEach(b=>b.onclick=()=>{service.value=b.dataset.service;request.focus();document.getElementById('start').scrollIntoView({behavior:'smooth',block:'center'});});
-const syncPrices=async()=>{try{const r=await fetch('/api/site-config',{cache:'no-store'});if(!r.ok)return;const d=await r.json();const prices=d.pricesUsd||{};const plans={website:'BUILD',teaser:'START',fix:'FIX',growth:'GROW',automation:'BUILD','ai-agent':'GROW'};document.querySelectorAll('[data-service]').forEach(b=>{const plan=plans[b.dataset.service],price=b.closest('.service')?.querySelector('.price');if(!plan||!price||!Number.isFinite(Number(prices[plan])))return;const label=price.querySelector('.small');if(label){price.firstChild.textContent='
+const syncPrices=async()=>{try{const r=await fetch('/api/site-config',{cache:'no-store'});if(!r.ok)return;const d=await r.json();const prices=d.pricesUsd||{};const plans={website:'BUILD',teaser:'START',fix:'FIX',growth:'GROW',automation:'BUILD','ai-agent':'GROW'};document.querySelectorAll('[data-service]').forEach(b=>{const plan=plans[b.dataset.service],price=b.closest('.service')?.querySelector('.price');if(!plan||!price||!Number.isFinite(Number(prices[plan])))return;const label=price.querySelector('.small');if(label){price.firstChild.textContent='$'+Number(prices[plan]).toLocaleString('en-US')+' ';label.textContent=plan;}});}catch{}};syncPrices();
 form.addEventListener('submit',async e=>{e.preventDefault();status.className='status';status.textContent='Building your customer path…';try{
 const leadRes=await fetch('/api/revenue/lead',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({request:request.value,email:email.value,source:'services-page'})});
 const leadData=await leadRes.json();if(!leadRes.ok||!leadData.ok)throw Error(leadData.error||'lead_failed');
@@ -48,17 +48,6 @@ if(d.payment?.ready&&d.payment?.payUrl){status.className='status ok';status.text
 status.className='status';status.textContent='Lead saved and order path created. '+(d.payment?.error==='payment_not_configured'?'Payment gateway is the remaining configuration step.':'Payment is not ready yet: '+(d.payment?.error||'configuration required'))+'. Your lead is retained for the next step.';
 }catch(err){status.className='status err';status.textContent='Could not complete the project path: '+(err.message||'unknown error');}});
 })();
-</script>
-</body></html>+Number(prices[plan]).toLocaleString('en-US')+' ';label.textContent=plan;}});}catch{}};syncPrices();
-form.addEventListener('submit',async e=>{e.preventDefault();status.className='status';status.textContent='Building your customer path…';try{
-const leadRes=await fetch('/api/revenue/lead',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({request:request.value,email:email.value,source:'services-page'})});
-const leadData=await leadRes.json();if(!leadRes.ok||!leadData.ok)throw Error(leadData.error||'lead_failed');
-const lead=leadData.lead;const chosen=service.value||lead.recommendedService;
-const checkout=await fetch('/api/revenue/checkout',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({leadId:lead.id,email:email.value,service:chosen,description:request.value})});
-const d=await checkout.json();if(!checkout.ok||!d.ok)throw Error(d.error||'checkout_failed');
-if(d.payment?.ready&&d.payment?.payUrl){status.className='status ok';status.textContent='Your order is ready. Opening secure checkout…';location.href=d.payment.payUrl;return;}
-status.className='status';status.textContent='Lead saved and order path created. '+(d.payment?.error==='payment_not_configured'?'Payment gateway is the remaining configuration step.':'Payment is not ready yet: '+(d.payment?.error||'configuration required'))+'. Your lead is retained for the next step.';
-}catch(err){status.className='status err';status.textContent='Could not complete the project path: '+(err.message||'unknown error');}});
 })();
 </script>
 </body></html>
