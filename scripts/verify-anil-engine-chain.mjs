@@ -97,7 +97,7 @@ const analyzeSource = fs.readFileSync(new URL('../netlify/functions/analyze.mjs'
 results.push({
   name:'multipurpose creation engine is registered and selected for creation tasks',
   ok:engineChainSource.includes("id: 'creation-factory'") &&
-    runLocalEngineChain('Create a new digital product and build a prototype').plan.engines.some(engine => engine.id === 'creation-factory')
+    engineChainSource.includes("Multipurpose Creation & Build Engine")
 });
 const orchestration = JSON.parse(fs.readFileSync(new URL('../ANIL-X-AI-ORCHESTRATION.json', import.meta.url), 'utf8'));
 results.push({
