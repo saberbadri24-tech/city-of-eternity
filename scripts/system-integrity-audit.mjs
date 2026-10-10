@@ -20,7 +20,7 @@ const keepwarm=wf.filter(x=>/cron:\s*["']?\*\/5/.test(x.text)&&/city-of-eternity
 if(keepwarm.length>1) errors.push('Duplicate 5-minute keepwarm workflows: '+keepwarm.join(', '));
 
 const worker=await fs.readFile(path.join(root,'worker.js'),'utf8');
-if(/action:'ai_provider_blocked'[\\s\\S]{0,1000}return json\\(/.test(worker)) errors.push('Owner chat must not terminate at provider quota exhaustion; configured fallbacks and local cognition must remain reachable');
+if(/action:'ai_provider_blocked'[\s\S]{0,1000}return json\(/.test(worker)) errors.push('Owner chat must not terminate at provider quota exhaustion; configured fallbacks and local cognition must remain reachable');
 if(!worker.includes("action:'local_cognitive_fallback'")||!worker.includes('providerQuotaExhausted')) errors.push('Owner chat local cognition fallback or quota diagnostic is missing');
 const runtimeFiles=['worker.js','render-server.mjs','functions/api/execution-readiness.mjs','functions/api/guard-live.mjs','revenue-super-os.json'];
 for(const rel of runtimeFiles){
