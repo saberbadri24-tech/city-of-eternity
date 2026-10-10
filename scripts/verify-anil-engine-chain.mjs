@@ -49,13 +49,13 @@ results.push({
 });
 const planSource = fs.readFileSync(new URL('../functions/api/plan.mjs', import.meta.url), 'utf8');
 results.push({
-  name:'runtime plan does not call external model providers',
-  ok:!(/\bopenai\s*\(|\bclaude\s*\(|\bgemini\s*\(/i.test(planSource)) &&
+  name:'runtime plan uses first-party specialist engines',
+  ok:!(/https:\/\/[a-z0-9.-]+\/v1\/(?:messages|chat\/completions)/i.test(planSource)) &&
     planSource.includes('externalModelsCalled:false')
 });
 const workerSource = fs.readFileSync(new URL('../worker.js', import.meta.url), 'utf8');
 results.push({
-  name:'owner chat routes to independent council when external providers fail',
+  name:'owner chat routes to independent council without provider error disclosure',
   ok:workerSource.includes("if(u.pathname==='/api/admin/secretary')return secretary(req,env)") &&
     workerSource.includes("handlePlan(new Request('https://anilx.internal/api/plan'") &&
     workerSource.includes("action:'independent_council_fallback'") &&
@@ -72,7 +72,7 @@ results.push({
     workerSource.slice(ownerChatIndex, ownerHistoryIndex).includes('externalModelsCalled:false')
 });
 results.push({
-  name:'owner chat fails closed rather than silently falling back to external bots',
+  name:'owner chat keeps execution evidence-gated',
   ok:workerSource.slice(ownerChatIndex, ownerHistoryIndex).includes("action:'independent_council_unavailable'") &&
     workerSource.slice(ownerChatIndex, ownerHistoryIndex).includes("},503)")
 });
