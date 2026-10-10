@@ -16,12 +16,36 @@ async function translateBatch(items,target){if(!items.length)return;const fresh=
 async function apply(target){
  remember();restore();document.documentElement.lang=target;document.documentElement.dir=LANGS[target][1];window.ANILX_LANGUAGE=target;
  if(target==='en')return;
- if(target==='fa'){applyLocalFa();return;}
- const ns=nodes(),seen=new Set(),items=[],refs=[];const max=innerWidth<700?10:14;
- for(const n of ns){if(items.length>=max)break;const t=(original.get(n)||n.nodeValue).trim();if(!t||seen.has(t)||!visible(n))continue;seen.add(t);items.push(t);refs.push(n)}
- const ph=[...document.querySelectorAll('input[placeholder],textarea[placeholder]')].map(n=>({n,t:original.get(n)||''})).filter(x=>x.t&&!seen.has(x.t)).slice(0,2);
- for(const x of ph){if(items.length>=max)break;seen.add(x.t);items.push(x.t);refs.push(x.n)}
- try{await translateBatch(items,target);refs.forEach((n,i)=>{const t=items[i],v=translated.get(target+'|'+t);if(v){if(n.nodeType===3)n.nodeValue=n.nodeValue.replace(t,v);else n.setAttribute('placeholder',v)}})}catch{}
+ const groups=new Map();
+ const add=(text,ref)=>{if(!groups.has(text))groups.set(text,[]);groups.get(text).push(ref)};
+ for(const n of nodes()){
+  const raw=original.get(n)||n.nodeValue,t=raw.trim();if(!t)continue;
+  if(target==='fa'&&FA_MAP[t]){n.nodeValue=raw.replace(t,FA_MAP[t]);continue}
+  add(t,{node:n,raw,text:t,kind:'text'});
+ }
+ const attrSelectors='input[placeholder],textarea[placeholder],input[aria-label],button[aria-label],[title],[alt]';
+ document.querySelectorAll(attrSelectors).forEach(el=>{
+  ['placeholder','aria-label','title','alt'].forEach(attr=>{
+   if(!el.hasAttribute(attr))return;
+   const raw=el.getAttribute(attr)||'',t=raw.trim();if(!t)return;
+   if(target==='fa'&&FA_MAP[t]){el.setAttribute(attr,FA_MAP[t]);return}
+   add(t,{node:el,raw,text:t,kind:attr});
+  });
+ });
+ const pending=[...groups.keys()];
+ // Process the complete document, not only the first few visible labels; translate repeated labels together.
+ for(let offset=0;offset<pending.length;offset+=10){
+  const batch=pending.slice(offset,offset+10);
+  try{await translateBatch(batch,target)}catch(err){console.warn('ANIL X translation batch failed',target,offset,err)}
+  for(const text of batch){
+   const value=translated.get(target+'|'+text);if(!value||value===text)continue;
+   for(const item of groups.get(text)||[]){
+    if(!item.node?.isConnected)continue;
+    if(item.kind==='text')item.node.nodeValue=item.raw.replace(item.text,value);
+    else item.node.setAttribute(item.kind,value);
+   }
+  }
+ }
 }
 async function switchLang(next){if(!LANGS[next]||next===lang)return;lang=next;localStorage.setItem(KEY,next);const u=new URL(location.href);u.searchParams.set('lang',next);history.replaceState({},'',u);setup();await apply(next);window.dispatchEvent(new CustomEvent('anilx:language',{detail:{language:next}}))}
 function boot(){setup();remember();window.ANILX_LANGUAGE=lang;if(lang==='fa'){apply('fa').catch(()=>{});return;}if(lang!=='en'){const idle=window.requestIdleCallback||((f)=>setTimeout(f,120));idle(()=>apply(lang).catch(()=>{}),{timeout:400})}}
