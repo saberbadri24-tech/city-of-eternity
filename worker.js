@@ -784,7 +784,25 @@ async function secretary(req,env){
     const u=new URL(req.url);u.pathname=path;u.search='';
     const headers=new Headers({cookie:req.headers.get('cookie')||''});
     if(body)headers.set('content-type','application/json');
-    const rr=await runtimeRoutes(new Request(u,{method,headers,body:body?JSON.stringify(body):undefined}),env,u);
+    const internalReq=new Request(u,{method,headers,body:body?JSON.stringify(body):undefined});
+    let rr=await runtimeRoutes(internalReq,env,u);
+    // Dispatch outer-router endpoints too; the owner secretary previously only
+    // consulted runtimeRoutes, so health and Guard live checks falsely failed.
+    if(!rr&&path==='/api/health'){
+      rr=json({ok:true,ready:adminConfigured(env),service:'ANIL X',runtime:'unified-worker',
+        configured:{admin:adminConfigured(env),openai:!!getAiConfig(env).openai,
+          openrouter:!!getAiConfig(env).openrouter,localEngines:true,
+          variza:!!getVarizaApiKey(env),payments:!!env.PAYMENTS,assets:!!env.ASSETS},
+        revenue:{persistence:!!env.PAYMENTS,variza:!!getVarizaApiKey(env),
+          ton:validTonAddress(getMainTonAddress(env)),guardCatchQueue:!!env.PAYMENTS}},200);
+    }
+    if(!rr&&path==='/api/anil/execution-readiness')rr=await handleExecutionReadiness(internalReq,env);
+    if(!rr&&path==='/api/plan')rr=await handlePlan(internalReq,env);
+    if(!rr&&path==='/api/guard/live'&&method==='GET'){
+      rr=!(await adminAuth(internalReq,env))
+        ? rjson({ok:false,error:'admin_auth_required'},401)
+        : await handleGuardLive(internalReq,env);
+    }
     if(!rr)throw Error('route_unavailable');
     const data=await rr.json().catch(()=>({}));
     return {status:rr.status,data};
