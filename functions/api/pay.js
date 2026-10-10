@@ -10,7 +10,7 @@ export async function onRequestPost({ request, env }) {
   const durableAccounting = !!env.PAYMENTS && String(env.PAYMENTS_DURABLE || "false").toLowerCase() === "true";
   if (!durableAccounting) return json({ ok: false, error: "durable_payment_storage_required" }, 503);
 
-  const apiKey = env.VARIZA_API_KEY || env.VARIA_API_KEY || env.VARIZA_TOKEN || env.VARIZA_KEY || env.VARIZA_API_TOKEN || env.VARIZA_SECRET;
+  const apiKey = env.VARIZA_API_KEY || env.VARIA_API_KEY || env.VARIZA_TOKEN || env.VARIZA_KEY || env.VARIZA_API_TOKEN || env.VARIZA_SECRET || env.VARIZA_API || env.VARIZA_ACCESS_TOKEN || env.VARIZA_BEARER_TOKEN;
   if (!apiKey) return json({ ok: false, error: "payment_not_configured" }, 503);
 
   try {
