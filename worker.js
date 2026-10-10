@@ -538,10 +538,17 @@ if(p==='/api/payment-config'){
     return rjson({ok:true,ton:{enabled:validTonAddress(mainTon),walletConfigured:validTonAddress(mainTon),address:validTonAddress(mainTon)?mainTon:null,mainConfigured:validTonAddress(mainTon),checkoutEnabled:false,checkoutReason:'ton_order_receipt_verification_not_enabled'},guard:{catchQueueConfigured:Boolean(env.PAYMENTS),temporaryWalletUsed:false},fx:{configured:fx.source!=='runtime-default',source:fx.source,observedAt:fx.observedAt||null,rate:fx.source!=='runtime-default'?fx.rate:null,unit:'toman'},fiat:{provider:'variza',providerConfigured:varizaConfigured,enabled:fiatReady,checkoutEnabled:fiatReady,checkoutReason:fiatReason}});
   }
   if(p==='/api/revenue/catalog'){
-    return rjson({ok:true,merchant:'ANIL X STUDIO',currency:'USD',services:[
-      {id:'website',name:'AI Website Build',price:149},{id:'airdrop-campaign',name:'Airdrop Campaign Launch',price:299},{id:'airdrop-intelligence',name:'Airdrop Intelligence Report',price:49},{id:'teaser',name:'Marketing Teaser',price:49},
-      {id:'fix',name:'Website Fix',price:39},{id:'growth',name:'Growth & SEO',price:79},
-      {id:'automation',name:'Business Automation',price:99},{id:'ai-agent',name:'AI Agent Integration',price:129}
+    const pricing=await getV90Config(env);
+    const prices=pricing.pricesUsd;
+    return rjson({ok:true,merchant:'ANIL X STUDIO',currency:'USD',pricesUpdatedAt:pricing.updatedAt,services:[
+      {id:'website',name:'AI Website Build',plan:'BUILD',price:prices.BUILD},
+      {id:'airdrop-campaign',name:'Airdrop Campaign Launch',price:299},
+      {id:'airdrop-intelligence',name:'Airdrop Intelligence Report',price:49},
+      {id:'teaser',name:'Marketing Teaser',plan:'START',price:prices.START},
+      {id:'fix',name:'Website Fix',plan:'FIX',price:prices.FIX},
+      {id:'growth',name:'Growth & SEO',plan:'GROW',price:prices.GROW},
+      {id:'automation',name:'Business Automation',plan:'BUILD',price:prices.BUILD},
+      {id:'ai-agent',name:'AI Agent Integration',plan:'GROW',price:prices.GROW}
     ]});
   }
   if(p==='/api/revenue/lead'){
