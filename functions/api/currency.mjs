@@ -43,16 +43,18 @@ export async function getLiveUsdTomanConfig(env = {}) {
     if (!response.ok) throw new Error('fx_source_unavailable');
     const data = await response.json();
     const quote = data?.usd;
-    const rate = Number(quote?.value);
-    const observedAt = String(quote?.updatedTime || '');
-    const stale = quote?.stale;
+    // Nerkhara's public rates.json schema uses usd.price, top-level stale,
+    // and generated_utc; retain compatibility with the older value schema.
+    const rate = Number(quote?.value ?? quote?.price);
+    const observedAt = String(quote?.updatedTime || quote?.timestamp_utc || data?.generated_utc || '');
+    const stale = quote?.stale ?? data?.stale;
     if (stale !== false) throw new Error('fx_quote_stale');
     if (!Number.isFinite(rate) || rate < 10000 || rate > 1000000) throw new Error('fx_rate_out_of_range');
     if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:?\d{2})?$/.test(observedAt)) throw new Error('fx_timestamp_invalid');
     const timestamp = Date.parse(/(?:Z|[+-]\d{2}:?\d{2})$/.test(observedAt) ? observedAt : observedAt + 'Z');
     const ageMs = Date.now() - timestamp;
     if (!Number.isFinite(timestamp) || ageMs < -5 * 60_000 || ageMs > 6 * 60 * 60_000) throw new Error('fx_quote_stale');
-    const config = { rate: Math.round(rate), source: 'live-market-api', unit: 'toman', observedAt, stale: false };
+    const config = { rate: Math.round(rate), source: 'live-market-api', unit: 'toman', observedAt, stale: false, contributors: Array.isArray(quote?.sources) ? quote.sources.length : 0 };
     liveCache = { config, fetchedAt: Date.now() };
     return config;
   } catch {
