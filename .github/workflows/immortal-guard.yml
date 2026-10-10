@@ -23,6 +23,8 @@ jobs:
     env:
       TONCENTER_API_KEY: ${{ secrets.TONCENTER_API_KEY }}
       TON_MAIN_WALLET: ${{ secrets.TON_MAIN_WALLET }}
+      TON_GUARD_TEMP_WALLET: ${{ secrets.TON_GUARD_TEMP_WALLET }}
+      TON_GUARD_TEMP_WALLET_ADDRESS: ${{ secrets.TON_GUARD_TEMP_WALLET_ADDRESS }}
       GUARD_RUNTIME_FINAL: "1"
 
     steps:
