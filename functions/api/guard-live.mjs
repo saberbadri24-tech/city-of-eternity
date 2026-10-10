@@ -19,7 +19,7 @@ const REMOTE_FILES={
  receipts:'ton_receipts.json',
  ai:'ai_reviews.json',
  radar:'radar_intel.json',
- sourceHealth:'radar_intel.json'
+ sourceHealth:'official_source_gate.json'
 };
 const remoteCache=new Map();
 let cache={at:0,data:null};
@@ -86,8 +86,8 @@ export async function handleGuardLive(req,env){
   const receiptItems=Array.isArray(receipts.items)?receipts.items:[];
   const approvalItems=Array.isArray(transfer.approvals)?transfer.approvals:Array.isArray(transfer.items)?transfer.items:[];
   const compact=(x)=>({id:x?.id||x?.opportunityId||null,title:String(x?.title||x?.name||'فرصت').slice(0,100),source:String(x?.source||x?.resolvedDomain||'').slice(0,80),status:String(x?.status||x?.verification||'').slice(0,40),value:Number(x?.value||x?.rewardUsd||x?.estimatedValueUsd||0)||0});
-  const temporaryConfigured=String(status.temporaryWallet||'').toLowerCase()==='configured';
-  const permanentConfigured=Boolean(status.permanentWallet||status.permanentAddress);
+  const temporaryConfigured=String(status.temporaryWallet||'').toLowerCase()==='configured'||Boolean(status.wallet?.temporaryAddressConfigured)||Boolean(transfer.temporaryAddress);
+  const permanentConfigured=Boolean(status.permanentWallet||status.permanentAddress||transfer.permanentAddress);
   const out={
     ok:true,source:'ANIL-X-local-guard-state',
     updatedAt:status.updatedAt||status.lastScan||opportunities.updatedAt||null,
@@ -102,7 +102,7 @@ export async function handleGuardLive(req,env){
     },
     opportunities:{count:Number(status.discoveryCount||status.counts?.opportunities||oppItems.length||0),items:oppItems.slice(0,5).map(compact)},
     valueHunter:{count:Number(status.highValueCandidates||status.counts?.incomePriority||highItems.length||0),items:highItems.slice(0,5).map(compact)},
-    revenue:{confirmedIncome:Number(ledger.confirmedIncome||ledger.totalReceived||0),status:String(ledger.status||'UNCONFIRMED').slice(0,30)},
+    revenue:{confirmedIncome:Number(ledger.actualCollectedUsd||ledger.confirmedIncome||ledger.totalReceived||0),status:String(ledger.status||(Number(ledger.verifiedSettlementCount||0)>0?'SETTLED_EVIDENCE_VERIFIED':'UNCONFIRMED')).slice(0,30)},
     transfer:{status:String(transfer.status||'OWNER_APPROVAL_REQUIRED').slice(0,40),temporaryConfigured,temporaryWalletUsed:false,catchQueueConfigured:Boolean(env?.PAYMENTS),catchQueuePending:0,permanentConfigured,pendingApprovals:Number(status.waitingOwner||0)},
     ai:{
       live:Boolean(ai.live||ai.healthy||ai.overall==='healthy'),
@@ -118,6 +118,8 @@ export async function handleGuardLive(req,env){
       generatedAt:radar.generatedAt||radar.updatedAt||null
     },
     sourceHealth:sourceHealth.summary||sourceHealth.counts||{
+      officialVerifiedActionableCount:Number(sourceHealth.officialVerifiedActionableCount||0),
+      discoveryOnlyCount:Number(sourceHealth.discoveryOnlyCount||0),
       sources:radar.sources||0,
       sourceRows:radar.sourceRows||0,
       securitySources:radar.securitySources||0,
