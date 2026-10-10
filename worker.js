@@ -883,6 +883,37 @@ async function secretary(req,env){
         return json({ok:true,action:'first_party_conversation',provider:'anil-core',live:true,
           text:fa?'سلام. من آنیلِ دستیار مدیر ANIL X هستم. درخواستت را بگو؛ وضعیت زنده را بررسی می‌کنم و هیچ کاری را بدون شواهد انجام‌شده اعلام نمی‌کنم.':'Hello. I am ANIL, the ANIL X owner assistant. Tell me what you need; I will verify live status and never claim an action without evidence.'});
       }
+      // Route ordinary owner conversation through the same bounded provider rotation
+      // as the public assistant, while retaining the deterministic ANIL-Core fallback.
+      try {
+        const analysisRequest=new Request(new URL('/api/analyze',req.url),{
+          method:'POST',
+          headers:{'content-type':'application/json'},
+          body:JSON.stringify({
+            text:command,
+            language:fa?'fa':'en',
+            turns:Array.isArray(b.messages)?b.messages.slice(-8):[]
+          })
+        });
+        const analysisResponse=await analyze(analysisRequest,env);
+        const analysisData=await analysisResponse.json().catch(()=>({}));
+        if(analysisResponse.ok&&analysisData?.ok&&String(analysisData.reply||'').trim()){
+          const provider=String(analysisData.meta?.orchestrator||'ANIL-Core');
+          return json({
+            ok:true,
+            action:analysisData.meta?.fallback?'first_party_conversation':'provider_rotated_conversation',
+            provider,
+            live:true,
+            text:String(analysisData.reply).slice(0,2500),
+            data:{
+              route:analysisData.route||null,
+              confidence:analysisData.confidence||null,
+              meta:analysisData.meta||null,
+              execution:{performed:false,status:'not_executed'}
+            }
+          });
+        }
+      } catch {}
       try {
         const planResponse=await handlePlan(new Request('https://anilx.internal/api/plan',{
           method:'POST',headers:{'content-type':'application/json'},
