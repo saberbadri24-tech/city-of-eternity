@@ -1,3 +1,4 @@
+import {runLocalEngineChain} from './anil-engine-chain.mjs';
 const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','access-control-allow-origin':'*','access-control-allow-methods':'POST,OPTIONS','access-control-allow-headers':'content-type'};
 const planCache=new Map();
 const cacheKey=x=>JSON.stringify({r:String(x?.requestText||''),l:String(x?.language||''),a:String(x?.ageProfile||''),g:String(x?.goal||'')}).slice(0,7000);
@@ -83,4 +84,42 @@ if(toolExecutions.length&&astra){
     if(finalAstra)astra={...astra,...finalAstra,toolCalls:toolExecutions.map(x=>({tool:x.tool,executed:true}))};
   }catch(e){errors.push(String(e?.message||e))}
 }
-const reply=astra?.reply||('گرفتم: '+(astra?.title||fallback.title)); const replyText=reply;const result={ok:true,source:astra?(astraProvider==='openai'?'ai-council':'provider-fallback'):'local-fallback',orchestration,orchestrator:astraProvider||'local',reviewer:claudeReview?'claude':'local',research:geminiReview?'gemini':'local',specialists:{astra:{live:astraProvider==='openai',provider:astraProvider||'local'},claude:{live:!!claudeReview,provider:'anthropic'},gemini:{live:!!geminiReview,provider:'google'},vision:{live:false,endpoint:'/api/vision'},voice:{live:false,endpoint:'/api/voice'}},router:{selected:astra?.specialist||fallback.title,providerErrors:errors.slice(0,4),tools:{urls:toolResults.length,used:toolResults.some(x=>x?.ok),webSearch:Boolean(searchResults?.ok),searchProvider:searchResults?.provider||null,planned:toolExecutions.map(x=>({tool:x.tool,ok:!!x.result?.ok}))}},plan:{title:astra?.title||fallback.title,desc:astra?.desc||fallback.desc,moves:Array.isArray(astra?.moves)&&astra.moves.length?astra.moves.slice(0,6):fallback.moves},reply,text:replyText,answer:reply,confidence:Number(astra?.confidence)||.55};cacheSet(ck,result);return json(result)}catch(e){const fallback=localPlan(requestText);return json({ok:true,source:'local-fallback',orchestrator:'local',reviewer:'local',research:'local',specialists:{astra:{live:false,provider:'local'},claude:{live:false,provider:'local'},gemini:{live:false,provider:'local'},vision:{live:false,endpoint:'/api/vision'},voice:{live:false,endpoint:'/api/voice'}},router:{selected:fallback.title,providerErrors:[String(e?.message||e).slice(0,240)],tools:{urls:0,used:false,webSearch:false,searchProvider:null,planned:[]}},plan:fallback,reply:operationalIntent?'ابزار اجرایی لازم برای این درخواست در Runtime در دسترس نیست؛ ANIL X فعلاً فقط می‌تواند مسیر، تشخیص و اقدام بعدی را مشخص کند و اجرای واقعی را بدون ابزار لازم ادعا نمی‌کند.':'گرفتم؛ '+fallback.title+'.',text:operationalIntent?'ابزار اجرایی لازم برای این درخواست در Runtime در دسترس نیست؛ ANIL X فعلاً فقط می‌تواند مسیر، تشخیص و اقدام بعدی را مشخص کند و اجرای واقعی را بدون ابزار لازم ادعا نمی‌کند.':'گرفتم؛ '+fallback.title+'.',answer:operationalIntent?'ابزار اجرایی لازم برای این درخواست در Runtime در دسترس نیست؛ ANIL X فعلاً فقط می‌تواند مسیر، تشخیص و اقدام بعدی را مشخص کند و اجرای واقعی را بدون ابزار لازم ادعا نمی‌کند.':'گرفتم؛ '+fallback.title+'.',confidence:.25})}}
+const localEngineChain=astra?null:runLocalEngineChain(requestText);
+const reply=astra?.reply||localEngineChain?.reply||('گرفتم: '+(astra?.title||fallback.title));
+const replyText=reply;
+const result={
+ ok:true,
+ source:astra?(astraProvider==='openai'?'ai-council':'provider-fallback'):'local-engine-chain',
+ orchestration:localEngineChain?.orchestration||orchestration,
+ engineChain:localEngineChain?.chain||null,
+ orchestrator:astraProvider||'local',
+ reviewer:claudeReview?'claude':'local',
+ research:geminiReview?'gemini':'local',
+ specialists:{
+  astra:{live:astraProvider==='openai',provider:astraProvider||'local'},
+  claude:{live:!!claudeReview,provider:'anthropic'},
+  gemini:{live:!!geminiReview,provider:'google'},
+  vision:{live:false,endpoint:'/api/vision'},
+  voice:{live:false,endpoint:'/api/voice'}
+ },
+ router:{
+  selected:astra?.specialist||localEngineChain?.selectedEngine||fallback.title,
+  providerErrors:errors.slice(0,4),
+  tools:{urls:toolResults.length,used:toolResults.some(x=>x?.ok),webSearch:Boolean(searchResults?.ok),searchProvider:searchResults?.provider||null,planned:toolExecutions.map(x=>({tool:x.tool,ok:!!x.result?.ok}))}
+ },
+ plan:localEngineChain?.plan||{title:astra?.title||fallback.title,desc:astra?.desc||fallback.desc,moves:Array.isArray(astra?.moves)&&astra.moves.length?astra.moves.slice(0,6):fallback.moves},
+ execution:localEngineChain?.execution||{performed:false,status:'not_executed',reason:'provider-backed response; execution must be evidenced separately'},
+ reply,text:replyText,answer:reply,confidence:Number(astra?.confidence)||localEngineChain?.confidence||.55
+};
+cacheSet(ck,result);return json(result)}catch(e){
+ const localEngineChain=runLocalEngineChain(requestText);
+ const error=String(e?.message||e).slice(0,240);
+ return json({
+  ok:true,source:'local-engine-chain',orchestrator:'local',reviewer:'local',research:'local',
+  orchestration:localEngineChain.orchestration,engineChain:localEngineChain.chain,
+  specialists:{astra:{live:false,provider:'local'},claude:{live:false,provider:'local'},gemini:{live:false,provider:'local'},vision:{live:false,endpoint:'/api/vision'},voice:{live:false,endpoint:'/api/voice'}},
+  router:{selected:localEngineChain.selectedEngine,providerErrors:[error],tools:{urls:0,used:false,webSearch:false,searchProvider:null,planned:[]}},
+  plan:localEngineChain.plan,execution:localEngineChain.execution,
+  reply:localEngineChain.reply,text:localEngineChain.reply,answer:localEngineChain.reply,confidence:localEngineChain.confidence
+ })
+}}
