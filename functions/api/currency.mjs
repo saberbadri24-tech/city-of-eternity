@@ -48,8 +48,8 @@ export async function getLiveUsdTomanConfig(env = {}) {
     const stale = quote?.stale;
     if (stale !== false) throw new Error('fx_quote_stale');
     if (!Number.isFinite(rate) || rate < 10000 || rate > 1000000) throw new Error('fx_rate_out_of_range');
-    if (!/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:Z|[+-]\\d{2}:?\\d{2})?$/.test(observedAt)) throw new Error('fx_timestamp_invalid');
-    const timestamp = Date.parse(/(?:Z|[+-]\\d{2}:?\\d{2})$/.test(observedAt) ? observedAt : observedAt + 'Z');
+    if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:?\d{2})?$/.test(observedAt)) throw new Error('fx_timestamp_invalid');
+    const timestamp = Date.parse(/(?:Z|[+-]\d{2}:?\d{2})$/.test(observedAt) ? observedAt : observedAt + 'Z');
     const ageMs = Date.now() - timestamp;
     if (!Number.isFinite(timestamp) || ageMs < -5 * 60_000 || ageMs > 6 * 60 * 60_000) throw new Error('fx_quote_stale');
     const config = { rate: Math.round(rate), source: 'live-market-api', unit: 'toman', observedAt, stale: false };
