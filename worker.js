@@ -1,4 +1,5 @@
 import {state,now,clean,id,json as runtimeJson} from './functions/api/runtime-state.mjs';
+import {getUsdTomanConfig,getUsdTomanRate} from './functions/api/currency.mjs';
 import autopilot from './functions/api/autopilot.mjs';
 import {handlePlan} from './functions/api/plan.mjs';
 import analyze from './netlify/functions/analyze.mjs';
@@ -40,7 +41,7 @@ const getMainTonAddress=env=>firstEnv(env,['TON_MAIN_WALLET','TON_MAIN_WALLET_AD
 const getVarizaApiKey=env=>firstEnv(env,['VARIZA_API_KEY','VARIA_API_KEY','VARIZA_TOKEN','VARIZA_KEY','VARIZA_API_TOKEN','VARIZA_SECRET','VARIZA_API','VARIZA_ACCESS_TOKEN','VARIZA_BEARER_TOKEN']);
 const getVarizaWebhookSecret=env=>firstEnv(env,['VARIZA_WEBHOOK_SECRET','VARIA_WEBHOOK_SECRET','VARIZA_WEBHOOK_TOKEN','VARIZA_WEBHOOK_KEY','VARIZA_SECRET']);
 const getAiConfig=env=>({openai:firstEnv(env,['OPENAI_API_KEY','OPENAI_KEY']),anthropic:firstEnv(env,['ANTHROPIC_API_KEY','ANTHROPIC_KEY']),gemini:firstEnv(env,['GEMINI_API_KEY','GOOGLE_GEMINI_API_KEY','GOOGLE_API_KEY']),openrouter:firstEnv(env,['ANIL_OPENROUTER_API_KEY','OPENROUTER_API_KEY'])});
-const getUsdTomanConfig=env=>{const configured=Number(firstEnv(env,['USD_TOMAN_RATE','USD_TO_TOMAN','USD_TOMAN','USD_IRR_RATE'])||0);return {rate:Number.isFinite(configured)&&configured>0?configured:2687600,source:Number.isFinite(configured)&&configured>0?'environment':'runtime-default'};};const getUsdTomanRate=env=>getUsdTomanConfig(env).rate;
+
 const REVENUE_FLEET=[
 {id:'b2b-lead-hunter',name:'B2B Lead Hunter',mode:'hunter',status:'ACTIVE',monetization:'qualified-lead+project',prereq:'compliant prospecting channels'},
 {id:'business-auditor',name:'Business Auditor',mode:'audit',status:'ACTIVE',monetization:'audit+project',prereq:'ANIL-X lead/order/payment'},
@@ -272,7 +273,7 @@ async function v90AdminRoutes(req,env,u){
     if(decision==='approved'&&a.category==='pricing'){let parsed={};try{parsed=JSON.parse(a.details||'{}')}catch{return rjson({ok:false,error:'invalid_approval_details'},400)}const cur=await getV90Config(env);const prices={FIX:Number(parsed.FIX),START:Number(parsed.START),BUILD:Number(parsed.BUILD),GROW:Number(parsed.GROW)};if(!Object.values(prices).every(n=>Number.isFinite(n)&&n>=1&&n<=100000))return rjson({ok:false,error:'invalid_price'},400);await saveV90Config(env,{...cur,pricesUsd:prices});a.status='approved';a.executed=true;a.decidedAt=now();await kvPut(env,'admin/approval/'+idv,a);await v90Audit(env,'approved_price_change',true,prices);return rjson({ok:true,success:true,status:'approved',executed:true,pricesUsd:prices})}
     a.status=decision;a.executed=false;a.decidedAt=now();await kvPut(env,'admin/approval/'+idv,a);await v90Audit(env,'approval_'+decision,true,idv);return rjson({ok:true,success:true,status:decision,executed:false});
   }
-  if(p==='/api/currency/rates'&&req.method==='GET'){const rate=getUsdTomanRate(env);if(!Number.isFinite(rate)||rate<=0)return rjson({ok:false,error:'fx_unavailable'},503);return rjson({base:'USD',currencies:{USD:1,IRR:rate},tomanPerUsd:Math.round(rate/10),supported:['USD','EUR','GBP','CAD','AUD','AED','TRY','CNY','JPY']})}
+  if(p==='/api/currency/rates'&&req.method==='GET'){const rate=getUsdTomanRate(env);if(!Number.isFinite(rate)||rate<=0)return rjson({ok:false,error:'fx_unavailable'},503);return rjson({base:'USD',currencies:{USD:1,IRR:Math.round(rate*10)},tomanPerUsd:rate,rateUnit:'toman',source:getUsdTomanConfig(env).source,supported:['USD','EUR','GBP','CAD','AUD','AED','TRY','CNY','JPY']})}
   if(p==='/api/me'&&req.method==='GET'){return rjson({ok:true,mode:'guest',userId:null,name:'',email:'',orders:0,requests:0})}
   if((p==='/api/chat/memory'||p==='/api/memory')&&['GET','POST'].includes(req.method)){const sid=clean(u.searchParams.get('sessionId'),100).replace(/[^a-zA-Z0-9_-]/g,'');if(!sid)return rjson({ok:false,error:'session_required'},400);const key='chat/'+sid;if(req.method==='POST'){const b=await req.json().catch(()=>({}));const rec={sessionId:sid,turns:Array.isArray(b.turns)?b.turns.slice(-30):[],profile:b.profile&&typeof b.profile==='object'?b.profile:{},updatedAt:now()};await kvPut(env,key,rec);return rjson({ok:true,sessionId:sid,count:rec.turns.length})}const rec=await kvGet(env,key,{sessionId:sid,turns:[],profile:{}});return rjson({ok:true,...rec})}
   if(p==='/api/leads'&&req.method==='POST'){const b=await req.json().catch(()=>({})),email=clean(b.email,160),request=clean(b.request,4000);if(!/^\\S+@\\S+\\.\\S+$/.test(email)||!request)return rjson({ok:false,error:'invalid_request'},400);const lead={id:id(),email,request,language:b.language==='fa'?'fa':'en',recommendedPlan:['FIX','START','BUILD','GROW'].includes(b.recommendedPlan)?b.recommendedPlan:null,createdAt:now()};await kvPut(env,'lead/'+lead.id,lead);return rjson({ok:true,saved:true,leadId:lead.id})}
@@ -371,8 +372,8 @@ async function runtimeRoutes(req,env,u){
   }
   if(p==='/api/fx'){
     const rate=getUsdTomanRate(env);
-    if(!Number.isFinite(rate)||rate<=0)return rjson({ok:false,error:'usd_irr_rate_not_configured',currency:'USD',target:'IRR',source:'environment'});
-    return rjson({ok:true,from:'USD',to:'IRR',rate,source:getUsdTomanConfig(env).source,tomanRate:rate/10});
+    if(!Number.isFinite(rate)||rate<=0)return rjson({ok:false,error:'fx_unavailable',currency:'USD',target:'TOMAN'});
+    return rjson({ok:true,from:'USD',to:'IRR',rate:Math.round(rate*10),source:getUsdTomanConfig(env).source,tomanRate:rate,rateUnit:'toman'});
   }
   if(p==='/api/revenue/fleet'&&req.method==='GET')return rjson({...await revenueFleetStatus(env),state:await revenueFleetState(env)});
   if(p==='/api/revenue/opportunities'&&req.method==='GET'){
@@ -411,25 +412,28 @@ async function runtimeRoutes(req,env,u){
     const leadId=clean(b.leadId,120),email=clean(b.email,160),service=clean(b.service||'custom',80);
     if(!/^\\S+@\\S+\\.\\S+$/.test(email))return rjson({ok:false,error:'valid_email_required'},400);
     const catalog={
-      website:{name:'AI Website Build',price:149},
+      website:{name:'AI Website Build',plan:'BUILD'},
       'airdrop-campaign':{name:'Airdrop Campaign Launch',price:299},
       'airdrop-intelligence':{name:'Airdrop Intelligence Report',price:49},
-      teaser:{name:'Marketing Teaser',price:49},
-      fix:{name:'Website Fix',price:39},
-      growth:{name:'Growth & SEO',price:79},
-      automation:{name:'Business Automation',price:99},
-      'ai-agent':{name:'AI Agent Integration',price:129}
+      teaser:{name:'Marketing Teaser',plan:'START'},
+      fix:{name:'Website Fix',plan:'FIX'},
+      growth:{name:'Growth & SEO',plan:'GROW'},
+      automation:{name:'Business Automation',plan:'BUILD'},
+      'ai-agent':{name:'AI Agent Integration',plan:'GROW'}
     };
     let lead=leadId?await kvGet(env,'revenue-leads/'+leadId,null):null;
     if(!lead&&leadId)lead=state.revenueLeads.get(leadId)||null;
-    const selected=catalog[service]||catalog[String(lead?.recommendedService||'')];
+    const planToService={FIX:'fix',START:'teaser',BUILD:'website',GROW:'growth'};
+    const selected=catalog[service.toLowerCase()]||catalog[String(lead?.recommendedService||'').toLowerCase()]||catalog[planToService[String(lead?.recommendedPlan||'').toUpperCase()]];
     if(!selected)return rjson({ok:false,error:'service_not_available'},400);
-    const amountUsd=Number(selected.price);
+    const pricing=await getV90Config(env);
+    const amountUsd=Number(selected.plan?pricing.pricesUsd[selected.plan]:selected.price);
+    if(!Number.isFinite(amountUsd)||amountUsd<1)return rjson({ok:false,error:'invalid_service_price'},503);
     const rate=getUsdTomanRate(env);
     const paymentConfigured=!!getVarizaApiKey(env);
     const durableAccounting=!!env.PAYMENTS&&String(env.PAYMENTS_DURABLE||'false').toLowerCase()==='true';
     if(!durableAccounting)return rjson({ok:false,error:'durable_payment_storage_required',next:'configure_durable_payments_storage'},503);
-    const order={id:id(),accountId:clean(lead?.id||'guest'),client:email,email,service:service||lead?.recommendedService||'custom',description:clean(b.description||lead?.request||selected.name,1000),currency:'USD',amount:amountUsd,orderAmount:amountUsd,status:'pending',leadId:lead?.id||null,createdAt:now()};
+    const order={id:id(),accountId:clean(lead?.id||'guest'),client:email,email,service:service||lead?.recommendedService||selected.plan||'custom',plan:selected.plan||null,description:clean(b.description||lead?.request||selected.name,1000),currency:'USD',amount:amountUsd,orderAmount:amountUsd,status:'pending',leadId:lead?.id||null,createdAt:now()};
     state.orders.set(order.id,order);
     if(env.PAYMENTS)await env.PAYMENTS.put('orders/'+order.id,JSON.stringify(order));
     if(!paymentConfigured)return rjson({ok:true,order,payment:{ready:false,error:'payment_not_configured'},next:'configure_variza'},201);
