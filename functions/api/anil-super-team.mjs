@@ -25,9 +25,9 @@ const providerKey={astra:['OPENAI_API_KEY','OPENAI_KEY'],claude:['ANTHROPIC_API_
 const modelKey={astra:['ASTRA_MODEL','ANIL_OPENAI_MODEL'],claude:['CLAUDE_MODEL','ANIL_ANTHROPIC_MODEL'],gemini:['GEMINI_MODEL','ANIL_GEMINI_MODEL']};
 const extract=raw=>{try{return JSON.parse(raw)}catch{const m=String(raw||'').match(/\{[\s\S]*\}/);try{return m?JSON.parse(m[0]):null}catch{return null}}};
 export const fallbackModels={
- astra:['gpt-6-astra','gpt-6.1-sol','gpt-6-luna','gpt-5.6-terra','gpt-5.6-luna'],
- claude:['claude-opus-5','claude-sonnet-5','claude-sonnet-4-6'],
- gemini:['gemini-3.8-flash','gemini-3.7-flash','gemini-2.5-flash']
+ astra:['gpt-6-astra','gpt-6.1-sol','gpt-6-luna','gpt-5.6-luna'],
+ claude:['claude-sonnet-5','claude-opus-5','claude-sonnet-4-6'],
+ gemini:['gemini-3.8-flash','gemini-3.7-flash','gemini-3.6-flash']
 };
 async function brain(env,who,prompt){
  const key=firstEnv(env,providerKey[who]);
