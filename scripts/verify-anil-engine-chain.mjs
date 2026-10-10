@@ -81,7 +81,9 @@ results.push({
   ok:ownerChatIndex >= 0 && ownerChatEnd > ownerChatIndex &&
     ownerChatSource.includes("action:'serial_engine_chain_primary'") &&
     ownerChatSource.includes('externalModelsCalled:false') &&
-    !/https:\/\/api\.[a-z0-9.-]+\//i.test(ownerChatSource)
+    !/https:\/\/api\.[a-z0-9.-]+\//i.test(ownerChatSource) &&
+    !ownerChatSource.includes('analysisRequest') &&
+    !ownerChatSource.includes('verify:true')
 });
 results.push({
   name:'owner chat keeps execution evidence-gated without provider error disclosure',
@@ -91,6 +93,7 @@ results.push({
 });
 
 const engineChainSource = fs.readFileSync(new URL('../functions/api/anil-engine-chain.mjs', import.meta.url), 'utf8');
+const analyzeSource = fs.readFileSync(new URL('../netlify/functions/analyze.mjs', import.meta.url), 'utf8');
 results.push({
   name:'multipurpose creation engine is registered and selected for creation tasks',
   ok:engineChainSource.includes("id: 'creation-factory'") &&
@@ -104,6 +107,12 @@ results.push({
     orchestration.engine_chain?.rules?.threeModelCouncil === false
 });
 
+results.push({
+  name:'hosted three-model verification is removed from the runtime analysis adapter',
+  ok:!analyzeSource.includes('Optional council verification') &&
+    !analyzeSource.includes('council={claude:false,gemini:false}') &&
+    analyzeSource.includes('verification:"disabled"')
+});
 const failed = results.filter(item => !item.ok);
 for (const result of results) console.log((result.ok?'PASS ':'FAIL ')+result.name);
 if (failed.length) process.exit(1);
