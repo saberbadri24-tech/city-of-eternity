@@ -982,7 +982,7 @@ async function secretary(req,env){
     }
     const providerFailures=[];
     const ai=getAiConfig(env).openai;
-    const openAiModels=[env.ASTRA_MODEL,env.ANIL_OPENAI_MODEL,'gpt-5-mini','gpt-5','gpt-4.1-mini'].filter((v,i,a)=>v&&a.indexOf(v)===i);
+    const openAiModels=[env.ASTRA_MODEL,env.ANIL_OPENAI_MODEL,'gpt-6-astra','gpt-6.1-sol','gpt-6-luna','gpt-5.6-luna'].filter((v,i,a)=>v&&a.indexOf(v)===i);
     if(ai){
       const input=[...history,{role:'user',content:command}];
       for(const model of openAiModels){
