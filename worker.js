@@ -1,5 +1,5 @@
 import {state,now,clean,id,json as runtimeJson} from './functions/api/runtime-state.mjs';
-import {getUsdTomanConfig,getUsdTomanRate} from './functions/api/currency.mjs';
+import {getUsdTomanConfig,getUsdTomanRate,getLiveUsdTomanConfig} from './functions/api/currency.mjs';
 import autopilot from './functions/api/autopilot.mjs';
 import {handlePlan} from './functions/api/plan.mjs';
 import analyze from './netlify/functions/analyze.mjs';
@@ -528,12 +528,12 @@ async function runtimeRoutes(req,env,u){
   }
 if(p==='/api/payment-config'){
     const mainTon=getMainTonAddress(env);
-    const fx=getUsdTomanConfig(env);
+    const fx=await getLiveUsdTomanConfig(env);
     const durable=Boolean(env.PAYMENTS)&&String(env.PAYMENTS_DURABLE||'false').toLowerCase()==='true';
     const varizaConfigured=!!getVarizaApiKey(env);
     const fiatReady=varizaConfigured&&durable&&fx.source!=='runtime-default';
     const fiatReason=!varizaConfigured?'provider_not_configured':!durable?'durable_accounting_required':fx.source==='runtime-default'?'fx_rate_not_configured':null;
-    return rjson({ok:true,ton:{enabled:validTonAddress(mainTon),walletConfigured:validTonAddress(mainTon),address:validTonAddress(mainTon)?mainTon:null,mainConfigured:validTonAddress(mainTon),checkoutEnabled:false,checkoutReason:'ton_order_receipt_verification_not_enabled'},guard:{catchQueueConfigured:Boolean(env.PAYMENTS),temporaryWalletUsed:false},fx:{configured:fx.source!=='runtime-default',source:fx.source,unit:'toman'},fiat:{provider:'variza',providerConfigured:varizaConfigured,enabled:fiatReady,checkoutEnabled:fiatReady,checkoutReason:fiatReason}});
+    return rjson({ok:true,ton:{enabled:validTonAddress(mainTon),walletConfigured:validTonAddress(mainTon),address:validTonAddress(mainTon)?mainTon:null,mainConfigured:validTonAddress(mainTon),checkoutEnabled:false,checkoutReason:'ton_order_receipt_verification_not_enabled'},guard:{catchQueueConfigured:Boolean(env.PAYMENTS),temporaryWalletUsed:false},fx:{configured:fx.source!=='runtime-default',source:fx.source,observedAt:fx.observedAt||null,rate:fx.source!=='runtime-default'?fx.rate:null,unit:'toman'},fiat:{provider:'variza',providerConfigured:varizaConfigured,enabled:fiatReady,checkoutEnabled:fiatReady,checkoutReason:fiatReason}});
   }
   if(p==='/api/revenue/catalog'){
     return rjson({ok:true,merchant:'ANIL X STUDIO',currency:'USD',services:[
