@@ -40,7 +40,7 @@ const getMainTonAddress=env=>firstEnv(env,['TON_MAIN_WALLET','TON_MAIN_WALLET_AD
 const getVarizaApiKey=env=>firstEnv(env,['VARIZA_API_KEY','VARIA_API_KEY','VARIZA_TOKEN','VARIZA_KEY','VARIZA_API_TOKEN','VARIZA_SECRET','VARIZA_API','VARIZA_ACCESS_TOKEN','VARIZA_BEARER_TOKEN']);
 const getVarizaWebhookSecret=env=>firstEnv(env,['VARIZA_WEBHOOK_SECRET','VARIA_WEBHOOK_SECRET','VARIZA_WEBHOOK_TOKEN','VARIZA_WEBHOOK_KEY','VARIZA_SECRET']);
 const getAiConfig=env=>({openai:firstEnv(env,['OPENAI_API_KEY','OPENAI_KEY']),anthropic:firstEnv(env,['ANTHROPIC_API_KEY','ANTHROPIC_KEY']),gemini:firstEnv(env,['GEMINI_API_KEY','GOOGLE_GEMINI_API_KEY','GOOGLE_API_KEY']),openrouter:firstEnv(env,['ANIL_OPENROUTER_API_KEY','OPENROUTER_API_KEY'])});
-const getUsdTomanRate=env=>{const configured=Number(firstEnv(env,['USD_TOMAN_RATE','USD_TO_TOMAN','USD_TOMAN','USD_IRR_RATE'])||0);return Number.isFinite(configured)&&configured>0?configured:2687600;};
+const getUsdTomanConfig=env=>{const configured=Number(firstEnv(env,['USD_TOMAN_RATE','USD_TO_TOMAN','USD_TOMAN','USD_IRR_RATE'])||0);return {rate:Number.isFinite(configured)&&configured>0?configured:2687600,source:Number.isFinite(configured)&&configured>0?'environment':'runtime-default'};};const getUsdTomanRate=env=>getUsdTomanConfig(env).rate;
 const REVENUE_FLEET=[
 {id:'b2b-lead-hunter',name:'B2B Lead Hunter',mode:'hunter',status:'ACTIVE',monetization:'qualified-lead+project',prereq:'compliant prospecting channels'},
 {id:'business-auditor',name:'Business Auditor',mode:'audit',status:'ACTIVE',monetization:'audit+project',prereq:'ANIL-X lead/order/payment'},
@@ -372,7 +372,7 @@ async function runtimeRoutes(req,env,u){
   if(p==='/api/fx'){
     const rate=getUsdTomanRate(env);
     if(!Number.isFinite(rate)||rate<=0)return rjson({ok:false,error:'usd_irr_rate_not_configured',currency:'USD',target:'IRR',source:'environment'});
-    return rjson({ok:true,from:'USD',to:'IRR',rate,source:'environment',tomanRate:rate/10});
+    return rjson({ok:true,from:'USD',to:'IRR',rate,source:getUsdTomanConfig(env).source,tomanRate:rate/10});
   }
   if(p==='/api/revenue/fleet'&&req.method==='GET')return rjson({...await revenueFleetStatus(env),state:await revenueFleetState(env)});
   if(p==='/api/revenue/opportunities'&&req.method==='GET'){
@@ -391,7 +391,7 @@ async function runtimeRoutes(req,env,u){
     const ai=!!(getAiConfig(env).openai||getAiConfig(env).gemini||getAiConfig(env).anthropic);
     const storageConfigured=!!env.PAYMENTS;
     const persistence=storageConfigured&&String(env.PAYMENTS_DURABLE||'false').toLowerCase()==='true';
-    return rjson({ok:true,customerPath:{brief:true,leadCapture:true,qualification:true,offer:true,order:true,checkout:payment&&fx&&persistence,paymentGateway:payment,fxConfigured:fx,persistentAccounting:persistence,storageConfigured,aiReady:ai},blockers:[...(!payment?['VARIZA_API_KEY']:[]),...(!fx?['USD_IRR_RATE']:[]),...(!storageConfigured?['PAYMENTS_STORAGE']:[]),...(storageConfigured&&!persistence?['DURABLE_PAYMENTS_STORAGE']:[])],truth:'customer arrival is external; everything inside this path is explicit and testable'});
+    return rjson({ok:true,customerPath:{brief:true,leadCapture:true,qualification:true,offer:true,order:true,checkout:payment&&fx&&persistence,paymentGateway:payment,fxConfigured:fx,persistentAccounting:persistence,storageConfigured,aiReady:true,externalAiConfigured:ai,localCoreAvailable:true},blockers:[...(!payment?['VARIZA_API_KEY']:[]),...(!fx?['USD_IRR_RATE']:[]),...(!storageConfigured?['PAYMENTS_STORAGE']:[]),...(storageConfigured&&!persistence?['DURABLE_PAYMENTS_STORAGE']:[])],truth:'customer arrival is external; everything inside this path is explicit and testable'});
   }
   if(p==='/api/revenue/programs'&&req.method==='GET'){
     const configured={variza:!!getVarizaApiKey(env),ton:validTonAddress(getMainTonAddress(env)),ai:!!(getAiConfig(env).openai||getAiConfig(env).gemini||getAiConfig(env).anthropic),gsc:!!(env.GSC_ACCESS_TOKEN||env.GSC_SERVICE_ACCOUNT_JSON),storage:!!env.PAYMENTS};
