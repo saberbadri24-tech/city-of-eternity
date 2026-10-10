@@ -7,7 +7,7 @@ export function handleAnilCapabilities(req,env){
     ok:true,
     generatedAt:new Date().toISOString(),
     capabilities:{
-      ai:{openai:envFlag(env,'OPENAI_API_KEY'),anthropic:envFlag(env,'ANTHROPIC_API_KEY'),gemini:envFlag(env,'GEMINI_API_KEY')},
+      ai:{localEngines:true,independentCouncil:true,externalModelDependency:false},
       github:{workflowOidc:true,repository:'saberbadri24-tech/city-of-eternity',writePath:'controlled-change-request -> GitHub Actions -> branch/PR -> tests',tokenDirect:false},
       gitlab:{configured:envFlag(env,'GITLAB_TOKEN'),writePath:'api-adapter-when-configured'},
       browser:{playwrightSmoke:true,remoteBrowser:envFlag(env,'BROWSERBASE_API_KEY','BROWSERLESS_TOKEN','BROWSER_AUTOMATION_TOKEN')},
