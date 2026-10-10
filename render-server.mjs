@@ -141,12 +141,15 @@ const server=http.createServer(async(req,res)=>{
       let body;try{body=JSON.parse(raw.toString('utf8')||'{}')}catch{return json(400,{ok:false,error:'invalid_json'})}
       const text=typeof body.text==='string'?body.text:'';const target=String(body.target||'');
       const allowed=new Set(['en','fa','ar','tr','ru','de','fr','es','pt','it','nl','pl','uk','sv','no','da','fi','cs','sk','ro','hu','el','bg','sr','hr','sl','he','ur','hi','bn','ta','te','th','vi','id','ms','zh-CN','zh-TW','ja','ko']);
-      if(!allowed.has(target)||!text||text.length>10_000||!/^([\s\S]*\[\[AX\d+\]\][\s\S]*)$/.test(text))return json(400,{ok:false,error:'invalid_translation_request'});
-      const output=localTranslate(text,target);
-      const expected=[...text.matchAll(/\[\[AX(\d+)\]\]/g)].map(m=>m[0]);
+      if(!allowed.has(target)||!text.trim()||text.length>10_000)return json(400,{ok:false,error:'invalid_translation_request'});
+      const hasMarkers=/\[\[AX\d+\]\]/.test(text);
+      const sourceText=hasMarkers?text:'[[AX0]]'+text;
+      const output=localTranslate(sourceText,target);
+      const expected=[...sourceText.matchAll(/\[\[AX(\d+)\]\]/g)].map(m=>m[0]);
       const found=[...output.matchAll(/\[\[AX(\d+)\]\]/g)].map(m=>m[0]);
-      if(!expected.length||expected.some((m,i)=>found[i]!==m)||found.length!==expected.length)return json(200,{ok:true,target,text,engine:'local-translation-fallback',fallback:true});
-      return json(200,{ok:true,target,text:output,engine:'local-translation-fallback',fallback:true});
+      if(!expected.length||expected.some((m,i)=>found[i]!==m)||found.length!==expected.length)return json(200,{ok:true,target,text:hasMarkers?text:text,engine:'local-translation-fallback',fallback:true});
+      const resultText=hasMarkers?output:output.replace(/^\[\[AX0\]\]/,'');
+      return json(200,{ok:true,target,text:resultText,engine:'local-translation-fallback',fallback:true});
     }
 
     if((u.pathname==='/healthz'||u.pathname==='/api/health')&&req.method==='GET'){
