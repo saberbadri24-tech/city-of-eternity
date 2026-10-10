@@ -1,5 +1,5 @@
 import {state,now} from './runtime-state.mjs';
-import {getUsdTomanConfig,getUsdTomanRate} from './currency.mjs';
+import {getUsdTomanConfig,getUsdTomanRate,getLiveUsdTomanConfig} from './currency.mjs';
 
 const json = (data, status = 200) => new Response(JSON.stringify(data), {
   status,
@@ -25,11 +25,11 @@ function safeReturnUrl(value, requestOrigin, env, orderId) {
   }
 }
 
-function expectedProviderAmount(order, env) {
+function expectedProviderAmount(order, env, rate = getUsdTomanRate(env)) {
   const currency = String(order?.currency || order?.orderCurrency || 'USD').toUpperCase();
   const amount = Number(order?.orderAmount ?? order?.amount);
   if (!Number.isFinite(amount) || amount <= 0) return NaN;
-  if (currency === 'USD') return Math.round(amount * getUsdTomanRate(env));
+  if (currency === 'USD') return Math.round(amount * Number(rate));
   if (currency === 'TOMAN' || currency === 'IRT') return Math.round(amount);
   if (currency === 'IRR') return Math.round(amount / 10);
   return NaN;
@@ -57,10 +57,11 @@ export async function onRequestPost({ request, env }) {
     if (existing.status !== "pending") return json({ ok: false, error: "order_not_payable" }, 409);
 
     const orderCurrency = String(existing.currency || existing.orderCurrency || 'USD').toUpperCase();
-    if (orderCurrency === 'USD' && getUsdTomanConfig(env).source === 'runtime-default') {
+    const fxConfig = await getLiveUsdTomanConfig(env);
+    if (orderCurrency === 'USD' && fxConfig.source === 'runtime-default') {
       return json({ ok: false, error: 'fx_unavailable' }, 503);
     }
-    const expectedAmount = expectedProviderAmount(existing, env);
+    const expectedAmount = expectedProviderAmount(existing, env, fxConfig.rate);
     if (!Number.isSafeInteger(expectedAmount) || expectedAmount < 1000 || amount !== expectedAmount) {
       return json({ ok: false, error: "order_amount_mismatch" }, 409);
     }
