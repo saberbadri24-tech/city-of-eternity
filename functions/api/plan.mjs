@@ -96,7 +96,7 @@ export async function handlePlan(request, env={}) {
       return json({...cached.value,cached:true});
     }
 
-    // First-party deterministic specialist council. No GPT/Claude/Gemini request is made.
+    // First-party deterministic specialist council. No external model request is required.
     const council = runLocalEngineChain(requestText);
     const urls = [...requestText.matchAll(/https?:\/\/[^\s<>"']+/g)]
       .map(match=>match[0].replace(/[),.;]+$/,'')).slice(0,2);
@@ -136,9 +136,6 @@ export async function handlePlan(request, env={}) {
         planner:{live:true,provider:'first-party-deterministic'},
         security:{live:true,provider:'first-party-deterministic'},
         qa:{live:true,provider:'first-party-deterministic',status:'verification-required'},
-        astra:{live:false,provider:'disabled-in-runtime',reason:'replaced by independent council'},
-        claude:{live:false,provider:'disabled-in-runtime',reason:'replaced by independent council'},
-        gemini:{live:false,provider:'disabled-in-runtime',reason:'replaced by independent council'},
         vision:{live:false,endpoint:'/api/vision'},
         voice:{live:false,endpoint:'/api/voice'}
       },
