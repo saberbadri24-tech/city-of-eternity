@@ -295,13 +295,38 @@ const server=http.createServer(async(req,res)=>{
       payload.updatedAt=new Date().toISOString();
       env.PAYMENTS=await getPaymentsStore();
       if(!env.PAYMENTS){res.statusCode=503;res.setHeader('content-type','application/json');res.end(JSON.stringify({ok:false,error:'private_storage_unavailable'}));return;}
+      let stagedOwnerQueue=0;
       try{
         for(const [key,value] of Object.entries(payload))await env.PAYMENTS.put('guard/private/'+key,JSON.stringify(value));
+        // Every candidate already passing the official-source gate and all six
+        // specialist checks is automatically staged for owner review only.
+        // Staging never claims a reward, signs, transfers, or credits revenue.
+        const queue=payload.ownerQueue;
+        for(const candidate of (Array.isArray(queue?.items)?queue.items:[])){
+          const id=String(candidate?.id||'');
+          if(!/^[a-zA-Z0-9._-]{1,120}$/.test(id)||candidate.officialQualified!==true||
+             candidate.status!=='READY_FOR_OWNER_REVIEW'||candidate.action!=='OWNER_REVIEW_ONLY')continue;
+          const key='guard/catch/'+id;
+          const existing=await env.PAYMENTS.get(key,'json').catch(()=>null);
+          if(existing)continue;
+          const staged={
+            id,title:String(candidate.title||'Guard opportunity').slice(0,180),
+            source:String(candidate.url||'').slice(0,500),
+            category:'OFFICIAL_OPPORTUNITY_REVIEW',
+            currency:'',estimatedValue:null,verifiedValue:null,
+            status:'PENDING_OWNER',requiresOwnerApproval:true,
+            origin:'immortal-guard-owner-review-queue',
+            evidence:{officialQualified:true,specialistsPassed:Number(candidate.specialistsPassed||0),specialistsTotal:Number(candidate.specialistsTotal||0),fingerprint:String(candidate.fingerprint||'').slice(0,100)},
+            safety:{autoClaim:false,autoSigning:false,autoTransfer:false,secretStorage:false},
+            createdAt:new Date().toISOString()
+          };
+          await env.PAYMENTS.put(key,JSON.stringify(staged));stagedOwnerQueue++;
+        }
       }catch(error){
         console.error('[GUARD-INGEST-GATE]',String(error?.message||error));
         res.statusCode=503;res.setHeader('content-type','application/json');res.end(JSON.stringify({ok:false,error:'private_storage_write_failed',message:String(error?.message||error)}));return;
       }
-      res.statusCode=200;res.setHeader('content-type','application/json');res.end(JSON.stringify({ok:true,stored:Object.keys(payload),updatedAt:payload.updatedAt}));return;
+      res.statusCode=200;res.setHeader('content-type','application/json');res.end(JSON.stringify({ok:true,stored:Object.keys(payload),stagedOwnerQueue,updatedAt:payload.updatedAt}));return;
     }
 
     const body=await readBody(req);
