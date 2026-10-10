@@ -21,7 +21,7 @@ const systemPrompt="You are Astra, the central ANIL X orchestrator. Produce a pr
 async function providerOpenAI(prompt,env){
   const key=getEnv(env,"OPENAI_API_KEY"); if(!key)return null;
   const model=getEnv(env,"ASTRA_MODEL")||"gpt-5-mini";
-  const r=await timeoutFetch("https://api.openai.com/v1/chat/completions",{method:"POST",headers:{"content-type":"application/json",authorization:`Bearer ${key}`},body:JSON.stringify({model,messages:[{role:"system",content:systemPrompt},{role:"user",content:prompt}],temperature:.2})});
+  const r=await timeoutFetch("https://api.openai.com/v1/chat/completions",{method:"POST",headers:{"content-type":"application/json",authorization:`Bearer ${key}`},body:JSON.stringify({model,messages:[{role:"system",content:systemPrompt},{role:"user",content:prompt}],temperature:.2})},2200);
   if(!r.ok){
     if(r.status===429){
       const err=await r.json().catch(()=>({}));
@@ -36,7 +36,7 @@ async function providerOpenAI(prompt,env){
 async function providerGemini(prompt,env){
   const key=getEnv(env,"GEMINI_API_KEY"); if(!key)return null;
   const model=getEnv(env,"GEMINI_MODEL")||"gemini-2.5-flash";
-  const r=await timeoutFetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(key)}`,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({contents:[{role:"user",parts:[{text:`${systemPrompt}\n${prompt}`}]}],generationConfig:{responseMimeType:"application/json",temperature:.2}})});
+  const r=await timeoutFetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(key)}`,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({contents:[{role:"user",parts:[{text:`${systemPrompt}\n${prompt}`}]}],generationConfig:{responseMimeType:"application/json",temperature:.2}})},2200);
   if(!r.ok)throw Error("gemini_"+r.status);
   const d=await r.json(); const out=parseJSON(d?.candidates?.[0]?.content?.parts?.map(x=>x.text||"").join(""));
   if(!out||typeof out!=="object")throw Error("gemini_invalid_json"); return out;
@@ -60,7 +60,7 @@ async function providerClaude(prompt,env){
 async function providerOpenRouter(prompt,env){
   const key=getEnv(env,"ANIL_OPENROUTER_API_KEY")||getEnv(env,"OPENROUTER_API_KEY"); if(!key)return null;
   const model=getEnv(env,"ANIL_OPENROUTER_MODEL")||getEnv(env,"OPENROUTER_MODEL")||"openrouter/free";
-  const r=await timeoutFetch("https://openrouter.ai/api/v1/chat/completions",{method:"POST",headers:{"content-type":"application/json",authorization:`Bearer ${key}`,"HTTP-Referer":"https://anil-x-live.onrender.com","X-Title":"ANIL X"},body:JSON.stringify({model,messages:[{role:"system",content:systemPrompt},{role:"user",content:prompt}],temperature:.2})});
+  const r=await timeoutFetch("https://openrouter.ai/api/v1/chat/completions",{method:"POST",headers:{"content-type":"application/json",authorization:`Bearer ${key}`,"HTTP-Referer":"https://anil-x-live.onrender.com","X-Title":"ANIL X"},body:JSON.stringify({model,messages:[{role:"system",content:systemPrompt},{role:"user",content:prompt}],temperature:.2})},2200);
   if(!r.ok)throw Error("openrouter_"+r.status);
   const d=await r.json(); const out=parseJSON(d?.choices?.[0]?.message?.content);
   if(!out||typeof out!=="object")throw Error("openrouter_invalid_json"); return out;
