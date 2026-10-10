@@ -141,11 +141,12 @@ export function runLocalEngineChain(request) {
     requiresOwnerApproval,
     evidenceRequired: true
   };
-  const languageFa = /[\u0600-\u06FF]/.test(original);
-  const next = selected.moves.slice(0,3).join(languageFa ? '؛ ' : '; ');
+  const languageFa = /[\\u0600-\\u06FF]/.test(original);
+  const next = selected.moves.slice(0,4).join(languageFa ? ' ← ' : ' → ');
+  const selectedNames = specialists.map(x => x.name).join(languageFa ? '، ' : ', ');
   const reply = languageFa
-    ? 'زنجیره تخصصی مستقل ANIL درخواست را دسته‌بندی کرد و ' + specialists.map(x=>x.name).join('، ') + ' را برای بررسی انتخاب کرد. این مرحله برنامه‌ریزی است، نه اثبات اجرای بیرونی. گام‌های بعدی: ' + next + (requiresOwnerApproval ? '؛ اقدام حساس تا تأیید مالک متوقف می‌ماند.' : '؛ نتیجه فقط با آزمون و شواهد تأیید می‌شود.')
-    : 'ANIL independent specialist chain routed this request to ' + specialists.map(x=>x.name).join(', ') + '. This is planning, not proof of external execution. Next: ' + next + (requiresOwnerApproval ? '; sensitive actions remain blocked pending owner approval.' : '; results require tests and evidence.');
+    ? 'گرفتم. برای این درخواست، ' + selectedNames + ' را وارد مسیر بررسی کردم. اولویت کار این است: ' + next + '؛ نتیجه را فقط بعد از آزمون و مدرک قابل بررسی تأیید می‌کنم.' + (requiresOwnerApproval ? ' اقدام حساس تا تأیید مالک متوقف می‌ماند.' : ' هنوز تغییری بیرونی اجرا نشده است.')
+    : 'Got it. I routed this request through ' + selectedNames + '. The practical sequence is: ' + next + '. I will only mark the result complete after tests and reviewable evidence.' + (requiresOwnerApproval ? ' Sensitive actions remain blocked until owner approval.' : ' No external change has been executed yet.');
   return {
     engine:'ANIL-INDEPENDENT-ENGINE-COUNCIL',
     version:'2.0.0',
