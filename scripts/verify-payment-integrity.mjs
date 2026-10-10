@@ -32,7 +32,7 @@ const checks = [
   ['TON checkout is gated on an eligible order and verified receipt support', files.paymentPage.includes('checkoutEnabled') && files.paymentPage.includes("String(od.currency||'').toUpperCase()!=='TON'") && files.worker.includes('ton_order_receipt_verification_not_enabled') && !files.paymentPage.includes('const DEST=')],
   ['USD to Toman conversion does not mistake Rials for Tomans', getUsdTomanConfig({USD_IRR_RATE:'2687600'}).rate === 268760 && getUsdTomanConfig({USD_TOMAN_RATE:'268760'}).rate === 268760 && getUsdTomanConfig({}).rate === 268760 && usdToToman(19,{USD_IRR_RATE:'2687600'}) === 5106440],
   ['payment readiness does not treat the fallback FX estimate as configured', getUsdTomanConfig({}).source === 'runtime-default' && getUsdTomanConfig({USD_IRR_RATE:'2687600'}).source !== 'runtime-default'],
-  ['checkout and readiness fail closed without configured FX', files.worker.includes("fx.source==='runtime-default'") && files.pay.includes("getUsdTomanConfig(env).source === 'runtime-default'") && files.readiness.includes("fx:fxConfig.source!=='runtime-default'")]
+  ['checkout and readiness fail closed without configured FX', files.worker.includes("fx.source==='runtime-default'") && files.pay.includes("fxConfig.source === 'runtime-default'") && files.readiness.includes("fx:fxConfig.source!=='runtime-default'")]
 ];
 const mockData = new Map();
 const mockPayments = {
@@ -57,7 +57,10 @@ mockData.set('orders/order-external', {
 const originalFetch = globalThis.fetch;
 let providerCalls = 0;
 try {
-  globalThis.fetch = async (_url, options) => {
+  globalThis.fetch = async (url, options) => {
+    if (String(url).includes('nerkh.jahankhahan.shop/data/live.json')) {
+      throw new Error('FX feed intentionally unavailable in deterministic payment test');
+    }
     providerCalls++;
     const sent = JSON.parse(options.body);
     return new Response(JSON.stringify({
