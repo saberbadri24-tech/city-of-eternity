@@ -57,11 +57,11 @@ async function switchLang(next){
   const u=new URL(location.href);u.searchParams.set('lang',next);history.replaceState({},'',u);
   setup();window.dispatchEvent(new CustomEvent('anilx:language',{detail:{language:next}}));
  }catch(err){
-  restore();lang=previous;document.documentElement.lang=previous;document.documentElement.dir=LANGS[previous][1];window.ANILX_LANGUAGE=previous;
-  const u=new URL(location.href);u.searchParams.set('lang',previous);history.replaceState({},'',u);setup();
-  console.warn('ANIL X language switch rolled back to avoid mixed-language UI',err);
+  restore();lang='en';localStorage.setItem(KEY,'en');document.documentElement.lang='en';document.documentElement.dir='ltr';window.ANILX_LANGUAGE='en';
+  const u=new URL(location.href);u.searchParams.set('lang','en');history.replaceState({},'',u);setup();
+  console.warn('ANIL X translation unavailable; restored a consistent English UI',err);
  }
 }
-function boot(){setup();remember();window.ANILX_LANGUAGE=lang;if(lang==='fa'){apply('fa').catch(()=>{});return;}if(lang!=='en'){const idle=window.requestIdleCallback||((f)=>setTimeout(f,120));idle(()=>apply(lang).catch(()=>{}),{timeout:400})}}
+function boot(){setup();remember();window.ANILX_LANGUAGE=lang;const failSafe=err=>{restore();lang='en';localStorage.setItem(KEY,'en');document.documentElement.lang='en';document.documentElement.dir='ltr';window.ANILX_LANGUAGE='en';const u=new URL(location.href);u.searchParams.set('lang','en');history.replaceState({},'',u);setup();console.warn('ANIL X translation unavailable; restored a consistent English UI',err)};if(lang==='fa'){apply('fa').catch(failSafe);return;}if(lang!=='en'){const idle=window.requestIdleCallback||((f)=>setTimeout(f,120));idle(()=>apply(lang).catch(failSafe),{timeout:400})}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
