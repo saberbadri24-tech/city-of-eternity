@@ -12,18 +12,45 @@ const roles=[
 const providerKey={astra:['OPENAI_API_KEY','OPENAI_KEY'],claude:['ANTHROPIC_API_KEY','ANTHROPIC_KEY'],gemini:['GEMINI_API_KEY','GOOGLE_GEMINI_API_KEY','GOOGLE_API_KEY']};
 const modelKey={astra:['ASTRA_MODEL','ANIL_OPENAI_MODEL'],claude:['CLAUDE_MODEL','ANIL_ANTHROPIC_MODEL'],gemini:['GEMINI_MODEL','ANIL_GEMINI_MODEL']};
 const extract=raw=>{try{return JSON.parse(raw)}catch{const m=String(raw||'').match(/\{[\s\S]*\}/);try{return m?JSON.parse(m[0]):null}catch{return null}}};
+const fallbackModels={
+ astra:['gpt-5-mini','gpt-5','gpt-4.1-mini'],
+ claude:['claude-sonnet-4-5-20250929','claude-3-7-sonnet-latest','claude-3-5-haiku-latest'],
+ gemini:['gemini-2.5-flash','gemini-2.0-flash']
+};
 async function brain(env,who,prompt){
- const key=firstEnv(env,providerKey[who]); const model=firstEnv(env,modelKey[who])||({astra:'gpt-6-astra',claude:'claude-opus-5',gemini:'gemini-3.8-flash'}[who]||null);
- if(!key)return {live:false,provider:who,model:model||null,reason:'runtime_secret_missing'};
- if(!model)return {live:false,provider:who,model:null,reason:'runtime_model_not_configured'};
- try{
-  let r,raw;
-  if(who==='astra'){r=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+key},body:JSON.stringify({model,instructions:'You are Astra, chief strategist inside ANIL X. Return JSON only with answer,command,priorities,tests,stopConditions. The answer must directly address the owner in concise natural language, grounded only in the supplied runtime evidence. ANIL is the final orchestrator. Never claim execution without evidence.',input:prompt,reasoning:{effort:env.ASTRA_REASONING_EFFORT||'high'}})});const d=await r.json();raw=d?.output_text}
-  else if(who==='claude'){r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'content-type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01'},body:JSON.stringify({model,max_tokens:700,system:'You are Claude, adversarial reviewer for ANIL X. Return JSON only with risks,corrections,tests,blockers.',messages:[{role:'user',content:prompt}]})});const d=await r.json();raw=d?.content?.map(x=>x.text||'').join('')}
-  else {r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+encodeURIComponent(model)+':generateContent?key='+encodeURIComponent(key),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:'You are Gemini, evidence verifier for ANIL X. Return JSON only with evidence,unknowns,tests,corrections. '+prompt}]}]})});const d=await r.json();raw=d?.candidates?.[0]?.content?.parts?.map(x=>x.text||'').join('')}
-  if(!r.ok)throw Error(who+'_'+r.status);
-  return {live:true,provider:who,model,output:extract(raw)};
- }catch(e){return {live:false,provider:who,model,reason:String(e?.message||e).slice(0,160)}}
+ const key=firstEnv(env,providerKey[who]);
+ const configured=firstEnv(env,modelKey[who]);
+ const candidates=[...new Set([configured,...(fallbackModels[who]||[])].filter(Boolean))];
+ if(!key)return {live:false,provider:who,model:configured||null,reason:'runtime_secret_missing'};
+ let last={live:false,provider:who,model:candidates[0]||null,reason:'provider_unavailable'};
+ for(let index=0;index<candidates.length;index++){
+  const model=candidates[index];
+  try{
+   let r,raw,d;
+   if(who==='astra'){
+    r=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+key},body:JSON.stringify({model,instructions:'You are Astra, chief strategist inside ANIL X. Return JSON only with answer,command,priorities,tests,stopConditions. Ground claims only in supplied runtime evidence. ANIL is final orchestrator. Never claim execution without evidence.',input:prompt,reasoning:{effort:env.ASTRA_REASONING_EFFORT||'high'}}),signal:AbortSignal.timeout(12000)});
+   }else if(who==='claude'){
+    r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'content-type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01'},body:JSON.stringify({model,max_tokens:700,system:'You are Claude, adversarial reviewer for ANIL X. Return JSON only with risks,corrections,tests,blockers.',messages:[{role:'user',content:prompt}]}),signal:AbortSignal.timeout(12000)});
+   }else{
+    r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+encodeURIComponent(model)+':generateContent?key='+encodeURIComponent(key),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:'You are Gemini, evidence verifier for ANIL X. Return JSON only with evidence,unknowns,tests,corrections. '+prompt}]}],generationConfig:{responseMimeType:'application/json',temperature:0.2}}),signal:AbortSignal.timeout(12000)});
+   }
+   d=await r.json().catch(()=>({}));
+   if(!r.ok){
+    const detail=String(d?.error?.message||d?.error?.type||'').replace(/[\\r\\n\\t]/g,' ').slice(0,140);
+    const invalidModel=[400,404,422].includes(r.status)&&/model|not found|does not exist|unsupported|not available/i.test(detail);
+    last={live:false,provider:who,model,reason:who+'_'+r.status,...(detail?{detail}:{})};
+    if(invalidModel&&index<candidates.length-1)continue;
+    return last;
+   }
+   const raw=who==='astra'?d?.output_text:who==='claude'?d?.content?.map(x=>x.text||'').join(''):d?.candidates?.[0]?.content?.parts?.map(x=>x.text||'').join('');
+   const output=extract(raw);
+   if(!output||typeof output!=='object')return {live:false,provider:who,model,reason:'provider_invalid_json'};
+   return {live:true,provider:who,model,output};
+  }catch(e){
+   return {live:false,provider:who,model,reason:String(e?.name==='TimeoutError'?'provider_timeout':e?.message||e).slice(0,160)};
+  }
+ }
+ return last;
 }
 function localCommand(state,guard,task){
  const blockers=[]; if(guard?.freshness?.stale)blockers.push('guard_state_stale'); if(!state.providers.astra.live)blockers.push('astra_runtime_not_ready');
