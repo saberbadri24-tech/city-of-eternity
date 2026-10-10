@@ -100,10 +100,10 @@ try {
     }),
     env: noFxEnv
   });
-  checks.push([
-    'payment creation fails closed when FX is only a runtime estimate',
-    noFxResponse.status === 503 && (await noFxResponse.json()).error === 'fx_unavailable' && providerCalls === 1
-  ]);
+  const noFxPayload = await noFxResponse.json();
+  const noFxOk = noFxResponse.status === 503 && noFxPayload.error === 'fx_unavailable' && providerCalls === 1;
+  if (!noFxOk) console.log('DIAG no-FX payment', JSON.stringify({status:noFxResponse.status,error:noFxPayload.error,providerCalls}));
+  checks.push(['payment creation fails closed when FX is only a runtime estimate', noFxOk]);
 
   const mismatchResponse = await createVarizaPayment({
     request: new Request('https://anil-x-live.onrender.com/api/pay', {
@@ -112,10 +112,9 @@ try {
     }),
     env: integrationEnv
   });
-  checks.push([
-    'payment creation blocks amounts that differ from the order',
-    mismatchResponse.status === 409 && providerCalls === 1
-  ]);
+  const mismatchOk = mismatchResponse.status === 409 && providerCalls === 1;
+  if (!mismatchOk) console.log('DIAG amount mismatch', JSON.stringify({status:mismatchResponse.status,providerCalls}));
+  checks.push(['payment creation blocks amounts that differ from the order', mismatchOk]);
 
   const externalReturnResponse = await createVarizaPayment({
     request: new Request('https://anil-x-live.onrender.com/api/pay', {
@@ -127,10 +126,9 @@ try {
     }),
     env: integrationEnv
   });
-  checks.push([
-    'payment creation rejects a third-party return URL before calling Variza',
-    externalReturnResponse.status === 400 && providerCalls === 1
-  ]);
+  const externalReturnOk = externalReturnResponse.status === 400 && providerCalls === 1;
+  if (!externalReturnOk) console.log('DIAG external return URL', JSON.stringify({status:externalReturnResponse.status,providerCalls}));
+  checks.push(['payment creation rejects a third-party return URL before calling Variza', externalReturnOk]);
 
   const rawWebhook = JSON.stringify({
     event: 'payment.paid', status: 'paid', slug: 'slug-integration',
