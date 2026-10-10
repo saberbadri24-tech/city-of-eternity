@@ -971,12 +971,38 @@ async function secretary(req,env){
       // Do not fan out into the Super Team and repeat provider calls when the shared
       // account quota is known to be exhausted. Return one short, actionable diagnosis.
       if(agent?.reason==='openai_invocation_failed'&&/credit_balance_exhausted|insufficient_quota|no credits remaining|credit balance is too low/i.test(String(agent.detail||''))){
-        const fa=b.language==='fa';
+        // Do not repeat doomed model calls after a confirmed quota failure; immediately use the independent council.
         const detail=String(agent.detail||'').slice(0,420);
+        try {
+          const planResponse=await handlePlan(new Request('https://anilx.internal/api/plan',{
+            method:'POST',
+            headers:{'content-type':'application/json'},
+            body:JSON.stringify({text:command,language:b.language==='fa'?'fa':'en'})
+          }),env);
+          const planData=await planResponse.json().catch(()=>({}));
+          if(planResponse.ok&&planData?.ok){
+            const fa=b.language==='fa';
+            const note=fa
+              ? 'اعتبار API ارائه‌دهنده تمام شده؛ برای جلوگیری از تکرار خطای سهمیه، زنجیره تخصصی مستقل استفاده شد. این پاسخ برنامه‌ریزی/تحقیق خواندنی است و اجرای بیرونی محسوب نمی‌شود.'
+              : 'The provider API quota is exhausted, so ANIL skipped repeated model calls and used the independent specialist council. This is planning/read-only research, not external execution.';
+            return json({
+              ok:true,action:'independent_council_fallback',live:false,provider:'independent-council',
+              text:String(planData.reply||planData.text||planData.answer||note)+'\n\n'+note,
+              data:{
+                source:planData.source||'anil-independent-specialist-council',
+                engine:planData.engine||'ANIL-INDEPENDENT-ENGINE-COUNCIL',
+                plan:planData.plan||null,evidence:planData.evidence||[],
+                execution:planData.execution||{performed:false,status:'not_executed'},
+                orchestration:planData.orchestration||null,
+                providerFailures:[{provider:'openai',reason:'quota_exhausted',detail}]
+              }
+            });
+          }
+        } catch {}
         return json({ok:true,action:'ai_provider_blocked',live:false,
-          text:fa
-            ? 'پاسخ‌گویی هوشمند زنده فعلاً به‌دلیل تمام‌شدن اعتبار API متوقف است؛ اتصال سرور برقرار است، اما این مشکل با تکرار درخواست یا عوض‌کردن مدل حل نمی‌شود. برای فعال‌شدن دوبارهٔ پاسخ‌گویی، در حساب ارائه‌دهنده اعتبار API را شارژ کن یا یک Provider دارای اعتبار در تنظیمات امن Render وصل کن. تا آن زمان، گزارش‌های وضعیت، سلامت، Guard و کسب‌وکار که مسیر داخلی دارند جداگانه قابل بررسی‌اند.'
-            : 'Live AI replies are blocked because the provider API account has exhausted its credits. The server is reachable, but retrying models will not fix this. Add API credit or configure another funded provider in Render. Internal status, health, Guard, and business reports remain separate routes.',
+          text:b.language==='fa'
+            ? 'اعتبار API تمام شده و زنجیره تخصصی مستقل نیز فعلاً در دسترس نبود. اتصال سرور برقرار است، اما اجرای ساختگی اعلام نمی‌شود. جزئیات امن: '+detail
+            : 'The provider API quota is exhausted and the independent council fallback was unavailable. The server is reachable; no execution is claimed. Safe detail: '+detail,
           data:{provider:'openai',reason:'quota_exhausted',detail}});
       }
       try{
@@ -1007,6 +1033,42 @@ async function secretary(req,env){
         if(rr.ok){const out=String((d?.content||[]).map(x=>x?.text||'').join('\n')).trim();if(out)return json({ok:true,text:out,action:'live_ai_fallback',provider:'anthropic',live:true,model});}
         providerFailures.push({provider:'anthropic',model,status:rr.status,detail:JSON.stringify(d).slice(0,300)});
       }catch(e){providerFailures.push({provider:'anthropic',model,status:0,detail:String(e?.message||e).slice(0,300)})}
+    }
+    // The owner chat must remain useful when external model quotas or provider keys fail.
+    // Route the final fallback through the first-party specialist council and its bounded read-only research tools.
+    try {
+      const planResponse = await handlePlan(new Request('https://anilx.internal/api/plan', {
+        method:'POST',
+        headers:{'content-type':'application/json'},
+        body:JSON.stringify({text:command,language:b.language==='fa'?'fa':'en'})
+      }), env);
+      const planData = await planResponse.json().catch(()=>({}));
+      if (planResponse.ok && planData?.ok) {
+        const fa = b.language === 'fa';
+        const providerNote = fa
+          ? 'مدل بیرونی در این نوبت پاسخ قابل‌استفاده نداد؛ زنجیره تخصصی مستقل فعال شد. این خروجی برنامه‌ریزی و تحقیق خواندنی است، نه ادعای اجرای تغییر، پرداخت یا استقرار.'
+          : 'No usable external-model response was available for this turn; the independent specialist council handled the request. This is planning/read-only research, not a claim of code changes, payments, or deployment.';
+        return json({
+          ok:true,
+          action:'independent_council_fallback',
+          live:false,
+          provider:'independent-council',
+          text:String(planData.reply||planData.text||planData.answer||providerNote)+'\n\n'+providerNote,
+          data:{
+            source:planData.source||'anil-independent-specialist-council',
+            engine:planData.engine||'ANIL-INDEPENDENT-ENGINE-COUNCIL',
+            version:planData.version||null,
+            specialists:planData.council||planData.specialists||null,
+            plan:planData.plan||null,
+            evidence:planData.evidence||[],
+            execution:planData.execution||{performed:false,status:'not_executed'},
+            orchestration:planData.orchestration||null,
+            providerFailures:providerFailures.slice(0,8)
+          }
+        });
+      }
+    } catch (fallbackError) {
+      providerFailures.push({provider:'independent-council',status:0,detail:String(fallbackError?.message||fallbackError).slice(0,240)});
     }
     const k=await handleCapabilityKernel(new Request(new URL('/api/anil/capability-kernel',req.url),{method:'GET'}),env).then(x=>x.json());
     const fa=b.language==='fa';
