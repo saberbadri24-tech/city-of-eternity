@@ -105,6 +105,23 @@ const DEFAULT_ENGINE = {
   moves: ['تعریف نتیجه مطلوب و معیار موفقیت','تفکیک واقعیت از فرضیه و مجهول','اولویت‌بندی اقدام‌های کم‌خطر','بررسی نتیجه و اصلاح مسیر','گزارش دقیق وضعیت و گام بعدی']
 };
 
+const EN_COPY = {
+  'security-governance': {title:'Security, access control and policy',desc:'Check permissions, side effects, and rollback before acting.',moves:['Classify data and required access','Identify side effects and abuse paths','Apply least privilege and fail-closed controls','Record evidence and decision rationale','Pause sensitive actions for owner approval']},
+  'payment-integrity': {title:'Payment and wallet integrity',desc:'Reconcile orders, amounts, webhooks, durable storage, and settlement receipts.',moves:['Inspect configuration without exposing secrets','Test order and checkout creation','Verify webhook signatures and exact amounts','Enforce idempotency and durable records','Count revenue only after verified settlement']},
+  'guard-security': {title:'Guard opportunity and safety',desc:'Verify opportunities from official sources; discovery is not proof of profit or permission to transact.',moves:['Check official source and publication time','Remove duplicates, expired, and suspicious items','Score evidence and contract risk','Queue items for owner review','Stop before signing, claiming, or transferring funds']},
+  'code-quality': {title:'Root-cause diagnosis and code repair',desc:'Keep changes small, reversible, tested, and supported by live evidence.',moves:['Inspect version and related changes','Create a minimal reproduction','Apply the smallest compatible fix','Run syntax and critical-path regression tests','Verify deployment and rollback readiness']},
+  'revenue-operations': {title:'Revenue, sales and growth operations',desc:'Track leads, offers, orders, payments, and settled revenue separately.',moves:['Score leads by fit and purchase intent','Match service offers and prices','Prepare follow-up without bulk auto-messaging','Reconcile orders with real payment state','Measure conversion and settled revenue']},
+  'research-verification': {title:'Research and evidence verification',desc:'Separate verified facts, assumptions, missing data, and conflicting sources.',moves:['Define testable questions','Separate facts from assumptions and unknowns','Check source quality and freshness','Compare conflicting evidence','Report findings and uncertainty']},
+  'website-operations': {title:'Website UX and operations',desc:'Test user flows, buttons, APIs, language, mobile behavior, and errors.',moves:['Define the user path and expected outcome','Test Persian and English separately','Verify buttons, APIs, login, and storage','Inspect mobile layout and browser errors','Confirm only with reproducible tests']},
+  'writing-communication': {title:'Writing and professional communication',desc:'Shape the message around its audience, goal, tone, and desired action.',moves:['Identify audience and objective','Choose the right structure and tone','Draft usable copy','Review clarity, accuracy, and brevity','Adapt the final version to constraints']},
+  'data-analysis': {title:'Data analysis and calculation',desc:'Make assumptions, units, data quality, and calculations auditable.',moves:['Identify inputs, units, and missing data','Validate ranges and consistency','Choose an appropriate method','Independently check results and edge cases','Present results with assumptions']},
+  'workflow-automation': {title:'Workflow and automation',desc:'Use explicit triggers, idempotency, bounded retries, audit logs, and recovery paths.',moves:['Define trigger and success criteria','Split work into repeatable stages','Add timeouts, bounded retries, and idempotency','Record outcomes and failure alerts','Test success, failure, and recovery']},
+  'customer-support': {title:'Customer support',desc:'Answer from verified information and route private or sensitive issues to the owner.',moves:['Identify issue and urgency','Check available verified information','Give a trackable step-by-step solution','Escalate sensitive or unclear requests','Record status and next action']},
+  'learning-explanation': {title:'Learning and explanation',desc:'Break a topic into prerequisites, examples, practice, and understanding checks.',moves:['Set learning level and goal','Explain from simple to advanced','Give a practical example','Check understanding with a short exercise','Correct common misunderstandings']},
+  'content-strategy': {title:'Product and content strategy',desc:'Prioritize ideas by audience value, execution cost, and measurable outcomes.',moves:['Define audience and core need','Clarify the value proposition','Compare options by cost and impact','Set measurable success criteria','Run a small experiment and review']},
+  'general-reasoning': {title:'Problem solving',desc:'Break the request into explicit assumptions, low-risk steps, and verifiable outcomes.',moves:['Define the desired outcome and success measure','Separate facts from assumptions and unknowns','Prioritize low-risk actions','Review results and adapt','Report only verified completion']}
+};
+
 const IRREVERSIBLE = /\b(delete|transfer|withdraw|sign|claim|purchase|charge|send to all|production deploy)\b|حذف دائمی|انتقال(?:\s+وجه)?|برداشت|امضا(?:ی)?(?:\s+تراکنش)?|مطالبه(?:\s+خودکار)?|پرداخت واقعی|تسویه واقعی|ارسال وجه|ارسال انبوه|انتشار نهایی/i;
 
 export function runLocalEngineChain(request) {
@@ -132,17 +149,18 @@ export function runLocalEngineChain(request) {
     {id:'recovery',name:'Repair & Recovery Engine',status:'standby'},
     {id:'release-gate',name:'Release Gate',status:'blocked_until_evidence'}
   ];
+  const languageFa = /[\\u0600-\\u06FF]/.test(original);
+  const copy = languageFa ? {title:selected.title,desc:selected.desc,moves:selected.moves} : (EN_COPY[selected.id] || EN_COPY['general-reasoning']);
   const plan = {
-    title: selected.title,
-    desc: selected.desc,
-    moves: selected.moves.slice(0,6),
+    title: copy.title,
+    desc: copy.desc,
+    moves: copy.moves.slice(0,6),
     engines: specialists.map(engine => ({id:engine.id,name:engine.name})),
     executionStatus: 'plan_only',
     requiresOwnerApproval,
     evidenceRequired: true
   };
-  const languageFa = /[\u0600-\u06FF]/.test(original);
-  const next = selected.moves.slice(0,4).join(languageFa ? ' ← ' : ' → ');
+  const next = copy.moves.slice(0,4).join(languageFa ? ' ← ' : ' → ');
   const selectedNames = specialists.map(x => x.name).join(languageFa ? '، ' : ', ');
   const reply = languageFa
     ? 'گرفتم. برای این درخواست، ' + selectedNames + ' را وارد مسیر بررسی کردم. اولویت کار این است: ' + next + '؛ نتیجه را فقط بعد از آزمون و مدرک قابل بررسی تأیید می‌کنم.' + (requiresOwnerApproval ? ' اقدام حساس تا تأیید مالک متوقف می‌ماند.' : ' هنوز تغییری بیرونی اجرا نشده است.')
