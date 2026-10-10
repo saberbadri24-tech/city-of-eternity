@@ -24,7 +24,7 @@ const roles=[
 const providerKey={astra:['OPENAI_API_KEY','OPENAI_KEY'],claude:['ANTHROPIC_API_KEY','ANTHROPIC_KEY'],gemini:['GEMINI_API_KEY','GOOGLE_GEMINI_API_KEY','GOOGLE_API_KEY']};
 const modelKey={astra:['ASTRA_MODEL','ANIL_OPENAI_MODEL'],claude:['CLAUDE_MODEL','ANIL_ANTHROPIC_MODEL'],gemini:['GEMINI_MODEL','ANIL_GEMINI_MODEL']};
 const extract=raw=>{try{return JSON.parse(raw)}catch{const m=String(raw||'').match(/\{[\s\S]*\}/);try{return m?JSON.parse(m[0]):null}catch{return null}}};
-const fallbackModels={
+export const fallbackModels={
  astra:['gpt-5-mini','gpt-5','gpt-4.1-mini'],
  claude:['claude-sonnet-5','claude-sonnet-4-6','claude-sonnet-4-5-20250929'],
  gemini:['gemini-3.8-flash','gemini-3.7-flash','gemini-2.5-flash']
