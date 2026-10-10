@@ -62,7 +62,7 @@ export async function onRequestPost({ request, env }) {
       local.providerAmountUnit = 'toman';
       local.updatedAt = now();
       state.orders.set(local.orderId, local);
-      return json({ ok: true, orderId: local.orderId, status: 'paid' });
+      return json({ ok: true, orderId: local.orderId, status: local.status });
     }
 
     const deliveryId =
