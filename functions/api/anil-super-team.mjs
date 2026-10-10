@@ -26,8 +26,8 @@ const modelKey={astra:['ASTRA_MODEL','ANIL_OPENAI_MODEL'],claude:['CLAUDE_MODEL'
 const extract=raw=>{try{return JSON.parse(raw)}catch{const m=String(raw||'').match(/\{[\s\S]*\}/);try{return m?JSON.parse(m[0]):null}catch{return null}}};
 const fallbackModels={
  astra:['gpt-5-mini','gpt-5','gpt-4.1-mini'],
- claude:['claude-sonnet-4-5-20250929','claude-3-7-sonnet-latest','claude-3-5-haiku-latest'],
- gemini:['gemini-2.5-flash','gemini-2.0-flash']
+ claude:['claude-sonnet-5','claude-sonnet-4-6','claude-sonnet-4-5-20250929'],
+ gemini:['gemini-3.8-flash','gemini-3.7-flash','gemini-2.5-flash']
 };
 async function brain(env,who,prompt){
  const key=firstEnv(env,providerKey[who]);
