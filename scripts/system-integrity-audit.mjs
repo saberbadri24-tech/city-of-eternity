@@ -26,6 +26,7 @@ if(guardApi.includes('configured:Boolean(ai.configured||ai.providers')) errors.p
 const worker=await fs.readFile(path.join(root,'worker.js'),'utf8');
 if(/action:'ai_provider_blocked'[\s\S]{0,1000}return json\(/.test(worker)) errors.push('Owner chat must not terminate at provider quota exhaustion; configured fallbacks and local cognition must remain reachable');
 if(!worker.includes("action:'local_cognitive_fallback'")||!worker.includes('providerQuotaExhausted')) errors.push('Owner chat local cognition fallback or quota diagnostic is missing');
+if(!worker.includes("'gpt-6-astra'")||!worker.includes("'gpt-6.1-sol'")||!worker.includes("'gpt-6-luna'")) errors.push('Owner chat fallback must prioritize current supported GPT-6 model families');
 const runtimeFiles=['worker.js','render-server.mjs','functions/api/execution-readiness.mjs','functions/api/guard-live.mjs','revenue-super-os.json'];
 for(const rel of runtimeFiles){
  const c=await fs.readFile(path.join(root,rel),'utf8');
