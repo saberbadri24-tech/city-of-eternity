@@ -35,7 +35,7 @@ const checks = [
   ['payment readiness does not treat the fallback FX estimate as configured', getUsdTomanConfig({}).source === 'runtime-default' && getUsdTomanConfig({USD_IRR_RATE:'2687600'}).source !== 'runtime-default'],
   ['live FX source requires a fresh non-stale market quote', files.currency.includes('https://nerkhara.com/rates.json') && files.currency.includes('quote?.stale') && files.currency.includes('ageMs > 6 * 60 * 60_000')],
   ['checkout and payment-config use the same validated live FX helper', files.pay.includes('await getLiveUsdTomanConfig(env)') && files.worker.includes('const fx=await getLiveUsdTomanConfig(env)')],
-  ['checkout and readiness fail closed without configured FX', files.worker.includes("fx.source==='runtime-default'") && files.pay.includes("getUsdTomanConfig(env).source === 'runtime-default'") && files.readiness.includes("fx:fxConfig.source!=='runtime-default'")]
+  ['checkout and readiness fail closed without configured FX', files.worker.includes("fx.source==='runtime-default'") && files.pay.includes("fxConfig.source === 'runtime-default'") && files.readiness.includes("fx:fxConfig.source!=='runtime-default'")]
 ];
 const mockData = new Map();
 const mockPayments = {
@@ -71,8 +71,8 @@ try {
     providerCalls++;
     const sent = JSON.parse(options.body);
     return new Response(JSON.stringify({
-      pay_url: 'https://variza.ir/pay/slug-integration',
-      slug: 'slug-integration',
+      pay_url: 'https://variza.ir/pay/' + (providerCalls === 1 ? 'slug-integration' : 'slug-live-fx'),
+      slug: providerCalls === 1 ? 'slug-integration' : 'slug-live-fx',
       amount: sent.amount
     }), { status: 201, headers: { 'content-type': 'application/json' } });
   };
