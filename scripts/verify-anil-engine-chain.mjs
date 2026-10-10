@@ -11,6 +11,7 @@ const cases = [
   {input:'Review security and access permissions', expected:'security-governance'},
   {input:'Build website dashboard and test buttons', expected:'website-operations'},
   {input:'Write a customer email', expected:'writing-communication'},
+  {input:'Create a new digital product and build a prototype', expected:'creation-factory'},
   {input:'Analyze spreadsheet data and calculate totals', expected:'data-analysis'},
   {input:'Create an automation workflow', expected:'workflow-automation'},
   {input:'Help with customer support FAQ', expected:'customer-support'},
@@ -88,6 +89,21 @@ results.push({
     ownerChatSource.includes("performed:false") &&
     !ownerChatSource.includes('providerFailures')
 });
+
+const engineChainSource = fs.readFileSync(new URL('../functions/api/anil-engine-chain.mjs', import.meta.url), 'utf8');
+results.push({
+  name:'multipurpose creation engine is registered and selected for creation tasks',
+  ok:engineChainSource.includes("id: 'creation-factory'") &&
+    runLocalEngineChain('Create a new digital product and build a prototype').selectedEngine === 'Multipurpose Creation & Build Engine'
+});
+const orchestration = JSON.parse(fs.readFileSync(new URL('../ANIL-X-AI-ORCHESTRATION.json', import.meta.url), 'utf8'));
+results.push({
+  name:'legacy model council is removed from orchestration contract',
+  ok:!Object.prototype.hasOwnProperty.call(orchestration, 'council') &&
+    orchestration.engine_chain?.name === 'ANIL-MULTIPURPOSE-SERIAL-CREATION-ENGINE' &&
+    orchestration.engine_chain?.rules?.threeModelCouncil === false
+});
+
 const failed = results.filter(item => !item.ok);
 for (const result of results) console.log((result.ok?'PASS ':'FAIL ')+result.name);
 if (failed.length) process.exit(1);
