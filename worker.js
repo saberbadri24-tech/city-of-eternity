@@ -892,7 +892,8 @@ async function secretary(req,env){
           body:JSON.stringify({
             text:command,
             language:fa?'fa':'en',
-            turns:Array.isArray(b.messages)?b.messages.slice(-8):[]
+            turns:Array.isArray(b.messages)?b.messages.slice(-8):[],
+            verify:true
           })
         });
         const analysisResponse=await analyze(analysisRequest,env);
