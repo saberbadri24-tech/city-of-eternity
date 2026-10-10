@@ -1,6 +1,7 @@
 const critical=(s)=>/(payment|settlement|wallet|transfer|withdraw|security|secret|private key|seed|deploy|release|production|پرداخت|تسویه|کیف پول|انتقال|امنیت|کلید خصوصی|عبارت بازیابی|استقرار|انتشار)/i.test(String(s||''));
 const lowConfidenceProviders=(providers)=>Object.entries(providers||{}).filter(([,v])=>!v?.live).map(([k])=>k);
 const byId=(roles,id)=>roles.find(r=>r.id===id);
+const asArray=value=>Array.isArray(value)?value:value==null?[]:[String(value)];
 export function buildComplementaryCouncil({task,guard,providers,command,evidence,roles=[]}){
  const expanded=roles.map(r=>({...r}));
  const add=(id,source)=>{const r=byId(expanded,id);if(r)r.assignment=source;};
@@ -52,6 +53,6 @@ export function buildComplementaryCouncil({task,guard,providers,command,evidence
  if(liveProviders.length<2)blockers.push('Fewer than two live specialist providers; local deterministic rules are not independent model review.');
  if(unavailable.length)blockers.push('Unavailable providers: '+unavailable.join(', ')+'.');
  blockers.push('This response plans and routes work; it does not prove external mutations or production deployment.');
- const mergedCommand={...command,source:command?.source||'local-safe-planner',priorities:[...(command?.priorities||[]),'collect_fresh_evidence','independent_adversarial_review','run_regression_and_contract_tests','release_only_with_deployment_proof'],stopConditions:[...(command?.stopConditions||[]),'stale_guard_evidence','single-reviewer approval','missing rollback plan'],blockers:[...(command?.blockers||[]),...blockers],sensitiveTask:sensitive};
+ const mergedCommand={...command,source:command?.source||'local-safe-planner',priorities:[...asArray(command?.priorities),'collect_fresh_evidence','independent_adversarial_review','run_regression_and_contract_tests','release_only_with_deployment_proof'],stopConditions:[...asArray(command?.stopConditions),'stale_guard_evidence','single-reviewer approval','missing rollback plan'],blockers:[...asArray(command?.blockers),...blockers],sensitiveTask:sensitive};
  return {team:expanded,command:mergedCommand,chain:['ANIL','Astra','Claude','Gemini','Immortal Guard','Revenue Fleet','QA Sentinel','Memory & Learning','Systems Architect','Performance Sentinel','Incident Commander','Product & UX','Market Research','Data Integrity','Red Team','Delivery Manager','Cost Optimizer','Observability'],collaboration,qualityGates:gates};
 }
