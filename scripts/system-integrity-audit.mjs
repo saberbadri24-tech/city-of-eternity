@@ -33,5 +33,6 @@ for(const x of wf){
    errors.push(x.name+': Node 22 conflicts with production Node 24 contract');
 }
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
+await import('./test-anil-team-council.mjs');
 console.log('ANIL X system-integrity audit: PASS');
 console.log('Workflows inspected:',wf.length);
