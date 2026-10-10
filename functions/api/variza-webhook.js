@@ -49,19 +49,17 @@ export async function onRequestPost({ request, env }) {
       const local = payload.slug ? [...state.orders.values()].find(x => x.slug === payload.slug) : null;
       if (!local) return json({ ok: true, status: 'received_unmatched' });
       const paidAmount = Number(payload.amount);
-      const expectedAmount = Number(local.providerAmount ?? local.amount);
-      if (!Number.isFinite(paidAmount) || !Number.isFinite(expectedAmount) || paidAmount !== expectedAmount) {
-        local.status = 'amount_mismatch';
-        local.updatedAt = now();
-        local.providerAmount = Number.isFinite(paidAmount) ? paidAmount : null;
-        state.orders.set(local.orderId, local);
-        return json({ ok: true, orderId: local.orderId, status: 'amount_mismatch' }, 200);
-      }
-      local.status = 'paid';
-      local.paidAt = now();
+      const baseAmount = Number(payload.base_amount ?? payload.amount);
+      const expectedAmount = Number(local.providerBaseAmount ?? local.providerAmount ?? local.amount);
+      const paid = Number.isFinite(paidAmount) && Number.isFinite(baseAmount) &&
+        Number.isFinite(expectedAmount) && baseAmount === expectedAmount;
+      local.status = paid ? 'paid' : 'amount_mismatch';
+      if (paid) local.paidAt = now();
       local.attemptCode = payload.attempt_code || null;
-      local.providerAmount = paidAmount;
-        local.providerAmountUnit = 'toman';
+      local.providerAmount = Number.isFinite(paidAmount) ? paidAmount : null;
+      local.providerBaseAmount = Number.isFinite(baseAmount) ? baseAmount : null;
+      local.providerCurrency = 'TOMAN';
+      local.providerAmountUnit = 'toman';
       local.updatedAt = now();
       state.orders.set(local.orderId, local);
       return json({ ok: true, orderId: local.orderId, status: 'paid' });
@@ -86,21 +84,31 @@ export async function onRequestPost({ request, env }) {
       : null;
 
     if (order) {
-      const paid =
-        Number.isFinite(Number(payload.amount)) &&
-        Number.isFinite(Number(order.providerAmount ?? order.amount)) &&
-        Number(payload.amount) === Number(order.providerAmount ?? order.amount);
+      const paidAmount = Number(payload.amount);
+      const baseAmount = Number(payload.base_amount ?? payload.amount);
+      const expectedAmount = Number(order.providerBaseAmount ?? order.providerAmount ?? order.amount);
+      const paid = Number.isFinite(paidAmount) && Number.isFinite(baseAmount) &&
+        Number.isFinite(expectedAmount) && baseAmount === expectedAmount;
 
       const updated = {
         ...order,
         status: paid ? "paid" : "amount_mismatch",
         ...(paid ? { paidAt: now() } : {}),
-        providerAmount: Number(payload.amount),
-        providerCurrency: "IRR",
+        providerAmount: Number.isFinite(paidAmount) ? paidAmount : null,
+        providerBaseAmount: Number.isFinite(baseAmount) ? baseAmount : null,
+        providerCurrency: "TOMAN",
         providerAmountUnit: "toman",
         attemptCode: payload.attempt_code || null,
         deliveryId,
-        webhook: payload
+        webhook: {
+          event: payload.event,
+          status: payload.status,
+          slug: payload.slug || null,
+          amount: Number.isFinite(paidAmount) ? paidAmount : null,
+          base_amount: Number.isFinite(baseAmount) ? baseAmount : null,
+          attempt_code: payload.attempt_code || null,
+          sent_at: payload.sent_at || null
+        }
       };
 
       await env.PAYMENTS.put(`orders/${orderId}`, JSON.stringify(updated)); state.orders.set(orderId,updated);
