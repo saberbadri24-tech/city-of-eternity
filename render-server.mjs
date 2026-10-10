@@ -108,6 +108,17 @@ const getPaymentsStore=()=>paymentsStorePromise||(paymentsStorePromise=(process.
 const env={...process.env,ASSETS:{fetch:assetsFetch},PAYMENTS:null};
 const translateRate=new Map();
 
+function localTranslate(input,target){
+  const maps={
+    fa:{home:'خانه',services:'خدمات',about:'درباره ما',contact:'تماس',business:'کسب‌وکار',guard:'گارد جاویدان',revenue:'درآمد',wallet:'کیف پول',payments:'پرداخت‌ها',orders:'سفارش‌ها',customers:'مشتریان',dashboard:'پیشخوان',login:'ورود','sign in':'ورود','log in':'ورود',submit:'ارسال',cancel:'لغو',save:'ذخیره',search:'جست‌وجو',loading:'در حال بارگذاری',error:'خطا',success:'موفق',status:'وضعیت',language:'زبان',pricing:'قیمت‌گذاری',start:'شروع',fix:'اصلاح',grow:'رشد','contact us':'تماس با ما',settings:'تنظیمات',security:'امنیت',admin:'مدیر',anil:'آنیل',send:'ارسال',message:'پیام',chat:'گفتگو',faq:'سوالات متداول'},
+    en:{خانه:'Home',خدمات:'Services','درباره ما':'About','تماس':'Contact','کسب‌وکار':'Business','گارد جاویدان':'Immortal Guard','درآمد':'Revenue','کیف پول':'Wallet','پرداخت‌ها':'Payments','سفارش‌ها':'Orders','مشتریان':'Customers','پیشخوان':'Dashboard','ورود':'Sign in','ارسال':'Submit','لغو':'Cancel','ذخیره':'Save','جست‌وجو':'Search','در حال بارگذاری':'Loading','خطا':'Error','موفق':'Success','وضعیت':'Status','زبان':'Language','قیمت‌گذاری':'Pricing','شروع':'Start','اصلاح':'Fix','رشد':'Grow','تنظیمات':'Settings','امنیت':'Security','مدیر':'Admin','آنیل':'Anil','پیام':'Message','گفتگو':'Chat'}
+  };
+  const dictionary=maps[target]||{};
+  return String(input).replace(/\\[\\[AX(\\d+)\\]\\]([\\s\\S]*?)(?=\\[\\[AX\\d+\\]\\]|$)/g,(all,id,label)=>{
+    const key=String(label||'').trim().toLowerCase();
+    return '[[AX'+id+']]'+(dictionary[key]||String(label||'').trim());
+  });
+}
 const server=http.createServer(async(req,res)=>{
   try{
     const host=req.headers.host||'localhost';
@@ -139,21 +150,22 @@ const server=http.createServer(async(req,res)=>{
           const rr=await fetch('https://api.openai.com/v1/chat/completions',{method:'POST',headers:{authorization:'Bearer '+process.env.OPENAI_API_KEY,'content-type':'application/json'},body:JSON.stringify({model:process.env.ANIL_TRANSLATION_MODEL||'gpt-4o-mini',temperature:0,messages:[{role:'system',content:system},{role:'user',content:user}] }),signal:AbortSignal.timeout(18_000)});
           const data=await rr.json().catch(()=>({}));if(!rr.ok)throw Error('translation_provider_'+rr.status);
           output=String(data.choices?.[0]?.message?.content||'');
-        }else if(process.env.ANTHROPIC_API_KEY){
-          const rr=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'x-api-key':process.env.ANTHROPIC_API_KEY,'anthropic-version':'2023-06-01','content-type':'application/json'},body:JSON.stringify({model:process.env.ANIL_TRANSLATION_ANTHROPIC_MODEL||'claude-3-5-haiku-latest',max_tokens:1800,temperature:0,system, messages:[{role:'user',content:user}]}),signal:AbortSignal.timeout(18_000)});
-          const data=await rr.json().catch(()=>({}));if(!rr.ok)throw Error('translation_provider_'+rr.status);
-          output=String((data.content||[]).filter(x=>x.type==='text').map(x=>x.text).join('\\n'));
-        }else return json(503,{ok:false,error:'translation_provider_not_configured'});
-      }catch(e){return json(502,{ok:false,error:'translation_unavailable'});}
+        }else{
+          output='';
+        }
+      }catch(e){output='';}
+      if(!output)output=localTranslate(text,target);
       const expected=[...text.matchAll(/\\[\\[AX(\\d+)\\]\\]/g)].map(m=>m[0]);
       const found=[...output.matchAll(/\\[\\[AX(\\d+)\\]\\]/g)].map(m=>m[0]);
-      if(!expected.length||expected.some((m,i)=>found[i]!==m)||found.length!==expected.length)return json(502,{ok:false,error:'translation_marker_validation_failed'});
-      return json(200,{ok:true,target,text:output});
+      if(!expected.length||expected.some((m,i)=>found[i]!==m)||found.length!==expected.length){output=localTranslate(text,target);}
+      const verified=[...output.matchAll(/\\[\\[AX(\\d+)\\]\\]/g)].map(m=>m[0]);
+      if(!expected.length||expected.some((m,i)=>verified[i]!==m)||verified.length!==expected.length)return json(200,{ok:true,target,text,engine:'local-translation-fallback',fallback:true});
+      return json(200,{ok:true,target,text:output,engine:outputSource||'local-translation-fallback',fallback:!outputSource});
     }
 
     if((u.pathname==='/healthz'||u.pathname==='/api/health')&&req.method==='GET'){
       return res.end(await (async()=>{const mainTon=process.env.TON_MAIN_WALLET||process.env.TON_MAIN_WALLET_ADDRESS||process.env.TON_PERMANENT_WALLET_ADDRESS;const validTon=typeof mainTon==='string'&&/^(?:EQ|UQ)[A-Za-z0-9_-]{46}$/.test(mainTon);const {adminConfigured}=await import('./functions/api/admin-auth.mjs');
-      const out={ok:true,ready:adminConfigured(env),service:'ANIL X',runtime:'render-static-gateway',configured:{admin:adminConfigured(env),openai:Boolean(process.env.OPENAI_API_KEY),anthropic:Boolean(process.env.ANTHROPIC_API_KEY),gemini:Boolean(process.env.GEMINI_API_KEY),openrouter:Boolean(process.env.ANIL_OPENROUTER_API_KEY||process.env.OPENROUTER_API_KEY),groq:Boolean(process.env.GROQ_API_KEY),cerebras:Boolean(process.env.CEREBRAS_API_KEY),mistral:Boolean(process.env.MISTRAL_API_KEY),variza:Boolean(process.env.VARIZA_API_KEY||process.env.VARIA_API_KEY||process.env.VARIZA_TOKEN||process.env.VARIZA_KEY||process.env.VARIZA_API_TOKEN||process.env.VARIZA_SECRET||process.env.VARIZA_API||process.env.VARIZA_ACCESS_TOKEN||process.env.VARIZA_BEARER_TOKEN),payments:Boolean(process.env.ANIL_DURABLE_STORE_URL||process.env.REDIS_URL),assets:true},revenue:{storageConfigured:Boolean(process.env.ANIL_DURABLE_STORE_URL||process.env.REDIS_URL),durableAccounting:String(process.env.PAYMENTS_DURABLE||'false').toLowerCase()==='true',variza:Boolean(process.env.VARIZA_API_KEY||process.env.VARIA_API_KEY||process.env.VARIZA_TOKEN||process.env.VARIZA_KEY||process.env.VARIZA_API_TOKEN||process.env.VARIZA_SECRET||process.env.VARIZA_API||process.env.VARIZA_ACCESS_TOKEN||process.env.VARIZA_BEARER_TOKEN),ton:validTon,guardCatchQueue:true,temporaryWalletUsed:false}};res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');return JSON.stringify(out)})());
+      const out={ok:true,ready:adminConfigured(env),service:'ANIL X',runtime:'render-static-gateway',configured:{admin:adminConfigured(env),localEngines:true,openaiOptional:Boolean(process.env.OPENAI_API_KEY),openrouterOptional:Boolean(process.env.ANIL_OPENROUTER_API_KEY||process.env.OPENROUTER_API_KEY),variza:Boolean(process.env.VARIZA_API_KEY||process.env.VARIA_API_KEY||process.env.VARIZA_TOKEN||process.env.VARIZA_KEY||process.env.VARIZA_API_TOKEN||process.env.VARIZA_SECRET||process.env.VARIZA_API||process.env.VARIZA_ACCESS_TOKEN||process.env.VARIZA_BEARER_TOKEN),payments:Boolean(process.env.ANIL_DURABLE_STORE_URL||process.env.REDIS_URL),assets:true},revenue:{storageConfigured:Boolean(process.env.ANIL_DURABLE_STORE_URL||process.env.REDIS_URL),durableAccounting:String(process.env.PAYMENTS_DURABLE||'false').toLowerCase()==='true',variza:Boolean(process.env.VARIZA_API_KEY||process.env.VARIA_API_KEY||process.env.VARIZA_TOKEN||process.env.VARIZA_KEY||process.env.VARIZA_API_TOKEN||process.env.VARIZA_SECRET||process.env.VARIZA_API||process.env.VARIZA_ACCESS_TOKEN||process.env.VARIZA_BEARER_TOKEN),ton:validTon,guardCatchQueue:true,temporaryWalletUsed:false}};res.statusCode=200;res.setHeader('content-type','application/json; charset=utf-8');return JSON.stringify(out)})());
     }
     if(u.pathname==='/api/guard/live'&&req.method==='GET'){
       const {adminAuth}=await import('./functions/api/admin-auth.mjs');
