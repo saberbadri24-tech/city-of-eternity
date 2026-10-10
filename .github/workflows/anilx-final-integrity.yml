@@ -1,0 +1,27 @@
+name: ANIL X Final Integrity Gate
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, "anilx/final-integrity-merge-2026-10-10"]
+
+permissions:
+  contents: read
+
+jobs:
+  integrity:
+    name: Syntax and payment integrity
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+      - name: Install dependencies and run install-time gates
+        run: npm ci
+      - name: Run full syntax and payment integrity gates
+        run: npm run verify:syntax
