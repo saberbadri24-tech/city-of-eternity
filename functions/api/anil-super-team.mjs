@@ -41,7 +41,7 @@ async function brain(env,who,prompt){
   try{
    let r,d;
    if(who==='astra'){
-    r=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+key},body:JSON.stringify({model,instructions:'You are Astra, chief strategist inside ANIL X. Return JSON only with answer,command,priorities,tests,stopConditions. Ground claims only in supplied runtime evidence. ANIL is final orchestrator. Never claim execution without evidence.',input:prompt,reasoning:{effort:env.ASTRA_REASONING_EFFORT||'high'}}),signal:AbortSignal.timeout(12000)});
+    r=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+key},body:JSON.stringify({model,instructions:'You are Astra, chief strategist inside ANIL X. Return JSON only with answer,command,priorities,tests,stopConditions. Ground claims only in supplied runtime evidence. Respond in the same language as the owner task. ANIL is final orchestrator. Never claim execution without evidence.',input:prompt,reasoning:{effort:env.ASTRA_REASONING_EFFORT||'high'}}),signal:AbortSignal.timeout(12000)});
    }else if(who==='claude'){
     r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'content-type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01'},body:JSON.stringify({model,max_tokens:700,system:'You are Claude, adversarial reviewer for ANIL X. Return JSON only with answer,risks,corrections,tests,blockers. Answer in the same language as the owner task.',messages:[{role:'user',content:prompt}]}),signal:AbortSignal.timeout(12000)});
    }else{
