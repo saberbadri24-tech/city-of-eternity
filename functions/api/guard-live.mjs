@@ -9,7 +9,19 @@ const LOCAL={
  radar:'guard-super-radar.json',
  sourceHealth:'guard-source-health.json'
 };
-const REMOTE='https://raw.githubusercontent.com/saberbadri24-tech/city-of-eternity/main/';
+const REMOTE='https://raw.githubusercontent.com/saberbadri24-tech/immortal-guard/main/data/';
+const REMOTE_FILES={
+ status:'guard_status.json',
+ opportunities:'opportunities.json',
+ value:'radar_intel.json',
+ ledger:'revenue_ledger.json',
+ transfer:'transfer_state.json',
+ receipts:'ton_receipts.json',
+ ai:'ai_reviews.json',
+ radar:'radar_intel.json',
+ sourceHealth:'official_source_gate.json'
+};
+const remoteCache=new Map();
 let cache={at:0,data:null};
 const json=(d,s=200)=>new Response(JSON.stringify(d),{status:s,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-anilx-guard-cache':'server-60s'}});
 async function readLocal(env,name,req){
@@ -26,10 +38,14 @@ async function readPrivate(env,key){
   try{return await env.PAYMENTS.get('guard/private/'+key,'json')}catch{return null}
 }
 async function readRemote(name){
+  const cached=remoteCache.get(name);
+  if(cached&&Date.now()-cached.at<60000)return cached.data;
   try{
-    const r=await fetch(REMOTE+name+'?v='+Math.floor(Date.now()/60000),{headers:{accept:'application/json','cache-control':'no-cache'}});
+    const r=await fetch(REMOTE+encodeURIComponent(name)+'?v='+Math.floor(Date.now()/60000),{headers:{accept:'application/json','cache-control':'no-cache'},signal:AbortSignal.timeout(9000)});
     if(!r.ok)return null;
-    return await r.json();
+    const data=await r.json();
+    remoteCache.set(name,{at:Date.now(),data});
+    return data;
   }catch{return null}
 }
 async function readCatchQueue(env){
@@ -39,6 +55,11 @@ async function readCatchQueue(env){
 async function read(env,key,req){
   const privateData=await readPrivate(env,key);
   if(privateData)return {data:privateData,source:'owner-private-redis'};
+  const remoteName=REMOTE_FILES[key];
+  if(remoteName){
+    const remote=await readRemote(remoteName);
+    if(remote)return {data:remote,source:'immortal-guard-main'};
+  }
   const local=await readLocal(env,LOCAL[key],req);
   return {data:local,source:local?'legacy-local':'unavailable'};
 }
