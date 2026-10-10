@@ -84,7 +84,7 @@ results.push({
 });
 results.push({
   name:'owner chat keeps execution evidence-gated without provider error disclosure',
-  ok:ownerChatSource.includes("action:'independent_council_fallback'") &&
+  ok:ownerChatSource.includes("action:'serial_engine_chain_fallback'") &&
     ownerChatSource.includes("performed:false") &&
     !ownerChatSource.includes('providerFailures')
 });
