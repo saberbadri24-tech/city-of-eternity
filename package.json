@@ -10,6 +10,8 @@
   },
   "scripts": {
     "verify:syntax": "node scripts/verify-syntax.mjs",
-    "postinstall": "node scripts/verify-syntax.mjs"
+    "postinstall": "node scripts/verify-syntax.mjs",
+    "test:anil-council": "node scripts/test-anil-team-council.mjs",
+    "verify:all": "npm run verify:syntax && npm run test:anil-council"
   }
 }
