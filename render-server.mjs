@@ -1,6 +1,7 @@
 import http from 'node:http';
 import {promises as fs,createReadStream} from 'node:fs';
 import path from 'node:path';
+import {proxyToUpstream} from './functions/api/render-upstream-proxy.mjs';
 import {fileURLToPath} from 'node:url';
 
 const root=path.dirname(fileURLToPath(import.meta.url));
@@ -110,6 +111,11 @@ const server=http.createServer(async(req,res)=>{
     const host=req.headers.host||'localhost';
     const origin='http://'+host;
     const u=new URL(origin+(req.url||'/'));
+    const regionalUpstream=String(process.env.ANILX_GLOBAL_UPSTREAM_URL||'').trim();
+    if(regionalUpstream&&(u.pathname==='/api'||u.pathname.startsWith('/api/')||u.pathname==='/healthz')&&host!=='anil-x-live.onrender.com'){
+      await proxyToUpstream(req,res,regionalUpstream);
+      return;
+    }
 
     if((u.pathname==='/healthz'||u.pathname==='/api/health')&&req.method==='GET'){
       return res.end(await (async()=>{const mainTon=process.env.TON_MAIN_WALLET||process.env.TON_MAIN_WALLET_ADDRESS||process.env.TON_PERMANENT_WALLET_ADDRESS;const validTon=typeof mainTon==='string'&&/^(?:EQ|UQ)[A-Za-z0-9_-]{46}$/.test(mainTon);const {adminConfigured}=await import('./functions/api/admin-auth.mjs');
