@@ -48,6 +48,5 @@ if(d.payment?.ready&&d.payment?.payUrl){status.className='status ok';status.text
 status.className='status';status.textContent='Lead saved and order path created. '+(d.payment?.error==='payment_not_configured'?'Payment gateway is the remaining configuration step.':'Payment is not ready yet: '+(d.payment?.error||'configuration required'))+'. Your lead is retained for the next step.';
 }catch(err){status.className='status err';status.textContent='Could not complete the project path: '+(err.message||'unknown error');}});
 })();
-})();
 </script>
 </body></html>
