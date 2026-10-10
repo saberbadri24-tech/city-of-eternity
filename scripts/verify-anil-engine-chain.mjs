@@ -54,27 +54,28 @@ results.push({
     planSource.includes('externalModelsCalled:false')
 });
 const workerSource = fs.readFileSync(new URL('../worker.js', import.meta.url), 'utf8');
+const secretaryStart = workerSource.indexOf('async function secretary(req,env){');
+const secretaryEnd = workerSource.indexOf('export default{async fetch', secretaryStart);
+const secretarySource = secretaryStart >= 0 && secretaryEnd > secretaryStart
+  ? workerSource.slice(secretaryStart, secretaryEnd) : '';
 results.push({
   name:'owner chat routes to independent council when external providers fail',
   ok:workerSource.includes("if(u.pathname==='/api/admin/secretary')return secretary(req,env)") &&
-    workerSource.includes("handlePlan(new Request('https://anilx.internal/api/plan'") &&
-    workerSource.includes("action:'independent_council_fallback'") &&
-    workerSource.includes("execution:planData.execution||{performed:false,status:'not_executed'}")
+    secretarySource.includes("handlePlan(new Request('https://anilx.internal/api/plan'") &&
+    secretarySource.includes("action:'independent_council_primary'") &&
+    secretarySource.includes("execution:planData.execution||{performed:false,status:'not_executed'}")
 });
-const ownerChatIndex = workerSource.indexOf('// Internal-first owner chat: do not invoke hosted LLM/bot providers for ordinary conversation.');
-const ownerHistoryIndex = workerSource.indexOf('const history=Array.isArray(b.messages)', ownerChatIndex);
-const externalAiIndex = workerSource.indexOf('const configuredAi=Object.values(getAiConfig(env))', ownerHistoryIndex);
 results.push({
   name:'owner chat uses first-party council before any hosted LLM provider',
-  ok:ownerChatIndex >= 0 && ownerHistoryIndex > ownerChatIndex &&
-    externalAiIndex > ownerHistoryIndex &&
-    workerSource.slice(ownerChatIndex, ownerHistoryIndex).includes("action:'independent_council_primary'") &&
-    workerSource.slice(ownerChatIndex, ownerHistoryIndex).includes('externalModelsCalled:false')
+  ok:secretarySource.includes("action:'independent_council_primary'") &&
+    secretarySource.includes('externalModelsCalled:false') &&
+    !/getAiConfig|api\\.openai\\.com|api\\.anthropic\\.com|generativelanguage\\.googleapis\\.com/.test(secretarySource)
 });
 results.push({
   name:'owner chat fails closed rather than silently falling back to external bots',
-  ok:workerSource.slice(ownerChatIndex, ownerHistoryIndex).includes("action:'independent_council_unavailable'") &&
-    workerSource.slice(ownerChatIndex, ownerHistoryIndex).includes("},503)")
+  ok:secretarySource.includes("action:'independent_council_unavailable'") &&
+    secretarySource.includes("},503)") &&
+    secretarySource.includes("execution:{performed:false,status:'not_executed'}")
 });
 const failed = results.filter(item => !item.ok);
 for (const result of results) console.log((result.ok?'PASS ':'FAIL ')+result.name);
