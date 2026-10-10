@@ -114,7 +114,7 @@ function localTranslate(input,target){
     en:{خانه:'Home',خدمات:'Services','درباره ما':'About','تماس':'Contact','کسب‌وکار':'Business','گارد جاویدان':'Immortal Guard','درآمد':'Revenue','کیف پول':'Wallet','پرداخت‌ها':'Payments','سفارش‌ها':'Orders','مشتریان':'Customers','پیشخوان':'Dashboard','ورود':'Sign in','ارسال':'Submit','لغو':'Cancel','ذخیره':'Save','جست‌وجو':'Search','در حال بارگذاری':'Loading','خطا':'Error','موفق':'Success','وضعیت':'Status','زبان':'Language','قیمت‌گذاری':'Pricing','شروع':'Start','اصلاح':'Fix','رشد':'Grow','تنظیمات':'Settings','امنیت':'Security','مدیر':'Admin','آنیل':'Anil','پیام':'Message','گفتگو':'Chat'}
   };
   const dictionary=maps[target]||{};
-  return String(input).replace(/\\[\\[AX(\\d+)\\]\\]([\\s\\S]*?)(?=\\[\\[AX\\d+\\]\\]|$)/g,(all,id,label)=>{
+  return String(input).replace(/\[\[AX(\d+)\]\]([\s\S]*?)(?=\[\[AX\d+\]\]|$)/g,(all,id,label)=>{
     const key=String(label||'').trim().toLowerCase();
     return '[[AX'+id+']]'+(dictionary[key]||String(label||'').trim());
   });
@@ -141,9 +141,9 @@ const server=http.createServer(async(req,res)=>{
       let body;try{body=JSON.parse(raw.toString('utf8')||'{}')}catch{return json(400,{ok:false,error:'invalid_json'})}
       const text=typeof body.text==='string'?body.text:'';const target=String(body.target||'');
       const allowed=new Set(['fa','ar','tr','ru','de','fr','es','pt','it','nl','pl','uk','sv','no','da','fi','cs','sk','ro','hu','el','bg','sr','hr','sl','he','ur','hi','bn','ta','te','th','vi','id','ms','zh-CN','zh-TW','ja','ko']);
-      if(!allowed.has(target)||!text||text.length>10_000||!/^([\\s\\S]*\\[\\[AX\\d+\\]\\][\\s\\S]*)$/.test(text))return json(400,{ok:false,error:'invalid_translation_request'});
+      if(!allowed.has(target)||!text||text.length>10_000||!/^([\s\S]*\[\[AX\d+\]\][\s\S]*)$/.test(text))return json(400,{ok:false,error:'invalid_translation_request'});
       const system='You are a professional UI localization engine. Translate each text after its [[AXn]] marker into the target language. Preserve every marker exactly once and in order. Keep product names, URLs, code, numbers, and placeholders unchanged. Output only the translated lines, one marker per line, no commentary.';
-      const user='Target language: '+target+'\\nTranslate these UI strings:\\n'+text;
+      const user='Target language: '+target+'\nTranslate these UI strings:\n'+text;
       let output='';let outputSource='';
       try{
         if(process.env.OPENAI_API_KEY){
@@ -155,10 +155,10 @@ const server=http.createServer(async(req,res)=>{
         }
       }catch(e){output='';outputSource='';}
       if(!output){output=localTranslate(text,target);outputSource='local-translation-fallback';}
-      const expected=[...text.matchAll(/\\[\\[AX(\\d+)\\]\\]/g)].map(m=>m[0]);
-      const found=[...output.matchAll(/\\[\\[AX(\\d+)\\]\\]/g)].map(m=>m[0]);
+      const expected=[...text.matchAll(/\[\[AX(\d+)\]\]/g)].map(m=>m[0]);
+      const found=[...output.matchAll(/\[\[AX(\d+)\]\]/g)].map(m=>m[0]);
       if(!expected.length||expected.some((m,i)=>found[i]!==m)||found.length!==expected.length){output=localTranslate(text,target);outputSource='local-translation-fallback';}
-      const verified=[...output.matchAll(/\\[\\[AX(\\d+)\\]\\]/g)].map(m=>m[0]);
+      const verified=[...output.matchAll(/\[\[AX(\d+)\]\]/g)].map(m=>m[0]);
       if(!expected.length||expected.some((m,i)=>verified[i]!==m)||verified.length!==expected.length)return json(200,{ok:true,target,text,engine:'local-translation-fallback',fallback:true});
       return json(200,{ok:true,target,text:output,engine:outputSource||'local-translation-fallback',fallback:outputSource==='local-translation-fallback'});
     }
