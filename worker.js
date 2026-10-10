@@ -1027,7 +1027,7 @@ async function secretary(req,env){
           action:'independent_council_fallback',
           live:false,
           provider:'independent-council',
-          text:String(planData.reply||planData.text||planData.answer||providerNote)+'\\n\\n'+providerNote,
+          text:String(planData.reply||planData.text||planData.answer||providerNote)+'\n\n'+providerNote,
           data:{
             source:planData.source||'anil-independent-specialist-council',
             engine:planData.engine||'ANIL-INDEPENDENT-ENGINE-COUNCIL',
