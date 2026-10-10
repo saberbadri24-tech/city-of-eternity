@@ -962,6 +962,7 @@ async function secretary(req,env){
     }
     const history=Array.isArray(b.messages)?b.messages.slice(-12).map(x=>({role:x?.role==='assistant'?'assistant':'user',content:String(x?.content||'').slice(0,4000)})).filter(x=>x.content&&!/Cannot set properties of null|configured_provider_invocation_failed/i.test(x.content)):[];
     const configuredAi=Object.values(getAiConfig(env)).filter(Boolean).length>0;
+    let providerQuotaExhausted=false;
     if(configuredAi){
       let agent=null;
       try{
@@ -970,15 +971,9 @@ async function secretary(req,env){
       }catch{}
       // Do not fan out into the Super Team and repeat provider calls when the shared
       // account quota is known to be exhausted. Return one short, actionable diagnosis.
-      if(agent?.reason==='openai_invocation_failed'&&/credit_balance_exhausted|insufficient_quota|no credits remaining|credit balance is too low/i.test(String(agent.detail||''))){
-        const fa=b.language==='fa';
-        const detail=String(agent.detail||'').slice(0,420);
-        return json({ok:true,action:'ai_provider_blocked',live:false,
-          text:fa
-            ? 'پاسخ‌گویی هوشمند زنده فعلاً به‌دلیل تمام‌شدن اعتبار API متوقف است؛ اتصال سرور برقرار است، اما این مشکل با تکرار درخواست یا عوض‌کردن مدل حل نمی‌شود. برای فعال‌شدن دوبارهٔ پاسخ‌گویی، در حساب ارائه‌دهنده اعتبار API را شارژ کن یا یک Provider دارای اعتبار در تنظیمات امن Render وصل کن. تا آن زمان، گزارش‌های وضعیت، سلامت، Guard و کسب‌وکار که مسیر داخلی دارند جداگانه قابل بررسی‌اند.'
-            : 'Live AI replies are blocked because the provider API account has exhausted its credits. The server is reachable, but retrying models will not fix this. Add API credit or configure another funded provider in Render. Internal status, health, Guard, and business reports remain separate routes.',
-          data:{provider:'openai',reason:'quota_exhausted',detail}});
-      }
+      // Never terminate the owner chat just because one provider exhausted quota.
+      // Continue through other configured providers, then use the deterministic local cognition engine.
+      providerQuotaExhausted=agent?.reason==='openai_invocation_failed'&&/credit_balance_exhausted|insufficient_quota|no credits remaining|credit balance is too low/i.test(String(agent.detail||''));
       try{
         const teamResp=await handleSuperTeam(new Request(new URL('/api/anil/super-team',req.url),{method:'POST',headers:{cookie:req.headers.get('cookie')||'','content-type':'application/json'},body:JSON.stringify({task:command,history})}),env,{guardHandler:handleGuardLive});
         const team=await teamResp.json().catch(()=>({}));const answer=team?.command?.answer||team?.command?.response;
@@ -1012,12 +1007,45 @@ async function secretary(req,env){
     const fa=b.language==='fa';
     const providers=k.capabilities?.adapters?.ai?.providers||{};
     const configured=Object.values(providers).some(Boolean);
-    const action=configured?'configured_provider_invocation_failed':'no_provider_configured';
     const failureText=providerFailures.length?JSON.stringify(providerFailures):'no_provider_attempted';
-    return json({ok:true,action,live:false,text:fa
-      ? (configured?'اتصال Provider در Render وجود دارد اما فراخوانی واقعی شکست خورد. ANIL اجرای ساختگی اعلام نمی‌کند. خطای واقعی ثبت‌شده: '+failureText:'هیچ Provider هوش مصنوعی در Runtime تنظیم نشده است.')
-      : (configured?'AI provider credentials are configured, but every live invocation failed. No fake execution will be claimed. Provider diagnostics: '+failureText:'No AI provider is configured in the Runtime.'),
-      data:{capability:k,providerState:{configured,providers},providerFailures}});
+    // Deterministic local cognition fallback: always produce a useful, truthful response
+    // when external LLMs are unavailable. It never claims an action was executed.
+    const intent={
+      security:/(امنیت|هک|کلید خصوصی|عبارت بازیابی|seed|private key|security)/i.test(command),
+      finance:/(پرداخت|واریز|برداشت|تسویه|کیف پول|wallet|payment|settlement|transfer|withdraw)/i.test(command),
+      code:/(کد|باگ|خطا|اصلاح|درست|تغییر|بهبود|دیپلوی|deploy|fix|bug|repair|code|site|سایت)/i.test(command),
+      guard:/(گارد|ایردراپ|فرصت|guard|airdrop|opportunit)/i.test(command),
+      revenue:/(درآمد|فروش|سفارش|مشتری|لید|revenue|sales|order|customer|lead)/i.test(command)
+    };
+    let localText;
+    if(fa){
+      const next=intent.security
+        ? '۱) داده و مجوز را فقط‌خواندنی بررسی کن. ۲) مورد مشکوک را با شواهد ثبت کن. ۳) هر تغییر حساس را تا تأیید مدیر متوقف نگه دار.'
+        : intent.finance
+        ? '۱) وضعیت سفارش و پاسخ رسمی Variza را بخوان. ۲) شناسه تراکنش و تأیید webhook را تطبیق بده. ۳) فقط تسویه تأییدشده را درآمد حساب کن؛ هیچ انتقالی از این پاسخ اجرا نشده است.'
+        : intent.guard
+        ? '۱) تازگی رادار و منبع رسمی را بررسی کن. ۲) فرصت‌های قدیمی/تکراری را حذف کن. ۳) فقط فرصت تأییدشده را به صف بررسی مدیر بفرست؛ claim یا امضای خودکار انجام نمی‌شود.'
+        : intent.revenue
+        ? '۱) سفارش‌های واقعی و وضعیت پرداخت را بخوان. ۲) فقط درآمد تسویه‌شده را حساب کن. ۳) لیدها و گلوگاه تبدیل را بر اساس داده واقعی اولویت‌بندی کن.'
+        : intent.code
+        ? '۱) خطا را با مسیر و شواهد بازتولید کن. ۲) کوچک‌ترین اصلاح مستقل را آماده کن. ۳) تست syntax، regression و health را اجرا کن. ۴) بدون سبزشدن تست‌ها ادعای انتشار نکن.'
+        : '۱) هدف را به مسئله‌های کوچک و قابل‌آزمون تقسیم کن. ۲) از داده‌های Runtime و ابزارهای مجاز شواهد جمع کن. ۳) گزینه‌ها را بر اساس اثر، ریسک و هزینه رتبه‌بندی کن. ۴) کوچک‌ترین اقدام قابل‌برگشت را انتخاب و نتیجه را راستی‌آزمایی کن.';
+      localText='موتور شناخت محلی ANIL فعال شد؛ سرویس چت به‌خاطر قطع یا اتمام سهمیه یک مدل متوقف نمی‌شود.\n\n' + next + '\n\nوضعیت صداقت اجرا: هیچ تغییر، پرداخت یا استقراری در این پاسخ انجام‌شده اعلام نشده است. موتور محلی از استدلال قاعده‌محور و داده‌های داخلی استفاده می‌کند و جایگزین کامل مدل زبانی نیست. ارائه‌دهندگان بیرونی: '+(configured?'تنظیم شده‌اند اما پاسخ این نوبت ناموفق بود.':'در Runtime تنظیم نشده‌اند.')+'\nجزئیات فنی محدود: '+failureText.slice(0,900);
+    } else {
+      const next=intent.security
+        ? '1) Inspect state and permissions read-only. 2) Record evidence. 3) Keep sensitive changes behind owner approval.'
+        : intent.finance
+        ? '1) Read the order and official Variza status. 2) Match transaction IDs and webhook evidence. 3) Count only confirmed settlement; no transfer was executed by this response.'
+        : intent.guard
+        ? '1) Check radar freshness and official sources. 2) Remove stale/duplicate candidates. 3) Route verified opportunities for owner review; no automatic claim or signing.'
+        : intent.revenue
+        ? '1) Read real orders and payment status. 2) Count only settled revenue. 3) Prioritize conversion bottlenecks from actual data.'
+        : intent.code
+        ? '1) Reproduce the defect with evidence. 2) Prepare the smallest isolated fix. 3) Run syntax, regression, and health checks. 4) Do not claim release until tests pass.'
+        : '1) Decompose the goal into testable subproblems. 2) Gather evidence from permitted runtime tools. 3) Rank options by impact, risk, and cost. 4) Choose the smallest reversible action and verify it.';
+      localText='ANIL local cognition engine is active; chat will not stop merely because a provider is unavailable.\n\n'+next+'\n\nExecution truth: no change, payment, or deployment is claimed as completed. This deterministic local engine uses rules and internal data; it is not a full replacement for a language model. External providers: '+(configured?'configured but unsuccessful for this request.':'not configured in this runtime.')+'\nLimited diagnostics: '+failureText.slice(0,900);
+    }
+    return json({ok:true,action:'local_cognitive_fallback',live:false,provider:'anil-local-engine',text:localText,data:{capability:k,providerState:{configured,providers},providerFailures,providerQuotaExhausted:!!providerQuotaExhausted,localEngine:{active:true,mode:'deterministic-safe-fallback',claimsExecution:false}}});
 
   }catch(e){
     const message=String(e?.message||e).slice(0,240);
