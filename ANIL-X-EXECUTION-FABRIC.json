@@ -6,11 +6,15 @@
     "repository": {
       "provider": "GitHub",
       "mode": "Actions_OIDC_plus_controlled_PR",
-      "write_boundary": ["approved_branch","pull_request","approved_paths"]
+      "write_boundary": [
+        "approved_branch",
+        "pull_request",
+        "approved_paths"
+      ]
     },
     "runtime": {
       "provider": "Render",
-      "service": "city-of-eternity",
+      "service": "anil-x-live",
       "mode": "Node_web_service",
       "auto_deploy": true
     },
