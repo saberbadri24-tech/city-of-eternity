@@ -957,23 +957,63 @@ async function secretary(req,env){
       return json({ok:true,action:'live_business_status',text:(b.language==='fa'?'وضعیت واقعی کسب‌وکار، سفارش و درآمد:\n':'Live business, orders and revenue status:\n')+JSON.stringify({overview:o.data,fleet:f.data,analytics:a.data},null,2),data:{overview:o.data,fleet:f.data,analytics:a.data}});
     }
     if(/قابلیت|توان|ابزار|capabilit|tool/.test(q)){
-      const fa=b.language==='fa';
-    return json({
-      ok:true,
-      action:'independent_council_fallback',
-      live:false,
-      provider:'internal-engines',
-      text:fa
-        ? 'موتورهای مستقل ANIL فعال‌اند. برای این درخواست، نتیجهٔ قابل‌تأیید اجرایی ثبت نشد؛ بنابراین هیچ تغییر، پرداخت یا استقراری انجام‌شده اعلام نمی‌شود.'
-        : 'ANIL independent engines are active. No verified execution result was recorded for this request, so no code change, payment, or deployment is claimed.',
-      data:{source:'anil-independent-specialist-council',execution:{performed:false,status:'not_executed'}}
-    });
-
+      const k=await handleCapabilityKernel(new Request(new URL('/api/anil/capability-kernel',req.url),{method:'GET'}),env).then(x=>x.json());
+      return json({ok:true,action:'capability_report',text:(b.language==='fa'?'قابلیت‌های واقعی فعلی Anil:\n':'ANIL current verified capabilities:\n')+JSON.stringify(k,null,2),data:k});
+    }
+    if(/موتور درآمد|revenue engine|fleet|برنامه درآمد/.test(q)){
+      const [e,p]=await Promise.all([live('/api/revenue/engines'),live('/api/revenue/programs')]);
+      return json({ok:true,action:'revenue_engines',text:(b.language==='fa'?'موتورهای درآمدی زنده:\n':'Live revenue engines:\n')+JSON.stringify({engines:e.data,programs:p.data},null,2),data:{engines:e.data,programs:p.data}});
+    }
+    if(/اصلاح|درست|تغییر|بهبود|آپدیت|update|fix|improve|change|repair/.test(q)&&/(سایت|کد|دکمه|صفحه|گارد|guard|anil|site|code)/.test(q)){
+      try{
+        const op=await anilOperatorChange(req,env,command);
+        if(op?.ok)return json({ok:true,changed:false,action:'controlled_change_queued',text:'تغییر کنترل‌شده ساخته و برای تست/صف اجرا ثبت شد؛ تا عبور از تست و انتشار، انجام‌شده محسوب نمی‌شود.',data:op});
+        return json({ok:true,changed:false,action:'change_not_queued',text:'تغییر اجرا نشد؛ مرز ایمنی یا دسترسی لازم مانع ثبت آن شد.',data:op});
+      }catch(e){return json({ok:false,error:'operator_change_failed',message:String(e?.message||e)},502)}
+    }
+    // Internal-first owner chat: do not invoke hosted LLM/bot providers for ordinary conversation.
+    // Operational status/Guard/revenue and controlled-change intents above retain their live handlers.
+    {
+      const fa=b.language==='fa'||/[\u0600-\u06FF]/.test(command);
+      const greeting=/^(سلام|درود|وقت بخیر|خسته نباشی|ممنون|مرسی|hello|hi|hey|thanks|thank you)[!؟?.\s]*$/i.test(command.trim());
+      if(greeting){
+        return json({ok:true,action:'first_party_conversation',provider:'anil-core',live:true,
+          text:fa?'سلام. من آنیلِ دستیار مدیر ANIL X هستم. درخواستت را بگو؛ وضعیت زنده را بررسی می‌کنم و هیچ کاری را بدون شواهد انجام‌شده اعلام نمی‌کنم.':'Hello. I am ANIL, the ANIL X owner assistant. Tell me what you need; I will verify live status and never claim an action without evidence.'});
+      }
+      try {
+        const planResponse=await handlePlan(new Request('https://anilx.internal/api/plan',{
+          method:'POST',headers:{'content-type':'application/json'},
+          body:JSON.stringify({text:command,language:fa?'fa':'en'})
+        }),env);
+        const planData=await planResponse.json().catch(()=>({}));
+        if(planResponse.ok&&planData?.ok){
+          return json({ok:true,action:'independent_council_primary',provider:'first-party-deterministic',live:true,
+            text:String(planData.reply||planData.text||planData.answer||''),
+            data:{source:planData.source||'anil-independent-specialist-council',
+              engine:planData.engine||'ANIL-INDEPENDENT-ENGINE-COUNCIL',
+              version:planData.version||null,specialists:planData.council||planData.specialists||null,
+              plan:planData.plan||null,evidence:planData.evidence||[],
+              execution:planData.execution||{performed:false,status:'not_executed'},
+              orchestration:planData.orchestration||null,
+              externalModelsCalled:false}});
+        }
+        return json({ok:true,action:'independent_council_fallback',provider:'internal-engines',live:false,
+          text:fa?'موتورهای مستقل آنیل فعال‌اند؛ نتیجهٔ اجرایی قابل‌تأیید برای این درخواست ثبت نشد. هیچ تغییری اجراشده اعلام نمی‌شود.':'ANIL independent engines are active; no verified execution result was recorded for this request. No change is claimed.',
+          data:{source:'anil-independent-specialist-council',execution:{performed:false,status:'not_executed'}}});
+      } catch (error) {
+        return json({ok:true,action:'independent_council_fallback',provider:'internal-engines',live:false,
+          text:fa?'موتورهای مستقل آنیل فعال‌اند؛ نتیجهٔ اجرایی قابل‌تأیید برای این درخواست ثبت نشد. هیچ تغییری اجراشده اعلام نمی‌شود.':'ANIL independent engines are active; no verified execution result was recorded for this request. No change is claimed.',
+          data:{source:'anil-independent-specialist-council',execution:{performed:false,status:'not_executed'}}});
+      }
+    }
   }catch(e){
-    const message=String(e?.message||e).slice(0,240);
-    return json({ok:true,action:'runtime_diagnostic',live:false,text:(b.language==='fa'?'یک مسیر تشخیص وضعیت خطا داد؛ خود Runtime بالا است. جزئیات امن: ':'A status/diagnostic path failed; runtime remains reachable. Safe detail: ')+message,data:{error:'secretary_runtime_error',message}});
+    return json({ok:true,action:'independent_council_fallback',live:false,
+      text:b.language==='fa'?'موتورهای مستقل آنیل فعال‌اند؛ اقدامی بدون نتیجهٔ قابل‌تأیید انجام‌شده اعلام نمی‌شود.':'ANIL independent engines are active; no action is claimed without a verifiable result.',
+      data:{execution:{performed:false,status:'not_executed'}}});
   }
 }
+
+
 export default{async fetch(req,env,ctx){const u=new URL(req.url);if(u.pathname==='/api/guard/live'&&req.method==='GET'){if(!(await adminAuth(req,env)))return json({ok:false,error:'admin_auth_required'},401);return handleGuardLive(req,env);}if(u.pathname==='/api/health'||u.pathname==='/api/_healthcheck'){const adminReady=adminConfigured(env);return json({ok:true,ready:adminReady,service:'ANIL X',runtime:'unified-worker',configured:{admin:adminReady,openai:!!(getAiConfig(env).openai),openrouter:!!(getAiConfig(env).openrouter),localEngines:true,variza:!!getVarizaApiKey(env),payments:!!env.PAYMENTS,assets:!!env.ASSETS},routes:['/api/plan','/api/analyze','/api/vision','/api/voice','/api/ton/account','/api/ton/transactions','/api/javidan/trinity','/api/account','/api/memory','/api/order','/api/fx','/api/discovery','/api/free-request','/api/free-admin','/api/payment-status','/api/worker','/api/pay','/api/variza-webhook','/api/revenue/fleet','/api/revenue/fleet/run','/api/revenue/programs','/api/guard/live'],revenue:{persistence:!!env.PAYMENTS,variza:!!getVarizaApiKey(env),ton:validTonAddress(getMainTonAddress(env)),guardCatchQueue:!!env.PAYMENTS}},200);}const runtime=await runtimeRoutes(req,env,u);if(runtime)return runtime;if(u.pathname==='/api/analyze')return analyze(req,env);if(u.pathname==='/api/vision')return vision(req,env);if(u.pathname==='/api/voice')return voice(req,env);if(u.pathname==='/api/ton/account'||u.pathname==='/api/ton/transactions')return tonApi(req);if(u.pathname==='/api/anil/execution-readiness')return handleExecutionReadiness(req,env);if(u.pathname==='/api/plan')return handlePlan(req,env);if(u.pathname==='/api/anil/super-team'){if(!(await githubActionsAuth(req,env))&&!(await adminAuth(req,env)))return json({ok:false,error:'owner_or_github_actions_auth_required'},401);return handleSuperTeam(req,env,{guardHandler:handleGuardLive});}if(u.pathname==='/api/javidan/trinity')return handleJavidan(req,env);if(u.pathname==='/api/admin/password/login')return adminLogin(req,env);if(u.pathname==='/api/admin/password/logout'&&req.method==='POST')return json({ok:true},200,{'set-cookie':'session=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0'});
   if(u.pathname==='/api/admin/auth-self-test'&&req.method==='GET'){
     if(!(await githubActionsAuth(req,env)))return json({ok:false,error:'github_actions_auth_required'},401);
