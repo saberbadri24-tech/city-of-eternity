@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "name": "Immortal Guard Unified / Super Airdrop",
-  "purpose": "Canonical registry joining every Guard radar, evidence, intelligence, safety, learning, revenue and monitoring engine created across the project.",
+  "purpose": "Canonical registry joining Guard radar, evidence, intelligence, safety, learning, revenue and monitoring through first-party independent engines.",
   "pipeline": [
     "heartbeat",
     "global_discovery",
     "official_discovery",
     "discovery_verification",
     "strict_free_real_token_hunter",
-    "airdrop_plus_ai_consensus",
+    "airdrop_plus_independent_review",
     "source_health",
     "opportunity_intelligence",
     "high_value_opportunity",
@@ -29,9 +29,9 @@
   ],
   "intelligence": {
     "owner": "ANIL",
-    "strategist": "Astra / OpenAI",
-    "adversarial_reviewer": "Claude / Anthropic",
-    "verifier": "Gemini / Google",
+    "strategist": "Core Reasoning Engine",
+    "adversarial_reviewer": "Independent Review Engine",
+    "verifier": "Evidence Verification Engine",
     "deterministic_core": "Guard local engines",
     "coordination": "ANIL -> Guard -> evidence -> ranked opportunity -> owner queue -> approval boundary"
   },
@@ -54,7 +54,7 @@
     ],
     [
       "airdrop_guard.py",
-      "Airdrop+ multi-model review"
+      "Airdrop+ deterministic local evidence review"
     ],
     [
       "guard_source_health.py",
