@@ -963,8 +963,8 @@ async function secretary(req,env){
     // Internal-first owner chat: do not invoke hosted LLM/bot providers for ordinary conversation.
     // Operational status/Guard/revenue and controlled-change intents above retain their live handlers.
     {
-      const fa=b.language==='fa'||/[\\u0600-\\u06FF]/.test(command);
-      const greeting=/^(سلام|درود|وقت بخیر|خسته نباشی|ممنون|مرسی|hello|hi|hey|thanks|thank you)[!؟?.\\s]*$/i.test(command.trim());
+      const fa=b.language==='fa'||/[\u0600-\u06FF]/.test(command);
+      const greeting=/^(سلام|درود|وقت بخیر|خسته نباشی|ممنون|مرسی|hello|hi|hey|thanks|thank you)[!؟?.\s]*$/i.test(command.trim());
       if(greeting){
         return json({ok:true,action:'first_party_conversation',provider:'anil-core',live:true,
           text:fa?'سلام. من آنیلِ دستیار مدیر ANIL X هستم. درخواستت را بگو؛ وضعیت زنده را بررسی می‌کنم و هیچ کاری را بدون شواهد انجام‌شده اعلام نمی‌کنم.':'Hello. I am ANIL, the ANIL X owner assistant. Tell me what you need; I will verify live status and never claim an action without evidence.'});
