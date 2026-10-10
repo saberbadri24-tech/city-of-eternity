@@ -12,7 +12,8 @@ const files = {
   server: read('../render-server.mjs'),
   webhook: read('../functions/api/variza-webhook.js'),
   worker: read('../worker.js'),
-  paymentPage: read('../payment.html')
+  paymentPage: read('../payment.html'),
+  i18n: read('../unified-i18n-v3.js')
 };
 const aliases = [
   'VARIZA_API_KEY','VARIA_API_KEY','VARIZA_TOKEN','VARIZA_KEY',
@@ -35,6 +36,7 @@ const checks = [
   ['payment readiness does not treat the fallback FX estimate as configured', getUsdTomanConfig({}).source === 'runtime-default' && getUsdTomanConfig({USD_IRR_RATE:'2687600'}).source !== 'runtime-default'],
   ['live FX source requires a fresh non-stale market quote', files.currency.includes('https://nerkhara.com/rates.json') && files.currency.includes('quote?.stale') && files.currency.includes('ageMs > 30 * 60_000')],
   ['checkout and payment-config use the same validated live FX helper', files.pay.includes('await getLiveUsdTomanConfig(env)') && files.worker.includes('const fx=await getLiveUsdTomanConfig(env)')],
+  ['UI translation batches stay below Render request limit', files.i18n.includes('size+cost>8000') && files.i18n.includes('new TextEncoder().encode') && files.server.includes('text.length>10_000')],
   ['checkout and readiness fail closed without configured FX', files.worker.includes("fx.source==='runtime-default'") && files.pay.includes("fxConfig.source === 'runtime-default'") && files.readiness.includes("fx:fxConfig.source!=='runtime-default'")]
 ];
 const mockData = new Map();
