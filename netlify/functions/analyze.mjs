@@ -36,11 +36,16 @@ async function providerGemini(prompt,env){
 }
 async function providerClaude(prompt,env){
   const key=getEnv(env,"ANTHROPIC_API_KEY"); if(!key)return null;
-  const model=getEnv(env,"CLAUDE_MODEL")||"claude-sonnet-4-5";
-  const r=await timeoutFetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"content-type":"application/json","x-api-key":key,"anthropic-version":"2023-06-01"},body:JSON.stringify({model,max_tokens:900,system:systemPrompt,messages:[{role:"user",content:prompt}]})});
-  if(!r.ok)throw Error("anthropic_"+r.status);
-  const d=await r.json(); const out=parseJSON(d?.content?.map(x=>x.text||"").join(""));
-  if(!out||typeof out!=="object")throw Error("anthropic_invalid_json"); return out;
+  const preferred=getEnv(env,"CLAUDE_MODEL");
+  const models=[preferred,"claude-sonnet-4-5-20250929","claude-3-7-sonnet-latest","claude-3-5-haiku-latest"].filter((v,i,a)=>v&&a.indexOf(v)===i);
+  let lastStatus=0;
+  for(const model of models){
+    const r=await timeoutFetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"content-type":"application/json","x-api-key":key,"anthropic-version":"2023-06-01"},body:JSON.stringify({model,max_tokens:900,system:systemPrompt,messages:[{role:"user",content:prompt}]})},2600);
+    if(r.ok){const d=await r.json();const out=parseJSON(d?.content?.map(x=>x.text||"").join(""));if(!out||typeof out!=="object")throw Error("anthropic_invalid_json");return out;}
+    lastStatus=r.status;
+    if(![400,404].includes(r.status))throw Error("anthropic_"+r.status);
+  }
+  throw Error("anthropic_"+lastStatus);
 }
 async function providerOpenRouter(prompt,env){
   const key=getEnv(env,"ANIL_OPENROUTER_API_KEY")||getEnv(env,"OPENROUTER_API_KEY"); if(!key)return null;
