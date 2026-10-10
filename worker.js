@@ -962,6 +962,7 @@ async function secretary(req,env){
     }
     const history=Array.isArray(b.messages)?b.messages.slice(-12).map(x=>({role:x?.role==='assistant'?'assistant':'user',content:String(x?.content||'').slice(0,4000)})).filter(x=>x.content&&!/Cannot set properties of null|configured_provider_invocation_failed/i.test(x.content)):[];
     const configuredAi=Object.values(getAiConfig(env)).filter(Boolean).length>0;
+    let providerQuotaExhausted=false;
     if(configuredAi){
       let agent=null;
       try{
@@ -972,7 +973,7 @@ async function secretary(req,env){
       // account quota is known to be exhausted. Return one short, actionable diagnosis.
       // Never terminate the owner chat just because one provider exhausted quota.
       // Continue through other configured providers, then use the deterministic local cognition engine.
-      const providerQuotaExhausted=agent?.reason==='openai_invocation_failed'&&/credit_balance_exhausted|insufficient_quota|no credits remaining|credit balance is too low/i.test(String(agent.detail||''));
+      providerQuotaExhausted=agent?.reason==='openai_invocation_failed'&&/credit_balance_exhausted|insufficient_quota|no credits remaining|credit balance is too low/i.test(String(agent.detail||''));
       try{
         const teamResp=await handleSuperTeam(new Request(new URL('/api/anil/super-team',req.url),{method:'POST',headers:{cookie:req.headers.get('cookie')||'','content-type':'application/json'},body:JSON.stringify({task:command,history})}),env,{guardHandler:handleGuardLive});
         const team=await teamResp.json().catch(()=>({}));const answer=team?.command?.answer||team?.command?.response;
