@@ -13,13 +13,13 @@ const REMOTE='https://raw.githubusercontent.com/saberbadri24-tech/immortal-guard
 const REMOTE_FILES={
  status:'guard_status.json',
  opportunities:'opportunities.json',
- value:'radar_intel.json',
+ value:'airdrop_plus.json',
  ledger:'revenue_ledger.json',
  transfer:'transfer_state.json',
  receipts:'ton_receipts.json',
  ai:'ai_reviews.json',
  radar:'radar_intel.json',
- sourceHealth:'official_source_gate.json'
+ sourceHealth:'radar_intel.json'
 };
 const remoteCache=new Map();
 let cache={at:0,data:null};
@@ -111,13 +111,19 @@ export async function handleGuardLive(req,env){
       providers:ai.providerAvailability||{},
     },
     radar:{
-      candidates:Number(radar?.summary?.totalCandidates||0),
-      officialCandidates:Number(radar?.summary?.officialCandidates||0),
-      actionableOfficial:Number(radar?.summary?.actionableOfficial||0),
-      highPriority:Number(radar?.summary?.highPriority||0),
-      generatedAt:radar.generatedAt||null
+      candidates:Number(radar?.summary?.totalCandidates||radar?.uniqueCandidates||radar?.items?.length||0),
+      officialCandidates:Number(radar?.summary?.officialCandidates||sourceHealth?.officialVerifiedActionableCount||0),
+      actionableOfficial:Number(radar?.summary?.actionableOfficial||sourceHealth?.officialVerifiedActionableCount||0),
+      highPriority:Number(radar?.summary?.highPriority||status?.counts?.incomePriority||0),
+      generatedAt:radar.generatedAt||radar.updatedAt||null
     },
-    sourceHealth:sourceHealth.summary||sourceHealth.counts||{},
+    sourceHealth:sourceHealth.summary||sourceHealth.counts||{
+      sources:radar.sources||0,
+      sourceRows:radar.sourceRows||0,
+      securitySources:radar.securitySources||0,
+      securityChecksAttempted:radar.securityChecksAttempted||0,
+      sourceErrors:radar.sourceErrors||[]
+    },
     sources:Object.fromEntries(entries.map(([key,x])=>[key,x.source])),
     safety:{autoClaim:false,autoSigning:false,autoTransfer:false,secretStorage:false,bypassControls:false,ownerApprovalRequired:true}
   };
