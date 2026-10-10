@@ -128,7 +128,7 @@ export async function runAutopilot(env,{force=false}={}){
     stages:['DISCOVER','QUALIFY','PACKAGE','OFFER','FOLLOW_UP','PAY','DELIVER','RETAIN','UPSELL','LEARN'],
     metrics:{promoted,qualified,newOffers,followups,retention,paidOrders:paid.filter(x=>x?.status==='paid').length},
     persistence:!!env.PAYMENTS,
-    paymentReady:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY),
+    paymentReady:!!(env.VARIZA_API_KEY||env.VARIA_API_KEY||env.VARIZA_TOKEN||env.VARIZA_KEY||env.VARIZA_API_TOKEN||env.VARIZA_SECRET||env.VARIZA_API||env.VARIZA_ACCESS_TOKEN||env.VARIZA_BEARER_TOKEN),
     safety:{
       no_bulk_spam:true,
       no_fake_revenue:true,
