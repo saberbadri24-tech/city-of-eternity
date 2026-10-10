@@ -22,7 +22,14 @@ async function providerOpenAI(prompt,env){
   const key=getEnv(env,"OPENAI_API_KEY"); if(!key)return null;
   const model=getEnv(env,"ASTRA_MODEL")||"gpt-5-mini";
   const r=await timeoutFetch("https://api.openai.com/v1/chat/completions",{method:"POST",headers:{"content-type":"application/json",authorization:`Bearer ${key}`},body:JSON.stringify({model,messages:[{role:"system",content:systemPrompt},{role:"user",content:prompt}],temperature:.2})});
-  if(!r.ok)throw Error("openai_"+r.status);
+  if(!r.ok){
+    if(r.status===429){
+      const err=await r.json().catch(()=>({}));
+      const code=String(err?.error?.code||err?.error?.type||"").toLowerCase();
+      if(code.includes("insufficient_quota")||code.includes("billing"))throw Error("openai_402");
+    }
+    throw Error("openai_"+r.status);
+  }
   const d=await r.json(); const out=parseJSON(d?.choices?.[0]?.message?.content);
   if(!out||typeof out!=="object")throw Error("openai_invalid_json"); return out;
 }
@@ -116,7 +123,7 @@ export default async (req,env)=>{
         const status=match?Number(match[1]):0;
         if(status===402)providerCooldowns.set(name,Date.now()+24*60*60*1000);
         else if(status===429)providerCooldowns.set(name,Date.now()+10*60*1000);
-        else if(status===400)providerCooldowns.set(name,Date.now()+60*60*1000);
+        else if(status===400)providerCooldowns.set(name,Date.now()+60*1000);
         else if(status===401||status===403)providerCooldowns.set(name,Date.now()+60*60*1000);
         else if(!status)providerCooldowns.set(name,Date.now()+30*1000);
         attempts.push({provider:name,status:status===429?"rate_limited":status===402?"credits_exhausted":status===400?"invalid_request_or_model":status===401||status===403?"auth_or_access_error":status?"http_error":"timeout_or_invalid",httpStatus:status||undefined});
