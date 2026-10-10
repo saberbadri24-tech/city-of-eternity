@@ -10,6 +10,6 @@
   },
   "scripts": {
     "verify:syntax": "node scripts/verify-syntax.mjs && node scripts/verify-payment-integrity.mjs && node scripts/verify-anil-engine-chain.mjs",
-    "postinstall": "node scripts/verify-syntax.mjs && node scripts/verify-payment-integrity.mjs"
+    "postinstall": "node scripts/verify-syntax.mjs && node scripts/verify-payment-integrity.mjs && node scripts/verify-anil-engine-chain.mjs"
   }
 }
