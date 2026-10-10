@@ -89,7 +89,7 @@ export async function handleGuardLive(req,env){
   const temporaryConfigured=String(status.temporaryWallet||'').toLowerCase()==='configured'||Boolean(status.wallet?.temporaryAddressConfigured)||Boolean(transfer.temporaryAddress);
   const permanentConfigured=Boolean(status.permanentWallet||status.permanentAddress||transfer.permanentAddress);
   const out={
-    ok:true,source:'ANIL-X-local-guard-state',
+    ok:true,source:'ANIL-X+Immortal-Guard-runtime',
     updatedAt:status.updatedAt||status.lastScan||opportunities.updatedAt||null,
     freshness:{minutesSinceUpdate:ageMinutes,stale:ageMinutes===null||ageMinutes>15,requiredMaxMinutes:15},
     guard:{
@@ -102,13 +102,13 @@ export async function handleGuardLive(req,env){
     },
     opportunities:{count:Number(status.discoveryCount||status.counts?.opportunities||oppItems.length||0),items:oppItems.slice(0,5).map(compact)},
     valueHunter:{count:Number(status.highValueCandidates||status.counts?.incomePriority||highItems.length||0),items:highItems.slice(0,5).map(compact)},
-    revenue:{confirmedIncome:Number(ledger.actualCollectedUsd||ledger.confirmedIncome||ledger.totalReceived||0),status:String(ledger.status||(Number(ledger.verifiedSettlementCount||0)>0?'SETTLED_EVIDENCE_VERIFIED':'UNCONFIRMED')).slice(0,30)},
-    transfer:{status:String(transfer.status||'OWNER_APPROVAL_REQUIRED').slice(0,40),temporaryConfigured,temporaryWalletUsed:false,catchQueueConfigured:Boolean(env?.PAYMENTS),catchQueuePending:0,permanentConfigured,pendingApprovals:Number(status.waitingOwner||0)},
+    revenue:{confirmedIncome:Number(ledger.actualCollectedUsd||0),status:String(ledger.status||(Number(ledger.verifiedSettlementCount||0)>0?'SETTLED_EVIDENCE_VERIFIED':'UNCONFIRMED')).slice(0,30)},
+    transfer:{status:String(transfer.status||'OWNER_APPROVAL_REQUIRED').slice(0,40),temporaryConfigured,temporaryWalletUsed:false,catchQueueConfigured:Boolean(env?.PAYMENTS),catchQueuePending:null,catchQueuePendingKnown:false,permanentConfigured,pendingApprovals:Number(status.waitingOwner||0)},
     ai:{
-      live:Boolean(ai.live||ai.healthy||ai.overall==='healthy'),
-      configured:Boolean(ai.configured||ai.providers||Object.values(ai.providerAvailability||{}).some(Boolean)),
+      live:Boolean(ai.live===true&&Number(ai.successfulCalls||0)>0),
+      configured:Boolean(ai.configured===true||Object.values(ai.providerAvailability||{}).some(Boolean)||Object.values(ai.providerSuccess||{}).some(v=>Number(v)>0)),
       successfulCalls:Number(ai.successfulCalls||0),
-      providers:ai.providerAvailability||{},
+      providers:ai.providerAvailability||ai.providerSuccess||{},
     },
     radar:{
       candidates:Number(radar?.summary?.totalCandidates||radar?.uniqueCandidates||radar?.items?.length||0),
