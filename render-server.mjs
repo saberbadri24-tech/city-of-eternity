@@ -114,9 +114,9 @@ function localTranslate(input,target){
     en:{خانه:'Home',خدمات:'Services','درباره ما':'About','تماس':'Contact','کسب‌وکار':'Business','گارد جاویدان':'Immortal Guard','درآمد':'Revenue','کیف پول':'Wallet','پرداخت‌ها':'Payments','سفارش‌ها':'Orders','مشتریان':'Customers','پیشخوان':'Dashboard','ورود':'Sign in','ارسال':'Submit','لغو':'Cancel','ذخیره':'Save','جست‌وجو':'Search','در حال بارگذاری':'Loading','خطا':'Error','موفق':'Success','وضعیت':'Status','زبان':'Language','قیمت‌گذاری':'Pricing','شروع':'Start','اصلاح':'Fix','رشد':'Grow','تنظیمات':'Settings','امنیت':'Security','مدیر':'Admin','آنیل':'Anil','پیام':'Message','گفتگو':'Chat'}
   };
   const dictionary=maps[target]||{};
-  return String(input).replace(/\[\[AX(\d+)\]\]([\s\S]*?)(?=\[\[AX\d+\]\]|$)/g,(all,id,label)=>{
+  return String(input).replace(/\[\[AX(\d+)\]\]([\s\S]*?)(\n?)(?=\[\[AX\d+\]\]|$)/g,(all,id,label,ending)=>{
     const key=String(label||'').trim().toLowerCase();
-    return '[[AX'+id+']]'+(dictionary[key]||String(label||'').trim());
+    return '[[AX'+id+']]'+(dictionary[key]||String(label||'').trim())+ending;
   });
 }
 const server=http.createServer(async(req,res)=>{
