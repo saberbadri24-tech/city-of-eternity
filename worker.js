@@ -859,8 +859,8 @@ async function secretary(req,env){
         const summary=String(planData.reply||'درخواست به مسیر قابل‌آزمایش تبدیل شد.').slice(0,1600);
         return json({ok:true,changed:false,action:'local_plan_fallback',provider:'first-party-deterministic',
           text:fa
-            ? 'درخواستت را گرفتم. مسیر اصلاح را آماده کردم؛ هنوز هیچ تغییر کدی ثبت یا منتشر نشده است. نتیجه فقط بعد از اعمال تغییر، اجرای آزمون و بررسی شواهد تأیید می‌شود.\\n'+summary
-            : 'I have the request and prepared a deterministic repair plan. No code change has been queued or deployed yet; the result will only be confirmed after implementation, tests, and evidence review.\\n'+summary,
+            ? 'درخواستت را گرفتم. مسیر اصلاح را آماده کردم؛ هنوز هیچ تغییر کدی ثبت یا منتشر نشده است. نتیجه فقط بعد از اعمال تغییر، اجرای آزمون و بررسی شواهد تأیید می‌شود.\n'+summary
+            : 'I have the request and prepared a deterministic repair plan. No code change has been queued or deployed yet; the result will only be confirmed after implementation, tests, and evidence review.\n'+summary,
           data:{reason:'code_change_not_queued',errorClass:String(e?.message||e).slice(0,100),
             plan:planData.plan||null,execution:{performed:false,status:'not_executed'}}});
       }
