@@ -149,7 +149,7 @@ export function runLocalEngineChain(request) {
     {id:'recovery',name:'Repair & Recovery Engine',status:'standby'},
     {id:'release-gate',name:'Release Gate',status:'blocked_until_evidence'}
   ];
-  const languageFa = /[\\u0600-\\u06FF]/.test(original);
+  const languageFa = /[\u0600-\u06FF]/.test(original);
   const copy = languageFa ? {title:selected.title,desc:selected.desc,moves:selected.moves} : (EN_COPY[selected.id] || EN_COPY['general-reasoning']);
   const plan = {
     title: copy.title,
