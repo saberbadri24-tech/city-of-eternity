@@ -27,6 +27,10 @@ async function providerOpenAI(prompt,env){
       const err=await r.json().catch(()=>({}));
       const code=String(err?.error?.code||err?.error?.type||"").toLowerCase();
       if(code.includes("insufficient_quota")||code.includes("billing"))throw Error("openai_402");
+      const retrySeconds=Number(r.headers.get("retry-after")||0);
+      const failure=Error("openai_429");
+      failure.retryAfterMs=retrySeconds>0?Math.min(900000,Math.max(5000,retrySeconds*1000)):60000;
+      throw failure;
     }
     throw Error("openai_"+r.status);
   }
@@ -81,7 +85,7 @@ const providerFireworks=(p,e)=>providerCompatible(p,e,{name:"fireworks",keys:["F
 const providerSambaNova=(p,e)=>providerCompatible(p,e,{name:"sambanova",keys:["SAMBANOVA_API_KEY"],endpoint:"https://api.sambanova.ai/v1/chat/completions",modelKeys:["SAMBANOVA_MODEL"],defaultModel:"Meta-Llama-3.3-70B-Instruct"});
 const providerXAI=(p,e)=>providerCompatible(p,e,{name:"xai",keys:["XAI_API_KEY"],endpoint:"https://api.x.ai/v1/chat/completions",modelKeys:["XAI_MODEL"],defaultModel:"grok-3-mini"});
 const PROVIDERS={openai:providerOpenAI,groq:providerGroq,cerebras:providerCerebras,gemini:providerGemini,claude:providerClaude,openrouter:providerOpenRouter,deepseek:providerDeepSeek,mistral:providerMistral,together:providerTogether,fireworks:providerFireworks,sambanova:providerSambaNova,xai:providerXAI};
-const providerCooldownsV4=new Map();
+const providerCooldownsV6=new Map();
 function providerOrder(env){
   const configured=getEnv(env,"ANIL_PROVIDER_ORDER");
   const requested=(configured||"openai,groq,cerebras,gemini,claude,openrouter,deepseek,mistral,together,fireworks,sambanova,xai").split(",").map(x=>x.trim().toLowerCase()).filter(x=>PROVIDERS[x]);
@@ -111,26 +115,26 @@ export default async (req,env)=>{
     const started=Date.now(),budgetMs=6000;
     for(const name of providerOrder(env)){
       if(Date.now()-started>=budgetMs)break;
-      const cooldownEntry=providerCooldownsV4.get(name);
-      const coolingUntil=typeof cooldownEntry==="object"&&cooldownEntry?.version===5?Number(cooldownEntry.until)||0:0;
-      if(cooldownEntry&&coolingUntil===0)providerCooldownsV4.delete(name);
+      const cooldownEntry=providerCooldownsV6.get(name);
+      const coolingUntil=typeof cooldownEntry==="object"&&cooldownEntry?.version===6?Number(cooldownEntry.until)||0:0;
+      if(cooldownEntry&&coolingUntil===0)providerCooldownsV6.delete(name);
       if(coolingUntil>Date.now()){
         attempts.push({provider:name,status:"cooldown",retryAfterMs:coolingUntil-Date.now()});
         continue;
       }
       try{
         const candidate=await PROVIDERS[name](prompt,env);
-        if(candidate){result=validModelResult(candidate,localResult);providerUsed=name;attempts.push({provider:name,status:"ok"});providerCooldownsV4.delete(name);break;}
+        if(candidate){result=validModelResult(candidate,localResult);providerUsed=name;attempts.push({provider:name,status:"ok"});providerCooldownsV6.delete(name);break;}
         attempts.push({provider:name,status:"not_configured"});
       }catch(error){
         const message=String(error?.message||error);
         const match=message.match(/_(400|401|402|403|404|408|413|429|500|502|503|504)$/);
         const status=match?Number(match[1]):0;
-        if(status===402)providerCooldownsV4.set(name,{until:Date.now()+24*60*60*1000,version:5});
-        else if(status===429)providerCooldownsV4.set(name,{until:Date.now()+10*60*1000,version:5});
-        else if(status===400)providerCooldownsV4.set(name,{until:Date.now()+60*1000,version:5});
-        else if(status===401||status===403)providerCooldownsV4.set(name,{until:Date.now()+60*60*1000,version:5});
-        else if(!status)providerCooldownsV4.set(name,{until:Date.now()+30*1000,version:5});
+        if(status===402)providerCooldownsV6.set(name,{until:Date.now()+24*60*60*1000,version:6});
+        else if(status===429)providerCooldownsV6.set(name,{until:Date.now()+Math.min(900000,Math.max(5000,Number(error?.retryAfterMs)||60000)),version:6});
+        else if(status===400)providerCooldownsV6.set(name,{until:Date.now()+60*1000,version:6});
+        else if(status===401||status===403)providerCooldownsV6.set(name,{until:Date.now()+60*60*1000,version:6});
+        else if(!status)providerCooldownsV6.set(name,{until:Date.now()+30*1000,version:6});
         attempts.push({provider:name,status:status===429?"rate_limited":status===402?"credits_exhausted":status===400?"invalid_request_or_model":status===401||status===403?"auth_or_access_error":status?"http_error":"timeout_or_invalid",httpStatus:status||undefined,...(error?.providerDetail?{detail:String(error.providerDetail).slice(0,180)}:{})});
       }
     }
