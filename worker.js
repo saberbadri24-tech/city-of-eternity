@@ -528,7 +528,12 @@ async function runtimeRoutes(req,env,u){
   }
 if(p==='/api/payment-config'){
     const mainTon=getMainTonAddress(env);
-    return rjson({ok:true,ton:{enabled:validTonAddress(mainTon),walletConfigured:validTonAddress(mainTon),address:validTonAddress(mainTon)?mainTon:null,mainConfigured:validTonAddress(mainTon),checkoutEnabled:false,checkoutReason:'ton_order_receipt_verification_not_enabled'},guard:{catchQueueConfigured:Boolean(env.PAYMENTS),temporaryWalletUsed:false},fiat:{provider:'variza',enabled:!!getVarizaApiKey(env)}});
+    const fx=getUsdTomanConfig(env);
+    const durable=Boolean(env.PAYMENTS)&&String(env.PAYMENTS_DURABLE||'false').toLowerCase()==='true';
+    const varizaConfigured=!!getVarizaApiKey(env);
+    const fiatReady=varizaConfigured&&durable&&fx.source!=='runtime-default';
+    const fiatReason=!varizaConfigured?'provider_not_configured':!durable?'durable_accounting_required':fx.source==='runtime-default'?'fx_rate_not_configured':null;
+    return rjson({ok:true,ton:{enabled:validTonAddress(mainTon),walletConfigured:validTonAddress(mainTon),address:validTonAddress(mainTon)?mainTon:null,mainConfigured:validTonAddress(mainTon),checkoutEnabled:false,checkoutReason:'ton_order_receipt_verification_not_enabled'},guard:{catchQueueConfigured:Boolean(env.PAYMENTS),temporaryWalletUsed:false},fx:{configured:fx.source!=='runtime-default',source:fx.source,unit:'toman'},fiat:{provider:'variza',providerConfigured:varizaConfigured,enabled:fiatReady,checkoutEnabled:fiatReady,checkoutReason:fiatReason}});
   }
   if(p==='/api/revenue/catalog'){
     return rjson({ok:true,merchant:'ANIL X STUDIO',currency:'USD',services:[
