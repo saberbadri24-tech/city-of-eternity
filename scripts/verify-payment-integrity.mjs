@@ -33,7 +33,7 @@ const checks = [
   ['TON checkout is gated on an eligible order and verified receipt support', files.paymentPage.includes('checkoutEnabled') && files.paymentPage.includes("String(od.currency||'').toUpperCase()!=='TON'") && files.worker.includes('ton_order_receipt_verification_not_enabled') && !files.paymentPage.includes('const DEST=')],
   ['USD to Toman conversion does not mistake Rials for Tomans', getUsdTomanConfig({USD_IRR_RATE:'2687600'}).rate === 268760 && getUsdTomanConfig({USD_TOMAN_RATE:'268760'}).rate === 268760 && getUsdTomanConfig({}).rate === 268760 && usdToToman(19,{USD_IRR_RATE:'2687600'}) === 5106440],
   ['payment readiness does not treat the fallback FX estimate as configured', getUsdTomanConfig({}).source === 'runtime-default' && getUsdTomanConfig({USD_IRR_RATE:'2687600'}).source !== 'runtime-default'],
-  ['live FX source requires a fresh non-stale market quote', files.currency.includes('https://nerkhara.com/rates.json') && files.currency.includes('quote?.stale') && files.currency.includes('ageMs > 6 * 60 * 60_000')],
+  ['live FX source requires a fresh non-stale market quote', files.currency.includes('https://nerkhara.com/rates.json') && files.currency.includes('quote?.stale') && files.currency.includes('ageMs > 30 * 60_000')],
   ['checkout and payment-config use the same validated live FX helper', files.pay.includes('await getLiveUsdTomanConfig(env)') && files.worker.includes('const fx=await getLiveUsdTomanConfig(env)')],
   ['checkout and readiness fail closed without configured FX', files.worker.includes("fx.source==='runtime-default'") && files.pay.includes("fxConfig.source === 'runtime-default'") && files.readiness.includes("fx:fxConfig.source!=='runtime-default'")]
 ];
