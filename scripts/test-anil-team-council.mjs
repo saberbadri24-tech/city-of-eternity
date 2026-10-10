@@ -23,6 +23,11 @@ assert.equal(sensitive.qualityGates.find(x=>x.id==='security-owner-gate').pass,f
 assert.equal(sensitive.qualityGates.find(x=>x.id==='security-owner-gate').status,'approval_required');
 assert.ok(sensitive.command.blockers.some(x=>x.includes('explicit owner approval')),'sensitive action blocker must be explicit');
 assert.equal(sensitive.command.sensitiveTask,true);
+const malformedCommand=buildComplementaryCouncil({task:'improve site',guard:{freshness:{stale:false}},providers:emptyProviders,command:{priorities:'high',stopConditions:'manual',blockers:'existing'},evidence:{guardAvailable:true,liveProviders:[]},roles});
+assert.ok(Array.isArray(malformedCommand.command.priorities),'string priorities must be normalized rather than spread into characters');
+assert.ok(malformedCommand.command.priorities.includes('high'));
+assert.ok(malformedCommand.command.stopConditions.includes('manual'));
+assert.ok(malformedCommand.command.blockers.includes('existing'));
 
 assert.equal(stale.chain[0],'ANIL','ANIL must remain the final orchestrator');
 assert.equal(stale.chain.length,18,'the collaboration chain must include all 18 roles');
