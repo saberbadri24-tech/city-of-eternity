@@ -106,6 +106,8 @@ const getPaymentsStore=()=>paymentsStorePromise||(paymentsStorePromise=(process.
   ? import('./functions/api/render-payments-store.mjs').then(m=>m.createPaymentsStore(process.env.REDIS_URL))
   : createSupabasePaymentsStore()));
 const env={...process.env,ASSETS:{fetch:assetsFetch},PAYMENTS:null};
+const translateRate=new Map();
+
 const server=http.createServer(async(req,res)=>{
   try{
     const host=req.headers.host||'localhost';
@@ -115,6 +117,38 @@ const server=http.createServer(async(req,res)=>{
     if(regionalUpstream&&(u.pathname==='/api'||u.pathname.startsWith('/api/')||u.pathname==='/healthz')&&host!=='anil-x-live.onrender.com'){
       await proxyToUpstream(req,res,regionalUpstream);
       return;
+    }
+
+
+    if(u.pathname==='/api/translate'&&req.method==='POST'){
+      const json=(status,payload)=>{res.statusCode=status;res.setHeader('content-type','application/json; charset=utf-8');res.setHeader('cache-control','no-store');res.setHeader('x-content-type-options','nosniff');res.end(JSON.stringify(payload));};
+      const ip=String(req.headers['x-forwarded-for']||req.socket.remoteAddress||'unknown').split(',')[0].trim();
+      const now=Date.now();const windowMs=60_000;const state=translateRate.get(ip);
+      if(state&&now-state.start<windowMs&&state.count>=30)return json(429,{ok:false,error:'rate_limited'});
+      if(!state||now-state.start>=windowMs)translateRate.set(ip,{start:now,count:1});else state.count++;
+      const raw=await readBody(req);if(raw.length>12_000)return json(413,{ok:false,error:'payload_too_large'});
+      let body;try{body=JSON.parse(raw.toString('utf8')||'{}')}catch{return json(400,{ok:false,error:'invalid_json'})}
+      const text=typeof body.text==='string'?body.text:'';const target=String(body.target||'');
+      const allowed=new Set(['fa','ar','tr','ru','de','fr','es','pt','it','nl','pl','uk','sv','no','da','fi','cs','sk','ro','hu','el','bg','sr','hr','sl','he','ur','hi','bn','ta','te','th','vi','id','ms','zh-CN','zh-TW','ja','ko']);
+      if(!allowed.has(target)||!text||text.length>10_000||!/^([\\s\\S]*\\[\\[AX\\d+\\]\\][\\s\\S]*)$/.test(text))return json(400,{ok:false,error:'invalid_translation_request'});
+      const system='You are a professional UI localization engine. Translate each text after its [[AXn]] marker into the target language. Preserve every marker exactly once and in order. Keep product names, URLs, code, numbers, and placeholders unchanged. Output only the translated lines, one marker per line, no commentary.';
+      const user='Target language: '+target+'\\nTranslate these UI strings:\\n'+text;
+      let output='';
+      try{
+        if(process.env.OPENAI_API_KEY){
+          const rr=await fetch('https://api.openai.com/v1/chat/completions',{method:'POST',headers:{authorization:'Bearer '+process.env.OPENAI_API_KEY,'content-type':'application/json'},body:JSON.stringify({model:process.env.ANIL_TRANSLATION_MODEL||'gpt-4o-mini',temperature:0,messages:[{role:'system',content:system},{role:'user',content:user}] }),signal:AbortSignal.timeout(18_000)});
+          const data=await rr.json().catch(()=>({}));if(!rr.ok)throw Error('translation_provider_'+rr.status);
+          output=String(data.choices?.[0]?.message?.content||'');
+        }else if(process.env.ANTHROPIC_API_KEY){
+          const rr=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'x-api-key':process.env.ANTHROPIC_API_KEY,'anthropic-version':'2023-06-01','content-type':'application/json'},body:JSON.stringify({model:process.env.ANIL_TRANSLATION_ANTHROPIC_MODEL||'claude-3-5-haiku-latest',max_tokens:1800,temperature:0,system, messages:[{role:'user',content:user}]}),signal:AbortSignal.timeout(18_000)});
+          const data=await rr.json().catch(()=>({}));if(!rr.ok)throw Error('translation_provider_'+rr.status);
+          output=String((data.content||[]).filter(x=>x.type==='text').map(x=>x.text).join('\\n'));
+        }else return json(503,{ok:false,error:'translation_provider_not_configured'});
+      }catch(e){return json(502,{ok:false,error:'translation_unavailable'});}
+      const expected=[...text.matchAll(/\\[\\[AX(\\d+)\\]\\]/g)].map(m=>m[0]);
+      const found=[...output.matchAll(/\\[\\[AX(\\d+)\\]\\]/g)].map(m=>m[0]);
+      if(!expected.length||expected.some((m,i)=>found[i]!==m)||found.length!==expected.length)return json(502,{ok:false,error:'translation_marker_validation_failed'});
+      return json(200,{ok:true,target,text:output});
     }
 
     if((u.pathname==='/healthz'||u.pathname==='/api/health')&&req.method==='GET'){
