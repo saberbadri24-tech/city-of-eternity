@@ -105,6 +105,22 @@ const DEFAULT_ENGINE = {
   moves: ['تعریف نتیجه مطلوب و معیار موفقیت','تفکیک واقعیت از فرضیه و مجهول','اولویت‌بندی اقدام‌های کم‌خطر','بررسی نتیجه و اصلاح مسیر','گزارش دقیق وضعیت و گام بعدی']
 };
 
+const FA_NAMES = {
+  'security-governance':'موتور امنیت و سیاست‌گذاری',
+  'payment-integrity':'موتور یکپارچگی پرداخت و کیف پول',
+  'guard-security':'موتور گارد و فرصت‌یابی امن',
+  'code-quality':'موتور تشخیص و ترمیم کد',
+  'revenue-operations':'موتور درآمد و فروش',
+  'research-verification':'موتور پژوهش و راستی‌آزمایی',
+  'website-operations':'موتور عملیات سایت و تجربه کاربری',
+  'writing-communication':'موتور نگارش و ارتباطات',
+  'data-analysis':'موتور تحلیل داده',
+  'workflow-automation':'موتور خودکارسازی گردش‌کار',
+  'customer-support':'موتور پشتیبانی مشتری',
+  'learning-explanation':'موتور آموزش و توضیح',
+  'content-strategy':'موتور راهبرد محتوا',
+  'general-reasoning':'موتور حل مسئله'
+};
 const EN_COPY = {
   'security-governance': {title:'Security, access control and policy',desc:'Check permissions, side effects, and rollback before acting.',moves:['Classify data and required access','Identify side effects and abuse paths','Apply least privilege and fail-closed controls','Record evidence and decision rationale','Pause sensitive actions for owner approval']},
   'payment-integrity': {title:'Payment and wallet integrity',desc:'Reconcile orders, amounts, webhooks, durable storage, and settlement receipts.',moves:['Inspect configuration without exposing secrets','Test order and checkout creation','Verify webhook signatures and exact amounts','Enforce idempotency and durable records','Count revenue only after verified settlement']},
@@ -161,7 +177,7 @@ export function runLocalEngineChain(request) {
     evidenceRequired: true
   };
   const next = copy.moves.slice(0,4).join(languageFa ? ' ← ' : ' → ');
-  const selectedNames = specialists.map(x => x.name).join(languageFa ? '، ' : ', ');
+  const selectedNames = specialists.map(x => languageFa ? (FA_NAMES[x.id] || x.name) : x.name).join(languageFa ? '، ' : ', ');
   const reply = languageFa
     ? 'گرفتم. برای این درخواست، ' + selectedNames + ' را وارد مسیر بررسی کردم. اولویت کار این است: ' + next + '؛ نتیجه را فقط بعد از آزمون و مدرک قابل بررسی تأیید می‌کنم.' + (requiresOwnerApproval ? ' اقدام حساس تا تأیید مالک متوقف می‌ماند.' : ' هنوز تغییری بیرونی اجرا نشده است.')
     : 'Got it. I routed this request through ' + selectedNames + '. The practical sequence is: ' + next + '. I will only mark the result complete after tests and reviewable evidence.' + (requiresOwnerApproval ? ' Sensitive actions remain blocked until owner approval.' : ' No external change has been executed yet.');
