@@ -433,7 +433,7 @@ async function runtimeRoutes(req,env,u){
     const paymentConfigured=!!getVarizaApiKey(env);
     const durableAccounting=!!env.PAYMENTS&&String(env.PAYMENTS_DURABLE||'false').toLowerCase()==='true';
     if(!durableAccounting)return rjson({ok:false,error:'durable_payment_storage_required',next:'configure_durable_payments_storage'},503);
-    const order={id:id(),accountId:clean(lead?.id||'guest'),client:email,email,service:service||lead?.recommendedService||selected.plan||'custom',plan:selected.plan||null,description:clean(b.description||lead?.request||selected.name,1000),currency:'USD',amount:amountUsd,orderAmount:amountUsd,status:'pending',leadId:lead?.id||null,createdAt:now()};
+    const order={id:id(),accountId:clean(lead?.id||'guest'),client:email,email,service:(catalog[service.toLowerCase()]?service.toLowerCase():(selected.plan?planToService[selected.plan]:(lead?.recommendedService||'custom'))),plan:selected.plan||null,description:clean(b.description||lead?.request||selected.name,1000),currency:'USD',amount:amountUsd,orderAmount:amountUsd,status:'pending',leadId:lead?.id||null,createdAt:now()};
     state.orders.set(order.id,order);
     if(env.PAYMENTS)await env.PAYMENTS.put('orders/'+order.id,JSON.stringify(order));
     if(!paymentConfigured)return rjson({ok:true,order,payment:{ready:false,error:'payment_not_configured'},next:'configure_variza'},201);
