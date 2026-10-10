@@ -26,7 +26,7 @@ async function brain(env,who,prompt){
  for(let index=0;index<candidates.length;index++){
   const model=candidates[index];
   try{
-   let r,raw,d;
+   let r,d;
    if(who==='astra'){
     r=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+key},body:JSON.stringify({model,instructions:'You are Astra, chief strategist inside ANIL X. Return JSON only with answer,command,priorities,tests,stopConditions. Ground claims only in supplied runtime evidence. ANIL is final orchestrator. Never claim execution without evidence.',input:prompt,reasoning:{effort:env.ASTRA_REASONING_EFFORT||'high'}}),signal:AbortSignal.timeout(12000)});
    }else if(who==='claude'){
