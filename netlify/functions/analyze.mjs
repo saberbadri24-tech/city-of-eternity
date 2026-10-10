@@ -112,7 +112,7 @@ export default async (req,env)=>{
     for(const name of providerOrder(env)){
       if(Date.now()-started>=budgetMs)break;
       const cooldownEntry=providerCooldownsV4.get(name);
-      const coolingUntil=typeof cooldownEntry==="object"&&cooldownEntry?.version===4?Number(cooldownEntry.until)||0:0;
+      const coolingUntil=typeof cooldownEntry==="object"&&cooldownEntry?.version===5?Number(cooldownEntry.until)||0:0;
       if(cooldownEntry&&coolingUntil===0)providerCooldownsV4.delete(name);
       if(coolingUntil>Date.now()){
         attempts.push({provider:name,status:"cooldown",retryAfterMs:coolingUntil-Date.now()});
@@ -126,11 +126,11 @@ export default async (req,env)=>{
         const message=String(error?.message||error);
         const match=message.match(/_(400|401|402|403|404|408|413|429|500|502|503|504)$/);
         const status=match?Number(match[1]):0;
-        if(status===402)providerCooldownsV4.set(name,{until:Date.now()+24*60*60*1000,version:4});
-        else if(status===429)providerCooldownsV4.set(name,{until:Date.now()+10*60*1000,version:4});
-        else if(status===400)providerCooldownsV4.set(name,{until:Date.now()+60*1000,version:4});
-        else if(status===401||status===403)providerCooldownsV4.set(name,{until:Date.now()+60*60*1000,version:4});
-        else if(!status)providerCooldownsV4.set(name,{until:Date.now()+30*1000,version:4});
+        if(status===402)providerCooldownsV4.set(name,{until:Date.now()+24*60*60*1000,version:5});
+        else if(status===429)providerCooldownsV4.set(name,{until:Date.now()+10*60*1000,version:5});
+        else if(status===400)providerCooldownsV4.set(name,{until:Date.now()+60*1000,version:5});
+        else if(status===401||status===403)providerCooldownsV4.set(name,{until:Date.now()+60*60*1000,version:5});
+        else if(!status)providerCooldownsV4.set(name,{until:Date.now()+30*1000,version:5});
         attempts.push({provider:name,status:status===429?"rate_limited":status===402?"credits_exhausted":status===400?"invalid_request_or_model":status===401||status===403?"auth_or_access_error":status?"http_error":"timeout_or_invalid",httpStatus:status||undefined,...(error?.providerDetail?{detail:String(error.providerDetail).slice(0,180)}:{})});
       }
     }
