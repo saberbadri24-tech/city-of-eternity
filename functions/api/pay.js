@@ -1,5 +1,5 @@
 import {state,now} from './runtime-state.mjs';
-import {getUsdTomanRate} from './currency.mjs';
+import {getUsdTomanConfig,getUsdTomanRate} from './currency.mjs';
 
 const json = (data, status = 200) => new Response(JSON.stringify(data), {
   status,
@@ -56,6 +56,10 @@ export async function onRequestPost({ request, env }) {
     if (!existing) return json({ ok: false, error: "order_not_found" }, 404);
     if (existing.status !== "pending") return json({ ok: false, error: "order_not_payable" }, 409);
 
+    const orderCurrency = String(existing.currency || existing.orderCurrency || 'USD').toUpperCase();
+    if (orderCurrency === 'USD' && getUsdTomanConfig(env).source === 'runtime-default') {
+      return json({ ok: false, error: 'fx_unavailable' }, 503);
+    }
     const expectedAmount = expectedProviderAmount(existing, env);
     if (!Number.isSafeInteger(expectedAmount) || expectedAmount < 1000 || amount !== expectedAmount) {
       return json({ ok: false, error: "order_amount_mismatch" }, 409);

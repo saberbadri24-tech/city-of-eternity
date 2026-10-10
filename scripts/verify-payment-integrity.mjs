@@ -27,7 +27,9 @@ const checks = [
   ['payment creation requires durable accounting and a real pending order', files.pay.includes('durable_payment_storage_required') && files.pay.includes('order_required') && files.pay.includes('order_not_found') && files.pay.includes('order_amount_mismatch')],
   ['payment return URLs are HTTPS and restricted to approved origins', files.pay.includes('url.protocol !== \'https:\'') && files.pay.includes('allowedOrigins.has(url.origin)')],
   ['checkout catalog uses the same configured START/FIX/BUILD/GROW prices shown to customers', files.worker.includes("website:{name:'AI Website Build',plan:'BUILD'}") && files.worker.includes("teaser:{name:'Marketing Teaser',plan:'START'}") && files.worker.includes("fix:{name:'Website Fix',plan:'FIX'}") && files.worker.includes("growth:{name:'Growth & SEO',plan:'GROW'}") && files.worker.includes('const pricing=await getV90Config(env)')],
-  ['USD to Toman conversion does not mistake Rials for Tomans', getUsdTomanConfig({USD_IRR_RATE:'2687600'}).rate === 268760 && getUsdTomanConfig({USD_TOMAN_RATE:'268760'}).rate === 268760 && getUsdTomanConfig({}).rate === 268760 && usdToToman(19,{USD_IRR_RATE:'2687600'}) === 5106440]
+  ['USD to Toman conversion does not mistake Rials for Tomans', getUsdTomanConfig({USD_IRR_RATE:'2687600'}).rate === 268760 && getUsdTomanConfig({USD_TOMAN_RATE:'268760'}).rate === 268760 && getUsdTomanConfig({}).rate === 268760 && usdToToman(19,{USD_IRR_RATE:'2687600'}) === 5106440],
+  ['payment readiness does not treat the fallback FX estimate as configured', getUsdTomanConfig({}).source === 'runtime-default' && getUsdTomanConfig({USD_IRR_RATE:'2687600'}).source !== 'runtime-default'],
+  ['checkout and readiness fail closed without configured FX', files.worker.includes("fx.source==='runtime-default'") && files.pay.includes("getUsdTomanConfig(env).source === 'runtime-default'") && files.readiness.includes("fx:fxConfig.source!=='runtime-default'")]
 ];
 const mockData = new Map();
 const mockPayments = {
@@ -79,6 +81,22 @@ try {
       createdOrder?.providerBaseAmount === expectedToman &&
       createdOrder?.providerCurrency === 'TOMAN' &&
       mockData.get('slugs/slug-integration')?.orderId === 'order-integration'
+  ]);
+
+  const noFxEnv = { ...integrationEnv, USD_IRR_RATE: '' };
+  const noFxResponse = await createVarizaPayment({
+    request: new Request('https://anil-x-live.onrender.com/api/pay', {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        orderId: 'order-external', amount: expectedToman,
+        returnUrl: 'https://anil-x-live.onrender.com/payment.html?order=order-external'
+      })
+    }),
+    env: noFxEnv
+  });
+  checks.push([
+    'payment creation fails closed when FX is only a runtime estimate',
+    noFxResponse.status === 503 && (await noFxResponse.json()).error === 'fx_unavailable' && providerCalls === 1
   ]);
 
   const mismatchResponse = await createVarizaPayment({

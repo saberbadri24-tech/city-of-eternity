@@ -429,7 +429,7 @@ async function runtimeRoutes(req,env,u){
     const pricing=await getV90Config(env);
     const amountUsd=Number(selected.plan?pricing.pricesUsd[selected.plan]:selected.price);
     if(!Number.isFinite(amountUsd)||amountUsd<1)return rjson({ok:false,error:'invalid_service_price'},503);
-    const rate=getUsdTomanRate(env);
+    const fx=getUsdTomanConfig(env);const rate=fx.rate;
     const paymentConfigured=!!getVarizaApiKey(env);
     const durableAccounting=!!env.PAYMENTS&&String(env.PAYMENTS_DURABLE||'false').toLowerCase()==='true';
     if(!durableAccounting)return rjson({ok:false,error:'durable_payment_storage_required',next:'configure_durable_payments_storage'},503);
@@ -437,7 +437,7 @@ async function runtimeRoutes(req,env,u){
     state.orders.set(order.id,order);
     if(env.PAYMENTS)await env.PAYMENTS.put('orders/'+order.id,JSON.stringify(order));
     if(!paymentConfigured)return rjson({ok:true,order,payment:{ready:false,error:'payment_not_configured'},next:'configure_variza'},201);
-    if(!Number.isFinite(rate)||rate<=0)return rjson({ok:true,order,payment:{ready:false,error:'fx_unavailable'},next:'configure_usd_irr_rate'},201);
+    if(fx.source==='runtime-default'||!Number.isFinite(rate)||rate<=0)return rjson({ok:true,order,payment:{ready:false,error:'fx_unavailable'},next:'configure_usd_toman_rate'},201);
     const providerAmount=Math.max(1000,Math.round(amountUsd*rate));
     const paymentReq=new Request(new URL('/api/pay',req.url),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({amount:providerAmount,orderId:order.id,client:email,description:order.description,returnUrl:new URL('/payment.html?order='+encodeURIComponent(order.id)+'&amount='+providerAmount,req.url).toString()})});
     const paymentResp=await pay({request:paymentReq,env});

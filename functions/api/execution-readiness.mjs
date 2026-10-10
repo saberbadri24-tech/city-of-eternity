@@ -21,7 +21,7 @@ export async function handleExecutionReadiness(req,env){
     varizaWebhook:Boolean(webhook),
     tonMain:validTonAddress(mainTon),
     guardCatchQueue:true,
-    fx:Boolean(Number.isFinite(tomanRate)&&tomanRate>0),
+    fx:fxConfig.source!=='runtime-default'&&Boolean(Number.isFinite(tomanRate)&&tomanRate>0),
     durableStore:Boolean(env?.REDIS_URL||(env?.ANIL_DURABLE_STORE_URL&&env?.ANIL_DURABLE_STORE_TOKEN))&&String(env?.PAYMENTS_DURABLE||'false').toLowerCase()==='true',
     assets:Boolean(env?.ASSETS)
   };
