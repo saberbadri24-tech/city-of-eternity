@@ -139,16 +139,7 @@ export default async (req,env)=>{
         attempts.push({provider:name,status:status===429?"rate_limited":status===402?"credits_exhausted":status===400?"invalid_request_or_model":status===401||status===403?"auth_or_access_error":status?"http_error":"timeout_or_invalid",httpStatus:status||undefined,...(error?.providerDetail?{detail:String(error.providerDetail).slice(0,180)}:{})});
       }
     }
-    // Optional council verification only when explicitly requested; never slow down every normal chat turn.
-    let council={claude:false,gemini:false};
-    if(body?.verify===true){
-      const verifyPrompt=JSON.stringify({request:input,answer:result});
-      const checks=await Promise.all(["claude","gemini"].map(async name=>{
-        try{const configured=name==="claude"?firstEnv(env,["ANTHROPIC_API_KEY","ANTHROPIC_KEY","CLAUDE_API_KEY"]):firstEnv(env,["GEMINI_API_KEY","GOOGLE_API_KEY","GOOGLE_GENERATIVE_AI_API_KEY"]);if(!configured)return [name,false];const fn=name==="claude"?providerClaude:providerGemini;const r=await fn(verifyPrompt,env);return [name,!!r];}catch{return [name,false];}
-      }));
-      council=Object.fromEntries(checks);
-    }
-    return json({ok:true,input,route:{id:local.routeId||legacyRoute.id,title:result.title||local.title,desc:result.desc||local.desc,steps:Array.isArray(result.steps)&&result.steps.length?result.steps.slice(0,8):local.steps},reply:result.reply||local.reply,confidence:Math.max(.25,Math.min(1,Number(result.confidence)||.55)),meta:{engine:"ANIL-Core+Provider-Rotation",version:"3.0-owned-core",internationalFirst:true,orchestrator:providerUsed,providerAttempts:attempts,specialists:council,verification:body?.verify===true?"requested":"on-demand",fallback:providerUsed==="ANIL-Core",localCoreAvailable:true,externalProviderRequired:false,controls:local.controls}});
+    return json({ok:true,input,route:{id:local.routeId||legacyRoute.id,title:result.title||local.title,desc:result.desc||local.desc,steps:Array.isArray(result.steps)&&result.steps.length?result.steps.slice(0,8):local.steps},reply:result.reply||local.reply,confidence:Math.max(.25,Math.min(1,Number(result.confidence)||.55)),meta:{engine:"ANIL-Core+Provider-Rotation",engineChain:"ANIL-MULTIPURPOSE-SERIAL-CREATION-ENGINE",version:"4.0-owned-core",internationalFirst:true,orchestrator:providerUsed,providerAttempts:attempts,verification:"disabled",fallback:providerUsed==="ANIL-Core",localCoreAvailable:true,externalProviderRequired:false,controls:local.controls}});
   }catch(error){return json({ok:false,error:"engine_failure",message:String(error?.message||error)},502)}
 };
 export const config={path:"/api/analyze"};
