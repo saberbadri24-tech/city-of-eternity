@@ -36,9 +36,13 @@ export function buildCorePlan(input, body = {}) {
   const raw = String(input ?? "").trim().slice(0, 4000);
   const text = norm(raw);
   const language = isPersian(raw) ? "fa" : "en";
+  const debugIntent = includesAny(text, ["رفع","برطرف","درست کن","fix","debug","troubleshoot","repair"]) ||
+    (includesAny(text, ["خطا","ارور","خراب","bug","error","broken","stuck","کند"]) &&
+     includesAny(text, ["سایت","صفحه","کد","api","دکمه","چت","پنل","site","website","code","button","chat","panel"]));
   const ranked = ROUTES.map(route => ({ route, score: route.keys.reduce((sum, key) => sum + (text.includes(norm(key)) ? 1 : 0), 0) }))
     .sort((a,b) => b.score - a.score);
-  const route = ranked[0]?.score ? ranked[0].route : ROUTES[ROUTES.length - 1];
+  const route = debugIntent ? (ROUTES.find(item => item.id === "debug") || ranked[0]?.route)
+    : ranked[0]?.score ? ranked[0].route : ROUTES[ROUTES.length - 1];
   const sensitive = hasSensitiveIntent(text);
   const deployment = hasDeploymentIntent(text);
   const profile = body?.profile && typeof body.profile === "object" ? body.profile : {};
