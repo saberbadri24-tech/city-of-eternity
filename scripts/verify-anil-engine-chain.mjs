@@ -66,19 +66,19 @@ results.push({
 });
 const workerSource = fs.readFileSync(new URL('../worker.js', import.meta.url), 'utf8');
 results.push({
-  name:'owner chat routes to independent council without provider error disclosure',
+  name:'owner chat routes through the first-party serial engine chain',
   ok:workerSource.includes("if(u.pathname==='/api/admin/secretary')return secretary(req,env)") &&
     workerSource.includes("handlePlan(new Request('https://anilx.internal/api/plan'") &&
-    workerSource.includes("action:'independent_council_fallback'") &&
+    workerSource.includes("action:'serial_engine_chain_fallback'") &&
     workerSource.includes("execution:planData.execution||{performed:false,status:'not_executed'}")
 });
 const ownerChatIndex = workerSource.indexOf('// Internal-first owner chat: do not invoke hosted LLM/bot providers for ordinary conversation.');
 const ownerChatEnd = workerSource.indexOf('\nexport default', ownerChatIndex);
 const ownerChatSource = workerSource.slice(ownerChatIndex, ownerChatEnd);
 results.push({
-  name:'owner chat uses first-party council without hosted-model calls',
+  name:'owner chat uses first-party serial engines without hosted-model calls',
   ok:ownerChatIndex >= 0 && ownerChatEnd > ownerChatIndex &&
-    ownerChatSource.includes("action:'independent_council_primary'") &&
+    ownerChatSource.includes("action:'serial_engine_chain_primary'") &&
     ownerChatSource.includes('externalModelsCalled:false') &&
     !/https:\/\/api\.[a-z0-9.-]+\//i.test(ownerChatSource)
 });
@@ -91,4 +91,4 @@ results.push({
 const failed = results.filter(item => !item.ok);
 for (const result of results) console.log((result.ok?'PASS ':'FAIL ')+result.name);
 if (failed.length) process.exit(1);
-console.log('ANIL X independent engine council gate: PASS ('+results.length+' checks)');
+console.log('ANIL X multipurpose serial creation engine gate: PASS ('+results.length+' checks)');
