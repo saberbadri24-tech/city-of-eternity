@@ -11,6 +11,7 @@ const routes=[
 const fallback={id:"custom",title:"Adaptive ANIL X path",desc:"ANIL X turns the desired outcome into an executable path.",steps:["Understand outcome","Discover related needs","Build the path","Preview","Execute","Continue and grow"]};
 const parseJSON=parseModelJson;
 const getEnv=(env,key)=>String((env||process.env)[key]||"").trim();
+const firstEnv=(env,keys)=>keys.map(key=>getEnv(env,key)).find(Boolean)||"";
 const timeoutFetch=async(url,options={},ms=7500)=>{
   const controller=new AbortController();
   const timer=setTimeout(()=>controller.abort(),ms);
@@ -19,7 +20,7 @@ const timeoutFetch=async(url,options={},ms=7500)=>{
 };
 const systemPrompt="You are Astra, the central ANIL X orchestrator. Produce a practical, concise plan. Never claim actions were executed. Prefer the user's language. Return ONLY JSON: {title,desc,steps,reply,confidence}.";
 async function providerOpenAI(prompt,env){
-  const key=getEnv(env,"OPENAI_API_KEY"); if(!key)return null;
+  const key=firstEnv(env,["OPENAI_API_KEY","OPENAI_KEY"]); if(!key)return null;
   const model=getEnv(env,"ASTRA_MODEL")||"gpt-5-mini";
   const r=await timeoutFetch("https://api.openai.com/v1/chat/completions",{method:"POST",headers:{"content-type":"application/json",authorization:`Bearer ${key}`},body:JSON.stringify({model,messages:[{role:"system",content:systemPrompt},{role:"user",content:prompt}],temperature:.2})},2200);
   if(!r.ok){
@@ -38,7 +39,7 @@ async function providerOpenAI(prompt,env){
   if(!out||typeof out!=="object")throw Error("openai_invalid_json"); return out;
 }
 async function providerGemini(prompt,env){
-  const key=getEnv(env,"GEMINI_API_KEY"); if(!key)return null;
+  const key=firstEnv(env,["GEMINI_API_KEY","GOOGLE_API_KEY","GOOGLE_GENERATIVE_AI_API_KEY"]); if(!key)return null;
   const model=getEnv(env,"GEMINI_MODEL")||"gemini-2.5-flash";
   const r=await timeoutFetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(key)}`,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({contents:[{role:"user",parts:[{text:`${systemPrompt}\n${prompt}`}]}],generationConfig:{responseMimeType:"application/json",temperature:.2}})},2200);
   if(!r.ok)throw Error("gemini_"+r.status);
@@ -46,7 +47,7 @@ async function providerGemini(prompt,env){
   if(!out||typeof out!=="object")throw Error("gemini_invalid_json"); return out;
 }
 async function providerClaude(prompt,env){
-  const key=getEnv(env,"ANTHROPIC_API_KEY"); if(!key)return null;
+  const key=firstEnv(env,["ANTHROPIC_API_KEY","ANTHROPIC_KEY","CLAUDE_API_KEY"]); if(!key)return null;
   const preferred=getEnv(env,"CLAUDE_MODEL");
   const models=[preferred,"claude-sonnet-4-5-20250929","claude-3-7-sonnet-latest","claude-3-5-haiku-latest"].filter((v,i,a)=>v&&a.indexOf(v)===i);
   let lastStatus=0,lastDetail="";
@@ -62,7 +63,7 @@ async function providerClaude(prompt,env){
   const failure=Error("anthropic_"+lastStatus);failure.providerDetail=lastDetail;throw failure;
 }
 async function providerOpenRouter(prompt,env){
-  const key=getEnv(env,"ANIL_OPENROUTER_API_KEY")||getEnv(env,"OPENROUTER_API_KEY"); if(!key)return null;
+  const key=firstEnv(env,["ANIL_OPENROUTER_API_KEY","OPENROUTER_API_KEY","OPENROUTER_KEY"]); if(!key)return null;
   const model=getEnv(env,"ANIL_OPENROUTER_MODEL")||getEnv(env,"OPENROUTER_MODEL")||"openrouter/free";
   const r=await timeoutFetch("https://openrouter.ai/api/v1/chat/completions",{method:"POST",headers:{"content-type":"application/json",authorization:`Bearer ${key}`,"HTTP-Referer":"https://anil-x-live.onrender.com","X-Title":"ANIL X"},body:JSON.stringify({model,messages:[{role:"system",content:systemPrompt},{role:"user",content:prompt}],temperature:.2})},2200);
   if(!r.ok)throw Error("openrouter_"+r.status);
@@ -76,14 +77,14 @@ async function providerCompatible(prompt,env,cfg){
   if(!r.ok)throw Error(cfg.name+"_"+r.status);
   const d=await r.json(),out=parseJSON(d?.choices?.[0]?.message?.content);if(!out||typeof out!=="object")throw Error(cfg.name+"_invalid_json");return out;
 }
-const providerGroq=(p,e)=>providerCompatible(p,e,{name:"groq",keys:["GROQ_API_KEY"],endpoint:"https://api.groq.com/openai/v1/chat/completions",modelKeys:["GROQ_MODEL"],defaultModel:"openai/gpt-oss-120b"});
-const providerCerebras=(p,e)=>providerCompatible(p,e,{name:"cerebras",keys:["CEREBRAS_API_KEY"],endpoint:"https://api.cerebras.ai/v1/chat/completions",modelKeys:["CEREBRAS_MODEL"],defaultModel:"gpt-oss-120b"});
-const providerMistral=(p,e)=>providerCompatible(p,e,{name:"mistral",keys:["MISTRAL_API_KEY"],endpoint:"https://api.mistral.ai/v1/chat/completions",modelKeys:["MISTRAL_MODEL"],defaultModel:"mistral-small-latest"});
-const providerDeepSeek=(p,e)=>providerCompatible(p,e,{name:"deepseek",keys:["DEEPSEEK_API_KEY"],endpoint:"https://api.deepseek.com/chat/completions",modelKeys:["DEEPSEEK_MODEL"],defaultModel:"deepseek-chat"});
-const providerTogether=(p,e)=>providerCompatible(p,e,{name:"together",keys:["TOGETHER_API_KEY"],endpoint:"https://api.together.xyz/v1/chat/completions",modelKeys:["TOGETHER_MODEL"],defaultModel:"meta-llama/Llama-3.3-70B-Instruct-Turbo"});
-const providerFireworks=(p,e)=>providerCompatible(p,e,{name:"fireworks",keys:["FIREWORKS_API_KEY"],endpoint:"https://api.fireworks.ai/inference/v1/chat/completions",modelKeys:["FIREWORKS_MODEL"],defaultModel:"accounts/fireworks/models/llama-v3p3-70b-instruct"});
-const providerSambaNova=(p,e)=>providerCompatible(p,e,{name:"sambanova",keys:["SAMBANOVA_API_KEY"],endpoint:"https://api.sambanova.ai/v1/chat/completions",modelKeys:["SAMBANOVA_MODEL"],defaultModel:"Meta-Llama-3.3-70B-Instruct"});
-const providerXAI=(p,e)=>providerCompatible(p,e,{name:"xai",keys:["XAI_API_KEY"],endpoint:"https://api.x.ai/v1/chat/completions",modelKeys:["XAI_MODEL"],defaultModel:"grok-3-mini"});
+const providerGroq=(p,e)=>providerCompatible(p,e,{name:"groq",keys:["GROQ_API_KEY","GROQ_KEY"],endpoint:"https://api.groq.com/openai/v1/chat/completions",modelKeys:["GROQ_MODEL"],defaultModel:"openai/gpt-oss-120b"});
+const providerCerebras=(p,e)=>providerCompatible(p,e,{name:"cerebras",keys:["CEREBRAS_API_KEY","CEREBRAS_KEY"],endpoint:"https://api.cerebras.ai/v1/chat/completions",modelKeys:["CEREBRAS_MODEL"],defaultModel:"gpt-oss-120b"});
+const providerMistral=(p,e)=>providerCompatible(p,e,{name:"mistral",keys:["MISTRAL_API_KEY","MISTRAL_KEY"],endpoint:"https://api.mistral.ai/v1/chat/completions",modelKeys:["MISTRAL_MODEL"],defaultModel:"mistral-small-latest"});
+const providerDeepSeek=(p,e)=>providerCompatible(p,e,{name:"deepseek",keys:["DEEPSEEK_API_KEY","DEEPSEEK_KEY"],endpoint:"https://api.deepseek.com/chat/completions",modelKeys:["DEEPSEEK_MODEL"],defaultModel:"deepseek-chat"});
+const providerTogether=(p,e)=>providerCompatible(p,e,{name:"together",keys:["TOGETHER_API_KEY","TOGETHERAI_API_KEY"],endpoint:"https://api.together.xyz/v1/chat/completions",modelKeys:["TOGETHER_MODEL"],defaultModel:"meta-llama/Llama-3.3-70B-Instruct-Turbo"});
+const providerFireworks=(p,e)=>providerCompatible(p,e,{name:"fireworks",keys:["FIREWORKS_API_KEY","FIREWORKS_KEY"],endpoint:"https://api.fireworks.ai/inference/v1/chat/completions",modelKeys:["FIREWORKS_MODEL"],defaultModel:"accounts/fireworks/models/llama-v3p3-70b-instruct"});
+const providerSambaNova=(p,e)=>providerCompatible(p,e,{name:"sambanova",keys:["SAMBANOVA_API_KEY","SAMBANOVA_KEY"],endpoint:"https://api.sambanova.ai/v1/chat/completions",modelKeys:["SAMBANOVA_MODEL"],defaultModel:"Meta-Llama-3.3-70B-Instruct"});
+const providerXAI=(p,e)=>providerCompatible(p,e,{name:"xai",keys:["XAI_API_KEY","GROK_API_KEY"],endpoint:"https://api.x.ai/v1/chat/completions",modelKeys:["XAI_MODEL"],defaultModel:"grok-3-mini"});
 const PROVIDERS={openai:providerOpenAI,groq:providerGroq,cerebras:providerCerebras,gemini:providerGemini,claude:providerClaude,openrouter:providerOpenRouter,deepseek:providerDeepSeek,mistral:providerMistral,together:providerTogether,fireworks:providerFireworks,sambanova:providerSambaNova,xai:providerXAI};
 const providerCooldownsV6=new Map();
 function providerOrder(env){
@@ -143,7 +144,7 @@ export default async (req,env)=>{
     if(body?.verify===true){
       const verifyPrompt=JSON.stringify({request:input,answer:result});
       const checks=await Promise.all(["claude","gemini"].map(async name=>{
-        try{const keyName=name==="claude"?"ANTHROPIC_API_KEY":"GEMINI_API_KEY";if(!getEnv(env,keyName))return [name,false];const fn=name==="claude"?providerClaude:providerGemini;const r=await fn(verifyPrompt,env);return [name,!!r];}catch{return [name,false];}
+        try{const configured=name==="claude"?firstEnv(env,["ANTHROPIC_API_KEY","ANTHROPIC_KEY","CLAUDE_API_KEY"]):firstEnv(env,["GEMINI_API_KEY","GOOGLE_API_KEY","GOOGLE_GENERATIVE_AI_API_KEY"]);if(!configured)return [name,false];const fn=name==="claude"?providerClaude:providerGemini;const r=await fn(verifyPrompt,env);return [name,!!r];}catch{return [name,false];}
       }));
       council=Object.fromEntries(checks);
     }
