@@ -47,8 +47,8 @@ for(const file of files.filter(p=>p.endsWith('.html'))){
 const adminHtml=await fs.readFile(path.join(root,'admin.html'),'utf8').catch(()=> '');
 const adminJs=await fs.readFile(path.join(root,'admin.js'),'utf8').catch(()=> '');
 if(adminHtml&&adminJs){
-  const ids=new Set([...adminHtml.matchAll(/\\bid=[\"']([^\"']+)[\"']/g)].map(m=>m[1]));
-  const refs=[...adminJs.matchAll(/\\$\\(['\"]#([^'\"]+)['\"]\\)/g)].map(m=>m[1]);
+  const ids=new Set([...adminHtml.matchAll(/\bid=["']([^"']+)["']/g)].map(m=>m[1]));
+  const refs=[...adminJs.matchAll(/\$\(['"]#([^'"]+)['"]\)/g)].map(m=>m[1]);
   const missing=[...new Set(refs.filter(id=>!ids.has(id)))];
   if(missing.length) errors.push('admin.js references missing admin.html element IDs: '+missing.join(', '));
 }
