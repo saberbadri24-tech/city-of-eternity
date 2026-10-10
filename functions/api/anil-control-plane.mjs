@@ -91,7 +91,7 @@ export async function handleControlPlane(req,env){
   version:'2.0.0',
   mode:'owner-gated-operational-agent',
   identity:'ANIL OWNER OPERATING SYSTEM',
-  chain:['ANIL','Astra','Claude','Gemini','Immortal Guard','Revenue Fleet','QA Sentinel'],
+  chain:['ANIL','Core Reasoning Engine','Independent Review Engine','Evidence Verification Engine','Immortal Guard','Revenue Fleet','QA Sentinel'],
   capabilities:CAPABILITIES,
   adapters,
   operations:OPERATIONS,
@@ -112,7 +112,7 @@ export async function handleControlPlane(req,env){
   ],
   intelligence:{
    adaptivePlanning:true,
-   multiAgentCrossCheck:true,
+   independentEngineCrossCheck:true,
    evidenceFirst:true,
    contradictionDetection:true,
    uncertaintyReporting:true,
