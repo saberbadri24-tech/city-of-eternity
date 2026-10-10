@@ -178,13 +178,17 @@ try {
   });
   const webhookResult = await webhookResponse.json();
   const settledOrder = mockData.get('orders/order-integration');
-  checks.push([
-    'signed Variza webhook accepts documented base_amount despite payment suffix',
-    webhookResponse.status === 200 && webhookResult.status === 'paid' &&
-      settledOrder?.status === 'paid' &&
-      settledOrder?.providerBaseAmount === expectedToman &&
-      settledOrder?.providerAmount === expectedToman + 128
-  ]);
+  const webhookOk = webhookResponse.status === 200 && webhookResult.status === 'paid' &&
+    settledOrder?.status === 'paid' &&
+    settledOrder?.providerBaseAmount === expectedToman &&
+    settledOrder?.providerAmount === expectedToman + 128;
+  if (!webhookOk) console.log('DIAG Variza webhook', JSON.stringify({
+    status:webhookResponse.status,resultStatus:webhookResult.status,
+    orderStatus:settledOrder?.status,expectedToman,
+    providerBaseAmount:settledOrder?.providerBaseAmount,
+    providerAmount:settledOrder?.providerAmount
+  }));
+  checks.push(['signed Variza webhook accepts documented base_amount despite payment suffix', webhookOk]);
 
   const badSignatureResponse = await handleVarizaWebhook({
     request: new Request('https://anil-x-live.onrender.com/api/variza-webhook', {
