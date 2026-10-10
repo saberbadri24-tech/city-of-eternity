@@ -1,134 +1,107 @@
 {
-  "version": 2,
+  "version": 3,
   "purpose": "ANIL X is a provider-neutral AI operating system for website delivery, business growth, engineering, research, and Immortal Guard.",
-  "strategy": "capability-routed multi-agent council with evidence, verification, memory, evaluation, rollback, and truthful live-state reporting",
+  "strategy": "first-party specialist engine chain with bounded tools, evidence, independent QA, memory, evaluation, rollback, and truthful live-state reporting",
   "providers": {
-    "openai": {
-      "enabled_when": "OPENAI_API_KEY",
+    "internal_engines": {
+      "enabled": true,
       "roles": [
         "reasoning",
-        "coding",
-        "agent",
-        "vision",
-        "tool_use",
+        "planning",
+        "security",
+        "code-quality-review",
+        "research-routing",
+        "payment-integrity",
+        "revenue-operations",
+        "guard-verification",
+        "qa",
         "synthesis"
       ],
-      "preferred": "Responses/Agents/Codex"
+      "execution": "first-party deterministic engines and authorized tools"
     },
-    "anthropic": {
-      "enabled_when": "ANTHROPIC_API_KEY",
+    "openai": {
+      "optional": true,
+      "enabled_when": "OPENAI_API_KEY with successful runtime invocation",
       "roles": [
-        "deep_review",
-        "reasoning",
-        "long_context",
-        "agent",
-        "vision"
+        "advanced reasoning",
+        "coding",
+        "tool-use",
+        "synthesis"
       ],
-      "preferred": "Claude/Claude Code"
+      "fallback": "first-party specialist engine chain"
     },
-    "google_gemini": {
-      "enabled_when": "GEMINI_API_KEY",
+    "openai_compatible_router": {
+      "optional": true,
+      "enabled_when": "ANIL_OPENROUTER_API_KEY or OPENROUTER_API_KEY with successful runtime invocation",
       "roles": [
-        "research",
-        "verification",
-        "multimodal",
-        "comparison",
-        "long_context"
+        "optional model routing"
       ],
-      "preferred": "Gemini API/CLI-compatible bridge"
+      "fallback": "first-party specialist engine chain"
     },
-    "github_copilot": {
-      "enabled_when": "GITHUB_ACTIONS_OR_OIDC",
+    "github_actions": {
+      "enabled_when": "authorized GitHub workflow",
       "roles": [
-        "repo_agent",
-        "issue_to_pr",
-        "review",
-        "ci_cd"
-      ],
-      "execution": "controlled GitHub workflow"
-    },
-    "cursor": {
-      "enabled_when": "external_agent_bridge_configured",
-      "roles": [
-        "codebase_navigation",
-        "ide_agent",
-        "review"
-      ],
-      "execution": "external bridge only"
-    },
-    "mcp": {
-      "enabled_when": "MCP_SERVER_CONFIGURED",
-      "roles": [
-        "browser",
-        "database",
-        "search",
-        "specialist_tools",
-        "external_services"
+        "controlled repository execution",
+        "CI/CD"
       ]
     },
-    "generic_openai_compatible": {
-      "enabled_when": "AI_COMPATIBLE_BASE_URL_AND_KEY",
+    "mcp_tools": {
+      "enabled_when": "tool connection configured",
       "roles": [
-        "fallback",
-        "specialist",
-        "cost_routing"
-      ],
-      "execution": "adapter"
+        "browser",
+        "repository",
+        "database",
+        "search",
+        "external services"
+      ]
     }
   },
   "routing": {
-    "architecture": [
-      "openai",
-      "anthropic",
-      "gemini"
+    "default": [
+      "intent-router",
+      "ANIL Core Reasoning Engine",
+      "security-gate",
+      "evidence-verifier"
     ],
     "research": [
-      "gemini",
-      "openai",
-      "anthropic"
+      "research-engine",
+      "source-verification-engine",
+      "evidence-merger"
     ],
     "hard_reasoning": [
-      "openai",
-      "anthropic",
-      "gemini"
+      "problem-decomposition-engine",
+      "reasoning-engine",
+      "independent-qa-engine"
     ],
     "coding": [
-      "openai",
-      "anthropic",
-      "github_copilot"
-    ],
-    "code_review": [
-      "anthropic",
-      "openai",
-      "github_copilot"
+      "code-architecture-engine",
+      "implementation-planner",
+      "code-quality-engine",
+      "controlled-repository-tool"
     ],
     "verification": [
-      "gemini",
-      "anthropic",
-      "openai"
+      "evidence-verification-engine",
+      "regression-test-engine",
+      "release-gate"
     ],
     "multimodal": [
-      "openai",
-      "gemini",
-      "anthropic"
+      "vision-engine",
+      "voice-engine"
     ],
     "browser": [
-      "mcp",
-      "github_copilot"
+      "authorized-browser-tool",
+      "evidence-ledger"
     ],
     "final_synthesis": [
-      "openai",
-      "anthropic"
+      "ANIL Core Reasoning Engine",
+      "truth-and-evidence-gate"
     ],
     "fallback": [
-      "generic_openai_compatible",
-      "openai",
-      "anthropic",
-      "gemini"
+      "first-party specialist engine chain"
     ]
   },
   "council": {
-    "pattern": "intent -> planner -> parallel specialists -> evidence merge -> contradiction detection -> verifier -> synthesis -> action gate",
+    "pattern": "intent -> planner -> specialist engines -> evidence merge -> contradiction detection -> verifier -> synthesis -> action gate",
     "parallel_when_useful": true,
     "minimum_independent_checks_for_high_impact_change": 2,
     "disagreement_policy": "surface disagreement and evidence; never invent consensus",
