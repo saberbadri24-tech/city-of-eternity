@@ -922,27 +922,27 @@ async function secretary(req,env){
         }),env);
         const planData=await planResponse.json().catch(()=>({}));
         if(planResponse.ok&&planData?.ok){
-          return json({ok:true,action:'independent_council_primary',provider:'first-party-deterministic',live:true,
+          return json({ok:true,action:'serial_engine_chain_primary',provider:'first-party-deterministic',live:true,
             text:String(planData.reply||planData.text||planData.answer||''),
-            data:{source:planData.source||'anil-independent-specialist-council',
-              engine:planData.engine||'ANIL-INDEPENDENT-ENGINE-COUNCIL',
-              version:planData.version||null,specialists:planData.council||planData.specialists||null,
+            data:{source:planData.source||'ANIL-MULTIPURPOSE-SERIAL-CREATION-ENGINE',
+              engine:planData.engine||'ANIL-MULTIPURPOSE-SERIAL-CREATION-ENGINE',
+              version:planData.version||null,engines:planData.engines||planData.specialists||null,
               plan:planData.plan||null,evidence:planData.evidence||[],
               execution:planData.execution||{performed:false,status:'not_executed'},
               orchestration:planData.orchestration||null,
               externalModelsCalled:false}});
         }
-        return json({ok:true,action:'independent_council_fallback',provider:'internal-engines',live:false,
+        return json({ok:true,action:'serial_engine_chain_fallback',provider:'internal-engines',live:false,
           text:fa?'موتورهای مستقل آنیل فعال‌اند؛ نتیجهٔ اجرایی قابل‌تأیید برای این درخواست ثبت نشد. هیچ تغییری اجراشده اعلام نمی‌شود.':'ANIL independent engines are active; no verified execution result was recorded for this request. No change is claimed.',
-          data:{source:'anil-independent-specialist-council',execution:{performed:false,status:'not_executed'}}});
+          data:{source:'ANIL-MULTIPURPOSE-SERIAL-CREATION-ENGINE',execution:{performed:false,status:'not_executed'}}});
       } catch (error) {
-        return json({ok:true,action:'independent_council_fallback',provider:'internal-engines',live:false,
+        return json({ok:true,action:'serial_engine_chain_fallback',provider:'internal-engines',live:false,
           text:fa?'موتورهای مستقل آنیل فعال‌اند؛ نتیجهٔ اجرایی قابل‌تأیید برای این درخواست ثبت نشد. هیچ تغییری اجراشده اعلام نمی‌شود.':'ANIL independent engines are active; no verified execution result was recorded for this request. No change is claimed.',
-          data:{source:'anil-independent-specialist-council',execution:{performed:false,status:'not_executed'}}});
+          data:{source:'ANIL-MULTIPURPOSE-SERIAL-CREATION-ENGINE',execution:{performed:false,status:'not_executed'}}});
       }
     }
   }catch(e){
-    return json({ok:true,action:'independent_council_fallback',live:false,
+    return json({ok:true,action:'serial_engine_chain_fallback',live:false,
       text:b.language==='fa'?'موتورهای مستقل آنیل فعال‌اند؛ اقدامی بدون نتیجهٔ قابل‌تأیید انجام‌شده اعلام نمی‌شود.':'ANIL independent engines are active; no action is claimed without a verifiable result.',
       data:{execution:{performed:false,status:'not_executed'}}});
   }
