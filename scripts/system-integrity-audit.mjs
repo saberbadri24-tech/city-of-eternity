@@ -19,6 +19,13 @@ if(autoScheduled.length) errors.push('Legacy /api/autopilot must not have a 5-mi
 const keepwarm=wf.filter(x=>/cron:\s*["']?\*\/5/.test(x.text)&&/city-of-eternity\.onrender\.com\/(api\/health|api\/payment-config|\s*$)/.test(x.text)).map(x=>x.name);
 if(keepwarm.length>1) errors.push('Duplicate 5-minute keepwarm workflows: '+keepwarm.join(', '));
 
+const guardApi=await fs.readFile(path.join(root,'functions','api','guard-live.mjs'),'utf8');
+if(guardApi.includes('confirmedIncome:Number(ledger.actualCollectedUsd||ledger.confirmedIncome')) errors.push('Guard revenue must use actual settled ledger evidence only');
+if(guardApi.includes('catchQueuePending:0')) errors.push('Guard must not claim an unread owner catch queue is empty');
+if(guardApi.includes('configured:Boolean(ai.configured||ai.providers')) errors.push('Guard must not infer AI configuration from the existence of a provider object');
+const worker=await fs.readFile(path.join(root,'worker.js'),'utf8');
+if(/action:'ai_provider_blocked'[\s\S]{0,1000}return json\(/.test(worker)) errors.push('Owner chat must not terminate at provider quota exhaustion; configured fallbacks and local cognition must remain reachable');
+if(!worker.includes("action:'local_cognitive_fallback'")||!worker.includes('providerQuotaExhausted')) errors.push('Owner chat local cognition fallback or quota diagnostic is missing');
 const runtimeFiles=['worker.js','render-server.mjs','functions/api/execution-readiness.mjs','functions/api/guard-live.mjs','revenue-super-os.json'];
 for(const rel of runtimeFiles){
  const c=await fs.readFile(path.join(root,rel),'utf8');
@@ -34,5 +41,6 @@ for(const x of wf){
 }
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
 await import('./test-render-upstream-proxy.mjs');
+await import('./test-anil-team-council.mjs');
 console.log('ANIL X system-integrity audit: PASS');
 console.log('Workflows inspected:',wf.length);

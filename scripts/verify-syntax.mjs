@@ -25,3 +25,8 @@ for(const file of files){
 }
 if(failed) process.exit(1);
 console.log("ANIL X predeploy syntax gate: PASS ("+files.length+" JS/MJS/CJS files)");
+const councilTest=path.join(root,"scripts","test-anil-team-council.mjs");
+if(fs.existsSync(councilTest)){
+  const test=spawnSync(process.execPath,[councilTest],{stdio:"inherit",encoding:"utf8"});
+  if(test.status!==0) process.exit(test.status||1);
+}
