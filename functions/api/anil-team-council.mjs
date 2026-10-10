@@ -38,7 +38,7 @@ export function buildComplementaryCouncil({task,guard,providers,command,evidence
   {phase:'LEARN',lead:'memory',partners:['anil','performance'],output:'verified outcome only; no secret or unverified claim persistence'}
  ];
  const gates=[
-  {id:'evidence',rule:'Every factual live-status or completion claim needs timestamped runtime evidence',pass:Boolean(evidence)},
+  {id:'evidence',rule:'Every factual live-status or completion claim needs timestamped runtime evidence',pass:Boolean(evidence&&(evidence.guardAvailable||evidence.liveProviders?.length||evidence.deploymentSha||evidence.testRunId)),status:evidence&&(evidence.guardAvailable||evidence.liveProviders?.length||evidence.deploymentSha||evidence.testRunId)?'evidence_present':'missing_runtime_evidence'},
   {id:'provider-truth',rule:'Configured credentials/models are not proof of successful provider calls',pass:true},
   {id:'guard-freshness',rule:'Stale or missing Guard data cannot authorize a claim or sensitive action',pass:!stale},
   {id:'settlement-integrity',rule:'Revenue is counted only after confirmed settlement evidence',pass:true},
@@ -48,6 +48,7 @@ export function buildComplementaryCouncil({task,guard,providers,command,evidence
  ];
  const blockers=[];
  if(stale)blockers.push('Guard snapshot missing or stale: discovery/review only; no claim authorization.');
+ if(sensitive)blockers.push('Sensitive task detected: require explicit owner approval before any irreversible financial, security, or production action.');
  if(liveProviders.length<2)blockers.push('Fewer than two live specialist providers; local deterministic rules are not independent model review.');
  if(unavailable.length)blockers.push('Unavailable providers: '+unavailable.join(', ')+'.');
  blockers.push('This response plans and routes work; it does not prove external mutations or production deployment.');
