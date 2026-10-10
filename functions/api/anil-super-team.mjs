@@ -1,3 +1,4 @@
+import {buildComplementaryCouncil} from './anil-team-council.mjs';
 const firstEnv=(env,keys)=>keys.map(k=>env?.[k]).find(v=>typeof v==='string'&&v.trim())||'';
 const json=(d,s=200)=>new Response(JSON.stringify(d),{status:s,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store'}});
 const roles=[
@@ -7,7 +8,18 @@ const roles=[
  {id:'gemini',name:'Gemini',role:'research-verifier',authority:'verify_only',can:['research','cross_check','evidence_validation']},
  {id:'guard',name:'Immortal Guard',role:'security-and-opportunity-controller',authority:'safety_gate',can:['opportunity_scan','official_source_verification','risk_gate','owner_queue']},
  {id:'revenue',name:'Revenue Fleet',role:'revenue-execution-layer',authority:'bounded_execution',can:['lead_qualification','offer_packaging','delivery_tracking','retention']},
- {id:'qa',name:'QA Sentinel',role:'regression-and-live-test',authority:'block_on_failure',can:['health_checks','contract_checks','regression_checks','freshness_checks']}
+ {id:'qa',name:'QA Sentinel',role:'regression-and-live-test',authority:'block_on_failure',can:['health_checks','contract_checks','regression_checks','freshness_checks']},
+ {id:'memory',name:'Memory & Learning Engine',role:'evidence-backed-learning',authority:'recommend_only',can:['outcome_tracking','pattern_detection','reversible_learning','no_secret_memory']},
+ {id:'architect',name:'Systems Architect',role:'dependency-and-interface-design',authority:'propose_only',can:['dependency_mapping','contract_design','failure_isolation']},
+ {id:'performance',name:'Performance Sentinel',role:'latency-and-resource-optimization',authority:'measure_then_recommend',can:['latency_budget','resource_budget','cache_review','load_risk']},
+ {id:'incident',name:'Incident Commander',role:'fault-containment-and-recovery',authority:'stop_and_recover',can:['failure_classification','rollback_recommendation','degradation_mode']},
+ {id:'product',name:'Product & UX Engine',role:'user-outcome-and-accessibility',authority:'recommend_only',can:['task_clarity','mobile_first','accessibility','conversion_friction']},
+ {id:'research',name:'Market Research Engine',role:'source-backed-discovery',authority:'evidence_only',can:['source_quality','freshness_check','independent_cross_check']},
+ {id:'data',name:'Data Integrity Auditor',role:'state-and-ledger-integrity',authority:'block_on_mismatch',can:['idempotency_review','ledger_reconciliation','settlement_proof']},
+ {id:'redteam',name:'Red-Team Challenger',role:'adversarial-threat-modeling',authority:'block_on_critical_risk',can:['prompt_injection_review','auth_boundary_review','abuse_case_testing']},
+ {id:'delivery',name:'Delivery & Release Manager',role:'release-readiness',authority:'release_gate_only',can:['change_scope','deployment_evidence','rollback_readiness']},
+ {id:'cost',name:'Cost & Quota Optimizer',role:'provider-resilience-and-cost',authority:'recommend_only',can:['provider_fallback','quota_budget','timeout_budget','cost_visibility']},
+ {id:'observability',name:'Observability Engine',role:'runtime-evidence-and-freshness',authority:'evidence_only',can:['health_evidence','staleness_detection','trace_correlation','claim_verification']}
 ];
 const providerKey={astra:['OPENAI_API_KEY','OPENAI_KEY'],claude:['ANTHROPIC_API_KEY','ANTHROPIC_KEY'],gemini:['GEMINI_API_KEY','GOOGLE_GEMINI_API_KEY','GOOGLE_API_KEY']};
 const modelKey={astra:['ASTRA_MODEL','ANIL_OPENAI_MODEL'],claude:['CLAUDE_MODEL','ANIL_ANTHROPIC_MODEL'],gemini:['GEMINI_MODEL','ANIL_GEMINI_MODEL']};
@@ -69,5 +81,6 @@ export async function handleSuperTeam(req,env,{guardHandler}={}){
  state.providers.astra=a;state.providers.claude=c;state.providers.gemini=g;
  const command=a.live&&a.output?.command?{...a.output,source:'astra'}:localCommand(state,guard,task);
  const evidence={guardFresh:guard?.freshness?.stale===false,guardAvailable:Boolean(guard?.ok),providerKeys:keys,configuredModels:models,liveProviders:[a,c,g].filter(x=>x.live).map(x=>x.provider)};
- return json({ok:true,engine:'ANIL-SUPER-TEAM',version:'2.0.0-frontier-aware',generatedAt:new Date().toISOString(),task,chain:['ANIL','Astra','Claude','Gemini','Guard','Revenue Fleet','QA Sentinel'],team:roles,command,evidence,guard:{freshness:guard?.freshness||null,snapshot:guard?.guard||null,radar:guard?.radar||null},safety:{finalCommand:'ANIL',irreversibleActions:'OWNER_APPROVAL',moneyMovement:'OWNER_APPROVAL',privateKeys:false,seedPhrases:false,autoSigning:false,captchaBypass:false,kycBypass:false},truth:{revenueCountsOnlyWhenSettled:true,providerConfigurationIsNotRuntimeProof:true,modelCatalogIsNotRuntimeProof:true}});
+ const council=buildComplementaryCouncil({task,guard,providers:{astra:a,claude:c,gemini:g},command,evidence,roles});
+ return json({ok:true,engine:'ANIL-SUPER-TEAM',version:'3.0.0-complementary-council',generatedAt:new Date().toISOString(),task,chain:council.chain,team:council.team,command:council.command,evidence,council:council.collaboration,qualityGates:council.qualityGates,guard:{freshness:guard?.freshness||null,snapshot:guard?.guard||null,radar:guard?.radar||null},safety:{finalCommand:'ANIL',irreversibleActions:'OWNER_APPROVAL',moneyMovement:'OWNER_APPROVAL',privateKeys:false,seedPhrases:false,autoSigning:false,captchaBypass:false,kycBypass:false},truth:{revenueCountsOnlyWhenSettled:true,providerConfigurationIsNotRuntimeProof:true,modelCatalogIsNotRuntimeProof:true,executionRequiresRuntimeEvidence:true,localFallbackIsNotEquivalentToFullLLM:true}});
 }
