@@ -1,6 +1,11 @@
 import assert from 'node:assert/strict';
 import {buildComplementaryCouncil} from '../functions/api/anil-team-council.mjs';
+import {fallbackModels} from '../functions/api/anil-super-team.mjs';
 
+assert.deepEqual(fallbackModels.claude,['claude-sonnet-5','claude-sonnet-4-6','claude-sonnet-4-5-20250929']);
+assert.deepEqual(fallbackModels.gemini,['gemini-3.8-flash','gemini-3.7-flash','gemini-2.5-flash']);
+assert.ok(!fallbackModels.claude.some(x=>/claude-3-7|claude-3-5-haiku/.test(x)),'retired Claude model IDs must not be fallback targets');
+assert.ok(!fallbackModels.gemini.includes('gemini-2.0-flash'),'shut-down Gemini 2.0 must not be a fallback target');
 const roles=[{"id":"anil","name":"ANIL"},{"id":"astra","name":"Astra"},{"id":"claude","name":"Claude"},{"id":"gemini","name":"Gemini"},{"id":"guard","name":"Guard"},{"id":"revenue","name":"Revenue Fleet"},{"id":"qa","name":"QA Sentinel"},{"id":"memory","name":"Memory & Learning Engine"},{"id":"architect","name":"Systems Architect"},{"id":"performance","name":"Performance Sentinel"},{"id":"incident","name":"Incident Commander"},{"id":"product","name":"Product & UX Engine"},{"id":"research","name":"Market Research Engine"},{"id":"data","name":"Data Integrity Auditor"},{"id":"redteam","name":"Red-Team Challenger"},{"id":"delivery","name":"Delivery & Release Manager"},{"id":"cost","name":"Cost & Quota Optimizer"},{"id":"observability","name":"Observability Engine"}];
 const emptyProviders={astra:{live:false},claude:{live:false},gemini:{live:false}};
 const stale=buildComplementaryCouncil({task:'improve site',guard:null,providers:emptyProviders,command:{priorities:[],stopConditions:[],blockers:[]},evidence:{guardAvailable:false,liveProviders:[]},roles});
