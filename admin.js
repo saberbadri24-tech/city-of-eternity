@@ -72,7 +72,7 @@ async function guard(){
   $('#gOwner').textContent=Number(external.queueCount||g.waitingOwner||state.approvals?.length||0).toLocaleString();
   $('#gFresh').textContent=f.stale?'STALE':'FRESH';
   const localHtml=items.slice(0,20).map(x=>'<div class="row"><div><b>'+esc(x.title||x.name||'Opportunity')+'</b><small>'+esc(x.source||x.domain||'—')+' · '+esc(x.status||x.action||'discovered')+'</small></div><span class="tag '+(String(x.status||x.action||'').includes('OWNER')?'gold':'ok')+'">'+esc(x.value||x.score||'—')+'</span></div>').join('');
-  const externalHtml=externalItems.slice(0,100).map(x=>'<div class="row"><div><b>'+esc(x.title||'Immortal Guard opportunity')+'</b><small><a href="'+esc(x.url||'#')+'" target="_blank" rel="noopener noreferrer">منبع رسمی</a> · '+esc(x.status||'READY_FOR_OWNER_REVIEW')+' · بررسی متخصصان '+esc(x.specialistsPassed||0)+'/'+esc(x.specialistsTotal||0)+'</small></div><span class="tag gold">فقط بررسی مالک</span><div class="row-actions"><button type="button" data-stage-owner="'+esc(x.id||'')+'">ارسال به صف تأیید مالک</button></div></div>').join('');
+  const externalHtml=externalItems.slice(0,100).map(x=>'<div class="row"><div><b>'+esc(x.title||'Immortal Guard opportunity')+'</b><small><a href="'+esc(x.url||'#')+'" target="_blank" rel="noopener noreferrer">منبع رسمی</a> · '+esc(x.status||'READY_FOR_OWNER_REVIEW')+' · بررسی متخصصان '+esc(x.specialistsPassed||0)+'/'+esc(x.specialistsTotal||0)+'</small></div><span class="tag gold">صف تأیید مالک</span></div>').join('');
   $('#guardOpps').innerHTML=(localHtml+externalHtml)||'<div class="empty">هنوز فرصت تأییدشده‌ای برای بررسی مالک در صف نیست.</div>';
   if(external.queueCount||externalItems.length){
    const aiState=external.aiLive?'AI زنده تأیید شد':'هوش بیرونی زنده نیست؛ بررسی محلی فعال است';
@@ -87,12 +87,6 @@ async function guard(){
   }).join(''):'<div class="empty">هنوز موردی در صف دریافت/بررسی مالک نیست.</div>';
   $('#catchQueue').querySelectorAll('[data-catch-approve]').forEach(b=>b.onclick=()=>decideGuardCatch(b.dataset.catchApprove,'approved',b));
   $('#catchQueue').querySelectorAll('[data-catch-reject]').forEach(b=>b.onclick=()=>decideGuardCatch(b.dataset.catchReject,'rejected',b));
-  $('#guardOpps').querySelectorAll('[data-stage-owner]').forEach(b=>b.onclick=async()=>{
-   const id=b.dataset.stageOwner;if(!id)return;
-   b.disabled=true;
-   try{const out=await api('/api/guard/catch-stage',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({id})});b.textContent=out.alreadyStaged?'از قبل در صف است':'به صف مالک اضافه شد';await guard()}
-   catch(e){b.disabled=false;b.textContent='خطا؛ دوباره تلاش کن';console.error('Guard owner queue stage failed',e)}
-  });
   await initOwnerTonWallet();
   const a=await api('/api/guard/state');approvals((a.approvals||[]).filter(x=>x.status==='OWNER_APPROVAL'||x.requiresOwnerApproval));
   return d
