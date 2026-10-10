@@ -1,28 +1,67 @@
 {
-  "schemaVersion": 2,
-  "sourcePolicy": "official provider model APIs only",
-  "providers": [
+  "schemaVersion": 3,
+  "sourcePolicy": "first-party ANIL X engine registry; no external model catalog required",
+  "engines": [
     {
-      "provider": "openai",
-      "configured": false,
-      "models": [],
-      "error": "credential_missing",
-      "preferred": "gpt-6-astra"
+      "id": "core-reasoning",
+      "enabled": true,
+      "module": "functions/api/anil-engine-chain.mjs",
+      "roles": [
+        "reasoning",
+        "planning",
+        "task-decomposition"
+      ]
     },
     {
-      "provider": "anthropic",
-      "configured": false,
-      "models": [],
-      "error": "credential_missing",
-      "preferred": "claude-opus-5"
+      "id": "research-verification",
+      "enabled": true,
+      "module": "functions/api/plan.mjs",
+      "roles": [
+        "source-review",
+        "evidence-routing",
+        "bounded-read-only-research"
+      ]
     },
     {
-      "provider": "google_gemini",
-      "configured": false,
-      "models": [],
-      "error": "credential_missing",
-      "preferred": "gemini-3.8-flash"
+      "id": "security-guard",
+      "enabled": true,
+      "module": "functions/api/guard-live.mjs",
+      "roles": [
+        "opportunity-screening",
+        "risk-gate",
+        "owner-approval"
+      ]
+    },
+    {
+      "id": "payment-integrity",
+      "enabled": true,
+      "module": "functions/api/pay.js",
+      "roles": [
+        "order-binding",
+        "amount-validation",
+        "checkout-safety"
+      ]
+    },
+    {
+      "id": "revenue-operations",
+      "enabled": true,
+      "module": "worker.js",
+      "roles": [
+        "lead-qualification",
+        "order-routing",
+        "settlement-accounting"
+      ]
+    },
+    {
+      "id": "independent-qa",
+      "enabled": true,
+      "module": "scripts/verify-anil-engine-chain.mjs",
+      "roles": [
+        "regression",
+        "contract-tests",
+        "release-gate"
+      ]
     }
   ],
-  "generatedAt": "2026-10-04T16:52:16.872Z"
+  "generatedAt": "stable-registry"
 }
