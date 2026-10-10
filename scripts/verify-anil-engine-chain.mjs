@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import { runLocalEngineChain } from '../functions/api/anil-engine-chain.mjs';
+import { buildCorePlan } from '../functions/api/anil-core-engine.mjs';
 
 const cases = [
   {input:'واریزا و پرداخت کیف پول را بررسی کن', expected:'payment-integrity'},
@@ -30,6 +31,16 @@ const results = cases.map(item => {
       out.orchestration.providerIndependent === true &&
       Array.isArray(out.chain) && out.chain.length >= 10
   };
+});
+const troubleshootingPlan = buildCorePlan('رفع خطای سایت');
+results.push({
+  name:'troubleshooting intent outranks website topic overlap',
+  ok:troubleshootingPlan.routeId==='debug'
+});
+const websitePlan = buildCorePlan('یک سایت جدید بساز');
+results.push({
+  name:'plain website-build requests retain website route',
+  ok:websitePlan.routeId==='website'
 });
 const sensitive = runLocalEngineChain('انتقال وجه از کیف پول را انجام بده');
 results.push({
