@@ -141,7 +141,7 @@ export function runLocalEngineChain(request) {
     requiresOwnerApproval,
     evidenceRequired: true
   };
-  const languageFa = /[\\u0600-\\u06FF]/.test(original);
+  const languageFa = /[\u0600-\u06FF]/.test(original);
   const next = selected.moves.slice(0,4).join(languageFa ? ' ← ' : ' → ');
   const selectedNames = specialists.map(x => x.name).join(languageFa ? '، ' : ', ');
   const reply = languageFa
