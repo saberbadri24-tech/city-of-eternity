@@ -24,7 +24,8 @@ for(const file of htmlFiles){
   let match,index=0;
   while((match=re.exec(html))){
     const attrs=match[1]||'',body=match[2]||'';
-    if(/\bsrc\s*=/.test(attrs)||/\btype\s*=\s*["']module["']/i.test(attrs)||!body.trim()) continue;
+    const type=attrs.match(/\btype\s*=\s*["']([^"']+)["']/i)?.[1]?.toLowerCase()||'';
+    if(/\bsrc\s*=/.test(attrs)||type==='module'||(type&&!/^(text|application)\/(javascript|ecmascript)$/.test(type))||!body.trim()) continue;
     index++;
     try { new Function(body); }
     catch(error){
