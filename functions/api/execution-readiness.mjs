@@ -1,6 +1,6 @@
 import {json} from './runtime-state.mjs';
 
-const first=(env,keys)=>keys.map(k=>env?.[k]).find(v=>typeof v==='string'&&v.trim())||'';const validTonAddress=a=>/^(?:EQ|UQ)[A-Za-z0-9_-]{46}$/.test(String(a||''));
+const first=(env,keys)=>keys.map(k=>env?.[k]).find(v=>v!==undefined&&v!==null&&String(v).trim()!=='')||'';const validTonAddress=a=>/^(?:EQ|UQ)[A-Za-z0-9_-]{46}$/.test(String(a||''));
 
 export async function handleExecutionReadiness(req,env){
   if(req.method!=='GET') return json({ok:false,error:'method_not_allowed'},405);
