@@ -335,7 +335,7 @@ async function runtimeRoutes(req,env,u){
   if(p==='/api/anil/capabilities')return handleAnilCapabilities(req,env);
   if(p==='/api/anil/capability-kernel')return handleCapabilityKernel(req,env);
   if(p==='/api/anil/permanent-core')return handlePermanentCore(req,env);
-  if(p==='/api/anil/toolss'){if(req.method==='POST'&&!(await githubActionsAuth(req,env))&&!(await adminAuth(req,env)))return rjson({ok:false,error:'owner_or_github_actions_auth_required'},401);return anilTool(req,env);}
+  if(p==='/api/anil/tools'||p==='/api/anil/toolss'){if(req.method==='POST'&&!(await githubActionsAuth(req,env))&&!(await adminAuth(req,env)))return rjson({ok:false,error:'owner_or_github_actions_auth_required'},401);return anilTool(req,env);}
   if(p==='/api/anil/automation/queue')return anilChangeRequest(req,env);
   const PRIVATE_OWNER_PATHS=new Set([
     '/api/revenue/fleet','/api/revenue/opportunities','/api/revenue/programs',
