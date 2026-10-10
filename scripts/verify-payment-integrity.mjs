@@ -1,11 +1,12 @@
 import fs from 'node:fs';
-import { getUsdTomanConfig, usdToToman } from '../functions/api/currency.mjs';
+import { getUsdTomanConfig, getLiveUsdTomanConfig, usdToToman } from '../functions/api/currency.mjs';
 import { onRequestPost as createVarizaPayment } from '../functions/api/pay.js';
 import { onRequestPost as handleVarizaWebhook } from '../functions/api/variza-webhook.js';
 
 const read = p => fs.readFileSync(new URL(p, import.meta.url), 'utf8');
 const files = {
   pay: read('../functions/api/pay.js'),
+  currency: read('../functions/api/currency.mjs'),
   readiness: read('../functions/api/execution-readiness.mjs'),
   autopilot: read('../functions/api/autopilot.mjs'),
   server: read('../render-server.mjs'),
@@ -32,6 +33,8 @@ const checks = [
   ['TON checkout is gated on an eligible order and verified receipt support', files.paymentPage.includes('checkoutEnabled') && files.paymentPage.includes("String(od.currency||'').toUpperCase()!=='TON'") && files.worker.includes('ton_order_receipt_verification_not_enabled') && !files.paymentPage.includes('const DEST=')],
   ['USD to Toman conversion does not mistake Rials for Tomans', getUsdTomanConfig({USD_IRR_RATE:'2687600'}).rate === 268760 && getUsdTomanConfig({USD_TOMAN_RATE:'268760'}).rate === 268760 && getUsdTomanConfig({}).rate === 268760 && usdToToman(19,{USD_IRR_RATE:'2687600'}) === 5106440],
   ['payment readiness does not treat the fallback FX estimate as configured', getUsdTomanConfig({}).source === 'runtime-default' && getUsdTomanConfig({USD_IRR_RATE:'2687600'}).source !== 'runtime-default'],
+  ['live FX source requires a fresh non-stale market quote', files.currency.includes('https://nerkhara.com/rates.json') && files.currency.includes('quote?.stale') && files.currency.includes('ageMs > 6 * 60 * 60_000')],
+  ['checkout and payment-config use the same validated live FX helper', files.pay.includes('await getLiveUsdTomanConfig(env)') && files.worker.includes('const fx=await getLiveUsdTomanConfig(env)')],
   ['checkout and readiness fail closed without configured FX', files.worker.includes("fx.source==='runtime-default'") && files.pay.includes("getUsdTomanConfig(env).source === 'runtime-default'") && files.readiness.includes("fx:fxConfig.source!=='runtime-default'")]
 ];
 const mockData = new Map();
@@ -56,8 +59,15 @@ mockData.set('orders/order-external', {
 });
 const originalFetch = globalThis.fetch;
 let providerCalls = 0;
+let fxCalls = 0;
+let liveFxEnabled = true;
 try {
-  globalThis.fetch = async (_url, options) => {
+  globalThis.fetch = async (url, options) => {
+    if (String(url).includes('nerkhara.com/rates.json')) {
+      fxCalls++;
+      if (!liveFxEnabled) return new Response('{}', { status: 503, headers: { 'content-type': 'application/json' } });
+      return new Response(JSON.stringify({ usd: { value: 268760, updatedTime: new Date().toISOString().slice(0, 19), stale: false } }), { status: 200, headers: { 'content-type': 'application/json' } });
+    }
     providerCalls++;
     const sent = JSON.parse(options.body);
     return new Response(JSON.stringify({
@@ -87,6 +97,7 @@ try {
   ]);
 
   const noFxEnv = { ...integrationEnv, USD_IRR_RATE: '' };
+  liveFxEnabled = false;
   const noFxResponse = await createVarizaPayment({
     request: new Request('https://anil-x-live.onrender.com/api/pay', {
       method: 'POST', headers: { 'content-type': 'application/json' },
@@ -98,8 +109,24 @@ try {
     env: noFxEnv
   });
   checks.push([
-    'payment creation fails closed when FX is only a runtime estimate',
-    noFxResponse.status === 503 && (await noFxResponse.json()).error === 'fx_unavailable' && providerCalls === 1
+    'payment creation fails closed when live FX is unavailable',
+    noFxResponse.status === 503 && (await noFxResponse.json()).error === 'fx_unavailable' && providerCalls === 1 && fxCalls === 1
+  ]);
+
+  liveFxEnabled = true;
+  mockData.set('orders/order-live-fx', { orderId: 'order-live-fx', status: 'pending', currency: 'USD', amount: 19, orderAmount: 19, service: 'fix', plan: 'FIX' });
+  const liveFxAmount = 19 * 268760;
+  const liveFxResponse = await createVarizaPayment({
+    request: new Request('https://anil-x-live.onrender.com/api/pay', {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ orderId: 'order-live-fx', amount: liveFxAmount, returnUrl: 'https://anil-x-live.onrender.com/payment.html?order=order-live-fx' })
+    }),
+    env: noFxEnv
+  });
+  const liveFxResult = await liveFxResponse.json();
+  checks.push([
+    'payment creation uses a validated live FX quote when no environment rate is configured',
+    liveFxResponse.status === 200 && liveFxResult.ok === true && fxCalls === 2 && providerCalls === 2 && mockData.get('orders/order-live-fx')?.providerBaseAmount === liveFxAmount
   ]);
 
   const mismatchResponse = await createVarizaPayment({
@@ -111,7 +138,7 @@ try {
   });
   checks.push([
     'payment creation blocks amounts that differ from the order',
-    mismatchResponse.status === 409 && providerCalls === 1
+    mismatchResponse.status === 409 && providerCalls === 2
   ]);
 
   const externalReturnResponse = await createVarizaPayment({
@@ -126,7 +153,7 @@ try {
   });
   checks.push([
     'payment creation rejects a third-party return URL before calling Variza',
-    externalReturnResponse.status === 400 && providerCalls === 1
+    externalReturnResponse.status === 400 && providerCalls === 2
   ]);
 
   const rawWebhook = JSON.stringify({
