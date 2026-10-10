@@ -42,7 +42,7 @@ export function buildComplementaryCouncil({task,guard,providers,command,evidence
   {id:'provider-truth',rule:'Configured credentials/models are not proof of successful provider calls',pass:true},
   {id:'guard-freshness',rule:'Stale or missing Guard data cannot authorize a claim or sensitive action',pass:!stale},
   {id:'settlement-integrity',rule:'Revenue is counted only after confirmed settlement evidence',pass:true},
-  {id:'security-owner-gate',rule:'Irreversible financial/security actions require owner approval',pass:!sensitive||true},
+  {id:'security-owner-gate',rule:'Irreversible financial/security actions require owner approval',pass:!sensitive,status:sensitive?'approval_required':'not_triggered'},
   {id:'independent-review',rule:'Specialist outputs must be cross-checked; one model cannot self-approve',pass:liveProviders.length>=2},
   {id:'release-proof',rule:'No release claim without tests, deployment SHA, and live health evidence',pass:false}
  ];
