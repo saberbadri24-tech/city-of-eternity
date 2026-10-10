@@ -141,9 +141,11 @@ const server=http.createServer(async(req,res)=>{
       let body;try{body=JSON.parse(raw.toString('utf8')||'{}')}catch{return json(400,{ok:false,error:'invalid_json'})}
       const text=typeof body.text==='string'?body.text:'';const target=String(body.target||'');
       const allowed=new Set(['en','fa','ar','tr','ru','de','fr','es','pt','it','nl','pl','uk','sv','no','da','fi','cs','sk','ro','hu','el','bg','sr','hr','sl','he','ur','hi','bn','ta','te','th','vi','id','ms','zh-CN','zh-TW','ja','ko']);
-      if(!allowed.has(target)||!text||text.length>10_000||!/^([\s\S]*\[\[AX\d+\]\][\s\S]*)$/.test(text))return json(400,{ok:false,error:'invalid_translation_request'});
+      if(!allowed.has(target)||!text.trim()||text.length>10_000)return json(400,{ok:false,error:'invalid_translation_request'});
+      const hasMarkers=/\[\[AX\d+\]\]/.test(text);
+      const sourceText=hasMarkers?text:'[[AX0]]'+text;
       const system='You are a professional UI localization engine. Translate each text after its [[AXn]] marker into the target language. Preserve every marker exactly once and in order. Keep product names, URLs, code, numbers, and placeholders unchanged. Output only the translated lines, one marker per line, no commentary.';
-      const user='Target language: '+target+'\nTranslate these UI strings:\n'+text;
+      const user='Target language: '+target+'\\nTranslate these UI strings:\\n'+sourceText;
       let output='';let outputSource='';
       try{
         if(process.env.OPENAI_API_KEY){
@@ -154,13 +156,14 @@ const server=http.createServer(async(req,res)=>{
           output='';
         }
       }catch(e){output='';outputSource='';}
-      if(!output){output=localTranslate(text,target);outputSource='local-translation-fallback';}
-      const expected=[...text.matchAll(/\[\[AX(\d+)\]\]/g)].map(m=>m[0]);
+      if(!output){output=localTranslate(sourceText,target);outputSource='local-translation-fallback';}
+      const expected=[...sourceText.matchAll(/\[\[AX(\d+)\]\]/g)].map(m=>m[0]);
       const found=[...output.matchAll(/\[\[AX(\d+)\]\]/g)].map(m=>m[0]);
-      if(!expected.length||expected.some((m,i)=>found[i]!==m)||found.length!==expected.length){output=localTranslate(text,target);outputSource='local-translation-fallback';}
+      if(!expected.length||expected.some((m,i)=>found[i]!==m)||found.length!==expected.length){output=localTranslate(sourceText,target);outputSource='local-translation-fallback';}
       const verified=[...output.matchAll(/\[\[AX(\d+)\]\]/g)].map(m=>m[0]);
-      if(!expected.length||expected.some((m,i)=>verified[i]!==m)||verified.length!==expected.length)return json(200,{ok:true,target,text,engine:'local-translation-fallback',fallback:true});
-      return json(200,{ok:true,target,text:output,engine:outputSource||'local-translation-fallback',fallback:outputSource==='local-translation-fallback'});
+      if(!expected.length||expected.some((m,i)=>verified[i]!==m)||verified.length!==expected.length){output=localTranslate(sourceText,target);outputSource='local-translation-fallback';}
+      const resultText=hasMarkers?output:output.replace(/^\\[\\[AX0\\]\\]/,'');
+      return json(200,{ok:true,target,text:resultText,engine:outputSource||'local-translation-fallback',fallback:outputSource==='local-translation-fallback'});
     }
 
     if((u.pathname==='/healthz'||u.pathname==='/api/health')&&req.method==='GET'){
