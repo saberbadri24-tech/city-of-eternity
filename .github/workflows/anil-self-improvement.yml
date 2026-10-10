@@ -1,113 +1,34 @@
-name: ANIL X Self Improvement Radar
+name: ANIL X Independent Engine QA
 on:
   workflow_dispatch:
   schedule:
     - cron: "17 * * * *"
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 concurrency:
-  group: anil-self-improvement
+  group: anil-independent-engine-qa
   cancel-in-progress: true
 jobs:
-  audit:
+  verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 15
     steps:
-      - name: Secret availability gate
-        id: keygate
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: |
-          if [ -n "$OPENAI_API_KEY" ]; then
-            echo "enabled=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "enabled=false" >> "$GITHUB_OUTPUT"
-            echo "OPENAI_API_KEY is not configured; self-improvement cycle is intentionally skipped."
-          fi
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-        if: steps.keygate.outputs.enabled == 'true'
-        with: {fetch-depth: 1}
-      - name: Check for existing improvement PR
-        if: steps.keygate.outputs.enabled == 'true'
-        id: gate
-        env:
-          GH_TOKEN: ${{ github.token }}
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24
+      - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
+        with:
+          python-version: "3.12"
+      - name: Syntax and independent engine regression
         run: |
-          n=$(gh pr list --state open --search "head:anil/self-improve-" --json number --jq 'length')
-          echo "count=$n" >> "$GITHUB_OUTPUT"
-      - name: Ask Astra for one bounded improvement
-        if: steps.keygate.outputs.enabled == 'true' && steps.gate.outputs.count == '0'
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: |
-          python - <<'PY'
-          import json,os,urllib.request,re
-          files=[]
-          for root in ("src","functions","scripts","public"):
-            if os.path.isdir(root):
-              for dp,_,ns in os.walk(root):
-                for n in ns:
-                  p=os.path.join(dp,n)
-                  if os.path.getsize(p)<=120000: files.append(p)
-          q={"task":"Find exactly ONE safe concrete improvement for reliability, usefulness, UX, automation, observability, research, or Guard integration.","allowed_roots":["src/","functions/","scripts/","public/"],"forbidden":["secrets","credentials","private keys","seed phrases","wallet signing","fund transfers","payment execution","KYC/CAPTCHA bypass","spam","security weakening","workflow modification"],"files":files[:250]}
-          b=json.dumps({"model":"gpt-5-mini","messages":[{"role":"system","content":"Astra engineering auditor. JSON only: {path,goal,reason}. Choose one existing safe file or null. Never claim tests passed."},{"role":"user","content":json.dumps(q,ensure_ascii=False)}],"temperature":0.1}).encode()
-          r=urllib.request.Request("https://api.openai.com/v1/chat/completions",data=b,headers={"Authorization":"Bearer "+os.environ["OPENAI_API_KEY"],"Content-Type":"application/json"})
-          t=json.load(urllib.request.urlopen(r,timeout=60))["choices"][0]["message"]["content"]
-          try:x=json.loads(t)
-          except:x=json.loads(re.search(r"\{.*\}",t,re.S).group(0))
-          open("/tmp/plan.json","w").write(json.dumps(x))
-          PY
-      - name: Generate bounded patch
-        id: patch
-        if: steps.keygate.outputs.enabled == 'true' && steps.gate.outputs.count == '0'
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: |
-          python - <<'PY'
-          import json,os,urllib.request,re
-          p=json.load(open("/tmp/plan.json")); path=p.get("path")
-          ok=bool(path and path.startswith(("src/","functions/","scripts/","public/")) and ".." not in path and not any(x in path.lower() for x in (".env","secret","credential","private-key","seed")))
-          if not ok:
-            open("/tmp/skip","w").write("1"); raise SystemExit
-          cur=open(path,encoding="utf-8").read()
-          q={"path":path,"goal":p.get("goal"),"reason":p.get("reason"),"current":cur[:190000],"requirements":"Return JSON {content,message}. Complete replacement, minimal scoped change, preserve compatibility, no secrets/credentials/signing/transfer/payment execution/bypasses/workflow edits."}
-          b=json.dumps({"model":"gpt-5-mini","messages":[{"role":"system","content":"Astra. Make one bounded production code improvement. JSON only. Never claim tests passed."},{"role":"user","content":json.dumps(q,ensure_ascii=False)}],"temperature":0.1}).encode()
-          r=urllib.request.Request("https://api.openai.com/v1/chat/completions",data=b,headers={"Authorization":"Bearer "+os.environ["OPENAI_API_KEY"],"Content-Type":"application/json"})
-          t=json.load(urllib.request.urlopen(r,timeout=120))["choices"][0]["message"]["content"]
-          try:x=json.loads(t)
-          except:x=json.loads(re.search(r"\{.*\}",t,re.S).group(0))
-          c=x.get("content","")
-          if not c or len(c)>200000 or re.search(r"BEGIN (RSA|OPENSSH|EC|PRIVATE) KEY|seed phrase|recovery phrase|private key\s*[:=]",c,re.I): raise SystemExit("rejected")
-          open(path,"w",encoding="utf-8").write(c)
-          open("/tmp/change.json","w").write(json.dumps({"path":path,"message":x.get("message","ANIL X self-improvement")}))
-          PY
-          echo "skip=false" >> "$GITHUB_OUTPUT"
-        continue-on-error: false
-      - name: Test and browser verify
-        if: steps.keygate.outputs.enabled == 'true' && steps.gate.outputs.count == '0' && steps.patch.outputs.skip != 'true'
-        env: {ANIL_BASE_URL: https://anil-x-live.onrender.com}
-        run: |
-          npm install
-          npm test --if-present
-          npm audit --omit=dev --audit-level=high
           node --check worker.js
-          npm install --no-save playwright@1.55.0
-          npx playwright install --with-deps chromium
-          node scripts/production-browser-smoke.mjs
-      - name: Open review PR
-        if: steps.keygate.outputs.enabled == 'true' && steps.gate.outputs.count == '0' && steps.patch.outputs.skip != 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          PATHV=$(python -c 'import json;print(json.load(open("/tmp/change.json"))["path"])')
-          MSG=$(python -c 'import json;print(json.load(open("/tmp/change.json"))["message"])')
-          branch="anil/self-improve-$(date +%s)"
-          git checkout -b "$branch"
-          git add -- "$PATHV"
-          git diff --cached --quiet && exit 0
-          git config user.name "ANIL X Self Improvement"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "$MSG"
-          git push -u origin "$branch"
-          gh pr create --base main --head "$branch" --title "ANIL X self-improvement: $MSG" --body "Bounded AI-generated improvement. Automated tests and browser smoke passed. Owner review is required before production merge."
+          node --check functions/api/anil-engine-chain.mjs
+          node --check functions/api/plan.mjs
+          node --check functions/api/anil-super-team.mjs
+          node scripts/verify-anil-engine-chain.mjs
+          python -m py_compile scripts/airdrop_guard.py
+      - name: Payment integrity regression
+        run: node scripts/verify-payment-integrity.mjs
