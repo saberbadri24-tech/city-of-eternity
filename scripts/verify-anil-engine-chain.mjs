@@ -62,19 +62,20 @@ results.push({
     workerSource.includes("execution:planData.execution||{performed:false,status:'not_executed'}")
 });
 const ownerChatIndex = workerSource.indexOf('// Internal-first owner chat: do not invoke hosted LLM/bot providers for ordinary conversation.');
-const ownerHistoryIndex = workerSource.indexOf('const history=Array.isArray(b.messages)', ownerChatIndex);
-const externalAiIndex = workerSource.indexOf('const configuredAi=Object.values(getAiConfig(env))', ownerHistoryIndex);
+const ownerChatEnd = workerSource.indexOf('\nexport default', ownerChatIndex);
+const ownerChatSource = workerSource.slice(ownerChatIndex, ownerChatEnd);
 results.push({
-  name:'owner chat uses first-party council before any hosted LLM provider',
-  ok:ownerChatIndex >= 0 && ownerHistoryIndex > ownerChatIndex &&
-    externalAiIndex > ownerHistoryIndex &&
-    workerSource.slice(ownerChatIndex, ownerHistoryIndex).includes("action:'independent_council_primary'") &&
-    workerSource.slice(ownerChatIndex, ownerHistoryIndex).includes('externalModelsCalled:false')
+  name:'owner chat uses first-party council without hosted-model calls',
+  ok:ownerChatIndex >= 0 && ownerChatEnd > ownerChatIndex &&
+    ownerChatSource.includes("action:'independent_council_primary'") &&
+    ownerChatSource.includes('externalModelsCalled:false') &&
+    !/https:\/\/api\.[a-z0-9.-]+\//i.test(ownerChatSource)
 });
 results.push({
-  name:'owner chat keeps execution evidence-gated',
-  ok:workerSource.slice(ownerChatIndex, ownerHistoryIndex).includes("action:'independent_council_unavailable'") &&
-    workerSource.slice(ownerChatIndex, ownerHistoryIndex).includes("},503)")
+  name:'owner chat keeps execution evidence-gated without provider error disclosure',
+  ok:ownerChatSource.includes("action:'independent_council_fallback'") &&
+    ownerChatSource.includes("performed:false") &&
+    !ownerChatSource.includes('providerFailures')
 });
 const failed = results.filter(item => !item.ok);
 for (const result of results) console.log((result.ok?'PASS ':'FAIL ')+result.name);
