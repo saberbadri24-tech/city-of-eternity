@@ -2,7 +2,6 @@ import assert from 'node:assert/strict';
 import {buildComplementaryCouncil} from '../functions/api/anil-team-council.mjs';
 import {fallbackModels} from '../functions/api/anil-super-team.mjs';
 
-assert.deepEqual(fallbackModels.astra,['gpt-6-astra','gpt-6.1-sol','gpt-6-luna','gpt-5.6-terra','gpt-5.6-luna']);
 assert.deepEqual(fallbackModels.astra,['gpt-6-astra','gpt-6.1-sol','gpt-6-luna','gpt-5.6-luna']);
 assert.deepEqual(fallbackModels.claude,['claude-sonnet-5','claude-opus-5','claude-sonnet-4-6']);
 assert.deepEqual(fallbackModels.gemini,['gemini-3.8-flash','gemini-3.7-flash','gemini-3.6-flash']);
