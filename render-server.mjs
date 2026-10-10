@@ -248,11 +248,41 @@ const server=http.createServer(async(req,res)=>{
       const buf=Buffer.from(await response.arrayBuffer());res.setHeader('content-length',String(buf.length));res.end(buf);return;
     }
 
+    if(u.pathname==='/api/guard/catch-stage'&&req.method==='POST'){
+      const json=(status,payload)=>{res.statusCode=status;res.setHeader('content-type','application/json; charset=utf-8');res.setHeader('cache-control','no-store');res.setHeader('x-content-type-options','nosniff');res.end(JSON.stringify(payload));};
+      env.PAYMENTS=await getPaymentsStore();
+      if(!env.PAYMENTS)return json(503,{ok:false,error:'private_storage_unavailable'});
+      const raw=await readBody(req);if(raw.length>12000)return json(413,{ok:false,error:'payload_too_large'});
+      let body;try{body=JSON.parse(raw.toString('utf8')||'{}')}catch{return json(400,{ok:false,error:'invalid_json'})}
+      const id=String(body.id||'');
+      if(!/^[a-zA-Z0-9._-]{1,120}$/.test(id))return json(400,{ok:false,error:'invalid_candidate_id'});
+      const queue=await env.PAYMENTS.get('guard/private/ownerQueue','json').catch(()=>null);
+      const candidate=(Array.isArray(queue?.items)?queue.items:[]).find(x=>String(x.id||'')===id);
+      if(!candidate||candidate.officialQualified!==true||candidate.status!=='READY_FOR_OWNER_REVIEW'||candidate.action!=='OWNER_REVIEW_ONLY')
+        return json(409,{ok:false,error:'candidate_not_eligible_for_owner_queue'});
+      const key='guard/catch/'+id;
+      const existing=await env.PAYMENTS.get(key,'json').catch(()=>null);
+      if(existing)return json(200,{ok:true,alreadyStaged:true,status:existing.status||'PENDING_OWNER',id});
+      const staged={
+        id,title:String(candidate.title||'Guard opportunity').slice(0,180),
+        source:String(candidate.url||'').slice(0,500),
+        category:'OFFICIAL_OPPORTUNITY_REVIEW',
+        currency:'',estimatedValue:null,verifiedValue:null,
+        status:'PENDING_OWNER',requiresOwnerApproval:true,
+        origin:'immortal-guard-owner-review-queue',
+        evidence:{officialQualified:true,specialistsPassed:Number(candidate.specialistsPassed||0),specialistsTotal:Number(candidate.specialistsTotal||0),fingerprint:String(candidate.fingerprint||'').slice(0,100)},
+        safety:{autoClaim:false,autoSigning:false,autoTransfer:false,secretStorage:false},
+        createdAt:new Date().toISOString()
+      };
+      await env.PAYMENTS.put(key,JSON.stringify(staged));
+      return json(201,{ok:true,staged:true,status:'PENDING_OWNER',id,ownerApprovalRequired:true,walletAction:'NOT_PERFORMED'});
+    }
+
     if(u.pathname==='/api/guard/ingest'&&req.method==='POST'){
       if(!(await verifyGuardOidc(req))){res.statusCode=401;res.setHeader('content-type','application/json');res.end(JSON.stringify({ok:false,error:'github_actions_auth_required'}));return;}
       const body=await readBody(req);
       const b=JSON.parse(body?.toString('utf8')||'{}');
-      const allowed=['status','opportunities','highValue','sourceHealth','capabilities','radar','receipts','official','ledger'];
+      const allowed=['status','opportunities','highValue','sourceHealth','capabilities','radar','receipts','official','ledger','externalStatus','ownerQueue','externalAI','externalReceipts','externalIncome'];
       const payload={};
       const bound=v=>{
         const raw=JSON.stringify(v);

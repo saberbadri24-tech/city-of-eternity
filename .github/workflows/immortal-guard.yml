@@ -33,6 +33,13 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           fetch-depth: 1
+      - name: Checkout standalone Immortal Guard source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: saberbadri24-tech/immortal-guard
+          ref: main
+          path: external-immortal-guard
+          persist-credentials: false
 
       - name: Setup Python
         uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
@@ -191,7 +198,13 @@ jobs:
             'radar':read('guard-super-radar.json'),
             'receipts':read('guard-receipts.json'),
             'official':read('guard-official-discovery.json'),
-            'ledger':read('guard-evidence-ledger.json')
+            'ledger':read('guard-evidence-ledger.json'),
+            # Independent Guard is the canonical source for owner-review candidates.
+            'externalStatus':read('external-immortal-guard/data/guard_status.json'),
+            'ownerQueue':read('external-immortal-guard/data/owner_review_queue.json'),
+            'externalAI':read('external-immortal-guard/data/ai_reviews.json'),
+            'externalReceipts':read('external-immortal-guard/data/ton_receipts.json'),
+            'externalIncome':read('external-immortal-guard/data/income_pipeline.json')
           }
           # Bound each document as valid JSON; never truncate the serialized
           # aggregate, which could cut a JSON token and make the ingest body invalid.

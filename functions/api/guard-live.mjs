@@ -49,6 +49,10 @@ export async function handleGuardLive(req,env){
   const keys=Object.keys(LOCAL);
   const entries=await Promise.all(keys.map(async key=>[key,await read(env,key,req)]));
   const data=Object.fromEntries(entries);
+  const [externalStatus,ownerQueue,externalAI,externalReceipts,externalIncome,catchQueue]=await Promise.all([
+    readPrivate(env,'externalStatus'),readPrivate(env,'ownerQueue'),readPrivate(env,'externalAI'),
+    readPrivate(env,'externalReceipts'),readPrivate(env,'externalIncome'),readCatchQueue(env)
+  ]);
   const status=data.status.data||{};
   const opportunities=data.opportunities.data||{};
   const value=data.value.data||{};
@@ -82,7 +86,26 @@ export async function handleGuardLive(req,env){
     opportunities:{count:Number(status.discoveryCount||status.counts?.opportunities||oppItems.length||0),items:oppItems.slice(0,5).map(compact)},
     valueHunter:{count:Number(status.highValueCandidates||status.counts?.incomePriority||highItems.length||0),items:highItems.slice(0,5).map(compact)},
     revenue:{confirmedIncome:Number(ledger.confirmedIncome||ledger.totalReceived||0),status:String(ledger.status||'UNCONFIRMED').slice(0,30)},
-    transfer:{status:String(transfer.status||'OWNER_APPROVAL_REQUIRED').slice(0,40),temporaryConfigured,temporaryWalletUsed:false,catchQueueConfigured:Boolean(env?.PAYMENTS),catchQueuePending:0,permanentConfigured,pendingApprovals:Number(status.waitingOwner||0)},
+    transfer:{status:String(transfer.status||'OWNER_APPROVAL_REQUIRED').slice(0,40),temporaryConfigured,temporaryWalletUsed:false,catchQueueConfigured:Boolean(env?.PAYMENTS),catchQueuePending:catchQueue.length,permanentConfigured,pendingApprovals:Math.max(Number(status.waitingOwner||0),Number(ownerQueue?.count||ownerQueue?.items?.length||0))},
+    externalGuard:{
+      updatedAt:externalStatus?.updatedAt||null,
+      opportunities:Number(externalStatus?.counts?.opportunities||0),
+      verified:Number(externalStatus?.counts?.verificationReachableAligned||0),
+      incomePriority:Number(externalStatus?.counts?.incomePriority||0),
+      queueCount:Number(ownerQueue?.count||ownerQueue?.items?.length||0),
+      queue: Array.isArray(ownerQueue?.items)?ownerQueue.items.slice(0,100):[],
+      aiLive:Boolean(externalAI?.live),
+      aiConfigured:Boolean(externalAI?.configured),
+      aiSuccessfulCalls:Number(externalAI?.successfulCalls||0),
+      aiProviderStatus:externalAI?.providerStatus||{},
+      receipts:Number(externalReceipts?.count||externalReceipts?.receipts?.length||0),
+      receiptStatus:String(externalReceipts?.status||'UNCONFIGURED'),
+      incomePipelineCount:Number(externalIncome?.count||externalIncome?.items?.length||0),
+      temporaryWalletConfigured:Boolean(externalStatus?.wallet?.temporaryAddressConfigured),
+      blockers:Array.isArray(externalStatus?.blockers)?externalStatus.blockers.slice(0,10):[],
+      updatedAtStatus:externalStatus?.updatedAt||null
+    },
+    catchQueue:{count:catchQueue.length,items:catchQueue.slice(0,100)},
     ai:{
       live:Boolean(ai.live||ai.healthy||ai.overall==='healthy'),
       configured:Boolean(ai.configured||ai.providers||Object.values(ai.providerAvailability||{}).some(Boolean)),

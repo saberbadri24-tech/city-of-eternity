@@ -60,14 +60,44 @@ async function decideGuardCatch(id,decision,btn){
   await guard();
  }catch(e){btn.disabled=false;btn.textContent=S.lang==='fa'?'خطا؛ دوباره':'Retry';}
 }
-async function guard(){try{const [d,state]=await Promise.all([api('/api/guard/live'),api('/api/guard/state')]),g=d.guard||{},f=d.freshness||{},raw=state.official?.items||state.highValue?.items||[],items=Array.isArray(raw)?raw:[];$('#gDiscoveries').textContent=Number(g.discoveryCount||state.official?.count||0);$('#gSources').textContent=Number(g.sourcesScanned||0);$('#gOwner').textContent=Number(g.waitingOwner||state.approvals?.length||0);$('#gFresh').textContent=f.stale?'STALE':'FRESH';$('#guardOpps').innerHTML=items.length?items.slice(0,20).map(x=>'<div class="row"><div><b>'+esc(x.title||x.name||'Opportunity')+'</b><small>'+esc(x.source||x.domain||'—')+' · '+esc(x.status||x.action||'discovered')+'</small></div><span class="tag '+(String(x.status||x.action||'').includes('OWNER')?'gold':'ok')+'">'+esc(x.value||x.score||'—')+'</span></div>').join(''):'<div class="empty">No verified opportunity is currently in the live queue.</div>';const c=await api('/api/guard/catches');const ci=c.items||[];$('#catchQueue').innerHTML=ci.length?ci.slice(0,30).map(x=>{
- const pending=String(x.status||'')==='PENDING_OWNER';
- return '<div class="row"><div><b>'+esc(x.title||'Guard catch')+'</b><small>'+esc(x.source||'—')+' · '+esc(x.currency||'')+' '+esc(x.verifiedValue||x.estimatedValue||'—')+'</small></div><span class="tag gold">'+esc(x.status||'—')+'</span>'+(pending?'<div class="row-actions"><button type="button" data-catch-approve="'+esc(x.id)+'">Approve</button><button type="button" data-catch-reject="'+esc(x.id)+'">Reject</button></div>':'')+'</div>';
- }).join(''):'<div class="empty">No catches waiting.</div>';
- $('#catchQueue').querySelectorAll('[data-catch-approve]').forEach(b=>b.onclick=()=>decideGuardCatch(b.dataset.catchApprove,'approved',b));
- $('#catchQueue').querySelectorAll('[data-catch-reject]').forEach(b=>b.onclick=()=>decideGuardCatch(b.dataset.catchReject,'rejected',b));
- await initOwnerTonWallet();
-const a=await api('/api/guard/state');approvals((a.approvals||[]).filter(x=>x.status==='OWNER_APPROVAL'||x.requiresOwnerApproval));return d}catch(e){$('#guardOpps').innerHTML='<div class="empty">Guard unavailable: '+esc(e.message)+'</div>'}}
+async function guard(){
+ try{
+  const [d,state]=await Promise.all([api('/api/guard/live'),api('/api/guard/state')]);
+  const g=d.guard||{},f=d.freshness||{},external=d.externalGuard||{};
+  const localRaw=state.official?.items||state.highValue?.items||[];
+  const items=Array.isArray(localRaw)?localRaw:[];
+  const externalItems=Array.isArray(external.queue)?external.queue:[];
+  $('#gDiscoveries').textContent=Number(g.discoveryCount||state.official?.count||external.opportunities||0).toLocaleString();
+  $('#gSources').textContent=Number(g.sourcesScanned||0).toLocaleString();
+  $('#gOwner').textContent=Number(external.queueCount||g.waitingOwner||state.approvals?.length||0).toLocaleString();
+  $('#gFresh').textContent=f.stale?'STALE':'FRESH';
+  const localHtml=items.slice(0,20).map(x=>'<div class="row"><div><b>'+esc(x.title||x.name||'Opportunity')+'</b><small>'+esc(x.source||x.domain||'—')+' · '+esc(x.status||x.action||'discovered')+'</small></div><span class="tag '+(String(x.status||x.action||'').includes('OWNER')?'gold':'ok')+'">'+esc(x.value||x.score||'—')+'</span></div>').join('');
+  const externalHtml=externalItems.slice(0,100).map(x=>'<div class="row"><div><b>'+esc(x.title||'Immortal Guard opportunity')+'</b><small><a href="'+esc(x.url||'#')+'" target="_blank" rel="noopener noreferrer">منبع رسمی</a> · '+esc(x.status||'READY_FOR_OWNER_REVIEW')+' · بررسی متخصصان '+esc(x.specialistsPassed||0)+'/'+esc(x.specialistsTotal||0)+'</small></div><span class="tag gold">فقط بررسی مالک</span><div class="row-actions"><button type="button" data-stage-owner="'+esc(x.id||'')+'">ارسال به صف تأیید مالک</button></div></div>').join('');
+  $('#guardOpps').innerHTML=(localHtml+externalHtml)||'<div class="empty">هنوز فرصت تأییدشده‌ای برای بررسی مالک در صف نیست.</div>';
+  if(external.queueCount||externalItems.length){
+   const aiState=external.aiLive?'AI زنده تأیید شد':'هوش بیرونی زنده نیست؛ بررسی محلی فعال است';
+   const walletState=external.temporaryWalletConfigured?'آدرس کیف موقت تنظیم شده':'کیف موقت هنوز تنظیم نشده';
+   const diag='<div class="row"><div><b>Immortal Guard مستقل</b><small>'+Number(external.opportunities||0).toLocaleString()+' شکار · '+Number(external.verified||0).toLocaleString()+' منبع قابل‌دسترسی · '+aiState+' · '+walletState+'</small></div><span class="tag gold">'+Number(external.queueCount||0)+' صف مالک</span></div>';
+   $('#guardOpps').insertAdjacentHTML('afterbegin',diag);
+  }
+  const c=await api('/api/guard/catches'),ci=c.items||[];
+  $('#catchQueue').innerHTML=ci.length?ci.slice(0,100).map(x=>{
+   const pending=String(x.status||'')==='PENDING_OWNER';
+   return '<div class="row"><div><b>'+esc(x.title||'Guard catch')+'</b><small>'+esc(x.source||'—')+' · '+esc(x.currency||'')+' '+esc(x.verifiedValue||x.estimatedValue||'—')+'</small></div><span class="tag gold">'+esc(x.status||'—')+'</span>'+(pending?'<div class="row-actions"><button type="button" data-catch-approve="'+esc(x.id)+'">تأیید بررسی</button><button type="button" data-catch-reject="'+esc(x.id)+'">رد</button></div>':'')+'</div>';
+  }).join(''):'<div class="empty">هنوز موردی در صف دریافت/بررسی مالک نیست.</div>';
+  $('#catchQueue').querySelectorAll('[data-catch-approve]').forEach(b=>b.onclick=()=>decideGuardCatch(b.dataset.catchApprove,'approved',b));
+  $('#catchQueue').querySelectorAll('[data-catch-reject]').forEach(b=>b.onclick=()=>decideGuardCatch(b.dataset.catchReject,'rejected',b));
+  $('#guardOpps').querySelectorAll('[data-stage-owner]').forEach(b=>b.onclick=async()=>{
+   const id=b.dataset.stageOwner;if(!id)return;
+   b.disabled=true;
+   try{const out=await api('/api/guard/catch-stage',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({id})});b.textContent=out.alreadyStaged?'از قبل در صف است':'به صف مالک اضافه شد';await guard()}
+   catch(e){b.disabled=false;b.textContent='خطا؛ دوباره تلاش کن';console.error('Guard owner queue stage failed',e)}
+  });
+  await initOwnerTonWallet();
+  const a=await api('/api/guard/state');approvals((a.approvals||[]).filter(x=>x.status==='OWNER_APPROVAL'||x.requiresOwnerApproval));
+  return d
+ }catch(e){$('#guardOpps').innerHTML='<div class="empty">Guard unavailable: '+esc(e.message)+'</div>'}
+}
 async function revenue(){try{const [f,p,e,a,o]=await Promise.all([api('/api/revenue/fleet'),api('/api/revenue/programs'),api('/api/revenue/engines'),api('/api/analytics'),api('/api/revenue/opportunities')]);const m=a.metrics||{};$('#rLeads').textContent=Number(m.leads||0).toLocaleString();$('#rOrders').textContent=Number(m.orders||0).toLocaleString();$('#rPaid').textContent=Number(m.paid||0).toLocaleString();$('#rRevenue').textContent='$'+Number(m.revenueUsd||0).toLocaleString();$('#revenueNotice').textContent='Variza: '+(f.truth?.paymentReady?'READY':'CHECK')+' · accounting: '+(f.truth?.persistentAccounting?'DURABLE':'CHECK')+' · TON: '+(f.truth?.tonReady?'READY':'CHECK');$('#revenueEngines').innerHTML=(e.engines||[]).map(x=>'<div class="row"><div><b>'+esc(x.name)+'</b><small>'+esc(x.monetization||x.mode||'engine')+'</small></div><span class="tag '+(x.status==='ACTIVE'?'ok':'gold')+'">'+esc(x.status||x.mode||'—')+'</span></div>').join('');$('#revenuePrograms').innerHTML=(p.programs||[]).slice(0,40).map(x=>'<div class="row"><div><b>'+esc(x.name||x.id)+'</b><small>'+esc(x.status||'—')+' · '+esc(x.prereq||'')+'</small></div><span class="tag '+(x.operational?'ok':'gold')+'">'+(x.operational?'LIVE':'CHECK')+'</span></div>').join('')}catch(e){$('#revenueNotice').textContent='Revenue unavailable: '+e.message}}
 async function finance(){try{const d=await api('/api/revenue/settlement');$('#fVariza').textContent=d.providers?.variza?'READY':'OFF';$('#fTon').textContent=d.providers?.ton?'READY':'OFF';$('#fAccounting').textContent=d.providers?.accounting?'DURABLE':'CHECK';$('#fSettlement').textContent=d.policy?.paidOnly?'PAID ONLY':'CHECK'}catch(e){}}
 async function qa(){try{const [h,k,e]=await Promise.all([api('/api/health'),api('/api/anil/capability-kernel'),api('/api/execution-readiness')]);$('#qHealth').textContent=h.ok?'OK':'FAIL';$('#qCap').textContent=(k.capabilityLevel?.configured??'—')+'%';$('#qTarget').textContent=(k.capabilityLevel?.target??100)+'%';$('#qaDetails').textContent='Configured capability: '+(k.capabilityLevel?.configured??'—')+'%. Runtime verification is reported separately; configuration is not proof of live provider access. Execution readiness: '+JSON.stringify(e)}catch(e){$('#qaDetails').textContent='QA error: '+e.message}}
