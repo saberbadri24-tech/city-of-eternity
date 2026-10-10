@@ -52,6 +52,7 @@ async function providerClaude(prompt,env){
     lastStatus=r.status;
     const err=await r.json().catch(()=>({}));
     lastDetail=String(err?.error?.message||err?.error?.type||"").replace(/[\r\n\t]/g," ").slice(0,180);
+    if(/credit balance|insufficient credit|out of credits|billing/i.test(lastDetail))throw Error("anthropic_402");
     if(![400,404].includes(r.status))throw Error("anthropic_"+r.status);
   }
   const failure=Error("anthropic_"+lastStatus);failure.providerDetail=lastDetail;throw failure;
@@ -110,7 +111,9 @@ export default async (req,env)=>{
     const started=Date.now(),budgetMs=9000;
     for(const name of providerOrder(env)){
       if(Date.now()-started>=budgetMs)break;
-      const coolingUntil=providerCooldownsV4.get(name)||0;
+      const cooldownEntry=providerCooldownsV4.get(name);
+      const coolingUntil=typeof cooldownEntry==="object"&&cooldownEntry?.version===4?Number(cooldownEntry.until)||0:0;
+      if(cooldownEntry&&coolingUntil===0)providerCooldownsV4.delete(name);
       if(coolingUntil>Date.now()){
         attempts.push({provider:name,status:"cooldown",retryAfterMs:coolingUntil-Date.now()});
         continue;
@@ -123,11 +126,11 @@ export default async (req,env)=>{
         const message=String(error?.message||error);
         const match=message.match(/_(400|401|402|403|404|408|413|429|500|502|503|504)$/);
         const status=match?Number(match[1]):0;
-        if(status===402)providerCooldownsV4.set(name,Date.now()+24*60*60*1000);
-        else if(status===429)providerCooldownsV4.set(name,Date.now()+10*60*1000);
-        else if(status===400)providerCooldownsV4.set(name,Date.now()+60*1000);
-        else if(status===401||status===403)providerCooldownsV4.set(name,Date.now()+60*60*1000);
-        else if(!status)providerCooldownsV4.set(name,Date.now()+30*1000);
+        if(status===402)providerCooldownsV4.set(name,{until:Date.now()+24*60*60*1000,version:4});
+        else if(status===429)providerCooldownsV4.set(name,{until:Date.now()+10*60*1000,version:4});
+        else if(status===400)providerCooldownsV4.set(name,{until:Date.now()+60*1000,version:4});
+        else if(status===401||status===403)providerCooldownsV4.set(name,{until:Date.now()+60*60*1000,version:4});
+        else if(!status)providerCooldownsV4.set(name,{until:Date.now()+30*1000,version:4});
         attempts.push({provider:name,status:status===429?"rate_limited":status===402?"credits_exhausted":status===400?"invalid_request_or_model":status===401||status===403?"auth_or_access_error":status?"http_error":"timeout_or_invalid",httpStatus:status||undefined,...(error?.providerDetail?{detail:String(error.providerDetail).slice(0,180)}:{})});
       }
     }
