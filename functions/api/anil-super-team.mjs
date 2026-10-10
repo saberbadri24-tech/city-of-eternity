@@ -35,6 +35,7 @@ async function brain(env,who,prompt){
  const candidates=[...new Set([configured,...(fallbackModels[who]||[])].filter(Boolean))];
  if(!key)return {live:false,provider:who,model:configured||null,reason:'runtime_secret_missing'};
  let last={live:false,provider:who,model:candidates[0]||null,reason:'provider_unavailable'};
+ let transientRetryUsed=false;
  for(let index=0;index<candidates.length;index++){
   const model=candidates[index];
   try{
@@ -52,6 +53,7 @@ async function brain(env,who,prompt){
     const invalidModel=[400,404,422].includes(r.status)&&/model|not found|does not exist|unsupported|not available/i.test(detail);
     last={live:false,provider:who,model,reason:who+'_'+r.status,...(detail?{detail}:{})};
     if(invalidModel&&index<candidates.length-1)continue;
+    if([500,502,503,504].includes(r.status)&&!transientRetryUsed&&index<candidates.length-1){transientRetryUsed=true;continue;}
     return last;
    }
    const raw=who==='astra'?d?.output_text:who==='claude'?d?.content?.map(x=>x.text||'').join(''):d?.candidates?.[0]?.content?.parts?.map(x=>x.text||'').join('');
@@ -59,7 +61,10 @@ async function brain(env,who,prompt){
    if(!output||typeof output!=='object')return {live:false,provider:who,model,reason:'provider_invalid_json'};
    return {live:true,provider:who,model,output};
   }catch(e){
-   return {live:false,provider:who,model,reason:String(e?.name==='TimeoutError'?'provider_timeout':e?.message||e).slice(0,160)};
+   last={live:false,provider:who,model,reason:String(e?.name==='TimeoutError'?'provider_timeout':e?.message||e).slice(0,160)};
+   const transient=e?.name==='TimeoutError'||/fetch failed|network|ECONNRESET|ECONNREFUSED|EAI_AGAIN|socket/i.test(String(e?.message||''));
+   if(transient&&!transientRetryUsed&&index<candidates.length-1){transientRetryUsed=true;continue;}
+   return last;
   }
  }
  return last;
