@@ -1,52 +1,64 @@
 {
-  "schemaVersion": 1,
-  "name": "ANIL X Frontier Control Plane",
-  "purpose": "Keep model/tool routing capability-first, health-aware, evidence-first and automatically refreshed from authoritative provider metadata.",
+  "schemaVersion": 2,
+  "name": "ANIL X Independent Engine Control Plane",
+  "purpose": "Route tasks through first-party specialist engines, bounded tools, live evidence and independent verification.",
   "principles": [
-    "Never hard-code a permanent winner.",
-    "Prefer live runtime evidence over labels or benchmark claims.",
-    "Route by task, capability, latency, reliability and cost when measurable.",
-    "Fail over without exposing secrets.",
-    "A new model is not production-ready until a runtime smoke test passes.",
-    "Do not silently weaken security, payment or wallet approval boundaries."
+    "Prefer runtime evidence over labels or benchmark claims.",
+    "No external model is required for the core reasoning chain.",
+    "Fail closed when evidence is stale or unavailable.",
+    "Never claim execution without tool confirmation.",
+    "Do not weaken payment, security or wallet approval boundaries."
   ],
-  "providerCatalog": {
-    "openai": {
-      "modelsEndpoint": "https://api.openai.com/v1/models",
-      "keyEnv": "OPENAI_API_KEY"
+  "engineCatalog": {
+    "reasoning": {
+      "module": "functions/api/anil-engine-chain.mjs",
+      "role": "problem decomposition and plan"
     },
-    "anthropic": {
-      "modelsEndpoint": "https://api.anthropic.com/v1/models",
-      "keyEnv": "ANTHROPIC_API_KEY"
+    "planning": {
+      "module": "functions/api/plan.mjs",
+      "role": "intent routing and research"
     },
-    "google_gemini": {
-      "modelsEndpoint": "https://generativelanguage.googleapis.com/v1beta/models",
-      "keyEnv": "GEMINI_API_KEY"
+    "security": {
+      "module": "functions/api/guard-live.mjs",
+      "role": "security and opportunity gate"
+    },
+    "verification": {
+      "module": "functions/api/execution-readiness.mjs",
+      "role": "runtime evidence and readiness"
+    },
+    "superTeam": {
+      "module": "functions/api/anil-super-team.mjs",
+      "role": "independent engine coordination"
+    },
+    "paymentIntegrity": {
+      "module": "functions/api/pay.js",
+      "role": "checkout integrity and order binding"
+    },
+    "revenue": {
+      "module": "worker.js",
+      "role": "revenue operations and settlement truth"
+    },
+    "quality": {
+      "module": "scripts/verify-anil-engine-chain.mjs",
+      "role": "regression and engine-chain verification"
     }
-  },
-  "refresh": {
-    "cadence": "daily",
-    "source": "official provider model APIs when credentials are available",
-    "store": "frontier-model-catalog.json",
-    "commitSecrets": false
   },
   "selection": {
     "dimensions": [
       "task_capability",
       "runtime_health",
+      "evidence_quality",
       "latency",
-      "failure_rate",
-      "cost_when_available",
-      "context_capacity_when_available",
-      "multimodal_support_when_required"
+      "safe_tool_availability"
     ],
     "minimumEvidence": "successful runtime smoke test",
-    "tieBreak": "lowest observed failure/latency cost after capability requirements are satisfied"
+    "tieBreak": "lowest observed failure rate after capability requirements are satisfied"
   },
   "safeFallback": {
-    "deterministicTools": true,
+    "deterministicEngines": true,
     "singleProviderModeAllowed": true,
-    "unconfiguredProvidersExcluded": true,
-    "noFakeCapability": true
+    "unavailableToolsExcluded": true,
+    "noFakeCapability": true,
+    "externalModelCallsOptional": true
   }
 }
