@@ -9,7 +9,19 @@ const LOCAL={
  radar:'guard-super-radar.json',
  sourceHealth:'guard-source-health.json'
 };
-const REMOTE='https://raw.githubusercontent.com/saberbadri24-tech/city-of-eternity/main/';
+const REMOTE='https://raw.githubusercontent.com/saberbadri24-tech/immortal-guard/main/data/';
+const REMOTE_FILES={
+ status:'guard_status.json',
+ opportunities:'opportunities.json',
+ value:'airdrop_plus.json',
+ ledger:'revenue_ledger.json',
+ transfer:'transfer_state.json',
+ receipts:'ton_receipts.json',
+ ai:'ai_reviews.json',
+ radar:'radar_intel.json',
+ sourceHealth:'official_source_gate.json'
+};
+const remoteCache=new Map();
 let cache={at:0,data:null};
 const json=(d,s=200)=>new Response(JSON.stringify(d),{status:s,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-anilx-guard-cache':'server-60s'}});
 async function readLocal(env,name,req){
@@ -26,10 +38,14 @@ async function readPrivate(env,key){
   try{return await env.PAYMENTS.get('guard/private/'+key,'json')}catch{return null}
 }
 async function readRemote(name){
+  const cached=remoteCache.get(name);
+  if(cached&&Date.now()-cached.at<60000)return cached.data;
   try{
-    const r=await fetch(REMOTE+name+'?v='+Math.floor(Date.now()/60000),{headers:{accept:'application/json','cache-control':'no-cache'}});
+    const r=await fetch(REMOTE+encodeURIComponent(name)+'?v='+Math.floor(Date.now()/60000),{headers:{accept:'application/json','cache-control':'no-cache'},signal:AbortSignal.timeout(9000)});
     if(!r.ok)return null;
-    return await r.json();
+    const data=await r.json();
+    remoteCache.set(name,{at:Date.now(),data});
+    return data;
   }catch{return null}
 }
 async function readCatchQueue(env){
@@ -39,6 +55,11 @@ async function readCatchQueue(env){
 async function read(env,key,req){
   const privateData=await readPrivate(env,key);
   if(privateData)return {data:privateData,source:'owner-private-redis'};
+  const remoteName=REMOTE_FILES[key];
+  if(remoteName){
+    const remote=await readRemote(remoteName);
+    if(remote)return {data:remote,source:'immortal-guard-main'};
+  }
   const local=await readLocal(env,LOCAL[key],req);
   return {data:local,source:local?'legacy-local':'unavailable'};
 }
@@ -65,10 +86,10 @@ export async function handleGuardLive(req,env){
   const receiptItems=Array.isArray(receipts.items)?receipts.items:[];
   const approvalItems=Array.isArray(transfer.approvals)?transfer.approvals:Array.isArray(transfer.items)?transfer.items:[];
   const compact=(x)=>({id:x?.id||x?.opportunityId||null,title:String(x?.title||x?.name||'فرصت').slice(0,100),source:String(x?.source||x?.resolvedDomain||'').slice(0,80),status:String(x?.status||x?.verification||'').slice(0,40),value:Number(x?.value||x?.rewardUsd||x?.estimatedValueUsd||0)||0});
-  const temporaryConfigured=String(status.temporaryWallet||'').toLowerCase()==='configured';
-  const permanentConfigured=Boolean(status.permanentWallet||status.permanentAddress);
+  const temporaryConfigured=String(status.temporaryWallet||'').toLowerCase()==='configured'||Boolean(status.wallet?.temporaryAddressConfigured)||Boolean(transfer.temporaryAddress);
+  const permanentConfigured=Boolean(status.permanentWallet||status.permanentAddress||transfer.permanentAddress);
   const out={
-    ok:true,source:'ANIL-X-local-guard-state',
+    ok:true,source:'ANIL-X+Immortal-Guard-runtime',
     updatedAt:status.updatedAt||status.lastScan||opportunities.updatedAt||null,
     freshness:{minutesSinceUpdate:ageMinutes,stale:ageMinutes===null||ageMinutes>15,requiredMaxMinutes:15},
     guard:{
@@ -81,22 +102,30 @@ export async function handleGuardLive(req,env){
     },
     opportunities:{count:Number(status.discoveryCount||status.counts?.opportunities||oppItems.length||0),items:oppItems.slice(0,5).map(compact)},
     valueHunter:{count:Number(status.highValueCandidates||status.counts?.incomePriority||highItems.length||0),items:highItems.slice(0,5).map(compact)},
-    revenue:{confirmedIncome:Number(ledger.confirmedIncome||ledger.totalReceived||0),status:String(ledger.status||'UNCONFIRMED').slice(0,30)},
-    transfer:{status:String(transfer.status||'OWNER_APPROVAL_REQUIRED').slice(0,40),temporaryConfigured,temporaryWalletUsed:false,catchQueueConfigured:Boolean(env?.PAYMENTS),catchQueuePending:0,permanentConfigured,pendingApprovals:Number(status.waitingOwner||0)},
+    revenue:{confirmedIncome:Number(ledger.actualCollectedUsd||0),status:String(ledger.status||(Number(ledger.verifiedSettlementCount||0)>0?'SETTLED_EVIDENCE_VERIFIED':'UNCONFIRMED')).slice(0,30)},
+    transfer:{status:String(transfer.status||'OWNER_APPROVAL_REQUIRED').slice(0,40),temporaryConfigured,temporaryWalletUsed:false,catchQueueConfigured:Boolean(env?.PAYMENTS),catchQueuePending:null,catchQueuePendingKnown:false,permanentConfigured,pendingApprovals:Number(status.waitingOwner||0)},
     ai:{
-      live:Boolean(ai.live||ai.healthy||ai.overall==='healthy'),
-      configured:Boolean(ai.configured||ai.providers||Object.values(ai.providerAvailability||{}).some(Boolean)),
+      live:Boolean(ai.live===true&&Number(ai.successfulCalls||0)>0),
+      configured:Boolean(ai.configured===true||Object.values(ai.providerAvailability||{}).some(Boolean)||Object.values(ai.providerSuccess||{}).some(v=>Number(v)>0)),
       successfulCalls:Number(ai.successfulCalls||0),
-      providers:ai.providerAvailability||{},
+      providers:ai.providerAvailability||ai.providerSuccess||{},
     },
     radar:{
-      candidates:Number(radar?.summary?.totalCandidates||0),
-      officialCandidates:Number(radar?.summary?.officialCandidates||0),
-      actionableOfficial:Number(radar?.summary?.actionableOfficial||0),
-      highPriority:Number(radar?.summary?.highPriority||0),
-      generatedAt:radar.generatedAt||null
+      candidates:Number(radar?.summary?.totalCandidates||radar?.uniqueCandidates||radar?.items?.length||0),
+      officialCandidates:Number(radar?.summary?.officialCandidates||sourceHealth?.officialVerifiedActionableCount||0),
+      actionableOfficial:Number(radar?.summary?.actionableOfficial||sourceHealth?.officialVerifiedActionableCount||0),
+      highPriority:Number(radar?.summary?.highPriority||status?.counts?.incomePriority||0),
+      generatedAt:radar.generatedAt||radar.updatedAt||null
     },
-    sourceHealth:sourceHealth.summary||sourceHealth.counts||{},
+    sourceHealth:sourceHealth.summary||sourceHealth.counts||{
+      officialVerifiedActionableCount:Number(sourceHealth.officialVerifiedActionableCount||0),
+      discoveryOnlyCount:Number(sourceHealth.discoveryOnlyCount||0),
+      sources:radar.sources||0,
+      sourceRows:radar.sourceRows||0,
+      securitySources:radar.securitySources||0,
+      securityChecksAttempted:radar.securityChecksAttempted||0,
+      sourceErrors:radar.sourceErrors||[]
+    },
     sources:Object.fromEntries(entries.map(([key,x])=>[key,x.source])),
     safety:{autoClaim:false,autoSigning:false,autoTransfer:false,secretStorage:false,bypassControls:false,ownerApprovalRequired:true}
   };
