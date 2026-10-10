@@ -52,6 +52,21 @@ results.push({
     workerSource.includes("action:'independent_council_fallback'") &&
     workerSource.includes("execution:planData.execution||{performed:false,status:'not_executed'}")
 });
+const ownerChatIndex = workerSource.indexOf('// Internal-first owner chat: do not invoke hosted LLM/bot providers for ordinary conversation.');
+const ownerHistoryIndex = workerSource.indexOf('const history=Array.isArray(b.messages)', ownerChatIndex);
+const externalAiIndex = workerSource.indexOf('const configuredAi=Object.values(getAiConfig(env))', ownerHistoryIndex);
+results.push({
+  name:'owner chat uses first-party council before any hosted LLM provider',
+  ok:ownerChatIndex >= 0 && ownerHistoryIndex > ownerChatIndex &&
+    externalAiIndex > ownerHistoryIndex &&
+    workerSource.slice(ownerChatIndex, ownerHistoryIndex).includes("action:'independent_council_primary'") &&
+    workerSource.slice(ownerChatIndex, ownerHistoryIndex).includes('externalModelsCalled:false')
+});
+results.push({
+  name:'owner chat fails closed rather than silently falling back to external bots',
+  ok:workerSource.slice(ownerChatIndex, ownerHistoryIndex).includes("action:'independent_council_unavailable'") &&
+    workerSource.slice(ownerChatIndex, ownerHistoryIndex).includes("},503)")
+});
 const failed = results.filter(item => !item.ok);
 for (const result of results) console.log((result.ok?'PASS ':'FAIL ')+result.name);
 if (failed.length) process.exit(1);

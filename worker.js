@@ -960,6 +960,41 @@ async function secretary(req,env){
         return json({ok:true,changed:false,action:'change_not_queued',text:'تغییر اجرا نشد؛ مرز ایمنی یا دسترسی لازم مانع ثبت آن شد.',data:op});
       }catch(e){return json({ok:false,error:'operator_change_failed',message:String(e?.message||e)},502)}
     }
+    // Internal-first owner chat: do not invoke hosted LLM/bot providers for ordinary conversation.
+    // Operational status/Guard/revenue and controlled-change intents above retain their live handlers.
+    {
+      const fa=b.language==='fa'||/[\u0600-\u06FF]/.test(command);
+      const greeting=/^(سلام|درود|وقت بخیر|خسته نباشی|ممنون|مرسی|hello|hi|hey|thanks|thank you)[!؟?.\s]*$/i.test(command.trim());
+      if(greeting){
+        return json({ok:true,action:'first_party_conversation',provider:'anil-core',live:true,
+          text:fa?'سلام. من آنیلِ دستیار مدیر ANIL X هستم. درخواستت را بگو؛ وضعیت زنده را بررسی می‌کنم و هیچ کاری را بدون شواهد انجام‌شده اعلام نمی‌کنم.':'Hello. I am ANIL, the ANIL X owner assistant. Tell me what you need; I will verify live status and never claim an action without evidence.'});
+      }
+      try {
+        const planResponse=await handlePlan(new Request('https://anilx.internal/api/plan',{
+          method:'POST',headers:{'content-type':'application/json'},
+          body:JSON.stringify({text:command,language:fa?'fa':'en'})
+        }),env);
+        const planData=await planResponse.json().catch(()=>({}));
+        if(planResponse.ok&&planData?.ok){
+          return json({ok:true,action:'independent_council_primary',provider:'first-party-deterministic',live:true,
+            text:String(planData.reply||planData.text||planData.answer||''),
+            data:{source:planData.source||'anil-independent-specialist-council',
+              engine:planData.engine||'ANIL-INDEPENDENT-ENGINE-COUNCIL',
+              version:planData.version||null,specialists:planData.council||planData.specialists||null,
+              plan:planData.plan||null,evidence:planData.evidence||[],
+              execution:planData.execution||{performed:false,status:'not_executed'},
+              orchestration:planData.orchestration||null,
+              externalModelsCalled:false}});
+        }
+        return json({ok:false,action:'independent_council_unavailable',provider:'first-party-deterministic',live:false,
+          error:'independent_council_unavailable',
+          text:fa?'زنجیرهٔ مستقل آنیل این درخواست را پردازش نکرد. برای جلوگیری از پاسخ ساختگی، هیچ بات یا مدل بیرونی جایگزین نشد.':'ANIL’s independent council could not process this request. No external bot/model was substituted and no execution is claimed.'},503);
+      } catch (error) {
+        return json({ok:false,action:'independent_council_unavailable',provider:'first-party-deterministic',live:false,
+          error:'independent_council_unavailable',
+          text:fa?'زنجیرهٔ مستقل آنیل موقتاً خطا داد؛ پاسخ یا اجرای ساختگی ارائه نمی‌شود.':'ANIL’s independent council failed temporarily; no fabricated answer or execution is returned.'},503);
+      }
+    }
     const history=Array.isArray(b.messages)?b.messages.slice(-12).map(x=>({role:x?.role==='assistant'?'assistant':'user',content:String(x?.content||'').slice(0,4000)})).filter(x=>x.content&&!/Cannot set properties of null|configured_provider_invocation_failed/i.test(x.content)):[];
     const configuredAi=Object.values(getAiConfig(env)).filter(Boolean).length>0;
     if(configuredAi){
