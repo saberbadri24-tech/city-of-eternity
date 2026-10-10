@@ -515,11 +515,20 @@ async function runtimeRoutes(req,env,u){
     const items=Object.entries(byCustomer).map(([customer,os])=>({customer,orders:os.length,lastPaidAt:os.map(x=>x.paidAt||x.createdAt).sort().pop(),nextService:os.some(x=>x.service==='website')?'growth':os.some(x=>x.service==='growth')?'automation':'growth',upsellAllowed:true}));return rjson({ok:true,customers:items,engine:'retention'});
   }
   if(p==='/api/agent/catalog'&&req.method==='GET'){
-    return rjson({ok:true,protocol:'ANIL-X-Agent-Commerce-v1',services:[
-      {id:'website',name:'AI Website Build',priceUsd:149,currency:'USD'},{id:'airdrop-campaign',name:'Airdrop Campaign Launch',priceUsd:299,currency:'USD'},{id:'airdrop-intelligence',name:'Airdrop Intelligence Report',priceUsd:49,currency:'USD'},{id:'teaser',name:'Marketing Teaser',priceUsd:49,currency:'USD'},{id:'fix',name:'Website Fix',priceUsd:39,currency:'USD'},{id:'growth',name:'Growth & SEO',priceUsd:79,currency:'USD'},{id:'automation',name:'Business Automation',priceUsd:99,currency:'USD'},{id:'ai-agent',name:'AI Agent Integration',priceUsd:129,currency:'USD'}],payment:{provider:'Variza',requiresCheckout:true},safety:{draftOrderOnly:true,no_secret_access:true}});
+    const pricing=await getV90Config(env),prices=pricing.pricesUsd;
+    return rjson({ok:true,protocol:'ANIL-X-Agent-Commerce-v1',currency:'USD',services:[
+      {id:'website',name:'AI Website Build',plan:'BUILD',priceUsd:prices.BUILD,currency:'USD'},
+      {id:'airdrop-campaign',name:'Airdrop Campaign Launch',priceUsd:299,currency:'USD'},
+      {id:'airdrop-intelligence',name:'Airdrop Intelligence Report',priceUsd:49,currency:'USD'},
+      {id:'teaser',name:'Marketing Teaser',plan:'START',priceUsd:prices.START,currency:'USD'},
+      {id:'fix',name:'Website Fix',plan:'FIX',priceUsd:prices.FIX,currency:'USD'},
+      {id:'growth',name:'Growth & SEO',plan:'GROW',priceUsd:prices.GROW,currency:'USD'},
+      {id:'automation',name:'Business Automation',plan:'BUILD',priceUsd:prices.BUILD,currency:'USD'},
+      {id:'ai-agent',name:'AI Agent Integration',plan:'GROW',priceUsd:prices.GROW,currency:'USD'}
+    ],payment:{provider:'Variza',requiresCheckout:true},safety:{draftOrderOnly:true,no_secret_access:true}});
   }
   if(p==='/api/agent/orders'&&req.method==='POST'){
-    const b=await req.json().catch(()=>({})),service=clean(b.service,80),cat={website:149,'airdrop-campaign':299,'airdrop-intelligence':49,teaser:49,fix:39,growth:79,automation:99,'ai-agent':129};if(!cat[service])return rjson({ok:false,error:'service_not_found'},404);
+    const b=await req.json().catch(()=>({})),service=clean(b.service,80),pricing=await getV90Config(env),prices=pricing.pricesUsd,cat={website:prices.BUILD,'airdrop-campaign':299,'airdrop-intelligence':49,teaser:prices.START,fix:prices.FIX,growth:prices.GROW,automation:prices.BUILD,'ai-agent':prices.GROW};if(!cat[service])return rjson({ok:false,error:'service_not_found'},404);
     const order={id:id(),agentId:clean(b.agentId||'external-agent',120),service,amount:cat[service],currency:'USD',description:clean(b.description||'',1000),status:'draft',paymentRequired:true,createdAt:now(),source:'agent-commerce'};await kvPut(env,'orders/'+order.id,order);return rjson({ok:true,order},201);
   }
   if(p==='/api/agent/orders'&&req.method==='GET'){
