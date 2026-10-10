@@ -844,7 +844,26 @@ async function secretary(req,env){
         const op=await anilOperatorChange(req,env,command);
         if(op?.ok)return json({ok:true,changed:false,action:'controlled_change_queued',text:'تغییر کنترل‌شده ساخته و برای تست/صف اجرا ثبت شد؛ تا عبور از تست و انتشار، انجام‌شده محسوب نمی‌شود.',data:op});
         return json({ok:true,changed:false,action:'change_not_queued',text:'تغییر اجرا نشد؛ مرز ایمنی یا دسترسی لازم مانع ثبت آن شد.',data:op});
-      }catch(e){return json({ok:false,error:'operator_change_failed',message:String(e?.message||e)},502)}
+      }catch(e){
+        // Keep the owner chat conversational when code-generation providers are
+        // unavailable. Never imply that a code change was applied or released.
+        let planData={};
+        try{
+          const planned=await handlePlan(new Request('https://anilx.internal/api/plan',{
+            method:'POST',headers:{'content-type':'application/json'},
+            body:JSON.stringify({text:command,language:b.language==='fa'||/[\\u0600-\\u06FF]/.test(command)?'fa':'en'})
+          }),env);
+          planData=await planned.json().catch(()=>({}));
+        }catch{}
+        const fa=b.language==='fa'||/[\\u0600-\\u06FF]/.test(command);
+        const summary=String(planData.reply||'درخواست به مسیر قابل‌آزمایش تبدیل شد.').slice(0,1600);
+        return json({ok:true,changed:false,action:'local_plan_fallback',provider:'first-party-deterministic',
+          text:fa
+            ? 'درخواستت را گرفتم. مسیر اصلاح را آماده کردم؛ هنوز هیچ تغییر کدی ثبت یا منتشر نشده است. نتیجه فقط بعد از اعمال تغییر، اجرای آزمون و بررسی شواهد تأیید می‌شود.\\n'+summary
+            : 'I have the request and prepared a deterministic repair plan. No code change has been queued or deployed yet; the result will only be confirmed after implementation, tests, and evidence review.\\n'+summary,
+          data:{reason:'code_change_not_queued',errorClass:String(e?.message||e).slice(0,100),
+            plan:planData.plan||null,execution:{performed:false,status:'not_executed'}}});
+      }
     }
     // Internal-first owner chat: do not invoke hosted LLM/bot providers for ordinary conversation.
     // Operational status/Guard/revenue and controlled-change intents above retain their live handlers.
