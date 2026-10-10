@@ -144,23 +144,23 @@ const server=http.createServer(async(req,res)=>{
       if(!allowed.has(target)||!text||text.length>10_000||!/^([\\s\\S]*\\[\\[AX\\d+\\]\\][\\s\\S]*)$/.test(text))return json(400,{ok:false,error:'invalid_translation_request'});
       const system='You are a professional UI localization engine. Translate each text after its [[AXn]] marker into the target language. Preserve every marker exactly once and in order. Keep product names, URLs, code, numbers, and placeholders unchanged. Output only the translated lines, one marker per line, no commentary.';
       const user='Target language: '+target+'\\nTranslate these UI strings:\\n'+text;
-      let output='';
+      let output='';let outputSource='';
       try{
         if(process.env.OPENAI_API_KEY){
           const rr=await fetch('https://api.openai.com/v1/chat/completions',{method:'POST',headers:{authorization:'Bearer '+process.env.OPENAI_API_KEY,'content-type':'application/json'},body:JSON.stringify({model:process.env.ANIL_TRANSLATION_MODEL||'gpt-4o-mini',temperature:0,messages:[{role:'system',content:system},{role:'user',content:user}] }),signal:AbortSignal.timeout(18_000)});
           const data=await rr.json().catch(()=>({}));if(!rr.ok)throw Error('translation_provider_'+rr.status);
-          output=String(data.choices?.[0]?.message?.content||'');
+          output=String(data.choices?.[0]?.message?.content||'');if(output)outputSource='openai-optional';
         }else{
           output='';
         }
-      }catch(e){output='';}
-      if(!output)output=localTranslate(text,target);
+      }catch(e){output='';outputSource='';}
+      if(!output){output=localTranslate(text,target);outputSource='local-translation-fallback';}
       const expected=[...text.matchAll(/\\[\\[AX(\\d+)\\]\\]/g)].map(m=>m[0]);
       const found=[...output.matchAll(/\\[\\[AX(\\d+)\\]\\]/g)].map(m=>m[0]);
-      if(!expected.length||expected.some((m,i)=>found[i]!==m)||found.length!==expected.length){output=localTranslate(text,target);}
+      if(!expected.length||expected.some((m,i)=>found[i]!==m)||found.length!==expected.length){output=localTranslate(text,target);outputSource='local-translation-fallback';}
       const verified=[...output.matchAll(/\\[\\[AX(\\d+)\\]\\]/g)].map(m=>m[0]);
       if(!expected.length||expected.some((m,i)=>verified[i]!==m)||verified.length!==expected.length)return json(200,{ok:true,target,text,engine:'local-translation-fallback',fallback:true});
-      return json(200,{ok:true,target,text:output,engine:outputSource||'local-translation-fallback',fallback:!outputSource});
+      return json(200,{ok:true,target,text:output,engine:outputSource||'local-translation-fallback',fallback:outputSource==='local-translation-fallback'});
     }
 
     if((u.pathname==='/healthz'||u.pathname==='/api/health')&&req.method==='GET'){
