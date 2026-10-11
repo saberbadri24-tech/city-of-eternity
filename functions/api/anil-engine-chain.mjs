@@ -164,7 +164,7 @@ export function runLocalEngineChain(request) {
   }).filter(item => item.score > 0).sort((a,b) => b.score - a.score);
 
   // Explicit troubleshooting intent must win over generic website-topic overlap.
-  const troubleshootingIntent = /رفع.{0,18}(خطا|ارور|باگ)|(?:خطا|ارور|باگ).{0,18}(سایت|پنل|کد)|\\b(debug|troubleshoot|fix (?:the )?(?:site|website) error|root cause)\\b/i.test(normalized);
+  const troubleshootingIntent = /رفع.{0,18}(خطا|ارور|باگ)|(?:خطا|ارور|باگ).{0,18}(سایت|پنل|کد)|\b(debug|troubleshoot|fix (?:the )?(?:site|website) error|root cause)\b/i.test(normalized);
   if (troubleshootingIntent) {
     const debugEngine = ENGINES.find(engine => engine.id === 'code-quality');
     if (debugEngine && !scored.some(item => item.engine.id === debugEngine.id)) {
