@@ -869,8 +869,7 @@ async function secretary(req,env){
       const status=v=>v?.configured?'پیکربندی شده':'نیازمند اتصال/مجوز';
       const fa=b.language==='fa'||/[\\u0600-\\u06FF]/.test(command);
       const gaps=[
-        ['GitHub',a.github],['Render',a.render],['مرورگر',a.browser],['Variza',a.variza],
-        ['ذخیره‌ساز پرداخت', {configured:!!k?.capabilities?.adapters?.payments}]
+        ['GitHub',a.github],['Render',a.render],['مرورگر',a.browser],['Variza',a.variza]
       ];
       const missing=gaps.filter(([name,item])=>!item?.configured).map(([name])=>name);
       const lines=fa?[
