@@ -165,9 +165,9 @@ export async function handlePlan(request, env={}) {
       engineChain:engineRun.chain,
       specialists:engineRun.specialists,
       evidence:toolEvidence,
-      reply:council.reply+' '+evidenceNote,
-      text:council.reply+' '+evidenceNote,
-      answer:council.reply+' '+evidenceNote,
+      reply:engineRun.reply+' '+evidenceNote,
+      text:engineRun.reply+' '+evidenceNote,
+      answer:engineRun.reply+' '+evidenceNote,
       confidence:toolWorked ? Math.min(.9,engineRun.confidence+.04) : engineRun.confidence
     };
     cache.set(cacheKey,{time:Date.now(),value:result});
