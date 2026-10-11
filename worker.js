@@ -824,6 +824,29 @@ async function secretary(req,env){
     return {status:rr.status,data};
   };
   try{
+    if(/برقراری|اتصال مدیر|اتصال|وصل هستی|ارتباط|connection|connected|are you online/.test(q)){
+      const h=await live('/api/health');
+      const configured=h.data?.configured||{};
+      const fa=b.language==='fa'||/[\\u0600-\\u06FF]/.test(command);
+      const report={httpStatus:h.status,healthOk:h.data?.ok===true,ready:h.data?.ready===true,
+        runtime:h.data?.runtime||'unknown',localEngines:configured.localEngines===true,
+        openaiConfigured:configured.openai===true,openrouterConfigured:configured.openrouter===true,
+        varizaConfigured:configured.variza===true,paymentsConfigured:configured.payments===true};
+      const lines=fa
+        ? ['اتصال درخواست مدیر به Runtime بررسی شد.', 'سلامت API: '+(report.healthOk?'پاسخ سالم':'نیازمند بررسی'),
+           'Runtime آماده: '+(report.ready?'بله':'خیر'), 'موتور داخلی: '+(report.localEngines?'فعال':'تأییدنشده'),
+           'OpenAI: '+(report.openaiConfigured?'پیکربندی‌شده (دسترسی واقعی هنوز نیازمند آزمون درخواست است)':'پیکربندی نشده'),
+           'OpenRouter: '+(report.openrouterConfigured?'پیکربندی‌شده':'پیکربندی نشده'),
+           'واریزا: '+(report.varizaConfigured?'پیکربندی‌شده':'پیکربندی نشده'),
+           'پرداخت‌ها: '+(report.paymentsConfigured?'ذخیره‌ساز پیکربندی‌شده':'ذخیره‌ساز پیکربندی نشده')].join('\\n')
+        : ['Owner-to-runtime connection checked.', 'API health: '+(report.healthOk?'healthy':'needs review'),
+           'Runtime ready: '+(report.ready?'yes':'no'), 'Local engine: '+(report.localEngines?'active':'unverified'),
+           'OpenAI: '+(report.openaiConfigured?'configured; live request still needs testing':'not configured'),
+           'OpenRouter: '+(report.openrouterConfigured?'configured':'not configured'),
+           'Variza: '+(report.varizaConfigured?'configured':'not configured'),
+           'Payments: '+(report.paymentsConfigured?'storage configured':'storage not configured')].join('\\n');
+      return json({ok:report.healthOk,action:'live_connection_check',provider:'ANIL X runtime',text:lines,data:report});
+    }
     if(/وضعیت|status|سلامت|health|runtime|سیستم/.test(q)){
       const h=await live('/api/health');
       let k=null,capabilityError=null;
