@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import { runLocalEngineChain } from '../functions/api/anil-engine-chain.mjs';
+import { buildCorePlan } from '../functions/api/anil-core-engine.mjs';
 
 const cases = [
   {input:'واریزا و پرداخت کیف پول را بررسی کن', expected:'payment-integrity'},
@@ -10,6 +11,7 @@ const cases = [
   {input:'Review security and access permissions', expected:'security-governance'},
   {input:'Build website dashboard and test buttons', expected:'website-operations'},
   {input:'Write a customer email', expected:'writing-communication'},
+  {input:'Create a new digital product and build a prototype', expected:'creation-factory'},
   {input:'Analyze spreadsheet data and calculate totals', expected:'data-analysis'},
   {input:'Create an automation workflow', expected:'workflow-automation'},
   {input:'Help with customer support FAQ', expected:'customer-support'},
@@ -30,6 +32,22 @@ const results = cases.map(item => {
       out.orchestration.providerIndependent === true &&
       Array.isArray(out.chain) && out.chain.length >= 10
   };
+});
+const localTroubleshooting = runLocalEngineChain('رفع خطای سایت');
+results.push({
+  name:'local engine chain prioritizes explicit troubleshooting intent',
+  ok:localTroubleshooting.selectedEngine==='Code Quality & Repair Engine' &&
+    localTroubleshooting.plan.engines.some(engine=>engine.id==='code-quality')
+});
+const troubleshootingPlan = buildCorePlan('رفع خطای سایت');
+results.push({
+  name:'troubleshooting intent outranks website topic overlap',
+  ok:troubleshootingPlan.routeId==='debug'
+});
+const websitePlan = buildCorePlan('یک سایت جدید بساز');
+results.push({
+  name:'plain website-build requests retain website route',
+  ok:websitePlan.routeId==='website'
 });
 const sensitive = runLocalEngineChain('انتقال وجه از کیف پول را انجام بده');
 results.push({
@@ -55,29 +73,53 @@ results.push({
 });
 const workerSource = fs.readFileSync(new URL('../worker.js', import.meta.url), 'utf8');
 results.push({
-  name:'owner chat routes to independent council without provider error disclosure',
+  name:'owner chat routes through the first-party serial engine chain',
   ok:workerSource.includes("if(u.pathname==='/api/admin/secretary')return secretary(req,env)") &&
     workerSource.includes("handlePlan(new Request('https://anilx.internal/api/plan'") &&
-    workerSource.includes("action:'independent_council_fallback'") &&
+    workerSource.includes("action:'serial_engine_chain_fallback'") &&
     workerSource.includes("execution:planData.execution||{performed:false,status:'not_executed'}")
 });
 const ownerChatIndex = workerSource.indexOf('// Internal-first owner chat: do not invoke hosted LLM/bot providers for ordinary conversation.');
 const ownerChatEnd = workerSource.indexOf('\nexport default', ownerChatIndex);
 const ownerChatSource = workerSource.slice(ownerChatIndex, ownerChatEnd);
 results.push({
-  name:'owner chat uses first-party council without hosted-model calls',
+  name:'owner chat uses first-party serial engines without hosted-model calls',
   ok:ownerChatIndex >= 0 && ownerChatEnd > ownerChatIndex &&
-    ownerChatSource.includes("action:'independent_council_primary'") &&
+    ownerChatSource.includes("action:'serial_engine_chain_primary'") &&
     ownerChatSource.includes('externalModelsCalled:false') &&
-    !/https:\/\/api\.[a-z0-9.-]+\//i.test(ownerChatSource)
+    !/https:\/\/api\.[a-z0-9.-]+\//i.test(ownerChatSource) &&
+    !ownerChatSource.includes('analysisRequest') &&
+    !ownerChatSource.includes('verify:true')
 });
 results.push({
   name:'owner chat keeps execution evidence-gated without provider error disclosure',
-  ok:ownerChatSource.includes("action:'independent_council_fallback'") &&
+  ok:ownerChatSource.includes("action:'serial_engine_chain_fallback'") &&
     ownerChatSource.includes("performed:false") &&
     !ownerChatSource.includes('providerFailures')
+});
+
+const engineChainSource = fs.readFileSync(new URL('../functions/api/anil-engine-chain.mjs', import.meta.url), 'utf8');
+const analyzeSource = fs.readFileSync(new URL('../netlify/functions/analyze.mjs', import.meta.url), 'utf8');
+results.push({
+  name:'multipurpose creation engine is registered and selected for creation tasks',
+  ok:engineChainSource.includes("id: 'creation-factory'") &&
+    engineChainSource.includes("Multipurpose Creation & Build Engine")
+});
+const orchestration = JSON.parse(fs.readFileSync(new URL('../ANIL-X-AI-ORCHESTRATION.json', import.meta.url), 'utf8'));
+results.push({
+  name:'legacy model council is removed from orchestration contract',
+  ok:!Object.prototype.hasOwnProperty.call(orchestration, 'council') &&
+    orchestration.engine_chain?.name === 'ANIL-MULTIPURPOSE-SERIAL-CREATION-ENGINE' &&
+    orchestration.engine_chain?.rules?.threeModelCouncil === false
+});
+
+results.push({
+  name:'hosted three-model verification is removed from the runtime analysis adapter',
+  ok:!analyzeSource.includes('Optional council verification') &&
+    !analyzeSource.includes('council={claude:false,gemini:false}') &&
+    analyzeSource.includes('verification:"disabled"')
 });
 const failed = results.filter(item => !item.ok);
 for (const result of results) console.log((result.ok?'PASS ':'FAIL ')+result.name);
 if (failed.length) process.exit(1);
-console.log('ANIL X independent engine council gate: PASS ('+results.length+' checks)');
+console.log('ANIL X multipurpose serial creation engine gate: PASS ('+results.length+' checks)');

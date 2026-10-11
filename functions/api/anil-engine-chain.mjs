@@ -55,6 +55,13 @@ const ENGINES = [
     moves: ['تعریف مسیر و نتیجه مورد انتظار کاربر','بررسی فارسی و انگلیسی به‌صورت مستقل','آزمون دکمه‌ها، API، ورود و ذخیره‌سازی','بررسی موبایل و خطاهای کنسول','تأیید فقط با آزمون قابل تکرار']
   },
   {
+    id: 'creation-factory', name: 'Multipurpose Creation & Build Engine', weight: 75,
+    keywords: ['create','creation','generate','make','invent','design and build','build me','ساخت','بساز','بسازش','ایجاد','خلق','تولید کن','طراحی کن','طراحی و ساخت','نمونه اولیه','محصول جدید'],
+    title: 'موتور چندمنظورهٔ ساخت، خلق و توسعه',
+    desc: 'درخواست را به خروجی قابل‌ساخت تبدیل می‌کند: نرم‌افزار، ابزار، محتوا، محصول دیجیتال، گردش‌کار یا طرح اجرایی؛ سپس آزمون و شواهد را الزامی می‌کند.',
+    moves: ['تعیین خروجی نهایی و معیار پذیرش','شکستن ساخت به اجزای کوچک و وابستگی‌ها','انتخاب ابزار و مسیر اجرای کم‌ریسک','ساخت نسخهٔ اولیه یا طرح قابل‌آزمایش','اجرای آزمون، بازبینی و اصلاح','تحویل همراه با شواهد و گام بعدی']
+  },
+  {
     id: 'writing-communication', name: 'Writing & Communication Engine', weight: 60,
     keywords: ['write','writing','email','message','copy','proposal','caption','نوشتن','ایمیل','پیام','متن','پیشنهادنامه','کپشن'],
     title: 'نگارش و ارتباط حرفه‌ای',
@@ -113,6 +120,7 @@ const FA_NAMES = {
   'revenue-operations':'موتور درآمد و فروش',
   'research-verification':'موتور پژوهش و راستی‌آزمایی',
   'website-operations':'موتور عملیات سایت و تجربه کاربری',
+  'creation-factory':'موتور چندمنظورهٔ ساخت، خلق و توسعه',
   'writing-communication':'موتور نگارش و ارتباطات',
   'data-analysis':'موتور تحلیل داده',
   'workflow-automation':'موتور خودکارسازی گردش‌کار',
@@ -122,6 +130,7 @@ const FA_NAMES = {
   'general-reasoning':'موتور حل مسئله'
 };
 const EN_COPY = {
+  'creation-factory': {title:'Multipurpose creation and build',desc:'Turn the desired outcome into a buildable artifact, then test and verify it.',moves:['Define the deliverable and acceptance criteria','Break creation into components and dependencies','Choose a low-risk implementation path','Build a testable first version','Run tests, review, and refine','Deliver with evidence and next steps']},
   'security-governance': {title:'Security, access control and policy',desc:'Check permissions, side effects, and rollback before acting.',moves:['Classify data and required access','Identify side effects and abuse paths','Apply least privilege and fail-closed controls','Record evidence and decision rationale','Pause sensitive actions for owner approval']},
   'payment-integrity': {title:'Payment and wallet integrity',desc:'Reconcile orders, amounts, webhooks, durable storage, and settlement receipts.',moves:['Inspect configuration without exposing secrets','Test order and checkout creation','Verify webhook signatures and exact amounts','Enforce idempotency and durable records','Count revenue only after verified settlement']},
   'guard-security': {title:'Guard opportunity and safety',desc:'Verify opportunities from official sources; discovery is not proof of profit or permission to transact.',moves:['Check official source and publication time','Remove duplicates, expired, and suspicious items','Score evidence and contract risk','Queue items for owner review','Stop before signing, claiming, or transferring funds']},
@@ -143,10 +152,29 @@ const IRREVERSIBLE = /\b(delete|transfer|withdraw|sign|claim|purchase|charge|sen
 export function runLocalEngineChain(request) {
   const original = clean(request);
   const normalized = normalize(original);
-  const scored = ENGINES.map(engine => ({
-    engine,
-    score: engine.weight * engine.keywords.filter(word => normalized.includes(normalize(word))).length
-  })).filter(item => item.score > 0).sort((a,b) => b.score - a.score);
+  // Prefer intent-bearing phrases over incidental topic overlap. Longer keyword
+  // matches carry more signal; repeated generic matches must not drown out the task.
+  const scored = ENGINES.map(engine => {
+    const hits = engine.keywords
+      .map(word => normalize(word))
+      .filter(word => word && normalized.includes(word));
+    const uniqueHits = [...new Set(hits)];
+    const specificity = uniqueHits.reduce((sum, word) => sum + Math.min(word.length, 24), 0);
+    return {engine, hits:uniqueHits, score:engine.weight * uniqueHits.length + specificity * 2};
+  }).filter(item => item.score > 0).sort((a,b) => b.score - a.score);
+
+  // Explicit troubleshooting intent must win over generic website-topic overlap.
+  const troubleshootingIntent = /رفع.{0,18}(خطا|ارور|باگ)|(?:خطا|ارور|باگ).{0,18}(سایت|پنل|کد)|\b(debug|troubleshoot|fix (?:the )?(?:site|website) error|root cause)\b/i.test(normalized);
+  if (troubleshootingIntent) {
+    const debugEngine = ENGINES.find(engine => engine.id === 'code-quality');
+    if (debugEngine && !scored.some(item => item.engine.id === debugEngine.id)) {
+      scored.unshift({engine:debugEngine,hits:['explicit-troubleshooting-intent'],score:100000});
+    } else if (debugEngine) {
+      const item = scored.find(item => item.engine.id === debugEngine.id);
+      item.score = Math.max(item.score, 100000);
+      scored.sort((a,b) => b.score - a.score);
+    }
+  }
   const selected = scored[0]?.engine || DEFAULT_ENGINE;
   const matched = scored.map(item => item.engine);
   const operational = /\b(fix|deploy|execute|change|commit|payment|wallet|guard|revenue|order|customer|website|code|test|audit|build|create|automation)\b|رفع|اجرا|تغییر|کامیت|پرداخت|کیف پول|گارد|درآمد|سفارش|مشتری|سایت|کد|آزمون|بررسی عملی|بساز|ایجاد|خودکار/i.test(normalized);
@@ -160,10 +188,10 @@ export function runLocalEngineChain(request) {
     {id:'policy-gate',name:'Security & Owner Approval Gate',status:'checked'},
     {id:'tool-router',name:'Read-only Tool Router',status:'available_when_configured'},
     {id:'execution',name:'Execution Adapter',status:'not_run'},
-    {id:'independent-qa',name:'Independent QA Engine',status:'pending_execution'},
-    {id:'evidence-verifier',name:'Evidence & Claim Verifier',status:'pending_evidence'},
-    {id:'recovery',name:'Repair & Recovery Engine',status:'standby'},
-    {id:'release-gate',name:'Release Gate',status:'blocked_until_evidence'}
+    {id:'independent-qa',name:'Serial QA & Regression Engine',status:'pending_execution'},
+    {id:'evidence-verifier',name:'Evidence & Truth Verification Engine',status:'pending_evidence'},
+    {id:'recovery',name:'Self-Repair & Recovery Engine',status:'standby'},
+    {id:'release-gate',name:'Verified Release Gate',status:'blocked_until_evidence'}
   ];
   const languageFa = /[\u0600-\u06FF]/.test(original);
   const copy = languageFa ? {title:selected.title,desc:selected.desc,moves:selected.moves} : (EN_COPY[selected.id] || EN_COPY['general-reasoning']);
@@ -182,8 +210,8 @@ export function runLocalEngineChain(request) {
     ? 'گرفتم. برای این درخواست، ' + selectedNames + ' را وارد مسیر بررسی کردم. اولویت کار این است: ' + next + '؛ نتیجه را فقط بعد از آزمون و مدرک قابل بررسی تأیید می‌کنم.' + (requiresOwnerApproval ? ' اقدام حساس تا تأیید مالک متوقف می‌ماند.' : ' هنوز تغییری بیرونی اجرا نشده است.')
     : 'Got it. I routed this request through ' + selectedNames + '. The practical sequence is: ' + next + '. I will only mark the result complete after tests and reviewable evidence.' + (requiresOwnerApproval ? ' Sensitive actions remain blocked until owner approval.' : ' No external change has been executed yet.');
   return {
-    engine:'ANIL-INDEPENDENT-ENGINE-COUNCIL',
-    version:'2.0.0',
+    engine:'ANIL-MULTIPURPOSE-SERIAL-CREATION-ENGINE',
+    version:'3.0.0',
     mode:operational?'operational-plan':'reasoning-plan',
     plan, reply, selectedEngine:selected.name,
     confidence:scored.length ? Math.min(0.88,0.55 + scored[0].score/500) : 0.5,

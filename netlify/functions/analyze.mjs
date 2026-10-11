@@ -22,7 +22,7 @@ const systemPrompt="You are Astra, the central ANIL X orchestrator. Produce a pr
 async function providerOpenAI(prompt,env){
   const key=firstEnv(env,["OPENAI_API_KEY","OPENAI_KEY"]); if(!key)return null;
   const model=getEnv(env,"ASTRA_MODEL")||"gpt-5-mini";
-  const r=await timeoutFetch("https://api.openai.com/v1/chat/completions",{method:"POST",headers:{"content-type":"application/json",authorization:`Bearer ${key}`},body:JSON.stringify({model,messages:[{role:"system",content:systemPrompt},{role:"user",content:prompt}],temperature:.2})},2200);
+  const r=await timeoutFetch("https://api.openai.com/v1/chat/completions",{method:"POST",headers:{"content-type":"application/json",authorization:`Bearer ${key}`},body:JSON.stringify({model,messages:[{role:"system",content:systemPrompt},{role:"user",content:prompt}],temperature:.2})},7500);
   if(!r.ok){
     if(r.status===429){
       const err=await r.json().catch(()=>({}));
@@ -41,7 +41,7 @@ async function providerOpenAI(prompt,env){
 async function providerGemini(prompt,env){
   const key=firstEnv(env,["GEMINI_API_KEY","GOOGLE_API_KEY","GOOGLE_GENERATIVE_AI_API_KEY"]); if(!key)return null;
   const model=getEnv(env,"GEMINI_MODEL")||"gemini-2.5-flash";
-  const r=await timeoutFetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(key)}`,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({contents:[{role:"user",parts:[{text:`${systemPrompt}\n${prompt}`}]}],generationConfig:{responseMimeType:"application/json",temperature:.2}})},2200);
+  const r=await timeoutFetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(key)}`,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({contents:[{role:"user",parts:[{text:`${systemPrompt}\n${prompt}`}]}],generationConfig:{responseMimeType:"application/json",temperature:.2}})},7500);
   if(!r.ok)throw Error("gemini_"+r.status);
   const d=await r.json(); const out=parseJSON(d?.candidates?.[0]?.content?.parts?.map(x=>x.text||"").join(""));
   if(!out||typeof out!=="object")throw Error("gemini_invalid_json"); return out;
@@ -52,7 +52,7 @@ async function providerClaude(prompt,env){
   const models=[preferred,"claude-sonnet-4-5-20250929","claude-3-7-sonnet-latest","claude-3-5-haiku-latest"].filter((v,i,a)=>v&&a.indexOf(v)===i);
   let lastStatus=0,lastDetail="";
   for(const model of models){
-    const r=await timeoutFetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"content-type":"application/json","x-api-key":key,"anthropic-version":"2023-06-01"},body:JSON.stringify({model,max_tokens:900,system:systemPrompt,messages:[{role:"user",content:prompt}]})},1600);
+    const r=await timeoutFetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"content-type":"application/json","x-api-key":key,"anthropic-version":"2023-06-01"},body:JSON.stringify({model,max_tokens:900,system:systemPrompt,messages:[{role:"user",content:prompt}]})},5000);
     if(r.ok){const d=await r.json();const out=parseJSON(d?.content?.map(x=>x.text||"").join(""));if(!out||typeof out!=="object")throw Error("anthropic_invalid_json");return out;}
     lastStatus=r.status;
     const err=await r.json().catch(()=>({}));
@@ -65,7 +65,7 @@ async function providerClaude(prompt,env){
 async function providerOpenRouter(prompt,env){
   const key=firstEnv(env,["ANIL_OPENROUTER_API_KEY","OPENROUTER_API_KEY","OPENROUTER_KEY"]); if(!key)return null;
   const model=getEnv(env,"ANIL_OPENROUTER_MODEL")||getEnv(env,"OPENROUTER_MODEL")||"openrouter/free";
-  const r=await timeoutFetch("https://openrouter.ai/api/v1/chat/completions",{method:"POST",headers:{"content-type":"application/json",authorization:`Bearer ${key}`,"HTTP-Referer":"https://anil-x-live.onrender.com","X-Title":"ANIL X"},body:JSON.stringify({model,messages:[{role:"system",content:systemPrompt},{role:"user",content:prompt}],temperature:.2})},2200);
+  const r=await timeoutFetch("https://openrouter.ai/api/v1/chat/completions",{method:"POST",headers:{"content-type":"application/json",authorization:`Bearer ${key}`,"HTTP-Referer":"https://anil-x-live.onrender.com","X-Title":"ANIL X"},body:JSON.stringify({model,messages:[{role:"system",content:systemPrompt},{role:"user",content:prompt}],temperature:.2})},7500);
   if(!r.ok)throw Error("openrouter_"+r.status);
   const d=await r.json(); const out=parseJSON(d?.choices?.[0]?.message?.content);
   if(!out||typeof out!=="object")throw Error("openrouter_invalid_json"); return out;
@@ -73,7 +73,7 @@ async function providerOpenRouter(prompt,env){
 async function providerCompatible(prompt,env,cfg){
   const key=cfg.keys.map(k=>getEnv(env,k)).find(Boolean);if(!key)return null;
   const model=cfg.modelKeys.map(k=>getEnv(env,k)).find(Boolean)||cfg.defaultModel;
-  const r=await timeoutFetch(cfg.endpoint,{method:"POST",headers:{"content-type":"application/json",authorization:"Bearer "+key,...(cfg.headers||{})},body:JSON.stringify({model,messages:[{role:"system",content:systemPrompt},{role:"user",content:prompt}],temperature:.2})},2200);
+  const r=await timeoutFetch(cfg.endpoint,{method:"POST",headers:{"content-type":"application/json",authorization:"Bearer "+key,...(cfg.headers||{})},body:JSON.stringify({model,messages:[{role:"system",content:systemPrompt},{role:"user",content:prompt}],temperature:.2})},7500);
   if(!r.ok)throw Error(cfg.name+"_"+r.status);
   const d=await r.json(),out=parseJSON(d?.choices?.[0]?.message?.content);if(!out||typeof out!=="object")throw Error(cfg.name+"_invalid_json");return out;
 }
@@ -113,7 +113,7 @@ export default async (req,env)=>{
     let result=localResult,providerUsed="ANIL-Core";
     const attempts=[];
     // Bounded sequential rotation: a failed/empty/quota-limited provider never blocks the local engine.
-    const started=Date.now(),budgetMs=6000;
+    const started=Date.now(),budgetMs=18000;
     for(const name of providerOrder(env)){
       if(Date.now()-started>=budgetMs)break;
       const cooldownEntry=providerCooldownsV6.get(name);
@@ -139,16 +139,7 @@ export default async (req,env)=>{
         attempts.push({provider:name,status:status===429?"rate_limited":status===402?"credits_exhausted":status===400?"invalid_request_or_model":status===401||status===403?"auth_or_access_error":status?"http_error":"timeout_or_invalid",httpStatus:status||undefined,...(error?.providerDetail?{detail:String(error.providerDetail).slice(0,180)}:{})});
       }
     }
-    // Optional council verification only when explicitly requested; never slow down every normal chat turn.
-    let council={claude:false,gemini:false};
-    if(body?.verify===true){
-      const verifyPrompt=JSON.stringify({request:input,answer:result});
-      const checks=await Promise.all(["claude","gemini"].map(async name=>{
-        try{const configured=name==="claude"?firstEnv(env,["ANTHROPIC_API_KEY","ANTHROPIC_KEY","CLAUDE_API_KEY"]):firstEnv(env,["GEMINI_API_KEY","GOOGLE_API_KEY","GOOGLE_GENERATIVE_AI_API_KEY"]);if(!configured)return [name,false];const fn=name==="claude"?providerClaude:providerGemini;const r=await fn(verifyPrompt,env);return [name,!!r];}catch{return [name,false];}
-      }));
-      council=Object.fromEntries(checks);
-    }
-    return json({ok:true,input,route:{id:local.routeId||legacyRoute.id,title:result.title||local.title,desc:result.desc||local.desc,steps:Array.isArray(result.steps)&&result.steps.length?result.steps.slice(0,8):local.steps},reply:result.reply||local.reply,confidence:Math.max(.25,Math.min(1,Number(result.confidence)||.55)),meta:{engine:"ANIL-Core+Provider-Rotation",version:"3.0-owned-core",internationalFirst:true,orchestrator:providerUsed,providerAttempts:attempts,specialists:council,verification:body?.verify===true?"requested":"on-demand",fallback:providerUsed==="ANIL-Core",localCoreAvailable:true,externalProviderRequired:false,controls:local.controls}});
+    return json({ok:true,input,route:{id:local.routeId||legacyRoute.id,title:result.title||local.title,desc:result.desc||local.desc,steps:Array.isArray(result.steps)&&result.steps.length?result.steps.slice(0,8):local.steps},reply:result.reply||local.reply,confidence:Math.max(.25,Math.min(1,Number(result.confidence)||.55)),meta:{engine:"ANIL-Core+Provider-Rotation",engineChain:"ANIL-MULTIPURPOSE-SERIAL-CREATION-ENGINE",version:"4.0-owned-core",internationalFirst:true,orchestrator:providerUsed,providerAttempts:attempts,verification:"disabled",fallback:providerUsed==="ANIL-Core",localCoreAvailable:true,externalProviderRequired:false,controls:local.controls}});
   }catch(error){return json({ok:false,error:"engine_failure",message:String(error?.message||error)},502)}
 };
 export const config={path:"/api/analyze"};

@@ -824,6 +824,29 @@ async function secretary(req,env){
     return {status:rr.status,data};
   };
   try{
+    if(/برقراری|اتصال مدیر|اتصال|وصل هستی|ارتباط|connection|connected|are you online/.test(q)){
+      const h=await live('/api/health');
+      const configured=h.data?.configured||{};
+      const fa=b.language==='fa'||/[\\u0600-\\u06FF]/.test(command);
+      const report={httpStatus:h.status,healthOk:h.data?.ok===true,ready:h.data?.ready===true,
+        runtime:h.data?.runtime||'unknown',localEngines:configured.localEngines===true,
+        openaiConfigured:configured.openai===true,openrouterConfigured:configured.openrouter===true,
+        varizaConfigured:configured.variza===true,paymentsConfigured:configured.payments===true};
+      const lines=fa
+        ? ['اتصال درخواست مدیر به Runtime بررسی شد.', 'سلامت API: '+(report.healthOk?'پاسخ سالم':'نیازمند بررسی'),
+           'Runtime آماده: '+(report.ready?'بله':'خیر'), 'موتور داخلی: '+(report.localEngines?'فعال':'تأییدنشده'),
+           'OpenAI: '+(report.openaiConfigured?'پیکربندی‌شده (دسترسی واقعی هنوز نیازمند آزمون درخواست است)':'پیکربندی نشده'),
+           'OpenRouter: '+(report.openrouterConfigured?'پیکربندی‌شده':'پیکربندی نشده'),
+           'واریزا: '+(report.varizaConfigured?'پیکربندی‌شده':'پیکربندی نشده'),
+           'پرداخت‌ها: '+(report.paymentsConfigured?'ذخیره‌ساز پیکربندی‌شده':'ذخیره‌ساز پیکربندی نشده')].join('\\n')
+        : ['Owner-to-runtime connection checked.', 'API health: '+(report.healthOk?'healthy':'needs review'),
+           'Runtime ready: '+(report.ready?'yes':'no'), 'Local engine: '+(report.localEngines?'active':'unverified'),
+           'OpenAI: '+(report.openaiConfigured?'configured; live request still needs testing':'not configured'),
+           'OpenRouter: '+(report.openrouterConfigured?'configured':'not configured'),
+           'Variza: '+(report.varizaConfigured?'configured':'not configured'),
+           'Payments: '+(report.paymentsConfigured?'storage configured':'storage not configured')].join('\\n');
+      return json({ok:report.healthOk,action:'live_connection_check',provider:'ANIL X runtime',text:lines,data:report});
+    }
     if(/وضعیت|status|سلامت|health|runtime|سیستم/.test(q)){
       const h=await live('/api/health');
       let k=null,capabilityError=null;
@@ -883,37 +906,6 @@ async function secretary(req,env){
         return json({ok:true,action:'first_party_conversation',provider:'anil-core',live:true,
           text:fa?'سلام. من آنیلِ دستیار مدیر ANIL X هستم. درخواستت را بگو؛ وضعیت زنده را بررسی می‌کنم و هیچ کاری را بدون شواهد انجام‌شده اعلام نمی‌کنم.':'Hello. I am ANIL, the ANIL X owner assistant. Tell me what you need; I will verify live status and never claim an action without evidence.'});
       }
-      // Route ordinary owner conversation through the same bounded provider rotation
-      // as the public assistant, while retaining the deterministic ANIL-Core fallback.
-      try {
-        const analysisRequest=new Request(new URL('/api/analyze',req.url),{
-          method:'POST',
-          headers:{'content-type':'application/json'},
-          body:JSON.stringify({
-            text:command,
-            language:fa?'fa':'en',
-            turns:Array.isArray(b.messages)?b.messages.slice(-8):[]
-          })
-        });
-        const analysisResponse=await analyze(analysisRequest,env);
-        const analysisData=await analysisResponse.json().catch(()=>({}));
-        if(analysisResponse.ok&&analysisData?.ok&&String(analysisData.reply||'').trim()){
-          const provider=String(analysisData.meta?.orchestrator||'ANIL-Core');
-          return json({
-            ok:true,
-            action:analysisData.meta?.fallback?'first_party_conversation':'provider_rotated_conversation',
-            provider,
-            live:true,
-            text:String(analysisData.reply).slice(0,2500),
-            data:{
-              route:analysisData.route||null,
-              confidence:analysisData.confidence||null,
-              meta:analysisData.meta||null,
-              execution:{performed:false,status:'not_executed'}
-            }
-          });
-        }
-      } catch {}
       try {
         const planResponse=await handlePlan(new Request('https://anilx.internal/api/plan',{
           method:'POST',headers:{'content-type':'application/json'},
@@ -921,27 +913,27 @@ async function secretary(req,env){
         }),env);
         const planData=await planResponse.json().catch(()=>({}));
         if(planResponse.ok&&planData?.ok){
-          return json({ok:true,action:'independent_council_primary',provider:'first-party-deterministic',live:true,
+          return json({ok:true,action:'serial_engine_chain_primary',provider:'first-party-deterministic',live:true,
             text:String(planData.reply||planData.text||planData.answer||''),
-            data:{source:planData.source||'anil-independent-specialist-council',
-              engine:planData.engine||'ANIL-INDEPENDENT-ENGINE-COUNCIL',
-              version:planData.version||null,specialists:planData.council||planData.specialists||null,
+            data:{source:planData.source||'ANIL-MULTIPURPOSE-SERIAL-CREATION-ENGINE',
+              engine:planData.engine||'ANIL-MULTIPURPOSE-SERIAL-CREATION-ENGINE',
+              version:planData.version||null,engines:planData.engines||planData.specialists||null,
               plan:planData.plan||null,evidence:planData.evidence||[],
               execution:planData.execution||{performed:false,status:'not_executed'},
               orchestration:planData.orchestration||null,
               externalModelsCalled:false}});
         }
-        return json({ok:true,action:'independent_council_fallback',provider:'internal-engines',live:false,
+        return json({ok:true,action:'serial_engine_chain_fallback',provider:'internal-engines',live:false,
           text:fa?'موتورهای مستقل آنیل فعال‌اند؛ نتیجهٔ اجرایی قابل‌تأیید برای این درخواست ثبت نشد. هیچ تغییری اجراشده اعلام نمی‌شود.':'ANIL independent engines are active; no verified execution result was recorded for this request. No change is claimed.',
-          data:{source:'anil-independent-specialist-council',execution:{performed:false,status:'not_executed'}}});
+          data:{source:'ANIL-MULTIPURPOSE-SERIAL-CREATION-ENGINE',execution:{performed:false,status:'not_executed'}}});
       } catch (error) {
-        return json({ok:true,action:'independent_council_fallback',provider:'internal-engines',live:false,
+        return json({ok:true,action:'serial_engine_chain_fallback',provider:'internal-engines',live:false,
           text:fa?'موتورهای مستقل آنیل فعال‌اند؛ نتیجهٔ اجرایی قابل‌تأیید برای این درخواست ثبت نشد. هیچ تغییری اجراشده اعلام نمی‌شود.':'ANIL independent engines are active; no verified execution result was recorded for this request. No change is claimed.',
-          data:{source:'anil-independent-specialist-council',execution:{performed:false,status:'not_executed'}}});
+          data:{source:'ANIL-MULTIPURPOSE-SERIAL-CREATION-ENGINE',execution:{performed:false,status:'not_executed'}}});
       }
     }
   }catch(e){
-    return json({ok:true,action:'independent_council_fallback',live:false,
+    return json({ok:true,action:'serial_engine_chain_fallback',live:false,
       text:b.language==='fa'?'موتورهای مستقل آنیل فعال‌اند؛ اقدامی بدون نتیجهٔ قابل‌تأیید انجام‌شده اعلام نمی‌شود.':'ANIL independent engines are active; no action is claimed without a verifiable result.',
       data:{execution:{performed:false,status:'not_executed'}}});
   }
