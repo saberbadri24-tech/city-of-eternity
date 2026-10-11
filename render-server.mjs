@@ -18,7 +18,7 @@ const readBody=async(req,limit=MAX_BODY_BYTES)=>{let total=0;const chunks=[];for
 
 async function verifyGuardOidc(req){
   const raw=req.headers['x-anil-oidc-token']||req.headers.authorization||'';
-  const token=String(raw).replace(/^Bearer\\s+/i,'').trim();
+  const token=String(raw).replace(/^Bearer\s+/i,'').trim();
   const parts=token.split('.');
   if(parts.length!==3)return false;
   try{
@@ -54,7 +54,7 @@ async function assetsFetch(request){
       const agentMeta='<meta name="anilx-project" content="ANIL X ONLY | ADVANCED MODE | preserve current runtime | inspect this page as part of ANIL X | never mix other projects">';
       const agentRuntime='<script>window.__ANILX_PROJECT_CONTEXT__={product:"ANIL X",mode:"advanced",scope:"ANIL-X-only",guard:"Immortal Guard",rule:"preserve-runtime-and-continue-until-real-green"};</script>';
       const html=Buffer.from(data).toString('utf8');
-      const withContext=html.includes('name="anilx-project"')?html:html.replace(/<head>/i,'<head>\\n'+agentMeta+'\\n'+agentRuntime);data=Buffer.from((html.includes('ANILX-PROJECT-CONTINUITY:')?'':marker+'\\n')+withContext);
+      const withContext=html.includes('name="anilx-project"')?html:html.replace(/<head>/i,'<head>\n'+agentMeta+'\n'+agentRuntime);data=Buffer.from((html.includes('ANILX-PROJECT-CONTINUITY:')?'':marker+'\n')+withContext);
     }
     const headers={
       'content-type':mime[ext]||'application/octet-stream',
