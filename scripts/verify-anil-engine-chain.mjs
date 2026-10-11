@@ -33,6 +33,12 @@ const results = cases.map(item => {
       Array.isArray(out.chain) && out.chain.length >= 10
   };
 });
+const localTroubleshooting = runLocalEngineChain('رفع خطای سایت');
+results.push({
+  name:'local engine chain prioritizes explicit troubleshooting intent',
+  ok:localTroubleshooting.selectedEngine==='Code Quality & Repair Engine' &&
+    localTroubleshooting.plan.engines.some(engine=>engine.id==='code-quality')
+});
 const troubleshootingPlan = buildCorePlan('رفع خطای سایت');
 results.push({
   name:'troubleshooting intent outranks website topic overlap',
