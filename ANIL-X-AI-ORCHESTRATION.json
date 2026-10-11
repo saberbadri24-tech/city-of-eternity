@@ -1,7 +1,7 @@
 {
   "version": 3,
   "purpose": "ANIL X is a provider-neutral AI operating system for website delivery, business growth, engineering, research, and Immortal Guard.",
-  "strategy": "first-party specialist engine chain with bounded tools, evidence, independent QA, memory, evaluation, rollback, and truthful live-state reporting",
+  "strategy": "first-party multipurpose serial creation engine with domain-specialist routing, authorized tools, evidence verification, QA, recovery, rollback, and truthful live-state reporting",
   "providers": {
     "internal_engines": {
       "enabled": true,
@@ -100,13 +100,6 @@
       "first-party specialist engine chain"
     ]
   },
-  "council": {
-    "pattern": "intent -> planner -> specialist engines -> evidence merge -> contradiction detection -> verifier -> synthesis -> action gate",
-    "parallel_when_useful": true,
-    "minimum_independent_checks_for_high_impact_change": 2,
-    "disagreement_policy": "surface disagreement and evidence; never invent consensus",
-    "confidence_policy": "confidence is evidence-weighted metadata, never proof"
-  },
   "agent_roles": [
     "orchestrator",
     "researcher",
@@ -172,5 +165,48 @@
     "kyc_or_captcha_bypass": false,
     "security_controls_may_not_be_weakened": true,
     "spam": false
+  },
+  "engine_chain": {
+    "name": "ANIL-MULTIPURPOSE-SERIAL-CREATION-ENGINE",
+    "version": "4.0.0",
+    "mode": "serial-first-with-parallel-independent-checks-when-useful",
+    "stages": [
+      "sense",
+      "understand",
+      "intent-and-priority",
+      "decompose",
+      "select-domain-engines",
+      "create-or-repair",
+      "security-and-owner-gate",
+      "execute-authorized-tools",
+      "self-repair",
+      "qa-and-regression",
+      "evidence-and-truth-verification",
+      "release-gate",
+      "observe",
+      "learn"
+    ],
+    "capabilities": [
+      "software-and-web-app-creation",
+      "code-repair",
+      "research-and-verification",
+      "business-and-revenue-operations",
+      "security",
+      "payments-integrity",
+      "workflow-automation",
+      "content-and-product-creation",
+      "data-analysis",
+      "mobile-ux",
+      "guard-opportunity-verification"
+    ],
+    "rules": {
+      "externalModelsAreOptionalAdapters": true,
+      "threeModelCouncil": false,
+      "executionMustBeToolBacked": true,
+      "completionRequiresEvidence": true,
+      "failedChecksBlockRelease": true,
+      "sensitiveActionsRequireOwnerApproval": true,
+      "privateKeysAndSeedPhrasesNeverRequested": true
+    }
   }
 }

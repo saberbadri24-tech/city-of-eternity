@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: [main]
   push:
-    branches: [main, "anilx/final-integrity-merge-2026-10-10"]
+    branches: [main, "anilx/final-integrity-merge-2026-10-10", "anil-x-isolated"]
 
 permissions:
   contents: read
