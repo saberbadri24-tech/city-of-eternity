@@ -133,6 +133,15 @@ results.push({
     runtimePlanBody.execution?.performed===false &&
     runtimePlanBody.orchestration?.externalModelsCalled===false
 });
+const renderServerSource = fs.readFileSync(new URL('../render-server.mjs', import.meta.url), 'utf8');
+results.push({
+  name:'Guard OIDC strips a standard Bearer prefix and HTML context uses real newlines',
+  ok:renderServerSource.includes("replace(/^Bearer\\\\s+/i") &&
+    !renderServerSource.includes("replace(/^Bearer\\\\\\\\s+/i") &&
+    renderServerSource.includes("'<head>\\n'+agentMeta+'\\n'+agentRuntime") &&
+    renderServerSource.includes("marker+'\\n'")
+});
+
 const failed = results.filter(item => !item.ok);
 for (const result of results) console.log((result.ok?'PASS ':'FAIL ')+result.name);
 if (failed.length) process.exit(1);
