@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import { runLocalEngineChain } from '../functions/api/anil-engine-chain.mjs';
 import { buildCorePlan } from '../functions/api/anil-core-engine.mjs';
+import { handlePlan } from '../functions/api/plan.mjs';
 
 const cases = [
   {input:'واریزا و پرداخت کیف پول را بررسی کن', expected:'payment-integrity'},
@@ -118,6 +119,19 @@ results.push({
   ok:!analyzeSource.includes('Optional council verification') &&
     !analyzeSource.includes('council={claude:false,gemini:false}') &&
     analyzeSource.includes('verification:"disabled"')
+});
+const runtimePlanResponse = await handlePlan(new Request('https://anilx.internal/api/plan', {
+  method:'POST',
+  headers:{'content-type':'application/json'},
+  body:JSON.stringify({text:'سلام، برنامه بده',language:'fa'})
+}), {});
+const runtimePlanBody = await runtimePlanResponse.json().catch(()=>({}));
+results.push({
+  name:'runtime plan handler returns a real first-party response without reference errors',
+  ok:runtimePlanResponse.status===200 && runtimePlanBody.ok===true &&
+    typeof runtimePlanBody.reply==='string' && runtimePlanBody.reply.length>20 &&
+    runtimePlanBody.execution?.performed===false &&
+    runtimePlanBody.orchestration?.externalModelsCalled===false
 });
 const failed = results.filter(item => !item.ok);
 for (const result of results) console.log((result.ok?'PASS ':'FAIL ')+result.name);
