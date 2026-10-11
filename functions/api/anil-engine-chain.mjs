@@ -152,10 +152,29 @@ const IRREVERSIBLE = /\b(delete|transfer|withdraw|sign|claim|purchase|charge|sen
 export function runLocalEngineChain(request) {
   const original = clean(request);
   const normalized = normalize(original);
-  const scored = ENGINES.map(engine => ({
-    engine,
-    score: engine.weight * engine.keywords.filter(word => normalized.includes(normalize(word))).length
-  })).filter(item => item.score > 0).sort((a,b) => b.score - a.score);
+  // Prefer intent-bearing phrases over incidental topic overlap. Longer keyword
+  // matches carry more signal; repeated generic matches must not drown out the task.
+  const scored = ENGINES.map(engine => {
+    const hits = engine.keywords
+      .map(word => normalize(word))
+      .filter(word => word && normalized.includes(word));
+    const uniqueHits = [...new Set(hits)];
+    const specificity = uniqueHits.reduce((sum, word) => sum + Math.min(word.length, 24), 0);
+    return {engine, hits:uniqueHits, score:engine.weight * uniqueHits.length + specificity * 2};
+  }).filter(item => item.score > 0).sort((a,b) => b.score - a.score);
+
+  // Explicit troubleshooting intent must win over generic website-topic overlap.
+  const troubleshootingIntent = /رفع.{0,18}(خطا|ارور|باگ)|(?:خطا|ارور|باگ).{0,18}(سایت|پنل|کد)|\\b(debug|troubleshoot|fix (?:the )?(?:site|website) error|root cause)\\b/i.test(normalized);
+  if (troubleshootingIntent) {
+    const debugEngine = ENGINES.find(engine => engine.id === 'code-quality');
+    if (debugEngine && !scored.some(item => item.engine.id === debugEngine.id)) {
+      scored.unshift({engine:debugEngine,hits:['explicit-troubleshooting-intent'],score:100000});
+    } else if (debugEngine) {
+      const item = scored.find(item => item.engine.id === debugEngine.id);
+      item.score = Math.max(item.score, 100000);
+      scored.sort((a,b) => b.score - a.score);
+    }
+  }
   const selected = scored[0]?.engine || DEFAULT_ENGINE;
   const matched = scored.map(item => item.engine);
   const operational = /\b(fix|deploy|execute|change|commit|payment|wallet|guard|revenue|order|customer|website|code|test|audit|build|create|automation)\b|رفع|اجرا|تغییر|کامیت|پرداخت|کیف پول|گارد|درآمد|سفارش|مشتری|سایت|کد|آزمون|بررسی عملی|بساز|ایجاد|خودکار/i.test(normalized);
