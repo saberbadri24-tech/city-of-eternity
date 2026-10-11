@@ -863,9 +863,46 @@ async function secretary(req,env){
       const [o,f,a]=await Promise.all([live('/api/admin/overview','POST'),live('/api/revenue/fleet'),live('/api/analytics')]);
       return json({ok:true,action:'live_business_status',text:(b.language==='fa'?'وضعیت واقعی کسب‌وکار، سفارش و درآمد:\n':'Live business, orders and revenue status:\n')+JSON.stringify({overview:o.data,fleet:f.data,analytics:a.data},null,2),data:{overview:o.data,fleet:f.data,analytics:a.data}});
     }
-    if(/قابلیت|توان|ابزار|capabilit|tool/.test(q)){
+    if(/قابلیت|توان|ابزار|capabilit|tool|کم داری|کمبود|چه چیزی کم|برای اداره|what.{0,20}missing|what do you lack/i.test(q)){
       const k=await handleCapabilityKernel(new Request(new URL('/api/anil/capability-kernel',req.url),{method:'GET'}),env).then(x=>x.json());
-      return json({ok:true,action:'capability_report',text:(b.language==='fa'?'قابلیت‌های واقعی فعلی Anil:\n':'ANIL current verified capabilities:\n')+JSON.stringify(k,null,2),data:k});
+      const a=k?.capabilities?.adapters||{};
+      const status=v=>v?.configured?'پیکربندی شده':'نیازمند اتصال/مجوز';
+      const fa=b.language==='fa'||/[\\u0600-\\u06FF]/.test(command);
+      const gaps=[
+        ['GitHub',a.github],['Render',a.render],['مرورگر',a.browser],['Variza',a.variza],
+        ['ذخیره‌ساز پرداخت', {configured:!!k?.capabilities?.adapters?.payments}]
+      ];
+      const missing=gaps.filter(([name,item])=>!item?.configured).map(([name])=>name);
+      const lines=fa?[
+        'گزارش مدیریتی قابلیت‌های ANIL X',
+        'موتور مستقل چندمنظوره: فعال در کد؛ اجرای هر عملیات فقط با مدرک جداگانه تأیید می‌شود.',
+        'GitHub: '+status(a.github),
+        'Render: '+status(a.render),
+        'مرورگر خودکار: '+status(a.browser),
+        'Variza: '+status(a.variza),
+        'OpenAI: '+(a.ai?.providers?.openaiOptional?'کلید پیکربندی شده؛ درخواست زنده هنوز باید آزموده شود':'کلید پیکربندی نشده'),
+        'OpenRouter: '+(a.ai?.providers?.openrouterOptional?'کلید پیکربندی شده':'کلید پیکربندی نشده'),
+        'تأیید Runtime: '+(k?.capabilityLevel?.runtimeVerified===true?'موفق': 'هنوز تأیید نهایی نشده'),
+        'کمبودهای اتصال: '+(missing.length?missing.join('، '):'هیچ اتصال از فهرست بررسی‌شده‌ای کم نیست؛ آزمون عملی همچنان لازم است'),
+        'گام بعدی: اتصال‌های لازم را در تنظیمات امن سرویس انجام بده؛ سپس آزمون احراز هویت، ابزار، QA و انتشار را جداگانه اجرا کن. رمز یا کلید را در چت ارسال نکن.'
+      ].join('\\n'):[
+        'ANIL X capability readiness report',
+        'First-party serial engine: present in code; each operation still requires separate execution evidence.',
+        'GitHub: '+(a.github?.configured?'configured':'connection/permission needed'),
+        'Render: '+(a.render?.configured?'configured':'connection/permission needed'),
+        'Browser automation: '+(a.browser?.configured?'configured':'connection needed'),
+        'Variza: '+(a.variza?.configured?'configured':'configuration needed'),
+        'OpenAI: '+(a.ai?.providers?.openaiOptional?'key configured; live request still needs testing':'key not configured'),
+        'OpenRouter: '+(a.ai?.providers?.openrouterOptional?'key configured':'key not configured'),
+        'Runtime verification: '+(k?.capabilityLevel?.runtimeVerified===true?'passed':'not yet finally verified'),
+        'Missing adapters: '+(missing.length?missing.join(', '):'none in the checked list; live tests are still required'),
+        'Next: configure required connections in the service settings, then separately test authentication, tools, QA and release. Never paste secrets into chat.'
+      ].join('\\n');
+      return json({ok:true,action:'capability_readiness_report',text:lines,data:{
+        engine:k?.engine,capabilityLevel:k?.capabilityLevel,adapters:a,
+        missingAdapters:missing,runtimeVerified:k?.capabilityLevel?.runtimeVerified===true,
+        externalModelsCalled:false
+      }});
     }
     if(/موتور درآمد|revenue engine|fleet|برنامه درآمد/.test(q)){
       const [e,p]=await Promise.all([live('/api/revenue/engines'),live('/api/revenue/programs')]);
