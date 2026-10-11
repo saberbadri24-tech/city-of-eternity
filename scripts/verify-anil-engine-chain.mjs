@@ -134,12 +134,13 @@ results.push({
     runtimePlanBody.orchestration?.externalModelsCalled===false
 });
 const renderServerSource = fs.readFileSync(new URL('../render-server.mjs', import.meta.url), 'utf8');
+const slash = String.fromCharCode(92);
 results.push({
   name:'Guard OIDC strips a standard Bearer prefix and HTML context uses real newlines',
-  ok:renderServerSource.includes("replace(/^Bearer\\\\s+/i") &&
-    !renderServerSource.includes("replace(/^Bearer\\\\\\\\s+/i") &&
-    renderServerSource.includes("'<head>\\n'+agentMeta+'\\n'+agentRuntime") &&
-    renderServerSource.includes("marker+'\\n'")
+  ok:renderServerSource.includes('replace(/^Bearer'+slash+'s+/i') &&
+    !renderServerSource.includes('replace(/^Bearer'+slash+slash+'s+/i') &&
+    renderServerSource.includes("'<head>"+slash+'n'+"'+agentMeta+'"+slash+'n'+"'+agentRuntime") &&
+    renderServerSource.includes("marker+'"+slash+'n'+"'")
 });
 
 const failed = results.filter(item => !item.ok);
