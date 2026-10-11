@@ -96,8 +96,8 @@ export async function handlePlan(request, env={}) {
       return json({...cached.value,cached:true});
     }
 
-    // First-party deterministic specialist council. No external model request is required.
-    const council = runLocalEngineChain(requestText);
+    // First-party deterministic serial engine chain. No external model request is required.
+    const engineRun = runLocalEngineChain(requestText);
     const urls = [...requestText.matchAll(/https?:\/\/[^\s<>"']+/g)]
       .map(match=>match[0].replace(/[),.;]+$/,'')).slice(0,2);
     const needsSearch = isSearchIntent(requestText);
@@ -125,8 +125,8 @@ export async function handlePlan(request, env={}) {
       : 'برای این درخواست ابزار بیرونی اجرا نشد.';
     const result = {
       ok:true,
-      source:'anil-independent-specialist-council',
-      engine:'ANIL-INDEPENDENT-ENGINE-COUNCIL',
+      source:'anil-first-party-serial-engine-chain',
+      engine:'ANIL-MULTIPURPOSE-SERIAL-CREATION-ENGINE',
       version:'2.0.0',
       orchestrator:'anil-core',
       reviewer:'independent-qa-pending-execution',
@@ -140,7 +140,7 @@ export async function handlePlan(request, env={}) {
         voice:{live:false,endpoint:'/api/voice'}
       },
       router:{
-        selected:council.selectedEngine,
+        selected:engineRun.selectedEngine,
         providerErrors:[],
         externalModelsCalled:false,
         tools:{
@@ -149,26 +149,26 @@ export async function handlePlan(request, env={}) {
           evidenceCount:toolEvidence.length
         }
       },
-      plan:council.plan,
+      plan:engineRun.plan,
       execution:{
         performed:false,status:'not_executed',
         reason:'planning and read-only research do not authorize code changes, payments, claims, transfers, or production deployment'
       },
       orchestration:{
-        ...council.orchestration,
+        ...engineRun.orchestration,
         providerIndependent:true,
         externalProviderRequired:false,
         externalModelsCalled:false,
         toolEvidence:toolEvidence.length>0,
         evidenceNote
       },
-      engineChain:council.chain,
-      council:council.specialists,
+      engineChain:engineRun.chain,
+      specialists:engineRun.specialists,
       evidence:toolEvidence,
       reply:council.reply+' '+evidenceNote,
       text:council.reply+' '+evidenceNote,
       answer:council.reply+' '+evidenceNote,
-      confidence:toolWorked ? Math.min(.9,council.confidence+.04) : council.confidence
+      confidence:toolWorked ? Math.min(.9,engineRun.confidence+.04) : engineRun.confidence
     };
     cache.set(cacheKey,{time:Date.now(),value:result});
     while(cache.size>40) cache.delete(cache.keys().next().value);
